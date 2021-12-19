@@ -17,7 +17,8 @@ void Game::Run()
     Character Champion{Sprite{"sprites/characters/Fox_idle.png", 4, 4}, 
                        Sprite{"sprites/characters/Fox_walk.png", 4, 4},
                        Sprite{"sprites/characters/Fox_run.png", 4, 4}, 
-                       Sprite{"sprites/characters/Fox_melee.png", 4, 4}, 
+                       Sprite{"sprites/characters/Fox_melee.png", 4, 4},
+                       Sprite{"sprites/characters/Fox_hit.png", 2, 4}, 
                        Sprite{"sprites/characters/Fox_die.png", 1, 4}, 
                        &Window, &MapBG};
 

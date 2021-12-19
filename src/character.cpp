@@ -1,10 +1,11 @@
 #include "headers/character.hpp"
 
-Character::Character(Sprite Idle, Sprite Walk, Sprite Run, Sprite Attack, Sprite Death, Window* Screen, Background* World)
+Character::Character(Sprite Idle, Sprite Walk, Sprite Run, Sprite Attack, Sprite Hurt, Sprite Death, Window* Screen, Background* World)
     : Idle{Idle},
       Walk{Walk},
       Run{Run},
       Attack{Attack},
+      Hurt{Hurt},
       Death{Death},
       Screen{Screen},
       World{World}
@@ -14,6 +15,7 @@ Character::Character(Sprite Idle, Sprite Walk, Sprite Run, Sprite Attack, Sprite
     Sprites.emplace_back(&(this->Walk));
     Sprites.emplace_back(&(this->Run));
     Sprites.emplace_back(&(this->Attack));
+    Sprites.emplace_back(&(this->Hurt));
     Sprites.emplace_back(&(this->Death));
 }
 
@@ -24,6 +26,7 @@ Character::~Character()
     UnloadTexture(Idle.Texture);
     UnloadTexture(Run.Texture);
     UnloadTexture(Attack.Texture);
+    UnloadTexture(Hurt.Texture);
     UnloadTexture(Death.Texture);
 }
 
