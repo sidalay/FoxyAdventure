@@ -26,9 +26,8 @@ void Game::Run()
                        &Window, &MapBG};
 
     // Initialize Props & Create a Props Struct
-    std::vector<std::vector<Prop>> UnderProps{Game::InitializeUnderProps()};
-    std::vector<std::vector<Prop>> OverProps{Game::InitializeOverProps()};
-
+    std::vector<std::vector<Prop>> UnderProps{Game::InitializePropsUnder()};
+    std::vector<std::vector<Prop>> OverProps{Game::InitializePropsOver()};
     Props Props{&UnderProps, &OverProps};
 
     // Start Game Loop
@@ -120,55 +119,53 @@ void Game::Draw(Background& Map, Character& Character, Props& Props)
     Map.Draw();
 
     for (auto PropType:*Props.Under)
-    {
         for (auto Prop:PropType)
         {
             Prop.Draw(Character.GetWorldPos());
             // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, BLUE);
         }
-    }
 
     // DrawRectangle(Character.GetCollisionRec().x,Character.GetCollisionRec().y,Character.GetCollisionRec().width,Character.GetCollisionRec().height, RED);
     Character.Draw();
     
     for (auto PropType:*Props.Over)
-    {
         for (auto Prop:PropType)
         {
             Prop.Draw(Character.GetWorldPos());
             // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, BLUE);
         }
-    }
-
     
     DrawText(TextFormat("WorldPos.x: %i", (int)Character.GetWorldPos().x), 20, 20, 20, WHITE);
     DrawText(TextFormat("WorldPos.y: %i", (int)Character.GetWorldPos().y), 20, 40, 20, WHITE);
 }
 
-std::vector<std::vector<Prop>> Game::InitializeUnderProps()
+std::vector<std::vector<Prop>> Game::InitializePropsUnder()
 {
     std::vector<std::vector<Prop>> Props{};
 
     std::vector<Prop> Flowers
     {
-        Prop{"sprites/props/PinkTree.png", Vector2{40,100}, PropType::TREE}
+        Prop{"sprites/props/Flowers.png", Vector2{200,300}, PropType::FLOWER}, 
+        Prop{"sprites/props/Flowers.png", Vector2{270,300}, PropType::FLOWER},
+        Prop{"sprites/props/Flowers.png", Vector2{200,368}, PropType::FLOWER}, 
+        Prop{"sprites/props/Flowers.png", Vector2{290,380}, PropType::FLOWER, 2.f}
     };
     Props.emplace_back(Flowers);
 
     return Props;
 }
 
-std::vector<std::vector<Prop>> Game::InitializeOverProps()
+std::vector<std::vector<Prop>> Game::InitializePropsOver()
 {
     std::vector<std::vector<Prop>> Props{};
 
     std::vector<Prop> Trees
     {
-        Prop{"sprites/props/PinkTree.png", Vector2{40,100}, PropType::TREE}, 
-        Prop{"sprites/props/PinkTree.png", Vector2{80,125}, PropType::TREE},
-        Prop{"sprites/props/PinkTree.png", Vector2{200,80}, PropType::TREE}, 
-        Prop{"sprites/props/BlueTree.png", Vector2{320,67}, PropType::TREE},
-        Prop{"sprites/props/FallTree.png", Vector2{400,400}, PropType::TREE, 8.f},
+        Prop{"sprites/props/TreePink.png", Vector2{40,100}, PropType::TREE}, 
+        Prop{"sprites/props/TreePink.png", Vector2{80,125}, PropType::TREE},
+        Prop{"sprites/props/TreePink.png", Vector2{200,80}, PropType::TREE}, 
+        Prop{"sprites/props/TreeBlue.png", Vector2{320,67}, PropType::TREE},
+        Prop{"sprites/props/TreeFall.png", Vector2{400,400}, PropType::TREE, 8.f},
     };
     Props.emplace_back(Trees);
     
@@ -180,6 +177,12 @@ std::vector<std::vector<Prop>> Game::InitializeOverProps()
         Prop{"sprites/props/Boulder.png", Vector2{1172,500}, PropType::BOULDER}
     };
     Props.emplace_back(Boulder);
+
+    std::vector<Prop> Stump
+    {
+        Prop{"sprites/props/TreeStump.png", Vector2{600,200}, PropType::STUMP}
+    };
+    Props.emplace_back(Stump);
     
     return Props;
 }

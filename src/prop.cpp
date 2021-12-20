@@ -3,7 +3,13 @@
 Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale)
     : Object{TexturePath}, Type{Type}, WorldPos{Pos}, Scale{Scale}
 {
-
+    if (Type == PropType::BOULDER ||
+        Type == PropType::BUSH ||
+        Type == PropType::STUMP ||
+        Type == PropType::TREE)
+    {
+        Collidable = true;
+    }
 }
 
 Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale)
@@ -65,28 +71,50 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
         {
             return Rectangle
             {
-
+                ScreenPos.x,
+                ScreenPos.y,
+                Object.Texture.width * Scale,
+                Object.Texture.height * Scale
             };
         }
         case PropType::FENCE:
         {
             return Rectangle
             {
-
+                ScreenPos.x,
+                ScreenPos.y,
+                Object.Texture.width * Scale,
+                Object.Texture.height * Scale
             };
         }
         case PropType::GRASS:
         {
             return Rectangle
             {
-
+                ScreenPos.x,
+                ScreenPos.y,
+                Object.Texture.width * Scale,
+                Object.Texture.height * Scale
             };
         }
         case PropType::WALL:
         {
             return Rectangle
             {
-
+                ScreenPos.x,
+                ScreenPos.y,
+                Object.Texture.width * Scale,
+                Object.Texture.height * Scale
+            };
+        }
+        case PropType::STUMP:
+        {
+            return Rectangle
+            {
+                ScreenPos.x,
+                ScreenPos.y,
+                Object.Texture.width * Scale,
+                Object.Texture.height * Scale
             };
         }
         default:

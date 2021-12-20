@@ -30,17 +30,23 @@ Character::Character(Sprite Idle,
     Sprites.emplace_back(&(this->Attack));
     Sprites.emplace_back(&(this->Hurt));
     Sprites.emplace_back(&(this->Death));
+    Sprites.emplace_back(&(this->Push));
+    Sprites.emplace_back(&(this->Sleep));
+    Sprites.emplace_back(&(this->ItemGrab));
 }
 
 Character::~Character()
 {
     // Unload all Textures when destructing Character
-    UnloadTexture(CurrentSprite->Texture);
     UnloadTexture(Idle.Texture);
+    UnloadTexture(Walk.Texture);
     UnloadTexture(Run.Texture);
     UnloadTexture(Attack.Texture);
     UnloadTexture(Hurt.Texture);
     UnloadTexture(Death.Texture);
+    UnloadTexture(Push.Texture);
+    UnloadTexture(Sleep.Texture);
+    UnloadTexture(ItemGrab.Texture);
 }
 
 void Character::Tick(float DeltaTime, Props& Props)
@@ -163,9 +169,12 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props)
     {
         for (auto Prop:PropType)
         {
-            if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos)))
+            if (Prop.HasCollision())
             {
-                UndoMovement(PrevWorldPos);
+                if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos)))
+                {
+                    UndoMovement(PrevWorldPos);
+                }
             }
         }
     }

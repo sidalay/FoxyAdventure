@@ -8,7 +8,7 @@
 
 enum class PropType
 {
-    TREE, ROCK, BOULDER, GRASS, FLOWER, FENCE, WALL
+    TREE, ROCK, BOULDER, GRASS, FLOWER, FENCE, WALL, BUSH, STUMP
 };
 
 class Prop 
@@ -18,14 +18,16 @@ private:
     PropType Type{};
     Vector2 WorldPos{};     // Where the prop is located in the world
     float Scale {4.f};
+    bool Collidable{false};
+
 public:
     // Constructor for inanimate props
     Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale = 4.f);
     // Constructor for animated props
-    Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale = 4.f);
-    // Tick function for animated Props               
+    Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale = 4.f);              
     void Tick(float DeltaTime);
     void Draw(Vector2 CharacterWorldPos);
+    bool HasCollision() {return Collidable;}
     Rectangle GetCollisionRec(Vector2 CharacterWorldPos);
 };
 

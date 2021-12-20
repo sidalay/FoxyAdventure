@@ -26,9 +26,9 @@ namespace Game
     void Draw(Background& Map, Character& Character, Props& Props);
 
     // Initialize props drawn under character
-    std::vector<std::vector<Prop>> InitializeUnderProps();
+    std::vector<std::vector<Prop>> InitializePropsUnder();
     // Initialize props drawn over character
-    std::vector<std::vector<Prop>> InitializeOverProps();
+    std::vector<std::vector<Prop>> InitializePropsOver();
 }
 
 #endif
