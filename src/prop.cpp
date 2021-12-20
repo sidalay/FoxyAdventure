@@ -95,3 +95,11 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
         }
     }
 }
+
+// ---------------------------------------------------------------------
+
+Props::Props(std::vector<std::vector<Prop>>* Under, std::vector<std::vector<Prop>>* Over)
+    : Under{Under}, Over{Over}
+{
+
+}

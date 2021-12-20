@@ -11,12 +11,6 @@ enum class PropType
     TREE, ROCK, BOULDER, GRASS, FLOWER, FENCE, WALL
 };
 
-struct Props
-{
-    std::vector<std::vector<Props>>* PropsUnder{};
-    std::vector<std::vector<Props>>* PropsOver{};
-};
-
 class Prop 
 {
 private:
@@ -33,6 +27,14 @@ public:
     void Tick(float DeltaTime);
     void Draw(Vector2 CharacterWorldPos);
     Rectangle GetCollisionRec(Vector2 CharacterWorldPos);
+};
+
+struct Props
+{
+    std::vector<std::vector<Prop>>* Under{};
+    std::vector<std::vector<Prop>>* Over{};
+
+    Props(std::vector<std::vector<Prop>>* Under, std::vector<std::vector<Prop>>* Over);
 };
 
 #endif

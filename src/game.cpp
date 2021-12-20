@@ -25,14 +25,16 @@ void Game::Run()
                        Sprite{"sprites/characters/Fox_itemGot.png", 1, 4},
                        &Window, &MapBG};
 
-    // Initialize Props
+    // Initialize Props & Create a Props Struct
     std::vector<std::vector<Prop>> UnderProps{Game::InitializeUnderProps()};
     std::vector<std::vector<Prop>> OverProps{Game::InitializeOverProps()};
+
+    Props Props{&UnderProps, &OverProps};
 
     // Start Game Loop
     while (!WindowShouldClose()) 
     {
-        Game::Tick(Window, MapBG, Champion, &UnderProps, &OverProps);
+        Game::Tick(Window, MapBG, Champion, Props);
     }
 
     // Clean-up
@@ -50,7 +52,7 @@ void Game::Initialize(Window& Window, int FPS, std::string Title)
     SetExitKey(0);
 }
 
-void Game::Tick(Window& Window, Background& Map, Character& Character, std::vector<std::vector<Prop>>* UnderProps, std::vector<std::vector<Prop>>* OverProps)
+void Game::Tick(Window& Window, Background& Map, Character& Character, Props& Props)
 {
     // Check if Window has been resized or fullscreened
     Game::CheckScreenSizing(Window);
@@ -60,8 +62,8 @@ void Game::Tick(Window& Window, Background& Map, Character& Character, std::vect
     ClearBackground(BLACK);
 
     // Tick & Draw Functions
-    Game::Update(Map, Character, UnderProps, OverProps);
-    Game::Draw(Map, Character, UnderProps, OverProps);
+    Game::Update(Map, Character, Props);
+    Game::Draw(Map, Character, Props);
 
     // END DRAWING
     EndDrawing();
@@ -103,21 +105,21 @@ void Game::SetFullScreen(Window& Window)
 }
 
 
-void Game::Update(Background& Map, Character& Character, std::vector<std::vector<Prop>>* UnderProps, std::vector<std::vector<Prop>>* OverProps)
+void Game::Update(Background& Map, Character& Character, Props& Props)
 {
     // Create DeltaTime
     float DeltaTime{GetFrameTime()};
 
     // Call Ticks
     Map.Tick(Character.GetWorldPos());
-    Character.Tick(DeltaTime, UnderProps, OverProps);
+    Character.Tick(DeltaTime, Props);
 }
 
-void Game::Draw(Background& Map, Character& Character, std::vector<std::vector<Prop>>* UnderProps, std::vector<std::vector<Prop>>* OverProps)
+void Game::Draw(Background& Map, Character& Character, Props& Props)
 {
     Map.Draw();
 
-    for (auto PropType:*UnderProps)
+    for (auto PropType:*Props.Under)
     {
         for (auto Prop:PropType)
         {
@@ -129,7 +131,7 @@ void Game::Draw(Background& Map, Character& Character, std::vector<std::vector<P
     // DrawRectangle(Character.GetCollisionRec().x,Character.GetCollisionRec().y,Character.GetCollisionRec().width,Character.GetCollisionRec().height, RED);
     Character.Draw();
     
-    for (auto PropType:*OverProps)
+    for (auto PropType:*Props.Over)
     {
         for (auto Prop:PropType)
         {

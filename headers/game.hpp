@@ -19,11 +19,11 @@ namespace Game
 {
     void Run();
     void Initialize(Window& Window, int FPS, std::string Title);
-    void Tick(Window& Window, Background& Map, Character& Character, std::vector<std::vector<Prop>>* UnderProps, std::vector<std::vector<Prop>>* OverProps);
+    void Tick(Window& Window, Background& Map, Character& Character, Props& Props);
     void CheckScreenSizing(Window& Window);
     void SetFullScreen(Window& Window);
-    void Update(Background& Map, Character& Character, std::vector<std::vector<Prop>>* UnderProps, std::vector<std::vector<Prop>>* OverProps);
-    void Draw(Background& Map, Character& Character, std::vector<std::vector<Prop>>* UnderProps, std::vector<std::vector<Prop>>* OverProps);
+    void Update(Background& Map, Character& Character, Props& Props);
+    void Draw(Background& Map, Character& Character, Props& Props);
 
     // Initialize props drawn under character
     std::vector<std::vector<Prop>> InitializeUnderProps();
