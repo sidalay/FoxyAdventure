@@ -4,6 +4,7 @@
 #include <raylib.h>
 #include <raymath.h>
 #include <vector>
+#include "headers/prop.hpp"
 #include "headers/sprite.hpp"
 #include "headers/window.hpp"
 #include "headers/background.hpp"
@@ -23,8 +24,8 @@ private:
 
     Window* Screen{};
     Background* World{};
-    Vector2 CharacterPos{};
-    Vector2 WorldPos{};
+    Vector2 CharacterPos{};     // Where the character is on the screen
+    Vector2 WorldPos{};         // Where the character is in the world
     Vector2 PrevWorldPos{};
     Rectangle Source{};
     Rectangle Destination{};
@@ -39,18 +40,22 @@ private:
 public:
     Character(Sprite Idle, Sprite Walk, Sprite Run, Sprite Attack, Sprite Hurt, Sprite Death, Window* Screen, Background* World);
     ~Character();
-    void Tick(float DeltaTime);
+    void Tick(float DeltaTime, std::vector<std::vector<Prop>>* Props);
     void Draw();
     void SpriteTick(float DeltaTime);
     void UpdateCharacterPos();
     void CheckDirection();
-    void CheckMovement();
+    void CheckMovement(std::vector<std::vector<Prop>>* Props);
+    void UndoMovement(Vector2 PrevWorldPos);
+    void CheckCollision(std::vector<std::vector<Prop>>* Props);
     void WalkOrRun();
-    void CheckAttack();
+    void CheckAttack(std::vector<std::vector<Prop>>* Props);
     void UpdateSource();
 
     Vector2 GetWorldPos() {return WorldPos;}
+    Vector2 GetPrevWorldPos() {return PrevWorldPos;}
     Vector2 GetCharPos() {return CharacterPos;}
+    Rectangle GetCollisionRec();
 };
 
 #endif

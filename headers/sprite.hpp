@@ -15,7 +15,7 @@ struct Sprite
     float RunningTime{};
 
     Sprite();
-    Sprite(const char* TexturePath, float MaxFramesX, float MaxFramesY);
+    Sprite(const char* TexturePath, float MaxFramesX = 1, float MaxFramesY = 1);
     ~Sprite();
     void Tick(float DeltaTime);
 };

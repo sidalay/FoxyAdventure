@@ -30,7 +30,7 @@ Character::~Character()
     UnloadTexture(Death.Texture);
 }
 
-void Character::Tick(float DeltaTime)
+void Character::Tick(float DeltaTime, std::vector<std::vector<Prop>>* Props)
 {
     UpdateCharacterPos();
 
@@ -38,11 +38,11 @@ void Character::Tick(float DeltaTime)
 
     CheckDirection();
 
-    CheckMovement();
+    CheckMovement(Props);
 
     WalkOrRun();
 
-    CheckAttack();
+    CheckAttack(Props);
 
     UpdateSource();
 }
@@ -99,7 +99,7 @@ void Character::CheckDirection()
 }
 
 // Check for movement input
-void Character::CheckMovement()
+void Character::CheckMovement(std::vector<std::vector<Prop>>* Props)
 {
     PrevWorldPos = WorldPos;
     Vector2 Direction{};
@@ -123,12 +123,37 @@ void Character::CheckMovement()
         WorldPos = Vector2Add(WorldPos, Vector2Scale(Vector2Normalize(Direction), Speed));
     }
 
+    // Undo Movement if walking out-of-bounds
     if (WorldPos.x + CharacterPos.x < 0.f ||
         WorldPos.y + CharacterPos.y < 0.f ||
         WorldPos.x + (Screen->x - CharacterPos.x) > World->GetMap().width * World->GetScale() ||
         WorldPos.y + (Screen->y - CharacterPos.y) > World->GetMap().height * World->GetScale())
     {
-        WorldPos = PrevWorldPos;
+        UndoMovement(PrevWorldPos);
+    }
+
+    CheckCollision(Props);
+
+}
+
+// Undo movement if walking out-of-bounds or colliding
+void Character::UndoMovement(Vector2 PrevWorldPos)
+{
+    WorldPos = PrevWorldPos;
+}
+
+// Check if colliding with props
+void Character::CheckCollision(std::vector<std::vector<Prop>>* Props)
+{
+    for (auto PropType:*Props)
+    {
+        for (auto Prop:PropType)
+        {
+            if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos)))
+            {
+                UndoMovement(PrevWorldPos);
+            }
+        }
     }
 }
 
@@ -168,7 +193,7 @@ void Character::WalkOrRun()
     }
 }
 
-void Character::CheckAttack()
+void Character::CheckAttack(std::vector<std::vector<Prop>>* Props)
 {
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
     {
@@ -185,7 +210,7 @@ void Character::CheckAttack()
     }
     else
     {
-        CheckMovement();
+        CheckMovement(Props);
     }
 }
 
@@ -197,4 +222,17 @@ void Character::UpdateSource()
     Source.width = CurrentSprite->Texture.width/CurrentSprite->MaxFramesX;
     Source.height = CurrentSprite->Texture.height/CurrentSprite->MaxFramesY;
 }
+
+// Return character collision dimensions
+Rectangle Character::GetCollisionRec()
+{
+    return Rectangle 
+    {
+        CharacterPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f,
+        CharacterPos.y + CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f,
+        ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
+        ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+    };
+}
+
 

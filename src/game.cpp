@@ -22,10 +22,13 @@ void Game::Run()
                        Sprite{"sprites/characters/Fox_die.png", 1, 4}, 
                        &Window, &MapBG};
 
+    // Initialize Props
+    std::vector<std::vector<Prop>> Props{Game::InitializeProps()};
+
     // Start Game Loop
     while (!WindowShouldClose()) 
     {
-        Game::Tick(Window, MapBG, Champion);
+        Game::Tick(Window, MapBG, Champion, &Props);
     }
 
     // Clean-up
@@ -43,7 +46,7 @@ void Game::Initialize(Window& Window, int FPS, std::string Title)
     SetExitKey(0);
 }
 
-void Game::Tick(Window& Window, Background& Map, Character& Character)
+void Game::Tick(Window& Window, Background& Map, Character& Character, std::vector<std::vector<Prop>>* Props)
 {
     // Check if Window has been resized or fullscreened
     Game::CheckScreenSizing(Window);
@@ -53,8 +56,8 @@ void Game::Tick(Window& Window, Background& Map, Character& Character)
     ClearBackground(BLACK);
 
     // Tick & Draw Functions
-    Game::Update(Map, Character);
-    Game::Draw(Map, Character);
+    Game::Update(Map, Character, Props);
+    Game::Draw(Map, Character, Props);
 
     // END DRAWING
     EndDrawing();
@@ -96,22 +99,49 @@ void Game::SetFullScreen(Window& Window)
 }
 
 
-void Game::Update(Background& Map, Character& Character)
+void Game::Update(Background& Map, Character& Character, std::vector<std::vector<Prop>>* Props)
 {
     // Create DeltaTime
     float DeltaTime{GetFrameTime()};
 
     // Call Ticks
     Map.Tick(Character.GetWorldPos());
-    Character.Tick(DeltaTime);
+    Character.Tick(DeltaTime, Props);
 }
 
-void Game::Draw(Background& Map, Character& Character)
+void Game::Draw(Background& Map, Character& Character, std::vector<std::vector<Prop>>* Props)
 {
     Map.Draw();
+    // DrawRectangle(Character.GetCollisionRec().x,Character.GetCollisionRec().y,Character.GetCollisionRec().width,Character.GetCollisionRec().height, RED);
     Character.Draw();
+    
+    for (auto PropType:*Props)
+    {
+        for (auto Prop:PropType)
+        {
+            Prop.Draw(Character.GetWorldPos());
+            // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, BLUE);
+        }
+    }
+
     
     DrawText(TextFormat("WorldPos.x: %i", (int)Character.GetWorldPos().x), 20, 20, 20, WHITE);
     DrawText(TextFormat("WorldPos.y: %i", (int)Character.GetWorldPos().y), 20, 40, 20, WHITE);
+}
+
+std::vector<std::vector<Prop>> Game::InitializeProps()
+{
+    std::vector<std::vector<Prop>> Props{};
+
+    std::vector<Prop> Trees
+    {
+        Prop{"sprites/props/PinkTree.png", Vector2{40,100}, PropType::TREE}, Prop{"sprites/props/PinkTree.png", Vector2{80,125}, PropType::TREE},
+        Prop{"sprites/props/PinkTree.png", Vector2{200,80}, PropType::TREE}, Prop{"sprites/props/BlueTree.png", Vector2{300,67}, PropType::TREE},
+        Prop{"sprites/props/FallTree.png", Vector2{400,400}, PropType::TREE, 8.f}, Prop{"sprites/props/PinkTree.png", Vector2{800,400}, PropType::TREE, 11.f}
+    };
+    Props.emplace_back(Trees);
+    
+
+    return Props;
 }
 
