@@ -1,12 +1,25 @@
 #include "headers/character.hpp"
 
-Character::Character(Sprite Idle, Sprite Walk, Sprite Run, Sprite Attack, Sprite Hurt, Sprite Death, Window* Screen, Background* World)
+Character::Character(Sprite Idle, 
+                     Sprite Walk, 
+                     Sprite Run, 
+                     Sprite Attack, 
+                     Sprite Hurt, 
+                     Sprite Death, 
+                     Sprite Push, 
+                     Sprite Sleep, 
+                     Sprite ItemGrab, 
+                     Window* Screen, 
+                     Background* World)
     : Idle{Idle},
       Walk{Walk},
       Run{Run},
       Attack{Attack},
       Hurt{Hurt},
       Death{Death},
+      Push{Push},
+      Sleep{Sleep},
+      ItemGrab{ItemGrab},
       Screen{Screen},
       World{World}
 {

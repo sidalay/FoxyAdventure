@@ -19,6 +19,9 @@ private:
     Sprite Attack{};
     Sprite Hurt{};
     Sprite Death{};
+    Sprite Push{};
+    Sprite Sleep{};
+    Sprite ItemGrab{};
     Sprite* CurrentSprite{&Idle};  
     std::vector<Sprite*> Sprites {};
 
@@ -38,7 +41,17 @@ private:
     Direction Face{Direction::DOWN};
 
 public:
-    Character(Sprite Idle, Sprite Walk, Sprite Run, Sprite Attack, Sprite Hurt, Sprite Death, Window* Screen, Background* World);
+    Character(Sprite Idle, 
+              Sprite Walk, 
+              Sprite Run, 
+              Sprite Attack, 
+              Sprite Hurt, 
+              Sprite Death, 
+              Sprite Push, 
+              Sprite Sleep, 
+              Sprite ItemGrab, 
+              Window* Screen, 
+              Background* World);
     ~Character();
     void Tick(float DeltaTime, std::vector<std::vector<Prop>>* Props);
     void Draw();

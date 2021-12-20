@@ -19,7 +19,10 @@ void Game::Run()
                        Sprite{"sprites/characters/Fox_run.png", 4, 4}, 
                        Sprite{"sprites/characters/Fox_melee.png", 4, 4},
                        Sprite{"sprites/characters/Fox_hit.png", 2, 4}, 
-                       Sprite{"sprites/characters/Fox_die.png", 1, 4}, 
+                       Sprite{"sprites/characters/Fox_die.png", 1, 4},
+                       Sprite{"sprites/characters/Fox_push.png", 4, 4},
+                       Sprite{"sprites/characters/Fox_sleep.png", 4, 1}, 
+                       Sprite{"sprites/characters/Fox_itemGot.png", 1, 4},
                        &Window, &MapBG};
 
     // Initialize Props
@@ -136,8 +139,8 @@ std::vector<std::vector<Prop>> Game::InitializeProps()
     std::vector<Prop> Trees
     {
         Prop{"sprites/props/PinkTree.png", Vector2{40,100}, PropType::TREE}, Prop{"sprites/props/PinkTree.png", Vector2{80,125}, PropType::TREE},
-        Prop{"sprites/props/PinkTree.png", Vector2{200,80}, PropType::TREE}, Prop{"sprites/props/BlueTree.png", Vector2{300,67}, PropType::TREE},
-        Prop{"sprites/props/FallTree.png", Vector2{400,400}, PropType::TREE, 8.f}, Prop{"sprites/props/PinkTree.png", Vector2{800,400}, PropType::TREE, 11.f}
+        Prop{"sprites/props/PinkTree.png", Vector2{200,80}, PropType::TREE}, Prop{"sprites/props/BlueTree.png", Vector2{320,67}, PropType::TREE},
+        Prop{"sprites/props/FallTree.png", Vector2{400,400}, PropType::TREE, 8.f}
     };
     Props.emplace_back(Trees);
     
