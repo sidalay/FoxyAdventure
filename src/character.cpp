@@ -43,7 +43,7 @@ Character::~Character()
     UnloadTexture(Death.Texture);
 }
 
-void Character::Tick(float DeltaTime, std::vector<std::vector<Prop>>* Props)
+void Character::Tick(float DeltaTime, std::vector<std::vector<Prop>>* UnderProps, std::vector<std::vector<Prop>>* OverProps)
 {
     UpdateCharacterPos();
 
@@ -51,11 +51,11 @@ void Character::Tick(float DeltaTime, std::vector<std::vector<Prop>>* Props)
 
     CheckDirection();
 
-    CheckMovement(Props);
+    CheckMovement(UnderProps, OverProps);
 
     WalkOrRun();
 
-    CheckAttack(Props);
+    CheckAttack(UnderProps, OverProps);
 
     UpdateSource();
 }
@@ -112,7 +112,7 @@ void Character::CheckDirection()
 }
 
 // Check for movement input
-void Character::CheckMovement(std::vector<std::vector<Prop>>* Props)
+void Character::CheckMovement(std::vector<std::vector<Prop>>* UnderProps, std::vector<std::vector<Prop>>* OverProps)
 {
     PrevWorldPos = WorldPos;
     Vector2 Direction{};
@@ -145,7 +145,8 @@ void Character::CheckMovement(std::vector<std::vector<Prop>>* Props)
         UndoMovement(PrevWorldPos);
     }
 
-    CheckCollision(Props);
+    CheckCollision(UnderProps);
+    CheckCollision(OverProps);
 
 }
 
@@ -206,7 +207,7 @@ void Character::WalkOrRun()
     }
 }
 
-void Character::CheckAttack(std::vector<std::vector<Prop>>* Props)
+void Character::CheckAttack(std::vector<std::vector<Prop>>* UnderProps, std::vector<std::vector<Prop>>* OverProps)
 {
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
     {
@@ -223,7 +224,7 @@ void Character::CheckAttack(std::vector<std::vector<Prop>>* Props)
     }
     else
     {
-        CheckMovement(Props);
+        CheckMovement(UnderProps, OverProps);
     }
 }
 

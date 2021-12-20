@@ -26,11 +26,72 @@ void Prop::Draw(Vector2 CharacterWorldPos)
 Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
 {
     Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)};
-    return Rectangle
+
+    switch (Type)
     {
-        ScreenPos.x + ((Object.Texture.width*.23f) * Scale),
-        ScreenPos.y + ((Object.Texture.height*.75f) * Scale),
-        (Object.Texture.width - Object.Texture.width*.47f) * Scale,
-        (Object.Texture.height - Object.Texture.height*.75f) * Scale
-    };
+        case PropType::TREE:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + ((Object.Texture.width*.23f) * Scale),
+                ScreenPos.y + ((Object.Texture.height*.75f) * Scale),
+                (Object.Texture.width - Object.Texture.width*.47f) * Scale,
+                (Object.Texture.height - Object.Texture.height*.75f) * Scale
+            };
+            break;
+        }
+        case PropType::ROCK:
+        {
+            return Rectangle
+            {
+                ScreenPos.x,
+                ScreenPos.y,
+                Object.Texture.width * Scale,
+                Object.Texture.height * Scale
+            };
+            break;
+        }
+        case PropType::BOULDER:
+        {
+            return Rectangle
+            {
+                ScreenPos.x,
+                ScreenPos.y,
+                (Object.Texture.width - Object.Texture.width*.125f) * Scale,
+                (Object.Texture.height - Object.Texture.height*.125f) * Scale   
+            };
+        }
+        case PropType::FLOWER:
+        {
+            return Rectangle
+            {
+
+            };
+        }
+        case PropType::FENCE:
+        {
+            return Rectangle
+            {
+
+            };
+        }
+        case PropType::GRASS:
+        {
+            return Rectangle
+            {
+
+            };
+        }
+        case PropType::WALL:
+        {
+            return Rectangle
+            {
+
+            };
+        }
+        default:
+        {
+            return Rectangle{};
+        }
+    }
 }

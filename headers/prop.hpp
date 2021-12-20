@@ -3,11 +3,18 @@
 
 #include <raylib.h>
 #include <raymath.h>
+#include <vector>
 #include "headers/sprite.hpp"
 
 enum class PropType
 {
-    TREE, ROCK, GRASS, FLOWER, FENCE, WALL
+    TREE, ROCK, BOULDER, GRASS, FLOWER, FENCE, WALL
+};
+
+struct Props
+{
+    std::vector<std::vector<Props>>* PropsUnder{};
+    std::vector<std::vector<Props>>* PropsOver{};
 };
 
 class Prop 

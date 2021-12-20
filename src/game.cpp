@@ -26,12 +26,13 @@ void Game::Run()
                        &Window, &MapBG};
 
     // Initialize Props
-    std::vector<std::vector<Prop>> Props{Game::InitializeProps()};
+    std::vector<std::vector<Prop>> UnderProps{Game::InitializeUnderProps()};
+    std::vector<std::vector<Prop>> OverProps{Game::InitializeOverProps()};
 
     // Start Game Loop
     while (!WindowShouldClose()) 
     {
-        Game::Tick(Window, MapBG, Champion, &Props);
+        Game::Tick(Window, MapBG, Champion, &UnderProps, &OverProps);
     }
 
     // Clean-up
@@ -49,7 +50,7 @@ void Game::Initialize(Window& Window, int FPS, std::string Title)
     SetExitKey(0);
 }
 
-void Game::Tick(Window& Window, Background& Map, Character& Character, std::vector<std::vector<Prop>>* Props)
+void Game::Tick(Window& Window, Background& Map, Character& Character, std::vector<std::vector<Prop>>* UnderProps, std::vector<std::vector<Prop>>* OverProps)
 {
     // Check if Window has been resized or fullscreened
     Game::CheckScreenSizing(Window);
@@ -59,8 +60,8 @@ void Game::Tick(Window& Window, Background& Map, Character& Character, std::vect
     ClearBackground(BLACK);
 
     // Tick & Draw Functions
-    Game::Update(Map, Character, Props);
-    Game::Draw(Map, Character, Props);
+    Game::Update(Map, Character, UnderProps, OverProps);
+    Game::Draw(Map, Character, UnderProps, OverProps);
 
     // END DRAWING
     EndDrawing();
@@ -102,23 +103,33 @@ void Game::SetFullScreen(Window& Window)
 }
 
 
-void Game::Update(Background& Map, Character& Character, std::vector<std::vector<Prop>>* Props)
+void Game::Update(Background& Map, Character& Character, std::vector<std::vector<Prop>>* UnderProps, std::vector<std::vector<Prop>>* OverProps)
 {
     // Create DeltaTime
     float DeltaTime{GetFrameTime()};
 
     // Call Ticks
     Map.Tick(Character.GetWorldPos());
-    Character.Tick(DeltaTime, Props);
+    Character.Tick(DeltaTime, UnderProps, OverProps);
 }
 
-void Game::Draw(Background& Map, Character& Character, std::vector<std::vector<Prop>>* Props)
+void Game::Draw(Background& Map, Character& Character, std::vector<std::vector<Prop>>* UnderProps, std::vector<std::vector<Prop>>* OverProps)
 {
     Map.Draw();
+
+    for (auto PropType:*UnderProps)
+    {
+        for (auto Prop:PropType)
+        {
+            Prop.Draw(Character.GetWorldPos());
+            // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, BLUE);
+        }
+    }
+
     // DrawRectangle(Character.GetCollisionRec().x,Character.GetCollisionRec().y,Character.GetCollisionRec().width,Character.GetCollisionRec().height, RED);
     Character.Draw();
     
-    for (auto PropType:*Props)
+    for (auto PropType:*OverProps)
     {
         for (auto Prop:PropType)
         {
@@ -132,19 +143,42 @@ void Game::Draw(Background& Map, Character& Character, std::vector<std::vector<P
     DrawText(TextFormat("WorldPos.y: %i", (int)Character.GetWorldPos().y), 20, 40, 20, WHITE);
 }
 
-std::vector<std::vector<Prop>> Game::InitializeProps()
+std::vector<std::vector<Prop>> Game::InitializeUnderProps()
+{
+    std::vector<std::vector<Prop>> Props{};
+
+    std::vector<Prop> Flowers
+    {
+        Prop{"sprites/props/PinkTree.png", Vector2{40,100}, PropType::TREE}
+    };
+    Props.emplace_back(Flowers);
+
+    return Props;
+}
+
+std::vector<std::vector<Prop>> Game::InitializeOverProps()
 {
     std::vector<std::vector<Prop>> Props{};
 
     std::vector<Prop> Trees
     {
-        Prop{"sprites/props/PinkTree.png", Vector2{40,100}, PropType::TREE}, Prop{"sprites/props/PinkTree.png", Vector2{80,125}, PropType::TREE},
-        Prop{"sprites/props/PinkTree.png", Vector2{200,80}, PropType::TREE}, Prop{"sprites/props/BlueTree.png", Vector2{320,67}, PropType::TREE},
-        Prop{"sprites/props/FallTree.png", Vector2{400,400}, PropType::TREE, 8.f}
+        Prop{"sprites/props/PinkTree.png", Vector2{40,100}, PropType::TREE}, 
+        Prop{"sprites/props/PinkTree.png", Vector2{80,125}, PropType::TREE},
+        Prop{"sprites/props/PinkTree.png", Vector2{200,80}, PropType::TREE}, 
+        Prop{"sprites/props/BlueTree.png", Vector2{320,67}, PropType::TREE},
+        Prop{"sprites/props/FallTree.png", Vector2{400,400}, PropType::TREE, 8.f},
     };
     Props.emplace_back(Trees);
     
-
+    std::vector<Prop> Boulder
+    {
+        Prop{"sprites/props/Boulder.png", Vector2{1000,500}, PropType::BOULDER}, 
+        Prop{"sprites/props/Boulder.png", Vector2{1112,500}, PropType::BOULDER},
+        Prop{"sprites/props/Boulder.png", Vector2{1066,612}, PropType::BOULDER},
+        Prop{"sprites/props/Boulder.png", Vector2{1172,500}, PropType::BOULDER}
+    };
+    Props.emplace_back(Boulder);
+    
     return Props;
 }
 

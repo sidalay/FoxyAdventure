@@ -53,16 +53,16 @@ public:
               Window* Screen, 
               Background* World);
     ~Character();
-    void Tick(float DeltaTime, std::vector<std::vector<Prop>>* Props);
+    void Tick(float DeltaTime, std::vector<std::vector<Prop>>* UnderProps, std::vector<std::vector<Prop>>* OverProps);
     void Draw();
     void SpriteTick(float DeltaTime);
     void UpdateCharacterPos();
     void CheckDirection();
-    void CheckMovement(std::vector<std::vector<Prop>>* Props);
+    void CheckMovement(std::vector<std::vector<Prop>>* UnderProps, std::vector<std::vector<Prop>>* OverProps);
     void UndoMovement(Vector2 PrevWorldPos);
     void CheckCollision(std::vector<std::vector<Prop>>* Props);
     void WalkOrRun();
-    void CheckAttack(std::vector<std::vector<Prop>>* Props);
+    void CheckAttack(std::vector<std::vector<Prop>>* UnderProps, std::vector<std::vector<Prop>>* OverProps);
     void UpdateSource();
 
     Vector2 GetWorldPos() {return WorldPos;}
