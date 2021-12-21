@@ -60,7 +60,7 @@ public:
     void CheckDirection();
     void CheckMovement(Props& Props);
     void UndoMovement(Vector2 PrevWorldPos);
-    void CheckCollision(std::vector<std::vector<Prop>>* Props);
+    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction);
     void WalkOrRun();
     void CheckAttack(Props& Props);
     void UpdateSource();

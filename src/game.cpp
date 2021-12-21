@@ -152,6 +152,12 @@ std::vector<std::vector<Prop>> Game::InitializePropsUnder()
     };
     Props.emplace_back(Flowers);
 
+    std::vector<Prop> Grass
+    {
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 2, 1}, Vector2{400,300}, PropType::GRASS}
+    };
+    Props.emplace_back(Grass);
+
     return Props;
 }
 
@@ -173,14 +179,14 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
     {
         Prop{"sprites/props/Boulder.png", Vector2{1000,500}, PropType::BOULDER}, 
         Prop{"sprites/props/Boulder.png", Vector2{1112,500}, PropType::BOULDER},
-        Prop{"sprites/props/Boulder.png", Vector2{1066,612}, PropType::BOULDER},
-        Prop{"sprites/props/Boulder.png", Vector2{1172,500}, PropType::BOULDER}
+        Prop{"sprites/props/Boulder.png", Vector2{1172,500}, PropType::BOULDER},
+        Prop{"sprites/props/Boulder.png", Vector2{750,200}, PropType::BOULDER, 4.f, true}
     };
     Props.emplace_back(Boulder);
 
     std::vector<Prop> Stump
     {
-        Prop{"sprites/props/TreeStump.png", Vector2{600,200}, PropType::STUMP}
+        Prop{"sprites/props/TreeStump.png", Vector2{600,200}, PropType::STUMP, 4.f, true}
     };
     Props.emplace_back(Stump);
     

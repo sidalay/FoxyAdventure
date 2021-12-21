@@ -1,7 +1,7 @@
 #include "headers/prop.hpp"
 
-Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale)
-    : Object{TexturePath}, Type{Type}, WorldPos{Pos}, Scale{Scale}
+Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale, bool Interactable)
+    : Object{TexturePath}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}
 {
     if (Type == PropType::BOULDER ||
         Type == PropType::BUSH ||
@@ -12,10 +12,16 @@ Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale)
     }
 }
 
-Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale)
-    : Object{Object}, Type{Type}, WorldPos{Pos}, Scale{Scale}
+Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Interactable)
+    : Object{Object}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}
 {
-
+    if (Type == PropType::BOULDER ||
+        Type == PropType::BUSH ||
+        Type == PropType::STUMP ||
+        Type == PropType::TREE)
+    {
+        Collidable = true;
+    }
 }
 
 void Prop::Tick(float DeltaTime)
@@ -26,7 +32,8 @@ void Prop::Tick(float DeltaTime)
 void Prop::Draw(Vector2 CharacterWorldPos)
 {
     Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)};    // Where the prop is drawn on the screen
-    DrawTextureEx(Object.Texture, ScreenPos, 0.f, Scale, WHITE);
+    // DrawTextureEx(Object.Texture, ScreenPos, 0.f, Scale, WHITE);
+    DrawTexturePro(Object.Texture, Object.GetSourceRec(), Object.GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
 }
 
 Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
@@ -93,7 +100,7 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
             {
                 ScreenPos.x,
                 ScreenPos.y,
-                Object.Texture.width * Scale,
+                (Object.Texture.width * Scale / 2),
                 Object.Texture.height * Scale
             };
         }
@@ -122,6 +129,13 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
             return Rectangle{};
         }
     }
+}
+
+void Prop::SetWorldPos(Vector2 Direction)
+{
+    DrawText("Im setting the world position!", 20, 0, 20, BLUE);
+    WorldPos = Vector2Add(WorldPos, Direction);
+    DrawText(TextFormat("Prop.WorldPos.x: %i, Prop.WorldPos.y: %i", (int)WorldPos.x, (int)WorldPos.y), 20, 100, 20, WHITE);
 }
 
 // ---------------------------------------------------------------------

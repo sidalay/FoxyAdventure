@@ -8,7 +8,7 @@
 class Background
 {
 private:
-    Texture2D Map {LoadTexture("sprites/maps/CodexMap.png")};
+    Texture2D Map {LoadTexture("sprites/maps/CodexMap2.png")};
     Vector2 MapPos{0.f, 0.f};
     Vector2 PreviousMapPos{};
     float Speed{1.5f};

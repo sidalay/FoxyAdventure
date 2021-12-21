@@ -38,15 +38,10 @@ Character::Character(Sprite Idle,
 Character::~Character()
 {
     // Unload all Textures when destructing Character
-    UnloadTexture(Idle.Texture);
-    UnloadTexture(Walk.Texture);
-    UnloadTexture(Run.Texture);
-    UnloadTexture(Attack.Texture);
-    UnloadTexture(Hurt.Texture);
-    UnloadTexture(Death.Texture);
-    UnloadTexture(Push.Texture);
-    UnloadTexture(Sleep.Texture);
-    UnloadTexture(ItemGrab.Texture);
+    for (auto Sprite:Sprites)
+    {
+        UnloadTexture(Sprite->Texture);
+    }
 }
 
 void Character::Tick(float DeltaTime, Props& Props)
@@ -151,8 +146,8 @@ void Character::CheckMovement(Props& Props)
         UndoMovement(PrevWorldPos);
     }
 
-    CheckCollision(Props.Under);
-    CheckCollision(Props.Over);
+    CheckCollision(Props.Under, Direction);
+    CheckCollision(Props.Over, Direction);
 
 }
 
@@ -163,7 +158,7 @@ void Character::UndoMovement(Vector2 PrevWorldPos)
 }
 
 // Check if colliding with props
-void Character::CheckCollision(std::vector<std::vector<Prop>>* Props)
+void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction)
 {
     for (auto PropType:*Props)
     {
@@ -172,10 +167,32 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props)
             if (Prop.HasCollision())
             {
                 if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos)))
-                {
-                    UndoMovement(PrevWorldPos);
+                {   
+                    if (Prop.IsInteractable())
+                    {
+                        if (Prop.GetType() == PropType::STUMP || Prop.GetType() == PropType::BOULDER)
+                        {
+                            DrawText(TextFormat("Prop.WorldPos.x: %i, Prop.WorldPos.y: %i", (int)Prop.GetWorldPos().x, (int)Prop.GetWorldPos().y), 20, 80, 20, WHITE);
+                            if (Vector2Length(Direction) != 0.f)
+                            {
+                                DrawText("Im running THROUGH the prop!", 20, 60, 20, BLUE);
+                                Prop.SetWorldPos(Vector2Scale(Vector2Normalize(Direction), Speed));
+                            }
+                        }
+                    } 
+                    else
+                    {
+                        UndoMovement(PrevWorldPos);
+                    }
                 }
             }
+            // if (Prop.GetType() == PropType::GRASS)
+            // {
+            //     if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos)))
+            //     {
+            //        Prop.Tick(GetFrameTime());
+            //     }
+            // }
         }
     }
 }
