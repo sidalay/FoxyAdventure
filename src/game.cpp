@@ -53,7 +53,6 @@ void Game::Initialize(Window& Window, int FPS, std::string Title)
 
 void Game::Tick(Window& Window, Background& Map, Character& Character, Props& Props)
 {
-    // Check if Window has been resized or fullscreened
     Game::CheckScreenSizing(Window);
 
     // BEGIN DRAWING
@@ -68,6 +67,7 @@ void Game::Tick(Window& Window, Background& Map, Character& Character, Props& Pr
     EndDrawing();
 }
 
+// Check if Window has been resized or fullscreened
 void Game::CheckScreenSizing(Window& Window)
 {
     // set window.x / window.y to resized dimensions
@@ -84,6 +84,7 @@ void Game::CheckScreenSizing(Window& Window)
     }
 }
 
+// Full screen with current resolution settings
 void Game::SetFullScreen(Window& Window)
 {
     // see what display we are on right now
@@ -139,6 +140,7 @@ void Game::Draw(Background& Map, Character& Character, Props& Props)
     DrawText(TextFormat("WorldPos.y: %i", (int)Character.GetWorldPos().y), 20, 40, 20, WHITE);
 }
 
+// Initialize props drawn under character
 std::vector<std::vector<Prop>> Game::InitializePropsUnder()
 {
     std::vector<std::vector<Prop>> Props{};
@@ -161,6 +163,7 @@ std::vector<std::vector<Prop>> Game::InitializePropsUnder()
     return Props;
 }
 
+// Initialize props drawn over character
 std::vector<std::vector<Prop>> Game::InitializePropsOver()
 {
     std::vector<std::vector<Prop>> Props{};

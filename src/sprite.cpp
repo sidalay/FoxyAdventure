@@ -30,6 +30,7 @@ void Sprite::Tick(float DeltaTime)
     }
 }
 
+// Returns a source rectangle that dictates what sprite to draw
 Rectangle Sprite::GetSourceRec()
 {
     Rectangle Source {
@@ -42,6 +43,7 @@ Rectangle Sprite::GetSourceRec()
     return Source;
 }
 
+// Returns destination rectangle that shows where to draw on screen
 Rectangle Sprite::GetPosRec(const Vector2& ScreenPos, float Scale)
 {
     Rectangle Destination {

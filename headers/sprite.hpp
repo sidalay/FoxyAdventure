@@ -18,9 +18,7 @@ struct Sprite
     Sprite(const char* TexturePath, float MaxFramesX = 1, float MaxFramesY = 1);
     ~Sprite();
     void Tick(float DeltaTime);
-    // Returns a source rectangle that dictates what sprite to draw
     Rectangle GetSourceRec();
-    // Returns destination rectangle that shows where to draw on screen
     Rectangle GetPosRec(const Vector2& ScreenPos, float Scale);
 };
 

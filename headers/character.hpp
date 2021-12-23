@@ -53,6 +53,7 @@ public:
               Window* Screen, 
               Background* World);
     ~Character();
+    
     void Tick(float DeltaTime, Props& Props);
     void Draw();
     void SpriteTick(float DeltaTime);

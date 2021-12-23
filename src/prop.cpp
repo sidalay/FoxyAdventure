@@ -1,5 +1,6 @@
 #include "headers/prop.hpp"
 
+// Constructor for inanimate props
 Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale, bool Interactable)
     : Object{TexturePath}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}
 {
@@ -12,6 +13,7 @@ Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale, boo
     }
 }
 
+// Constructor for animated props
 Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Interactable)
     : Object{Object}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}
 {
@@ -31,7 +33,7 @@ void Prop::Tick(float DeltaTime)
 
 void Prop::Draw(Vector2 CharacterWorldPos)
 {
-    Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)};    // Where the prop is drawn on the screen
+    Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)}; // Where the prop is drawn on the screen
     // DrawTextureEx(Object.Texture, ScreenPos, 0.f, Scale, WHITE);
     DrawTexturePro(Object.Texture, Object.GetSourceRec(), Object.GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
 }
