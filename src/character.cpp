@@ -118,16 +118,20 @@ void Character::CheckMovement(Props& Props)
     PrevWorldPos = WorldPos;
     Vector2 Direction{};
 
-    if (IsKeyDown(KEY_W)) {
+    if (IsKeyDown(KEY_W)) 
+    {
         Direction.y -= Speed;
     }
-    if (IsKeyDown(KEY_A)) {
+    if (IsKeyDown(KEY_A)) 
+    {
         Direction.x -= Speed;
     }
-    if (IsKeyDown(KEY_S)) {
+    if (IsKeyDown(KEY_S)) 
+    {
         Direction.y += Speed;
     }
-    if (IsKeyDown(KEY_D)) {
+    if (IsKeyDown(KEY_D)) 
+    {
         Direction.x += Speed;
     }
 

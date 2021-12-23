@@ -21,7 +21,7 @@
         {
             "name": "Mac",
             "includePath": [
-                "c:raylib/raylib/src/**",
+                "/opt/homebrew/include",
                 "${workspaceFolder}/**"
             ],
             "defines": [

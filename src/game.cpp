@@ -6,7 +6,7 @@ void Game::Run()
 {
 
     // Initialization ---------------------------
-    Window Window {800, 800};                      // Window Dimensions
+    Window Window {800, 800};                       // Window Dimensions
     int FPS {144};                                  // Frames Per Second
     Game::Initialize(Window, FPS, "Template");      // Create Window
 
