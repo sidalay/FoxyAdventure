@@ -5,8 +5,8 @@ Sprite::Sprite()
 
 }
 
-Sprite::Sprite(const char* TexturePath, float MaxFramesX, float MaxFramesY) 
-    : Texture{LoadTexture(TexturePath)}, MaxFramesX{MaxFramesX}, MaxFramesY{MaxFramesY}
+Sprite::Sprite(const char* TexturePath, float MaxFramesX, float MaxFramesY, float UpdateSpeed) 
+    : Texture{LoadTexture(TexturePath)}, MaxFramesX{MaxFramesX}, MaxFramesY{MaxFramesY}, UpdateTime{UpdateSpeed}
 {
 
 }

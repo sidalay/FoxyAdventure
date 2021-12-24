@@ -11,12 +11,15 @@ enum class PropType
     TREE, ROCK, BOULDER, GRASS, FLOWER, FENCE, WALL, BUSH, STUMP
 };
 
+struct Props;
+
 class Prop 
 {
 private:
     Sprite Object{};
     PropType Type{};
     Vector2 WorldPos{};     // Where the prop is located in the world
+    Vector2 PrevWorldPos{};
     float Scale {4.f};
     bool Collidable{false};
     bool Interactable{};
@@ -36,6 +39,7 @@ public:
     Rectangle GetCollisionRec(Vector2 CharacterWorldPos);
     
     void SetWorldPos(Vector2 Direction);
+    void UndoMovement() {WorldPos = PrevWorldPos;}
 };
 
 struct Props

@@ -34,7 +34,8 @@ private:
     Rectangle Destination{};
     
     float Scale{1.5f};
-    float Speed{1.5f};
+    float Speed{1.0f};
+    bool Colliding{false};
     bool Walking{false};
     bool Running{false};
     bool Attacking{false};
@@ -66,6 +67,7 @@ public:
     void CheckAttack(Props& Props);
     void UpdateSource();
 
+    float GetSpeed() {return Speed;}
     Vector2 GetWorldPos() {return WorldPos;}
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}
     Vector2 GetCharPos() {return CharacterPos;}
