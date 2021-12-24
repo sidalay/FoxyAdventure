@@ -61,7 +61,7 @@ public:
     void UpdateCharacterPos();
     void CheckDirection();
     void CheckMovement(Props& Props);
-    void UndoMovement(Vector2 PrevWorldPos);
+    void UndoMovement();
     void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction);
     void WalkOrRun();
     void CheckAttack(Props& Props);

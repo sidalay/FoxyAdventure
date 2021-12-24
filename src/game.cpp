@@ -113,6 +113,14 @@ void Game::Update(Background& Map, Character& Character, Props& Props)
     // Call Ticks
     Map.Tick(Character.GetWorldPos());
     Character.Tick(DeltaTime, Props);
+
+    for (auto& Proptype:*Props.Under)
+        for (auto& Prop:Proptype)
+            Prop.Tick(DeltaTime, Map);
+
+    for (auto& Proptype:*Props.Over)
+        for (auto& Prop:Proptype)
+            Prop.Tick(DeltaTime, Map);
 }
 
 void Game::Draw(Background& Map, Character& Character, Props& Props)
@@ -156,6 +164,8 @@ std::vector<std::vector<Prop>> Game::InitializePropsUnder()
 
     std::vector<Prop> Grass
     {
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{750,100}, PropType::GRASS, 4.f, true},
+
         Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{790,675}, PropType::GRASS, 4.f, true},
         Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{815,725}, PropType::GRASS, 4.f, true},
 

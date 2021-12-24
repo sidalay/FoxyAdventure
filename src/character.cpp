@@ -147,7 +147,7 @@ void Character::CheckMovement(Props& Props)
         WorldPos.x + (Screen->x - CharacterPos.x) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
         WorldPos.y + (Screen->y - CharacterPos.y) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f)
     {
-        UndoMovement(PrevWorldPos);
+        UndoMovement();
     }
 
     CheckCollision(Props.Under, Direction);
@@ -156,7 +156,7 @@ void Character::CheckMovement(Props& Props)
 }
 
 // Undo movement if walking out-of-bounds or colliding
-void Character::UndoMovement(Vector2 PrevWorldPos)
+void Character::UndoMovement()
 {
     WorldPos = PrevWorldPos;
 }
@@ -176,31 +176,38 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                     {
                         if (Prop.GetType() == PropType::STUMP || Prop.GetType() == PropType::BOULDER)
                         {
-                            if (Vector2Length(Direction) != 0.f)
+                            Colliding = true;   
+                            if(!Prop.IsOutOfBounds())
                             {
-                                Colliding = true;   
-                                Prop.SetWorldPos(Vector2Scale(Vector2Normalize(Direction), Speed));
+                                if (Prop.CheckMovement(*World, WorldPos, Direction, Speed, Props)) {
+                                    UndoMovement();
+                                }
                             }
+                            else
+                            {
+                                UndoMovement();
+                            }
+                            // Prop.SetWorldPos(Vector2Scale(Vector2Normalize(Direction), Speed));
                         }
                         if (Prop.GetType() == PropType::GRASS)
                         {
-                            if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos)))
-                            {
-                                Prop.Tick(GetFrameTime());
-                            }
+                            Prop.SetActive(true);
                         }
                     } 
                     else
                     {
-                        UndoMovement(PrevWorldPos);
+                        UndoMovement();
                     }
+                }
+                else
+                {
+                    Prop.SetActive(false);
                 }
             }
             else
             {
                 Colliding = false;
             }
-            
         }
     }
 }
