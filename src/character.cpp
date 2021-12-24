@@ -142,10 +142,10 @@ void Character::CheckMovement(Props& Props)
     }
 
     // Undo Movement if walking out-of-bounds
-    if (WorldPos.x + CharacterPos.x < 0.f ||
-        WorldPos.y + CharacterPos.y < 0.f ||
-        WorldPos.x + (Screen->x - CharacterPos.x) > World->GetMap().width * World->GetScale() ||
-        WorldPos.y + (Screen->y - CharacterPos.y) > World->GetMap().height * World->GetScale())
+    if (WorldPos.x + CharacterPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f||
+        WorldPos.y + CharacterPos.y < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f||
+        WorldPos.x + (Screen->x - CharacterPos.x) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
+        WorldPos.y + (Screen->y - CharacterPos.y) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f)
     {
         UndoMovement(PrevWorldPos);
     }
@@ -164,9 +164,9 @@ void Character::UndoMovement(Vector2 PrevWorldPos)
 // Check if colliding with props
 void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction)
 {
-    for (auto PropType:*Props)
+    for (auto& PropType:*Props)
     {
-        for (auto Prop:PropType)
+        for (auto& Prop:PropType)
         {
             if (Prop.HasCollision())
             {
@@ -176,11 +176,17 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                     {
                         if (Prop.GetType() == PropType::STUMP || Prop.GetType() == PropType::BOULDER)
                         {
-                            DrawText(TextFormat("Prop.WorldPos.x: %i, Prop.WorldPos.y: %i", (int)Prop.GetWorldPos().x, (int)Prop.GetWorldPos().y), 20, 80, 20, WHITE);
                             if (Vector2Length(Direction) != 0.f)
                             {
-                                DrawText("Im running THROUGH the prop!", 20, 60, 20, BLUE);
+                                Colliding = true;   
                                 Prop.SetWorldPos(Vector2Scale(Vector2Normalize(Direction), Speed));
+                            }
+                        }
+                        if (Prop.GetType() == PropType::GRASS)
+                        {
+                            if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos)))
+                            {
+                                Prop.Tick(GetFrameTime());
                             }
                         }
                     } 
@@ -190,13 +196,11 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                     }
                 }
             }
-            // if (Prop.GetType() == PropType::GRASS)
-            // {
-            //     if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos)))
-            //     {
-            //        Prop.Tick(GetFrameTime());
-            //     }
-            // }
+            else
+            {
+                Colliding = false;
+            }
+            
         }
     }
 }
@@ -207,12 +211,21 @@ void Character::WalkOrRun()
     if (IsKeyDown(KEY_LEFT_SHIFT))
     {
         Running = true;
-        Speed = 2.5f;
+
+        if (Colliding)
+            Speed = 0.9f;
+        else 
+            Speed = 1.5f;
     }
     else 
     {
         Running = false;
-        Speed = 1.5f;
+
+        if (Colliding)
+            Speed = 0.4f;
+        else
+            Speed = 1.0f;
+
     }
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_A) || IsKeyDown(KEY_S) || IsKeyDown(KEY_D))
     {

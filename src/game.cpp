@@ -119,8 +119,8 @@ void Game::Draw(Background& Map, Character& Character, Props& Props)
 {
     Map.Draw();
 
-    for (auto PropType:*Props.Under)
-        for (auto Prop:PropType)
+    for (auto& PropType:*Props.Under)
+        for (auto& Prop:PropType)
         {
             Prop.Draw(Character.GetWorldPos());
             // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, BLUE);
@@ -129,8 +129,8 @@ void Game::Draw(Background& Map, Character& Character, Props& Props)
     // DrawRectangle(Character.GetCollisionRec().x,Character.GetCollisionRec().y,Character.GetCollisionRec().width,Character.GetCollisionRec().height, RED);
     Character.Draw();
     
-    for (auto PropType:*Props.Over)
-        for (auto Prop:PropType)
+    for (auto& PropType:*Props.Over)
+        for (auto& Prop:PropType)
         {
             Prop.Draw(Character.GetWorldPos());
             // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, BLUE);
@@ -156,7 +156,17 @@ std::vector<std::vector<Prop>> Game::InitializePropsUnder()
 
     std::vector<Prop> Grass
     {
-        Prop{Sprite{"sprites/props/GrassAnimation.png", 2, 1}, Vector2{400,300}, PropType::GRASS}
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{790,675}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{815,725}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{790+64,675}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{815+64,725}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{790,675+64}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{815,725+64}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{790+64,675+64}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{815+64,725+64}, PropType::GRASS, 4.f, true},
     };
     Props.emplace_back(Grass);
 
@@ -168,21 +178,11 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
 {
     std::vector<std::vector<Prop>> Props{};
 
-    std::vector<Prop> Trees
-    {
-        Prop{"sprites/props/TreePink.png", Vector2{40,100}, PropType::TREE}, 
-        Prop{"sprites/props/TreePink.png", Vector2{80,125}, PropType::TREE},
-        Prop{"sprites/props/TreePink.png", Vector2{200,80}, PropType::TREE}, 
-        Prop{"sprites/props/TreeBlue.png", Vector2{320,67}, PropType::TREE},
-        Prop{"sprites/props/TreeFall.png", Vector2{400,400}, PropType::TREE, 8.f},
-    };
-    Props.emplace_back(Trees);
-    
     std::vector<Prop> Boulder
     {
         Prop{"sprites/props/Boulder.png", Vector2{1000,500}, PropType::BOULDER}, 
         Prop{"sprites/props/Boulder.png", Vector2{1112,500}, PropType::BOULDER},
-        Prop{"sprites/props/Boulder.png", Vector2{1172,500}, PropType::BOULDER},
+        Prop{"sprites/props/Boulder.png", Vector2{1172,500}, PropType::BOULDER, 4.f, true},
         Prop{"sprites/props/Boulder.png", Vector2{750,200}, PropType::BOULDER, 4.f, true}
     };
     Props.emplace_back(Boulder);
@@ -192,6 +192,36 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeStump.png", Vector2{600,200}, PropType::STUMP, 4.f, true}
     };
     Props.emplace_back(Stump);
+
+    std::vector<Prop> Trees
+    {
+        Prop{"sprites/props/TreePink.png", Vector2{40,100}, PropType::TREE}, 
+        Prop{"sprites/props/TreePink.png", Vector2{80,125}, PropType::TREE},
+        Prop{"sprites/props/TreePink.png", Vector2{200,80}, PropType::TREE}, 
+        Prop{"sprites/props/TreeBlue.png", Vector2{320,67}, PropType::TREE},
+        Prop{"sprites/props/TreeFall.png", Vector2{400,400}, PropType::TREE, 8.f},
+    };
+    Props.emplace_back(Trees);
+
+    std::vector<Prop> Grass
+    {
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{825,680}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{800,700}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{830,710}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{825+64,680}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{800+64,700}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{830+64,710}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{825,680+64}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{800,700+64}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{830,710+64}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{825+64,680+64}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{800+64,700+64}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{830+64,710+64}, PropType::GRASS, 4.f, true},
+    };
+    Props.emplace_back(Grass);
     
     return Props;
 }

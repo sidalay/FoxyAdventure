@@ -7,7 +7,8 @@ Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale, boo
     if (Type == PropType::BOULDER ||
         Type == PropType::BUSH ||
         Type == PropType::STUMP ||
-        Type == PropType::TREE)
+        Type == PropType::TREE ||
+        Type == PropType::GRASS)
     {
         Collidable = true;
     }
@@ -20,7 +21,8 @@ Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Interact
     if (Type == PropType::BOULDER ||
         Type == PropType::BUSH ||
         Type == PropType::STUMP ||
-        Type == PropType::TREE)
+        Type == PropType::TREE ||
+        Type == PropType::GRASS)
     {
         Collidable = true;
     }
@@ -100,10 +102,10 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
         {
             return Rectangle
             {
-                ScreenPos.x,
-                ScreenPos.y,
-                (Object.Texture.width * Scale / 2),
-                Object.Texture.height * Scale
+                ScreenPos.x + (Object.Texture.width * Scale) * .05f,
+                ScreenPos.y + (Object.Texture.height * Scale) * .4f,
+                (Object.Texture.width - Object.Texture.width * .875f) * Scale,
+                (Object.Texture.height - Object.Texture.height * .69f) * Scale
             };
         }
         case PropType::WALL:
@@ -135,9 +137,7 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
 
 void Prop::SetWorldPos(Vector2 Direction)
 {
-    DrawText("Im setting the world position!", 20, 0, 20, BLUE);
     WorldPos = Vector2Add(WorldPos, Direction);
-    DrawText(TextFormat("Prop.WorldPos.x: %i, Prop.WorldPos.y: %i", (int)WorldPos.x, (int)WorldPos.y), 20, 100, 20, WHITE);
 }
 
 // ---------------------------------------------------------------------
