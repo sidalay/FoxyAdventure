@@ -6,9 +6,9 @@ void Game::Run()
 {
 
     // Initialization ---------------------------
-    Window Window {800, 800};                       // Window Dimensions
-    int FPS {144};                                  // Frames Per Second
-    Game::Initialize(Window, FPS, "Template");      // Create Window
+    Window Window {800, 800};                               // Window Dimensions
+    int FPS {144};                                          // Frames Per Second
+    Game::Initialize(Window, FPS, "Cryptex Adventure");     // Create Window
 
     // Initialize Background
     Background MapBG{};
@@ -146,6 +146,8 @@ void Game::Draw(Background& Map, Character& Character, Props& Props)
     
     DrawText(TextFormat("WorldPos.x: %i", (int)Character.GetWorldPos().x), 20, 20, 20, WHITE);
     DrawText(TextFormat("WorldPos.y: %i", (int)Character.GetWorldPos().y), 20, 40, 20, WHITE);
+
+    Map.DrawMiniMap(Character.GetWorldPos());
 }
 
 // Initialize props drawn under character
@@ -155,17 +157,15 @@ std::vector<std::vector<Prop>> Game::InitializePropsUnder()
 
     std::vector<Prop> Flowers
     {
-        Prop{"sprites/props/Flowers.png", Vector2{200,300}, PropType::FLOWER}, 
-        Prop{"sprites/props/Flowers.png", Vector2{270,300}, PropType::FLOWER},
-        Prop{"sprites/props/Flowers.png", Vector2{200,368}, PropType::FLOWER}, 
-        Prop{"sprites/props/Flowers.png", Vector2{290,380}, PropType::FLOWER, 2.f}
+        Prop{"sprites/props/Flowers.png", Vector2{200,800}, PropType::FLOWER}, 
+        Prop{"sprites/props/Flowers.png", Vector2{270,800}, PropType::FLOWER},
+        Prop{"sprites/props/Flowers.png", Vector2{200,868}, PropType::FLOWER}, 
+        Prop{"sprites/props/Flowers.png", Vector2{290,880}, PropType::FLOWER, 2.f}
     };
     Props.emplace_back(Flowers);
 
     std::vector<Prop> Grass
     {
-        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{750,100}, PropType::GRASS, 4.f, true},
-
         Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{790,675}, PropType::GRASS, 4.f, true},
         Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{815,725}, PropType::GRASS, 4.f, true},
 
@@ -190,26 +190,235 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
 
     std::vector<Prop> Boulder
     {
-        Prop{"sprites/props/Boulder.png", Vector2{1000,500}, PropType::BOULDER}, 
-        Prop{"sprites/props/Boulder.png", Vector2{1112,500}, PropType::BOULDER},
-        Prop{"sprites/props/Boulder.png", Vector2{1172,500}, PropType::BOULDER, 4.f, true},
-        Prop{"sprites/props/Boulder.png", Vector2{750,200}, PropType::BOULDER, 4.f, true}
+        Prop{"sprites/props/Boulder.png", Vector2{1000,1000}, PropType::BOULDER}, 
+        Prop{"sprites/props/Boulder.png", Vector2{1112,1000}, PropType::BOULDER},
+        Prop{"sprites/props/Boulder.png", Vector2{1172,1000}, PropType::BOULDER, 4.f, true},
+        Prop{"sprites/props/Boulder.png", Vector2{750,900}, PropType::BOULDER, 4.f, true},
+        
+        Prop{"sprites/props/Boulder.png", Vector2{960,2950}, PropType::BOULDER},
+        Prop{"sprites/props/Boulder.png", Vector2{1090,2950}, PropType::BOULDER},
+        Prop{"sprites/props/Boulder.png", Vector2{1025,3050}, PropType::BOULDER, 4.f, true},
+
     };
     Props.emplace_back(Boulder);
 
     std::vector<Prop> Stump
     {
-        Prop{"sprites/props/TreeStump.png", Vector2{600,200}, PropType::STUMP, 4.f, true}
+        Prop{"sprites/props/TreeStump.png", Vector2{600,900}, PropType::STUMP, 4.f, true}
     };
     Props.emplace_back(Stump);
 
     std::vector<Prop> Trees
     {
-        Prop{"sprites/props/TreePink.png", Vector2{40,100}, PropType::TREE}, 
-        Prop{"sprites/props/TreePink.png", Vector2{80,125}, PropType::TREE},
-        Prop{"sprites/props/TreePink.png", Vector2{200,80}, PropType::TREE}, 
-        Prop{"sprites/props/TreeBlue.png", Vector2{320,67}, PropType::TREE},
-        Prop{"sprites/props/TreeFall.png", Vector2{400,400}, PropType::TREE, 8.f},
+        // row1
+        Prop{"sprites/props/TreeGreen.png", Vector2{20,67}, PropType::TREE}, 
+        Prop{"sprites/props/TreeGreen.png", Vector2{120,67}, PropType::TREE}, 
+        Prop{"sprites/props/TreeGreen.png", Vector2{220,67}, PropType::TREE}, 
+        Prop{"sprites/props/TreeGreen.png", Vector2{320,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{420,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{520,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{620,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{720,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{820,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{920,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1020,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1120,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1220,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1320,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1420,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1520,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1620,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1720,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1820,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1920,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2020,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2120,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2220,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2320,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2420,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2520,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2620,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2720,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2820,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2920,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3020,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3120,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3220,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3320,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3420,67}, PropType::TREE},
+
+        Prop{"sprites/props/TreeGreen.png", Vector2{3700,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3800,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3900,67}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{4000,67}, PropType::TREE},
+
+        // row2
+        Prop{"sprites/props/TreeGreen.png", Vector2{0,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{100,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{200,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{300,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{400,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{500,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{600,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{700,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{800,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{900,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1000,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1100,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1200,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1300,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1400,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1500,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1600,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1700,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1800,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1900,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2000,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2100,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2200,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2300,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2400,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2500,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2600,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2700,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2800,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2900,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3000,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3100,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3200,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3300,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3400,167}, PropType::TREE},
+
+        Prop{"sprites/props/TreeGreen.png", Vector2{3720,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3820,167}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3920,167}, PropType::TREE},
+
+        // row3
+        Prop{"sprites/props/TreeGreen.png", Vector2{20,267}, PropType::TREE}, 
+        Prop{"sprites/props/TreeGreen.png", Vector2{120,267}, PropType::TREE}, 
+        Prop{"sprites/props/TreeGreen.png", Vector2{220,267}, PropType::TREE}, 
+        Prop{"sprites/props/TreeGreen.png", Vector2{320,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{420,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{520,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{620,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{720,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{820,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{920,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1020,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1120,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1220,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1320,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1420,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1520,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1620,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1720,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1820,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1920,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2020,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2120,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2220,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2320,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2420,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2520,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2620,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2720,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2820,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2920,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3020,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3120,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3220,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3320,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3420,267}, PropType::TREE},
+
+        Prop{"sprites/props/TreeGreen.png", Vector2{3700,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3800,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3900,267}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{4000,267}, PropType::TREE},
+
+        // row4
+        Prop{"sprites/props/TreeGreen.png", Vector2{0,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{100,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{200,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{300,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{400,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{500,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{600,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{700,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{800,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{900,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1000,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1100,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1200,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1300,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1400,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1500,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1600,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1700,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1800,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1900,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2000,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2100,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2200,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2300,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2400,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2500,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2600,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2700,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2800,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2900,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3000,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3100,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3200,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3300,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3400,367}, PropType::TREE},
+
+        Prop{"sprites/props/TreeGreen.png", Vector2{3720,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3820,367}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3920,367}, PropType::TREE},
+
+        //row5
+        Prop{"sprites/props/TreeGreen.png", Vector2{20,467}, PropType::TREE}, 
+        Prop{"sprites/props/TreeGreen.png", Vector2{120,467}, PropType::TREE}, 
+        Prop{"sprites/props/TreeGreen.png", Vector2{220,467}, PropType::TREE}, 
+        Prop{"sprites/props/TreeGreen.png", Vector2{320,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{420,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{520,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{620,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{720,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{820,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{920,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1020,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1120,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1220,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1320,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1420,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1520,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1620,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1720,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1820,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{1920,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2020,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2120,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2220,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2320,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2420,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2520,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2620,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2720,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2820,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{2920,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3020,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3120,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3220,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3320,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3420,467}, PropType::TREE},
+
+        Prop{"sprites/props/TreeGreen.png", Vector2{3700,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3800,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{3900,467}, PropType::TREE},
+        Prop{"sprites/props/TreeGreen.png", Vector2{4000,467}, PropType::TREE},
+
+        Prop{"sprites/props/TreeGreen.png", Vector2{2050,2050}, PropType::TREE, 8.f},
     };
     Props.emplace_back(Trees);
 

@@ -173,19 +173,10 @@ bool Prop::CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Directio
         for (auto& Prop:Proptype) {
             if (Prop.HasCollision()) {
                 if (CheckCollisionRecs(GetCollisionRec(CharWorldPos), Prop.GetCollisionRec(CharWorldPos))) {
-                    if (Prop.IsInteractable()) {
-                        if (Prop.GetType() == PropType::GRASS) {
-                            DrawText("I am setting the grass to active!", 20, 80, 20, WHITE);
-                            Prop.SetActive(true);
-                        }
-                    }
-                    else {
+                    if (!Prop.IsInteractable()) {
                         UndoMovement();
                         Colliding = true;
                     }
-                }
-                else {
-                    Prop.SetActive(false);
                 }
             }
         }
