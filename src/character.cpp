@@ -202,6 +202,7 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                 else
                 {
                     Prop.SetActive(false);
+                    Colliding = false;
                 }
             }
             else

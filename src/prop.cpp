@@ -8,7 +8,18 @@ Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale, boo
         Type == PropType::BUSH ||
         Type == PropType::STUMP ||
         Type == PropType::TREE ||
-        Type == PropType::GRASS)
+        Type == PropType::FENCE ||
+        Type == PropType::rHOUSELEFT ||
+        Type == PropType::rHOUSERIGHT ||
+        Type == PropType::bHOUSELEFT ||
+        Type == PropType::bHOUSERIGHT ||
+        Type == PropType::DOOR ||
+        Type == PropType::GRASS ||
+        Type == PropType::TOPWALL ||
+        Type == PropType::LEFTSIDEWALL ||
+        Type == PropType::RIGHTSIDEWALL ||
+        Type == PropType::BOTTOMWALL ||
+        Type == PropType::HOLE)
     {
         Collidable = true;
     }
@@ -22,7 +33,18 @@ Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Interact
         Type == PropType::BUSH ||
         Type == PropType::STUMP ||
         Type == PropType::TREE ||
-        Type == PropType::GRASS)
+        Type == PropType::FENCE ||
+        Type == PropType::rHOUSELEFT ||
+        Type == PropType::rHOUSERIGHT ||
+        Type == PropType::bHOUSELEFT ||
+        Type == PropType::bHOUSERIGHT ||
+        Type == PropType::DOOR ||
+        Type == PropType::GRASS ||
+        Type == PropType::TOPWALL ||
+        Type == PropType::LEFTSIDEWALL ||
+        Type == PropType::RIGHTSIDEWALL ||
+        Type == PropType::BOTTOMWALL ||
+        Type == PropType::HOLE)
     {
         Collidable = true;
     }
@@ -98,9 +120,9 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
             return Rectangle
             {
                 ScreenPos.x,
-                ScreenPos.y,
+                ScreenPos.y + (Object.Texture.height * Scale) * .1f,
                 Object.Texture.width * Scale,
-                Object.Texture.height * Scale
+                (Object.Texture.height * Scale) * .9f
             };
         }
         case PropType::GRASS:
@@ -113,7 +135,88 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
                 (Object.Texture.height - Object.Texture.height * .69f) * Scale
             };
         }
-        case PropType::WALL:
+        case PropType::rHOUSELEFT:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + (Object.Texture.width * Scale) * .08f,
+                ScreenPos.y + (Object.Texture.height * Scale) * .6f,
+                (Object.Texture.width * Scale) * .43f,
+                (Object.Texture.height * Scale) * .3f
+            };
+        }
+        case PropType::rHOUSERIGHT:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + (Object.Texture.width * Scale) * .75f,
+                ScreenPos.y + (Object.Texture.height * Scale) * .6f,
+                (Object.Texture.width * Scale) * .19f,
+                (Object.Texture.height * Scale) * .3f
+            };
+        }
+        case PropType::bHOUSELEFT:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + (Object.Texture.width * Scale) * .08f,
+                ScreenPos.y + (Object.Texture.height * Scale) * .6f,
+                (Object.Texture.width * Scale) * .10f,
+                (Object.Texture.height * Scale) * .35f
+            };
+        }
+        case PropType::bHOUSERIGHT:
+        {
+            return Rectangle
+            {
+                
+                ScreenPos.x + (Object.Texture.width * Scale) * .40f,
+                ScreenPos.y + (Object.Texture.height * Scale) * .6f,
+                (Object.Texture.width * Scale) * .50f,
+                (Object.Texture.height * Scale) * .35f
+            };
+        }
+        case PropType::DOOR:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + (Object.Texture.width * Scale) * .31f,
+                ScreenPos.y + (Object.Texture.height * Scale) * .20f,
+                (Object.Texture.width * Scale) - (Object.Texture.width * Scale) * .59f,
+                (Object.Texture.height * Scale) * .35f
+            };
+        }
+        case PropType::TOPWALL:
+        {
+            return Rectangle
+            {
+                ScreenPos.x,
+                ScreenPos.y,
+                Object.Texture.width * Scale,
+                (Object.Texture.height * Scale) * .3f
+            };
+        }
+        case PropType::LEFTSIDEWALL:
+        {
+            return Rectangle   
+            {
+                ScreenPos.x,
+                ScreenPos.y,
+                (Object.Texture.width * Scale) * .2f,
+                Object.Texture.height * Scale
+            };
+        }
+        case PropType::RIGHTSIDEWALL:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + (Object.Texture.width * Scale) * .8f,
+                ScreenPos.y,
+                (Object.Texture.width * Scale) * .2f,
+                Object.Texture.height * Scale
+            };
+        }
+        case PropType::BOTTOMWALL:
         {
             return Rectangle
             {
@@ -131,6 +234,16 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
                 ScreenPos.y,
                 Object.Texture.width * Scale,
                 Object.Texture.height * Scale
+            };
+        }
+        case PropType::HOLE:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + (Object.Texture.width * Scale) * .1f,
+                ScreenPos.y + (Object.Texture.height * Scale) * .2f,
+                (Object.Texture.width * Scale) * .8f,
+                (Object.Texture.height * Scale) * .7f
             };
         }
         default:
