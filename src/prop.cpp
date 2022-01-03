@@ -132,7 +132,7 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
                 ScreenPos.x + (Object.Texture.width * Scale) * .05f,
                 ScreenPos.y + (Object.Texture.height * Scale) * .4f,
                 (Object.Texture.width - Object.Texture.width * .875f) * Scale,
-                (Object.Texture.height - Object.Texture.height * .69f) * Scale
+                (Object.Texture.height - Object.Texture.height * .65f) * Scale
             };
         }
         case PropType::rHOUSELEFT:
