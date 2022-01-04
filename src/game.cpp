@@ -172,6 +172,18 @@ std::vector<std::vector<Prop>> Game::InitializePropsUnder()
     };
     Props.emplace_back(DungeonEntrance);
 
+    std::vector<Prop> Altar
+    {
+        Prop{"sprites/props/AltarDormant.png", Vector2{700,1025}, PropType::ALTAR},
+        // Prop{"sprites/props/AltarTopLeft.png", Vector2{700,1025}, PropType::ALTAR},
+        // Prop{"sprites/props/AltarTop.png", Vector2{764,1025}, PropType::ALTAR},
+        // Prop{"sprites/props/AltarTopRight.png", Vector2{828,1025}, PropType::ALTAR},
+        // Prop{"sprites/props/AltarBotLeft.png", Vector2{700,1089}, PropType::ALTAR},
+        // Prop{"sprites/props/AltarBot.png", Vector2{764,1089}, PropType::ALTAR},
+        // Prop{"sprites/props/AltarBotRight.png", Vector2{828,1089}, PropType::ALTAR},
+    };
+    Props.emplace_back(Altar);
+
     std::vector<Prop> Grass
     {   
         // --------------------------------------------- Far Left Column -----------------------------------------------

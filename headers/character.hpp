@@ -28,7 +28,7 @@ private:
     Window* Screen{};
     Background* World{};
     Vector2 CharacterPos{};              // Where the character is on the screen
-    Vector2 WorldPos{3216,-41};         // Where the character is in the world
+    Vector2 WorldPos{1899,2125};         // Where the character is in the world
     Vector2 PrevWorldPos{};
     Rectangle Source{};
     Rectangle Destination{};

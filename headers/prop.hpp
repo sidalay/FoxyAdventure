@@ -22,7 +22,8 @@ enum class PropType
     STUMP, 
     HOLE, 
     TREASURE,
-    DUNGEON, DUNGEONLEFT, DUNGEONRIGHT
+    DUNGEON, DUNGEONLEFT, DUNGEONRIGHT,
+    ALTAR
 };
 
 struct Props;

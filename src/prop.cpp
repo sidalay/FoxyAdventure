@@ -282,7 +282,13 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
         }
         default:
         {
-            return Rectangle{};
+            return Rectangle
+            {
+                ScreenPos.x,
+                ScreenPos.y,
+                Object.Texture.width * Scale,
+                Object.Texture.height * Scale
+            };
         }
     }
 }
