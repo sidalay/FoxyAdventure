@@ -21,7 +21,8 @@ enum class PropType
     BUSH, 
     STUMP, 
     HOLE, 
-    TREASURE
+    TREASURE,
+    DUNGEON, DUNGEONLEFT, DUNGEONRIGHT
 };
 
 struct Props;

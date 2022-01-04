@@ -19,7 +19,9 @@ Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale, boo
         Type == PropType::LEFTSIDEWALL ||
         Type == PropType::RIGHTSIDEWALL ||
         Type == PropType::BOTTOMWALL ||
-        Type == PropType::HOLE)
+        Type == PropType::HOLE ||
+        Type == PropType::DUNGEONLEFT ||
+        Type == PropType::DUNGEONRIGHT)
     {
         Collidable = true;
     }
@@ -44,7 +46,9 @@ Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Interact
         Type == PropType::LEFTSIDEWALL ||
         Type == PropType::RIGHTSIDEWALL ||
         Type == PropType::BOTTOMWALL ||
-        Type == PropType::HOLE)
+        Type == PropType::HOLE ||
+        Type == PropType::DUNGEONLEFT ||
+        Type == PropType::DUNGEONRIGHT)
     {
         Collidable = true;
     }
@@ -244,6 +248,36 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
                 ScreenPos.y + (Object.Texture.height * Scale) * .2f,
                 (Object.Texture.width * Scale) * .8f,
                 (Object.Texture.height * Scale) * .7f
+            };
+        }
+        case PropType::DUNGEON:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + (Object.Texture.width * Scale) * .31f,
+                ScreenPos.y + (Object.Texture.height * Scale) * .20f,
+                (Object.Texture.width * Scale) - (Object.Texture.width * Scale) * .59f,
+                (Object.Texture.height * Scale) * .35f
+            };
+        }
+        case PropType::DUNGEONLEFT:
+        {
+            return Rectangle
+            {
+                ScreenPos.x,
+                ScreenPos.y + (Object.Texture.height * Scale) * .20f,
+                (Object.Texture.width * Scale) - (Object.Texture.width * Scale) * .70f,
+                (Object.Texture.height * Scale) * .80f
+            };
+        }
+        case PropType::DUNGEONRIGHT:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + (Object.Texture.width * Scale) * .72f,
+                ScreenPos.y + (Object.Texture.height * Scale) * .20f,
+                (Object.Texture.width * Scale) - (Object.Texture.width * Scale) * .70f,
+                (Object.Texture.height * Scale) * .80f
             };
         }
         default:

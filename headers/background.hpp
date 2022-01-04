@@ -8,8 +8,8 @@
 class Background
 {
 private:
-    Texture2D Map {LoadTexture("sprites/maps/CodexMap2.png")};
-    Texture2D MiniMap {LoadTexture("sprites/maps/CodexMap4.png")};
+    Texture2D Map {LoadTexture("sprites/maps/CodexMap.png")};
+    Texture2D MiniMap {LoadTexture("sprites/maps/MiniMap.png")};
     Vector2 MapPos{0.f, 0.f};
     float Scale{4.f};
     bool IsMiniMap{false};

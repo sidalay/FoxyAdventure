@@ -164,6 +164,14 @@ std::vector<std::vector<Prop>> Game::InitializePropsUnder()
     };
     Props.emplace_back(Flowers);
 
+    std::vector<Prop> DungeonEntrance
+    {
+        Prop{"sprites/props/DungeonEntrance.png", Vector2{3520,60}, PropType::DUNGEON},
+        Prop{"sprites/props/DungeonEntrance.png", Vector2{3520,60}, PropType::DUNGEONLEFT, 4.f},
+        Prop{"sprites/props/DungeonEntrance.png", Vector2{3520,60}, PropType::DUNGEONRIGHT, 4.f},
+    };
+    Props.emplace_back(DungeonEntrance);
+
     std::vector<Prop> Grass
     {   
         // --------------------------------------------- Far Left Column -----------------------------------------------
@@ -606,6 +614,428 @@ std::vector<std::vector<Prop>> Game::InitializePropsUnder()
         Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{2264,1998}, PropType::GRASS, 4.f, true},
         Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{2264,2038}, PropType::GRASS, 4.f, true},
 
+        // --------------------------------------------------------------------------------------------------------------
+        // -----------------------------------------Dungeon Entrance Grass-----------------------------------------------
+        // --------------------------------------------------------------------------------------------------------------
+
+        // ------------------------------------------------ Left Column -------------------------------------------------
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,170}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,210}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,170}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,210}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,234}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,274}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,234}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,274}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,298}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,338}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,298}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,338}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,362}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,402}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,362}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,402}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,426}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,446}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,426}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,446}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,490}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,530}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,490}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,530}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,554}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,594}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,554}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,594}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,618}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,658}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,618}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,658}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,682}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,722}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,682}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,722}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,746}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,786}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,746}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,786}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,810}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,850}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,810}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,850}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,874}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,914}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,874}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,914}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,938}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,978}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,938}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,978}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1002}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1042}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1002}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1042}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1066}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1106}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1066}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1106}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1130}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1170}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1130}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1170}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1194}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1234}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1194}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1234}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1258}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1298}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1258}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1298}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1322}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1362}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1322}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1362}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1386}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1426}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1386}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1426}, PropType::GRASS, 4.f, true},
+        
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1450}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1490}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1450}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1490}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1514}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1554}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1514}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1554}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1578}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1618}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1578}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1618}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1642}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1682}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1642}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1682}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1706}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1746}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1706}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1746}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1770}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1810}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1770}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1810}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1834}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1874}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1834}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1874}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1898}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1938}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1898}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1938}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,1962}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,2002}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,1962}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,2002}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,2026}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3500,2046}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,2026}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3564,2046}, PropType::GRASS, 4.f, true},
+
+        // ------------------------------------------------ Right Column -------------------------------------------------
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,170}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,210}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,170}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,210}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,234}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,274}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,234}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,274}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,298}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,338}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,298}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,338}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,362}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,402}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,362}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,402}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,426}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,446}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,426}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,446}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,490}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,530}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,490}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,530}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,554}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,594}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,554}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,594}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,618}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,658}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,618}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,658}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,682}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,722}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,682}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,722}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,746}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,786}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,746}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,786}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,810}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,850}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,810}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,850}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,874}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,914}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,874}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,914}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,938}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,978}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,938}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,978}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1002}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1042}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1002}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1042}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1066}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1106}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1066}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1106}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1130}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1170}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1130}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1170}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1194}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1234}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1194}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1234}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1258}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1298}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1258}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1298}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1322}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1362}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1322}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1362}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1386}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1426}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1386}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1426}, PropType::GRASS, 4.f, true},
+        
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1450}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1490}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1450}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1490}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1514}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1554}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1514}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1554}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1578}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1618}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1578}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1618}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1642}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1682}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1642}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1682}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1706}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1746}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1706}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1746}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1770}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1810}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1770}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1810}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1834}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1874}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1834}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1874}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1898}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1938}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1898}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1938}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,1962}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,2002}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,1962}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,2002}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,2026}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3628,2046}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,2026}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3692,2046}, PropType::GRASS, 4.f, true},
+        
         
     };
     Props.emplace_back(Grass);
@@ -1046,9 +1476,9 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeGreen.png", Vector2{800,167}, PropType::TREE},      // 9
         Prop{"sprites/props/TreeGreen.png", Vector2{900,167}, PropType::TREE},      // 10
         Prop{"sprites/props/TreeGreen.png", Vector2{1000,167}, PropType::TREE},     // 11
-        Prop{"sprites/props/TreeGreen.png", Vector2{1100,167}, PropType::TREE},     // 12
-        Prop{"sprites/props/TreeGreen.png", Vector2{1200,167}, PropType::TREE},     // 13
-        Prop{"sprites/props/TreeGreen.png", Vector2{1300,167}, PropType::TREE},     // 14
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1100,167}, PropType::TREE},     // 12
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1200,167}, PropType::TREE},     // 13
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1300,167}, PropType::TREE},     // 14
         Prop{"sprites/props/TreeGreen.png", Vector2{1400,167}, PropType::TREE},     // 15
         Prop{"sprites/props/TreeGreen.png", Vector2{1500,167}, PropType::TREE},     // 16
         Prop{"sprites/props/TreeGreen.png", Vector2{1600,167}, PropType::TREE},     // 17
@@ -1087,9 +1517,9 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeGreen.png", Vector2{820,267}, PropType::TREE},      // 9 
         Prop{"sprites/props/TreeGreen.png", Vector2{920,267}, PropType::TREE},      // 10
         // Prop{"sprites/props/TreeGreen.png", Vector2{1020,267}, PropType::TREE},  // 11
-        Prop{"sprites/props/TreeGreen.png", Vector2{1120,267}, PropType::TREE},     // 12
-        Prop{"sprites/props/TreeGreen.png", Vector2{1220,267}, PropType::TREE},     // 13
-        Prop{"sprites/props/TreeGreen.png", Vector2{1320,267}, PropType::TREE},     // 14
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1120,267}, PropType::TREE},     // 12
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1220,267}, PropType::TREE},     // 13
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1320,267}, PropType::TREE},     // 14
         // Prop{"sprites/props/TreeGreen.png", Vector2{1420,267}, PropType::TREE},  // 15
         Prop{"sprites/props/TreeGreen.png", Vector2{1520,267}, PropType::TREE},     // 16
         Prop{"sprites/props/TreeGreen.png", Vector2{1620,267}, PropType::TREE},     // 17
@@ -1128,21 +1558,21 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeGreen.png", Vector2{700,367}, PropType::TREE},      // 8 
         Prop{"sprites/props/TreeGreen.png", Vector2{800,367}, PropType::TREE},      // 9 
         Prop{"sprites/props/TreeGreen.png", Vector2{900,367}, PropType::TREE},      // 10
-        Prop{"sprites/props/TreeGreen.png", Vector2{1000,367}, PropType::TREE},     // 11
-        Prop{"sprites/props/TreeGreen.png", Vector2{1100,367}, PropType::TREE},     // 12
-        Prop{"sprites/props/TreeGreen.png", Vector2{1200,367}, PropType::TREE},     // 13
-        Prop{"sprites/props/TreeGreen.png", Vector2{1300,367}, PropType::TREE},     // 14
-        Prop{"sprites/props/TreeGreen.png", Vector2{1400,367}, PropType::TREE},     // 15
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1000,367}, PropType::TREE},     // 11
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1100,367}, PropType::TREE},     // 12
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1200,367}, PropType::TREE},     // 13
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1300,367}, PropType::TREE},     // 14
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1400,367}, PropType::TREE},     // 15
         Prop{"sprites/props/TreeGreen.png", Vector2{1500,367}, PropType::TREE},     // 16
         Prop{"sprites/props/TreeGreen.png", Vector2{1600,367}, PropType::TREE},     // 17
         // Prop{"sprites/props/TreeGreen.png", Vector2{1700,367}, PropType::TREE},  // 18
         Prop{"sprites/props/TreeGreen.png", Vector2{1800,367}, PropType::TREE},     // 19
         Prop{"sprites/props/TreeGreen.png", Vector2{1900,367}, PropType::TREE},     // 20
-        Prop{"sprites/props/TreeGreen.png", Vector2{2000,367}, PropType::TREE},     // 21
-        Prop{"sprites/props/TreeGreen.png", Vector2{2100,367}, PropType::TREE},     // 22
-        Prop{"sprites/props/TreeGreen.png", Vector2{2200,367}, PropType::TREE},     // 23
-        Prop{"sprites/props/TreeGreen.png", Vector2{2300,367}, PropType::TREE},     // 24
-        // Prop{"sprites/props/TreeGreen.png", Vector2{2400,367}, PropType::TREE},  // 25
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2000,367}, PropType::TREE},     // 21
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2100,367}, PropType::TREE},     // 22
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2200,367}, PropType::TREE},     // 23
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2300,367}, PropType::TREE},     // 24
+        Prop{"sprites/props/TreeGreen.png", Vector2{2400,367}, PropType::TREE},  // 25
         Prop{"sprites/props/TreeGreen.png", Vector2{2500,367}, PropType::TREE},     // 26
         Prop{"sprites/props/TreeGreen.png", Vector2{2600,367}, PropType::TREE},     // 27
         Prop{"sprites/props/TreeGreen.png", Vector2{2700,367}, PropType::TREE},     // 28
@@ -1154,7 +1584,7 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeGreen.png", Vector2{3300,367}, PropType::TREE},     // 34
         Prop{"sprites/props/TreeGreen.png", Vector2{3400,367}, PropType::TREE},     // 35
 
-        // Prop{"sprites/props/TreeGreen.png", Vector2{3720,367}, PropType::TREE},  // 36
+        Prop{"sprites/props/TreeGreen.png", Vector2{3720,367}, PropType::TREE},     // 36
         Prop{"sprites/props/TreeGreen.png", Vector2{3820,367}, PropType::TREE},     // 37
         Prop{"sprites/props/TreeGreen.png", Vector2{3920,367}, PropType::TREE},     // 38
 
@@ -1170,19 +1600,19 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         // Prop{"sprites/props/TreeGreen.png", Vector2{820,467}, PropType::TREE},   // 9 
         Prop{"sprites/props/TreeGreen.png", Vector2{920,467}, PropType::TREE},      // 10
         Prop{"sprites/props/TreeGreen.png", Vector2{1020,467}, PropType::TREE},     // 11
-        Prop{"sprites/props/TreeGreen.png", Vector2{1120,467}, PropType::TREE},     // 12
-        Prop{"sprites/props/TreeGreen.png", Vector2{1220,467}, PropType::TREE},     // 13
-        Prop{"sprites/props/TreeGreen.png", Vector2{1320,467}, PropType::TREE},     // 14
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1120,467}, PropType::TREE},     // 12
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1220,467}, PropType::TREE},     // 13
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1320,467}, PropType::TREE},     // 14
         Prop{"sprites/props/TreeGreen.png", Vector2{1420,467}, PropType::TREE},     // 15
         Prop{"sprites/props/TreeGreen.png", Vector2{1520,467}, PropType::TREE},     // 16
         Prop{"sprites/props/TreeGreen.png", Vector2{1620,467}, PropType::TREE},     // 17
         // Prop{"sprites/props/TreeGreen.png", Vector2{1720,467}, PropType::TREE},  // 18
         Prop{"sprites/props/TreeGreen.png", Vector2{1820,467}, PropType::TREE},     // 19
-        Prop{"sprites/props/TreeGreen.png", Vector2{1920,467}, PropType::TREE},     // 20
-        Prop{"sprites/props/TreeGreen.png", Vector2{2020,467}, PropType::TREE},     // 21
-        Prop{"sprites/props/TreeGreen.png", Vector2{2120,467}, PropType::TREE},     // 22
-        Prop{"sprites/props/TreeGreen.png", Vector2{2220,467}, PropType::TREE},     // 23
-        Prop{"sprites/props/TreeGreen.png", Vector2{2320,467}, PropType::TREE},     // 24
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1920,467}, PropType::TREE},     // 20
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2020,467}, PropType::TREE},     // 21
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2120,467}, PropType::TREE},     // 22
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2220,467}, PropType::TREE},     // 23
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2320,467}, PropType::TREE},     // 24
         // Prop{"sprites/props/TreeGreen.png", Vector2{2420,467}, PropType::TREE},  // 25
         Prop{"sprites/props/TreeGreen.png", Vector2{2520,467}, PropType::TREE},     // 26
         Prop{"sprites/props/TreeGreen.png", Vector2{2620,467}, PropType::TREE},     // 27
@@ -1219,13 +1649,13 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeGreen.png", Vector2{1500,567}, PropType::TREE},     // 16
         Prop{"sprites/props/TreeGreen.png", Vector2{1600,567}, PropType::TREE},     // 17
         Prop{"sprites/props/TreeGreen.png", Vector2{1700,567}, PropType::TREE},     // 18
-        Prop{"sprites/props/TreeGreen.png", Vector2{1800,567}, PropType::TREE},     // 19
-        Prop{"sprites/props/TreeGreen.png", Vector2{1900,567}, PropType::TREE},     // 20
-        Prop{"sprites/props/TreeGreen.png", Vector2{2000,567}, PropType::TREE},     // 21
-        Prop{"sprites/props/TreeGreen.png", Vector2{2100,567}, PropType::TREE},     // 22
-        Prop{"sprites/props/TreeGreen.png", Vector2{2200,567}, PropType::TREE},     // 23
-        Prop{"sprites/props/TreeGreen.png", Vector2{2300,567}, PropType::TREE},     // 24
-        Prop{"sprites/props/TreeGreen.png", Vector2{2400,567}, PropType::TREE},     // 25
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1800,567}, PropType::TREE},     // 19
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1900,567}, PropType::TREE},     // 20
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2000,567}, PropType::TREE},     // 21
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2100,567}, PropType::TREE},     // 22
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2200,567}, PropType::TREE},     // 23
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2300,567}, PropType::TREE},     // 24
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2400,567}, PropType::TREE},     // 25
         Prop{"sprites/props/TreeGreen.png", Vector2{2500,567}, PropType::TREE},     // 26
         // Prop{"sprites/props/TreeGreen.png", Vector2{2600,567}, PropType::TREE},  // 27
         Prop{"sprites/props/TreeGreen.png", Vector2{2700,567}, PropType::TREE},     // 28
@@ -1237,7 +1667,7 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeGreen.png", Vector2{3300,567}, PropType::TREE},     // 34
         Prop{"sprites/props/TreeGreen.png", Vector2{3400,567}, PropType::TREE},     // 35
 
-        // Prop{"sprites/props/TreeGreen.png", Vector2{3720,567}, PropType::TREE},  // 36
+        Prop{"sprites/props/TreeGreen.png", Vector2{3720,567}, PropType::TREE},     // 36
         Prop{"sprites/props/TreeGreen.png", Vector2{3820,567}, PropType::TREE},     // 37
         Prop{"sprites/props/TreeGreen.png", Vector2{3920,567}, PropType::TREE},     // 38
 
@@ -1261,24 +1691,24 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         // Prop{"sprites/props/TreeGreen.png", Vector2{1620,667}, PropType::TREE},  // 17    
         Prop{"sprites/props/TreeGreen.png", Vector2{1720,667}, PropType::TREE},     // 18
         Prop{"sprites/props/TreeGreen.png", Vector2{1820,667}, PropType::TREE},     // 19
-        Prop{"sprites/props/TreeGreen.png", Vector2{1920,667}, PropType::TREE},     // 20
-        Prop{"sprites/props/TreeGreen.png", Vector2{2020,667}, PropType::TREE},     // 21
-        Prop{"sprites/props/TreeGreen.png", Vector2{2120,667}, PropType::TREE},     // 22
-        Prop{"sprites/props/TreeGreen.png", Vector2{2220,667}, PropType::TREE},     // 23
-        // Prop{"sprites/props/TreeGreen.png", Vector2{2320,667}, PropType::TREE},  // 24    
+        // Prop{"sprites/props/TreeGreen.png", Vector2{1920,667}, PropType::TREE},     // 20
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2020,667}, PropType::TREE},     // 21
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2120,667}, PropType::TREE},     // 22
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2220,667}, PropType::TREE},     // 23
+        // // Prop{"sprites/props/TreeGreen.png", Vector2{2320,667}, PropType::TREE},  // 24    
         Prop{"sprites/props/TreeGreen.png", Vector2{2420,667}, PropType::TREE},     // 25
         Prop{"sprites/props/TreeGreen.png", Vector2{2520,667}, PropType::TREE},     // 26
         Prop{"sprites/props/TreeGreen.png", Vector2{2620,667}, PropType::TREE},     // 27
-        // Prop{"sprites/props/TreeGreen.png", Vector2{2720,667}, PropType::TREE},  // 28    
-        Prop{"sprites/props/TreeGreen.png", Vector2{2820,667}, PropType::TREE},     // 29
-        Prop{"sprites/props/TreeGreen.png", Vector2{2920,667}, PropType::TREE},     // 30
-        Prop{"sprites/props/TreeGreen.png", Vector2{3020,667}, PropType::TREE},     // 31
-        // Prop{"sprites/props/TreeGreen.png", Vector2{3120,667}, PropType::TREE},  // 32    
+        Prop{"sprites/props/TreeGreen.png", Vector2{2720,667}, PropType::TREE},     // 28    
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2820,667}, PropType::TREE},     // 29
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2920,667}, PropType::TREE},     // 30
+        // Prop{"sprites/props/TreeGreen.png", Vector2{3020,667}, PropType::TREE},     // 31
+        Prop{"sprites/props/TreeGreen.png", Vector2{3120,667}, PropType::TREE},     // 32    
         Prop{"sprites/props/TreeGreen.png", Vector2{3220,667}, PropType::TREE},     // 33
         Prop{"sprites/props/TreeGreen.png", Vector2{3320,667}, PropType::TREE},     // 34
         Prop{"sprites/props/TreeGreen.png", Vector2{3420,667}, PropType::TREE},     // 35
 
-        // Prop{"sprites/props/TreeGreen.png", Vector2{3700,667}, PropType::TREE},  // 36    
+        Prop{"sprites/props/TreeGreen.png", Vector2{3700,667}, PropType::TREE},     // 36    
         Prop{"sprites/props/TreeGreen.png", Vector2{3800,667}, PropType::TREE},     // 37
         Prop{"sprites/props/TreeGreen.png", Vector2{3900,667}, PropType::TREE},     // 38
         Prop{"sprites/props/TreeGreen.png", Vector2{4000,667}, PropType::TREE},     // 39
@@ -1304,24 +1734,24 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeGreen.png", Vector2{1700,767}, PropType::TREE},     // 18
         // Prop{"sprites/props/TreeGreen.png", Vector2{1800,767}, PropType::TREE},  // 19    
         Prop{"sprites/props/TreeGreen.png", Vector2{1900,767}, PropType::TREE},     // 20
-        Prop{"sprites/props/TreeGreen.png", Vector2{2000,767}, PropType::TREE},     // 21
-        Prop{"sprites/props/TreeGreen.png", Vector2{2100,767}, PropType::TREE},     // 22
-        Prop{"sprites/props/TreeGreen.png", Vector2{2200,767}, PropType::TREE},     // 23
-        Prop{"sprites/props/TreeGreen.png", Vector2{2300,767}, PropType::TREE},     // 24
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2000,767}, PropType::TREE},     // 21
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2100,767}, PropType::TREE},     // 22
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2200,767}, PropType::TREE},     // 23
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2300,767}, PropType::TREE},     // 24
         Prop{"sprites/props/TreeGreen.png", Vector2{2400,767}, PropType::TREE},     // 25
         Prop{"sprites/props/TreeGreen.png", Vector2{2500,767}, PropType::TREE},     // 26
         Prop{"sprites/props/TreeGreen.png", Vector2{2600,767}, PropType::TREE},     // 27
-        // Prop{"sprites/props/TreeGreen.png", Vector2{2700,767}, PropType::TREE},  // 28    
-        Prop{"sprites/props/TreeGreen.png", Vector2{2800,767}, PropType::TREE},     // 29
-        Prop{"sprites/props/TreeGreen.png", Vector2{2900,767}, PropType::TREE},     // 30
-        Prop{"sprites/props/TreeGreen.png", Vector2{3000,767}, PropType::TREE},     // 31
-        Prop{"sprites/props/TreeGreen.png", Vector2{3100,767}, PropType::TREE},     // 32
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2700,767}, PropType::TREE},     // 28    
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2800,767}, PropType::TREE},     // 29
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2900,767}, PropType::TREE},     // 30
+        // Prop{"sprites/props/TreeGreen.png", Vector2{3000,767}, PropType::TREE},     // 31
+        // Prop{"sprites/props/TreeGreen.png", Vector2{3100,767}, PropType::TREE},     // 32
         Prop{"sprites/props/TreeGreen.png", Vector2{3200,767}, PropType::TREE},     // 33
-        // Prop{"sprites/props/TreeGreen.png", Vector2{3300,767}, PropType::TREE},  // 34    
+        Prop{"sprites/props/TreeGreen.png", Vector2{3300,767}, PropType::TREE},     // 34    
         Prop{"sprites/props/TreeGreen.png", Vector2{3400,767}, PropType::TREE},     // 35
 
-        // Prop{"sprites/props/TreeGreen.png", Vector2{3720,767}, PropType::TREE},  // 36    
-        // Prop{"sprites/props/TreeGreen.png", Vector2{3820,767}, PropType::TREE},  // 37    
+        Prop{"sprites/props/TreeGreen.png", Vector2{3720,767}, PropType::TREE},     // 36    
+        Prop{"sprites/props/TreeGreen.png", Vector2{3820,767}, PropType::TREE},     // 37    
         Prop{"sprites/props/TreeGreen.png", Vector2{3920,767}, PropType::TREE},     // 38
 
         // row9
@@ -1352,11 +1782,11 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeGreen.png", Vector2{2420,867}, PropType::TREE},     // 25
         Prop{"sprites/props/TreeGreen.png", Vector2{2520,867}, PropType::TREE},     // 26
         Prop{"sprites/props/TreeGreen.png", Vector2{2620,867}, PropType::TREE},     // 27
-        Prop{"sprites/props/TreeGreen.png", Vector2{2720,867}, PropType::TREE},     // 28
-        Prop{"sprites/props/TreeGreen.png", Vector2{2820,867}, PropType::TREE},     // 29
-        Prop{"sprites/props/TreeGreen.png", Vector2{2920,867}, PropType::TREE},     // 30
-        Prop{"sprites/props/TreeGreen.png", Vector2{3020,867}, PropType::TREE},     // 31
-        Prop{"sprites/props/TreeGreen.png", Vector2{3120,867}, PropType::TREE},     // 32
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2720,867}, PropType::TREE},     // 28
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2820,867}, PropType::TREE},     // 29
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2920,867}, PropType::TREE},     // 30
+        // Prop{"sprites/props/TreeGreen.png", Vector2{3020,867}, PropType::TREE},     // 31
+        // Prop{"sprites/props/TreeGreen.png", Vector2{3120,867}, PropType::TREE},     // 32
         Prop{"sprites/props/TreeGreen.png", Vector2{3220,867}, PropType::TREE},     // 33
         Prop{"sprites/props/TreeGreen.png", Vector2{3320,867}, PropType::TREE},     // 34
         Prop{"sprites/props/TreeGreen.png", Vector2{3420,867}, PropType::TREE},     // 35
@@ -1394,11 +1824,11 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeGreen.png", Vector2{2400,967}, PropType::TREE},     // 25
         Prop{"sprites/props/TreeGreen.png", Vector2{2500,967}, PropType::TREE},     // 26
         Prop{"sprites/props/TreeGreen.png", Vector2{2600,967}, PropType::TREE},     // 27
-        Prop{"sprites/props/TreeGreen.png", Vector2{2700,967}, PropType::TREE},     // 28
-        Prop{"sprites/props/TreeGreen.png", Vector2{2800,967}, PropType::TREE},     // 29
-        Prop{"sprites/props/TreeGreen.png", Vector2{2900,967}, PropType::TREE},     // 30
-        Prop{"sprites/props/TreeGreen.png", Vector2{3000,967}, PropType::TREE},     // 31
-        Prop{"sprites/props/TreeGreen.png", Vector2{3100,967}, PropType::TREE},     // 32
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2700,967}, PropType::TREE},     // 28
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2800,967}, PropType::TREE},     // 29
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2900,967}, PropType::TREE},     // 30
+        // Prop{"sprites/props/TreeGreen.png", Vector2{3000,967}, PropType::TREE},     // 31
+        // Prop{"sprites/props/TreeGreen.png", Vector2{3100,967}, PropType::TREE},     // 32
         Prop{"sprites/props/TreeGreen.png", Vector2{3200,967}, PropType::TREE},     // 33
         Prop{"sprites/props/TreeGreen.png", Vector2{3300,967}, PropType::TREE},     // 34
         Prop{"sprites/props/TreeGreen.png", Vector2{3400,967}, PropType::TREE},     // 35
@@ -1436,9 +1866,9 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeGreen.png", Vector2{2520,1067}, PropType::TREE},    // 26    
         Prop{"sprites/props/TreeGreen.png", Vector2{2620,1067}, PropType::TREE},    // 27    
         Prop{"sprites/props/TreeGreen.png", Vector2{2720,1067}, PropType::TREE},    // 28    
-        Prop{"sprites/props/TreeGreen.png", Vector2{2820,1067}, PropType::TREE},    // 29    
-        Prop{"sprites/props/TreeGreen.png", Vector2{2920,1067}, PropType::TREE},    // 30    
-        Prop{"sprites/props/TreeGreen.png", Vector2{3020,1067}, PropType::TREE},    // 31    
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2820,1067}, PropType::TREE},    // 29    
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2920,1067}, PropType::TREE},    // 30    
+        // Prop{"sprites/props/TreeGreen.png", Vector2{3020,1067}, PropType::TREE},    // 31    
         Prop{"sprites/props/TreeGreen.png", Vector2{3120,1067}, PropType::TREE},    // 32    
         Prop{"sprites/props/TreeGreen.png", Vector2{3220,1067}, PropType::TREE},    // 33    
         Prop{"sprites/props/TreeGreen.png", Vector2{3320,1067}, PropType::TREE},    // 34    
@@ -1476,13 +1906,13 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeGreen.png", Vector2{2300,1167}, PropType::TREE},    // 24    
         Prop{"sprites/props/TreeGreen.png", Vector2{2400,1167}, PropType::TREE},    // 25    
         Prop{"sprites/props/TreeGreen.png", Vector2{2500,1167}, PropType::TREE},    // 26    
-        Prop{"sprites/props/TreeGreen.png", Vector2{2600,1167}, PropType::TREE},    // 27    
-        Prop{"sprites/props/TreeGreen.png", Vector2{2700,1167}, PropType::TREE},    // 28    
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2600,1167}, PropType::TREE},    // 27    
+        // Prop{"sprites/props/TreeGreen.png", Vector2{2700,1167}, PropType::TREE},    // 28    
         Prop{"sprites/props/TreeGreen.png", Vector2{2800,1167}, PropType::TREE},    // 29    
         Prop{"sprites/props/TreeGreen.png", Vector2{2900,1167}, PropType::TREE},    // 30    
         Prop{"sprites/props/TreeGreen.png", Vector2{3000,1167}, PropType::TREE},    // 31    
         Prop{"sprites/props/TreeGreen.png", Vector2{3100,1167}, PropType::TREE},    // 32    
-        Prop{"sprites/props/TreeGreen.png", Vector2{3200,1167}, PropType::TREE},    // 33    
+        // Prop{"sprites/props/TreeGreen.png", Vector2{3200,1167}, PropType::TREE},    // 33    
         Prop{"sprites/props/TreeGreen.png", Vector2{3300,1167}, PropType::TREE},    // 34    
         Prop{"sprites/props/TreeGreen.png", Vector2{3400,1167}, PropType::TREE},    // 35    
 
@@ -1818,6 +2248,9 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         // Prop{"sprites/props/TreeGreen.png", Vector2{3300,1967}, PropType::TREE},    // 34
         Prop{"sprites/props/TreeGreen.png", Vector2{3400,1967}, PropType::TREE},    // 35
 
+        Prop{"sprites/props/TreeGreen.png", Vector2{3500,1967}, PropType::TREE},    // 35
+        Prop{"sprites/props/TreeGreen.png", Vector2{3600,1967}, PropType::TREE},    // 35
+
         Prop{"sprites/props/TreeGreen.png", Vector2{3720,1967}, PropType::TREE},    // 36
         Prop{"sprites/props/TreeGreen.png", Vector2{3820,1967}, PropType::TREE},    // 37
         Prop{"sprites/props/TreeGreen.png", Vector2{3920,1967}, PropType::TREE},    // 38
@@ -1858,6 +2291,9 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeGreen.png", Vector2{3220,2067}, PropType::TREE},    // 33
         Prop{"sprites/props/TreeGreen.png", Vector2{3320,2067}, PropType::TREE},    // 34
         Prop{"sprites/props/TreeGreen.png", Vector2{3420,2067}, PropType::TREE},    // 35
+
+        Prop{"sprites/props/TreeGreen.png", Vector2{3520,2067}, PropType::TREE},    // 35
+        Prop{"sprites/props/TreeGreen.png", Vector2{3620,2067}, PropType::TREE},    // 35
 
         Prop{"sprites/props/TreeGreen.png", Vector2{3700,2067}, PropType::TREE},    // 36
         Prop{"sprites/props/TreeGreen.png", Vector2{3800,2067}, PropType::TREE},    // 37
@@ -1901,6 +2337,9 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeGreen.png", Vector2{3300,2167}, PropType::TREE},    // 34
         Prop{"sprites/props/TreeGreen.png", Vector2{3400,2167}, PropType::TREE},    // 35
 
+        Prop{"sprites/props/TreeGreen.png", Vector2{3500,2167}, PropType::TREE},    // 35
+        Prop{"sprites/props/TreeGreen.png", Vector2{3600,2167}, PropType::TREE},    // 35
+
         Prop{"sprites/props/TreeGreen.png", Vector2{3720,2167}, PropType::TREE},    // 36
         Prop{"sprites/props/TreeGreen.png", Vector2{3820,2167}, PropType::TREE},    // 37    
         Prop{"sprites/props/TreeGreen.png", Vector2{3920,2167}, PropType::TREE},    // 38
@@ -1941,6 +2380,9 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeGreen.png", Vector2{3220,2267}, PropType::TREE},    // 33
         Prop{"sprites/props/TreeGreen.png", Vector2{3320,2267}, PropType::TREE},    // 34
         Prop{"sprites/props/TreeGreen.png", Vector2{3420,2267}, PropType::TREE},    // 35
+
+        Prop{"sprites/props/TreeGreen.png", Vector2{3520,2267}, PropType::TREE},    // 35
+        Prop{"sprites/props/TreeGreen.png", Vector2{3620,2267}, PropType::TREE},    // 35
 
         Prop{"sprites/props/TreeGreen.png", Vector2{3700,2267}, PropType::TREE},    // 36
         Prop{"sprites/props/TreeGreen.png", Vector2{3800,2267}, PropType::TREE},    // 37
@@ -1984,9 +2426,12 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{"sprites/props/TreeGreen.png", Vector2{3300,2340}, PropType::TREE}, // 34
         Prop{"sprites/props/TreeGreen.png", Vector2{3400,2340}, PropType::TREE}, // 35
 
-        Prop{"sprites/props/TreeGreen.png", Vector2{3720,2340}, PropType::TREE}, // 36
-        Prop{"sprites/props/TreeGreen.png", Vector2{3820,2340}, PropType::TREE}, // 37
-        Prop{"sprites/props/TreeGreen.png", Vector2{3920,2340}, PropType::TREE}, // 38
+        Prop{"sprites/props/TreeGreen.png", Vector2{3500,2340}, PropType::TREE}, // 36
+        Prop{"sprites/props/TreeGreen.png", Vector2{3600,2340}, PropType::TREE}, // 37
+
+        Prop{"sprites/props/TreeGreen.png", Vector2{3720,2340}, PropType::TREE}, // 38
+        Prop{"sprites/props/TreeGreen.png", Vector2{3820,2340}, PropType::TREE}, // 39
+        Prop{"sprites/props/TreeGreen.png", Vector2{3920,2340}, PropType::TREE}, // 40
 
         // row23
         Prop{"sprites/props/TreeGreen.png", Vector2{20,2467}, PropType::TREE},      // 1 
@@ -2882,6 +3327,287 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         
         Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{2229,2018}, PropType::GRASS, 4.f, true},
         // Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{2229,2058}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        // -----------------------------------------Dungeon Entrance Grass-----------------------------------------------
+        // --------------------------------------------------------------------------------------------------------------
+
+        // ------------------------------------------------ Left Column -------------------------------------------------
+        // Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3465,150}, PropType::GRASS, 4.f, true},
+        // Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3465,190}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,150}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,190}, PropType::GRASS, 4.f, true},
+        
+        // Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3465,214}, PropType::GRASS, 4.f, true},
+        // Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3465,254}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,214}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,254}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,278}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,318}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,342}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,382}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,406}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,446}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,470}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,510}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,534}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,574}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,598}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,638}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,662}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,702}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,726}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,766}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,790}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,830}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,854}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,894}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,918}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,958}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,982}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1022}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1046}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1086}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1110}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1150}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1174}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1214}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1238}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1278}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1302}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1342}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1366}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1406}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1430}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1470}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1494}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1534}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1558}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1598}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1622}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1662}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1686}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1726}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1750}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1790}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1814}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1854}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1878}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3529,1918}, PropType::GRASS, 4.f, true},
+
+        // ------------------------------------------------ Right Column -------------------------------------------------
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,150}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,190}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,150}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,190}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,214}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,254}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,214}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,254}, PropType::GRASS, 4.f, true},
+
+        // --------------------------------------------------------------------------------------------------------------
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,278}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,318}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,278}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,318}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,342}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,382}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,342}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,382}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,406}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,446}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,406}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,446}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,470}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,510}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,470}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,510}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,534}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,574}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,534}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,574}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,598}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,638}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,598}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,638}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,662}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,702}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,662}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,702}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,726}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,766}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,726}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,766}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,790}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,830}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,790}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,830}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,854}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,894}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,854}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,894}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,918}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,958}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,918}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,958}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,982}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1022}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,982}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1022}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1046}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1086}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1046}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1086}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1110}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1150}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1110}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1150}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1174}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1214}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1174}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1214}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1238}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1278}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1238}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1278}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1302}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1342}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1302}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1342}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1366}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1406}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1366}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1406}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1430}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1470}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1430}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1470}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1494}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1534}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1494}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1534}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1558}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1598}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1558}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1598}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1622}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1662}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1622}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1662}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1686}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1726}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1686}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1726}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1750}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1790}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1750}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1790}, PropType::GRASS, 4.f, true},
+        // --------------------------------------------------------------------------------------------------------------
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1814}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1854}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1814}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1854}, PropType::GRASS, 4.f, true},
+
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1878}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3593,1918}, PropType::GRASS, 4.f, true},
+        
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1878}, PropType::GRASS, 4.f, true},
+        Prop{Sprite{"sprites/props/GrassAnimation.png", 4, 1, 1.f/3.f}, Vector2{3657,1918}, PropType::GRASS, 4.f, true},
+
 
     };
     Props.emplace_back(Grass);
