@@ -126,13 +126,17 @@ void Game::Update(Background& Map, Character& Character, Props& Props)
             Prop.Tick(DeltaTime, Map);
 
     // Debugging
-    if (IsKeyPressed(KEY_RIGHT_BRACKET))
-    {
-        Character.SetHealth(1);
+    if (Character.GetHealth() < 10) {
+        if (IsKeyPressed(KEY_RIGHT_BRACKET))
+        {
+            Character.SetHealth(1);
+        }
     }
-    if (IsKeyPressed(KEY_LEFT_BRACKET))
-    {
-        Character.SetHealth(-1);
+    if (Character.GetHealth() > 0) {
+        if (IsKeyPressed(KEY_LEFT_BRACKET))
+        {
+            Character.SetHealth(-1);
+        }
     }
 }
 
