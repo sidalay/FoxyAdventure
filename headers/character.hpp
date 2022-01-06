@@ -10,6 +10,11 @@
 #include "headers/background.hpp"
 #include "headers/basecharacter.hpp"
 
+enum class Emotion 
+{
+    DEFAULT, ANGRY, HAPPY, NERVOUS, SAD, SLEEPING
+};
+
 class Character : BaseCharacter
 {
 private:
@@ -33,12 +38,14 @@ private:
     Rectangle Source{};
     Rectangle Destination{};
     
+    int Health{5};
     float Scale{1.5f};
     float Speed{1.0f};
     bool Colliding{false};
     bool Walking{false};
     bool Running{false};
     bool Attacking{false};
+    Emotion State{Emotion::DEFAULT};
     Direction Face{Direction::DOWN};
 
 public:
@@ -66,12 +73,18 @@ public:
     void WalkOrRun();
     void CheckAttack(Props& Props);
     void UpdateSource();
+    void CheckEmotion();
 
+    int GetHealth() {return Health;}
     float GetSpeed() {return Speed;}
     Vector2 GetWorldPos() {return WorldPos;}
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}
     Vector2 GetCharPos() {return CharacterPos;}
+    Emotion GetEmotion() {return State;}
     Rectangle GetCollisionRec();
+
+    // Debug function
+    void SetHealth(int HP);
 };
 
 #endif

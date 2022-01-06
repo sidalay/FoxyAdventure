@@ -25,6 +25,9 @@ void Game::Run()
                        Sprite{"sprites/characters/Fox_itemGot.png", 1, 4},
                        &Window, &MapBG};
 
+    // Initialize HUD
+    HUD Hud{};
+
     // Initialize Props & Create a Props Struct
     std::vector<std::vector<Prop>> UnderProps{Game::InitializePropsUnder()};
     std::vector<std::vector<Prop>> OverProps{Game::InitializePropsOver()};
@@ -33,7 +36,7 @@ void Game::Run()
     // Start Game Loop
     while (!WindowShouldClose()) 
     {
-        Game::Tick(Window, MapBG, Champion, Props);
+        Game::Tick(Window, MapBG, Champion, Props, Hud);
     }
 
     // Clean-up
@@ -51,7 +54,7 @@ void Game::Initialize(Window& Window, int FPS, std::string Title)
     SetExitKey(0);
 }
 
-void Game::Tick(Window& Window, Background& Map, Character& Character, Props& Props)
+void Game::Tick(Window& Window, Background& Map, Character& Character, Props& Props, HUD& Hud)
 {
     Game::CheckScreenSizing(Window);
 
@@ -61,7 +64,7 @@ void Game::Tick(Window& Window, Background& Map, Character& Character, Props& Pr
 
     // Tick & Draw Functions
     Game::Update(Map, Character, Props);
-    Game::Draw(Map, Character, Props);
+    Game::Draw(Map, Character, Props, Hud);
 
     // END DRAWING
     EndDrawing();
@@ -121,9 +124,19 @@ void Game::Update(Background& Map, Character& Character, Props& Props)
     for (auto& Proptype:*Props.Over)
         for (auto& Prop:Proptype)
             Prop.Tick(DeltaTime, Map);
+
+    // Debugging
+    if (IsKeyPressed(KEY_RIGHT_BRACKET))
+    {
+        Character.SetHealth(1);
+    }
+    if (IsKeyPressed(KEY_LEFT_BRACKET))
+    {
+        Character.SetHealth(-1);
+    }
 }
 
-void Game::Draw(Background& Map, Character& Character, Props& Props)
+void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud)
 {
     Map.Draw();
 
@@ -144,8 +157,9 @@ void Game::Draw(Background& Map, Character& Character, Props& Props)
             // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, PURPLE);
         }
     
-    DrawText(TextFormat("WorldPos.x: %i", (int)Character.GetWorldPos().x), 20, 20, 20, WHITE);
-    DrawText(TextFormat("WorldPos.y: %i", (int)Character.GetWorldPos().y), 20, 40, 20, WHITE);
+    Hud.Draw(Character.GetHealth(), Character.GetEmotion());
+    // DrawText(TextFormat("WorldPos.x: %i", (int)Character.GetWorldPos().x), 20, 20, 20, WHITE);
+    // DrawText(TextFormat("WorldPos.y: %i", (int)Character.GetWorldPos().y), 20, 40, 20, WHITE);
 
     Map.DrawMiniMap(Character.GetWorldPos());
 }
@@ -154,15 +168,6 @@ void Game::Draw(Background& Map, Character& Character, Props& Props)
 std::vector<std::vector<Prop>> Game::InitializePropsUnder()
 {
     std::vector<std::vector<Prop>> Props{};
-
-    std::vector<Prop> Flowers
-    {
-        // Prop{"sprites/props/Flowers.png", Vector2{200,800}, PropType::FLOWER}, 
-        // Prop{"sprites/props/Flowers.png", Vector2{270,800}, PropType::FLOWER},
-        // Prop{"sprites/props/Flowers.png", Vector2{200,868}, PropType::FLOWER}, 
-        // Prop{"sprites/props/Flowers.png", Vector2{290,880}, PropType::FLOWER, 2.f}
-    };
-    Props.emplace_back(Flowers);
 
     std::vector<Prop> DungeonEntrance
     {

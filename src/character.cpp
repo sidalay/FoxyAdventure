@@ -59,6 +59,8 @@ void Character::Tick(float DeltaTime, Props& Props)
     CheckAttack(Props);
 
     UpdateSource();
+
+    CheckEmotion();
 }
 
 // Draw character animation
@@ -279,6 +281,18 @@ void Character::CheckAttack(Props& Props)
     }
 }
 
+void Character::CheckEmotion()
+{
+    if (Health >= 9)
+        State = Emotion::HAPPY;
+    else if (Health > 5 && Health < 9)
+        State = Emotion::DEFAULT;
+    else if (Health > 2 && Health <= 5)
+        State = Emotion::NERVOUS;
+    else 
+        State = Emotion::SAD;
+}
+
 // Update which portion of the spritesheet is drawn
 void Character::UpdateSource()
 {
@@ -300,4 +314,10 @@ Rectangle Character::GetCollisionRec()
     };
 }
 
+
+// Debug Function
+void Character::SetHealth(int HP)
+{
+    Health += HP;
+}
 
