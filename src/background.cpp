@@ -27,13 +27,14 @@ void Background::Draw()
 void Background::DrawMiniMap(Vector2 CharWorldPos)
 {
     Vector2 Position {
-        (float)(GetScreenWidth()/2 - (MiniMap.width/2) * .35f),
+        (float)(GetScreenWidth()/1.3 - (MiniMap.width/2) * .35f),
         (float)(GetScreenHeight()/2 - (MiniMap.height/2) * .35f)
     };
 
     if (IsMiniMap) {
         // Draw MiniMap Border
-        DrawRectangle(Position.x - 10, Position.y - 10, 95*Scale,95*Scale,Color{41,29,43,255});
+        DrawTextureEx(SquareContainer, Vector2Subtract(Position, Vector2{10, 10}), 0.f, 7.9f, WHITE);
+        // DrawRectangle(Position.x - 10, Position.y - 10, 95*Scale,95*Scale,WHITE);
         // Draw MiniMap
         DrawTextureEx(MiniMap, Position, 0.0f, .35f, WHITE);
         // Draw MiniMap Character Indicator
