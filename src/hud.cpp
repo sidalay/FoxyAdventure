@@ -39,10 +39,11 @@ void HUD::Draw(int Health, Emotion State)
             break;
     }
 
-    Vector2 PosRowOne{100, 20};
-    Vector2 PosRowTwo{-50, 50};
+    Vector2 PosRowOne{100, 30};
+    Vector2 PosRowTwo{-50, 60};
     Vector2 PosAdd{30,0};
 
+    DrawTextureEx(Container, Vector2{15, 15}, 0.f, 5.f, WHITE);
     DrawTextureEx(Fox, Vector2{20,20}, 0.f, Scale, WHITE);
 
     for (auto i = 1; i <= 10; ++i)

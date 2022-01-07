@@ -38,13 +38,15 @@ private:
     Rectangle Source{};
     Rectangle Destination{};
     
-    int Health{5};
+    int Health{10};
     float Scale{1.5f};
     float Speed{1.0f};
+    float RunningTime{};
     bool Colliding{false};
     bool Walking{false};
     bool Running{false};
     bool Attacking{false};
+    bool Sleeping{false};
     Emotion State{Emotion::DEFAULT};
     Direction Face{Direction::DOWN};
 
@@ -73,7 +75,9 @@ public:
     void WalkOrRun();
     void CheckAttack(Props& Props);
     void UpdateSource();
+    void CheckSleep();
     void CheckEmotion();
+    void SetSleep() {Sleeping = !Sleeping;}
 
     int GetHealth() {return Health;}
     float GetSpeed() {return Speed;}

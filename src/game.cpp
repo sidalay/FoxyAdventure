@@ -6,7 +6,7 @@ void Game::Run()
 {
 
     // Initialization ---------------------------
-    Window Window {800, 800};                               // Window Dimensions
+    Window Window {1280, 720};                               // Window Dimensions
     int FPS {144};                                          // Frames Per Second
     Game::Initialize(Window, FPS, "Cryptex Adventure");     // Create Window
 
@@ -21,7 +21,7 @@ void Game::Run()
                        Sprite{"sprites/characters/Fox_hit.png", 2, 4}, 
                        Sprite{"sprites/characters/Fox_die.png", 1, 4},
                        Sprite{"sprites/characters/Fox_push.png", 4, 4},
-                       Sprite{"sprites/characters/Fox_sleep.png", 4, 1}, 
+                       Sprite{"sprites/characters/Fox_sleeping.png", 4, 1}, 
                        Sprite{"sprites/characters/Fox_itemGot.png", 1, 4},
                        &Window, &MapBG};
 
@@ -91,18 +91,18 @@ void Game::CheckScreenSizing(Window& Window)
 void Game::SetFullScreen(Window& Window)
 {
     // see what display we are on right now
-    int display = GetCurrentMonitor();
+    // int display = GetCurrentMonitor();
 
     if (IsWindowFullscreen()) 
     {
         // if we are full screen, then go back to the windowed size
         ToggleFullscreen();                  
-        SetWindowSize(Window.x, Window.y); 
+        // SetWindowSize(Window.x, Window.y); 
     }
     else
     {                                        
         // if we are not full screen, set the window size to match the monitor we are on
-        SetWindowSize(GetMonitorWidth(display), GetMonitorHeight(display));
+        // SetWindowSize(GetMonitorWidth(display), GetMonitorHeight(display));
         ToggleFullscreen();
     }
 }
@@ -125,19 +125,17 @@ void Game::Update(Background& Map, Character& Character, Props& Props)
         for (auto& Prop:Proptype)
             Prop.Tick(DeltaTime, Map);
 
-    // Debugging
-    if (Character.GetHealth() < 10) {
+    // Debugging --------------------------------------
+    if (Character.GetHealth() < 10)
         if (IsKeyPressed(KEY_RIGHT_BRACKET))
-        {
             Character.SetHealth(1);
-        }
-    }
-    if (Character.GetHealth() > 0) {
+
+    if (Character.GetHealth() > 0)
         if (IsKeyPressed(KEY_LEFT_BRACKET))
-        {
             Character.SetHealth(-1);
-        }
-    }
+
+    if (IsKeyPressed(KEY_PAGE_DOWN))
+        Character.SetSleep();
 }
 
 void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud)

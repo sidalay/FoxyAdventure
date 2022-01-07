@@ -10,6 +10,8 @@ private:
     Texture2D HeartFull{LoadTexture("sprites/props/Heart.png")};
     Texture2D HeartHalf{LoadTexture("sprites/props/Heart_Half.png")};
     Texture2D HeartEmpty{LoadTexture("sprites/props/Heart_Empty.png")};
+
+    Texture2D Container{LoadTexture("sprites/props/TransparentContainer.png")};
     
     Texture2D Fox{};
     Texture2D FoxDefault{LoadTexture("sprites/portraits/Fox_Frame.png")};

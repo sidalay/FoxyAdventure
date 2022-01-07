@@ -61,6 +61,8 @@ void Character::Tick(float DeltaTime, Props& Props)
     UpdateSource();
 
     CheckEmotion();
+
+    CheckSleep();
 }
 
 // Draw character animation
@@ -240,6 +242,7 @@ void Character::WalkOrRun()
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_A) || IsKeyDown(KEY_S) || IsKeyDown(KEY_D))
     {
         Walking = true;
+        Sleeping = false;
     }
     else
     {
@@ -254,6 +257,10 @@ void Character::WalkOrRun()
     {
         CurrentSprite = &Walk;
     }
+    else if (Sleeping)
+    {
+        CurrentSprite = &Sleep;
+    }
     else 
     {
         CurrentSprite = &Idle;
@@ -262,14 +269,16 @@ void Character::WalkOrRun()
 
 void Character::CheckAttack(Props& Props)
 {
-    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
     {
         Attacking = true;
+        Sleeping = false;
     }
     else
     {
         Attacking = false;
     }
+
 
     if (Attacking)
     {
@@ -279,11 +288,34 @@ void Character::CheckAttack(Props& Props)
     {
         CheckMovement(Props);
     }
+
+}
+
+void Character::CheckSleep()
+{
+    float DeltaTime{GetFrameTime()};
+    float UpdateTime{2.f/1.f};
+
+    if (Sleeping)
+    {
+        RunningTime += DeltaTime;    
+
+        if (RunningTime >= UpdateTime) {
+            if (Health < 10) {
+                SetHealth(1);
+                RunningTime = 0.f;
+            }
+        }
+    }
 }
 
 void Character::CheckEmotion()
 {
-    if (Health >= 9)
+    if (Attacking)
+        State = Emotion::ANGRY;
+    else if (Sleeping)
+        State = Emotion::SLEEPING;
+    else if (Health >= 9)
         State = Emotion::HAPPY;
     else if (Health > 5 && Health < 9)
         State = Emotion::DEFAULT;
