@@ -69,6 +69,10 @@ void Character::Tick(float DeltaTime, Props& Props)
 void Character::Draw()
 {
     DrawTexturePro(CurrentSprite->Texture, Source, Destination, Vector2{}, 0.f, WHITE);
+
+    if (Interactable) {
+        DrawTextureEx(Interact, Vector2Subtract(CharacterPos, Vector2{-50, 0}), 0.f, 3.f, WHITE);
+    }
 }
 
 // Loop through Sprites vector and call Sprite::Tick()
@@ -168,49 +172,65 @@ void Character::UndoMovement()
 // Check if colliding with props
 void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction)
 {
-    for (auto& PropType:*Props)
-    {
-        for (auto& Prop:PropType)
-        {
-            if (Prop.HasCollision())
-            {
-                if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos)))
-                {   
-                    if (Prop.IsInteractable())
-                    {
-                        if (Prop.GetType() == PropType::STUMP || Prop.GetType() == PropType::BOULDER)
-                        {
+    for (auto& PropType:*Props) {
+        for (auto& Prop:PropType) {
+            if (Prop.HasCollision()) {
+                
+                // check physical collision
+                if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos))) {   
+                    
+                    // manage pushable props
+                    if (Prop.IsMoveable()) {
+                        if (Prop.GetType() == PropType::BOULDER) {
                             Colliding = true;   
-                            if(!Prop.IsOutOfBounds())
-                            {
+                            if(!Prop.IsOutOfBounds()) {
                                 if (Prop.CheckMovement(*World, WorldPos, Direction, Speed, Props)) {
                                     UndoMovement();
                                 }
                             }
-                            else
-                            {
+                            else {
                                 UndoMovement();
                             }
-                            // Prop.SetWorldPos(Vector2Scale(Vector2Normalize(Direction), Speed));
                         }
-                        if (Prop.GetType() == PropType::GRASS)
-                        {
+                        if (Prop.GetType() == PropType::GRASS) {
                             Prop.SetActive(true);
                         }
-                    } 
-                    else
-                    {
+                    }
+                    // if not pushable, block movement   
+                    else {
                         UndoMovement();
                     }
                 }
-                else
-                {
+                else {
                     Prop.SetActive(false);
                     Colliding = false;
                 }
+
+                // check interactable collision
+                if (CheckCollisionRecs(GetCollisionRec(), Prop.GetInteractRec(WorldPos))) {
+                    // Check for interact collision to display ! over character
+                    if (Prop.IsInteractable()) {
+                        Interactable = true;
+                    }
+
+                    // Manage interacting with props
+                    if (Interactable == true) {
+                        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_SPACE))
+                            Interacting = true;
+                                
+                        if (Interacting == true)
+                            Prop.SetActive(true);
+
+                        if (Prop.IsOpened()) {
+                            Interacting = false;
+                            Interactable = false;
+                        }
+                    }
+                }
+
             }
-            else
-            {
+            else {
+                Interactable = false;
                 Colliding = false;
             }
         }
@@ -267,6 +287,7 @@ void Character::WalkOrRun()
     }
 }
 
+// manage attack sprites
 void Character::CheckAttack(Props& Props)
 {
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
@@ -291,6 +312,7 @@ void Character::CheckAttack(Props& Props)
 
 }
 
+// manage sleep skill
 void Character::CheckSleep()
 {
     float DeltaTime{GetFrameTime()};
@@ -309,6 +331,7 @@ void Character::CheckSleep()
     }
 }
 
+// manage character portraits 
 void Character::CheckEmotion()
 {
     if (Attacking)

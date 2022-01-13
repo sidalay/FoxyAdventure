@@ -147,6 +147,8 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud)
         {
             Prop.Draw(Character.GetWorldPos());
             // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, BLUE);
+            // if (Prop.IsInteractable())
+            //     DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,Prop.GetInteractRec(Character.GetWorldPos()).y,Prop.GetInteractRec(Character.GetWorldPos()).width,Prop.GetInteractRec(Character.GetWorldPos()).height, PURPLE);
         }
 
     // DrawRectangle(Character.GetCollisionRec().x,Character.GetCollisionRec().y,Character.GetCollisionRec().width,Character.GetCollisionRec().height, RED);
@@ -157,11 +159,13 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud)
         {
             Prop.Draw(Character.GetWorldPos());
             // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, PURPLE);
+            if (Prop.IsInteractable())
+                DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,Prop.GetInteractRec(Character.GetWorldPos()).y,Prop.GetInteractRec(Character.GetWorldPos()).width,Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
         }
     
     Hud.Draw(Character.GetHealth(), Character.GetEmotion());
-    // DrawText(TextFormat("WorldPos.x: %i", (int)Character.GetWorldPos().x), 20, 20, 20, WHITE);
-    // DrawText(TextFormat("WorldPos.y: %i", (int)Character.GetWorldPos().y), 20, 40, 20, WHITE);
+    // DrawText(TextFormat("WorldPos.x: %i", (int)Character.GetWorldPos().x), 20, 120, 20, WHITE);
+    // DrawText(TextFormat("WorldPos.y: %i", (int)Character.GetWorldPos().y), 20, 140, 20, WHITE);
 
     Map.DrawMiniMap(Character.GetWorldPos());
 }
@@ -173,21 +177,21 @@ std::vector<std::vector<Prop>> Game::InitializePropsUnder()
 
     std::vector<Prop> DungeonEntrance
     {
-        Prop{"sprites/props/DungeonEntrance.png", Vector2{3520,60}, PropType::DUNGEON},
         Prop{"sprites/props/DungeonEntrance.png", Vector2{3520,60}, PropType::DUNGEONLEFT, 4.f},
         Prop{"sprites/props/DungeonEntrance.png", Vector2{3520,60}, PropType::DUNGEONRIGHT, 4.f},
+        Prop{"sprites/props/DungeonEntrance.png", Vector2{3520,60}, PropType::DUNGEON, 4.f, false, true},
     };
     Props.emplace_back(DungeonEntrance);
 
     std::vector<Prop> Altar
     {
-        Prop{"sprites/props/AltarDormant.png", Vector2{700,1025}, PropType::ALTAR},
-        // Prop{"sprites/props/AltarTopLeft.png", Vector2{700,1025}, PropType::ALTAR},
-        // Prop{"sprites/props/AltarTop.png", Vector2{764,1025}, PropType::ALTAR},
-        // Prop{"sprites/props/AltarTopRight.png", Vector2{828,1025}, PropType::ALTAR},
-        // Prop{"sprites/props/AltarBotLeft.png", Vector2{700,1089}, PropType::ALTAR},
-        // Prop{"sprites/props/AltarBot.png", Vector2{764,1089}, PropType::ALTAR},
-        // Prop{"sprites/props/AltarBotRight.png", Vector2{828,1089}, PropType::ALTAR},
+        Prop{"sprites/props/AltarDormant.png", Vector2{700,1025}, PropType::ALTAR, 4.f, false, true},
+        // Prop{"sprites/props/AltarTopLeft.png", Vector2{700,1025}, PropType::ALTAR, 4.f, false, true},
+        // Prop{"sprites/props/AltarTop.png", Vector2{764,1025}, PropType::ALTAR, 4.f, false, true},
+        // Prop{"sprites/props/AltarTopRight.png", Vector2{828,1025}, PropType::ALTAR, 4.f, false, true},
+        // Prop{"sprites/props/AltarBotLeft.png", Vector2{700,1089}, PropType::ALTAR, 4.f, false, true},
+        // Prop{"sprites/props/AltarBot.png", Vector2{764,1089}, PropType::ALTAR, 4.f, false, true},
+        // Prop{"sprites/props/AltarBotRight.png", Vector2{828,1089}, PropType::ALTAR, 4.f, false, true},
     };
     Props.emplace_back(Altar);
 
@@ -1377,14 +1381,9 @@ std::vector<std::vector<Prop>> Game::InitializePropsUnder()
         Prop{"sprites/props/GrassWallTop.png", Vector2{3008, 2624}, PropType::TOPWALL},
         Prop{"sprites/props/WallTopLeft.png", Vector2{2944, 2624}, PropType::TOPWALL},
 
-        
-        
         // Door
-        Prop{"sprites/props/DoorRed.png", Vector2{1612,2815}, PropType::DOOR}, 
-        Prop{"sprites/props/DoorBlue.png", Vector2{3120,2685}, PropType::DOOR}
-
-
-
+        Prop{"sprites/props/DoorRed.png", Vector2{1612,2815}, PropType::DOOR, 4.f, false, true}, 
+        Prop{"sprites/props/DoorBlue.png", Vector2{3120,2685}, PropType::DOOR, 4.f, false, true}
     };
     Props.emplace_back(Walls);
 
@@ -1408,7 +1407,6 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         // Red House
         Prop{"sprites/props/HouseRed.png", Vector2{1472,2688}, PropType::rHOUSELEFT},   
         Prop{"sprites/props/HouseRed.png", Vector2{1472,2688}, PropType::rHOUSERIGHT},
-
 
         // Blue House   
         Prop{"sprites/props/HouseBlue.png", Vector2{3073,2495}, PropType::bHOUSELEFT},   
@@ -1434,7 +1432,7 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
 
     std::vector<Prop> Moveable
     {
-        // Prop{"sprites/props/TreeStump.png", Vector2{1025,3500}, PropType::STUMP, 4.f, true},
+        Prop{"sprites/props/TreeStump.png", Vector2{3525,3640}, PropType::STUMP, 4.f, false, true},
         Prop{"sprites/props/Boulder.png", Vector2{1025,3050}, PropType::BOULDER, 4.f, true},
     };
     Props.emplace_back(Moveable);
@@ -3630,6 +3628,15 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
 
     };
     Props.emplace_back(Grass);
+
+    std::vector<Prop> Treasure
+    {
+        Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,2950}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTopLeft.png")}},
+        Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3150}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTop.png")}},
+        Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3350}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTopRight.png")}},
+        Prop{Sprite{"sprites/props/TreasureChestBig.png", 4, 1, 1.f/4.f}, Vector2{2150,3350}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTopRight.png")}}
+    };
+    Props.emplace_back(Treasure);
     
     return Props;
 }

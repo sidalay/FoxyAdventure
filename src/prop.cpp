@@ -1,8 +1,8 @@
 #include "headers/prop.hpp"
 
 // Constructor for inanimate props
-Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale, bool Interactable)
-    : Object{TexturePath}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}
+Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale, bool Moveable, bool Interactable)
+    : Object{TexturePath}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}
 {
     if (Type == PropType::BOULDER ||
         Type == PropType::BUSH ||
@@ -21,15 +21,17 @@ Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale, boo
         Type == PropType::BOTTOMWALL ||
         Type == PropType::HOLE ||
         Type == PropType::DUNGEONLEFT ||
-        Type == PropType::DUNGEONRIGHT)
+        Type == PropType::DUNGEONRIGHT ||
+        Type == PropType::DUNGEON ||
+        Type == PropType::TREASURE)
     {
         Collidable = true;
     }
 }
 
 // Constructor for animated props
-Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Interactable)
-    : Object{Object}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}
+Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Moveable, bool Interactable, Texture2D Item)
+    : Object{Object}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}, Item{Item}
 {
     if (Type == PropType::BOULDER ||
         Type == PropType::BUSH ||
@@ -48,7 +50,9 @@ Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Interact
         Type == PropType::BOTTOMWALL ||
         Type == PropType::HOLE ||
         Type == PropType::DUNGEONLEFT ||
-        Type == PropType::DUNGEONRIGHT)
+        Type == PropType::DUNGEONRIGHT ||
+        Type == PropType::DUNGEON ||
+        Type == PropType::TREASURE)
     {
         Collidable = true;
     }
@@ -62,6 +66,19 @@ void Prop::Tick(float DeltaTime, Background& Map)
         {
             Object.Tick(DeltaTime);
         }
+        
+        else if (Type == PropType::TREASURE)
+        {
+            if (!Opened)
+                Object.Tick(DeltaTime);
+
+            RunningTime += DeltaTime;
+            if (RunningTime > Object.UpdateTime * 4)
+            {
+                Opened = true;
+                RunningTime = 0.f;       
+            }
+        }
     }
 }
 
@@ -69,6 +86,7 @@ void Prop::Draw(Vector2 CharacterWorldPos)
 {
     Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)}; // Where the prop is drawn on the screen
     DrawTexturePro(Object.Texture, Object.GetSourceRec(), Object.GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
+    // CheckActivity(ScreenPos);
 }
 
 Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
@@ -280,6 +298,16 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
                 (Object.Texture.height * Scale) * .80f
             };
         }
+        case PropType::TREASURE:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + (Object.Texture.width * Scale)/4.f * .10f,
+                ScreenPos.y + (Object.Texture.height * Scale) * .10f,
+                (Object.Texture.width * Scale)/4.f - (Object.Texture.width * Scale)/4.f * .10f,
+                Object.Texture.height * Scale - (Object.Texture.height * Scale) * .10f
+            };
+        }
         default:
         {
             return Rectangle
@@ -287,6 +315,46 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
                 ScreenPos.x,
                 ScreenPos.y,
                 Object.Texture.width * Scale,
+                Object.Texture.height * Scale
+            };
+        }
+    }
+}
+
+Rectangle Prop::GetInteractRec(Vector2 CharacterWorldPos)
+{
+    Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)};
+
+    switch (Type)
+    {
+        case PropType::STUMP:
+        {
+            return Rectangle
+            {
+                ScreenPos.x - (Object.Texture.width * Scale) * .10f,
+                ScreenPos.y - (Object.Texture.height * Scale) * .10f,
+                Object.Texture.width * Scale + (Object.Texture.width * Scale) * .20f,
+                Object.Texture.height * Scale + (Object.Texture.height * Scale) * .20f
+            };
+        }
+        case PropType::TREASURE:
+        {
+            return Rectangle
+            {
+                ScreenPos.x - (Object.Texture.width * Scale)/4.f * .45f,
+                ScreenPos.y - (Object.Texture.height * Scale) * .45f,
+                (Object.Texture.width * Scale)/4.f + (Object.Texture.width * Scale)/4.f,
+                (Object.Texture.height * Scale) + (Object.Texture.height * Scale)
+            };
+            break;
+        }
+        default:
+        {
+            return Rectangle
+            {
+                ScreenPos.x,
+                ScreenPos.y,
+                (Object.Texture.width * Scale),
                 Object.Texture.height * Scale
             };
         }
@@ -326,7 +394,7 @@ bool Prop::CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Directio
         for (auto& Prop:Proptype) {
             if (Prop.HasCollision()) {
                 if (CheckCollisionRecs(GetCollisionRec(CharWorldPos), Prop.GetCollisionRec(CharWorldPos))) {
-                    if (!Prop.IsInteractable()) {
+                    if (!Prop.IsMoveable()) {
                         UndoMovement();
                         Colliding = true;
                     }
@@ -335,6 +403,11 @@ bool Prop::CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Directio
         }
     }
     return Colliding;
+}
+
+void Prop::CheckActivity(Vector2 ScreenPos)
+{
+    
 }
 
 // ---------------------------------------------------------------------

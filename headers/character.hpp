@@ -28,12 +28,13 @@ private:
     Sprite Sleep{};
     Sprite ItemGrab{};
     Sprite* CurrentSprite{&Idle};  
+    Texture2D Interact{LoadTexture("sprites/props/Interact.png")};
     std::vector<Sprite*> Sprites {};
 
     Window* Screen{};
     Background* World{};
     Vector2 CharacterPos{};              // Where the character is on the screen
-    Vector2 WorldPos{1899,2125};         // Where the character is in the world
+    Vector2 WorldPos{1660,3166};         // Where the character is in the world
     Vector2 PrevWorldPos{};
     Rectangle Source{};
     Rectangle Destination{};
@@ -47,6 +48,8 @@ private:
     bool Running{false};
     bool Attacking{false};
     bool Sleeping{false};
+    bool Interacting{false};
+    bool Interactable{false};
     Emotion State{Emotion::DEFAULT};
     Direction Face{Direction::DOWN};
 
