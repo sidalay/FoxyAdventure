@@ -159,9 +159,11 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud)
         {
             Prop.Draw(Character.GetWorldPos());
             // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, PURPLE);
-            if (Prop.IsInteractable())
-                DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,Prop.GetInteractRec(Character.GetWorldPos()).y,Prop.GetInteractRec(Character.GetWorldPos()).width,Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
+            // if (Prop.IsInteractable())
+            //     DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,Prop.GetInteractRec(Character.GetWorldPos()).y,Prop.GetInteractRec(Character.GetWorldPos()).width,Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
         }
+
+    Character.DrawIndicator();
     
     Hud.Draw(Character.GetHealth(), Character.GetEmotion());
     // DrawText(TextFormat("WorldPos.x: %i", (int)Character.GetWorldPos().x), 20, 120, 20, WHITE);
@@ -3634,7 +3636,7 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,2950}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTopLeft.png")}},
         Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3150}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTop.png")}},
         Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3350}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTopRight.png")}},
-        Prop{Sprite{"sprites/props/TreasureChestBig.png", 4, 1, 1.f/4.f}, Vector2{2150,3350}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTopRight.png")}}
+        Prop{Sprite{"sprites/props/TreasureChestBig.png", 4, 1, 1.f/4.f}, Vector2{2050,3350}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTopRight.png")}}
     };
     Props.emplace_back(Treasure);
     

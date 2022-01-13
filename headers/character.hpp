@@ -81,6 +81,7 @@ public:
     void CheckSleep();
     void CheckEmotion();
     void SetSleep() {Sleeping = !Sleeping;}
+    void DrawIndicator();
 
     int GetHealth() {return Health;}
     float GetSpeed() {return Speed;}

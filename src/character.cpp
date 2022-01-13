@@ -69,10 +69,6 @@ void Character::Tick(float DeltaTime, Props& Props)
 void Character::Draw()
 {
     DrawTexturePro(CurrentSprite->Texture, Source, Destination, Vector2{}, 0.f, WHITE);
-
-    if (Interactable) {
-        DrawTextureEx(Interact, Vector2Subtract(CharacterPos, Vector2{-50, 0}), 0.f, 3.f, WHITE);
-    }
 }
 
 // Loop through Sprites vector and call Sprite::Tick()
@@ -347,6 +343,14 @@ void Character::CheckEmotion()
     else 
         State = Emotion::SAD;
 }
+
+// Draw ! when interactable is true
+void Character::DrawIndicator() 
+{
+    if (Interactable) {
+        DrawTextureEx(Interact, Vector2Subtract(CharacterPos, Vector2{-50, 0}), 0.f, 3.f, WHITE);
+    }
+};
 
 // Update which portion of the spritesheet is drawn
 void Character::UpdateSource()
