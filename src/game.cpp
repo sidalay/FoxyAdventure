@@ -163,12 +163,16 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud)
             //     DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,Prop.GetInteractRec(Character.GetWorldPos()).y,Prop.GetInteractRec(Character.GetWorldPos()).width,Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
         }
 
+    // Draw ! when within an interactable entity
     Character.DrawIndicator();
     
+    // Draw Portrait and Health Bars
     Hud.Draw(Character.GetHealth(), Character.GetEmotion());
+
+    // Debugging info
     DrawText(TextFormat("WorldPos.x: %i", (int)Character.GetWorldPos().x + 615), 20, 150, 20, WHITE);
     DrawText(TextFormat("WorldPos.y: %i", (int)Character.GetWorldPos().y + 335), 20, 170, 20, WHITE);
-    DrawFPS(20, 190);
+    DrawFPS(20, 223);
 
     Map.DrawMiniMap(Character.GetWorldPos());
 }
@@ -1392,8 +1396,8 @@ std::vector<std::vector<Prop>> Game::InitializePropsUnder()
 
     std::vector<Prop> Moveable
     {
+        Prop{"sprites/props/TreeStump.png", Vector2{3525,3640}, PropType::STUMP, 4.f, true},
         Prop{"sprites/props/Boulder.png", Vector2{1025,3050}, PropType::BOULDER, 4.f, true},
-        // Prop{"sprites/props/TreeStump.png", Vector2{1025,3500}, PropType::STUMP, 4.f, true}
     };
     Props.emplace_back(Moveable);
     
@@ -1435,7 +1439,7 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
 
     std::vector<Prop> Moveable
     {
-        Prop{"sprites/props/TreeStump.png", Vector2{3525,3640}, PropType::STUMP, 4.f, false, true},
+        Prop{"sprites/props/TreeStump.png", Vector2{3525,3640}, PropType::STUMP, 4.f, true},
         Prop{"sprites/props/Boulder.png", Vector2{1025,3050}, PropType::BOULDER, 4.f, true},
     };
     Props.emplace_back(Moveable);

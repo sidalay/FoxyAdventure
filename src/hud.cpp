@@ -74,4 +74,9 @@ void HUD::Draw(int Health, Emotion State)
         PosRowOne = Vector2Add(PosRowOne, PosAdd);
         PosRowTwo = Vector2Add(PosRowTwo, PosAdd);
     }
+
+    // Rectangle for debugging info (WorldPos, FPS, etc.)
+    DrawTextureEx(RecContainer, Vector2{15, 135}, 0.f, 4.f, WHITE);
+    DrawTextureEx(RecContainer, Vector2{15, 215}, 0.f, 2.f, WHITE);
+    
 }

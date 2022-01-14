@@ -94,26 +94,29 @@ void Character::UpdateCharacterPos()
 // Check which orientation the character is facing
 void Character::CheckDirection()
 {
-    if (IsKeyDown(KEY_W)) Face = Direction::UP;
-    if (IsKeyDown(KEY_A)) Face = Direction::LEFT;
-    if (IsKeyDown(KEY_S)) Face = Direction::DOWN;
-    if (IsKeyDown(KEY_D)) Face = Direction::RIGHT;
-    
-    switch (Face)
+    if (!Locked)
     {
-        case Direction::DOWN: 
-            CurrentSprite->FrameY = 0;
-            break;
-        case Direction::LEFT: 
-            CurrentSprite->FrameY = 1;
-            break;
-        case Direction::RIGHT:
-            CurrentSprite->FrameY = 2;
-            break;
-        case Direction::UP: 
-            CurrentSprite->FrameY = 3;
-            break;
+        if (IsKeyDown(KEY_W)) Face = Direction::UP;
+        if (IsKeyDown(KEY_A)) Face = Direction::LEFT;
+        if (IsKeyDown(KEY_S)) Face = Direction::DOWN;
+        if (IsKeyDown(KEY_D)) Face = Direction::RIGHT;
     }
+
+        switch (Face)
+        {
+            case Direction::DOWN: 
+                CurrentSprite->FrameY = 0;
+                break;
+            case Direction::LEFT: 
+                CurrentSprite->FrameY = 1;
+                break;
+            case Direction::RIGHT:
+                CurrentSprite->FrameY = 2;
+                break;
+            case Direction::UP: 
+                CurrentSprite->FrameY = 3;
+                break;
+        }
 }
 
 // Check for movement input
@@ -122,36 +125,41 @@ void Character::CheckMovement(Props& Props)
     PrevWorldPos = WorldPos;
     Vector2 Direction{};
 
-    if (IsKeyDown(KEY_W)) 
+    if (!Locked) 
     {
-        Direction.y -= Speed;
-    }
-    if (IsKeyDown(KEY_A)) 
-    {
-        Direction.x -= Speed;
-    }
-    if (IsKeyDown(KEY_S)) 
-    {
-        Direction.y += Speed;
-    }
-    if (IsKeyDown(KEY_D)) 
-    {
-        Direction.x += Speed;
-    }
 
-    if (Vector2Length(Direction) != 0.f)
-    {
-        // set MapPos -= Direction
-        WorldPos = Vector2Add(WorldPos, Vector2Scale(Vector2Normalize(Direction), Speed));
-    }
+        if (IsKeyDown(KEY_W)) 
+        {
+            Direction.y -= Speed;
+        }
+        if (IsKeyDown(KEY_A)) 
+        {
+            Direction.x -= Speed;
+        }
+        if (IsKeyDown(KEY_S)) 
+        {
+            Direction.y += Speed;
+        }
+        if (IsKeyDown(KEY_D)) 
+        {
+            Direction.x += Speed;
+        }
 
-    // Undo Movement if walking out-of-bounds
-    if (WorldPos.x + CharacterPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f||
-        WorldPos.y + CharacterPos.y < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f||
-        WorldPos.x + (Screen->x - CharacterPos.x) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
-        WorldPos.y + (Screen->y - CharacterPos.y) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f)
-    {
-        UndoMovement();
+        if (Vector2Length(Direction) != 0.f)
+        {
+            // set MapPos -= Direction
+            WorldPos = Vector2Add(WorldPos, Vector2Scale(Vector2Normalize(Direction), Speed));
+        }
+
+        // Undo Movement if walking out-of-bounds
+        if (WorldPos.x + CharacterPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f||
+            WorldPos.y + CharacterPos.y < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f||
+            WorldPos.x + (Screen->x - CharacterPos.x) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
+            WorldPos.y + (Screen->y - CharacterPos.y) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f)
+        {
+            UndoMovement();
+        }
+
     }
 
     CheckCollision(Props.Under, Direction);
@@ -177,7 +185,7 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                     
                     // manage pushable props
                     if (Prop.IsMoveable()) {
-                        if (Prop.GetType() == PropType::BOULDER) {
+                        if (Prop.GetType() == PropType::BOULDER || Prop.GetType() == PropType::STUMP) {
                             Colliding = true;   
                             if(!Prop.IsOutOfBounds()) {
                                 if (Prop.CheckMovement(*World, WorldPos, Direction, Speed, Props)) {
@@ -199,7 +207,6 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                 }
                 else {
                     Prop.SetActive(false);
-                    Colliding = false;
                 }
 
                 // check interactable collision
@@ -214,16 +221,18 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_SPACE))
                             Interacting = true;
                                 
-                        if (Interacting == true)
+                        if (Interacting == true) {
                             Prop.SetActive(true);
+                            Locked = true;
+                        }
 
                         if (Prop.IsOpened()) {
                             Interacting = false;
                             Interactable = false;
+                            Locked = false;
                         }
                     }
                 }
-
             }
             else {
                 Interactable = false;
@@ -286,16 +295,19 @@ void Character::WalkOrRun()
 // manage attack sprites
 void Character::CheckAttack(Props& Props)
 {
-    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
+    
+    if (!Locked)
     {
-        Attacking = true;
-        Sleeping = false;
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
+        {
+            Attacking = true;
+            Sleeping = false;
+        }
+        else
+        {
+            Attacking = false;
+        }
     }
-    else
-    {
-        Attacking = false;
-    }
-
 
     if (Attacking)
     {
@@ -348,7 +360,7 @@ void Character::CheckEmotion()
 void Character::DrawIndicator() 
 {
     if (Interactable) {
-        DrawTextureEx(Interact, Vector2Subtract(CharacterPos, Vector2{-50, 0}), 0.f, 3.f, WHITE);
+        DrawTextureEx(Interact, Vector2Subtract(CharacterPos, Vector2{-58, -20}), 0.f, 2.f, WHITE);
     }
 };
 
