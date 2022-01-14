@@ -59,6 +59,10 @@ void Character::Tick(float DeltaTime, Props& Props)
     CheckAttack(Props);
 
     UpdateSource();
+
+    CheckEmotion();
+
+    CheckSleep();
 }
 
 // Draw character animation
@@ -90,26 +94,29 @@ void Character::UpdateCharacterPos()
 // Check which orientation the character is facing
 void Character::CheckDirection()
 {
-    if (IsKeyDown(KEY_W)) Face = Direction::UP;
-    if (IsKeyDown(KEY_A)) Face = Direction::LEFT;
-    if (IsKeyDown(KEY_S)) Face = Direction::DOWN;
-    if (IsKeyDown(KEY_D)) Face = Direction::RIGHT;
-    
-    switch (Face)
+    if (!Locked)
     {
-        case Direction::DOWN: 
-            CurrentSprite->FrameY = 0;
-            break;
-        case Direction::LEFT: 
-            CurrentSprite->FrameY = 1;
-            break;
-        case Direction::RIGHT:
-            CurrentSprite->FrameY = 2;
-            break;
-        case Direction::UP: 
-            CurrentSprite->FrameY = 3;
-            break;
+        if (IsKeyDown(KEY_W)) Face = Direction::UP;
+        if (IsKeyDown(KEY_A)) Face = Direction::LEFT;
+        if (IsKeyDown(KEY_S)) Face = Direction::DOWN;
+        if (IsKeyDown(KEY_D)) Face = Direction::RIGHT;
     }
+
+        switch (Face)
+        {
+            case Direction::DOWN: 
+                CurrentSprite->FrameY = 0;
+                break;
+            case Direction::LEFT: 
+                CurrentSprite->FrameY = 1;
+                break;
+            case Direction::RIGHT:
+                CurrentSprite->FrameY = 2;
+                break;
+            case Direction::UP: 
+                CurrentSprite->FrameY = 3;
+                break;
+        }
 }
 
 // Check for movement input
@@ -118,36 +125,41 @@ void Character::CheckMovement(Props& Props)
     PrevWorldPos = WorldPos;
     Vector2 Direction{};
 
-    if (IsKeyDown(KEY_W)) 
+    if (!Locked) 
     {
-        Direction.y -= Speed;
-    }
-    if (IsKeyDown(KEY_A)) 
-    {
-        Direction.x -= Speed;
-    }
-    if (IsKeyDown(KEY_S)) 
-    {
-        Direction.y += Speed;
-    }
-    if (IsKeyDown(KEY_D)) 
-    {
-        Direction.x += Speed;
-    }
 
-    if (Vector2Length(Direction) != 0.f)
-    {
-        // set MapPos -= Direction
-        WorldPos = Vector2Add(WorldPos, Vector2Scale(Vector2Normalize(Direction), Speed));
-    }
+        if (IsKeyDown(KEY_W)) 
+        {
+            Direction.y -= Speed;
+        }
+        if (IsKeyDown(KEY_A)) 
+        {
+            Direction.x -= Speed;
+        }
+        if (IsKeyDown(KEY_S)) 
+        {
+            Direction.y += Speed;
+        }
+        if (IsKeyDown(KEY_D)) 
+        {
+            Direction.x += Speed;
+        }
 
-    // Undo Movement if walking out-of-bounds
-    if (WorldPos.x + CharacterPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f||
-        WorldPos.y + CharacterPos.y < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f||
-        WorldPos.x + (Screen->x - CharacterPos.x) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
-        WorldPos.y + (Screen->y - CharacterPos.y) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f)
-    {
-        UndoMovement();
+        if (Vector2Length(Direction) != 0.f)
+        {
+            // set MapPos -= Direction
+            WorldPos = Vector2Add(WorldPos, Vector2Scale(Vector2Normalize(Direction), Speed));
+        }
+
+        // Undo Movement if walking out-of-bounds
+        if (WorldPos.x + CharacterPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f||
+            WorldPos.y + CharacterPos.y < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f||
+            WorldPos.x + (Screen->x - CharacterPos.x) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
+            WorldPos.y + (Screen->y - CharacterPos.y) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f)
+        {
+            UndoMovement();
+        }
+
     }
 
     CheckCollision(Props.Under, Direction);
@@ -164,48 +176,66 @@ void Character::UndoMovement()
 // Check if colliding with props
 void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction)
 {
-    for (auto& PropType:*Props)
-    {
-        for (auto& Prop:PropType)
-        {
-            if (Prop.HasCollision())
-            {
-                if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos)))
-                {   
-                    if (Prop.IsInteractable())
-                    {
-                        if (Prop.GetType() == PropType::STUMP || Prop.GetType() == PropType::BOULDER)
-                        {
+    for (auto& PropType:*Props) {
+        for (auto& Prop:PropType) {
+            if (Prop.HasCollision()) {
+                
+                // check physical collision
+                if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos))) {   
+                    
+                    // manage pushable props
+                    if (Prop.IsMoveable()) {
+                        if (Prop.GetType() == PropType::BOULDER || Prop.GetType() == PropType::STUMP) {
                             Colliding = true;   
-                            if(!Prop.IsOutOfBounds())
-                            {
+                            if(!Prop.IsOutOfBounds()) {
                                 if (Prop.CheckMovement(*World, WorldPos, Direction, Speed, Props)) {
                                     UndoMovement();
                                 }
                             }
-                            else
-                            {
+                            else {
                                 UndoMovement();
                             }
-                            // Prop.SetWorldPos(Vector2Scale(Vector2Normalize(Direction), Speed));
                         }
-                        if (Prop.GetType() == PropType::GRASS)
-                        {
+                        if (Prop.GetType() == PropType::GRASS) {
                             Prop.SetActive(true);
                         }
-                    } 
-                    else
-                    {
+                    }
+                    // if not pushable, block movement   
+                    else {
                         UndoMovement();
                     }
                 }
-                else
-                {
+                else {
                     Prop.SetActive(false);
                 }
+
+                // check interactable collision
+                if (CheckCollisionRecs(GetCollisionRec(), Prop.GetInteractRec(WorldPos))) {
+                    // Check for interact collision to display ! over character
+                    if (Prop.IsInteractable()) {
+                        Interactable = true;
+                    }
+
+                    // Manage interacting with props
+                    if (Interactable == true) {
+                        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_SPACE))
+                            Interacting = true;
+                                
+                        if (Interacting == true) {
+                            Prop.SetActive(true);
+                            Locked = true;
+                        }
+
+                        if (Prop.IsOpened()) {
+                            Interacting = false;
+                            Interactable = false;
+                            Locked = false;
+                        }
+                    }
+                }
             }
-            else
-            {
+            else {
+                Interactable = false;
                 Colliding = false;
             }
         }
@@ -237,6 +267,7 @@ void Character::WalkOrRun()
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_A) || IsKeyDown(KEY_S) || IsKeyDown(KEY_D))
     {
         Walking = true;
+        Sleeping = false;
     }
     else
     {
@@ -251,21 +282,31 @@ void Character::WalkOrRun()
     {
         CurrentSprite = &Walk;
     }
+    else if (Sleeping)
+    {
+        CurrentSprite = &Sleep;
+    }
     else 
     {
         CurrentSprite = &Idle;
     }
 }
 
+// manage attack sprites
 void Character::CheckAttack(Props& Props)
 {
-    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+    
+    if (!Locked)
     {
-        Attacking = true;
-    }
-    else
-    {
-        Attacking = false;
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
+        {
+            Attacking = true;
+            Sleeping = false;
+        }
+        else
+        {
+            Attacking = false;
+        }
     }
 
     if (Attacking)
@@ -276,7 +317,52 @@ void Character::CheckAttack(Props& Props)
     {
         CheckMovement(Props);
     }
+
 }
+
+// manage sleep skill
+void Character::CheckSleep()
+{
+    float DeltaTime{GetFrameTime()};
+    float UpdateTime{2.f/1.f};
+
+    if (Sleeping)
+    {
+        RunningTime += DeltaTime;    
+
+        if (RunningTime >= UpdateTime) {
+            if (Health < 10) {
+                SetHealth(1);
+                RunningTime = 0.f;
+            }
+        }
+    }
+}
+
+// manage character portraits 
+void Character::CheckEmotion()
+{
+    if (Attacking)
+        State = Emotion::ANGRY;
+    else if (Sleeping)
+        State = Emotion::SLEEPING;
+    else if (Health >= 9)
+        State = Emotion::HAPPY;
+    else if (Health > 5 && Health < 9)
+        State = Emotion::DEFAULT;
+    else if (Health > 2 && Health <= 5)
+        State = Emotion::NERVOUS;
+    else 
+        State = Emotion::SAD;
+}
+
+// Draw ! when interactable is true
+void Character::DrawIndicator() 
+{
+    if (Interactable) {
+        DrawTextureEx(Interact, Vector2Subtract(CharacterPos, Vector2{-58, -20}), 0.f, 2.f, WHITE);
+    }
+};
 
 // Update which portion of the spritesheet is drawn
 void Character::UpdateSource()
@@ -299,4 +385,10 @@ Rectangle Character::GetCollisionRec()
     };
 }
 
+
+// Debug Function
+void Character::SetHealth(int HP)
+{
+    Health += HP;
+}
 
