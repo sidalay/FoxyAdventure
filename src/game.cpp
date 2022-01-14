@@ -166,8 +166,9 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud)
     Character.DrawIndicator();
     
     Hud.Draw(Character.GetHealth(), Character.GetEmotion());
-    // DrawText(TextFormat("WorldPos.x: %i", (int)Character.GetWorldPos().x), 20, 120, 20, WHITE);
-    // DrawText(TextFormat("WorldPos.y: %i", (int)Character.GetWorldPos().y), 20, 140, 20, WHITE);
+    DrawText(TextFormat("WorldPos.x: %i", (int)Character.GetWorldPos().x + 615), 20, 150, 20, WHITE);
+    DrawText(TextFormat("WorldPos.y: %i", (int)Character.GetWorldPos().y + 335), 20, 170, 20, WHITE);
+    DrawFPS(20, 190);
 
     Map.DrawMiniMap(Character.GetWorldPos());
 }
