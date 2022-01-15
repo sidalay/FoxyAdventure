@@ -70,21 +70,35 @@ void Prop::Tick(float DeltaTime, Background& Map)
         else if (Type == PropType::TREASURE)
         {
             if (!Opened)
+            {
                 Object.Tick(DeltaTime);
+            }
 
             RunningTime += DeltaTime;
-            if (RunningTime > Object.UpdateTime * 4)
+            if (RunningTime > Object.UpdateTime * 4 && RunningTime < Object.UpdateTime * 8)
             {
                 Opened = true;
-                RunningTime = 0.f;       
+                Opening = true;
+                RunningTime = 0.f; 
+            }
+            
+            if (Opening)
+            {
+                if (RunningTime >= Object.UpdateTime * 8)
+                {
+                    Opening = false;
+                    RunningTime = 0.f; 
+                }
             }
         }
+
     }
 }
 
 void Prop::Draw(Vector2 CharacterWorldPos)
 {
     Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)}; // Where the prop is drawn on the screen
+    Vector2 MaxItemDistance {0,-20};
 
     // Draw only if Prop is viewable in the screen frame
     if ((WorldPos.x >= (CharacterWorldPos.x + 615) - (GetScreenWidth()/2 + (Object.Texture.width * Scale))) && (WorldPos.x <= (CharacterWorldPos.x + 615) + (GetScreenWidth()/2 + (Object.Texture.width * Scale))) &&
@@ -92,8 +106,18 @@ void Prop::Draw(Vector2 CharacterWorldPos)
     {
         DrawTexturePro(Object.Texture, Object.GetSourceRec(), Object.GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
     }
-    // CheckActivity(ScreenPos);
+    
+    if (Opening)
+    {
+        DrawTextureEx(Item, Vector2Add(ScreenPos, ItemPos), 0.f, 1.f, WHITE);
+    }
+    else
+    {
+        ItemPos = Vector2{25,20};
+    }
 
+    ItemPos = Vector2Add(ItemPos, Vector2{0,-0.1f});
+    // CheckActivity(ScreenPos);
 }
 
 Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)

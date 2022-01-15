@@ -37,6 +37,7 @@ private:
     Vector2 PrevWorldPos{};
     float Scale {4.f};
     bool Opened{false};
+    bool Opening{false};
     bool Active{false};
     bool Collidable{false};
     bool Interactable{false};
@@ -45,6 +46,7 @@ private:
 
     // Treasure member variables
     Texture2D Item{};
+    Vector2 ItemPos{32,0};
     float RunningTime{};
 
 public:
