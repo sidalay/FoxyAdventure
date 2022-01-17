@@ -30,8 +30,8 @@ Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale, boo
 }
 
 // Constructor for animated props
-Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Moveable, bool Interactable, Texture2D Item)
-    : Object{Object}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}, Item{Item}
+Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Moveable, bool Interactable, Texture2D Item, float ItemScale)
+    : Object{Object}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}, Item{Item}, ItemScale{ItemScale}
 {
     if (Type == PropType::BOULDER ||
         Type == PropType::BUSH ||
@@ -55,6 +55,20 @@ Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Moveable
         Type == PropType::TREASURE)
     {
         Collidable = true;
+    }
+
+    if (Type == PropType::TREASURE)
+    {
+        if (ItemScale == 1.f)
+            ItemPos.x = 24;
+        else if (ItemScale == 2.f)
+            ItemPos.x = 16;
+        else if (ItemScale == 3.f)
+            ItemPos.x = 8;
+        else if (ItemScale == 4.f)
+            ItemPos.x = 0;
+        else 
+            ItemPos.x = 0;
     }
 }
 
@@ -112,14 +126,14 @@ void Prop::Draw(Vector2 CharacterWorldPos)
     
     if (Opening)
     {
-        DrawTextureEx(Item, Vector2Add(ScreenPos, ItemPos), 0.f, 1.f, WHITE);
+        DrawTextureEx(Item, Vector2Add(ScreenPos, ItemPos), 0.f, ItemScale, WHITE);
+        ItemPos = Vector2Add(ItemPos, Vector2{0,-0.1f});
     }
     else
     {
-        ItemPos = Vector2{25,20};
+        // ItemPos = Vector2{25,20};
     }
 
-    ItemPos = Vector2Add(ItemPos, Vector2{0,-0.1f});
     // CheckActivity(ScreenPos);
 }
 

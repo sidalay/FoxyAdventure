@@ -46,12 +46,13 @@ private:
 
     // Treasure member variables
     Texture2D Item{};
-    Vector2 ItemPos{32,0};
+    float ItemScale{};
+    Vector2 ItemPos{};
     float RunningTime{};
 
 public:
     Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
-    Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false, Texture2D Item = LoadTexture(""));              
+    Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false, Texture2D Item = LoadTexture(""), float ItemScale = 2.f);              
     
     void Tick(float DeltaTime, Background& Map);
     void Draw(Vector2 CharacterWorldPos);

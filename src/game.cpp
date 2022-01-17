@@ -3641,7 +3641,7 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,2950}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTopLeft.png")}},
         Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3150}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTop.png")}},
         Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3350}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTopRight.png")}},
-        Prop{Sprite{"sprites/props/TreasureChestBig.png", 4, 1, 1.f/4.f}, Vector2{2050,3350}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTopRight.png")}}
+        Prop{Sprite{"sprites/props/TreasureChestBig.png", 4, 1, 1.f/4.f}, Vector2{2050,3350}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/TreasureHeart.png")}, 4.f}
     };
     Props.emplace_back(Treasure);
     
