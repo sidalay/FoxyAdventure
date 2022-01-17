@@ -75,30 +75,33 @@ void Prop::Tick(float DeltaTime, Background& Map)
             }
 
             RunningTime += DeltaTime;
+
             if (RunningTime > Object.UpdateTime * 4 && RunningTime < Object.UpdateTime * 8)
             {
                 Opened = true;
                 Opening = true;
                 RunningTime = 0.f; 
             }
-            
-            if (Opening)
+        }
+    }
+    else {
+        // Draw treasure item for (UpdateTime * X) seconds
+        if (Opening)
+        {
+            RunningTime += DeltaTime;
+            if (RunningTime >= Object.UpdateTime * 10)
             {
-                if (RunningTime >= Object.UpdateTime * 8)
-                {
-                    Opening = false;
-                    RunningTime = 0.f; 
-                }
+                Opening = false;
+                RunningTime = 0.f; 
             }
         }
-
     }
 }
 
 void Prop::Draw(Vector2 CharacterWorldPos)
 {
     Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)}; // Where the prop is drawn on the screen
-    Vector2 MaxItemDistance {0,-20};
+    // Vector2 MaxItemDistance {0,-20};
 
     // Draw only if Prop is viewable in the screen frame
     if ((WorldPos.x >= (CharacterWorldPos.x + 615) - (GetScreenWidth()/2 + (Object.Texture.width * Scale))) && (WorldPos.x <= (CharacterWorldPos.x + 615) + (GetScreenWidth()/2 + (Object.Texture.width * Scale))) &&
