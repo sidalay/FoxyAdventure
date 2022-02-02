@@ -1,6 +1,7 @@
 #include "headers/game.hpp"
 #include <assert.h>
 #include <vector>
+#include <iostream>
 
 void Game::Run() 
 {
@@ -25,6 +26,23 @@ void Game::Run()
                        Sprite{"sprites/characters/Fox_itemGot.png", 1, 4},
                        &Window, &MapBG};
 
+    // Initialize Enemies
+    std::vector<Enemy> Enemies{};
+    Enemy BrownBear{Sprite{"sprites/enemies/BrownBear_Idle.png", 4, 4},
+                    Sprite{"sprites/enemies/BrownBear_Walk.png", 4, 4},
+                    Sprite{"sprites/enemies/BrownBear_Attack.png", 4, 4},
+                    Sprite{"sprites/enemies/BrownBear_Hurt.png", 1, 4},
+                    Sprite{"sprites/enemies/BrownBear_Death.png", 4, 4},
+                    Vector2{1660, 3166}, &Window, &MapBG};
+
+    Enemies.emplace_back(BrownBear);
+
+    // Initialize NPCS
+    std::vector<NPC> NPCS{};
+    NPC Didi{Sprite{"sprites/npc/Didi.png", 4, 1, 1/8.f}, Vector2{3163, 2853}};
+
+    NPCS.emplace_back(Didi);
+
     // Initialize HUD
     HUD Hud{};
 
@@ -36,7 +54,7 @@ void Game::Run()
     // Start Game Loop
     while (!WindowShouldClose()) 
     {
-        Game::Tick(Window, MapBG, Champion, Props, Hud);
+        Game::Tick(Window, MapBG, Champion, Props, Hud, Enemies, NPCS);
     }
 
     // Clean-up
@@ -54,7 +72,7 @@ void Game::Initialize(Window& Window, int FPS, std::string Title)
     SetExitKey(0);
 }
 
-void Game::Tick(Window& Window, Background& Map, Character& Character, Props& Props, HUD& Hud)
+void Game::Tick(Window& Window, Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<NPC>& NPCS)
 {
     Game::CheckScreenSizing(Window);
 
@@ -63,8 +81,8 @@ void Game::Tick(Window& Window, Background& Map, Character& Character, Props& Pr
     ClearBackground(BLACK);
 
     // Tick & Draw Functions
-    Game::Update(Map, Character, Props);
-    Game::Draw(Map, Character, Props, Hud);
+    Game::Update(Map, Character, Props, Enemies, NPCS);
+    Game::Draw(Map, Character, Props, Hud, Enemies, NPCS);
 
     // END DRAWING
     EndDrawing();
@@ -108,7 +126,7 @@ void Game::SetFullScreen(Window& Window)
 }
 
 
-void Game::Update(Background& Map, Character& Character, Props& Props)
+void Game::Update(Background& Map, Character& Character, Props& Props, std::vector<Enemy>& Enemies, std::vector<NPC>& NPCS)
 {
     // Create DeltaTime
     float DeltaTime{GetFrameTime()};
@@ -116,6 +134,12 @@ void Game::Update(Background& Map, Character& Character, Props& Props)
     // Call Ticks
     Map.Tick(Character.GetWorldPos());
     Character.Tick(DeltaTime, Props);
+
+    // for (auto& Enemy:Enemies)
+    //     Enemy.Tick(DeltaTime, Props);
+
+    for (auto& NPC:NPCS)
+        NPC.Tick();
 
     for (auto& Proptype:*Props.Under)
         for (auto& Prop:Proptype)
@@ -138,7 +162,7 @@ void Game::Update(Background& Map, Character& Character, Props& Props)
         Character.SetSleep();
 }
 
-void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud)
+void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<NPC>& NPCS)
 {
     Map.Draw();
 
@@ -153,6 +177,14 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud)
 
     // DrawRectangle(Character.GetCollisionRec().x,Character.GetCollisionRec().y,Character.GetCollisionRec().width,Character.GetCollisionRec().height, RED);
     Character.Draw();
+
+    // for (auto& Enemy:Enemies)
+    // {
+    //     Enemy.Draw();
+    // }
+
+    // for (auto& NPC:NPCS)
+    //     NPC.Draw(Character.GetWorldPos());
     
     for (auto& PropType:*Props.Over)
         for (auto& Prop:PropType)
@@ -175,6 +207,7 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud)
     DrawFPS(20, 223);
 
     Map.DrawMiniMap(Character.GetWorldPos());
+
 }
 
 // Initialize props drawn under character
@@ -3644,6 +3677,15 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{Sprite{"sprites/props/TreasureChestBig.png", 4, 1, 1.f/4.f}, Vector2{2050,3350}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/TreasureHeart.png")}, 4.f}
     };
     Props.emplace_back(Treasure);
+
+    std::vector<Prop> NPCS
+    {
+        Prop{Sprite{"sprites/npc/Didi.png", 4, 1, 1.f/8.f}, Vector2{3163, 2853}, PropType::NPC_A, 3.f, false, true},
+        Prop{Sprite{"sprites/npc/Jade.png", 4, 1, 1.f/8.f}, Vector2{1546, 2959}, PropType::NPC_B, 3.f, false, true},
+        Prop{Sprite{"sprites/npc/Didi.png", 4, 1, 1.f/8.f}, Vector2{2492, 3634}, PropType::NPC_A, 3.f, false, true},
+        Prop{Sprite{"sprites/npc/Jade.png", 4, 1, 1.f/8.f}, Vector2{2044, 3634}, PropType::NPC_B, 3.f, false, true},
+    };
+    Props.emplace_back(NPCS);
     
     return Props;
 }

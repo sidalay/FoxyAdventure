@@ -15,7 +15,7 @@ enum class Emotion
     DEFAULT, ANGRY, HAPPY, NERVOUS, SAD, SLEEPING
 };
 
-class Character : BaseCharacter
+class Character : public BaseCharacter
 {
 private:
     Sprite Idle{};

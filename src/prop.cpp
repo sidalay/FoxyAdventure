@@ -23,7 +23,9 @@ Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale, boo
         Type == PropType::DUNGEONLEFT ||
         Type == PropType::DUNGEONRIGHT ||
         Type == PropType::DUNGEON ||
-        Type == PropType::TREASURE)
+        Type == PropType::TREASURE ||
+        Type == PropType::NPC_A ||
+        Type == PropType::NPC_B)
     {
         Collidable = true;
     }
@@ -52,7 +54,9 @@ Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Moveable
         Type == PropType::DUNGEONLEFT ||
         Type == PropType::DUNGEONRIGHT ||
         Type == PropType::DUNGEON ||
-        Type == PropType::TREASURE)
+        Type == PropType::TREASURE ||
+        Type == PropType::NPC_A ||
+        Type == PropType::NPC_B)
     {
         Collidable = true;
     }
@@ -74,13 +78,17 @@ Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Moveable
 
 void Prop::Tick(float DeltaTime, Background& Map)
 {
+    if ((Type == PropType::NPC_A || Type == PropType::NPC_B) && !Talking)
+    {
+        Object.Tick(DeltaTime);
+    }
+
     if (Active)
     {
         if (Type == PropType::GRASS)
         {
             Object.Tick(DeltaTime);
         }
-        
         else if (Type == PropType::TREASURE)
         {
             if (!Opened)
@@ -96,6 +104,15 @@ void Prop::Tick(float DeltaTime, Background& Map)
                 Opening = true;
                 RunningTime = 0.f; 
             }
+        }
+        else if (Type == PropType::DOOR)
+        {
+            Opened = true;
+        }
+        else if ((Type == PropType::NPC_A || Type == PropType::NPC_B))
+        {
+            // Object.Tick(DeltaTime);
+            Talking = true;
         }
     }
     else {
@@ -129,9 +146,23 @@ void Prop::Draw(Vector2 CharacterWorldPos)
         DrawTextureEx(Item, Vector2Add(ScreenPos, ItemPos), 0.f, ItemScale, WHITE);
         ItemPos = Vector2Add(ItemPos, Vector2{0,-0.1f});
     }
-    else
+
+    // NPC Speech Boxes
+    if (Talking)
     {
-        // ItemPos = Vector2{25,20};
+        DrawTextureEx(SpeechName, Vector2{376,438}, 0.f, 5.f, WHITE);
+        DrawTextureEx(SpeechBox, Vector2{352,518}, 0.f, 12.f, WHITE);
+
+        if (Type == PropType::NPC_A)
+        {
+            DrawText("Diana", 399, 490, 30, WHITE);
+            DrawSpeech();
+        }
+        else if (Type == PropType::NPC_B)
+        {
+            DrawText("Jade", 399, 490, 30, WHITE);
+            DrawSpeech();
+        }
     }
 
     // CheckActivity(ScreenPos);
@@ -356,6 +387,26 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
                 Object.Texture.height * Scale - (Object.Texture.height * Scale) * .10f
             };
         }
+        case PropType::NPC_A:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + (Object.Texture.width * Scale)/4.f * .10f,
+                ScreenPos.y + (Object.Texture.height * Scale) * .10f,
+                (Object.Texture.width * Scale)/4.f - (Object.Texture.width * Scale)/4.f * .10f,
+                Object.Texture.height * Scale - (Object.Texture.height * Scale) * .10f
+            };
+        }
+        case PropType::NPC_B:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + (Object.Texture.width * Scale)/4.f * .10f,
+                ScreenPos.y + (Object.Texture.height * Scale) * .10f,
+                (Object.Texture.width * Scale)/4.f - (Object.Texture.width * Scale)/4.f * .10f,
+                Object.Texture.height * Scale - (Object.Texture.height * Scale) * .10f
+            };
+        }
         default:
         {
             return Rectangle
@@ -395,6 +446,26 @@ Rectangle Prop::GetInteractRec(Vector2 CharacterWorldPos)
                 (Object.Texture.height * Scale) + (Object.Texture.height * Scale)
             };
             break;
+        }
+        case PropType::NPC_A:
+        {
+            return Rectangle
+            {
+                ScreenPos.x - (Object.Texture.width * Scale)/4.f * .45f,
+                ScreenPos.y - (Object.Texture.height * Scale) * .45f,
+                (Object.Texture.width * Scale)/4.f + (Object.Texture.width * Scale)/4.f,
+                (Object.Texture.height * Scale) + (Object.Texture.height * Scale)
+            };
+        }
+        case PropType::NPC_B:
+        {
+            return Rectangle
+            {
+                ScreenPos.x - (Object.Texture.width * Scale)/4.f * .45f,
+                ScreenPos.y - (Object.Texture.height * Scale) * .45f,
+                (Object.Texture.width * Scale)/4.f + (Object.Texture.width * Scale)/4.f,
+                (Object.Texture.height * Scale) + (Object.Texture.height * Scale)
+            };
         }
         default:
         {
@@ -456,6 +527,88 @@ bool Prop::CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Directio
 void Prop::CheckActivity(Vector2 ScreenPos)
 {
     
+}
+
+void Prop::DrawSpeech()
+{
+    switch(Act)
+    {
+        case Progress::ACT_I:
+        {   
+            if (Type == PropType::NPC_A)
+            {
+                DrawText("Hello there, little Foxy! You look a little hungry.", 390, 550, 20, WHITE);
+                DrawText("Here you go, have some food little one.", 390, 570, 20, WHITE);
+            }
+            else 
+            {
+                DrawText("Hi love! Have you seen my little one? Coulda sworn", 390, 550, 20, WHITE);
+                DrawText("he was right here...", 390, 570, 20, WHITE);
+            };
+
+            if (IsKeyReleased(KEY_ENTER))
+            {
+                Opened = true;
+                Talking = false;
+            }
+            break;
+        }
+        case Progress::ACT_II:
+        {
+            if (Type == PropType::NPC_A)
+            {
+                
+            }
+            else 
+            {
+
+            };
+
+            if (IsKeyPressed(KEY_SPACE))
+            {
+                Opened = true;
+            }
+            break;
+        }
+        case Progress::ACT_III:
+        {
+            if (Type == PropType::NPC_A)
+            {
+                
+            }
+            else 
+            {
+
+            };
+
+            if (IsKeyPressed(KEY_SPACE))
+            {
+                Opened = true;
+            }
+            break;
+        }
+        case Progress::ACT_IV:
+        {
+            if (Type == PropType::NPC_A)
+            {
+                
+            }
+            else 
+            {
+
+            };
+        
+            if (IsKeyPressed(KEY_SPACE))
+            {
+                Opened = true;
+            }
+            break;
+        }
+        default:
+            // Opened = true;
+            // Talking = false;
+            break;
+    }
 }
 
 // ---------------------------------------------------------------------

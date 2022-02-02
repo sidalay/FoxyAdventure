@@ -71,7 +71,10 @@ void Character::Draw()
     DrawTexturePro(CurrentSprite->Texture, Source, Destination, Vector2{}, 0.f, WHITE);
 }
 
-// Loop through Sprites vector and call Sprite::Tick()
+/* 
+    Loop through Sprites vector and call Sprite::Tick() to maintain sprite animations current 'spot'.
+    Halfway through walk animation -> Run will start from the halfway point. Etc.
+*/
 void Character::SpriteTick(float DeltaTime)
 {
     for (auto Sprite:Sprites)
@@ -231,6 +234,10 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                             Interactable = false;
                             Prop.SetActive(false);
                             Locked = false;
+                            if (Prop.GetType() == PropType::NPC_A || Prop.GetType() == PropType::NPC_B)
+                            {
+                                Prop.SetOpened(false);
+                            }
                         }
                     }
                 }
@@ -386,6 +393,7 @@ Rectangle Character::GetCollisionRec()
     };
 }
 
+// -------------------------------------------------------- //
 
 // Debug Function
 void Character::SetHealth(int HP)
