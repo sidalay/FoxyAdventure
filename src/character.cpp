@@ -226,6 +226,7 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                                 
                         if (Interacting == true) {
                             Prop.SetActive(true);
+                            Interactable = false;
                             Locked = true;
                         }
 

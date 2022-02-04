@@ -24,13 +24,15 @@ enum class PropType
     TREASURE,
     DUNGEON, DUNGEONLEFT, DUNGEONRIGHT,
     ALTAR,
+    NPC_O,
     NPC_A,
     NPC_B,
+    NPC_C
 };
 
 enum class Progress
 {
-    ACT_I, ACT_II, ACT_III, ACT_IV, ACT_V
+    ACT_O, ACT_I, ACT_II, ACT_III, ACT_IV, ACT_V
 };
 
 struct Props;
@@ -52,20 +54,25 @@ private:
     bool OutOfBounds{false};
     bool Talking{false};
 
-    // Treasure member variables
-    Texture2D Item{};
-    float ItemScale{};
-    Vector2 ItemPos{};
-    float RunningTime{};
-
     // NPC variables
     Progress Act{Progress::ACT_I};
     Texture2D SpeechBox{LoadTexture("sprites/npc/SpeechBox.png")};
     Texture2D SpeechName{LoadTexture("sprites/npc/SpeechName.png")};
 
+    // Treasure member variables
+    Progress TriggerAct{};
+    PropType TriggerNPC{};
+    static inline Progress CurrentAct{Progress::ACT_O};
+    static inline PropType CurrentNPC{PropType::NPC_O};
+    Texture2D Item{};
+    float ItemScale{};
+    Vector2 ItemPos{};
+    float RunningTime{};
+
 public:
     Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
-    Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false, Texture2D Item = LoadTexture(""), float ItemScale = 2.f);           
+    Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false, 
+         Progress Act = Progress::ACT_O, PropType NPC = PropType::NPC_O, Texture2D Item = LoadTexture("sprites/props/Heart.png"), float ItemScale = 2.f);           
     
     void Tick(float DeltaTime, Background& Map);
     void Draw(Vector2 CharacterWorldPos);

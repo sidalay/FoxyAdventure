@@ -1,7 +1,6 @@
 #include "headers/game.hpp"
 #include <assert.h>
 #include <vector>
-#include <iostream>
 
 void Game::Run() 
 {
@@ -10,6 +9,7 @@ void Game::Run()
     Window Window {1280, 720};                               // Window Dimensions
     int FPS {144};                                          // Frames Per Second
     Game::Initialize(Window, FPS, "Cryptex Adventure");     // Create Window
+    SetTraceLogLevel(LOG_WARNING);
 
     // Initialize Background
     Background MapBG{};
@@ -28,20 +28,20 @@ void Game::Run()
 
     // Initialize Enemies
     std::vector<Enemy> Enemies{};
-    Enemy BrownBear{Sprite{"sprites/enemies/BrownBear_Idle.png", 4, 4},
-                    Sprite{"sprites/enemies/BrownBear_Walk.png", 4, 4},
-                    Sprite{"sprites/enemies/BrownBear_Attack.png", 4, 4},
-                    Sprite{"sprites/enemies/BrownBear_Hurt.png", 1, 4},
-                    Sprite{"sprites/enemies/BrownBear_Death.png", 4, 4},
-                    Vector2{1660, 3166}, &Window, &MapBG};
+    // Enemy BrownBear{Sprite{"sprites/enemies/BrownBear_Idle.png", 4, 4},
+    //                 Sprite{"sprites/enemies/BrownBear_Walk.png", 4, 4},
+    //                 Sprite{"sprites/enemies/BrownBear_Attack.png", 4, 4},
+    //                 Sprite{"sprites/enemies/BrownBear_Hurt.png", 1, 4},
+    //                 Sprite{"sprites/enemies/BrownBear_Death.png", 4, 4},
+    //                 Vector2{1660, 3166}, &Window, &MapBG};
 
-    Enemies.emplace_back(BrownBear);
+    // Enemies.emplace_back(BrownBear);
 
     // Initialize NPCS
     std::vector<NPC> NPCS{};
-    NPC Didi{Sprite{"sprites/npc/Didi.png", 4, 1, 1/8.f}, Vector2{3163, 2853}};
+    // NPC Didi{Sprite{"sprites/npc/Didi.png", 4, 1, 1/8.f}, Vector2{3163, 2853}};
 
-    NPCS.emplace_back(Didi);
+    // NPCS.emplace_back(Didi);
 
     // Initialize HUD
     HUD Hud{};
@@ -66,7 +66,7 @@ void Game::Run()
 void Game::Initialize(Window& Window, int FPS, std::string Title)
 {
     assert(!GetWindowHandle());
-    SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(Window.x, Window.y, Title.c_str());
     SetTargetFPS(FPS);
     SetExitKey(0);
@@ -124,7 +124,6 @@ void Game::SetFullScreen(Window& Window)
         ToggleFullscreen();
     }
 }
-
 
 void Game::Update(Background& Map, Character& Character, Props& Props, std::vector<Enemy>& Enemies, std::vector<NPC>& NPCS)
 {
@@ -2404,9 +2403,9 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         // row21
         Prop{"sprites/props/TreeGreen.png", Vector2{20,2267}, PropType::TREE},      // 1
         Prop{"sprites/props/TreeGreen.png", Vector2{120,2267}, PropType::TREE},     // 2
-        // Prop{"sprites/props/TreeGreen.png", Vector2{220,2267}, PropType::TREE},  // 3   
+        Prop{"sprites/props/TreeGreen.png", Vector2{220,2267}, PropType::TREE},     // 3   
         Prop{"sprites/props/TreeGreen.png", Vector2{320,2267}, PropType::TREE},     // 4
-        // Prop{"sprites/props/TreeGreen.png", Vector2{420,2267}, PropType::TREE},  // 5    
+        Prop{"sprites/props/TreeGreen.png", Vector2{420,2267}, PropType::TREE},     // 5    
         Prop{"sprites/props/TreeGreen.png", Vector2{520,2267}, PropType::TREE},     // 6
         Prop{"sprites/props/TreeGreen.png", Vector2{620,2267}, PropType::TREE},     // 7
         Prop{"sprites/props/TreeGreen.png", Vector2{720,2267}, PropType::TREE},     // 8
@@ -3671,17 +3670,17 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
 
     std::vector<Prop> Treasure
     {
-        Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,2950}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTopLeft.png")}},
-        Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3150}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTop.png")}},
-        Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3350}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/AltarTopRight.png")}},
-        Prop{Sprite{"sprites/props/TreasureChestBig.png", 4, 1, 1.f/4.f}, Vector2{2050,3350}, PropType::TREASURE, 4.f, false, true, Texture2D{LoadTexture("sprites/props/TreasureHeart.png")}, 4.f}
+        Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,2950}, PropType::TREASURE, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarTopLeft.png")}},
+        Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3150}, PropType::TREASURE, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarTop.png")}},
+        Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3350}, PropType::TREASURE, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarTopRight.png")}},
+        Prop{Sprite{"sprites/props/TreasureChestBig.png", 4, 1, 1.f/4.f}, Vector2{2050,3350}, PropType::TREASURE, 4.f, false, true, Progress::ACT_II, PropType::NPC_B, Texture2D{LoadTexture("sprites/props/TreasureHeart.png")}, 4.f}
     };
     Props.emplace_back(Treasure);
 
     std::vector<Prop> NPCS
     {
-        Prop{Sprite{"sprites/npc/Didi.png", 4, 1, 1.f/8.f}, Vector2{3163, 2853}, PropType::NPC_A, 3.f, false, true},
-        Prop{Sprite{"sprites/npc/Jade.png", 4, 1, 1.f/8.f}, Vector2{1546, 2959}, PropType::NPC_B, 3.f, false, true},
+        // Prop{Sprite{"sprites/npc/Didi.png", 4, 1, 1.f/8.f}, Vector2{3163, 2853}, PropType::NPC_A, 3.f, false, true},
+        // Prop{Sprite{"sprites/npc/Jade.png", 4, 1, 1.f/8.f}, Vector2{1546, 2959}, PropType::NPC_B, 3.f, false, true},
         Prop{Sprite{"sprites/npc/Didi.png", 4, 1, 1.f/8.f}, Vector2{2492, 3634}, PropType::NPC_A, 3.f, false, true},
         Prop{Sprite{"sprites/npc/Jade.png", 4, 1, 1.f/8.f}, Vector2{2044, 3634}, PropType::NPC_B, 3.f, false, true},
     };
@@ -3689,5 +3688,4 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
     
     return Props;
 }
-
 
