@@ -2451,6 +2451,7 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         // Prop{"sprites/props/TreeGreen.png", Vector2{200,2367}, PropType::TREE},  // 3 
         // Prop{"sprites/props/TreeGreen.png", Vector2{300,2367}, PropType::TREE},  // 4 
         // Prop{"sprites/props/TreeGreen.png", Vector2{400,2367}, PropType::TREE},  // 5 
+        Prop{"sprites/props/TreeClear.png", Vector2{550,2303}, PropType::TREE},     // 6 Invisible Wall
         Prop{"sprites/props/TreeGreen.png", Vector2{550,2367}, PropType::TREE},     // 6 
         // Prop{"sprites/props/TreeGreen.png", Vector2{600,2367}, PropType::TREE},  // 7     
         Prop{"sprites/props/TreeGreen.png", Vector2{700,2367}, PropType::TREE},  // 8 
@@ -2496,6 +2497,7 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         // Prop{"sprites/props/TreeGreen.png", Vector2{320,2467}, PropType::TREE},  // 4 
         // Prop{"sprites/props/TreeGreen.png", Vector2{420,2467}, PropType::TREE},  // 5 
         // Prop{"sprites/props/TreeGreen.png", Vector2{520,2467}, PropType::TREE},  // 6 
+        Prop{"sprites/props/TreeClear.png", Vector2{620,2403}, PropType::TREE},     // 7 Invisible Wall
         Prop{"sprites/props/TreeGreen.png", Vector2{620,2467}, PropType::TREE},     // 7 
         Prop{"sprites/props/TreeGreen.png", Vector2{720,2467}, PropType::TREE},     // 8 
         Prop{"sprites/props/TreeGreen.png", Vector2{820,2467}, PropType::TREE},     // 9 
@@ -3670,19 +3672,20 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
 
     std::vector<Prop> Treasure
     {
-        Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,2950}, PropType::TREASURE, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarTopLeft.png")}},
-        Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3150}, PropType::TREASURE, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarTop.png")}},
-        Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3350}, PropType::TREASURE, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarTopRight.png")}},
-        Prop{Sprite{"sprites/props/TreasureChestBig.png", 4, 1, 1.f/4.f}, Vector2{2050,3350}, PropType::TREASURE, 4.f, false, true, Progress::ACT_II, PropType::NPC_B, Texture2D{LoadTexture("sprites/props/TreasureHeart.png")}, 4.f}
+        Prop{Sprite{"sprites/props/TreasureChestBig.png", 4, 1, 1.f/4.f}, Vector2{2050,3350}, PropType::TREASURE, 4.f, false, true, Progress::ACT_II, PropType::NPC_B, Texture2D{LoadTexture("sprites/props/TreasureHeart.png")}, "Life Stone", 4.f},
+        Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3350}, PropType::TREASURE, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarTopRight.png")}, "Altar Piece"},
+        Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3150}, PropType::TREASURE, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarTop.png")}, "Altar Piece"},
+        Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,2950}, PropType::TREASURE, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarTopLeft.png")}, "Altar Piece"},
     };
     Props.emplace_back(Treasure);
 
     std::vector<Prop> NPCS
     {
-        // Prop{Sprite{"sprites/npc/Didi.png", 4, 1, 1.f/8.f}, Vector2{3163, 2853}, PropType::NPC_A, 3.f, false, true},
-        // Prop{Sprite{"sprites/npc/Jade.png", 4, 1, 1.f/8.f}, Vector2{1546, 2959}, PropType::NPC_B, 3.f, false, true},
-        Prop{Sprite{"sprites/npc/Didi.png", 4, 1, 1.f/8.f}, Vector2{2492, 3634}, PropType::NPC_A, 3.f, false, true},
-        Prop{Sprite{"sprites/npc/Jade.png", 4, 1, 1.f/8.f}, Vector2{2044, 3634}, PropType::NPC_B, 3.f, false, true},
+        Prop{Sprite{"sprites/npc/Didi.png", 4, 1, 1.f/8.f}, Vector2{3163, 2853}, PropType::NPC_A, 3.f, false, true},
+        Prop{Sprite{"sprites/npc/Jade.png", 4, 1, 1.f/8.f}, Vector2{1546, 2959}, PropType::NPC_B, 3.f, false, true},
+        // Prop{Sprite{"sprites/npc/Didi.png", 4, 1, 1.f/8.f}, Vector2{2492, 3634}, PropType::NPC_A, 3.f, false, true},
+        // Prop{Sprite{"sprites/npc/Jade.png", 4, 1, 1.f/8.f}, Vector2{2044, 3634}, PropType::NPC_B, 3.f, false, true},
+        Prop{Sprite{"sprites/npc/Son.png", 4, 1, 1.f/8.f}, Vector2{1240, 2036}, PropType::NPC_C, 3.f, false, true, Progress::ACT_II, PropType::NPC_B},
     };
     Props.emplace_back(NPCS);
     

@@ -4,6 +4,7 @@
 #include <raylib.h>
 #include <raymath.h>
 #include <vector>
+#include <string>
 #include "headers/sprite.hpp"
 #include "headers/background.hpp"
 
@@ -56,15 +57,20 @@ private:
 
     // NPC variables
     Progress Act{Progress::ACT_I};
+    bool Visible{true};
     Texture2D SpeechBox{LoadTexture("sprites/npc/SpeechBox.png")};
     Texture2D SpeechName{LoadTexture("sprites/npc/SpeechName.png")};
 
-    // Treasure member variables
+    // Progress Trigger Variables
     Progress TriggerAct{};
     PropType TriggerNPC{};
     static inline Progress CurrentAct{Progress::ACT_O};
     static inline PropType CurrentNPC{PropType::NPC_O};
+
+    // Treasure member variables
+    bool ReceiveItem{false};
     Texture2D Item{};
+    std::string ItemName{};
     float ItemScale{};
     Vector2 ItemPos{};
     float RunningTime{};
@@ -72,7 +78,7 @@ private:
 public:
     Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
     Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false, 
-         Progress Act = Progress::ACT_O, PropType NPC = PropType::NPC_O, Texture2D Item = LoadTexture("sprites/props/Heart.png"), float ItemScale = 2.f);           
+         Progress Act = Progress::ACT_O, PropType NPC = PropType::NPC_O, Texture2D Item = LoadTexture("sprites/props/Heart.png"), std::string ItemName = "None", float ItemScale = 2.f);           
     
     void Tick(float DeltaTime, Background& Map);
     void Draw(Vector2 CharacterWorldPos);
@@ -83,6 +89,7 @@ public:
     bool IsOutOfBounds() {return OutOfBounds;}
     bool IsActive() {return Active;}
     bool IsOpened() {return Opened;}
+    bool IsVisible() {return Visible;}
     
     Vector2 GetWorldPos() {return WorldPos;}
     PropType GetType() {return Type;}

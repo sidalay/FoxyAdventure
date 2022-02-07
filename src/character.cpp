@@ -205,7 +205,9 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                     }
                     // if not pushable, block movement   
                     else {
-                        UndoMovement();
+                        if (Prop.IsVisible()) {
+                            UndoMovement();
+                        }
                     }
                 }
                 else {
@@ -216,7 +218,9 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                 if (CheckCollisionRecs(GetCollisionRec(), Prop.GetInteractRec(WorldPos))) {
                     // Check for interact collision to display ! over character
                     if (Prop.IsInteractable()) {
-                        Interactable = true;
+                        if (Prop.IsVisible()) {
+                            Interactable = true;
+                        }
                     }
 
                     // Manage interacting with props
@@ -235,7 +239,9 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                             Interactable = false;
                             Prop.SetActive(false);
                             Locked = false;
-                            if (Prop.GetType() == PropType::NPC_A || Prop.GetType() == PropType::NPC_B)
+
+                            // Make NPC's interactable again
+                            if (Prop.GetType() == PropType::NPC_A || Prop.GetType() == PropType::NPC_B || Prop.GetType() == PropType::NPC_C)
                             {
                                 Prop.SetOpened(false);
                             }
