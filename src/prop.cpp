@@ -196,8 +196,8 @@ void Prop::Draw(Vector2 CharacterWorldPos)
     // Treasure Speech Box
     if (ReceiveItem)
     {
-        DrawTextureEx(SpeechBox, Vector2{352,518}, 0.f, 12.f, WHITE);
-        // DrawTextureEx(SpeechBox, Vector2{352,518}, 0.f, 6.f, WHITE);
+        // DrawTextureEx(SpeechBox, Vector2{352,518}, 0.f, 12.f, WHITE);
+        DrawTextureEx(SpeechBox, Vector2{472,574}, 0.f, 8.f, WHITE);
         DrawSpeech();
     }
 
@@ -612,12 +612,12 @@ void Prop::DrawSpeech()
 {
     if (Type == PropType::TREASURE)
     {
-        DrawText("", 390, 550, 20, WHITE);
-        DrawText("", 390, 575, 20, WHITE);
-        DrawText(TextFormat("You have received, %s", ItemName.c_str()), 390, 600, 20, WHITE);
-        DrawText("", 390, 625, 20, WHITE);
-        DrawText("", 390, 650, 20, WHITE);
-        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+        DrawText("", 510, 550, 20, WHITE);
+        DrawText("", 510, 575, 20, WHITE);
+        DrawText(TextFormat("You have received: %s!", ItemName.c_str()), 503, 625, 20, WHITE);
+        DrawText("", 510, 625, 20, WHITE);
+        DrawText("", 510, 650, 20, WHITE);
+        DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
 
         if (IsKeyPressed(KEY_ENTER))
         {
