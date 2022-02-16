@@ -203,6 +203,7 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                             Prop.SetActive(true);
                         }
                     }
+
                     // if not pushable, block movement   
                     else {
                         if (Prop.IsVisible()) {

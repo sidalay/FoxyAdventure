@@ -26,7 +26,8 @@ Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale, boo
         Type == PropType::TREASURE ||
         Type == PropType::NPC_A ||
         Type == PropType::NPC_B ||
-        Type == PropType::NPC_C)
+        Type == PropType::NPC_C ||
+        Type == PropType::ALTAR)
     {
         Collidable = true;
     }
@@ -60,7 +61,8 @@ Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Moveable
         Type == PropType::TREASURE ||
         Type == PropType::NPC_A ||
         Type == PropType::NPC_B ||
-        Type == PropType::NPC_C)
+        Type == PropType::NPC_C ||
+        Type == PropType::ALTAR)
     {
         Collidable = true;
     }
@@ -99,6 +101,7 @@ void Prop::Tick(float DeltaTime, Background& Map)
         }
     }
 
+    // determine behavior of prop when interacting with it
     if (Active)
     {
         if (Type == PropType::GRASS)
@@ -140,6 +143,10 @@ void Prop::Tick(float DeltaTime, Background& Map)
             }
 
             Talking = true;
+        }
+        else if (Type == PropType::ALTAR)
+        {
+            Opened = true;   
         }
     }
     else {
@@ -233,6 +240,17 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
 
     switch (Type)
     {
+        case PropType::ALTAR:
+        {
+            return Rectangle
+            {
+                ScreenPos.x,
+                ScreenPos.y,
+                Object.Texture.width * Scale,
+                Object.Texture.height * Scale
+            };
+            break;
+        }
         case PropType::TREE:
         {
             return Rectangle
@@ -546,6 +564,17 @@ Rectangle Prop::GetInteractRec(Vector2 CharacterWorldPos)
                 (Object.Texture.height * Scale) + (Object.Texture.height * Scale)
             };
         }
+        case PropType::ALTAR:
+        {
+            return Rectangle
+            {
+                ScreenPos.x - (Object.Texture.width * Scale) * .10f,
+                ScreenPos.y - (Object.Texture.height * Scale) * .10f,
+                (Object.Texture.width * Scale) + (Object.Texture.width * Scale) * .20f,
+                (Object.Texture.height * Scale) + (Object.Texture.height * Scale) * .20f
+            };
+            break;
+        }
         default:
         {
             return Rectangle
@@ -614,7 +643,7 @@ void Prop::DrawSpeech()
     {
         DrawText("", 510, 550, 20, WHITE);
         DrawText("", 510, 575, 20, WHITE);
-        DrawText(TextFormat("You have received: %s!", ItemName.c_str()), 503, 625, 20, WHITE);
+        DrawText(TextFormat("Received: %s!", ItemName.c_str()), 503, 625, 20, WHITE);
         DrawText("", 510, 625, 20, WHITE);
         DrawText("", 510, 650, 20, WHITE);
         DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
