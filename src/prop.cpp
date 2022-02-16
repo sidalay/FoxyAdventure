@@ -129,6 +129,14 @@ void Prop::Tick(float DeltaTime, Background& Map)
                 Opening = true;
                 RunningTime = 0.f; 
             }
+
+            for (auto& Piece:AltarPieces)
+            {
+                if (std::get<0>(Piece) == ItemName)
+                {
+                    std::get<1>(Piece) = true;
+                }
+            }
         }
         else if (Type == PropType::DOOR)
         {
@@ -146,6 +154,10 @@ void Prop::Tick(float DeltaTime, Background& Map)
         }
         else if (Type == PropType::ALTAR)
         {
+            for (auto& Piece:AltarPieces)
+            {
+                
+            }
             Opened = true;   
         }
     }
@@ -178,7 +190,11 @@ void Prop::Draw(Vector2 CharacterWorldPos)
             (WorldPos.y >= (CharacterWorldPos.y + 335) - (GetScreenHeight()/2 + (Object.Texture.height * Scale))) && 
             (WorldPos.y <= (CharacterWorldPos.y + 335) + (GetScreenHeight()/2 + (Object.Texture.height * Scale))))
         {
+            // Draw the object
             DrawTexturePro(Object.Texture, Object.GetSourceRec(), Object.GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
+
+            // Draw the animated altar piece
+            
         }
         else
         {   

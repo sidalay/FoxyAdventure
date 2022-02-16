@@ -5,6 +5,7 @@
 #include <raymath.h>
 #include <vector>
 #include <string>
+#include <tuple>
 #include "headers/sprite.hpp"
 #include "headers/background.hpp"
 
@@ -75,6 +76,9 @@ private:
     float ItemScale{};
     Vector2 ItemPos{};
     float RunningTime{};
+    static inline std::vector<std::tuple<std::string, bool, bool>> AltarPieces{{"Top Left Altar Piece", false, false}, {"Top Altar Piece", false, false}, 
+                                                                               {"Top Right Altar Piece", false, false}, {"Bottom Left Altar Piece", false, false},
+                                                                               {"Bottom Altar Piece", false, false}, {"Bottom Right Altar Piece", false, false}}; 
 
 public:
     Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
