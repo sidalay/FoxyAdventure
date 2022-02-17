@@ -214,7 +214,10 @@ std::vector<std::vector<Prop>> Game::InitializePropsUnder()
 {
     std::vector<std::vector<Prop>> Props{};
 
-    // Placeholder prop to allow "!" to turn off. Need to figure out a better solution to this later.
+    /*  Placeholder prop to allow "!" to turn off. Need to figure out a better solution to this later.
+        Removing Placeholder will make "!" keep showing even if you walk out of an interactable range.
+        It will also introduce many bugs such as getting permanantly stuck in place if space is pressed when not in an interactable range.
+    */
     std::vector<Prop> Placeholder
     {
         Prop{"", Vector2{0,0}, PropType::PLACEHOLDER, 4.f, false, true}
@@ -229,17 +232,11 @@ std::vector<std::vector<Prop>> Game::InitializePropsUnder()
     };
     Props.emplace_back(DungeonEntrance);
 
-    std::vector<Prop> Altar
-    {
-        // Prop{"sprites/props/AltarDormant.png", Vector2{700,1025}, PropType::ALTAR, 4.f, false, true},
-        // Prop{"sprites/props/AltarTopLeft.png", Vector2{700,1025}, PropType::ALTAR, 4.f, false, true},
-        // Prop{"sprites/props/AltarTop.png", Vector2{764,1025}, PropType::ALTAR, 4.f, false, true},
-        // Prop{"sprites/props/AltarTopRight.png", Vector2{828,1025}, PropType::ALTAR, 4.f, false, true},
-        // Prop{"sprites/props/AltarBotLeft.png", Vector2{700,1089}, PropType::ALTAR, 4.f, false, true},
-        // Prop{"sprites/props/AltarBot.png", Vector2{764,1089}, PropType::ALTAR, 4.f, false, true},
-        // Prop{"sprites/props/AltarBotRight.png", Vector2{828,1089}, PropType::ALTAR, 4.f, false, true},
-    };
-    Props.emplace_back(Altar);
+    // std::vector<Prop> Altar
+    // {
+    //     Prop{"sprites/props/AltarDormant.png", Vector2{700,1025}, PropType::ALTAR, 4.f, false, true},
+    // };
+    // Props.emplace_back(Altar);
 
     std::vector<Prop> Grass
     {   
