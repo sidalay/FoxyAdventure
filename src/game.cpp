@@ -21,9 +21,9 @@ void Game::Run()
                        Sprite{"sprites/characters/Fox_melee.png", 4, 4},
                        Sprite{"sprites/characters/Fox_hit.png", 2, 4}, 
                        Sprite{"sprites/characters/Fox_die.png", 1, 4},
-                       Sprite{"sprites/characters/Fox_push.png", 4, 4},
+                       Sprite{"sprites/characters/Sorcerer_push.png", 4, 4},
                        Sprite{"sprites/characters/Fox_sleeping.png", 4, 1}, 
-                       Sprite{"sprites/characters/Fox_itemGot.png", 1, 4},
+                       Sprite{"sprites/characters/Sorcerer_itemGot.png", 1, 4},
                        &Window, &MapBG};
 
     // Initialize Enemies
@@ -169,9 +169,9 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, s
         for (auto& Prop:PropType)
         {
             Prop.Draw(Character.GetWorldPos());
-            // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, BLUE);
-            if (Prop.IsInteractable())
-                DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,Prop.GetInteractRec(Character.GetWorldPos()).y,Prop.GetInteractRec(Character.GetWorldPos()).width,Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
+            // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, CLITERAL(Color){ 0, 121, 241, 150 });
+            // if (Prop.IsInteractable())
+            //     DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,Prop.GetInteractRec(Character.GetWorldPos()).y,Prop.GetInteractRec(Character.GetWorldPos()).width,Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
         }
 
     // DrawRectangle(Character.GetCollisionRec().x,Character.GetCollisionRec().y,Character.GetCollisionRec().width,Character.GetCollisionRec().height, RED);
@@ -185,13 +185,13 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, s
     // for (auto& NPC:NPCS)
     //     NPC.Draw(Character.GetWorldPos());
     
-    for (auto& PropType:*Props.Over)
+    for (auto& PropType:*Props.Over) 
         for (auto& Prop:PropType)
         {
             Prop.Draw(Character.GetWorldPos());
             // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, PURPLE);
-            if (Prop.IsInteractable())
-                DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,Prop.GetInteractRec(Character.GetWorldPos()).y,Prop.GetInteractRec(Character.GetWorldPos()).width,Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
+            // if (Prop.IsInteractable())
+            //     DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,Prop.GetInteractRec(Character.GetWorldPos()).y,Prop.GetInteractRec(Character.GetWorldPos()).width,Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
         }
 
     // Draw ! when within an interactable entity
@@ -231,7 +231,7 @@ std::vector<std::vector<Prop>> Game::InitializePropsUnder()
 
     std::vector<Prop> Altar
     {
-        Prop{"sprites/props/AltarDormant.png", Vector2{700,1025}, PropType::ALTAR, 4.f, false, true},
+        // Prop{"sprites/props/AltarDormant.png", Vector2{700,1025}, PropType::ALTAR, 4.f, false, true},
         // Prop{"sprites/props/AltarTopLeft.png", Vector2{700,1025}, PropType::ALTAR, 4.f, false, true},
         // Prop{"sprites/props/AltarTop.png", Vector2{764,1025}, PropType::ALTAR, 4.f, false, true},
         // Prop{"sprites/props/AltarTopRight.png", Vector2{828,1025}, PropType::ALTAR, 4.f, false, true},
@@ -3679,7 +3679,7 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
 
     std::vector<Prop> Treasure
     {
-        Prop{Sprite{"sprites/props/TreasureChestBig.png", 4, 1, 1.f/4.f}, Vector2{2050,3350}, PropType::TREASURE, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/TreasureHeart.png")}, "Life Stone", 4.f},
+        Prop{Sprite{"sprites/props/TreasureChestBig.png", 4, 1, 1.f/4.f}, Vector2{2198,1677}, PropType::BIGTREASURE, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/TreasureHeart.png")}, "Life Stone", 4.f},
         Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3350}, PropType::TREASURE, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarTopRight.png")}, "Top Right Altar Piece"},
         Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{2250,3150}, PropType::TREASURE, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarTop.png")}, "Top Altar Piece"},
         Prop{Sprite{"sprites/props/TreasureChest.png", 4, 1, 1.f/4.f}, Vector2{130,210}, PropType::TREASURE, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarTopLeft.png")}, "Top Left Altar Piece"},
@@ -3698,6 +3698,17 @@ std::vector<std::vector<Prop>> Game::InitializePropsOver()
         Prop{Sprite{"sprites/npc/Son.png", 4, 1, 1.f/8.f}, Vector2{1240, 2036}, PropType::NPC_C, 3.f, false, true, Progress::ACT_II, PropType::NPC_B},
     };
     Props.emplace_back(NPCS);
+
+    std::vector<Prop> AnimatedAltarPieces
+    {
+        Prop{Sprite{"sprites/props/AltarTopLeftAnimated.png", 14, 1, 1/14.f}, Vector2{700,1025}, PropType::ANIMATEDALTAR, "Top Left Altar Piece", true, true},
+        Prop{Sprite{"sprites/props/AltarTopAnimated.png", 14, 1, 1/14.f}, Vector2{764,1025}, PropType::ANIMATEDALTAR, "Top Altar Piece", true, true},
+        Prop{Sprite{"sprites/props/AltarTopRightAnimated.png", 14, 1, 1/14.f}, Vector2{828,1025}, PropType::ANIMATEDALTAR, "Top Right Altar Piece", true, true},
+        Prop{Sprite{"sprites/props/AltarBotLeftAnimated.png", 14, 1, 1/14.f}, Vector2{700,1089}, PropType::ANIMATEDALTAR, "Bottom Left Altar Piece", true, true},
+        Prop{Sprite{"sprites/props/AltarBotAnimated.png", 14, 1, 1/14.f}, Vector2{764,1089}, PropType::ANIMATEDALTAR, "Bottom Altar Piece", true, true},
+        Prop{Sprite{"sprites/props/AltarBotRightAnimated.png", 14, 1, 1/14.f}, Vector2{828,1089}, PropType::ANIMATEDALTAR, "Bottom Right Altar Piece", true, true},
+    };
+    Props.emplace_back(AnimatedAltarPieces);
     
     return Props;
 }

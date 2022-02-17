@@ -27,10 +27,18 @@ Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale, boo
         Type == PropType::NPC_A ||
         Type == PropType::NPC_B ||
         Type == PropType::NPC_C ||
-        Type == PropType::ALTAR)
+        Type == PropType::ALTAR ||
+        Type == PropType::BIGTREASURE)
     {
         Collidable = true;
     }
+}
+
+// Constructor for animated altar pieces
+Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, std::string ItemName, bool Visible, bool Interactable)
+    : Object{Object}, Type{Type}, WorldPos{Pos}, Interactable{Interactable}, Visible{Visible}, ItemName{ItemName} 
+{
+    Collidable = true;
 }
 
 // Constructor for animated props
@@ -62,12 +70,18 @@ Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Moveable
         Type == PropType::NPC_A ||
         Type == PropType::NPC_B ||
         Type == PropType::NPC_C ||
-        Type == PropType::ALTAR)
+        Type == PropType::ALTAR ||
+        Type == PropType::BIGTREASURE)
     {
         Collidable = true;
     }
 
-    if (Type == PropType::TREASURE)
+    if (Type == PropType::BIGTREASURE)
+    {
+        Visible = false;
+    }
+
+    if (Type == PropType::TREASURE || Type == PropType::BIGTREASURE)
     {
         if (ItemScale == 1.f)
             ItemPos.x = 24;
@@ -77,6 +91,10 @@ Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Moveable
             ItemPos.x = 8;
         else if (ItemScale == 4.f)
             ItemPos.x = 0;
+        else if (ItemScale == 5.f)
+            ItemPos.x = -8;
+        else if (ItemScale == 6.f)
+            ItemPos.x = -16;
         else 
             ItemPos.x = 0;
     }
@@ -101,6 +119,27 @@ void Prop::Tick(float DeltaTime, Background& Map)
         }
     }
 
+    // Tick through Altar piece sprite animation once inserted
+    if (Type == PropType::ANIMATEDALTAR)
+    {
+        for (auto& Piece:AltarPieces) 
+        {
+            if (ItemName == std::get<0>(Piece) && std::get<2>(Piece) == true)
+            {
+                Object.Tick(DeltaTime);
+            }
+        }
+    }
+
+    // Turn visibility on for BigTreasure when all 6 pieces have been inserted
+    if (Type == PropType::BIGTREASURE)
+    {
+        if (PiecesAdded >= 6)
+        {
+            Visible = true;
+        }
+    }
+
     // determine behavior of prop when interacting with it
     if (Active)
     {
@@ -108,7 +147,7 @@ void Prop::Tick(float DeltaTime, Background& Map)
         {
             Object.Tick(DeltaTime);
         }
-        else if (Type == PropType::TREASURE)
+        else if (Type == PropType::TREASURE || Type == PropType::BIGTREASURE)
         {
             if (TriggerAct != Progress::ACT_O) 
             {
@@ -152,12 +191,27 @@ void Prop::Tick(float DeltaTime, Background& Map)
 
             Talking = true;
         }
-        else if (Type == PropType::ALTAR)
-        {
+        else if (Type == PropType::ANIMATEDALTAR)
+        {   
             for (auto& Piece:AltarPieces)
             {
-                
+                if (std::get<1>(Piece) == true)
+                {
+                    std::get<2>(Piece) = true;
+                    InsertPiece = true;
+                }
+                if (std::get<2>(Piece) == true && std::get<3>(Piece) == false)
+                {
+                    std::get<3>(Piece) = true;
+                    PiecesAdded++;
+                } 
             }
+            
+            if (PiecesAdded >= 6)
+            {
+                FinalChest = true;
+            }
+
             Opened = true;   
         }
     }
@@ -190,11 +244,34 @@ void Prop::Draw(Vector2 CharacterWorldPos)
             (WorldPos.y >= (CharacterWorldPos.y + 335) - (GetScreenHeight()/2 + (Object.Texture.height * Scale))) && 
             (WorldPos.y <= (CharacterWorldPos.y + 335) + (GetScreenHeight()/2 + (Object.Texture.height * Scale))))
         {
+            // Only draw final chest if conditions are met
+            if (Type == PropType::BIGTREASURE)
+            {
+                if (FinalChest) 
+                {
+                    DrawTexturePro(Object.Texture, Object.GetSourceRec(), Object.GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
+                }
+            }
             // Draw the object
-            DrawTexturePro(Object.Texture, Object.GetSourceRec(), Object.GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
+            else 
+            {
+                DrawTexturePro(Object.Texture, Object.GetSourceRec(), Object.GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
+            }
 
             // Draw the animated altar piece
-            
+            if (Type == PropType::ANIMATEDALTAR)
+            {
+                for (auto& Piece:AltarPieces)
+                {
+                    if (std::get<2>(Piece) == true)
+                    {
+                        if (std::get<0>(Piece) == ItemName)
+                        {
+                            DrawTextureEx(Object.Texture, WorldPos, 0.f, Scale, WHITE);
+                        }
+                    }
+                }
+            }
         }
         else
         {   
@@ -247,6 +324,13 @@ void Prop::Draw(Vector2 CharacterWorldPos)
         }
     }
 
+    // Altar Pieces Inserted
+    if (InsertPiece)
+    {
+        DrawTextureEx(SpeechBox, Vector2{472,574}, 0.f, 8.f, WHITE);
+        DrawSpeech();
+    }
+
     // CheckActivity(ScreenPos);
 }
 
@@ -264,6 +348,17 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
                 ScreenPos.y,
                 Object.Texture.width * Scale,
                 Object.Texture.height * Scale
+            };
+            break;
+        }
+        case PropType::ANIMATEDALTAR:
+        {
+            return Rectangle
+            {
+                ScreenPos.x,
+                ScreenPos.y,
+                (Object.Texture.width * Scale) / Object.MaxFramesX,
+                (Object.Texture.height * Scale) / Object.MaxFramesY
             };
             break;
         }
@@ -480,6 +575,16 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
                 Object.Texture.height * Scale - (Object.Texture.height * Scale) * .10f
             };
         }
+        case PropType::BIGTREASURE:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + (Object.Texture.width * Scale)/4.f * .10f,
+                ScreenPos.y + (Object.Texture.height * Scale) * .10f,
+                (Object.Texture.width * Scale)/4.f - (Object.Texture.width * Scale)/4.f * .10f,
+                Object.Texture.height * Scale - (Object.Texture.height * Scale) * .10f
+            };
+        }
         case PropType::NPC_A:
         {
             return Rectangle
@@ -550,6 +655,17 @@ Rectangle Prop::GetInteractRec(Vector2 CharacterWorldPos)
             };
             break;
         }
+        case PropType::BIGTREASURE:
+        {
+            return Rectangle
+            {
+                ScreenPos.x - (Object.Texture.width * Scale)/4.f * .45f,
+                ScreenPos.y - (Object.Texture.height * Scale) * .45f,
+                (Object.Texture.width * Scale)/4.f + (Object.Texture.width * Scale)/4.f,
+                (Object.Texture.height * Scale) + (Object.Texture.height * Scale)
+            };
+            break;
+        }
         case PropType::NPC_A:
         {
             return Rectangle
@@ -588,6 +704,17 @@ Rectangle Prop::GetInteractRec(Vector2 CharacterWorldPos)
                 ScreenPos.y - (Object.Texture.height * Scale) * .10f,
                 (Object.Texture.width * Scale) + (Object.Texture.width * Scale) * .20f,
                 (Object.Texture.height * Scale) + (Object.Texture.height * Scale) * .20f
+            };
+            break;
+        }
+        case PropType::ANIMATEDALTAR:
+        {
+            return Rectangle
+            {
+                ScreenPos.x - ((Object.Texture.width * Scale) / Object.MaxFramesX) * .10f,
+                ScreenPos.y - (Object.Texture.height * Scale) * .10f,
+                ((Object.Texture.width * Scale) / Object.MaxFramesX) + ((Object.Texture.width * Scale) / Object.MaxFramesX) * .20f,
+                ((Object.Texture.height * Scale) / Object.MaxFramesY) + ((Object.Texture.height * Scale) / Object.MaxFramesY) * .20f
             };
             break;
         }
@@ -659,7 +786,7 @@ void Prop::DrawSpeech()
     {
         DrawText("", 510, 550, 20, WHITE);
         DrawText("", 510, 575, 20, WHITE);
-        DrawText(TextFormat("Received: %s!", ItemName.c_str()), 503, 625, 20, WHITE);
+        DrawText(TextFormat("Received: %s!", ItemName.c_str()), 490, 625, 20, WHITE);
         DrawText("", 510, 625, 20, WHITE);
         DrawText("", 510, 650, 20, WHITE);
         DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
@@ -669,6 +796,51 @@ void Prop::DrawSpeech()
             ReceiveItem = false;
         }
     }
+    else if (Type == PropType::BIGTREASURE)
+    {
+        DrawText(TextFormat("Received: %s!", ItemName.c_str()), 510, 600, 20, WHITE);
+        DrawText("Diana is written on the bottom...", 510, 625, 20, WHITE);
+        DrawText("Bring it back to her!", 510, 650, 20, WHITE);
+        DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
+
+        if (IsKeyPressed(KEY_ENTER))
+        {
+            ReceiveItem = false;
+        }
+    }
+    else if (Type == PropType::ANIMATEDALTAR)
+    {
+        if (PiecesAdded <= 0) // This statement is not possible. DrawSpeech() isn't called until an Altar piece is inserted
+        {
+            DrawText("A mysterious altar...", 490, 600, 20, WHITE);
+            DrawText("You feel a strange power resonating", 490, 625, 20, WHITE);
+            DrawText("from the empty engravings...", 490, 650, 20, WHITE);
+            DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
+        }
+        else if (PiecesAdded > 0 && PiecesAdded < 6)
+        {
+            DrawText("", 510, 550, 20, WHITE);
+            DrawText("", 510, 575, 20, WHITE);
+            DrawText("Altar piece inserted!", 510, 625, 20, WHITE);
+            DrawText("", 510, 625, 20, WHITE);
+            DrawText("", 510, 650, 20, WHITE);
+            DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
+        }
+        else
+        {
+            DrawText("All pieces have been collected!", 490, 600, 20, WHITE);
+            DrawText("You hear sounds coming from", 490, 625, 20, WHITE);
+            DrawText("the middle of the forest...", 490, 650, 20, WHITE);
+            DrawText("", 510, 675, 20, WHITE);
+            DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
+        }
+
+        if (IsKeyPressed(KEY_ENTER))
+        {
+            InsertPiece = false;
+        }
+    }
+    // Manage NPC speech
     else
     {
         switch(Act)

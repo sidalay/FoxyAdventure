@@ -22,10 +22,12 @@ enum class PropType
     TOPWALL, LEFTSIDEWALL, RIGHTSIDEWALL, BOTTOMWALL, 
     BUSH, 
     STUMP, 
-    HOLE, 
+    HOLE,
     TREASURE,
+    BIGTREASURE, 
     DUNGEON, DUNGEONLEFT, DUNGEONRIGHT,
     ALTAR,
+    ANIMATEDALTAR,
     NPC_O,
     NPC_A,
     NPC_B,
@@ -76,15 +78,26 @@ private:
     float ItemScale{};
     Vector2 ItemPos{};
     float RunningTime{};
-    static inline std::vector<std::tuple<std::string, bool, bool>> AltarPieces{{"Top Left Altar Piece", false, false}, {"Top Altar Piece", false, false}, 
-                                                                               {"Top Right Altar Piece", false, false}, {"Bottom Left Altar Piece", false, false},
-                                                                               {"Bottom Altar Piece", false, false}, {"Bottom Right Altar Piece", false, false}}; 
+
+    // {"ItemName", ItemUnlocked, ItemVisible, ItemInserted}
+    static inline std::vector<std::tuple<std::string, bool, bool, bool>> AltarPieces {
+            {"Top Left Altar Piece", false, false, false}, 
+            {"Top Altar Piece", false, false, false}, 
+            {"Top Right Altar Piece", false, false, false}, 
+            {"Bottom Left Altar Piece", false, false, false},
+            {"Bottom Altar Piece", false, false, false}, 
+            {"Bottom Right Altar Piece", false, false, false}
+    };
+    static inline int PiecesAdded{0};
+    static inline bool FinalChest{false};                                                               
+    bool InsertPiece{false};   
 
 public:
     Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
+    Prop(Sprite Object, Vector2 Pos, PropType Type, std::string ItemName = "None", bool Visible = false, bool Interactable = false);           
     Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false, 
          Progress Act = Progress::ACT_O, PropType NPC = PropType::NPC_O, Texture2D Item = LoadTexture("sprites/props/Heart.png"), 
-         std::string ItemName = "None", float ItemScale = 2.f);           
+         std::string ItemName = "None", float ItemScale = 2.f);
     
     void Tick(float DeltaTime, Background& Map);
     void Draw(Vector2 CharacterWorldPos);
