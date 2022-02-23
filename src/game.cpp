@@ -28,20 +28,14 @@ void Game::Run()
 
     // Initialize Enemies
     std::vector<Enemy> Enemies{};
-    // Enemy BrownBear{Sprite{"sprites/enemies/BrownBear_Idle.png", 4, 4},
-    //                 Sprite{"sprites/enemies/BrownBear_Walk.png", 4, 4},
-    //                 Sprite{"sprites/enemies/BrownBear_Attack.png", 4, 4},
-    //                 Sprite{"sprites/enemies/BrownBear_Hurt.png", 1, 4},
-    //                 Sprite{"sprites/enemies/BrownBear_Death.png", 4, 4},
-    //                 Vector2{1660, 3166}, &Window, &MapBG};
+    Enemy BrownBear{Sprite{"sprites/enemies/BrownBear_Idle.png", 4, 4},
+                    Sprite{"sprites/enemies/BrownBear_Walk.png", 4, 4},
+                    Sprite{"sprites/enemies/BrownBear_Attack.png", 4, 4},
+                    Sprite{"sprites/enemies/BrownBear_Hurt.png", 1, 4},
+                    Sprite{"sprites/enemies/BrownBear_Death.png", 4, 4},
+                    Vector2{1660, 3366}, &Window, &MapBG};
 
-    // Enemies.emplace_back(BrownBear);
-
-    // Initialize NPCS
-    std::vector<NPC> NPCS{};
-    // NPC Didi{Sprite{"sprites/npc/Didi.png", 4, 1, 1/8.f}, Vector2{3163, 2853}};
-
-    // NPCS.emplace_back(Didi);
+    Enemies.emplace_back(BrownBear);
 
     // Initialize HUD
     HUD Hud{};
@@ -54,7 +48,7 @@ void Game::Run()
     // Start Game Loop
     while (!WindowShouldClose()) 
     {
-        Game::Tick(Window, MapBG, Champion, Props, Hud, Enemies, NPCS);
+        Game::Tick(Window, MapBG, Champion, Props, Hud, Enemies);
     }
 
     // Clean-up
@@ -72,7 +66,7 @@ void Game::Initialize(Window& Window, int FPS, std::string Title)
     SetExitKey(0);
 }
 
-void Game::Tick(Window& Window, Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<NPC>& NPCS)
+void Game::Tick(Window& Window, Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies)
 {
     Game::CheckScreenSizing(Window);
 
@@ -81,8 +75,8 @@ void Game::Tick(Window& Window, Background& Map, Character& Character, Props& Pr
     ClearBackground(BLACK);
 
     // Tick & Draw Functions
-    Game::Update(Map, Character, Props, Enemies, NPCS);
-    Game::Draw(Map, Character, Props, Hud, Enemies, NPCS);
+    Game::Update(Map, Character, Props, Enemies);
+    Game::Draw(Map, Character, Props, Hud, Enemies);
 
     // END DRAWING
     EndDrawing();
@@ -125,7 +119,7 @@ void Game::SetFullScreen(Window& Window)
     }
 }
 
-void Game::Update(Background& Map, Character& Character, Props& Props, std::vector<Enemy>& Enemies, std::vector<NPC>& NPCS)
+void Game::Update(Background& Map, Character& Character, Props& Props, std::vector<Enemy>& Enemies)
 {
     // Create DeltaTime
     float DeltaTime{GetFrameTime()};
@@ -134,11 +128,8 @@ void Game::Update(Background& Map, Character& Character, Props& Props, std::vect
     Map.Tick(Character.GetWorldPos());
     Character.Tick(DeltaTime, Props);
 
-    // for (auto& Enemy:Enemies)
-    //     Enemy.Tick(DeltaTime, Props);
-
-    for (auto& NPC:NPCS)
-        NPC.Tick();
+    for (auto& Enemy:Enemies)
+        Enemy.Tick(DeltaTime, Props);
 
     for (auto& Proptype:*Props.Under)
         for (auto& Prop:Proptype)
@@ -161,7 +152,7 @@ void Game::Update(Background& Map, Character& Character, Props& Props, std::vect
         Character.SetSleep();
 }
 
-void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<NPC>& NPCS)
+void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies)
 {
     Map.Draw();
 
@@ -177,13 +168,10 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, s
     // DrawRectangle(Character.GetCollisionRec().x,Character.GetCollisionRec().y,Character.GetCollisionRec().width,Character.GetCollisionRec().height, RED);
     Character.Draw();
 
-    // for (auto& Enemy:Enemies)
-    // {
-    //     Enemy.Draw();
-    // }
-
-    // for (auto& NPC:NPCS)
-    //     NPC.Draw(Character.GetWorldPos());
+    for (auto& Enemy:Enemies)
+    {
+        Enemy.Draw(Character.GetWorldPos());
+    }
     
     for (auto& PropType:*Props.Over) 
         for (auto& Prop:PropType)

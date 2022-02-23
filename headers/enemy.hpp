@@ -31,7 +31,7 @@ private:
     Background* World{};
     
     int Health{10};
-    float Scale{1.5f};
+    float Scale{3.2f};
     float Speed{1.0f};
     float RunningTime{};
     bool Colliding{false};
@@ -50,7 +50,7 @@ public:
     ~Enemy();
 
     void Tick(float DeltaTime, Props& Props);
-    void Draw();
+    void Draw(Vector2 CharacterWorldPos);
     void SpriteTick(float DeltaTime);
     void CheckDirection();
     void CheckMovement(Props& Props);

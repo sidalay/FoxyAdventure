@@ -41,15 +41,21 @@ void Enemy::Tick(float DeltaTime, Props& Props)
 
     CheckMovement(Props);
 
-    CheckAttack(Props);
+    // CheckAttack(Props);
 
     UpdateSource();
 }
 
 // Draw character animation
-void Enemy::Draw()
+void Enemy::Draw(Vector2 CharacterWorldPos)
 {
-    DrawTexturePro(CurrentSprite->Texture, Source, Destination, Vector2{}, 0.f, WHITE);
+    Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)}; // Where the prop is drawn on the screen
+
+    if ((WorldPos.x >= (CharacterWorldPos.x + 615) - (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) && (WorldPos.x <= (CharacterWorldPos.x + 615) + (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) &&
+       (WorldPos.y >= (CharacterWorldPos.y + 335) - (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))) && (WorldPos.y <= (CharacterWorldPos.y + 335) + (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))))
+    {
+        DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
+    }
 }
 
 /* 
@@ -171,6 +177,7 @@ void Enemy::CheckAttack(Props& Props)
     else
     {
         CheckMovement(Props);
+        // CurrentSprite = &Idle;
     }
 
 }
