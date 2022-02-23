@@ -21,6 +21,7 @@ private:
     Texture2D FoxNervous{LoadTexture("sprites/portraits/Fox_Nervous.png")};
     Texture2D FoxSad{LoadTexture("sprites/portraits/Fox_Sad.png")};
     Texture2D FoxSleeping{LoadTexture("sprites/portraits/Fox_Sleeping.png")};
+    Texture2D FoxHurt{LoadTexture("sprites/portraits/Fox_Hurt.png")};
 
     float Scale{2.f};
 public:

@@ -34,6 +34,9 @@ void HUD::Draw(int Health, Emotion State)
         case Emotion::SLEEPING:
             Fox = FoxSleeping;
             break;
+        case Emotion::HURT:
+            Fox = FoxHurt;
+            break;
         default:
             Fox = FoxDefault;
             break;

@@ -22,7 +22,7 @@ private:
     Sprite* CurrentSprite{&Idle};
     std::vector<Sprite*> Sprites{};
 
-    Vector2 CharacterPos{};              // Where the character is on the screen
+    Vector2 EnemyPos{};                  // Where the character is on the screen
     Vector2 WorldPos{};                  // Where the character is in the world
     Vector2 PrevWorldPos{};
     Rectangle Source{};
@@ -33,9 +33,12 @@ private:
     int Health{10};
     float Scale{3.2f};
     float Speed{1.0f};
+    float Radius{25.f};                 
+    float Range{125.f};
     float RunningTime{};
     bool Colliding{false};
     bool Attacking{false};
+    bool Moving{false};
 
     Direction Face{Direction::DOWN};
 public:
@@ -49,20 +52,20 @@ public:
           Background* World);
     ~Enemy();
 
-    void Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos);
+    void Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos);
     void Draw(Vector2 HeroWorldPos);
     void SpriteTick(float DeltaTime);
     void CheckDirection();
-    void CheckMovement(Props& Props, Vector2 HeroWorldPos);
+    void CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos);
     void UndoMovement();
-    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, Vector2 HeroWorldPos);
-    void CheckAttack(Props& Props, Vector2 HeroWorldPos);
+    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, Vector2 HeroWorldPos, Vector2 HeroScreenPos);
+    void CheckAttack(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos);
     void UpdateSource();
 
     int GetHealth() {return Health;}
     Vector2 GetWorldPos() {return WorldPos;}
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}
-    Vector2 GetCharPos() {return CharacterPos;}
+    Vector2 GetCharPos() {return EnemyPos;}
     Rectangle GetCollisionRec(Vector2 HeroWorldPos);
 };
 

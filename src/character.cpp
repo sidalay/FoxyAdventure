@@ -38,7 +38,7 @@ Character::Character(Sprite Idle,
 Character::~Character()
 {
     // Unload all Textures when destructing Character
-    for (auto Sprite:Sprites)
+    for (auto& Sprite:Sprites)
     {
         UnloadTexture(Sprite->Texture);
     }
@@ -77,7 +77,7 @@ void Character::Draw()
 */
 void Character::SpriteTick(float DeltaTime)
 {
-    for (auto Sprite:Sprites)
+    for (auto& Sprite:Sprites)
     {
         Sprite->Tick(DeltaTime);
     }
@@ -176,13 +176,14 @@ void Character::UndoMovement()
     WorldPos = PrevWorldPos;
 }
 
-// Check if colliding with props
+// Check if colliding with props / npcs / enemies 
 void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, std::vector<Enemy>& Enemies)
 {
     DamageTime += GetFrameTime();
     float UpdateTime {3.f/1.f};
     float HurtUpdateTime{1.f};
-
+    
+    // Loop through all Props for collision
     for (auto& PropType:*Props) {
         for (auto& Prop:PropType) {
             if (Prop.HasCollision()) {
@@ -260,7 +261,8 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
             }
         }
     }
-
+    
+    // Loop through all Enemies for collision
     for (auto& Enemy:Enemies) {
         if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec(WorldPos))) {
             // How often the hurt animation should play
@@ -269,9 +271,13 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
             }
             // How often health should decrease when colliding into enemy
             if (DamageTime >= UpdateTime) {
+                Hurting = true;
                 Health -= 1;
                 DamageTime = 0.f;
             }
+        }
+        else {
+            Hurting = false;
         }
     }
 }
@@ -378,6 +384,8 @@ void Character::CheckEmotion()
 {
     if (Attacking)
         State = Emotion::ANGRY;
+    else if (Hurting)
+        State = Emotion::HURT;
     else if (Sleeping)
         State = Emotion::SLEEPING;
     else if (Health >= 9)

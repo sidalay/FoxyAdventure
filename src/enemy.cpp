@@ -17,6 +17,7 @@ Enemy::Enemy(Sprite Idle,
       Screen{Screen},
       World{World}
 {
+    // Fill vector<Sprite*> with Sprite objects to easily loop through and call Sprite::Tick()
     Sprites.emplace_back(&(this->Idle));
     Sprites.emplace_back(&(this->Walk));
     Sprites.emplace_back(&(this->Attack));
@@ -27,34 +28,30 @@ Enemy::Enemy(Sprite Idle,
 Enemy::~Enemy()
 {
     // Unload all Textures when destructing Character
-    for (auto Sprite:Sprites)
+    for (auto& Sprite:Sprites)
     {
         UnloadTexture(Sprite->Texture);
     }
 }
 
-void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos)
+void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos)
 {
     SpriteTick(DeltaTime);
 
     CheckDirection();
 
-    CheckMovement(Props, HeroWorldPos);
+    CheckMovement(Props, HeroWorldPos, HeroScreenPos);
 
-    // CheckAttack(Props);
-
-    UpdateSource();
+    // CheckAttack(Props, HeroScreenPos);
 }
 
 // Draw character animation
-void Enemy::Draw(Vector2 CharacterWorldPos)
+void Enemy::Draw(Vector2 HeroWorldPos)
 {
-    Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)}; // Where the prop is drawn on the screen
-
-    if ((WorldPos.x >= (CharacterWorldPos.x + 615) - (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) && (WorldPos.x <= (CharacterWorldPos.x + 615) + (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) &&
-       (WorldPos.y >= (CharacterWorldPos.y + 335) - (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))) && (WorldPos.y <= (CharacterWorldPos.y + 335) + (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))))
+    if ((WorldPos.x >= (HeroWorldPos.x + 615) - (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) && (WorldPos.x <= (HeroWorldPos.x + 615) + (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) &&
+       (WorldPos.y >= (HeroWorldPos.y + 335) - (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))) && (WorldPos.y <= (HeroWorldPos.y + 335) + (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))))
     {
-        DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
+        DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, WHITE);
     }
 }
 
@@ -64,7 +61,7 @@ void Enemy::Draw(Vector2 CharacterWorldPos)
 */
 void Enemy::SpriteTick(float DeltaTime)
 {
-    for (auto Sprite:Sprites)
+    for (auto& Sprite:Sprites)
     {
         Sprite->Tick(DeltaTime);
     }
@@ -96,22 +93,43 @@ void Enemy::CheckDirection()
 }
 
 // Check for movement input
-void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos)
+void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos)
 {
+    EnemyPos = Vector2Subtract(WorldPos, HeroWorldPos); // Where the prop is drawn on the screen
+    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(HeroScreenPos, EnemyPos)), Speed)}; // Calculate the distance from Enemy to Player
+
+    // Only move enemy towards Player if within a certain range
+    if (Vector2Length(Vector2Subtract(HeroScreenPos, EnemyPos)) > Radius && Vector2Length(Vector2Subtract(HeroScreenPos, EnemyPos)) < Range)
+    {
+        WorldPos = Vector2Add(WorldPos, ToTarget);
+        Moving = true;
+        CurrentSprite = &Walk;
+    }
+
+    // if (Moving)
+    // {
+    //     CurrentSprite = &Walk;
+    // }
+    // else 
+    // {
+    //     Moving = false;
+    //     CurrentSprite = &Idle;
+    // }
+
     PrevWorldPos = WorldPos;
     Vector2 Direction{};
 
     // Undo Movement if walking out-of-bounds
-    if (WorldPos.x + CharacterPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f||
-        WorldPos.y + CharacterPos.y < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f||
-        WorldPos.x + (Screen->x - CharacterPos.x) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
-        WorldPos.y + (Screen->y - CharacterPos.y) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f)
+    if (WorldPos.x + EnemyPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
+        WorldPos.y + EnemyPos.y < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f ||
+        WorldPos.x + (Screen->x - EnemyPos.x) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
+        WorldPos.y + (Screen->y - EnemyPos.y) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f)
     {
         UndoMovement();
     }
 
-    CheckCollision(Props.Under, Direction, HeroWorldPos);
-    CheckCollision(Props.Over, Direction, HeroWorldPos);
+    CheckCollision(Props.Under, Direction, HeroWorldPos, HeroScreenPos);
+    CheckCollision(Props.Over, Direction, HeroWorldPos, HeroScreenPos);
 
 }
 
@@ -122,7 +140,7 @@ void Enemy::UndoMovement()
 }
 
 // Check if colliding with props
-void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, Vector2 HeroWorldPos)
+void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, Vector2 HeroWorldPos, Vector2 HeroScreenPos)
 {
     for (auto& PropType:*Props) {
         for (auto& Prop:PropType) {
@@ -152,7 +170,7 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direct
 }
 
 // manage attack sprites
-void Enemy::CheckAttack(Props& Props, Vector2 HeroWorldPos)
+void Enemy::CheckAttack(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos)
 {
     
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
@@ -170,19 +188,10 @@ void Enemy::CheckAttack(Props& Props, Vector2 HeroWorldPos)
     }
     else
     {
-        CheckMovement(Props, HeroWorldPos);
+        CheckMovement(Props, HeroWorldPos, HeroScreenPos);
         // CurrentSprite = &Idle;
     }
 
-}
-
-// Update which portion of the spritesheet is drawn
-void Enemy::UpdateSource()
-{
-    Source.x = CurrentSprite->FrameX * CurrentSprite->Texture.width / CurrentSprite->MaxFramesX;
-    Source.y = CurrentSprite->FrameY * CurrentSprite->Texture.height / CurrentSprite->MaxFramesY;
-    Source.width = CurrentSprite->Texture.width/CurrentSprite->MaxFramesX;
-    Source.height = CurrentSprite->Texture.height/CurrentSprite->MaxFramesY;
 }
 
 // Return character collision dimensions

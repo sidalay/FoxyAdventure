@@ -13,7 +13,7 @@
 
 enum class Emotion 
 {
-    DEFAULT, ANGRY, HAPPY, NERVOUS, SAD, SLEEPING
+    DEFAULT, ANGRY, HAPPY, NERVOUS, SAD, SLEEPING, HURT
 };
 
 class Character : public BaseCharacter
@@ -53,6 +53,7 @@ private:
     bool Sleeping{false};
     bool Interacting{false};
     bool Interactable{false};
+    bool Hurting{false};
     Emotion State{Emotion::DEFAULT};
     Direction Face{Direction::DOWN};
 

@@ -129,7 +129,7 @@ void Game::Update(Background& Map, Character& Character, Props& Props, std::vect
     Character.Tick(DeltaTime, Props, Enemies);
 
     for (auto& Enemy:Enemies)
-        Enemy.Tick(DeltaTime, Props, Character.GetWorldPos());
+        Enemy.Tick(DeltaTime, Props, Character.GetWorldPos(), Character.GetCharPos());
 
     for (auto& Proptype:*Props.Under)
         for (auto& Prop:Proptype)
@@ -192,6 +192,7 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, s
     // Debugging info
     DrawText(TextFormat("WorldPos.x: %i", (int)Character.GetWorldPos().x + 615), 20, 150, 20, WHITE);
     DrawText(TextFormat("WorldPos.y: %i", (int)Character.GetWorldPos().y + 335), 20, 170, 20, WHITE);
+    // DrawText(TextFormat("Velocity: %i", (int)Vector2Length(Vector2Subtract(Character.GetCharPos(), Enemies.at(0).GetCharPos()))), 20, 190, 20, WHITE);
     DrawFPS(20, 223);
 
     Map.DrawMiniMap(Character.GetWorldPos());
