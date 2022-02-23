@@ -44,7 +44,7 @@ Character::~Character()
     }
 }
 
-void Character::Tick(float DeltaTime, Props& Props)
+void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies)
 {
     UpdateCharacterPos();
 
@@ -52,11 +52,11 @@ void Character::Tick(float DeltaTime, Props& Props)
 
     CheckDirection();
 
-    CheckMovement(Props);
+    CheckMovement(Props, Enemies);
 
     WalkOrRun();
 
-    CheckAttack(Props);
+    CheckAttack(Props, Enemies);
 
     UpdateSource();
 
@@ -123,7 +123,7 @@ void Character::CheckDirection()
 }
 
 // Check for movement input
-void Character::CheckMovement(Props& Props)
+void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies)
 {
     PrevWorldPos = WorldPos;
     Vector2 Direction{};
@@ -165,8 +165,8 @@ void Character::CheckMovement(Props& Props)
 
     }
 
-    CheckCollision(Props.Under, Direction);
-    CheckCollision(Props.Over, Direction);
+    CheckCollision(Props.Under, Direction, Enemies);
+    CheckCollision(Props.Over, Direction, Enemies);
 
 }
 
@@ -177,8 +177,12 @@ void Character::UndoMovement()
 }
 
 // Check if colliding with props
-void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction)
+void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, std::vector<Enemy>& Enemies)
 {
+    DamageTime += GetFrameTime();
+    float UpdateTime {3.f/1.f};
+    float HurtUpdateTime{1.f};
+
     for (auto& PropType:*Props) {
         for (auto& Prop:PropType) {
             if (Prop.HasCollision()) {
@@ -256,6 +260,20 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
             }
         }
     }
+
+    for (auto& Enemy:Enemies) {
+        if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec(WorldPos))) {
+            // How often the hurt animation should play
+            if (DamageTime <= HurtUpdateTime) {
+                CurrentSprite = &Hurt;
+            }
+            // How often health should decrease when colliding into enemy
+            if (DamageTime >= UpdateTime) {
+                Health -= 1;
+                DamageTime = 0.f;
+            }
+        }
+    }
 }
 
 // Check if character is moving and change sprites if needed
@@ -309,7 +327,7 @@ void Character::WalkOrRun()
 }
 
 // manage attack sprites
-void Character::CheckAttack(Props& Props)
+void Character::CheckAttack(Props& Props, std::vector<Enemy>& Enemies)
 {
     
     if (!Locked)
@@ -331,7 +349,7 @@ void Character::CheckAttack(Props& Props)
     }
     else
     {
-        CheckMovement(Props);
+        CheckMovement(Props, Enemies);
     }
 
 }
@@ -348,7 +366,7 @@ void Character::CheckSleep()
 
         if (RunningTime >= UpdateTime) {
             if (Health < 10) {
-                SetHealth(1);
+                AddHealth(1);
                 RunningTime = 0.f;
             }
         }
@@ -404,7 +422,7 @@ Rectangle Character::GetCollisionRec()
 // -------------------------------------------------------- //
 
 // Debug Function
-void Character::SetHealth(int HP)
+void Character::AddHealth(int HP)
 {
     Health += HP;
 }

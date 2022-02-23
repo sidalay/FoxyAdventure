@@ -6,6 +6,7 @@
 #include <vector>
 #include "headers/prop.hpp"
 #include "headers/sprite.hpp"
+#include "headers/enemy.hpp"
 #include "headers/window.hpp"
 #include "headers/background.hpp"
 #include "headers/basecharacter.hpp"
@@ -43,6 +44,7 @@ private:
     float Scale{1.5f};
     float Speed{1.0f};
     float RunningTime{};
+    float DamageTime{};
     bool Colliding{false};
     bool Locked{false};
     bool Walking{false};
@@ -68,16 +70,16 @@ public:
               Background* World);
     ~Character();
     
-    void Tick(float DeltaTime, Props& Props);
+    void Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies);
     void Draw();
     void SpriteTick(float DeltaTime);
     void UpdateCharacterPos();
     void CheckDirection();
-    void CheckMovement(Props& Props);
+    void CheckMovement(Props& Props, std::vector<Enemy>& Enemies);
     void UndoMovement();
-    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction);
+    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, std::vector<Enemy>& Enemies);
     void WalkOrRun();
-    void CheckAttack(Props& Props);
+    void CheckAttack(Props& Props, std::vector<Enemy>& Enemies);
     void UpdateSource();
     void CheckSleep();
     void CheckEmotion();
@@ -93,7 +95,7 @@ public:
     Rectangle GetCollisionRec();
 
     // Debug function
-    void SetHealth(int HP);
+    void AddHealth(int HP);
 };
 
 #endif

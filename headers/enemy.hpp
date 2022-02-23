@@ -66,9 +66,4 @@ public:
     Rectangle GetCollisionRec(Vector2 HeroWorldPos);
 };
 
-struct Enemies
-{
-    std::vector<std::vector<Enemy>>* Enemies{};
-};
-
 #endif

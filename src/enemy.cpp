@@ -39,7 +39,7 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos)
 
     CheckDirection();
 
-    // CheckMovement(Props, HeroWorldPos);
+    CheckMovement(Props, HeroWorldPos);
 
     // CheckAttack(Props);
 
@@ -133,10 +133,6 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direct
                     
                     // manage pushable props
                     if (Prop.IsMoveable()) {
-                        if (Prop.GetType() == PropType::BOULDER || Prop.GetType() == PropType::STUMP) {
-                            Colliding = true;   
-                            UndoMovement();
-                        }
                         if (Prop.GetType() == PropType::GRASS) {
                             Prop.SetActive(true);
                         }
@@ -147,11 +143,9 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direct
                     }
                 }
                 else {
-                    Prop.SetActive(false);
+                    // This breaks the treasure chests when main character opens... 
+                    // Prop.SetActive(false);
                 }
-            }
-            else {
-                Colliding = false;
             }
         }
     }

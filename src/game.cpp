@@ -126,7 +126,7 @@ void Game::Update(Background& Map, Character& Character, Props& Props, std::vect
 
     // Call Ticks
     Map.Tick(Character.GetWorldPos());
-    Character.Tick(DeltaTime, Props);
+    Character.Tick(DeltaTime, Props, Enemies);
 
     for (auto& Enemy:Enemies)
         Enemy.Tick(DeltaTime, Props, Character.GetWorldPos());
@@ -142,11 +142,11 @@ void Game::Update(Background& Map, Character& Character, Props& Props, std::vect
     // Debugging --------------------------------------
     if (Character.GetHealth() < 10)
         if (IsKeyPressed(KEY_RIGHT_BRACKET))
-            Character.SetHealth(1);
+            Character.AddHealth(1);
 
     if (Character.GetHealth() > 0)
         if (IsKeyPressed(KEY_LEFT_BRACKET))
-            Character.SetHealth(-1);
+            Character.AddHealth(-1);
 
     if (IsKeyPressed(KEY_PAGE_DOWN))
         Character.SetSleep();
@@ -171,7 +171,7 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, s
     for (auto& Enemy:Enemies)
     {
         Enemy.Draw(Character.GetWorldPos());
-        DrawRectangle(Enemy.GetCollisionRec(Character.GetWorldPos()).x,Enemy.GetCollisionRec(Character.GetWorldPos()).y,Enemy.GetCollisionRec(Character.GetWorldPos()).width,Enemy.GetCollisionRec(Character.GetWorldPos()).height, CLITERAL(Color){ 230, 41, 55, 150 });
+        // DrawRectangle(Enemy.GetCollisionRec(Character.GetWorldPos()).x,Enemy.GetCollisionRec(Character.GetWorldPos()).y,Enemy.GetCollisionRec(Character.GetWorldPos()).width,Enemy.GetCollisionRec(Character.GetWorldPos()).height, CLITERAL(Color){ 230, 41, 55, 150 });
     }
     
     for (auto& PropType:*Props.Over) 
