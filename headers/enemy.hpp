@@ -49,21 +49,21 @@ public:
           Background* World);
     ~Enemy();
 
-    void Tick(float DeltaTime, Props& Props);
-    void Draw(Vector2 CharacterWorldPos);
+    void Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos);
+    void Draw(Vector2 HeroWorldPos);
     void SpriteTick(float DeltaTime);
     void CheckDirection();
-    void CheckMovement(Props& Props);
+    void CheckMovement(Props& Props, Vector2 HeroWorldPos);
     void UndoMovement();
-    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction);
-    void CheckAttack(Props& Props);
+    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, Vector2 HeroWorldPos);
+    void CheckAttack(Props& Props, Vector2 HeroWorldPos);
     void UpdateSource();
 
     int GetHealth() {return Health;}
     Vector2 GetWorldPos() {return WorldPos;}
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}
     Vector2 GetCharPos() {return CharacterPos;}
-    Rectangle GetCollisionRec();
+    Rectangle GetCollisionRec(Vector2 HeroWorldPos);
 };
 
 struct Enemies

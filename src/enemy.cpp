@@ -33,13 +33,13 @@ Enemy::~Enemy()
     }
 }
 
-void Enemy::Tick(float DeltaTime, Props& Props)
+void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos)
 {
     SpriteTick(DeltaTime);
 
     CheckDirection();
 
-    CheckMovement(Props);
+    // CheckMovement(Props, HeroWorldPos);
 
     // CheckAttack(Props);
 
@@ -96,7 +96,7 @@ void Enemy::CheckDirection()
 }
 
 // Check for movement input
-void Enemy::CheckMovement(Props& Props)
+void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos)
 {
     PrevWorldPos = WorldPos;
     Vector2 Direction{};
@@ -110,8 +110,8 @@ void Enemy::CheckMovement(Props& Props)
         UndoMovement();
     }
 
-    CheckCollision(Props.Under, Direction);
-    CheckCollision(Props.Over, Direction);
+    CheckCollision(Props.Under, Direction, HeroWorldPos);
+    CheckCollision(Props.Over, Direction, HeroWorldPos);
 
 }
 
@@ -122,14 +122,14 @@ void Enemy::UndoMovement()
 }
 
 // Check if colliding with props
-void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction)
+void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, Vector2 HeroWorldPos)
 {
     for (auto& PropType:*Props) {
         for (auto& Prop:PropType) {
             if (Prop.HasCollision()) {
                 
                 // check physical collision
-                if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos))) {   
+                if (CheckCollisionRecs(GetCollisionRec(HeroWorldPos), Prop.GetCollisionRec(WorldPos))) {   
                     
                     // manage pushable props
                     if (Prop.IsMoveable()) {
@@ -158,7 +158,7 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direct
 }
 
 // manage attack sprites
-void Enemy::CheckAttack(Props& Props)
+void Enemy::CheckAttack(Props& Props, Vector2 HeroWorldPos)
 {
     
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
@@ -176,7 +176,7 @@ void Enemy::CheckAttack(Props& Props)
     }
     else
     {
-        CheckMovement(Props);
+        CheckMovement(Props, HeroWorldPos);
         // CurrentSprite = &Idle;
     }
 
@@ -192,14 +192,17 @@ void Enemy::UpdateSource()
 }
 
 // Return character collision dimensions
-Rectangle Enemy::GetCollisionRec()
+Rectangle Enemy::GetCollisionRec(Vector2 HeroWorldPos)
 {
+    // This variable is needed for any object that is collidable with the Main Character
+    Vector2 ScreenPos {Vector2Subtract(WorldPos, HeroWorldPos)};
+
     return Rectangle 
     {
-        CharacterPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f,
-        CharacterPos.y + CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f,
-        ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
-        ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+        ScreenPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f,
+        ScreenPos.y + CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f,
+        (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale - ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .30f,
+        (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale - ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .25f
     };
 }
 

@@ -129,7 +129,7 @@ void Game::Update(Background& Map, Character& Character, Props& Props, std::vect
     Character.Tick(DeltaTime, Props);
 
     for (auto& Enemy:Enemies)
-        Enemy.Tick(DeltaTime, Props);
+        Enemy.Tick(DeltaTime, Props, Character.GetWorldPos());
 
     for (auto& Proptype:*Props.Under)
         for (auto& Prop:Proptype)
@@ -162,7 +162,7 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, s
             Prop.Draw(Character.GetWorldPos());
             // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, CLITERAL(Color){ 0, 121, 241, 150 });
             // if (Prop.IsInteractable())
-            //     DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,Prop.GetInteractRec(Character.GetWorldPos()).y,Prop.GetInteractRec(Character.GetWorldPos()).width,Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
+                // DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,Prop.GetInteractRec(Character.GetWorldPos()).y,Prop.GetInteractRec(Character.GetWorldPos()).width,Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
         }
 
     // DrawRectangle(Character.GetCollisionRec().x,Character.GetCollisionRec().y,Character.GetCollisionRec().width,Character.GetCollisionRec().height, RED);
@@ -171,6 +171,7 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, s
     for (auto& Enemy:Enemies)
     {
         Enemy.Draw(Character.GetWorldPos());
+        DrawRectangle(Enemy.GetCollisionRec(Character.GetWorldPos()).x,Enemy.GetCollisionRec(Character.GetWorldPos()).y,Enemy.GetCollisionRec(Character.GetWorldPos()).width,Enemy.GetCollisionRec(Character.GetWorldPos()).height, CLITERAL(Color){ 230, 41, 55, 150 });
     }
     
     for (auto& PropType:*Props.Over) 
