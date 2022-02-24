@@ -80,7 +80,7 @@ public:
     void UndoMovement();
     void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, std::vector<Enemy>& Enemies);
     void WalkOrRun();
-    void CheckAttack(Props& Props, std::vector<Enemy>& Enemies);
+    void CheckAttack();
     void UpdateSource();
     void CheckSleep();
     void CheckEmotion();

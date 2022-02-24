@@ -38,11 +38,14 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
 {
     SpriteTick(DeltaTime);
 
-    CheckDirection();
+    // CheckDirection();
 
     CheckMovement(Props, HeroWorldPos, HeroScreenPos);
+    
+    // WalkOrRun();
 
-    // CheckAttack(Props, HeroScreenPos);
+    CheckAttack();
+
 }
 
 // Draw character animation
@@ -96,28 +99,21 @@ void Enemy::CheckDirection()
 void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos)
 {
     EnemyPos = Vector2Subtract(WorldPos, HeroWorldPos); // Where the prop is drawn on the screen
-    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(HeroScreenPos, EnemyPos)), Speed)}; // Calculate the distance from Enemy to Player
+    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50,50}), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Player
 
     // Only move enemy towards Player if within a certain range
-    if (Vector2Length(Vector2Subtract(HeroScreenPos, EnemyPos)) > Radius && Vector2Length(Vector2Subtract(HeroScreenPos, EnemyPos)) < Range)
+    if (Vector2Length(Vector2Subtract(HeroScreenPos, EnemyPos)) < Radius || Vector2Length(Vector2Subtract(HeroScreenPos, EnemyPos)) > Range)
+    {
+        ToTarget = {0.f,0.f};
+        Moving = false;
+    }
+    else
     {
         WorldPos = Vector2Add(WorldPos, ToTarget);
         Moving = true;
-        CurrentSprite = &Walk;
     }
 
-    // if (Moving)
-    // {
-    //     CurrentSprite = &Walk;
-    // }
-    // else 
-    // {
-    //     Moving = false;
-    //     CurrentSprite = &Idle;
-    // }
-
     PrevWorldPos = WorldPos;
-    Vector2 Direction{};
 
     // Undo Movement if walking out-of-bounds
     if (WorldPos.x + EnemyPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
@@ -128,8 +124,8 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
         UndoMovement();
     }
 
-    CheckCollision(Props.Under, Direction, HeroWorldPos, HeroScreenPos);
-    CheckCollision(Props.Over, Direction, HeroWorldPos, HeroScreenPos);
+    // CheckCollision(Props.Under, HeroWorldPos, HeroScreenPos);
+    // CheckCollision(Props.Over, HeroWorldPos, HeroScreenPos);
 
 }
 
@@ -139,8 +135,31 @@ void Enemy::UndoMovement()
     WorldPos = PrevWorldPos;
 }
 
+// Check if Enemy is moving and change sprites if needed
+void Enemy::WalkOrRun()
+{
+    if (IsKeyDown(KEY_LEFT_SHIFT))
+    {
+        Speed = 1.6f;
+    }
+    else 
+    {
+        Speed = 1.4f;
+
+    }
+
+    if (Moving) 
+    {
+        CurrentSprite = &Walk;
+    }
+    else 
+    {
+        CurrentSprite = &Idle;
+    }
+}
+
 // Check if colliding with props
-void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, Vector2 HeroWorldPos, Vector2 HeroScreenPos)
+void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos)
 {
     for (auto& PropType:*Props) {
         for (auto& Prop:PropType) {
@@ -170,9 +189,8 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direct
 }
 
 // manage attack sprites
-void Enemy::CheckAttack(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos)
+void Enemy::CheckAttack()
 {
-    
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
     {
         Attacking = true;
@@ -186,24 +204,15 @@ void Enemy::CheckAttack(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPo
     {
         CurrentSprite = &Attack;
     }
-    else
-    {
-        CheckMovement(Props, HeroWorldPos, HeroScreenPos);
-        // CurrentSprite = &Idle;
-    }
-
 }
 
 // Return character collision dimensions
 Rectangle Enemy::GetCollisionRec(Vector2 HeroWorldPos)
 {
-    // This variable is needed for any object that is collidable with the Main Character
-    Vector2 ScreenPos {Vector2Subtract(WorldPos, HeroWorldPos)};
-
     return Rectangle 
     {
-        ScreenPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f,
-        ScreenPos.y + CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f,
+        EnemyPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f,
+        EnemyPos.y + CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f,
         (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale - ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .30f,
         (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale - ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .25f
     };

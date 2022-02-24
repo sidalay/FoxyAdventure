@@ -52,13 +52,13 @@ void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies)
 
     CheckDirection();
 
-    CheckMovement(Props, Enemies);
-
     WalkOrRun();
 
-    CheckAttack(Props, Enemies);
+    CheckAttack();
 
     UpdateSource();
+
+    CheckMovement(Props, Enemies);
 
     CheckEmotion();
 
@@ -292,7 +292,7 @@ void Character::WalkOrRun()
         if (Colliding)
             Speed = 0.9f;
         else 
-            Speed = 1.5f;
+            Speed = 2.5f;
     }
     else 
     {
@@ -301,7 +301,7 @@ void Character::WalkOrRun()
         if (Colliding)
             Speed = 0.4f;
         else
-            Speed = 1.0f;
+            Speed = 1.5f;
 
     }
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_A) || IsKeyDown(KEY_S) || IsKeyDown(KEY_D))
@@ -333,9 +333,8 @@ void Character::WalkOrRun()
 }
 
 // manage attack sprites
-void Character::CheckAttack(Props& Props, std::vector<Enemy>& Enemies)
+void Character::CheckAttack()
 {
-    
     if (!Locked)
     {
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
@@ -348,16 +347,15 @@ void Character::CheckAttack(Props& Props, std::vector<Enemy>& Enemies)
             Attacking = false;
         }
     }
+    else 
+    {
+        Attacking = false;
+    }
 
     if (Attacking)
     {
         CurrentSprite = &Attack;
     }
-    else
-    {
-        CheckMovement(Props, Enemies);
-    }
-
 }
 
 // manage sleep skill

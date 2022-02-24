@@ -32,9 +32,9 @@ private:
     
     int Health{10};
     float Scale{3.2f};
-    float Speed{1.0f};
+    float Speed{1.4f};
     float Radius{25.f};                 
-    float Range{125.f};
+    float Range{100.f};
     float RunningTime{};
     bool Colliding{false};
     bool Attacking{false};
@@ -57,9 +57,10 @@ public:
     void SpriteTick(float DeltaTime);
     void CheckDirection();
     void CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos);
+    void WalkOrRun();
     void UndoMovement();
-    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, Vector2 HeroWorldPos, Vector2 HeroScreenPos);
-    void CheckAttack(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos);
+    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos);
+    void CheckAttack();
     void UpdateSource();
 
     int GetHealth() {return Health;}
