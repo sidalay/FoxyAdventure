@@ -34,7 +34,7 @@ private:
     float Scale{3.2f};
     float Speed{1.4f};
     float Radius{25.f};                 
-    float Range{100.f};
+    float Range{150.f};
     float RunningTime{};
     bool Colliding{false};
     bool Attacking{false};

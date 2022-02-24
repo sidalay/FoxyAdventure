@@ -38,14 +38,13 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
 {
     SpriteTick(DeltaTime);
 
-    // CheckDirection();
+    CheckDirection();
 
     CheckMovement(Props, HeroWorldPos, HeroScreenPos);
     
-    // WalkOrRun();
+    WalkOrRun();
 
     CheckAttack();
-
 }
 
 // Draw character animation
@@ -102,7 +101,7 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
     Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50,50}), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Player
 
     // Only move enemy towards Player if within a certain range
-    if (Vector2Length(Vector2Subtract(HeroScreenPos, EnemyPos)) < Radius || Vector2Length(Vector2Subtract(HeroScreenPos, EnemyPos)) > Range)
+    if (Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, {50,0}), EnemyPos)) > Range)
     {
         ToTarget = {0.f,0.f};
         Moving = false;
@@ -126,7 +125,6 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
 
     // CheckCollision(Props.Under, HeroWorldPos, HeroScreenPos);
     // CheckCollision(Props.Over, HeroWorldPos, HeroScreenPos);
-
 }
 
 // Undo movement if walking out-of-bounds or colliding
@@ -150,11 +148,11 @@ void Enemy::WalkOrRun()
 
     if (Moving) 
     {
-        CurrentSprite = &Walk;
+        CurrentSprite = Sprites.at(1);
     }
     else 
     {
-        CurrentSprite = &Idle;
+        CurrentSprite = Sprites.at(0);
     }
 }
 
@@ -188,7 +186,7 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWo
     }
 }
 
-// manage attack sprites
+// Manage attack sprites
 void Enemy::CheckAttack()
 {
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
@@ -202,7 +200,7 @@ void Enemy::CheckAttack()
 
     if (Attacking)
     {
-        CurrentSprite = &Attack;
+        CurrentSprite = Sprites.at(2);
     }
 }
 
