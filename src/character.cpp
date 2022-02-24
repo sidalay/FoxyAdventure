@@ -63,6 +63,8 @@ void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies)
     CheckEmotion();
 
     CheckSleep();
+
+    IsAlive();
 }
 
 // Draw character animation
@@ -264,7 +266,7 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
     
     // Loop through all Enemies for collision
     for (auto& Enemy:Enemies) {
-        if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec(WorldPos))) {
+        if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
             // How often the hurt animation should play
             if (DamageTime <= HurtUpdateTime) {
                 CurrentSprite = &Hurt;
@@ -272,7 +274,9 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
             // How often health should decrease when colliding into enemy
             if (DamageTime >= UpdateTime) {
                 Hurting = true;
-                Health -= 1;
+                if (Health > 0) {
+                    Health -= 1;
+                }
                 DamageTime = 0.f;
             }
         }
@@ -380,7 +384,9 @@ void Character::CheckSleep()
 // manage character portraits 
 void Character::CheckEmotion()
 {
-    if (Attacking)
+    if (Health < 1)
+        State = Emotion::DEAD;
+    else if (Attacking)
         State = Emotion::ANGRY;
     else if (Hurting)
         State = Emotion::HURT;
@@ -392,7 +398,7 @@ void Character::CheckEmotion()
         State = Emotion::DEFAULT;
     else if (Health > 2 && Health <= 5)
         State = Emotion::NERVOUS;
-    else 
+    else if (Health > 0 && Health <= 2)
         State = Emotion::SAD;
 }
 
@@ -425,6 +431,21 @@ Rectangle Character::GetCollisionRec()
     };
 }
 
+// Check if Player is Alive and if not set dead sprite
+void Character::IsAlive()
+{
+    if (Health <= 0)
+    {
+        Locked = true;
+        Alive = false;
+        CurrentSprite = &Death;
+    }
+    else
+    {
+        Locked = false;
+        Alive = true;
+    }
+}
 // -------------------------------------------------------- //
 
 // Debug Function

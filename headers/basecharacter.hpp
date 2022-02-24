@@ -11,7 +11,7 @@ enum class Direction
 class BaseCharacter
 {
 protected:
-    bool alive{true};
+    bool Alive{true};
     int CurrentFrame{};
     int PreviousFrame{};
     int MaxFrames{4};

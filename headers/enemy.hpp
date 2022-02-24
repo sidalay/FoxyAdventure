@@ -59,7 +59,7 @@ public:
     void CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos);
     void WalkOrRun();
     void UndoMovement();
-    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos);
+    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroScreenPos);
     void CheckAttack();
     void UpdateSource();
 
@@ -67,7 +67,7 @@ public:
     Vector2 GetWorldPos() {return WorldPos;}
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}
     Vector2 GetCharPos() {return EnemyPos;}
-    Rectangle GetCollisionRec(Vector2 HeroWorldPos);
+    Rectangle GetCollisionRec();
 };
 
 #endif

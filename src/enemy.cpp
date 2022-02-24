@@ -123,8 +123,8 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
         UndoMovement();
     }
 
-    // CheckCollision(Props.Under, HeroWorldPos, HeroScreenPos);
-    // CheckCollision(Props.Over, HeroWorldPos, HeroScreenPos);
+    CheckCollision(Props.Under, HeroScreenPos);
+    CheckCollision(Props.Over, HeroScreenPos);
 }
 
 // Undo movement if walking out-of-bounds or colliding
@@ -157,14 +157,14 @@ void Enemy::WalkOrRun()
 }
 
 // Check if colliding with props
-void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos)
+void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroScreenPos)
 {
     for (auto& PropType:*Props) {
         for (auto& Prop:PropType) {
             if (Prop.HasCollision()) {
                 
                 // check physical collision
-                if (CheckCollisionRecs(GetCollisionRec(HeroWorldPos), Prop.GetCollisionRec(WorldPos))) {   
+                if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos))) {   
                     
                     // manage pushable props
                     if (Prop.IsMoveable()) {
@@ -205,7 +205,7 @@ void Enemy::CheckAttack()
 }
 
 // Return character collision dimensions
-Rectangle Enemy::GetCollisionRec(Vector2 HeroWorldPos)
+Rectangle Enemy::GetCollisionRec()
 {
     return Rectangle 
     {

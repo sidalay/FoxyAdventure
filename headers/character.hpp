@@ -13,7 +13,7 @@
 
 enum class Emotion 
 {
-    DEFAULT, ANGRY, HAPPY, NERVOUS, SAD, SLEEPING, HURT
+    DEFAULT, ANGRY, HAPPY, NERVOUS, SAD, SLEEPING, HURT, DEAD
 };
 
 class Character : public BaseCharacter
@@ -84,6 +84,7 @@ public:
     void UpdateSource();
     void CheckSleep();
     void CheckEmotion();
+    void IsAlive();
     void SetSleep() {Sleeping = !Sleeping;}
     void DrawIndicator();
 

@@ -159,7 +159,7 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, s
     Map.Draw();
 
     for (auto& PropType:*Props.Under)
-        for (auto& Prop:PropType)
+        for (auto& Prop:PropType) {
             Prop.Draw(Character.GetWorldPos());
             // Draw Collision Squares
             // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,
@@ -171,6 +171,7 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, s
             //                   Prop.GetInteractRec(Character.GetWorldPos()).y,
             //                   Prop.GetInteractRec(Character.GetWorldPos()).width,
             //                   Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
+        }
 
     Character.Draw();
     // Draw Collision Squares
@@ -179,14 +180,15 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, s
     //               Character.GetCollisionRec().width,
     //               Character.GetCollisionRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
 
-    for (auto& Enemy:Enemies)
+    for (auto& Enemy:Enemies) {
         Enemy.Draw(Character.GetWorldPos());
         // Draw Collision Squares
-        // DrawRectangle(Enemy.GetCollisionRec(Character.GetWorldPos()).x,
-        //               Enemy.GetCollisionRec(Character.GetWorldPos()).y,
-        //               Enemy.GetCollisionRec(Character.GetWorldPos()).width,
-        //               Enemy.GetCollisionRec(Character.GetWorldPos()).height, CLITERAL(Color){ 230, 41, 55, 150 });
-    
+        // DrawRectangle(Enemy.GetCollisionRec().x,
+        //               Enemy.GetCollisionRec().y,
+        //               Enemy.GetCollisionRec().width,
+        //               Enemy.GetCollisionRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
+    }
+
     for (auto& PropType:*Props.Over) 
         for (auto& Prop:PropType)
             Prop.Draw(Character.GetWorldPos());
