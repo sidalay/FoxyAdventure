@@ -119,6 +119,7 @@ void Game::SetFullScreen(Window& Window)
     }
 }
 
+// Manage Ticks for all objects
 void Game::Update(Background& Map, Character& Character, Props& Props, std::vector<Enemy>& Enemies)
 {
     // Create DeltaTime
@@ -152,36 +153,54 @@ void Game::Update(Background& Map, Character& Character, Props& Props, std::vect
         Character.SetSleep();
 }
 
+// Call Draw functions for all objects
 void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies)
 {
     Map.Draw();
 
     for (auto& PropType:*Props.Under)
         for (auto& Prop:PropType)
-        {
             Prop.Draw(Character.GetWorldPos());
-            // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, CLITERAL(Color){ 0, 121, 241, 150 });
+            // Draw Collision Squares
+            // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,
+            //               Prop.GetCollisionRec(Character.GetWorldPos()).y,
+            //               Prop.GetCollisionRec(Character.GetWorldPos()).width,
+            //               Prop.GetCollisionRec(Character.GetWorldPos()).height, CLITERAL(Color){ 0, 121, 241, 150 });
             // if (Prop.IsInteractable())
-                // DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,Prop.GetInteractRec(Character.GetWorldPos()).y,Prop.GetInteractRec(Character.GetWorldPos()).width,Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
-        }
+            //     DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,
+            //                   Prop.GetInteractRec(Character.GetWorldPos()).y,
+            //                   Prop.GetInteractRec(Character.GetWorldPos()).width,
+            //                   Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
 
-    // DrawRectangle(Character.GetCollisionRec().x,Character.GetCollisionRec().y,Character.GetCollisionRec().width,Character.GetCollisionRec().height, RED);
     Character.Draw();
+    // Draw Collision Squares
+    // DrawRectangle(Character.GetCollisionRec().x,
+    //               Character.GetCollisionRec().y,
+    //               Character.GetCollisionRec().width,
+    //               Character.GetCollisionRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
 
     for (auto& Enemy:Enemies)
-    {
         Enemy.Draw(Character.GetWorldPos());
-        // DrawRectangle(Enemy.GetCollisionRec(Character.GetWorldPos()).x,Enemy.GetCollisionRec(Character.GetWorldPos()).y,Enemy.GetCollisionRec(Character.GetWorldPos()).width,Enemy.GetCollisionRec(Character.GetWorldPos()).height, CLITERAL(Color){ 230, 41, 55, 150 });
-    }
+        // Draw Collision Squares
+        // DrawRectangle(Enemy.GetCollisionRec(Character.GetWorldPos()).x,
+        //               Enemy.GetCollisionRec(Character.GetWorldPos()).y,
+        //               Enemy.GetCollisionRec(Character.GetWorldPos()).width,
+        //               Enemy.GetCollisionRec(Character.GetWorldPos()).height, CLITERAL(Color){ 230, 41, 55, 150 });
     
     for (auto& PropType:*Props.Over) 
         for (auto& Prop:PropType)
-        {
             Prop.Draw(Character.GetWorldPos());
-            // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,Prop.GetCollisionRec(Character.GetWorldPos()).y,Prop.GetCollisionRec(Character.GetWorldPos()).width,Prop.GetCollisionRec(Character.GetWorldPos()).height, PURPLE);
+            // Draw Collision Squares
+            // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,
+            //               Prop.GetCollisionRec(Character.GetWorldPos()).y,
+            //               Prop.GetCollisionRec(Character.GetWorldPos()).width,
+            //               Prop.GetCollisionRec(Character.GetWorldPos()).height, PURPLE);
             // if (Prop.IsInteractable())
-            //     DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,Prop.GetInteractRec(Character.GetWorldPos()).y,Prop.GetInteractRec(Character.GetWorldPos()).width,Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
-        }
+            //     DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,
+            //                   Prop.GetInteractRec(Character.GetWorldPos()).y,
+            //                   Prop.GetInteractRec(Character.GetWorldPos()).width,
+            //                   Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
+
 
     // Draw ! when within an interactable entity
     Character.DrawIndicator();
