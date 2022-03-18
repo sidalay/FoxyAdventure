@@ -95,6 +95,7 @@ public:
     Vector2 GetCharPos() {return CharacterPos;}
     Emotion GetEmotion() {return State;}
     Rectangle GetCollisionRec();
+    Rectangle GetAttackRec();
 
     // Debug function
     void AddHealth(int HP);

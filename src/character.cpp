@@ -266,6 +266,8 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
     
     // Loop through all Enemies for collision
     for (auto& Enemy:Enemies) {
+
+        // Check collision of Player against Enemy
         if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
             // How often the hurt animation should play
             if (DamageTime <= HurtUpdateTime) {
@@ -282,6 +284,13 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
         }
         else {
             Hurting = false;
+        }
+
+        // Check collision of Player's attack against Enemy
+        if (Attacking) {
+            if (CheckCollisionRecs(GetAttackRec(), Enemy.GetCollisionRec())) {
+
+            }
         }
     }
 }
@@ -339,7 +348,7 @@ void Character::WalkOrRun()
 // manage attack sprites
 void Character::CheckAttack()
 {
-    if (!Locked)
+    if (!Locked) 
     {
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
         {
@@ -429,6 +438,38 @@ Rectangle Character::GetCollisionRec()
         ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
         ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
     };
+}
+
+// Return attack collision rectangle
+Rectangle Character::GetAttackRec()
+{
+    switch (Face)
+    {
+        case Direction::DOWN:
+            return Rectangle
+            {
+                CharacterPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f,
+                CharacterPos.y + CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f,
+                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
+                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+            }; 
+        case Direction::LEFT: 
+            return Rectangle
+            {
+
+            }; 
+        case Direction::RIGHT:
+            return Rectangle
+            {
+
+            }; 
+        case Direction::UP:
+            return Rectangle
+            {
+
+            };  
+    }
+
 }
 
 // Check if Player is Alive and if not set dead sprite
