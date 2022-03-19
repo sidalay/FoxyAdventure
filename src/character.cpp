@@ -449,25 +449,39 @@ Rectangle Character::GetAttackRec()
             return Rectangle
             {
                 CharacterPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f,
-                CharacterPos.y + CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f,
+                CharacterPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f * 2),
                 ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
                 ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
             }; 
         case Direction::LEFT: 
             return Rectangle
             {
-
+                CharacterPos.x,
+                CharacterPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f),
+                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
+                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
             }; 
         case Direction::RIGHT:
             return Rectangle
             {
-
+                CharacterPos.x + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f * 2),
+                CharacterPos.y + CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f,
+                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
+                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
             }; 
         case Direction::UP:
             return Rectangle
             {
-
-            };  
+                CharacterPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f,
+                CharacterPos.y,
+                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
+                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+            };
+        default:
+            return Rectangle
+            {
+                
+            };
     }
 
 }
