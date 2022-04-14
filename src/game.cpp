@@ -174,20 +174,20 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, s
         }
 
     Character.Draw();
-    // Draw Collision Squares
+    // Draw Collision Squares ---------------------------------
     // DrawRectangle(Character.GetCollisionRec().x,
     //               Character.GetCollisionRec().y,
     //               Character.GetCollisionRec().width,
     //               Character.GetCollisionRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
     
-    // Draw Attack Rectangle
-    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
-    {
-        DrawRectangle(Character.GetAttackRec().x,
-                      Character.GetAttackRec().y,
-                      Character.GetAttackRec().width,
-                      Character.GetAttackRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
-    }
+    // Draw Attack Rectangle ----------------------------------
+    // if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
+    // {
+    //     DrawRectangle(Character.GetAttackRec().x,
+    //                   Character.GetAttackRec().y,
+    //                   Character.GetAttackRec().width,
+    //                   Character.GetAttackRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
+    // }
 
     for (auto& Enemy:Enemies) {
         Enemy.Draw(Character.GetWorldPos());

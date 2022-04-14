@@ -254,11 +254,12 @@ void Enemy::TakingDamage()
 // Handle death animation
 void Enemy::CheckAlive() 
 {
-    float EndTime{3.0f/8.0f};
+    float EndTime{3.5f/8.0f};
 
     if (Health <= 0) {
         IsAttacked = false;
 
+        // Set to death sprite
         CurrentSprite = Sprites.at(4);
 
         StopTime += GetFrameTime();
