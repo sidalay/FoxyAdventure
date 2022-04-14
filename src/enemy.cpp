@@ -36,24 +36,35 @@ Enemy::~Enemy()
 
 void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos)
 {
-    SpriteTick(DeltaTime);
+    if (Alive) {
+        SpriteTick(DeltaTime);
 
-    CheckDirection();
+        CheckDirection();
+        
+        WalkOrRun();
+
+        CheckAttack();
+
+        TakingDamage();
+
+        CheckAlive();
+    }
 
     CheckMovement(Props, HeroWorldPos, HeroScreenPos);
-    
-    WalkOrRun();
-
-    CheckAttack();
 }
 
 // Draw character animation
 void Enemy::Draw(Vector2 HeroWorldPos)
 {
     if ((WorldPos.x >= (HeroWorldPos.x + 615) - (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) && (WorldPos.x <= (HeroWorldPos.x + 615) + (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) &&
-       (WorldPos.y >= (HeroWorldPos.y + 335) - (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))) && (WorldPos.y <= (HeroWorldPos.y + 335) + (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))))
+        (WorldPos.y >= (HeroWorldPos.y + 335) - (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))) && (WorldPos.y <= (HeroWorldPos.y + 335) + (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))))
     {
-        DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, WHITE);
+        if (CurrentSprite == &Hurt) {
+            DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, RED);
+        }
+        else {
+            DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, WHITE);
+        }
     }
 }
 
@@ -100,16 +111,18 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
     EnemyPos = Vector2Subtract(WorldPos, HeroWorldPos); // Where the prop is drawn on the screen
     Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50,50}), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Player
 
-    // Only move enemy towards Player if within a certain range
-    if (Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, {50,0}), EnemyPos)) > Range)
-    {
-        ToTarget = {0.f,0.f};
-        Moving = false;
-    }
-    else
-    {
-        WorldPos = Vector2Add(WorldPos, ToTarget);
-        Moving = true;
+    if (!Stopped && Alive) {
+        // Only move enemy towards Player if within a certain range
+        if (Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, {50,0}), EnemyPos)) > Range)
+        {
+            ToTarget = {0.f,0.f};
+            Moving = false;
+        }
+        else
+        {
+            WorldPos = Vector2Add(WorldPos, ToTarget);
+            Moving = true;
+        }
     }
 
     PrevWorldPos = WorldPos;
@@ -201,6 +214,58 @@ void Enemy::CheckAttack()
     if (Attacking)
     {
         CurrentSprite = Sprites.at(2);
+    }
+}
+
+// Handle enemy taking damage
+void Enemy::TakingDamage()
+{
+    DamageTime += GetFrameTime();
+    float UpdateTime {1.3f/1.f};
+    float HurtUpdateTime{0.6f};
+
+    // if (PreviousSprite != &Hurt) {PreviousSprite = CurrentSprite;}
+
+    if (IsAttacked) {
+        // Make enemy unable to move
+        Stopped = true;
+
+        // Time between hurt animation showing
+        if (DamageTime <= HurtUpdateTime) {
+            CurrentSprite = &Hurt;
+        }
+
+        // This is where the enemy takes damage
+        if (DamageTime >= UpdateTime) {
+            if (Health > 0) {
+                Health -= 2;
+            }
+            DamageTime = 0.f;
+        }
+    }
+    else {
+        Stopped = false;
+    }
+    // else {
+    //     CurrentSprite = PreviousSprite;
+    // }
+}
+
+// Handle death animation
+void Enemy::CheckAlive() 
+{
+    float EndTime{3.0f/8.0f};
+
+    if (Health <= 0) {
+        IsAttacked = false;
+
+        CurrentSprite = Sprites.at(4);
+
+        StopTime += GetFrameTime();
+        
+        if (StopTime >= EndTime) {
+            Alive = false;
+        }
     }
 }
 

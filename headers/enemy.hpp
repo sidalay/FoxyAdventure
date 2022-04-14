@@ -20,6 +20,7 @@ private:
     Sprite Hurt{};
     Sprite Death{};
     Sprite* CurrentSprite{&Idle};
+    Sprite* PreviousSprite{};
     std::vector<Sprite*> Sprites{};
 
     Vector2 EnemyPos{};                  // Where the character is on the screen
@@ -36,9 +37,13 @@ private:
     float Radius{25.f};                 
     float Range{150.f};
     float RunningTime{};
+    float DamageTime{};
+    float StopTime{};
     bool Colliding{false};
     bool Attacking{false};
     bool Moving{false};
+    bool IsAttacked{false};
+    bool Stopped{false};            // Whether or not the enemy should be able to move
 
     Direction Face{Direction::DOWN};
 public:
@@ -62,7 +67,11 @@ public:
     void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroScreenPos);
     void CheckAttack();
     void UpdateSource();
+    void TakingDamage();
+    void Damaged(bool Attacked) {IsAttacked = Attacked;}
+    void CheckAlive();
 
+    bool IsAlive() {return Alive;}
     int GetHealth() {return Health;}
     Vector2 GetWorldPos() {return WorldPos;}
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}

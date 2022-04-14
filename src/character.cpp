@@ -267,29 +267,34 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
     // Loop through all Enemies for collision
     for (auto& Enemy:Enemies) {
 
-        // Check collision of Player against Enemy
-        if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
-            // How often the hurt animation should play
-            if (DamageTime <= HurtUpdateTime) {
-                CurrentSprite = &Hurt;
-            }
-            // How often health should decrease when colliding into enemy
-            if (DamageTime >= UpdateTime) {
-                Hurting = true;
-                if (Health > 0) {
-                    Health -= 1;
+        if (Enemy.IsAlive()) {
+            // Check collision of Player against Enemy
+            if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
+                // How often the hurt animation should play
+                if (DamageTime <= HurtUpdateTime) {
+                    CurrentSprite = &Hurt;
                 }
-                DamageTime = 0.f;
+                // How often health should decrease when colliding into enemy
+                if (DamageTime >= UpdateTime) {
+                    Hurting = true;
+                    if (Health > 0) {
+                        Health -= 1;
+                    }
+                    DamageTime = 0.f;
+                }
             }
-        }
-        else {
-            Hurting = false;
-        }
+            else {
+                Hurting = false;
+            }
 
-        // Check collision of Player's attack against Enemy
-        if (Attacking) {
-            if (CheckCollisionRecs(GetAttackRec(), Enemy.GetCollisionRec())) {
-
+            // Check collision of Player's attack against Enemy
+            if (Attacking) {
+                if (CheckCollisionRecs(GetAttackRec(), Enemy.GetCollisionRec())) {
+                    Enemy.Damaged(true);
+                }
+            }
+            else {
+                Enemy.Damaged(false);
             }
         }
     }
