@@ -111,7 +111,7 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
     EnemyPos = Vector2Subtract(WorldPos, HeroWorldPos); // Where the prop is drawn on the screen
     Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50,50}), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Player
 
-    if (!Stopped && Alive) {
+    if (!Stopped && Alive && !Invulnerable) {
         // Only move enemy towards Player if within a certain range
         if (Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, {50,0}), EnemyPos)) > Range)
         {
@@ -229,6 +229,11 @@ void Enemy::TakingDamage()
     if (IsAttacked) {
         // Make enemy unable to move
         Stopped = true;
+
+        // Make invulnerable when HP <= 0
+        if (Health <= 0) {
+            Invulnerable = true;
+        }
 
         // Time between hurt animation showing
         if (DamageTime <= HurtUpdateTime) {

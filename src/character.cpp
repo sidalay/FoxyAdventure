@@ -288,14 +288,19 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
             }
 
             // Check collision of Player's attack against Enemy
-            if (Attacking) {
-                if (CheckCollisionRecs(GetAttackRec(), Enemy.GetCollisionRec())) {
-                    Enemy.Damaged(true);
+            if (!Enemy.IsInvulnerable()) {
+                if (Attacking) {
+                    if (CheckCollisionRecs(GetAttackRec(), Enemy.GetCollisionRec())) {
+                        Enemy.Damaged(true);
+                    }
+                }
+                else {
+                    Enemy.Damaged(false);
                 }
             }
-            else {
-                Enemy.Damaged(false);
-            }
+        }
+        else {
+            Hurting = false;
         }
     }
 }
@@ -353,25 +358,20 @@ void Character::WalkOrRun()
 // manage attack sprites
 void Character::CheckAttack()
 {
-    if (!Locked) 
-    {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
-        {
+    if (!Locked) {
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE)) {
             Attacking = true;
             Sleeping = false;
         }
-        else
-        {
+        else {
             Attacking = false;
         }
     }
-    else 
-    {
+    else {
         Attacking = false;
     }
 
-    if (Attacking)
-    {
+    if (Attacking) {
         CurrentSprite = &Attack;
     }
 }

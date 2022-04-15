@@ -41,6 +41,7 @@ private:
     float StopTime{};
     bool Colliding{false};
     bool Attacking{false};
+    bool Invulnerable{false};
     bool Moving{false};
     bool IsAttacked{false};
     bool Stopped{false};            // Whether or not the enemy should be able to move
@@ -72,6 +73,7 @@ public:
     void CheckAlive();
 
     bool IsAlive() {return Alive;}
+    bool IsInvulnerable() {return Invulnerable;}
     int GetHealth() {return Health;}
     Vector2 GetWorldPos() {return WorldPos;}
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}
