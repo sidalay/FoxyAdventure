@@ -199,7 +199,7 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, s
     }
 
     for (auto& PropType:*Props.Over) 
-        for (auto& Prop:PropType)
+        for (auto& Prop:PropType) {
             Prop.Draw(Character.GetWorldPos());
             // Draw Collision Squares
             // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,
@@ -211,7 +211,7 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, s
             //                   Prop.GetInteractRec(Character.GetWorldPos()).y,
             //                   Prop.GetInteractRec(Character.GetWorldPos()).width,
             //                   Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
-
+        }
 
     // Draw ! when within an interactable entity
     Character.DrawIndicator();

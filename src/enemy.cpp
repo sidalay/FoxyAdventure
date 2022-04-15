@@ -37,6 +37,7 @@ Enemy::~Enemy()
 void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos)
 {
     if (Alive) {
+
         SpriteTick(DeltaTime);
 
         CheckDirection();
@@ -83,10 +84,10 @@ void Enemy::SpriteTick(float DeltaTime)
 // Check which orientation the character is facing
 void Enemy::CheckDirection()
 {
-    if (IsKeyDown(KEY_W)) Face = Direction::UP;
-    if (IsKeyDown(KEY_A)) Face = Direction::LEFT;
-    if (IsKeyDown(KEY_S)) Face = Direction::DOWN;
-    if (IsKeyDown(KEY_D)) Face = Direction::RIGHT;
+    if (AIY < 0) Face = Direction::UP;
+    if (AIX < 0) Face = Direction::LEFT;
+    if (AIY > 0) Face = Direction::DOWN;
+    if (AIX > 0) Face = Direction::RIGHT;
 
     switch (Face)
     {
@@ -108,24 +109,61 @@ void Enemy::CheckDirection()
 // Check for movement input
 void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos)
 {
-    EnemyPos = Vector2Subtract(WorldPos, HeroWorldPos); // Where the prop is drawn on the screen
+    PrevWorldPos = WorldPos;
+    EnemyPos = Vector2Subtract(WorldPos, HeroWorldPos); // Where the Enemy is drawn on the screen
     Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50,50}), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Player
-
+    
+    // Chase Player
     if (!Stopped && Alive && !Invulnerable) {
         // Only move enemy towards Player if within a certain range
-        if (Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, {50,0}), EnemyPos)) > Range)
-        {
+        if (Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, {50,0}), EnemyPos)) > Range) {
             ToTarget = {0.f,0.f};
-            Moving = false;
+            Chasing = false;
+            // AIY = 0.f;
         }
-        else
-        {
+        else {
             WorldPos = Vector2Add(WorldPos, ToTarget);
-            Moving = true;
+            Chasing = true;
+
+            // Make enemy face up / down depending on what direction its chasing
+            // if (ToTarget.y > 0) {
+            //     AIY = 1.f;
+            // }
+            // else if (ToTarget.y < 0) {
+            //     AIY = -1.f;
+            // }
         }
     }
 
-    PrevWorldPos = WorldPos;
+    // Enemy movement AI
+    if (!Chasing) {
+        Movement.x += AIX;
+        Movement.y += AIY;
+
+        float IdleTime{8.f};
+        WalkingTime += GetFrameTime();
+
+        if (WalkingTime <= IdleTime/2) {
+            Walking = true;
+            WorldPos.x += AIX;
+            WorldPos.y += AIY;
+        }
+        else if (WalkingTime >= IdleTime) {
+            WalkingTime = 0.0f;
+        }
+        else {
+            Walking = false;
+        }
+
+        if (Movement.x >= 80 || Movement.x <= -80) {
+            AIX = -AIX;
+        }
+        if (Movement.y >= 60 || Movement.y <= -60) {
+            AIY = -AIY;
+        }
+    }
+
+    // PrevWorldPos = WorldPos;
 
     // Undo Movement if walking out-of-bounds
     if (WorldPos.x + EnemyPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
@@ -136,14 +174,16 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
         UndoMovement();
     }
 
-    CheckCollision(Props.Under, HeroScreenPos);
-    CheckCollision(Props.Over, HeroScreenPos);
+    CheckCollision(Props.Under, HeroWorldPos);
+    CheckCollision(Props.Over, HeroWorldPos);
 }
 
 // Undo movement if walking out-of-bounds or colliding
 void Enemy::UndoMovement()
 {
     WorldPos = PrevWorldPos;
+    WorldPos.x += -0.1;
+    WorldPos.y += 0.1; 
 }
 
 // Check if Enemy is moving and change sprites if needed
@@ -159,7 +199,7 @@ void Enemy::WalkOrRun()
 
     }
 
-    if (Moving) 
+    if (Chasing || Walking) 
     {
         CurrentSprite = Sprites.at(1);
     }
@@ -170,29 +210,30 @@ void Enemy::WalkOrRun()
 }
 
 // Check if colliding with props
-void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroScreenPos)
+void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos)
 {
     for (auto& PropType:*Props) {
         for (auto& Prop:PropType) {
             if (Prop.HasCollision()) {
                 
                 // check physical collision
-                if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos))) {   
-                    
+                if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(HeroWorldPos))) {   
+
                     // manage pushable props
                     if (Prop.IsMoveable()) {
-                        if (Prop.GetType() == PropType::GRASS) {
+                        if (Prop.GetType() == PropType::BOULDER) {
+                            UndoMovement();
+                        }
+                        if (Prop.GetType() == PropType::GRASS && Alive) {
                             Prop.SetActive(true);
                         }
                     }
                     // if not pushable, block movement   
                     else {
-                        UndoMovement();
+                        if (Prop.IsVisible()) {
+                            UndoMovement();
+                        }
                     }
-                }
-                else {
-                    // This breaks the treasure chests when main character opens... 
-                    // Prop.SetActive(false);
                 }
             }
         }

@@ -26,6 +26,7 @@ private:
     Vector2 EnemyPos{};                  // Where the character is on the screen
     Vector2 WorldPos{};                  // Where the character is in the world
     Vector2 PrevWorldPos{};
+    Vector2 Movement{};
     Rectangle Source{};
     Rectangle Destination{};
     Window* Screen{};
@@ -39,10 +40,14 @@ private:
     float RunningTime{};
     float DamageTime{};
     float StopTime{};
+    float WalkingTime{};
+    float AIX{0.6};
+    float AIY{0.6};
     bool Colliding{false};
     bool Attacking{false};
     bool Invulnerable{false};
-    bool Moving{false};
+    bool Chasing{false};
+    bool Walking{false};
     bool IsAttacked{false};
     bool Stopped{false};            // Whether or not the enemy should be able to move
 
@@ -65,7 +70,7 @@ public:
     void CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos);
     void WalkOrRun();
     void UndoMovement();
-    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroScreenPos);
+    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos);
     void CheckAttack();
     void UpdateSource();
     void TakingDamage();

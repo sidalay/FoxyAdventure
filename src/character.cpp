@@ -130,28 +130,22 @@ void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies)
     PrevWorldPos = WorldPos;
     Vector2 Direction{};
 
-    if (!Locked) 
-    {
+    if (!Locked) {
 
-        if (IsKeyDown(KEY_W)) 
-        {
+        if (IsKeyDown(KEY_W)) {
             Direction.y -= Speed;
         }
-        if (IsKeyDown(KEY_A)) 
-        {
+        if (IsKeyDown(KEY_A)) {
             Direction.x -= Speed;
         }
-        if (IsKeyDown(KEY_S)) 
-        {
+        if (IsKeyDown(KEY_S)) {
             Direction.y += Speed;
         }
-        if (IsKeyDown(KEY_D)) 
-        {
+        if (IsKeyDown(KEY_D)) {
             Direction.x += Speed;
         }
 
-        if (Vector2Length(Direction) != 0.f)
-        {
+        if (Vector2Length(Direction) != 0.f) {
             // set MapPos -= Direction
             WorldPos = Vector2Add(WorldPos, Vector2Scale(Vector2Normalize(Direction), Speed));
         }
@@ -169,7 +163,6 @@ void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies)
 
     CheckCollision(Props.Under, Direction, Enemies);
     CheckCollision(Props.Over, Direction, Enemies);
-
 }
 
 // Undo movement if walking out-of-bounds or colliding
