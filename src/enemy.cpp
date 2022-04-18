@@ -336,3 +336,10 @@ Rectangle Enemy::GetCollisionRec()
     };
 }
 
+/* 
+    TODO: 
+        - figure out orientation when chasing
+        - fix undo movement
+        - bounce back when being attacked
+        - implement attack
+*/
