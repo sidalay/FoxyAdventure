@@ -150,13 +150,15 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
 
     // Chase Player
     if (!Stopped && Alive && !Invulnerable) {
+        float Aggro{Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, {50,50}), EnemyPos))};
+
         // Only move enemy towards Player if within a certain range
-        if (Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, {50,0}), EnemyPos)) > Range) {
+        if (Aggro > MaxRange) {
             ToTarget = {0.f,0.f};
             Chasing = false;
             // AIY = 0.f;
         }
-        else {
+        else if ((Aggro > MinRange) && (Aggro < MaxRange)) {
             WorldPos = Vector2Add(WorldPos, ToTarget);
             Chasing = true;
 
@@ -227,10 +229,12 @@ void Enemy::WalkOrRun()
     if (Chasing || Walking) 
     {
         CurrentSprite = Sprites.at(1);
+        // CurrentSprite = &Walk;
     }
     else 
     {
         CurrentSprite = Sprites.at(0);
+        // CurrentSprite = &Idle;
     }
 }
 
@@ -280,6 +284,7 @@ void Enemy::CheckAttack()
     if (Attacking)
     {
         CurrentSprite = Sprites.at(2);
+        // CurrentSprite = &Attack;
     }
 }
 
@@ -338,6 +343,7 @@ void Enemy::CheckAlive()
 
         // Set to death sprite
         CurrentSprite = Sprites.at(4);
+        // CurrentSprite = &Death;
 
         StopTime += GetFrameTime();
         
@@ -357,6 +363,15 @@ Rectangle Enemy::GetCollisionRec()
         (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale - ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .30f,
         (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale - ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .25f
     };
+}
+
+
+// -----------------------------------------
+
+Enemies::Enemies(std::vector<Enemy>* Monsters) 
+    : Monsters{Monsters}
+{
+
 }
 
 /* 

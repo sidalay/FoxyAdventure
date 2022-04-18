@@ -38,7 +38,8 @@ private:
     float Scale{3.2f};
     float Speed{1.4f};
     float Radius{25.f};                 
-    float Range{150.f};
+    float MaxRange{150.f};
+    float MinRange{60.f};
     float RunningTime{};
     float DamageTime{};
     float StopTime{};
@@ -89,6 +90,13 @@ public:
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}
     Vector2 GetCharPos() {return EnemyPos;}
     Rectangle GetCollisionRec();
+};
+
+struct Enemies
+{
+    std::vector<Enemy>* Monsters{};
+
+    Enemies(std::vector<Enemy>* Monsters);
 };
 
 #endif

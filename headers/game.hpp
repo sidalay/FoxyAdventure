@@ -29,6 +29,7 @@ namespace Game
 
     std::vector<std::vector<Prop>> InitializePropsUnder();
     std::vector<std::vector<Prop>> InitializePropsOver();
+    std::vector<Enemy> InitializeEnemies(Background& MapBG, Window& Window);
 }
 
 #endif
