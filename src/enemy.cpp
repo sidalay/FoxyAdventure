@@ -27,6 +27,7 @@ Enemy::Enemy(Sprite Idle,
     Sprites.emplace_back(&(this->Hurt));
     Sprites.emplace_back(&(this->Death));
 
+    // Static variable to count how many enemies on the field
     MonsterCount += 1;
 }
 
@@ -150,7 +151,8 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
 
     // Chase Player
     if (!Stopped && Alive && !Invulnerable) {
-        float Aggro{Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, {50,50}), EnemyPos))};
+        Vector2 RadiusAroundEnemy{50,50};
+        float Aggro{Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, RadiusAroundEnemy), EnemyPos))};
 
         // Only move enemy towards Player if within a certain range
         if (Aggro > MaxRange) {
@@ -376,7 +378,8 @@ Enemies::Enemies(std::vector<Enemy>* Monsters)
 
 /* 
     TODO: 
-        - figure out orientation when chasing
+        - figure out orientation when chasing   // FINISHED
+        - Add min range to enemy aggro          // FINISHED
         - fix undo movement
         - bounce back when being attacked
         - implement attack
