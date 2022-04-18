@@ -32,6 +32,8 @@ private:
     Window* Screen{};
     Background* World{};
     
+    static int MonsterDeaths;
+    static int MonsterCount;
     int Health{10};
     float Scale{3.2f};
     float Speed{1.4f};
@@ -50,6 +52,7 @@ private:
     bool Walking{false};
     bool IsAttacked{false};
     bool Stopped{false};            // Whether or not the enemy should be able to move
+    bool Dead{false};
 
     Direction Face{Direction::DOWN};
 public:
@@ -80,6 +83,8 @@ public:
     bool IsAlive() {return Alive;}
     bool IsInvulnerable() {return Invulnerable;}
     int GetHealth() {return Health;}
+    int GetMonstersKilled() {return MonsterDeaths;}
+    int GetTotalMonsters() {return MonsterCount;}
     Vector2 GetWorldPos() {return WorldPos;}
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}
     Vector2 GetCharPos() {return EnemyPos;}
