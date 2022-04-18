@@ -300,6 +300,26 @@ void Enemy::TakingDamage()
     // if (PreviousSprite != &Hurt) {PreviousSprite = CurrentSprite;}
 
     if (IsAttacked) {
+        
+        // Knock enemy back a few units while hurt
+        if (DamageTime <= HurtUpdateTime) {
+            switch (Face) 
+            {
+                case Direction::UP:
+                    WorldPos.y += 0.5f;
+                    break;
+                case Direction::DOWN:
+                    WorldPos.y -= 0.5f;
+                    break;
+                case Direction::LEFT:
+                    WorldPos.x += 0.5f;
+                    break;
+                case Direction::RIGHT:
+                    WorldPos.x -= 0.5f;
+                    break;
+            }
+        }
+
         // Make enemy unable to move
         Stopped = true;
 

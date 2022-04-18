@@ -45,6 +45,7 @@ private:
     float Speed{1.0f};
     float RunningTime{};
     float DamageTime{};
+    float AttackTime{};
     bool Colliding{false};
     bool Locked{false};
     bool Walking{false};

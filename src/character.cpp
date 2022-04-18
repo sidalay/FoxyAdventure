@@ -351,14 +351,29 @@ void Character::WalkOrRun()
 // manage attack sprites
 void Character::CheckAttack()
 {
+    AttackTime += GetFrameTime();
+    float AttackResetTime{1.0f};
+
     if (!Locked) {
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE)) {
-            Attacking = true;
-            Sleeping = false;
+            // Attack animation & damage window lasts 0.4 seconds
+            if (AttackTime < 0.4f) {
+                Attacking = true;
+                Sleeping = false;
+            }
+            // Reset window when reaching AttackResetTime
+            else if (AttackTime >= AttackResetTime) {
+                Attacking = false;
+                AttackTime = 0.0f;
+            }
+            // 0.6 cooldown before Attack Window opens up again
+            else {
+                Attacking = false;
+            }
         }
         else {
             Attacking = false;
-        }
+        }        
     }
     else {
         Attacking = false;
