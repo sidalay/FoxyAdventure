@@ -235,13 +235,17 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWo
         for (auto& Prop:PropType) {
             if (Prop.HasCollision()) {
                 
+                /*
+                    Undo movement wasn't working so implemented a reverse aggro logic. 
+                    When enemy gets within min aggro range of an obstacle it 'runs' away from it.
+                    Therefore it will never collide with a prop.
+                */
                 Vector2 PropScreenPos{Vector2Subtract(Prop.GetWorldPos(), HeroWorldPos)};
                 Vector2 RadiusAroundEnemy{5,5};
                 Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Prop
-
                 float AvoidProp{Vector2Length(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), EnemyPos))};
 
-                // if not pushable, block movement 
+                // move away from moveable objects 
                 if (Prop.IsMoveable()) {
                     if (Prop.GetType() == PropType::BOULDER) {
                         if (AvoidProp <= MinRange) {
@@ -249,18 +253,17 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWo
                         }
                     }
                 }
+                // move away from all other objects
                 else if (Prop.IsVisible()) {
                     if (AvoidProp <= MinRange) {
                         WorldPos = Vector2Subtract(WorldPos, ToTarget);
                     }
                 }
 
-                Rectangle EnemyCollision{GetCollisionRec()};
-
                 // check physical collision
-                if (CheckCollisionRecs(EnemyCollision, Prop.GetCollisionRec(HeroWorldPos))) {   
+                if (CheckCollisionRecs(this->GetCollisionRec(), Prop.GetCollisionRec(HeroWorldPos))) {   
 
-                    // manage pushable props
+                    // activate grass animation
                     if (Prop.IsMoveable()) {
                         if (Prop.GetType() == PropType::GRASS && Alive) {
                             Prop.SetActive(true);
