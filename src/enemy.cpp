@@ -23,6 +23,8 @@ Enemy::Enemy(Sprite Idle,
     Sprites.emplace_back(&(this->Attack));
     Sprites.emplace_back(&(this->Hurt));
     Sprites.emplace_back(&(this->Death));
+
+    MonsterCount += 1;
 }
 
 Enemy::~Enemy()
@@ -303,6 +305,8 @@ void Enemy::CheckAlive()
     float EndTime{3.5f/8.0f};
 
     if (Health <= 0) {
+        MonsterDeaths += 1;
+
         IsAttacked = false;
 
         // Set to death sprite
