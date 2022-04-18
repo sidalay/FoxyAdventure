@@ -305,6 +305,7 @@ void Enemy::CheckAlive()
     float EndTime{3.5f/8.0f};
 
     if (Health <= 0) {
+
         if (!Dead) {
             Dead = true;
             MonsterDeaths += 1;
