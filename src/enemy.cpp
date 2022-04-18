@@ -1,5 +1,8 @@
 #include "headers/enemy.hpp"
 
+int Enemy::MonsterCount{};
+int Enemy::MonsterDeaths{};
+
 Enemy::Enemy(Sprite Idle,
              Sprite Walk,
              Sprite Attack,
@@ -86,10 +89,12 @@ void Enemy::SpriteTick(float DeltaTime)
 // Check which orientation the character is facing
 void Enemy::CheckDirection()
 {
-    if (AIY < 0) Face = Direction::UP;
-    if (AIX < 0) Face = Direction::LEFT;
-    if (AIY > 0) Face = Direction::DOWN;
-    if (AIX > 0) Face = Direction::RIGHT;
+    if (!Chasing) {
+        if (AIY < 0) Face = Direction::UP;
+        if (AIX < 0) Face = Direction::LEFT;
+        if (AIY > 0) Face = Direction::DOWN;
+        if (AIX > 0) Face = Direction::RIGHT;
+    }
 
     switch (Face)
     {
@@ -115,28 +120,6 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
     EnemyPos = Vector2Subtract(WorldPos, HeroWorldPos); // Where the Enemy is drawn on the screen
     Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50,50}), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Player
     
-    // Chase Player
-    if (!Stopped && Alive && !Invulnerable) {
-        // Only move enemy towards Player if within a certain range
-        if (Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, {50,0}), EnemyPos)) > Range) {
-            ToTarget = {0.f,0.f};
-            Chasing = false;
-            // AIY = 0.f;
-        }
-        else {
-            WorldPos = Vector2Add(WorldPos, ToTarget);
-            Chasing = true;
-
-            // Make enemy face up / down depending on what direction its chasing
-            // if (ToTarget.y > 0) {
-            //     AIY = 1.f;
-            // }
-            // else if (ToTarget.y < 0) {
-            //     AIY = -1.f;
-            // }
-        }
-    }
-
     // Enemy movement AI
     if (!Chasing) {
         Movement.x += AIX;
@@ -162,6 +145,46 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
         }
         if (Movement.y >= 60 || Movement.y <= -60) {
             AIY = -AIY;
+        }
+    }
+
+    // Chase Player
+    if (!Stopped && Alive && !Invulnerable) {
+        // Only move enemy towards Player if within a certain range
+        if (Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, {50,0}), EnemyPos)) > Range) {
+            ToTarget = {0.f,0.f};
+            Chasing = false;
+            // AIY = 0.f;
+        }
+        else {
+            WorldPos = Vector2Add(WorldPos, ToTarget);
+            Chasing = true;
+
+            // Control what direction the enemy will face when chasing
+            if ((ToTarget.x >= 0 && ToTarget.y < 0) || (ToTarget.x >= 0 && ToTarget.y == 0)) {
+                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::RIGHT;}
+                else {Face = Direction::UP;}
+            }
+            else if (ToTarget.x >= 0 && ToTarget.y > 0)  {
+                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::RIGHT;}
+                else {Face = Direction::DOWN;}
+            }
+            else if ((ToTarget.x <= 0 && ToTarget.y < 0) || (ToTarget.x <= 0 && ToTarget.y == 0))  {
+                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::LEFT;}
+                else {Face = Direction::UP;}
+            }
+            else if (ToTarget.x <= 0 && ToTarget.y > 0)  {
+                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::LEFT;}
+                else {Face = Direction::DOWN;}
+            }
+
+            // Make enemy face up / down depending on what direction its chasing
+            // if (ToTarget.y > 0) {
+            //     AIY = 1.f;
+            // }
+            // else if (ToTarget.y < 0) {
+            //     AIY = -1.f;
+            // }
         }
     }
 
