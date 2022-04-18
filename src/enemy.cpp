@@ -201,9 +201,6 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
 void Enemy::UndoMovement()
 {
     WorldPos = PrevWorldPos;
-
-    // WorldPos.x += 0.1f;
-    // WorldPos.y += 0.1f;
 }
 
 // Check if Enemy is moving and change sprites if needed

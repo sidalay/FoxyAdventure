@@ -31,14 +31,26 @@ void Game::Run()
 
     // Initialize Enemies
     std::vector<Enemy> Enemies{};
-    Enemy BrownBear{Sprite{"sprites/enemies/BrownBear_Idle.png", 4, 4},
-                    Sprite{"sprites/enemies/BrownBear_Walk.png", 4, 4},
-                    Sprite{"sprites/enemies/BrownBear_Attack.png", 4, 4},
-                    Sprite{"sprites/enemies/BrownBear_Hurt.png", 1, 4},
-                    Sprite{"sprites/enemies/BrownBear_Death.png", 4, 4},
-                    Vector2{1660, 3366}, &Window, &MapBG};
-
+    Enemy BrownBear
+    {
+        Sprite{"sprites/enemies/BrownBear_Idle.png", 4, 4},
+        Sprite{"sprites/enemies/BrownBear_Walk.png", 4, 4},
+        Sprite{"sprites/enemies/BrownBear_Attack.png", 4, 4},
+        Sprite{"sprites/enemies/BrownBear_Hurt.png", 1, 4},
+        Sprite{"sprites/enemies/BrownBear_Death.png", 4, 4},
+        Vector2{1660, 3366}, &Window, &MapBG
+    };
     Enemies.emplace_back(BrownBear);
+    // Enemy BrownBearTwo
+    // {
+    //     Sprite{"sprites/enemies/BrownBear_Idle.png", 4, 4},
+    //     Sprite{"sprites/enemies/BrownBear_Walk.png", 4, 4},
+    //     Sprite{"sprites/enemies/BrownBear_Attack.png", 4, 4},
+    //     Sprite{"sprites/enemies/BrownBear_Hurt.png", 1, 4},
+    //     Sprite{"sprites/enemies/BrownBear_Death.png", 4, 4},
+    //     Vector2{1700, 3466}, &Window, &MapBG
+    // };
+    // Enemies.emplace_back(BrownBearTwo);
 
     // std::vector<Enemy> Monsters{Game::InitializeEnemies(MapBG, Window)};
     // Enemies Enemies{&Monsters};
