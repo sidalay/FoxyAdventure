@@ -395,12 +395,3 @@ Enemies::Enemies(std::vector<Enemy>* Monsters)
 {
 
 }
-
-/* 
-    TODO: 
-        - figure out orientation when chasing   // FINISHED
-        - Add min range to enemy aggro          // FINISHED
-        - fix undo movement
-        - bounce back when being attacked
-        - implement attack
-*/

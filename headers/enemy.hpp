@@ -100,3 +100,12 @@ struct Enemies
 };
 
 #endif
+
+/* 
+    TODO: 
+        - figure out orientation when chasing   // FINISHED
+        - Add min range to enemy aggro          // FINISHED
+        - fix undo movement
+        - bounce back when being attacked       // FINISHED
+        - implement attack
+*/

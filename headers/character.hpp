@@ -103,3 +103,8 @@ public:
 };
 
 #endif
+
+/*
+    TODO:
+        - add attack cooldown       // FINISHED
+*/
