@@ -122,7 +122,7 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
     Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50,50}), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Player
     
     // Enemy movement AI
-    if (!Chasing) {
+    if (!Chasing && !Blocked) {
         Movement.x += AIX;
         Movement.y += AIY;
 
@@ -150,7 +150,7 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
     }
 
     // Chase Player
-    if (!Stopped && Alive && !Invulnerable) {
+    if (!Stopped && Alive && !Invulnerable && !Blocked) {
         Vector2 RadiusAroundEnemy{50,50};
         float Aggro{Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, RadiusAroundEnemy), EnemyPos))};
 
@@ -165,7 +165,7 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
             Chasing = true;
 
             // Control what direction the enemy will face when chasing
-            if ((ToTarget.x >= 0 && ToTarget.y < 0) || (ToTarget.x >= 0 && ToTarget.y == 0)) {
+            if (ToTarget.x >= 0 && ToTarget.y <= 0) {
                 if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::RIGHT;}
                 else {Face = Direction::UP;}
             }
@@ -173,7 +173,7 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
                 if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::RIGHT;}
                 else {Face = Direction::DOWN;}
             }
-            else if ((ToTarget.x <= 0 && ToTarget.y < 0) || (ToTarget.x <= 0 && ToTarget.y == 0))  {
+            else if (ToTarget.x <= 0 && ToTarget.y <= 0)  {
                 if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::LEFT;}
                 else {Face = Direction::UP;}
             }
@@ -181,18 +181,8 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
                 if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::LEFT;}
                 else {Face = Direction::DOWN;}
             }
-
-            // Make enemy face up / down depending on what direction its chasing
-            // if (ToTarget.y > 0) {
-            //     AIY = 1.f;
-            // }
-            // else if (ToTarget.y < 0) {
-            //     AIY = -1.f;
-            // }
         }
     }
-
-    // PrevWorldPos = WorldPos;
 
     // Undo Movement if walking out-of-bounds
     if (WorldPos.x + EnemyPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
@@ -211,8 +201,8 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
 void Enemy::UndoMovement()
 {
     WorldPos = PrevWorldPos;
-    WorldPos.x += -0.1;
-    WorldPos.y += 0.1; 
+    // WorldPos.x += 0.1f;
+    // WorldPos.y += 0.1f;
 }
 
 // Check if Enemy is moving and change sprites if needed
@@ -253,6 +243,7 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWo
                     // manage pushable props
                     if (Prop.IsMoveable()) {
                         if (Prop.GetType() == PropType::BOULDER) {
+                            Blocked = true;
                             UndoMovement();
                         }
                         if (Prop.GetType() == PropType::GRASS && Alive) {
@@ -262,9 +253,13 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWo
                     // if not pushable, block movement   
                     else {
                         if (Prop.IsVisible()) {
+                            Blocked = true;
                             UndoMovement();
                         }
                     }
+                }
+                else {
+                    Blocked = false;
                 }
             }
         }

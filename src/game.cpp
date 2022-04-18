@@ -39,6 +39,7 @@ void Game::Run()
                     Vector2{1660, 3366}, &Window, &MapBG};
 
     Enemies.emplace_back(BrownBear);
+
     // std::vector<Enemy> Monsters{Game::InitializeEnemies(MapBG, Window)};
     // Enemies Enemies{&Monsters};
 

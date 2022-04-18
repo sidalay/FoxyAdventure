@@ -54,6 +54,7 @@ private:
     bool IsAttacked{false};
     bool Stopped{false};            // Whether or not the enemy should be able to move
     bool Dead{false};
+    bool Blocked{false};            // Whether enemy is colliding with an object or not
 
     Direction Face{Direction::DOWN};
 public:
