@@ -185,13 +185,13 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
     }
 
     // Undo Movement if walking out-of-bounds
-    if (WorldPos.x + EnemyPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
-        WorldPos.y + EnemyPos.y < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f ||
-        WorldPos.x + (Screen->x - EnemyPos.x) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
-        WorldPos.y + (Screen->y - EnemyPos.y) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f)
-    {
-        UndoMovement();
-    }
+    // if (WorldPos.x + EnemyPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
+    //     WorldPos.y + EnemyPos.y < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f ||
+    //     WorldPos.x + (Screen->x - EnemyPos.x) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
+    //     WorldPos.y + (Screen->y - EnemyPos.y) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f) 
+    // {
+    //     UndoMovement();
+    // }
 
     CheckCollision(Props.Under, HeroWorldPos);
     CheckCollision(Props.Over, HeroWorldPos);
@@ -201,6 +201,7 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
 void Enemy::UndoMovement()
 {
     WorldPos = PrevWorldPos;
+
     // WorldPos.x += 0.1f;
     // WorldPos.y += 0.1f;
 }
@@ -237,29 +238,37 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWo
         for (auto& Prop:PropType) {
             if (Prop.HasCollision()) {
                 
+                Vector2 PropScreenPos{Vector2Subtract(Prop.GetWorldPos(), HeroWorldPos)};
+                Vector2 RadiusAroundEnemy{5,5};
+                Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Prop
+
+                float AvoidProp{Vector2Length(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), EnemyPos))};
+
+                // if not pushable, block movement 
+                if (Prop.IsMoveable()) {
+                    if (Prop.GetType() == PropType::BOULDER) {
+                        if (AvoidProp <= MinRange) {
+                            WorldPos = Vector2Subtract(WorldPos, ToTarget);
+                        }
+                    }
+                }
+                else if (Prop.IsVisible()) {
+                    if (AvoidProp <= MinRange) {
+                        WorldPos = Vector2Subtract(WorldPos, ToTarget);
+                    }
+                }
+
+                Rectangle EnemyCollision{GetCollisionRec()};
+
                 // check physical collision
-                if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(HeroWorldPos))) {   
+                if (CheckCollisionRecs(EnemyCollision, Prop.GetCollisionRec(HeroWorldPos))) {   
 
                     // manage pushable props
                     if (Prop.IsMoveable()) {
-                        if (Prop.GetType() == PropType::BOULDER) {
-                            Blocked = true;
-                            UndoMovement();
-                        }
                         if (Prop.GetType() == PropType::GRASS && Alive) {
                             Prop.SetActive(true);
                         }
                     }
-                    // if not pushable, block movement   
-                    else {
-                        if (Prop.IsVisible()) {
-                            Blocked = true;
-                            UndoMovement();
-                        }
-                    }
-                }
-                else {
-                    Blocked = false;
                 }
             }
         }

@@ -226,8 +226,11 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, s
     Hud.Draw(Character.GetHealth(), Character.GetEmotion());
 
     // Debugging info
-    DrawText(TextFormat("WorldPos.x: %i", (int)Character.GetWorldPos().x + 615), 20, 150, 20, WHITE);
-    DrawText(TextFormat("WorldPos.y: %i", (int)Character.GetWorldPos().y + 335), 20, 170, 20, WHITE);
+    DrawText(TextFormat("Player.x: %i", (int)Character.GetWorldPos().x + 615), 20, 150, 20, WHITE);
+    DrawText(TextFormat("Player.y: %i", (int)Character.GetWorldPos().y + 335), 20, 170, 20, WHITE);
+    // DrawText(TextFormat("Enemy.x: %i", (int)Enemies.at(0).GetWorldPos().x), 20, 190, 20, WHITE);
+    // DrawText(TextFormat("Enemy.y: %i", (int)Enemies.at(0).GetWorldPos().y), 20, 210, 20, WHITE);
+    // DrawText(TextFormat("Blocked: %i", Enemies.at(0).IsBlocked()), 20, 230, 20, WHITE);
     // DrawText(TextFormat("Velocity: %i", (int)Vector2Length(Vector2Subtract(Character.GetCharPos(), Enemies.at(0).GetCharPos()))), 20, 190, 20, WHITE);
     DrawFPS(20, 223);
 

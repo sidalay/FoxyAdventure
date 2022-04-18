@@ -40,6 +40,7 @@ private:
     float Radius{25.f};                 
     float MaxRange{150.f};
     float MinRange{60.f};
+    float MinCollisionRange{0.5f};
     float RunningTime{};
     float DamageTime{};
     float StopTime{};
@@ -82,6 +83,7 @@ public:
     void Damaged(bool Attacked) {IsAttacked = Attacked;}
     void CheckAlive();
 
+    bool IsBlocked() {return Blocked;}
     bool IsAlive() {return Alive;}
     bool IsInvulnerable() {return Invulnerable;}
     int GetHealth() {return Health;}
@@ -106,7 +108,9 @@ struct Enemies
     TODO: 
         - figure out orientation when chasing   // FINISHED
         - Add min range to enemy aggro          // FINISHED
-        - fix undo movement
+        - fix undo movement                     // FINISHED
         - bounce back when being attacked       // FINISHED
+        - add movement ai                       // FINISHED
         - implement attack
+        - add randomization to movement
 */
