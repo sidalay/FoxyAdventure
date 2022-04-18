@@ -388,7 +388,6 @@ Rectangle Enemy::GetCollisionRec()
     };
 }
 
-
 // -----------------------------------------
 
 Enemies::Enemies(std::vector<Enemy>* Monsters) 
