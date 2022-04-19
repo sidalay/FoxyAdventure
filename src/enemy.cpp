@@ -242,6 +242,11 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWo
     // Enemy collision handling
     for (auto& Enemy:Enemies) {
         if (this != &Enemy) {
+
+            /*
+                When enemy gets within min aggro range of another enemy it 'runs' away from it.
+                Therefore it will never collide with a Enemy.
+            */
             Vector2 RadiusAroundEnemy{5,5};
             Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), EnemyPos)), Speed)}; // Calculate the distance from this->Enemy to Enemy
             float AvoidEnemy{Vector2Length(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), EnemyPos))};
