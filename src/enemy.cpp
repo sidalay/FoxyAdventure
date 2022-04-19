@@ -39,16 +39,15 @@ Enemy::Enemy(Sprite Idle,
     MovementIdleTime = static_cast<float>(RandomIdleTime(RNG));
     MoveXRange = RandomRange(RNG);
     MoveYRange = RandomRange(RNG);
-
 }
 
 Enemy::~Enemy()
 {
     // Unload all Textures when destructing Character
-    for (auto& Sprite:Sprites)
-    {
-        UnloadTexture(Sprite->Texture);
-    }
+    // for (auto& Sprite:Sprites)
+    // {
+    //     UnloadTexture(Sprite->Texture);
+    // }
 }
 
 void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos)
