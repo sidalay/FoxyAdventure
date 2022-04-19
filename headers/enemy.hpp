@@ -129,4 +129,7 @@ struct Enemies
         [x] prevent enemies from 'overlapping' and walking over each other
         [ ] fix OutOfBounds if check parameters
         [ ] add HP bars
+        [ ] add heart loot drops
+        [ ] add enemy types
+        [ ] add 'boss' after defeating all of one enemy type
 */
