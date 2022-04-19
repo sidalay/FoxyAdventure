@@ -83,6 +83,7 @@ public:
     void CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos);
     void WalkOrRun();
     void UndoMovement();
+    void OutOfBounds();
     void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos);
     void CheckAttack();
     void UpdateSource();

@@ -141,14 +141,8 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
     // Chase Player
     EnemyAggro(HeroScreenPos);
 
-    // Undo Movement if walking out-of-bounds
-    // if (WorldPos.x + EnemyPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
-    //     WorldPos.y + EnemyPos.y < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f ||
-    //     WorldPos.x + (Screen->x - EnemyPos.x) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
-    //     WorldPos.y + (Screen->y - EnemyPos.y) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f) 
-    // {
-    //     UndoMovement();
-    // }
+    // Check if moving OOB (THE IF CHECK NEEDS FIXING)
+    // OutOfBounds();
 
     // Check for collision against player or props
     CheckCollision(Props.Under, HeroWorldPos);
@@ -159,6 +153,18 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
 void Enemy::UndoMovement()
 {
     WorldPos = PrevWorldPos;
+}
+
+// UndoMovement if enemy is moving out of bounds
+void Enemy::OutOfBounds()
+{
+    if (WorldPos.x + EnemyPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
+        WorldPos.y + EnemyPos.y < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f ||
+        WorldPos.x + (Screen->x - EnemyPos.x) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
+        WorldPos.y + (Screen->y - EnemyPos.y) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f) 
+    {
+        UndoMovement();
+    }
 }
 
 // Check if Enemy is moving and change sprites if needed
