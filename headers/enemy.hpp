@@ -21,8 +21,8 @@ private:
     Sprite Hurt{};
     Sprite Death{};
     Sprite* CurrentSprite{&Idle};
-    Sprite* PreviousSprite{};
-    std::vector<Sprite*> Sprites{};
+    Sprite PreviousSprite{};
+    std::vector<Sprite> Sprites{};
 
     Vector2 EnemyPos{};                  // Where the character is on the screen
     Vector2 WorldPos{};                  // Where the character is in the world
@@ -60,6 +60,7 @@ private:
     bool Stopped{false};            // Whether or not the enemy should be able to move
     bool Dead{false};
     bool Blocked{false};            // Whether enemy is colliding with an object or not
+    bool Hurting{false};
 
     Direction Face{Direction::DOWN};
 public:

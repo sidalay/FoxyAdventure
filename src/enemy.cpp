@@ -21,11 +21,11 @@ Enemy::Enemy(Sprite Idle,
       World{World}
 {
     // Fill vector<Sprite*> with Sprite objects to easily loop through and call Sprite::Tick()
-    Sprites.emplace_back(&(this->Idle));
-    Sprites.emplace_back(&(this->Walk));
-    Sprites.emplace_back(&(this->Attack));
-    Sprites.emplace_back(&(this->Hurt));
-    Sprites.emplace_back(&(this->Death));
+    Sprites.emplace_back(this->Idle);
+    Sprites.emplace_back(this->Walk);
+    Sprites.emplace_back(this->Attack);
+    Sprites.emplace_back(this->Hurt);
+    Sprites.emplace_back(this->Death);
 
     // Static variable to count how many enemies on the field
     MonsterCount += 1;
@@ -33,7 +33,7 @@ Enemy::Enemy(Sprite Idle,
     // Generate RNG for current object used for randomizing AI movement
     std::random_device Seed;
     std::uniform_int_distribution<int> RandomRange{60, 80};
-    std::uniform_int_distribution<int> RandomIdleTime{6, 8};
+    std::uniform_int_distribution<int> RandomIdleTime{5, 9};
     std::mt19937 RNG{std::mt19937{Seed()}};
 
     MovementIdleTime = static_cast<float>(RandomIdleTime(RNG));
@@ -43,10 +43,15 @@ Enemy::Enemy(Sprite Idle,
 
 Enemy::~Enemy()
 {
+    /* 
+        UnloadTexture was being called somewhere and breaking multiple instances of Enemy objects.
+        Disabling it fixed having more than one Enemy's textures breaking
+    */
+    
     // Unload all Textures when destructing Character
     // for (auto& Sprite:Sprites)
     // {
-    //     UnloadTexture(Sprite->Texture);
+    //     UnloadTexture(Sprite.Texture);
     // }
 }
 
@@ -74,7 +79,7 @@ void Enemy::Draw(Vector2 HeroWorldPos)
     if ((WorldPos.x >= (HeroWorldPos.x + 615) - (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) && (WorldPos.x <= (HeroWorldPos.x + 615) + (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) &&
         (WorldPos.y >= (HeroWorldPos.y + 335) - (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))) && (WorldPos.y <= (HeroWorldPos.y + 335) + (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))))
     {
-        if (CurrentSprite == &Hurt) {
+        if (Hurting) {
             DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, RED);
         }
         else {
@@ -91,7 +96,7 @@ void Enemy::SpriteTick(float DeltaTime)
 {
     for (auto& Sprite:Sprites)
     {
-        Sprite->Tick(DeltaTime);
+        Sprite.Tick(DeltaTime);
     }
 }
 
@@ -169,13 +174,13 @@ void Enemy::WalkOrRun()
 
     if (Chasing || Walking) 
     {
-        CurrentSprite = Sprites.at(1);
-        // CurrentSprite = &Walk;
+        CurrentSprite = &Sprites.at(1);
+        // CurrentSprite = Walk;
     }
     else 
     {
-        CurrentSprite = Sprites.at(0);
-        // CurrentSprite = &Idle;
+        CurrentSprite = &Sprites.at(0);
+        // CurrentSprite = Idle;
     }
 }
 
@@ -231,8 +236,8 @@ void Enemy::CheckAttack()
 {
     if (Attacking)
     {
-        CurrentSprite = Sprites.at(2);
-        // CurrentSprite = &Attack;
+        CurrentSprite = &Sprites.at(2);
+        // CurrentSprite = Attack;
     }
 }
 
@@ -277,6 +282,7 @@ void Enemy::TakingDamage()
         // Time between hurt animation showing
         if (DamageTime <= HurtUpdateTime) {
             CurrentSprite = &Hurt;
+            Hurting = true;
         }
 
         // This is where the enemy takes damage
@@ -289,6 +295,7 @@ void Enemy::TakingDamage()
     }
     else {
         Stopped = false;
+        Hurting = false;
     }
     // else {
     //     CurrentSprite = PreviousSprite;
@@ -310,8 +317,8 @@ void Enemy::CheckAlive()
         IsAttacked = false;
 
         // Set to death sprite
-        CurrentSprite = Sprites.at(4);
-        // CurrentSprite = &Death;
+        CurrentSprite = &Sprites.at(4);
+        // CurrentSprite = Death;
 
         StopTime += GetFrameTime();
         
