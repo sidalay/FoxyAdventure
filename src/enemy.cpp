@@ -57,7 +57,7 @@ Enemy::~Enemy()
     // }
 }
 
-void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos)
+void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies)
 {
     if (Alive) {
 
@@ -72,7 +72,7 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
         CheckAlive();
     }
 
-    CheckMovement(Props, HeroWorldPos, HeroScreenPos);
+    CheckMovement(Props, HeroWorldPos, HeroScreenPos, Enemies);
 }
 
 // Draw character animation
@@ -130,7 +130,7 @@ void Enemy::CheckDirection()
 }
 
 // Check for movement input
-void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos)
+void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies)
 {
     PrevWorldPos = WorldPos;
     EnemyPos = Vector2Subtract(WorldPos, HeroWorldPos); // Where the Enemy is drawn on the screen
@@ -145,8 +145,8 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
     // OutOfBounds();
 
     // Check for collision against player or props
-    CheckCollision(Props.Under, HeroWorldPos);
-    CheckCollision(Props.Over, HeroWorldPos);
+    CheckCollision(Props.Under, HeroWorldPos, Enemies);
+    CheckCollision(Props.Over, HeroWorldPos, Enemies);
 }
 
 // Undo movement if walking out-of-bounds or colliding
@@ -193,8 +193,9 @@ void Enemy::WalkOrRun()
 }
 
 // Check if colliding with props
-void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos)
+void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies)
 {
+    // Prop collision handling
     for (auto& PropType:*Props) {
         for (auto& Prop:PropType) {
             if (Prop.HasCollision()) {
@@ -234,6 +235,19 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWo
                         }
                     }
                 }
+            }
+        }
+    }
+
+    // Enemy collision handling
+    for (auto& Enemy:Enemies) {
+        if (this != &Enemy) {
+            Vector2 RadiusAroundEnemy{5,5};
+            Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), EnemyPos)), Speed)}; // Calculate the distance from this->Enemy to Enemy
+            float AvoidEnemy{Vector2Length(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), EnemyPos))};
+
+            if (AvoidEnemy <= MinRange) {
+                WorldPos = Vector2Subtract(WorldPos, ToTarget);
             }
         }
     }

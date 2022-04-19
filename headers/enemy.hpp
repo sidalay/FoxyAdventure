@@ -76,15 +76,15 @@ public:
           Background* World);
     ~Enemy();
 
-    void Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos);
+    void Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies);
     void Draw(Vector2 HeroWorldPos);
     void SpriteTick(float DeltaTime);
     void CheckDirection();
-    void CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos);
+    void CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies);
     void WalkOrRun();
     void UndoMovement();
     void OutOfBounds();
-    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos);
+    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies);
     void CheckAttack();
     void UpdateSource();
     void TakingDamage();
@@ -102,7 +102,7 @@ public:
     int GetTotalMonsters() {return MonsterCount;}
     Vector2 GetWorldPos() {return WorldPos;}
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}
-    Vector2 GetCharPos() {return EnemyPos;}
+    Vector2 GetEnemyPos() {return EnemyPos;}
     Rectangle GetCollisionRec();
     Rectangle GetAttackRec();
 };
@@ -126,5 +126,7 @@ struct Enemies
         [x] implement attack
         [x] add randomization to movement
         [x] fix multiple enemy instances
-        [ ] prevent enemies from 'overlapping' and walking over each other
+        [x] prevent enemies from 'overlapping' and walking over each other
+        [ ] fix OutOfBounds if check parameters
+        [ ] add HP bars
 */

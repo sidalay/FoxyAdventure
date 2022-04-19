@@ -109,4 +109,5 @@ public:
     TODO:
         [x] add attack cooldown
         [x] add damage knockback
+        [ ] add half-hearts to hp
 */

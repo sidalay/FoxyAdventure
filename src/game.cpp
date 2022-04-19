@@ -127,7 +127,7 @@ namespace Game
         Character.Tick(DeltaTime, Props, Enemies);
 
         for (auto& Enemy:Enemies)
-            Enemy.Tick(DeltaTime, Props, Character.GetWorldPos(), Character.GetCharPos());
+            Enemy.Tick(DeltaTime, Props, Character.GetWorldPos(), Character.GetCharPos(), Enemies);
 
         for (auto& Proptype:*Props.Under)
             for (auto& Prop:Proptype)
@@ -228,7 +228,7 @@ namespace Game
         // DrawText(TextFormat("Enemy.x: %i", (int)Enemies.at(0).GetWorldPos().x), 20, 190, 20, WHITE);
         // DrawText(TextFormat("Enemy.y: %i", (int)Enemies.at(0).GetWorldPos().y), 20, 210, 20, WHITE);
         // DrawText(TextFormat("Blocked: %i", Enemies.at(0).IsBlocked()), 20, 230, 20, WHITE);
-        // DrawText(TextFormat("Velocity: %i", (int)Vector2Length(Vector2Subtract(Character.GetCharPos(), Enemies.at(0).GetCharPos()))), 20, 190, 20, WHITE);
+        // DrawText(TextFormat("Velocity: %i", (int)Vector2Length(Vector2Subtract(Character.GetCharPos(), Enemies.at(0).GetEnemyPos()))), 20, 190, 20, WHITE);
         DrawFPS(20, 223);
 
         Map.DrawMiniMap(Character.GetWorldPos());
