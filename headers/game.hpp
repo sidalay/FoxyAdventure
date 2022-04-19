@@ -32,4 +32,4 @@ namespace Game
     std::vector<Enemy> InitializeEnemies(Background& MapBG, Window& Window);
 }
 
-#endif
+#endif // GAME_HPP

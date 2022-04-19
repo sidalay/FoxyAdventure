@@ -33,4 +33,4 @@ public:
     void Draw(int Health, Emotion State);
 };
 
-#endif
+#endif // HUD_HPP

@@ -103,7 +103,7 @@ public:
     void AddHealth(int HP);
 };
 
-#endif
+#endif // CHARACTER_HPP
 
 /*
     TODO:

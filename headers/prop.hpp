@@ -133,4 +133,4 @@ struct Props
     Props(std::vector<std::vector<Prop>>* Under, std::vector<std::vector<Prop>>* Over);
 };
 
-#endif
+#endif // PROP_HPP

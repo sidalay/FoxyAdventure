@@ -145,8 +145,10 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
     // OutOfBounds();
 
     // Check for collision against player or props
-    CheckCollision(Props.Under, HeroWorldPos, Enemies);
-    CheckCollision(Props.Over, HeroWorldPos, Enemies);
+    if (Alive) {
+        CheckCollision(Props.Under, HeroWorldPos, Enemies);
+        CheckCollision(Props.Over, HeroWorldPos, Enemies);
+    }
 }
 
 // Undo movement if walking out-of-bounds or colliding

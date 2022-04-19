@@ -31,4 +31,4 @@ public:
     float getHealth() const {return Health;}
 };
 
-#endif
+#endif // BASECHARACTER_HPP

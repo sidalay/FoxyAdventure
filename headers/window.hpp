@@ -7,4 +7,4 @@ struct Window
     int y{};
 };
 
-#endif
+#endif // WINDOW_HPP

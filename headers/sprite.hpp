@@ -22,4 +22,4 @@ struct Sprite
     Rectangle GetPosRec(const Vector2& ScreenPos, float Scale);
 };
 
-#endif
+#endif // SPRITE_HPP

@@ -3751,8 +3751,30 @@ namespace Game
             Vector2{1660, 3366}, &Window, &MapBG
         };
         Enemies.emplace_back(BrownBear);
-        
+
         Enemy BrownBearTwo
+        {
+            Sprite{"sprites/enemies/BrownBear_Idle.png", 4, 4},
+            Sprite{"sprites/enemies/BrownBear_Walk.png", 4, 4},
+            Sprite{"sprites/enemies/BrownBear_Attack.png", 4, 4},
+            Sprite{"sprites/enemies/BrownBear_Hurt.png", 1, 4},
+            Sprite{"sprites/enemies/BrownBear_Death.png", 4, 4},
+            Vector2{2940, 740}, &Window, &MapBG
+        };
+        Enemies.emplace_back(BrownBearTwo);
+
+        Enemy BrownBearThree
+        {
+            Sprite{"sprites/enemies/BrownBear_Idle.png", 4, 4},
+            Sprite{"sprites/enemies/BrownBear_Walk.png", 4, 4},
+            Sprite{"sprites/enemies/BrownBear_Attack.png", 4, 4},
+            Sprite{"sprites/enemies/BrownBear_Hurt.png", 1, 4},
+            Sprite{"sprites/enemies/BrownBear_Death.png", 4, 4},
+            Vector2{2927, 1090}, &Window, &MapBG
+        };
+        Enemies.emplace_back(BrownBearThree);
+        
+        Enemy LightBrownBear
         {
             Sprite{"sprites/enemies/LightBrownBear_Idle.png", 4, 4},
             Sprite{"sprites/enemies/LightBrownBear_Walk.png", 4, 4},
@@ -3761,9 +3783,31 @@ namespace Game
             Sprite{"sprites/enemies/LightBrownBear_Death.png", 4, 4},
             Vector2{1750, 3366}, &Window, &MapBG
         };
-        Enemies.emplace_back(BrownBearTwo);
+        Enemies.emplace_back(LightBrownBear);
+
+        Enemy LightBrownBearTwo
+        {
+            Sprite{"sprites/enemies/LightBrownBear_Idle.png", 4, 4},
+            Sprite{"sprites/enemies/LightBrownBear_Walk.png", 4, 4},
+            Sprite{"sprites/enemies/LightBrownBear_Attack.png", 4, 4},
+            Sprite{"sprites/enemies/LightBrownBear_Hurt.png", 1, 4},
+            Sprite{"sprites/enemies/LightBrownBear_Death.png", 4, 4},
+            Vector2{3102, 899}, &Window, &MapBG
+        };
+        Enemies.emplace_back(LightBrownBearTwo);
+
+        Enemy LightBrownBearThree
+        {
+            Sprite{"sprites/enemies/LightBrownBear_Idle.png", 4, 4},
+            Sprite{"sprites/enemies/LightBrownBear_Walk.png", 4, 4},
+            Sprite{"sprites/enemies/LightBrownBear_Attack.png", 4, 4},
+            Sprite{"sprites/enemies/LightBrownBear_Hurt.png", 1, 4},
+            Sprite{"sprites/enemies/LightBrownBear_Death.png", 4, 4},
+            Vector2{2835, 905}, &Window, &MapBG
+        };
+        Enemies.emplace_back(LightBrownBearThree);
 
         return Enemies;
     }
 
-}
+} // namespace Game

@@ -26,4 +26,4 @@ public:
     float GetScale() {return Scale;}
 };
 
-#endif
+#endif // BACKGROUND_HPP

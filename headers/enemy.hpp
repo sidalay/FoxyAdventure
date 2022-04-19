@@ -114,7 +114,7 @@ struct Enemies
     Enemies(std::vector<Enemy>* Monsters);
 };
 
-#endif
+#endif // ENEMY_HPP
 
 /* 
     TODO: 

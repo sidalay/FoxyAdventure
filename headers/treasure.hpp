@@ -11,4 +11,4 @@ private:
 public:
 };
 
-#endif
+#endif // TREASURE_HPP
