@@ -34,11 +34,13 @@ Enemy::Enemy(Sprite Idle,
     std::random_device Seed;
     std::uniform_int_distribution<int> RandomRange{60, 80};
     std::uniform_int_distribution<int> RandomIdleTime{5, 9};
+    std::uniform_int_distribution<int> RandomLeftRight{1, 10};
     std::mt19937 RNG{std::mt19937{Seed()}};
 
     MovementIdleTime = static_cast<float>(RandomIdleTime(RNG));
     MoveXRange = RandomRange(RNG);
     MoveYRange = RandomRange(RNG);
+    LeftOrRight = RandomLeftRight(RNG);
 }
 
 Enemy::~Enemy()
@@ -331,6 +333,12 @@ void Enemy::CheckAlive()
 // Handle enemy movement AI
 void Enemy::EnemyAI()
 {
+    // Randomize which direction enemy will move first
+    if (Intro && LeftOrRight <= 5) {
+        AIX = -AIX;
+        AIY = -AIY;
+        Intro = false;
+    }
 
     if (!Chasing && !Blocked) {
         Movement.x += AIX;
@@ -350,10 +358,10 @@ void Enemy::EnemyAI()
             Walking = false;
         }
 
-        if (Movement.x >= MoveXRange || Movement.x <= -MoveXRange) {
+        if (Movement.x <= -MoveXRange || Movement.x >= MoveXRange) {
             AIX = -AIX;
         }
-        if (Movement.y >= MoveYRange || Movement.y <= -MoveYRange) {
+        if (Movement.y <= -MoveYRange || Movement.y >= MoveYRange) {
             AIY = -AIY;
         }
     }

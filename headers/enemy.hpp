@@ -36,6 +36,7 @@ private:
     static int MonsterDeaths;
     static int MonsterCount;
     int Health{10};
+    int LeftOrRight{};
     float Scale{3.2f};
     float Speed{1.4f};
     float Radius{25.f};                 
@@ -61,6 +62,7 @@ private:
     bool Dead{false};
     bool Blocked{false};            // Whether enemy is colliding with an object or not
     bool Hurting{false};
+    bool Intro{true};
 
     Direction Face{Direction::DOWN};
 public:
@@ -122,4 +124,6 @@ struct Enemies
         [x] add movement ai                      
         [x] implement attack
         [x] add randomization to movement
+        [x] fix multiple enemy instances
+        [ ] prevent enemies from 'overlapping' and walking over each other
 */
