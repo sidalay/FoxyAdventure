@@ -3,6 +3,7 @@
 
 #include <raylib.h>
 #include <vector>
+#include <random>
 #include "headers/prop.hpp"
 #include "headers/sprite.hpp"
 #include "headers/window.hpp"
@@ -45,6 +46,9 @@ private:
     float DamageTime{};
     float StopTime{};
     float WalkingTime{};
+    float MovementIdleTime{};
+    float MoveXRange{};
+    float MoveYRange{};
     float AIX{0.6};
     float AIY{0.6};
     bool Colliding{false};
@@ -116,5 +120,5 @@ struct Enemies
         [x] bounce back when being attacked      
         [x] add movement ai                      
         [x] implement attack
-        [ ] add randomization to movement
+        [x] add randomization to movement
 */

@@ -214,12 +214,12 @@ void Game::Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, s
         //               Enemy.GetCollisionRec().y,
         //               Enemy.GetCollisionRec().width,
         //               Enemy.GetCollisionRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
-        if (Enemy.IsAttacking()) {
-            DrawRectangle(Enemy.GetAttackRec().x,
-                        Enemy.GetAttackRec().y,
-                        Enemy.GetAttackRec().width,
-                        Enemy.GetAttackRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
-        }
+        // if (Enemy.IsAttacking()) {
+        //     DrawRectangle(Enemy.GetAttackRec().x,
+        //                 Enemy.GetAttackRec().y,
+        //                 Enemy.GetAttackRec().width,
+        //                 Enemy.GetAttackRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
+        // }
     }
 
     for (auto& PropType:*Props.Over) 

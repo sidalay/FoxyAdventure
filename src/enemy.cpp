@@ -29,6 +29,17 @@ Enemy::Enemy(Sprite Idle,
 
     // Static variable to count how many enemies on the field
     MonsterCount += 1;
+
+    // Generate RNG for current object used for randomizing AI movement
+    std::random_device Seed;
+    std::uniform_int_distribution<int> RandomRange{60, 80};
+    std::uniform_int_distribution<int> RandomIdleTime{6, 8};
+    std::mt19937 RNG{std::mt19937{Seed()}};
+
+    MovementIdleTime = static_cast<float>(RandomIdleTime(RNG));
+    MoveXRange = RandomRange(RNG);
+    MoveYRange = RandomRange(RNG);
+
 }
 
 Enemy::~Enemy()
@@ -133,6 +144,7 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
     //     UndoMovement();
     // }
 
+    // Check for collision against player or props
     CheckCollision(Props.Under, HeroWorldPos);
     CheckCollision(Props.Over, HeroWorldPos);
 }
@@ -310,7 +322,7 @@ void Enemy::CheckAlive()
     }
 }
 
-// Handle enemy movement ai
+// Handle enemy movement AI
 void Enemy::EnemyAI()
 {
 
@@ -318,25 +330,24 @@ void Enemy::EnemyAI()
         Movement.x += AIX;
         Movement.y += AIY;
 
-        float IdleTime{8.f};
         WalkingTime += GetFrameTime();
 
-        if (WalkingTime <= IdleTime/2) {
+        if (WalkingTime <= MovementIdleTime/2) {
             Walking = true;
             WorldPos.x += AIX;
             WorldPos.y += AIY;
         }
-        else if (WalkingTime >= IdleTime) {
+        else if (WalkingTime >= MovementIdleTime) {
             WalkingTime = 0.0f;
         }
         else {
             Walking = false;
         }
 
-        if (Movement.x >= 80 || Movement.x <= -80) {
+        if (Movement.x >= MoveXRange || Movement.x <= -MoveXRange) {
             AIX = -AIX;
         }
-        if (Movement.y >= 60 || Movement.y <= -60) {
+        if (Movement.y >= MoveYRange || Movement.y <= -MoveYRange) {
             AIY = -AIY;
         }
     }
