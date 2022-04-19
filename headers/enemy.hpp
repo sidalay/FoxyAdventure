@@ -82,10 +82,13 @@ public:
     void TakingDamage();
     void Damaged(bool Attacked) {IsAttacked = Attacked;}
     void CheckAlive();
+    void EnemyAI();
+    void EnemyAggro(Vector2 HeroScreenPos);
 
     bool IsBlocked() {return Blocked;}
     bool IsAlive() {return Alive;}
     bool IsInvulnerable() {return Invulnerable;}
+    bool IsAttacking() {return Attacking;}
     int GetHealth() {return Health;}
     int GetMonstersKilled() {return MonsterDeaths;}
     int GetTotalMonsters() {return MonsterCount;}
@@ -93,6 +96,7 @@ public:
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}
     Vector2 GetCharPos() {return EnemyPos;}
     Rectangle GetCollisionRec();
+    Rectangle GetAttackRec();
 };
 
 struct Enemies
@@ -106,11 +110,11 @@ struct Enemies
 
 /* 
     TODO: 
-        - figure out orientation when chasing   // FINISHED
-        - Add min range to enemy aggro          // FINISHED
-        - fix undo movement                     // FINISHED
-        - bounce back when being attacked       // FINISHED
-        - add movement ai                       // FINISHED
-        - implement attack
-        - add randomization to movement
+        [x] figure out orientation when chasing   
+        [x] Add min range to enemy aggro         
+        [x] fix undo movement                    
+        [x] bounce back when being attacked      
+        [x] add movement ai                      
+        [x] implement attack
+        [ ] add randomization to movement
 */

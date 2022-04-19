@@ -88,6 +88,7 @@ public:
     void IsAlive();
     void SetSleep() {Sleeping = !Sleeping;}
     void DrawIndicator();
+    void TakingDamage();
 
     int GetHealth() {return Health;}
     float GetSpeed() {return Speed;}
@@ -106,5 +107,6 @@ public:
 
 /*
     TODO:
-        - add attack cooldown       // FINISHED
+        [x] add attack cooldown
+        [x] add damage knockback
 */

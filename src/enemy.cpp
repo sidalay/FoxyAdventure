@@ -50,8 +50,6 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
         
         WalkOrRun();
 
-        CheckAttack();
-
         TakingDamage();
 
         CheckAlive();
@@ -119,70 +117,12 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
 {
     PrevWorldPos = WorldPos;
     EnemyPos = Vector2Subtract(WorldPos, HeroWorldPos); // Where the Enemy is drawn on the screen
-    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50,50}), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Player
     
     // Enemy movement AI
-    if (!Chasing && !Blocked) {
-        Movement.x += AIX;
-        Movement.y += AIY;
-
-        float IdleTime{8.f};
-        WalkingTime += GetFrameTime();
-
-        if (WalkingTime <= IdleTime/2) {
-            Walking = true;
-            WorldPos.x += AIX;
-            WorldPos.y += AIY;
-        }
-        else if (WalkingTime >= IdleTime) {
-            WalkingTime = 0.0f;
-        }
-        else {
-            Walking = false;
-        }
-
-        if (Movement.x >= 80 || Movement.x <= -80) {
-            AIX = -AIX;
-        }
-        if (Movement.y >= 60 || Movement.y <= -60) {
-            AIY = -AIY;
-        }
-    }
+    EnemyAI();
 
     // Chase Player
-    if (!Stopped && Alive && !Invulnerable && !Blocked) {
-        Vector2 RadiusAroundEnemy{50,50};
-        float Aggro{Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, RadiusAroundEnemy), EnemyPos))};
-
-        // Only move enemy towards Player if within a certain range
-        if (Aggro > MaxRange) {
-            ToTarget = {0.f,0.f};
-            Chasing = false;
-            // AIY = 0.f;
-        }
-        else if ((Aggro > MinRange) && (Aggro < MaxRange)) {
-            WorldPos = Vector2Add(WorldPos, ToTarget);
-            Chasing = true;
-
-            // Control what direction the enemy will face when chasing
-            if (ToTarget.x >= 0 && ToTarget.y <= 0) {
-                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::RIGHT;}
-                else {Face = Direction::UP;}
-            }
-            else if (ToTarget.x >= 0 && ToTarget.y > 0)  {
-                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::RIGHT;}
-                else {Face = Direction::DOWN;}
-            }
-            else if (ToTarget.x <= 0 && ToTarget.y <= 0)  {
-                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::LEFT;}
-                else {Face = Direction::UP;}
-            }
-            else if (ToTarget.x <= 0 && ToTarget.y > 0)  {
-                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::LEFT;}
-                else {Face = Direction::DOWN;}
-            }
-        }
-    }
+    EnemyAggro(HeroScreenPos);
 
     // Undo Movement if walking out-of-bounds
     // if (WorldPos.x + EnemyPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
@@ -278,15 +218,6 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWo
 // Manage attack sprites
 void Enemy::CheckAttack()
 {
-    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
-    {
-        Attacking = true;
-    }
-    else
-    {
-        Attacking = false;
-    }
-
     if (Attacking)
     {
         CurrentSprite = Sprites.at(2);
@@ -379,7 +310,86 @@ void Enemy::CheckAlive()
     }
 }
 
-// Return character collision dimensions
+// Handle enemy movement ai
+void Enemy::EnemyAI()
+{
+
+    if (!Chasing && !Blocked) {
+        Movement.x += AIX;
+        Movement.y += AIY;
+
+        float IdleTime{8.f};
+        WalkingTime += GetFrameTime();
+
+        if (WalkingTime <= IdleTime/2) {
+            Walking = true;
+            WorldPos.x += AIX;
+            WorldPos.y += AIY;
+        }
+        else if (WalkingTime >= IdleTime) {
+            WalkingTime = 0.0f;
+        }
+        else {
+            Walking = false;
+        }
+
+        if (Movement.x >= 80 || Movement.x <= -80) {
+            AIX = -AIX;
+        }
+        if (Movement.y >= 60 || Movement.y <= -60) {
+            AIY = -AIY;
+        }
+    }
+}
+
+// Handle enemy aggro range and chasing
+void Enemy::EnemyAggro(Vector2 HeroScreenPos)
+{
+    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50,50}), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Player
+    
+    if (!Stopped && Alive && !Invulnerable && !Blocked) {
+        Vector2 RadiusAroundEnemy{50,50};
+        float Aggro{Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, RadiusAroundEnemy), EnemyPos))};
+
+        // Only move enemy towards Player if within a certain range
+        if (Aggro > MaxRange) {
+            ToTarget = {0.f,0.f};
+            Chasing = false;
+            Attacking = false;
+            // AIY = 0.f;
+        }
+        else if ((Aggro > MinRange) && (Aggro < MaxRange)) {
+            WorldPos = Vector2Add(WorldPos, ToTarget);
+            Chasing = true;
+            Attacking = false;
+
+            // Control what direction the enemy will face when chasing
+            if (ToTarget.x >= 0 && ToTarget.y <= 0) {
+                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::RIGHT;}
+                else {Face = Direction::UP;}
+            }
+            else if (ToTarget.x >= 0 && ToTarget.y > 0)  {
+                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::RIGHT;}
+                else {Face = Direction::DOWN;}
+            }
+            else if (ToTarget.x <= 0 && ToTarget.y <= 0)  {
+                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::LEFT;}
+                else {Face = Direction::UP;}
+            }
+            else if (ToTarget.x <= 0 && ToTarget.y > 0)  {
+                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::LEFT;}
+                else {Face = Direction::DOWN;}
+            }
+        }
+        else if (Aggro <= MinRange) {
+            Attacking = true;
+        }
+
+        CheckAttack();
+    }
+}
+
+// Return enemy physical collision dimensions
 Rectangle Enemy::GetCollisionRec()
 {
     return Rectangle 
@@ -389,6 +399,51 @@ Rectangle Enemy::GetCollisionRec()
         (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale - ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .30f,
         (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale - ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .25f
     };
+}
+
+// Return enemy attack collision dimensions
+Rectangle Enemy::GetAttackRec()
+{
+    switch (Face)
+    {
+        case Direction::DOWN:
+            return Rectangle
+            {
+                EnemyPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/6.f,
+                EnemyPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY * Scale),
+                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
+                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/3.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+            }; 
+        case Direction::LEFT: 
+            return Rectangle
+            {
+                EnemyPos.x - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/1.8f),
+                EnemyPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/6.f),
+                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/3.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
+                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+            }; 
+        case Direction::RIGHT:
+            return Rectangle
+            {
+                EnemyPos.x + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX * Scale)/1.2f,
+                EnemyPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/6.f),
+                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/3.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
+                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+            }; 
+        case Direction::UP:
+            return Rectangle
+            {
+                EnemyPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/6.f,
+                EnemyPos.y - CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/1.5f,
+                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
+                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/3.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+            };
+        default:
+            return Rectangle
+            {
+                
+            };
+    }
 }
 
 // -----------------------------------------

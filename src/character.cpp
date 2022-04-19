@@ -175,8 +175,6 @@ void Character::UndoMovement()
 void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, std::vector<Enemy>& Enemies)
 {
     DamageTime += GetFrameTime();
-    float UpdateTime {3.f/1.f};
-    float HurtUpdateTime{1.f};
     
     // Loop through all Props for collision
     for (auto& PropType:*Props) {
@@ -261,20 +259,10 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
     for (auto& Enemy:Enemies) {
 
         if (Enemy.IsAlive()) {
+
             // Check collision of Player against Enemy
             if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
-                // How often the hurt animation should play
-                if (DamageTime <= HurtUpdateTime) {
-                    CurrentSprite = &Hurt;
-                }
-                // How often health should decrease when colliding into enemy
-                if (DamageTime >= UpdateTime) {
-                    Hurting = true;
-                    if (Health > 0) {
-                        Health -= 1;
-                    }
-                    DamageTime = 0.f;
-                }
+                TakingDamage();
             }
             else {
                 Hurting = false;
@@ -290,6 +278,16 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                 else {
                     Enemy.Damaged(false);
                 }
+            }
+
+            // Check if Enemy Attack Collision is hitting Player
+            if (Enemy.IsAttacking()) {
+                if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetAttackRec())) {
+                    TakingDamage();
+                }
+            }
+            else {
+                Hurting = false;
             }
         }
         else {
@@ -514,6 +512,52 @@ void Character::IsAlive()
         Alive = true;
     }
 }
+
+// Manage Player animation when taking damage
+void Character::TakingDamage()
+{
+    float UpdateTime {3.f/1.f};
+    float HurtUpdateTime{1.f};
+    float KnockBack{2.f};
+
+    // How often the hurt animation should play
+    if (DamageTime <= HurtUpdateTime) {
+        CurrentSprite = &Hurt;
+    }
+    // How often health should decrease when colliding into enemy
+    if (DamageTime >= UpdateTime) {
+        Hurting = true;
+        if (Health > 0) {
+            Health -= 1;
+        }
+        DamageTime = 0.f;
+    }
+    else {
+        Hurting = false;
+    }
+
+    if (Hurting) {
+        // Knock player back a few units while hurt
+        if (DamageTime <= HurtUpdateTime) {
+            switch (Face) 
+            {
+                case Direction::UP:
+                    WorldPos.y += KnockBack;
+                    break;
+                case Direction::DOWN:
+                    WorldPos.y -= KnockBack;
+                    break;
+                case Direction::LEFT:
+                    WorldPos.x += KnockBack;
+                    break;
+                case Direction::RIGHT:
+                    WorldPos.x -= KnockBack;
+                    break;
+            }
+        }
+    }
+}
+
 // -------------------------------------------------------- //
 
 // Debug Function
