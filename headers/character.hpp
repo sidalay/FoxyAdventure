@@ -110,4 +110,5 @@ public:
         [x] add attack cooldown
         [x] add damage knockback
         [ ] add half-hearts to hp
+        [ ] redo attacking and combos to feel less clunky
 */
