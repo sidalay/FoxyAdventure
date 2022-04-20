@@ -1,3 +1,3 @@
 *.exe
-main.code-workspace
+*.code-workspace
 .VSCodeCounter
