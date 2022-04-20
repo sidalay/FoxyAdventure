@@ -3741,17 +3741,6 @@ namespace Game
     {
         std::vector<Enemy> Enemies{};
 
-        Enemy BrownBear
-        {
-            Sprite{"sprites/enemies/bear/brown_idle.png", 4, 4},
-            Sprite{"sprites/enemies/bear/brown_walk.png", 4, 4},
-            Sprite{"sprites/enemies/bear/brown_attack.png", 4, 4},
-            Sprite{"sprites/enemies/bear/brown_hurt.png", 1, 4},
-            Sprite{"sprites/enemies/bear/brown_death.png", 4, 4},
-            Vector2{1660, 3366}, &Window, &MapBG
-        };
-        Enemies.emplace_back(BrownBear);
-
         Enemy BrownBearTwo
         {
             Sprite{"sprites/enemies/bear/brown_idle.png", 4, 4},
@@ -3773,17 +3762,6 @@ namespace Game
             Vector2{2927, 1090}, &Window, &MapBG
         };
         Enemies.emplace_back(BrownBearThree);
-        
-        Enemy LightBrownBear
-        {
-            Sprite{"sprites/enemies/bear/lightbrown_idle.png", 4, 4},
-            Sprite{"sprites/enemies/bear/lightbrown_walk.png", 4, 4},
-            Sprite{"sprites/enemies/bear/lightbrown_attack.png", 4, 4},
-            Sprite{"sprites/enemies/bear/lightbrown_hurt.png", 1, 4},
-            Sprite{"sprites/enemies/bear/lightbrown_death.png", 4, 4},
-            Vector2{1750, 3366}, &Window, &MapBG
-        };
-        Enemies.emplace_back(LightBrownBear);
 
         Enemy LightBrownBearTwo
         {
@@ -3807,6 +3785,30 @@ namespace Game
         };
         Enemies.emplace_back(LightBrownBearThree);
 
+        // ----------------------------------- Test enemies below ------------------------------------
+
+        Enemy BrownBear
+        {
+            Sprite{"sprites/enemies/bear/brown_idle.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_walk.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_attack.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/bear/brown_death.png", 4, 4},
+            Vector2{1660, 3366}, &Window, &MapBG
+        };
+        Enemies.emplace_back(BrownBear);
+
+        Enemy LightBrownBear
+        {
+            Sprite{"sprites/enemies/bear/lightbrown_idle.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_walk.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_attack.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_death.png", 4, 4},
+            Vector2{1750, 3366}, &Window, &MapBG
+        };
+        Enemies.emplace_back(LightBrownBear);
+
         Enemy RedBeholder
         {
             Sprite{"sprites/enemies/beholder/red_idle.png", 4, 4},
@@ -3814,9 +3816,97 @@ namespace Game
             Sprite{"sprites/enemies/beholder/red_attack.png", 4, 4},
             Sprite{"sprites/enemies/beholder/red_hurt.png", 4, 4},
             Sprite{"sprites/enemies/beholder/red_death.png", 4, 4},
-            Vector2{1850, 3566}, &Window, &MapBG
+            Vector2{1550, 3966}, &Window, &MapBG
         };
         Enemies.emplace_back(RedBeholder);
+
+        Enemy WhiteGhost
+        {
+            Sprite{"sprites/enemies/ghost/white_idle.png", 4, 4},
+            Sprite{"sprites/enemies/ghost/white_walk.png", 4, 4},
+            Sprite{"sprites/enemies/ghost/white_attack.png", 4, 4},
+            Sprite{"sprites/enemies/ghost/white_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/ghost/white_death.png", 4, 4},
+            Vector2{1850, 3566}, &Window, &MapBG
+        };
+        Enemies.emplace_back(WhiteGhost);
+    
+        Enemy RedNecro
+        {
+            Sprite{"sprites/enemies/necromancer/red_idle.png", 4, 4},
+            Sprite{"sprites/enemies/necromancer/red_walk.png", 4, 4},
+            Sprite{"sprites/enemies/necromancer/red_attack.png", 4, 4},
+            Sprite{"sprites/enemies/necromancer/red_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/necromancer/red_death.png", 4, 4},
+            Vector2{1750, 3366}, &Window, &MapBG
+        };
+        Enemies.emplace_back(RedNecro);
+
+        Enemy AquaCreature
+        {
+            Sprite{"sprites/enemies/creature/aqua_idle.png", 4, 4},
+            Sprite{"sprites/enemies/creature/aqua_walk.png", 4, 4},
+            Sprite{"sprites/enemies/creature/aqua_attack.png", 4, 4},
+            Sprite{"sprites/enemies/creature/aqua_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/creature/aqua_death.png", 4, 4},
+            Vector2{1800, 3566}, &Window, &MapBG
+        };
+        Enemies.emplace_back(AquaCreature);
+
+        Enemy GreenImp
+        {
+            Sprite{"sprites/enemies/imp/green_idle.png", 4, 4},
+            Sprite{"sprites/enemies/imp/green_walk.png", 4, 4},
+            Sprite{"sprites/enemies/imp/green_attack.png", 4, 4},
+            Sprite{"sprites/enemies/imp/green_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/imp/green_death.png", 4, 4},
+            Vector2{1800, 3766}, &Window, &MapBG
+        };
+        Enemies.emplace_back(GreenImp);
+
+        Enemy PinkMushroom
+        {
+            Sprite{"sprites/enemies/mushroom/pink_idle.png", 4, 4},
+            Sprite{"sprites/enemies/mushroom/pink_walk.png", 4, 4},
+            Sprite{"sprites/enemies/mushroom/pink_attack.png", 4, 4},
+            Sprite{"sprites/enemies/mushroom/pink_hurt.png", 4, 4},
+            Sprite{"sprites/enemies/mushroom/pink_death.png", 4, 4},
+            Vector2{1500, 3666}, &Window, &MapBG
+        };
+        Enemies.emplace_back(PinkMushroom);
+
+        Enemy BlueShadow
+        {
+            Sprite{"sprites/enemies/shadow/blue_idle.png", 4, 4},
+            Sprite{"sprites/enemies/shadow/blue_walk.png", 4, 4},
+            Sprite{"sprites/enemies/shadow/blue_attack.png", 4, 4},
+            Sprite{"sprites/enemies/shadow/blue_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/shadow/blue_death.png", 4, 4},
+            Vector2{1800, 3666}, &Window, &MapBG
+        };
+        Enemies.emplace_back(BlueShadow);
+
+        Enemy BrownSpider
+        {
+            Sprite{"sprites/enemies/spider/brown_idle.png", 4, 4},
+            Sprite{"sprites/enemies/spider/brown_walk.png", 4, 4},
+            Sprite{"sprites/enemies/spider/brown_attack.png", 4, 4},
+            Sprite{"sprites/enemies/spider/brown_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/spider/brown_death.png", 4, 4},
+            Vector2{1600, 3666}, &Window, &MapBG
+        };
+        Enemies.emplace_back(BrownSpider);
+        
+        Enemy GreenToad
+        {
+            Sprite{"sprites/enemies/toad/green_idle.png", 4, 4},
+            Sprite{"sprites/enemies/toad/green_walk.png", 4, 4},
+            Sprite{"sprites/enemies/toad/green_attack.png", 4, 4},
+            Sprite{"sprites/enemies/toad/green_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/toad/green_death.png", 2, 4},
+            Vector2{1600, 3466}, &Window, &MapBG
+        };
+        Enemies.emplace_back(GreenToad);
 
         return Enemies;
     }
