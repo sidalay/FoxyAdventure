@@ -132,4 +132,5 @@ struct Enemies
         [ ] add heart loot drops
         [ ] add enemy types
         [ ] add 'boss' after defeating all of one enemy type
+        [ ] add tombstone for death animation?
 */
