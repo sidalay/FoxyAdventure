@@ -18,15 +18,15 @@ namespace Game
         // Initialize Character
         Character Champion
         {
-            Sprite{"sprites/characters/Fox_idle.png", 4, 4}, 
-            Sprite{"sprites/characters/Fox_walk.png", 4, 4},
-            Sprite{"sprites/characters/Fox_run.png", 4, 4}, 
-            Sprite{"sprites/characters/Fox_melee.png", 4, 4},
-            Sprite{"sprites/characters/Fox_hit.png", 2, 4}, 
-            Sprite{"sprites/characters/Fox_die.png", 1, 4},
-            Sprite{"sprites/characters/Sorcerer_push.png", 4, 4},
-            Sprite{"sprites/characters/Fox_sleeping.png", 4, 1}, 
-            Sprite{"sprites/characters/Sorcerer_itemGot.png", 1, 4},
+            Sprite{"sprites/characters/fox/Fox_idle.png", 4, 4}, 
+            Sprite{"sprites/characters/fox/Fox_walk.png", 4, 4},
+            Sprite{"sprites/characters/fox/Fox_run.png", 4, 4}, 
+            Sprite{"sprites/characters/fox/Fox_melee.png", 4, 4},
+            Sprite{"sprites/characters/fox/Fox_hit.png", 2, 4}, 
+            Sprite{"sprites/characters/fox/Fox_die.png", 1, 4},
+            Sprite{"sprites/characters/fox/Fox_push.png", 4, 4},
+            Sprite{"sprites/characters/fox/Fox_sleeping.png", 4, 1}, 
+            Sprite{"sprites/characters/fox/Fox_itemGot.png", 1, 4},
             &Window, &MapBG
         };
 
@@ -3743,69 +3743,80 @@ namespace Game
 
         Enemy BrownBear
         {
-            Sprite{"sprites/enemies/BrownBear_Idle.png", 4, 4},
-            Sprite{"sprites/enemies/BrownBear_Walk.png", 4, 4},
-            Sprite{"sprites/enemies/BrownBear_Attack.png", 4, 4},
-            Sprite{"sprites/enemies/BrownBear_Hurt.png", 1, 4},
-            Sprite{"sprites/enemies/BrownBear_Death.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_idle.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_walk.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_attack.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/bear/brown_death.png", 4, 4},
             Vector2{1660, 3366}, &Window, &MapBG
         };
         Enemies.emplace_back(BrownBear);
 
         Enemy BrownBearTwo
         {
-            Sprite{"sprites/enemies/BrownBear_Idle.png", 4, 4},
-            Sprite{"sprites/enemies/BrownBear_Walk.png", 4, 4},
-            Sprite{"sprites/enemies/BrownBear_Attack.png", 4, 4},
-            Sprite{"sprites/enemies/BrownBear_Hurt.png", 1, 4},
-            Sprite{"sprites/enemies/BrownBear_Death.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_idle.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_walk.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_attack.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/bear/brown_death.png", 4, 4},
             Vector2{2940, 740}, &Window, &MapBG
         };
         Enemies.emplace_back(BrownBearTwo);
 
         Enemy BrownBearThree
         {
-            Sprite{"sprites/enemies/BrownBear_Idle.png", 4, 4},
-            Sprite{"sprites/enemies/BrownBear_Walk.png", 4, 4},
-            Sprite{"sprites/enemies/BrownBear_Attack.png", 4, 4},
-            Sprite{"sprites/enemies/BrownBear_Hurt.png", 1, 4},
-            Sprite{"sprites/enemies/BrownBear_Death.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_idle.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_walk.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_attack.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/bear/brown_death.png", 4, 4},
             Vector2{2927, 1090}, &Window, &MapBG
         };
         Enemies.emplace_back(BrownBearThree);
         
         Enemy LightBrownBear
         {
-            Sprite{"sprites/enemies/LightBrownBear_Idle.png", 4, 4},
-            Sprite{"sprites/enemies/LightBrownBear_Walk.png", 4, 4},
-            Sprite{"sprites/enemies/LightBrownBear_Attack.png", 4, 4},
-            Sprite{"sprites/enemies/LightBrownBear_Hurt.png", 1, 4},
-            Sprite{"sprites/enemies/LightBrownBear_Death.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_idle.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_walk.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_attack.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_death.png", 4, 4},
             Vector2{1750, 3366}, &Window, &MapBG
         };
         Enemies.emplace_back(LightBrownBear);
 
         Enemy LightBrownBearTwo
         {
-            Sprite{"sprites/enemies/LightBrownBear_Idle.png", 4, 4},
-            Sprite{"sprites/enemies/LightBrownBear_Walk.png", 4, 4},
-            Sprite{"sprites/enemies/LightBrownBear_Attack.png", 4, 4},
-            Sprite{"sprites/enemies/LightBrownBear_Hurt.png", 1, 4},
-            Sprite{"sprites/enemies/LightBrownBear_Death.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_idle.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_walk.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_attack.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_death.png", 4, 4},
             Vector2{3102, 899}, &Window, &MapBG
         };
         Enemies.emplace_back(LightBrownBearTwo);
 
         Enemy LightBrownBearThree
         {
-            Sprite{"sprites/enemies/LightBrownBear_Idle.png", 4, 4},
-            Sprite{"sprites/enemies/LightBrownBear_Walk.png", 4, 4},
-            Sprite{"sprites/enemies/LightBrownBear_Attack.png", 4, 4},
-            Sprite{"sprites/enemies/LightBrownBear_Hurt.png", 1, 4},
-            Sprite{"sprites/enemies/LightBrownBear_Death.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_idle.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_walk.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_attack.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_death.png", 4, 4},
             Vector2{2835, 905}, &Window, &MapBG
         };
         Enemies.emplace_back(LightBrownBearThree);
+
+        Enemy RedBeholder
+        {
+            Sprite{"sprites/enemies/beholder/red_idle.png", 4, 4},
+            Sprite{"sprites/enemies/beholder/red_walk.png", 4, 4},
+            Sprite{"sprites/enemies/beholder/red_attack.png", 4, 4},
+            Sprite{"sprites/enemies/beholder/red_hurt.png", 4, 4},
+            Sprite{"sprites/enemies/beholder/red_death.png", 4, 4},
+            Vector2{1850, 3566}, &Window, &MapBG
+        };
+        Enemies.emplace_back(RedBeholder);
 
         return Enemies;
     }
