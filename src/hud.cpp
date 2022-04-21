@@ -17,6 +17,7 @@ void HUD::Tick()
 
 void HUD::Draw(int Health, Emotion State)
 {
+    // manage which fox portraits to draw
     switch (State)
     {
         case Emotion::ANGRY:
@@ -45,38 +46,34 @@ void HUD::Draw(int Health, Emotion State)
             break;
     }
 
-    Vector2 PosRowOne{100, 30};
-    Vector2 PosRowTwo{-50, 60};
-    Vector2 PosAdd{30,0};
+    Vector2 PosRowOne{100, 30}; // Heart row 1
+    Vector2 PosRowTwo{-50, 60}; // Heart row 2
+    Vector2 PosAdd{30,0};       // Spacing between each heart
 
-    DrawTextureEx(RecContainer, Vector2{15, 15}, 0.f, 5.f, WHITE);
-    DrawTextureEx(Fox, Vector2{20,20}, 0.f, Scale, WHITE);
+    DrawTextureEx(RecContainer, Vector2{15, 15}, 0.f, 5.f, WHITE);  // Draw Container holding the hearts
+    DrawTextureEx(Fox, Vector2{20,20}, 0.f, Scale, WHITE);          // Draw fox portrait
 
-    for (auto i = 1; i <= 10; ++i)
-    {
-        if (i <= 5)
-        {
-            if (i <= Health)
-            {
+    for (auto i = 1; i <= 10; ++i) {
+        // Draw hearts 1-5 on first row
+        if (i <= 5) {
+            if (i <= Health) {
                 DrawTextureEx(HeartFull, PosRowOne, 0.f, 3.f, WHITE);
             }
-            else 
-            {
+            else {
                 DrawTextureEx(HeartEmpty, PosRowOne, 0.f, 3.f, WHITE);
             }
         }
-        else
-        {
-            if (i <= Health)
-            {
+        // Draw hearts 6-10 on second row
+        else {
+            if (i <= Health) {
                 DrawTextureEx(HeartFull, PosRowTwo, 0.f, 3.f, WHITE);
             }
-            else 
-            {
+            else {
                 DrawTextureEx(HeartEmpty, PosRowTwo, 0.f, 3.f, WHITE);
             }
         }
 
+        // add spacing between each heart
         PosRowOne = Vector2Add(PosRowOne, PosAdd);
         PosRowTwo = Vector2Add(PosRowTwo, PosAdd);
     }

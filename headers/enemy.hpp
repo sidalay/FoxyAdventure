@@ -23,6 +23,12 @@ private:
     Sprite* CurrentSprite{&Idle};
     Sprite PreviousSprite{};
     std::vector<Sprite> Sprites{};
+    Texture2D LifeBarLeft_Full{LoadTexture("sprites/enemies/lifebar/round_left_filled.png")};
+    Texture2D LifeBarMiddle_Full{LoadTexture("sprites/enemies/lifebar/round_middle_filled.png")};
+    Texture2D LifeBarRight_Full{LoadTexture("sprites/enemies/lifebar/round_right_filled.png")};
+    Texture2D LifeBarLeft_Empty{LoadTexture("sprites/enemies/lifebar/round_left_empty.png")};
+    Texture2D LifeBarMiddle_Empty{LoadTexture("sprites/enemies/lifebar/round_middle_empty.png")};
+    Texture2D LifeBarRight_Empty{LoadTexture("sprites/enemies/lifebar/round_right_empty.png")};
 
     Vector2 EnemyPos{};                  // Where the character is on the screen
     Vector2 WorldPos{};                  // Where the character is in the world
@@ -35,7 +41,8 @@ private:
     
     static int MonsterDeaths;
     static int MonsterCount;
-    int Health{10};
+    int Health{5};
+    int MaxHP{};
     int LeftOrRight{};
     float Scale{3.2f};
     float Speed{1.4f};
@@ -73,7 +80,9 @@ public:
           Sprite Death,
           Vector2 WorldPos,
           Window* Screen,
-          Background* World);
+          Background* World,
+          int Health = 5,
+          float Scale = 3.2f);
     ~Enemy();
 
     void Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies);
@@ -92,6 +101,7 @@ public:
     void CheckAlive();
     void EnemyAI();
     void EnemyAggro(Vector2 HeroScreenPos);
+    void DrawHP();
 
     bool IsBlocked() {return Blocked;}
     bool IsAlive() {return Alive;}

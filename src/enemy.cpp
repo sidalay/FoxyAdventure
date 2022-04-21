@@ -10,7 +10,9 @@ Enemy::Enemy(Sprite Idle,
              Sprite Death,
              Vector2 WorldPos,
              Window* Screen,
-             Background* World)
+             Background* World,
+             int Health,
+             float Scale)
     : Idle{Idle},
       Walk{Walk},
       Attack{Attack},
@@ -18,7 +20,10 @@ Enemy::Enemy(Sprite Idle,
       Death{Death},
       WorldPos{WorldPos},
       Screen{Screen},
-      World{World}
+      World{World},
+      Health{Health},
+      MaxHP{Health},
+      Scale{Scale}
 {
     // Fill vector<Sprite*> with Sprite objects to easily loop through and call Sprite::Tick()
     Sprites.emplace_back(this->Idle);
@@ -86,6 +91,10 @@ void Enemy::Draw(Vector2 HeroWorldPos)
         }
         else {
             DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, WHITE);
+        }
+
+        if (Alive) {
+            DrawHP();
         }
     }
 }
@@ -317,7 +326,7 @@ void Enemy::TakingDamage()
         // This is where the enemy takes damage
         if (DamageTime >= UpdateTime) {
             if (Health > 0) {
-                Health -= 2;
+                Health -= 1;
             }
             DamageTime = 0.f;
         }
@@ -438,6 +447,59 @@ void Enemy::EnemyAggro(Vector2 HeroScreenPos)
         }
 
         CheckAttack();
+    }
+}
+
+// Draw enemy lifebar
+void Enemy::DrawHP()
+{
+    float LifeBarScale{2.f};
+    float SingleBarWidth{static_cast<float>(LifeBarLeft_Empty.width) * LifeBarScale};
+    float MaxBarWidth{SingleBarWidth * MaxHP};
+    // float CenterLifeBar {std::abs((MaxBarWidth - CurrentSprite->Texture.width * Scale)) * .11f};
+    Vector2 LifeBarPos{};                           // Where the lifebar is positioned
+    Vector2 LifeBarPosAdd{SingleBarWidth, 0};       // spacing between each life 'bar'
+
+    // center lifebar
+    if (MaxBarWidth > CurrentSprite->Texture.width * Scale) {
+        LifeBarPos = Vector2Subtract(EnemyPos, Vector2{MaxBarWidth * 0.11f, 20});
+    }
+    else {
+        LifeBarPos = Vector2Add(EnemyPos, Vector2{MaxBarWidth * 0.11f, -20});
+    }
+
+    for (auto i = 1; i <= MaxHP; ++i) {
+        if (i <= Health) {
+            // far left of lifebar
+            if (i == 1) {
+                DrawTextureEx(LifeBarLeft_Full, LifeBarPos, 0.f, LifeBarScale, WHITE);
+            }
+            // far right of lifebar
+            else if (i == MaxHP) {
+                DrawTextureEx(LifeBarRight_Full, LifeBarPos, 0.f, LifeBarScale, WHITE);
+            }
+            // middle of lifebar
+            else {
+                DrawTextureEx(LifeBarMiddle_Full, LifeBarPos, 0.f, LifeBarScale, WHITE);
+            }
+        }
+        else {
+            // far left of lifebar
+            if (i == 1) {
+                DrawTextureEx(LifeBarLeft_Empty, LifeBarPos, 0.f, LifeBarScale, WHITE);
+            }
+            // far right of lifebar
+            else if (i == MaxHP) {
+                DrawTextureEx(LifeBarRight_Empty, LifeBarPos, 0.f, 2.f, WHITE);
+            }
+            // middle of lifebar
+            else {
+                DrawTextureEx(LifeBarMiddle_Empty, LifeBarPos, 0.f, 2.f, WHITE);
+            }
+        }
+
+        // add spacing between each bar
+        LifeBarPos = Vector2Add(LifeBarPos, LifeBarPosAdd);
     }
 }
 
