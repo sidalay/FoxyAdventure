@@ -461,7 +461,7 @@ void Enemy::DrawHP()
     Vector2 LifeBarPosAdd{SingleBarWidth, 0};       // spacing between each life 'bar'
 
     // center lifebar
-    if (MaxBarWidth > CurrentSprite->Texture.width * Scale) {
+    if (MaxBarWidth > CurrentSprite->Texture.width) {
         LifeBarPos = Vector2Subtract(EnemyPos, Vector2{MaxBarWidth * 0.11f, 20});
     }
     else {
