@@ -456,17 +456,13 @@ void Enemy::DrawHP()
     float LifeBarScale{2.f};
     float SingleBarWidth{static_cast<float>(LifeBarLeft_Empty.width) * LifeBarScale};
     float MaxBarWidth{SingleBarWidth * MaxHP};
-    // float CenterLifeBar {std::abs((MaxBarWidth - CurrentSprite->Texture.width * Scale)) * .11f};
+    float CenterLifeBar {((MaxBarWidth/Scale) - CurrentSprite->Texture.width) * .10f};
     Vector2 LifeBarPos{};                           // Where the lifebar is positioned
     Vector2 LifeBarPosAdd{SingleBarWidth, 0};       // spacing between each life 'bar'
 
-    // center lifebar
-    if (MaxBarWidth > CurrentSprite->Texture.width) {
-        LifeBarPos = Vector2Subtract(EnemyPos, Vector2{MaxBarWidth * 0.11f, 20});
-    }
-    else {
-        LifeBarPos = Vector2Add(EnemyPos, Vector2{MaxBarWidth * 0.11f, -20});
-    }
+    // update lifebarpos to center of enemy sprite
+    LifeBarPos = Vector2Subtract(EnemyPos, Vector2{CenterLifeBar, 20});
+
 
     for (auto i = 1; i <= MaxHP; ++i) {
         if (i <= Health) {
