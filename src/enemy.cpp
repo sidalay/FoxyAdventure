@@ -456,7 +456,7 @@ void Enemy::DrawHP()
     float LifeBarScale{2.f};
     float SingleBarWidth{static_cast<float>(LifeBarLeft_Empty.width) * LifeBarScale};
     float MaxBarWidth{SingleBarWidth * MaxHP};
-    float CenterLifeBar {((MaxBarWidth/Scale) - CurrentSprite->Texture.width) * .10f};
+    float CenterLifeBar {(MaxBarWidth - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)*Scale ) / 2};
     Vector2 LifeBarPos{};                           // Where the lifebar is positioned
     Vector2 LifeBarPosAdd{SingleBarWidth, 0};       // spacing between each life 'bar'
 

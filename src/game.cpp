@@ -3816,7 +3816,7 @@ namespace Game
             Sprite{"sprites/enemies/beholder/red_attack.png", 4, 4},
             Sprite{"sprites/enemies/beholder/red_hurt.png", 4, 4},
             Sprite{"sprites/enemies/beholder/red_death.png", 4, 4},
-            Vector2{1550, 3466}, &Window, &MapBG, 10, 6.f
+            Vector2{1550, 3466}, &Window, &MapBG, 10
         };
         Enemies.emplace_back(RedBeholder);
 
