@@ -3794,7 +3794,7 @@ namespace Game
             Sprite{"sprites/enemies/bear/brown_attack.png", 4, 4},
             Sprite{"sprites/enemies/bear/brown_hurt.png", 1, 4},
             Sprite{"sprites/enemies/bear/brown_death.png", 4, 4},
-            Vector2{1660, 3366}, &Window, &MapBG, 10, 6.f
+            Vector2{1660, 3366}, &Window, &MapBG
         };
         Enemies.emplace_back(BrownBear);
 
@@ -3809,16 +3809,16 @@ namespace Game
         // };
         // Enemies.emplace_back(LightBrownBear);
 
-        // Enemy RedBeholder
-        // {
-        //     Sprite{"sprites/enemies/beholder/red_idle.png", 4, 4},
-        //     Sprite{"sprites/enemies/beholder/red_walk.png", 4, 4},
-        //     Sprite{"sprites/enemies/beholder/red_attack.png", 4, 4},
-        //     Sprite{"sprites/enemies/beholder/red_hurt.png", 4, 4},
-        //     Sprite{"sprites/enemies/beholder/red_death.png", 4, 4},
-        //     Vector2{1550, 3466}, &Window, &MapBG
-        // };
-        // Enemies.emplace_back(RedBeholder);
+        Enemy RedBeholder
+        {
+            Sprite{"sprites/enemies/beholder/red_idle.png", 4, 4},
+            Sprite{"sprites/enemies/beholder/red_walk.png", 4, 4},
+            Sprite{"sprites/enemies/beholder/red_attack.png", 4, 4},
+            Sprite{"sprites/enemies/beholder/red_hurt.png", 4, 4},
+            Sprite{"sprites/enemies/beholder/red_death.png", 4, 4},
+            Vector2{1550, 3466}, &Window, &MapBG
+        };
+        Enemies.emplace_back(RedBeholder);
 
         // Enemy WhiteGhost
         // {
@@ -3842,16 +3842,16 @@ namespace Game
         // };
         // Enemies.emplace_back(RedNecro);
 
-        // Enemy AquaCreature
-        // {
-        //     Sprite{"sprites/enemies/creature/aqua_idle.png", 4, 4},
-        //     Sprite{"sprites/enemies/creature/aqua_walk.png", 4, 4},
-        //     Sprite{"sprites/enemies/creature/aqua_attack.png", 4, 4},
-        //     Sprite{"sprites/enemies/creature/aqua_hurt.png", 1, 4},
-        //     Sprite{"sprites/enemies/creature/aqua_death.png", 4, 4},
-        //     Vector2{1800, 3566}, &Window, &MapBG
-        // };
-        // Enemies.emplace_back(AquaCreature);
+        Enemy AquaCreature
+        {
+            Sprite{"sprites/enemies/creature/aqua_idle.png", 4, 4},
+            Sprite{"sprites/enemies/creature/aqua_walk.png", 4, 4},
+            Sprite{"sprites/enemies/creature/aqua_attack.png", 4, 4},
+            Sprite{"sprites/enemies/creature/aqua_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/creature/aqua_death.png", 4, 4},
+            Vector2{1800, 3566}, &Window, &MapBG
+        };
+        Enemies.emplace_back(AquaCreature);
 
         // Enemy GreenImp
         // {
