@@ -70,6 +70,7 @@ private:
     bool Blocked{false};            // Whether enemy is colliding with an object or not
     bool Hurting{false};
     bool Intro{true};
+    bool OOB{false};
 
     Direction Face{Direction::DOWN};
 public:
@@ -143,5 +144,5 @@ struct Enemies
         [ ] add enemy types
         [ ] add 'boss' after defeating all of one enemy type
         [ ] add tombstone for death animation?
-        [ ] fix enemy collision rec
+        [x] fix enemy collision rec
 */

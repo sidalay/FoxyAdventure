@@ -86,11 +86,16 @@ void Enemy::Draw(Vector2 HeroWorldPos)
     if ((WorldPos.x >= (HeroWorldPos.x + 615) - (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) && (WorldPos.x <= (HeroWorldPos.x + 615) + (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) &&
         (WorldPos.y >= (HeroWorldPos.y + 335) - (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))) && (WorldPos.y <= (HeroWorldPos.y + 335) + (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))))
     {
-        if (Hurting) {
-            DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, RED);
+        if (!OOB) {
+            if (Hurting) {
+                DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, RED);
+            }
+            else {
+                DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, WHITE);
+            }
         }
         else {
-            DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, WHITE);
+            DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, PURPLE);
         }
 
         if (Alive) {
@@ -174,7 +179,11 @@ void Enemy::OutOfBounds()
         WorldPos.x + (Screen->x - EnemyPos.x) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
         WorldPos.y + (Screen->y - EnemyPos.y) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f) 
     {
-        UndoMovement();
+        // UndoMovement();
+        OOB = true;
+    }
+    else {
+        OOB = false;
     }
 }
 
@@ -456,13 +465,12 @@ void Enemy::DrawHP()
     float LifeBarScale{2.f};
     float SingleBarWidth{static_cast<float>(LifeBarLeft_Empty.width) * LifeBarScale};
     float MaxBarWidth{SingleBarWidth * MaxHP};
-    float CenterLifeBar {(MaxBarWidth - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)*Scale ) / 2};
+    float CenterLifeBar {(MaxBarWidth - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)*Scale ) / 2.f};
     Vector2 LifeBarPos{};                           // Where the lifebar is positioned
     Vector2 LifeBarPosAdd{SingleBarWidth, 0};       // spacing between each life 'bar'
 
     // update lifebarpos to center of enemy sprite
     LifeBarPos = Vector2Subtract(EnemyPos, Vector2{CenterLifeBar, 20});
-
 
     for (auto i = 1; i <= MaxHP; ++i) {
         if (i <= Health) {
@@ -504,10 +512,10 @@ Rectangle Enemy::GetCollisionRec()
 {
     return Rectangle 
     {
-        EnemyPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f,
-        EnemyPos.y + CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f,
-        (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale - ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .30f,
-        (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale - ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .25f
+        EnemyPos.x + ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .31f,
+        EnemyPos.y + ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .31f,
+        ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .40f,
+        ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .60f
     };
 }
 

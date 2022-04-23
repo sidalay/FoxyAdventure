@@ -3798,16 +3798,16 @@ namespace Game
         };
         Enemies.emplace_back(BrownBear);
 
-        // Enemy LightBrownBear
-        // {
-        //     Sprite{"sprites/enemies/bear/lightbrown_idle.png", 4, 4},
-        //     Sprite{"sprites/enemies/bear/lightbrown_walk.png", 4, 4},
-        //     Sprite{"sprites/enemies/bear/lightbrown_attack.png", 4, 4},
-        //     Sprite{"sprites/enemies/bear/lightbrown_hurt.png", 1, 4},
-        //     Sprite{"sprites/enemies/bear/lightbrown_death.png", 4, 4},
-        //     Vector2{1750, 3366}, &Window, &MapBG
-        // };
-        // Enemies.emplace_back(LightBrownBear);
+        Enemy LightBrownBear
+        {
+            Sprite{"sprites/enemies/bear/lightbrown_idle.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_walk.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_attack.png", 4, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/bear/lightbrown_death.png", 4, 4},
+            Vector2{1750, 3366}, &Window, &MapBG, 10, 6.f
+        };
+        Enemies.emplace_back(LightBrownBear);
 
         Enemy RedBeholder
         {
