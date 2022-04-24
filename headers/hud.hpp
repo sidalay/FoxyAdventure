@@ -26,9 +26,6 @@ private:
 
     float Scale{2.f};
 public:
-    HUD();
-    ~HUD();
-
     void Tick();
     void Draw(float Health, Emotion State);
 };
