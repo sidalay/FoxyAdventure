@@ -138,13 +138,13 @@ namespace Game
                 Prop.Tick(DeltaTime, Map);
 
         // Debugging --------------------------------------
-        if (Character.GetHealth() < 10)
+        if (Character.GetHealth() < 11)
             if (IsKeyPressed(KEY_RIGHT_BRACKET))
-                Character.AddHealth(1);
+                Character.AddHealth(0.5f);
 
         if (Character.GetHealth() > 0)
             if (IsKeyPressed(KEY_LEFT_BRACKET))
-                Character.AddHealth(-1);
+                Character.AddHealth(-0.5f);
 
         if (IsKeyPressed(KEY_PAGE_DOWN))
             Character.SetSleep();
@@ -225,6 +225,7 @@ namespace Game
         // Debugging info
         DrawText(TextFormat("Player.x: %i", (int)Character.GetWorldPos().x + 615), 20, 150, 20, WHITE);
         DrawText(TextFormat("Player.y: %i", (int)Character.GetWorldPos().y + 335), 20, 170, 20, WHITE);
+        DrawText(TextFormat("Player.HP: %i", (int)Character.GetHealth()), 20, 190, 20, WHITE);
         // DrawText(TextFormat("Enemy.x: %i", (int)Enemies.at(0).GetWorldPos().x), 20, 190, 20, WHITE);
         // DrawText(TextFormat("Enemy.y: %i", (int)Enemies.at(0).GetWorldPos().y), 20, 210, 20, WHITE);
         // DrawText(TextFormat("Blocked: %i", Enemies.at(0).IsBlocked()), 20, 230, 20, WHITE);
