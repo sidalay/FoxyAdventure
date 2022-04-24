@@ -393,8 +393,8 @@ void Character::CheckSleep()
         RunningTime += DeltaTime;    
 
         if (RunningTime >= UpdateTime) {
-            if (Health < 10) {
-                AddHealth(1);
+            if (Health < 10.f) {
+                AddHealth(0.5f);
                 RunningTime = 0.f;
             }
         }
@@ -404,7 +404,7 @@ void Character::CheckSleep()
 // manage character portraits 
 void Character::CheckEmotion()
 {
-    if (Health < 1)
+    if (Health < 1.f)
         State = Emotion::DEAD;
     else if (Attacking)
         State = Emotion::ANGRY;
@@ -412,13 +412,13 @@ void Character::CheckEmotion()
         State = Emotion::HURT;
     else if (Sleeping)
         State = Emotion::SLEEPING;
-    else if (Health >= 9)
+    else if (Health >= 10.f)
         State = Emotion::HAPPY;
-    else if (Health > 5 && Health < 9)
+    else if (Health > 6.f && Health < 10.f)
         State = Emotion::DEFAULT;
-    else if (Health > 2 && Health <= 5)
+    else if (Health > 3.f && Health <= 6.f)
         State = Emotion::NERVOUS;
-    else if (Health > 0 && Health <= 2)
+    else if (Health > 1.f && Health <= 3.f)
         State = Emotion::SAD;
 }
 
@@ -500,7 +500,7 @@ Rectangle Character::GetAttackRec()
 // Check if Player is Alive and if not set dead sprite
 void Character::IsAlive()
 {
-    if (Health <= 0)
+    if (Health <= 1.f)
     {
         Locked = true;
         Alive = false;
@@ -527,8 +527,8 @@ void Character::TakingDamage()
     // How often health should decrease when colliding into enemy
     if (DamageTime >= UpdateTime) {
         Hurting = true;
-        if (Health > 0) {
-            Health -= 1;
+        if (Health > 0.f) {
+            Health -= 0.5f;
         }
         DamageTime = 0.f;
     }
@@ -561,7 +561,7 @@ void Character::TakingDamage()
 // -------------------------------------------------------- //
 
 // Debug Function
-void Character::AddHealth(int HP)
+void Character::AddHealth(float HP)
 {
     Health += HP;
 }

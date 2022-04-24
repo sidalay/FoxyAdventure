@@ -30,7 +30,7 @@ public:
     ~HUD();
 
     void Tick();
-    void Draw(int Health, Emotion State);
+    void Draw(float Health, Emotion State);
 };
 
 #endif // HUD_HPP

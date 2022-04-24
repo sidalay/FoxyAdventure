@@ -40,7 +40,7 @@ private:
     Rectangle Source{};
     Rectangle Destination{};
     
-    int Health{10};
+    float Health{11.f};
     float Scale{1.5f};
     float Speed{1.0f};
     float RunningTime{};
@@ -90,7 +90,7 @@ public:
     void DrawIndicator();
     void TakingDamage();
 
-    int GetHealth() {return Health;}
+    float GetHealth() {return Health;}
     float GetSpeed() {return Speed;}
     Vector2 GetWorldPos() {return WorldPos;}
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}
@@ -100,7 +100,7 @@ public:
     Rectangle GetAttackRec();
 
     // Debug function
-    void AddHealth(int HP);
+    void AddHealth(float HP);
 };
 
 #endif // CHARACTER_HPP
