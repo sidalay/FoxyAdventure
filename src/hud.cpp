@@ -1,20 +1,5 @@
 #include "headers/hud.hpp"
 
-HUD::HUD()
-{
-
-}
-
-HUD::~HUD()
-{
-
-}
-
-void HUD::Tick()
-{
-
-}
-
 void HUD::Draw(float Health, Emotion State)
 {
     // manage which fox portraits to draw
