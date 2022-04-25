@@ -31,9 +31,9 @@ void HUD::Draw(float Health, Emotion State)
             break;
     }
 
-    Vector2 PosRowOne{100, 30}; // Heart row 1
-    Vector2 PosRowTwo{-50, 60}; // Heart row 2
-    Vector2 PosAdd{30,0};       // Spacing between each heart
+    Vector2 HeartRowOne{100, 30}; 
+    Vector2 HeartRowTwo{-50, 60}; 
+    Vector2 HeartSpacing{30,0}; 
     float MaxHP{10.f};
 
     DrawTextureEx(RecContainer, Vector2{15, 15}, 0.f, 5.f, WHITE);  // Draw Container holding the hearts
@@ -44,34 +44,34 @@ void HUD::Draw(float Health, Emotion State)
         if (i <= MaxHP/2.f) {
             if (i < Health) {
                 if ((i + .5f) == Health) {
-                    DrawTextureEx(HeartHalf, PosRowOne, 0.f, 3.f, WHITE);
+                    DrawTextureEx(HeartHalf, HeartRowOne, 0.f, 3.f, WHITE);
                 }
                 else {
-                    DrawTextureEx(HeartFull, PosRowOne, 0.f, 3.f, WHITE);
+                    DrawTextureEx(HeartFull, HeartRowOne, 0.f, 3.f, WHITE);
                 }
             }
             else {
-                DrawTextureEx(HeartEmpty, PosRowOne, 0.f, 3.f, WHITE);
+                DrawTextureEx(HeartEmpty, HeartRowOne, 0.f, 3.f, WHITE);
             }
         }
         // Draw hearts 6-10 on second row
         else {
             if (i < Health) {
                 if ((i + .5f) == Health) {
-                    DrawTextureEx(HeartHalf, PosRowTwo, 0.f, 3.f, WHITE);
+                    DrawTextureEx(HeartHalf, HeartRowTwo, 0.f, 3.f, WHITE);
                 }
                 else {
-                    DrawTextureEx(HeartFull, PosRowTwo, 0.f, 3.f, WHITE);
+                    DrawTextureEx(HeartFull, HeartRowTwo, 0.f, 3.f, WHITE);
                 }
             }
             else {
-                DrawTextureEx(HeartEmpty, PosRowTwo, 0.f, 3.f, WHITE);
+                DrawTextureEx(HeartEmpty, HeartRowTwo, 0.f, 3.f, WHITE);
             }
         }
 
         // add spacing between each heart
-        PosRowOne = Vector2Add(PosRowOne, PosAdd);
-        PosRowTwo = Vector2Add(PosRowTwo, PosAdd);
+        HeartRowOne = Vector2Add(HeartRowOne, HeartSpacing);
+        HeartRowTwo = Vector2Add(HeartRowTwo, HeartSpacing);
     }
 
     // Rectangle for debugging info (WorldPos, FPS, etc.)
