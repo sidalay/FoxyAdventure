@@ -264,9 +264,6 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
             if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
                 TakingDamage();
             }
-            else {
-                Hurting = false;
-            }
 
             // Check collision of Player's attack against Enemy
             if (!Enemy.IsInvulnerable()) {
@@ -286,12 +283,11 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                     TakingDamage();
                 }
             }
-            else {
+        }
+        if (Hurting) {
+            if (DamageTime >= 1.f) {
                 Hurting = false;
             }
-        }
-        else {
-            Hurting = false;
         }
     }
 }
@@ -518,44 +514,41 @@ void Character::TakingDamage()
 {
     float UpdateTime {3.f/1.f};
     float HurtUpdateTime{1.f};
-    float KnockBack{2.f};
+    // float KnockBack{2.f};
 
     // How often the hurt animation should play
     if (DamageTime <= HurtUpdateTime) {
         CurrentSprite = &Hurt;
+        Hurting = true;
     }
+
     // How often health should decrease when colliding into enemy
     if (DamageTime >= UpdateTime) {
-        Hurting = true;
         if (Health > 0.f) {
             Health -= 0.5f;
         }
         DamageTime = 0.f;
     }
-    else {
-        Hurting = false;
-    }
 
-    if (Hurting) {
-        // Knock player back a few units while hurt
-        if (DamageTime <= HurtUpdateTime) {
-            switch (Face) 
-            {
-                case Direction::UP:
-                    WorldPos.y += KnockBack;
-                    break;
-                case Direction::DOWN:
-                    WorldPos.y -= KnockBack;
-                    break;
-                case Direction::LEFT:
-                    WorldPos.x += KnockBack;
-                    break;
-                case Direction::RIGHT:
-                    WorldPos.x -= KnockBack;
-                    break;
-            }
-        }
-    }
+
+    // Knock player back a few units while hurt
+    // if (DamageTime <= HurtUpdateTime) {
+    //     switch (Face) 
+    //     {
+    //         case Direction::UP:
+    //             WorldPos.y += KnockBack;
+    //             break;
+    //         case Direction::DOWN:
+    //             WorldPos.y -= KnockBack;
+    //             break;
+    //         case Direction::LEFT:
+    //             WorldPos.x += KnockBack;
+    //             break;
+    //         case Direction::RIGHT:
+    //             WorldPos.x -= KnockBack;
+    //             break;
+    //     }
+    // }
 }
 
 // -------------------------------------------------------- //
