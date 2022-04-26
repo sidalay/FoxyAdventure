@@ -112,7 +112,16 @@ void Enemy::SpriteTick(float DeltaTime)
 {
     for (auto& Sprite:Sprites)
     {
-        Sprite.Tick(DeltaTime);
+        // Call Sprite::Tick() on all sprites that are NOT death sprite
+        if (&Sprite != &Sprites.at(4)) {
+            Sprite.Tick(DeltaTime);
+        }
+        // Don't call Sprite::Tick() on the death sprite until Dead=true so that it will start from FrameX=0 when it does need to play
+        else {
+            if (Dead) {
+                Sprite.Tick(DeltaTime);
+            }
+        }
     }
 }
 
@@ -352,23 +361,27 @@ void Enemy::TakingDamage()
 // Handle death animation
 void Enemy::CheckAlive(float DeltaTime) 
 {
-    float EndTime{3.5f/8.0f};
+    // Amount of time needed for death animation to complete beginning to end
+    float EndTime{1.35f};
 
     if (Health <= 0) {
-        IsAttacked = false;
-
         // Set to death sprite
         CurrentSprite = &Sprites.at(4);
         
-        if (!Dead) {
-            CurrentSprite->FrameX = 0;
-            Dead = true;
-            MonsterDeaths += 1;
-        }
+        // Turn off any TakingDamage() functionality
+        IsAttacked = false;
 
+        /* 
+            YES, Shivix, there is a reason for there to be a Dead AND Alive bool.
+            Dead=true will trigger some final Enemy::Tick() functionality.
+            Alive=false will turn off majority of Enemy::Tick().
+        */
+        Dead = true;
+
+        // Allow time for death animation to finish before setting alive=false which turns off SpriteTick()
         StopTime += DeltaTime;
-        
         if (StopTime >= EndTime) {
+            MonsterDeaths += 1;
             Alive = false;
         }
     }

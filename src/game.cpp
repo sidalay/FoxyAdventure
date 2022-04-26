@@ -3794,8 +3794,8 @@ namespace Game
             Sprite{"sprites/enemies/bear/brown_walk.png", 4, 4},
             Sprite{"sprites/enemies/bear/brown_attack.png", 4, 4},
             Sprite{"sprites/enemies/bear/brown_hurt.png", 1, 4},
-            Sprite{"sprites/enemies/bear/brown_death.png", 4, 4},
-            Vector2{1660, 3366}, &Window, &MapBG
+            Sprite{"sprites/enemies/bear/brown_death_tombstone.png", 11, 4},
+            Vector2{1800, 3566}, &Window, &MapBG
         };
         Enemies.emplace_back(BrownBear);
 
@@ -3805,8 +3805,8 @@ namespace Game
             Sprite{"sprites/enemies/bear/lightbrown_walk.png", 4, 4},
             Sprite{"sprites/enemies/bear/lightbrown_attack.png", 4, 4},
             Sprite{"sprites/enemies/bear/lightbrown_hurt.png", 1, 4},
-            Sprite{"sprites/enemies/bear/lightbrown_death.png", 4, 4},
-            Vector2{1750, 3366}, &Window, &MapBG, 10, 6.f
+            Sprite{"sprites/enemies/bear/lightbrown_death_tombstone.png", 11, 4},
+            Vector2{1750, 3366}, &Window, &MapBG, 4, 6.f
         };
         Enemies.emplace_back(LightBrownBear);
 
@@ -3850,7 +3850,7 @@ namespace Game
             Sprite{"sprites/enemies/creature/aqua_attack.png", 4, 4},
             Sprite{"sprites/enemies/creature/aqua_hurt.png", 1, 4},
             Sprite{"sprites/enemies/creature/aqua_death.png", 4, 4},
-            Vector2{1800, 3566}, &Window, &MapBG
+            Vector2{1660, 3366}, &Window, &MapBG
         };
         Enemies.emplace_back(AquaCreature);
 
