@@ -130,8 +130,8 @@ struct Enemies
 /* 
     TODO: 
         [x] figure out orientation when chasing   
-        [x] Add min range to enemy aggro         
-        [x] fix undo movement                    
+        [x] add min range to enemy aggro         
+        [x] implement new undo movement system                    
         [x] bounce back when being attacked      
         [x] add movement ai                      
         [x] implement attack
