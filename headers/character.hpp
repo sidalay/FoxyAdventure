@@ -110,6 +110,6 @@ public:
         [x] add attack cooldown
         [x] add damage knockback
         [x] add half-hearts to hp
-        [ ] fix hurt portrait not showing up
+        [x] fix hurt portrait not showing up
         [ ] redo attacking and combos to feel less clunky
 */

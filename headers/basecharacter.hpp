@@ -27,7 +27,7 @@ public:
     BaseCharacter();
     // void undoMovement();
     // Rectangle getCollisionRec();
-    virtual void Tick(float DeltaTime);
+    void Tick(float DeltaTime);
     float getHealth() const {return Health;}
 };
 
