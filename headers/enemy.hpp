@@ -147,10 +147,10 @@ struct Enemies
         [x] prevent enemies from 'overlapping' and walking over each other
         [ ] fix OutOfBounds if check parameters
         [x] add HP bars
-        [x] fix death animation
+        [x] fix death animation not ticking correctly
         [x] add tombstone for death animation
         [ ] add heart loot drops
-        [ ] add enemy types
+        [ ] add and implement enemy types
         [ ] add 'boss' after defeating all of one enemy type
         [x] fix enemy collision rec
 */
