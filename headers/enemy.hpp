@@ -41,7 +41,7 @@ private:
     
     static int MonsterDeaths;
     static int MonsterCount;
-    int Health{5};
+    int Health{3};
     int MaxHP{};
     int LeftOrRight{};
     float Scale{3.2f};
