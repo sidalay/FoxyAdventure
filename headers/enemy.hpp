@@ -10,6 +10,13 @@
 #include "headers/background.hpp"
 #include "headers/basecharacter.hpp"
 
+enum class EnemyType 
+{
+    BEAR, BEHOLDER, CREATURE, GHOST, 
+    IMP, MUSHROOM, NECROMANCER, SHADOW, 
+    SPIDER, TOAD, NORMAL, BOSS
+};
+
 struct Enemies;
 
 class Enemy : public BaseCharacter
