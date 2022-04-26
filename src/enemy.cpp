@@ -120,9 +120,9 @@ void Enemy::SpriteTick(float DeltaTime)
         if (&Sprite != &Sprites.at(4)) {
             Sprite.Tick(DeltaTime);
         }
-        // Don't call Sprite::Tick() on the death sprite until Dead=true so that it will start from FrameX=0 when it does need to play
+        // Don't call Sprite::Tick() on the death sprite until Dying=true so that it will start from FrameX=0 when it does need to play
         else {
-            if (Dead) {
+            if (Dying) {
                 Sprite.Tick(DeltaTime);
             }
         }
@@ -169,7 +169,7 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
     EnemyAggro(HeroScreenPos);
 
     // Check if moving OOB (THE IF CHECK NEEDS FIXING)
-    // OutOfBounds();
+    OutOfBounds();
 
     // Check for collision against player or props
     if (Alive) {
@@ -187,10 +187,10 @@ void Enemy::UndoMovement()
 // UndoMovement if enemy is moving out of bounds
 void Enemy::OutOfBounds()
 {
-    if (WorldPos.x + EnemyPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
-        WorldPos.y + EnemyPos.y < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f ||
-        WorldPos.x + (Screen->x - EnemyPos.x) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
-        WorldPos.y + (Screen->y - EnemyPos.y) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f) 
+    if (WorldPos.x + EnemyPos.x + 615 < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
+        WorldPos.y + EnemyPos.y + 335 < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f ||
+        WorldPos.x + (Screen->x - EnemyPos.x + 615) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
+        WorldPos.y + (Screen->y - EnemyPos.y + 335) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f) 
     {
         // UndoMovement();
         OOB = true;
@@ -284,7 +284,7 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWo
             Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), EnemyPos)), Speed)}; // Calculate the distance from this->Enemy to Enemy
             float AvoidEnemy{Vector2Length(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), EnemyPos))};
 
-            if ((AvoidEnemy <= MinRange) && !Dead) {
+            if ((AvoidEnemy <= MinRange) && !Dying) {
                 WorldPos = Vector2Subtract(WorldPos, ToTarget);
             }
         }
@@ -376,11 +376,10 @@ void Enemy::CheckAlive(float DeltaTime)
         IsAttacked = false;
 
         /* 
-            YES, Shivix, there is a reason for there to be a Dead AND Alive bool.
-            Dead=true will trigger some final Enemy::Tick() functionality.
+            Dying=true will trigger some final Enemy::Tick() functionality.
             Alive=false will turn off majority of Enemy::Tick().
         */
-        Dead = true;
+        Dying = true;
 
         // Allow time for death animation to finish before setting alive=false which turns off SpriteTick()
         StopTime += DeltaTime;
@@ -431,7 +430,8 @@ void Enemy::EnemyAI()
 // Handle enemy aggro range and chasing
 void Enemy::EnemyAggro(Vector2 HeroScreenPos)
 {
-    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50,50}), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Player
+    // Calculate the distance from Enemy to Player
+    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50,50}), EnemyPos)), Speed)}; 
     
     if (!Stopped && Alive && !Invulnerable && !Blocked) {
         Vector2 RadiusAroundEnemy{50,50};
