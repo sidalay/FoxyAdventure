@@ -41,7 +41,7 @@ private:
     
     static int MonsterDeaths;
     static int MonsterCount;
-    int Health{3};
+    int Health{};
     int MaxHP{};
     int LeftOrRight{};
     float Scale{3.2f};
@@ -82,7 +82,7 @@ public:
           Vector2 WorldPos,
           Window* Screen,
           Background* World,
-          int Health = 5,
+          int Health = 3,
           float Scale = 3.2f);
     ~Enemy();
 
