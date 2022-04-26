@@ -37,6 +37,9 @@ private:
     Texture2D LifeBarMiddle_Empty{LoadTexture("sprites/enemies/lifebar/round_middle_empty.png")};
     Texture2D LifeBarRight_Empty{LoadTexture("sprites/enemies/lifebar/round_right_empty.png")};
 
+    EnemyType Race{};                   // What kind of Enemy
+    EnemyType Type{};                   // If the Enemy is NORMAL or BOSS type
+
     Vector2 EnemyPos{};                  // Where the character is on the screen
     Vector2 WorldPos{};                  // Where the character is in the world
     Vector2 PrevWorldPos{};
@@ -86,6 +89,8 @@ public:
           Sprite Attack,
           Sprite Hurt,
           Sprite Death,
+          EnemyType Race,
+          EnemyType Type,
           Vector2 WorldPos,
           Window* Screen,
           Background* World,
@@ -150,7 +155,7 @@ struct Enemies
         [x] fix death animation not ticking correctly
         [x] add tombstone for death animation
         [ ] add heart loot drops
-        [ ] add and implement enemy types
+        [x] add and implement enemy types
         [ ] add 'boss' after defeating all of one enemy type
         [x] fix enemy collision rec
 */
