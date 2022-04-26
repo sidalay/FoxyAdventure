@@ -74,7 +74,7 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
 
         TakingDamage();
 
-        CheckAlive();
+        CheckAlive(DeltaTime);
     }
 
     CheckMovement(Props, HeroWorldPos, HeroScreenPos, Enemies);
@@ -350,24 +350,23 @@ void Enemy::TakingDamage()
 }
 
 // Handle death animation
-void Enemy::CheckAlive() 
+void Enemy::CheckAlive(float DeltaTime) 
 {
     float EndTime{3.5f/8.0f};
 
     if (Health <= 0) {
-
-        if (!Dead) {
-            Dead = true;
-            MonsterDeaths += 1;
-        }
-
         IsAttacked = false;
 
         // Set to death sprite
         CurrentSprite = &Sprites.at(4);
-        // CurrentSprite = Death;
+        
+        if (!Dead) {
+            CurrentSprite->FrameX = 0;
+            Dead = true;
+            MonsterDeaths += 1;
+        }
 
-        StopTime += GetFrameTime();
+        StopTime += DeltaTime;
         
         if (StopTime >= EndTime) {
             Alive = false;

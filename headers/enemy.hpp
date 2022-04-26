@@ -99,7 +99,7 @@ public:
     void UpdateSource();
     void TakingDamage();
     void Damaged(bool Attacked) {IsAttacked = Attacked;}
-    void CheckAlive();
+    void CheckAlive(float DeltaTime);
     void EnemyAI();
     void EnemyAggro(Vector2 HeroScreenPos);
     void DrawHP();
@@ -140,9 +140,10 @@ struct Enemies
         [x] prevent enemies from 'overlapping' and walking over each other
         [ ] fix OutOfBounds if check parameters
         [x] add HP bars
+        [ ] fix death animation
+        [ ] add tombstone for death animation?
         [ ] add heart loot drops
         [ ] add enemy types
         [ ] add 'boss' after defeating all of one enemy type
-        [ ] add tombstone for death animation?
         [x] fix enemy collision rec
 */
