@@ -1,3 +1,5 @@
 *.exe
 *.code-workspace
 .VSCodeCounter
+*.ase
+*.aseprite
