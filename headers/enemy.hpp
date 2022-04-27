@@ -150,6 +150,7 @@ public:
     Vector2 GetWorldPos() {return WorldPos;}
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}
     Vector2 GetEnemyPos() {return EnemyPos;}
+    EnemyType GetType() {return Type;}
     Rectangle GetCollisionRec();
     Rectangle GetAttackRec();
 };

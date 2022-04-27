@@ -258,35 +258,37 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
     // Loop through all Enemies for collision
     for (auto& Enemy:Enemies) {
 
-        if (Enemy.IsAlive()) {
+        if (Enemy.GetType() != EnemyType::NPC) {
+            if (Enemy.IsAlive()) {
 
-            // Check collision of Player against Enemy
-            if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
-                TakingDamage();
-            }
-
-            // Check collision of Player's attack against Enemy
-            if (!Enemy.IsInvulnerable()) {
-                if (Attacking) {
-                    if (CheckCollisionRecs(GetAttackRec(), Enemy.GetCollisionRec())) {
-                        Enemy.Damaged(true);
-                    }
-                }
-                else {
-                    Enemy.Damaged(false);
-                }
-            }
-
-            // Check if Enemy Attack Collision is hitting Player
-            if (Enemy.IsAttacking()) {
-                if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetAttackRec())) {
+                // Check collision of Player against Enemy
+                if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
                     TakingDamage();
                 }
+
+                // Check collision of Player's attack against Enemy
+                if (!Enemy.IsInvulnerable()) {
+                    if (Attacking) {
+                        if (CheckCollisionRecs(GetAttackRec(), Enemy.GetCollisionRec())) {
+                            Enemy.Damaged(true);
+                        }
+                    }
+                    else {
+                        Enemy.Damaged(false);
+                    }
+                }
+
+                // Check if Enemy Attack Collision is hitting Player
+                if (Enemy.IsAttacking()) {
+                    if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetAttackRec())) {
+                        TakingDamage();
+                    }
+                }
             }
-        }
-        if (Hurting) {
-            if (DamageTime >= 1.f) {
-                Hurting = false;
+            if (Hurting) {
+                if (DamageTime >= 1.f) {
+                    Hurting = false;
+                }
             }
         }
     }
