@@ -22,14 +22,24 @@ struct Enemies;
 class Enemy : public BaseCharacter
 {
 private:
+    // Enemy Sprites
     Sprite Idle{};
     Sprite Walk{};
     Sprite Attack{};
     Sprite Hurt{};
     Sprite Death{};
+
+    // Wildlife NPC sprites
+    Sprite NpcIdle{};
+    Sprite NpcIdleTwo{};
+    Sprite NpcWalk{};
+    Sprite NpcLazy{};
+    Sprite NpcSleep{};
+
     Sprite* CurrentSprite{&Idle};
     Sprite PreviousSprite{};
     std::vector<Sprite> Sprites{};
+
     Texture2D LifeBarLeft_Full{LoadTexture("sprites/enemies/lifebar/round_left_filled.png")};
     Texture2D LifeBarMiddle_Full{LoadTexture("sprites/enemies/lifebar/round_middle_filled.png")};
     Texture2D LifeBarRight_Full{LoadTexture("sprites/enemies/lifebar/round_right_filled.png")};
@@ -83,7 +93,9 @@ private:
     bool OOB{false};
 
     Direction Face{Direction::DOWN};
+
 public:
+    // Enemy constructor
     Enemy(Sprite Idle,
           Sprite Walk,
           Sprite Attack,
@@ -96,6 +108,18 @@ public:
           Background* World,
           int Health = 3,
           float Scale = 3.2f);
+    
+    // Wildlife NPC constructor
+    Enemy(Sprite NpcIdle,
+          Sprite NpcIdleTwo,
+          Sprite NpcWalk,
+          Sprite NpcLazy,
+          Sprite NpcSleep,
+          Vector2 WorldPos,
+          Window* Screen,
+          Background* World,
+          float Scale = 3.2f);
+
     ~Enemy();
 
     void Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies);

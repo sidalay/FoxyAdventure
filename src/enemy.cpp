@@ -52,6 +52,47 @@ Enemy::Enemy(Sprite Idle,
     LeftOrRight = RandomLeftRight(RNG);
 }
 
+Enemy::Enemy(Sprite NpcIdle,
+             Sprite NpcIdleTwo,
+             Sprite NpcWalk,
+             Sprite NpcLazy,
+             Sprite NpcSleep,
+             Vector2 WorldPos,
+             Window* Screen,
+             Background* World,
+             float Scale = 3.2f)
+    : NpcIdle{NpcIdle},
+      NpcIdleTwo{NpcIdleTwo},
+      NpcWalk{NpcWalk},
+      NpcLazy{NpcLazy},
+      NpcSleep{NpcSleep},
+      Type{EnemyType::NPC},
+      WorldPos{WorldPos},
+      Screen{Screen},
+      World{World},
+      Scale{Scale}
+{
+    // Fill vector<Sprite*> with Sprite objects to easily loop through and call Sprite::Tick()
+    Sprites.emplace_back(this->NpcIdle);
+    Sprites.emplace_back(this->NpcIdleTwo);
+    Sprites.emplace_back(this->NpcWalk);
+    Sprites.emplace_back(this->NpcLazy);
+    Sprites.emplace_back(this->NpcSleep);
+
+    // Generate RNG for current object used for randomizing AI movement
+    std::random_device Seed;
+    std::uniform_int_distribution<int> RandomRange{60, 80};
+    std::uniform_int_distribution<int> RandomIdleTime{5, 9};
+    std::uniform_int_distribution<int> RandomLeftRight{1, 10};
+    std::mt19937 RNG{std::mt19937{Seed()}};
+
+    MovementIdleTime = static_cast<float>(RandomIdleTime(RNG));
+    MoveXRange = RandomRange(RNG);
+    MoveYRange = RandomRange(RNG);
+    LeftOrRight = RandomLeftRight(RNG);
+}
+      
+
 Enemy::~Enemy()
 {
     /* 
