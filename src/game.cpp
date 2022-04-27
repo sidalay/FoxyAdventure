@@ -45,15 +45,7 @@ namespace Game
         // Start Game Loop
         while (!WindowShouldClose()) 
         {
-            if (State == GameState::RUNNING) {
-                Game::Tick(Window, MapBG, Champion, Props, Hud, Enemies);
-            }
-            else if (State == GameState::PAUSED) {
-
-            }
-            else if (State == GameState::GAMEOVER) {
-
-            }
+            Game::Tick(Window, MapBG, State, Champion, Props, Hud, Enemies);
         }
 
         // Clean-up
@@ -71,15 +63,24 @@ namespace Game
         SetExitKey(0);
     }
 
-    void Tick(Window& Window, Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies)
+    void Tick(Window& Window, Background& Map, GameState& State, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies)
     {
         Game::CheckScreenSizing(Window);
 
         BeginDrawing();
-        ClearBackground(BLACK);
 
-        Game::Update(Map, Character, Props, Enemies);
-        Game::Draw(Map, Character, Props, Hud, Enemies);
+        if (State == GameState::RUNNING) {
+            ClearBackground(BLACK);
+
+            Game::Update(Map, State, Character, Props, Enemies);
+            Game::Draw(Map, Character, Props, Hud, Enemies);
+        }
+        else if (State == GameState::PAUSED) {
+            ClearBackground(BLACK);
+
+            Game::PauseUpdate(State);
+            Game::PauseDraw();
+        }
 
         EndDrawing();
     }
@@ -122,8 +123,12 @@ namespace Game
     }
 
     // Manage Ticks for all objects
-    void Update(Background& Map, Character& Character, Props& Props, std::vector<Enemy>& Enemies)
+    void Update(Background& Map, GameState& State, Character& Character, Props& Props, std::vector<Enemy>& Enemies)
     {
+        if (IsKeyPressed(KEY_P)) {
+            State = GameState::PAUSED;
+        }
+
         // Create DeltaTime
         float DeltaTime{GetFrameTime()};
 
@@ -239,6 +244,22 @@ namespace Game
 
         Map.DrawMiniMap(Character.GetWorldPos());
 
+    }
+
+    // Manage Tick functions during pause menu
+    void PauseUpdate(GameState& State)
+    {
+        if (IsKeyPressed(KEY_P)) {
+            State = GameState::RUNNING;
+        }
+
+        // Add audio functionality here later
+    }
+
+    // Draw Pause sprite
+    void PauseDraw()
+    {
+        DrawTextureEx(LoadTexture("sprites/maps/PauseBackground.png"), Vector2{0.f,0.f}, 0.0f, 4.f, WHITE);
     }
 
     // Initialize props drawn under character
