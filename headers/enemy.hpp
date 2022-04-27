@@ -37,8 +37,8 @@ private:
     Texture2D LifeBarMiddle_Empty{LoadTexture("sprites/enemies/lifebar/round_middle_empty.png")};
     Texture2D LifeBarRight_Empty{LoadTexture("sprites/enemies/lifebar/round_right_empty.png")};
 
-    EnemyType Race{};                   // What kind of Enemy
-    EnemyType Type{};                   // If the Enemy is NORMAL or BOSS type
+    EnemyType Race{};                    // What kind of Enemy
+    EnemyType Type{};                    // If the Enemy is NORMAL, BOSS, or NPC type
 
     Vector2 EnemyPos{};                  // Where the character is on the screen
     Vector2 WorldPos{};                  // Where the character is in the world
@@ -158,4 +158,5 @@ struct Enemies
         [x] add and implement enemy types
         [ ] add 'boss' after defeating all of one enemy type
         [x] fix enemy collision rec
+        [ ] wildlife npcs
 */
