@@ -127,7 +127,7 @@ public:
     void SpriteTick(float DeltaTime);
     void CheckDirection();
     void CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies);
-    void WalkOrRun();
+    void WalkOrIdle();
     void UndoMovement();
     void OutOfBounds();
     void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies);

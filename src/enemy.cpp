@@ -60,7 +60,7 @@ Enemy::Enemy(Sprite NpcIdle,
              Vector2 WorldPos,
              Window* Screen,
              Background* World,
-             float Scale = 3.2f)
+             float Scale)
     : NpcIdle{NpcIdle},
       NpcIdleTwo{NpcIdleTwo},
       NpcWalk{NpcWalk},
@@ -78,6 +78,8 @@ Enemy::Enemy(Sprite NpcIdle,
     Sprites.emplace_back(this->NpcWalk);
     Sprites.emplace_back(this->NpcLazy);
     Sprites.emplace_back(this->NpcSleep);
+
+    CurrentSprite = &Sprites.at(0);
 
     // Generate RNG for current object used for randomizing AI movement
     std::random_device Seed;
@@ -109,17 +111,26 @@ Enemy::~Enemy()
 
 void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies)
 {
-    if (Alive) {
+    if (Type != EnemyType::NPC) {
+        if (Alive) {
+            SpriteTick(DeltaTime);
 
+            CheckDirection();
+            
+            WalkOrIdle();
+
+            TakingDamage();
+
+            CheckAlive(DeltaTime);
+        }
+    }
+    else {
         SpriteTick(DeltaTime);
 
         CheckDirection();
+
+        WalkOrIdle();
         
-        WalkOrRun();
-
-        TakingDamage();
-
-        CheckAlive(DeltaTime);
     }
 
     CheckMovement(Props, HeroWorldPos, HeroScreenPos, Enemies);
@@ -143,7 +154,7 @@ void Enemy::Draw(Vector2 HeroWorldPos)
             DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, PURPLE);
         }
 
-        if (Alive) {
+        if (Alive && (Type != EnemyType::NPC)) {
             DrawHP();
         }
     }
@@ -156,44 +167,75 @@ void Enemy::Draw(Vector2 HeroWorldPos)
 void Enemy::SpriteTick(float DeltaTime)
 {
     for (auto& Sprite:Sprites)
-    {
-        // Call Sprite::Tick() on all sprites that are NOT death sprite
-        if (&Sprite != &Sprites.at(4)) {
-            Sprite.Tick(DeltaTime);
-        }
-        // Don't call Sprite::Tick() on the death sprite until Dying=true so that it will start from FrameX=0 when it does need to play
-        else {
-            if (Dying) {
+    {   
+        if (Type != EnemyType::NPC) {
+            // Call Sprite::Tick() on all sprites that are NOT death sprite
+            if (&Sprite != &Sprites.at(4)) {
                 Sprite.Tick(DeltaTime);
             }
+            // Don't call Sprite::Tick() on the death sprite until Dying=true so that it will start from FrameX=0 when it does need to play
+            else {
+                if (Dying) {
+                    Sprite.Tick(DeltaTime);
+                }
+            }
+        }
+        else {
+            Sprite.Tick(DeltaTime);
         }
     }
 }
 
 // Check which orientation the character is facing
 void Enemy::CheckDirection()
-{
-    if (!Chasing) {
-        if (AIY < 0) Face = Direction::UP;
+{   
+    // NPC only has left and right orientation sprites
+    if (Type == EnemyType::NPC) {
         if (AIX < 0) Face = Direction::LEFT;
-        if (AIY > 0) Face = Direction::DOWN;
         if (AIX > 0) Face = Direction::RIGHT;
     }
+    else {
+        if (!Chasing) {
+            if (AIY < 0) Face = Direction::UP;
+            if (AIX < 0) Face = Direction::LEFT;
+            if (AIY > 0) Face = Direction::DOWN;
+            if (AIX > 0) Face = Direction::RIGHT;
+        }
+    }
 
-    switch (Face)
-    {
-        case Direction::DOWN: 
-            CurrentSprite->FrameY = 0;
-            break;
-        case Direction::LEFT: 
-            CurrentSprite->FrameY = 1;
-            break;
-        case Direction::RIGHT:
-            CurrentSprite->FrameY = 2;
-            break;
-        case Direction::UP: 
-            CurrentSprite->FrameY = 3;
-            break;
+    if (Type != EnemyType::NPC) {
+        switch (Face)
+        {
+            case Direction::DOWN: 
+                CurrentSprite->FrameY = 0;
+                break;
+            case Direction::LEFT: 
+                CurrentSprite->FrameY = 1;
+                break;
+            case Direction::RIGHT:
+                CurrentSprite->FrameY = 2;
+                break;
+            case Direction::UP: 
+                CurrentSprite->FrameY = 3;
+                break;
+        }
+    }
+    else {
+        switch (Face)
+        {
+            case Direction::DOWN: 
+                CurrentSprite->FrameY = 0;
+                break;
+            case Direction::LEFT: 
+                CurrentSprite->FrameY = 1;
+                break;
+            case Direction::RIGHT:
+                CurrentSprite->FrameY = 0;
+                break;
+            case Direction::UP: 
+                CurrentSprite->FrameY = 1;
+                break;
+        }
     }
 }
 
@@ -207,7 +249,9 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
     EnemyAI();
 
     // Chase Player
-    EnemyAggro(HeroScreenPos);
+    if (Type != EnemyType::NPC) {
+        EnemyAggro(HeroScreenPos);
+    }
 
     // Check if moving OOB (THE IF CHECK NEEDS FIXING)
     // OutOfBounds();
@@ -242,17 +286,28 @@ void Enemy::OutOfBounds()
 }
 
 // Check if Enemy is moving and change sprites if needed
-void Enemy::WalkOrRun()
+void Enemy::WalkOrIdle()
 {
+    // Assign walk sprite
     if (Chasing || Walking) 
     {
-        CurrentSprite = &Sprites.at(1);
-        // CurrentSprite = Walk;
+        if (Type == EnemyType::NPC) {
+            CurrentSprite = &Sprites.at(2);
+        }
+        else {
+            CurrentSprite = &Sprites.at(1);
+        }
     }
+    // Assign idle sprite
     else 
     {
-        CurrentSprite = &Sprites.at(0);
-        // CurrentSprite = Idle;
+        if (Type == EnemyType::NPC) {
+            // Need to add randomization to switch between two different idle sprites
+            CurrentSprite = &Sprites.at(0);
+        }
+        else {
+            CurrentSprite = &Sprites.at(0);
+        }
     }
 }
 
