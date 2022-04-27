@@ -247,7 +247,7 @@ namespace Game
         */
         std::vector<Prop> Placeholder
         {
-            Prop{"sprites/props/TreeClear.png", Vector2{0,0}, PropType::PLACEHOLDER, 4.f, false, true}
+            Prop{"sprites/placeholder/placeholder.png", Vector2{0,0}, PropType::PLACEHOLDER, 4.f, false, true}
         };
         Props.emplace_back(Placeholder);
 
