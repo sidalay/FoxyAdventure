@@ -11,6 +11,7 @@ namespace Game
         int FPS {144};                                           // Frames Per Second
         Game::Initialize(Window, FPS, "Cryptex Adventure");      // Create Window
         SetTraceLogLevel(LOG_WARNING);
+        GameState State{GameState::RUNNING};
 
         // Initialize Background
         Background MapBG{};
@@ -45,7 +46,15 @@ namespace Game
         // Start Game Loop
         while (!WindowShouldClose()) 
         {
-            Game::Tick(Window, MapBG, Champion, Props, Hud, Enemies);
+            if (State == GameState::RUNNING) {
+                Game::Tick(Window, MapBG, Champion, Props, Hud, Enemies);
+            }
+            else if (State == GameState::PAUSED) {
+
+            }
+            else if (State == GameState::GAMEOVER) {
+                
+            }
         }
 
         // Clean-up
