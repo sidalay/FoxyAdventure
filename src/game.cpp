@@ -3916,20 +3916,31 @@ namespace Game
             Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
             Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 7, 2},
             Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
-            Vector2{473, 2524}, &Window, &MapBG
+            EnemyType::FOX, Vector2{473, 2524}, &Window, &MapBG
         };
         Enemies.emplace_back(FoxFamOne);
         
-        // Enemy FoxFamTwo
-        // {
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 7, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
-        //     Vector2{247, 2524}, &Window, &MapBG
-        // };
-        // Enemies.emplace_back(FoxFamTwo);
+        Enemy FoxFamTwo
+        {
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 7, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
+            EnemyType::FOX, Vector2{247, 2524}, &Window, &MapBG
+        };
+        Enemies.emplace_back(FoxFamTwo);
+
+        Enemy FoxFamThree
+        {
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 7, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
+            EnemyType::FOX, Vector2{347, 2724}, &Window, &MapBG, 5.f
+        };
+        Enemies.emplace_back(FoxFamThree);
 
         return Enemies;
     }

@@ -14,7 +14,8 @@ enum class EnemyType
 {
     BEAR, BEHOLDER, CREATURE, GHOST, 
     IMP, MUSHROOM, NECROMANCER, SHADOW, 
-    SPIDER, TOAD, NORMAL, BOSS, NPC
+    SPIDER, TOAD, NORMAL, BOSS, NPC,
+    FOX, CROW, SQUIRREL
 };
 
 struct Enemies;
@@ -115,6 +116,7 @@ public:
           Sprite NpcWalk,
           Sprite NpcLazy,
           Sprite NpcSleep,
+          EnemyType Race,
           Vector2 WorldPos,
           Window* Screen,
           Background* World,
