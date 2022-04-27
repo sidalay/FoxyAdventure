@@ -244,16 +244,6 @@ void Enemy::OutOfBounds()
 // Check if Enemy is moving and change sprites if needed
 void Enemy::WalkOrRun()
 {
-    if (IsKeyDown(KEY_LEFT_SHIFT))
-    {
-        Speed = 1.6f;
-    }
-    else 
-    {
-        Speed = 1.4f;
-
-    }
-
     if (Chasing || Walking) 
     {
         CurrentSprite = &Sprites.at(1);
