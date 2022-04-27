@@ -14,7 +14,7 @@ enum class EnemyType
 {
     BEAR, BEHOLDER, CREATURE, GHOST, 
     IMP, MUSHROOM, NECROMANCER, SHADOW, 
-    SPIDER, TOAD, NORMAL, BOSS
+    SPIDER, TOAD, NORMAL, BOSS, NPC
 };
 
 struct Enemies;
