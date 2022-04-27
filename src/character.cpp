@@ -33,6 +33,8 @@ Character::Character(Sprite Idle,
     Sprites.emplace_back(&(this->Push));
     Sprites.emplace_back(&(this->Sleep));
     Sprites.emplace_back(&(this->ItemGrab));
+
+    WorldPos = Vector2Subtract(WorldPos, Offset);
 }
 
 Character::~Character()

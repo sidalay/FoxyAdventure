@@ -3938,9 +3938,31 @@ namespace Game
             Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
             Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 7, 2},
             Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
-            EnemyType::FOX, Vector2{347, 2724}, &Window, &MapBG, 5.f
+            EnemyType::FOX, Vector2{347, 2724}, &Window, &MapBG, 2.5f
         };
         Enemies.emplace_back(FoxFamThree);
+
+        Enemy FoxFamFour
+        {
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 7, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
+            EnemyType::FOX, Vector2{428, 2840}, &Window, &MapBG, 2.5f
+        };
+        Enemies.emplace_back(FoxFamFour);
+
+        Enemy FoxFamFive
+        {
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 7, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
+            EnemyType::FOX, Vector2{354, 2661}, &Window, &MapBG, 2.5f
+        };
+        Enemies.emplace_back(FoxFamFive);
 
         return Enemies;
     }
