@@ -33,12 +33,11 @@ namespace Game
 
         // Initialize Enemies
         std::vector<Enemy> Enemies{Game::InitializeEnemies(MapBG, Window)};
-        // Enemies Enemies{&Monsters};
 
         // Initialize HUD
         HUD Hud{};
 
-        // Initialize Props & Create a Props Struct
+        // Initialize Props
         std::vector<std::vector<Prop>> UnderProps{Game::InitializePropsUnder()};
         std::vector<std::vector<Prop>> OverProps{Game::InitializePropsOver()};
         Props Props{&UnderProps, &OverProps};
@@ -53,7 +52,7 @@ namespace Game
 
             }
             else if (State == GameState::GAMEOVER) {
-                
+
             }
         }
 
@@ -76,15 +75,12 @@ namespace Game
     {
         Game::CheckScreenSizing(Window);
 
-        // BEGIN DRAWING
         BeginDrawing();
         ClearBackground(BLACK);
 
-        // Tick & Draw Functions
         Game::Update(Map, Character, Props, Enemies);
         Game::Draw(Map, Character, Props, Hud, Enemies);
 
-        // END DRAWING
         EndDrawing();
     }
 
