@@ -14,20 +14,20 @@
 
 enum class GameState 
 {
-    MAINMENU, RUNNING, PAUSED, GAMEOVER
+    MAINMENU, RUNNING, PAUSED, GAMEOVER, TRANSITION
 };
 
 namespace Game 
 {
     void Run();
     void Initialize(Window& Window, int FPS, std::string Title);
-    void Tick(Window& Window, Background& Map, GameState& State, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Sprite>& PauseFox, int& PauseFoxIndex);
+    void Tick(Window& Window, Background& Map, GameState& State, GameState& PrevState, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Sprite>& PauseFox, int& PauseFoxIndex, float& Opacity, float& TransitionTime, float& TransitionInTime);
     void CheckScreenSizing(Window& Window);
     void SetFullScreen(Window& Window);
-    void Update(Background& Map, GameState& State, Character& Character, Props& Props, std::vector<Enemy>& Enemies);
+    void Update(Background& Map, GameState& State, GameState& PrevState, Character& Character, Props& Props, std::vector<Enemy>& Enemies);
     void Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies);
-    void PauseUpdate(GameState& State, std::vector<Sprite>& PauseFox, int& Index);
-    void PauseDraw(std::vector<Sprite>& PauseFox, const int Index);
+    void PauseUpdate(GameState& State, GameState& PrevState, std::vector<Sprite>& PauseFox, int& Index);
+    void PauseDraw(std::vector<Sprite>& PauseFox, GameState& State, const int Index);
 
     std::vector<std::vector<Prop>> InitializePropsUnder();
     std::vector<std::vector<Prop>> InitializePropsOver();

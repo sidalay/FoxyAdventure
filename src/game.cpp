@@ -12,6 +12,7 @@ namespace Game
         Game::Initialize(Window, FPS, "Cryptex Adventure");      // Create Window
         SetTraceLogLevel(LOG_WARNING);
         GameState State{GameState::RUNNING};
+        GameState NextState{};
 
         // Initialize Background
         Background MapBG{};
@@ -53,11 +54,14 @@ namespace Game
         PauseFox.emplace_back(PauseFoxRun);
         PauseFox.emplace_back(PauseFoxSleep);
         int PauseFoxIndex{0};
+        float Opacity{0.f};
+        float TransitionOutTime{0.f};
+        float TransitionInTime{0.f};
 
         // Start Game Loop
         while (!WindowShouldClose()) 
         {
-            Game::Tick(Window, MapBG, State, Champion, Props, Hud, Enemies, PauseFox, PauseFoxIndex);
+            Game::Tick(Window, MapBG, State, NextState, Champion, Props, Hud, Enemies, PauseFox, PauseFoxIndex, Opacity, TransitionOutTime, TransitionInTime);
         }
 
         // Clean-up
@@ -75,8 +79,9 @@ namespace Game
         SetExitKey(0);
     }
 
-    void Tick(Window& Window, Background& Map, GameState& State, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Sprite>& PauseFox, int& PauseFoxIndex)
+    void Tick(Window& Window, Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Sprite>& PauseFox, int& PauseFoxIndex, float& Opacity, float& TransitionOutTime, float& TransitionInTime)
     {
+        float MaxTime{0.3f};
         Game::CheckScreenSizing(Window);
 
         BeginDrawing();
@@ -84,14 +89,49 @@ namespace Game
         if (State == GameState::RUNNING) {
             ClearBackground(BLACK);
 
-            Game::Update(Map, State, Character, Props, Enemies);
+
+            Game::Update(Map, State, NextState, Character, Props, Enemies);
             Game::Draw(Map, Character, Props, Hud, Enemies);
+
+            if (TransitionOutTime < MaxTime) {
+                TransitionInTime = GetFrameTime();
+                DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, Opacity));
+                Opacity -= 0.01f;
+            }
+            else {
+                TransitionInTime = 0.f;
+                Opacity = 0.f;
+            }
+        }
+        else if (State == GameState::TRANSITION) {
+
+            if (TransitionOutTime < MaxTime) {
+                TransitionOutTime += GetFrameTime();
+                DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, Opacity));
+                Opacity += 0.01f;
+            }
+            else {
+                TransitionOutTime = 0.f;
+                Opacity = 1.f;
+                State = NextState;
+            }
         }
         else if (State == GameState::PAUSED) {
+
             ClearBackground(BLACK);
 
-            Game::PauseUpdate(State, PauseFox, PauseFoxIndex);
-            Game::PauseDraw(PauseFox, PauseFoxIndex);
+            Game::PauseUpdate(State, NextState, PauseFox, PauseFoxIndex);
+            Game::PauseDraw(PauseFox, State, PauseFoxIndex);
+
+            if (TransitionOutTime < MaxTime) {
+                TransitionInTime = GetFrameTime();
+                DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, Opacity));
+                Opacity -= 0.01f;
+            }
+            else {
+                TransitionInTime = 0.f;
+                Opacity = 0.f;
+            }
         }
 
         EndDrawing();
@@ -135,10 +175,11 @@ namespace Game
     }
 
     // Manage Ticks for all objects
-    void Update(Background& Map, GameState& State, Character& Character, Props& Props, std::vector<Enemy>& Enemies)
+    void Update(Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, std::vector<Enemy>& Enemies)
     {
         if (IsKeyPressed(KEY_P)) {
-            State = GameState::PAUSED;
+            NextState = GameState::PAUSED;
+            State = GameState::TRANSITION;
         }
 
         // Create DeltaTime
@@ -259,28 +300,34 @@ namespace Game
     }
 
     // Manage Tick functions during pause menu
-    void PauseUpdate(GameState& State, std::vector<Sprite>& PauseFox, int& Index)
+    void PauseUpdate(GameState& State, GameState& NextState, std::vector<Sprite>& PauseFox, int& Index)
     {
         if (IsKeyPressed(KEY_P)) {
+            NextState = GameState::RUNNING;
+            State = GameState::TRANSITION;
+            
+            // Add audio functionality here later
+
             ++Index;
             if (Index >= static_cast<int>(PauseFox.size())) {
                 Index = 0;
             }
-            State = GameState::RUNNING;
         }
-
-        for (auto& Fox:PauseFox) {
-            Fox.Tick(GetFrameTime());
+        else {
+            for (auto& Fox:PauseFox) {
+                Fox.Tick(GetFrameTime());
+            }
         }
-        // Add audio functionality here later
     }
 
     // Draw Pause sprite
-    void PauseDraw(std::vector<Sprite>& PauseFox, const int Index)
+    void PauseDraw(std::vector<Sprite>& PauseFox, GameState& State, const int Index)
     {
         DrawTextureEx(LoadTexture("sprites/maps/PauseBackground.png"), Vector2{0.f,0.f}, 0.0f, 4.f, WHITE);
 
-        DrawTexturePro(PauseFox.at(Index).Texture, PauseFox.at(Index).GetSourceRec(), PauseFox.at(Index).GetPosRec(Vector2{686.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
+        if (State != GameState::TRANSITION) {
+            DrawTexturePro(PauseFox.at(Index).Texture, PauseFox.at(Index).GetSourceRec(), PauseFox.at(Index).GetPosRec(Vector2{686.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
+        }
     }
 
     // Initialize props drawn under character
