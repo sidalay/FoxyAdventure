@@ -42,13 +42,22 @@ namespace Game
         std::vector<std::vector<Prop>> OverProps{Game::InitializePropsOver()};
         Props Props{&UnderProps, &OverProps};
 
-        // Initialize Sprite for Pause Menu
-        Sprite PauseFox{"sprites/characters/fox/Fox_sleeping.png", 4, 1};
+        // Initialize fox Sprites for Pause Menu
+        std::vector<Sprite> PauseFox{};
+        Sprite PauseFoxIdle{"sprites/characters/fox/Fox_idle.png", 4, 4};
+        Sprite PauseFoxWalk{"sprites/characters/fox/Fox_walk.png", 4, 4};
+        Sprite PauseFoxRun{"sprites/characters/fox/Fox_run.png", 4, 4};
+        Sprite PauseFoxSleep{"sprites/characters/fox/Fox_sleeping.png", 4, 1};
+        PauseFox.emplace_back(PauseFoxIdle);
+        PauseFox.emplace_back(PauseFoxWalk);
+        PauseFox.emplace_back(PauseFoxRun);
+        PauseFox.emplace_back(PauseFoxSleep);
+        int PauseFoxIndex{0};
 
         // Start Game Loop
         while (!WindowShouldClose()) 
         {
-            Game::Tick(Window, MapBG, State, PauseFox, Champion, Props, Hud, Enemies);
+            Game::Tick(Window, MapBG, State, Champion, Props, Hud, Enemies, PauseFox, PauseFoxIndex);
         }
 
         // Clean-up
@@ -66,7 +75,7 @@ namespace Game
         SetExitKey(0);
     }
 
-    void Tick(Window& Window, Background& Map, GameState& State, Sprite& PauseFox, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies)
+    void Tick(Window& Window, Background& Map, GameState& State, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Sprite>& PauseFox, int& PauseFoxIndex)
     {
         Game::CheckScreenSizing(Window);
 
@@ -81,8 +90,8 @@ namespace Game
         else if (State == GameState::PAUSED) {
             ClearBackground(BLACK);
 
-            Game::PauseUpdate(State, PauseFox);
-            Game::PauseDraw(PauseFox);
+            Game::PauseUpdate(State, PauseFox, PauseFoxIndex);
+            Game::PauseDraw(PauseFox, PauseFoxIndex);
         }
 
         EndDrawing();
@@ -250,22 +259,28 @@ namespace Game
     }
 
     // Manage Tick functions during pause menu
-    void PauseUpdate(GameState& State, Sprite& PauseFox)
+    void PauseUpdate(GameState& State, std::vector<Sprite>& PauseFox, int& Index)
     {
         if (IsKeyPressed(KEY_P)) {
+            ++Index;
+            if (Index >= static_cast<int>(PauseFox.size())) {
+                Index = 0;
+            }
             State = GameState::RUNNING;
         }
 
-        PauseFox.Tick(GetFrameTime());
+        for (auto& Fox:PauseFox) {
+            Fox.Tick(GetFrameTime());
+        }
         // Add audio functionality here later
     }
 
     // Draw Pause sprite
-    void PauseDraw(Sprite& PauseFox)
+    void PauseDraw(std::vector<Sprite>& PauseFox, const int Index)
     {
         DrawTextureEx(LoadTexture("sprites/maps/PauseBackground.png"), Vector2{0.f,0.f}, 0.0f, 4.f, WHITE);
 
-        DrawTexturePro(PauseFox.Texture, PauseFox.GetSourceRec(), PauseFox.GetPosRec(Vector2{686.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
+        DrawTexturePro(PauseFox.at(Index).Texture, PauseFox.at(Index).GetSourceRec(), PauseFox.at(Index).GetPosRec(Vector2{686.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
     }
 
     // Initialize props drawn under character
