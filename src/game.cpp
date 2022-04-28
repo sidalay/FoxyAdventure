@@ -159,7 +159,7 @@ namespace Game
             if (IsKeyPressed(KEY_LEFT_BRACKET))
                 Character.AddHealth(-0.5f);
 
-        if (IsKeyPressed(KEY_PAGE_DOWN))
+        if (IsKeyPressed(KEY_L))
             Character.SetSleep();
     }
 

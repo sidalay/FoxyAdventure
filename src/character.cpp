@@ -520,6 +520,11 @@ void Character::TakingDamage()
     float HurtUpdateTime{1.f};
     // float KnockBack{2.f};
 
+    // Cancel sleeping state if attacked
+    if (Sleeping) {
+        Sleeping = false;
+    }
+
     // How often the hurt animation should play
     if (DamageTime <= HurtUpdateTime) {
         CurrentSprite = &Hurt;
