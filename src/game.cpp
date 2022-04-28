@@ -303,6 +303,21 @@ namespace Game
     void PauseUpdate(GameState& State, GameState& NextState, std::vector<Sprite>& PauseFox, int& Index)
     {
         if (State != GameState::TRANSITION) {
+            if (IsKeyDown(KEY_L)) {
+                Index = 3;
+            }
+            else if (IsKeyDown(KEY_W) || IsKeyDown(KEY_A) || IsKeyDown(KEY_S) || IsKeyDown(KEY_D)) {
+                if (IsKeyDown(KEY_LEFT_SHIFT)) {
+                    Index = 2;
+                }
+                else {
+                    Index = 1;
+                }
+            }
+            else {
+                Index = 0;
+            }
+
             for (auto& Fox:PauseFox) {
                 Fox.Tick(GetFrameTime());
             }
@@ -314,10 +329,10 @@ namespace Game
             
             // Add audio functionality here later
 
-            ++Index;
-            if (Index >= static_cast<int>(PauseFox.size())) {
-                Index = 0;
-            }
+            // ++Index;
+            // if (Index >= static_cast<int>(PauseFox.size())) {
+            //     Index = 0;
+            // }
         }
     }
 
