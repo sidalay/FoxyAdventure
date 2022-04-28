@@ -53,15 +53,13 @@ namespace Game
         PauseFox.emplace_back(PauseFoxWalk);
         PauseFox.emplace_back(PauseFoxRun);
         PauseFox.emplace_back(PauseFoxSleep);
-        int PauseFoxIndex{0};
-        float Opacity{0.f};
-        float TransitionOutTime{0.f};
-        float TransitionInTime{0.f};
+
+        GameInfo GameInfo{0, 0.f, 0.f, 0.f};
 
         // Start Game Loop
         while (!WindowShouldClose()) 
         {
-            Game::Tick(Window, MapBG, State, NextState, Champion, Props, Hud, Enemies, PauseFox, PauseFoxIndex, Opacity, TransitionOutTime, TransitionInTime);
+            Game::Tick(Window, MapBG, State, NextState, Champion, Props, Hud, Enemies, PauseFox, GameInfo);
         }
 
         // Clean-up
@@ -79,9 +77,9 @@ namespace Game
         SetExitKey(0);
     }
 
-    void Tick(Window& Window, Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Sprite>& PauseFox, int& PauseFoxIndex, float& Opacity, float& TransitionOutTime, float& TransitionInTime)
+    void Tick(Window& Window, Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Sprite>& PauseFox, GameInfo& GameInfo)
     {
-        float MaxTime{0.3f};
+        float MaxTransitionTime{0.3f};
         Game::CheckScreenSizing(Window);
 
         BeginDrawing();
@@ -93,26 +91,26 @@ namespace Game
             Game::Update(Map, State, NextState, Character, Props, Enemies);
             Game::Draw(Map, Character, Props, Hud, Enemies);
 
-            if (TransitionOutTime < MaxTime) {
-                TransitionInTime = GetFrameTime();
-                DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, Opacity));
-                Opacity -= 0.01f;
+            if (GameInfo.TransitionOutTime < MaxTransitionTime) {
+                GameInfo.TransitionInTime = GetFrameTime();
+                DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, GameInfo.Opacity));
+                GameInfo.Opacity -= 0.01f;
             }
             else {
-                TransitionInTime = 0.f;
-                Opacity = 0.f;
+                GameInfo.TransitionInTime = 0.f;
+                GameInfo.Opacity = 0.f;
             }
         }
         else if (State == GameState::TRANSITION) {
 
-            if (TransitionOutTime < MaxTime) {
-                TransitionOutTime += GetFrameTime();
-                DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, Opacity));
-                Opacity += 0.01f;
+            if (GameInfo.TransitionOutTime < MaxTransitionTime) {
+                GameInfo.TransitionOutTime += GetFrameTime();
+                DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, GameInfo.Opacity));
+                GameInfo.Opacity += 0.01f;
             }
             else {
-                TransitionOutTime = 0.f;
-                Opacity = 1.f;
+                GameInfo.TransitionOutTime = 0.f;
+                GameInfo.Opacity = 1.f;
                 State = NextState;
             }
         }
@@ -120,17 +118,17 @@ namespace Game
 
             ClearBackground(BLACK);
 
-            Game::PauseUpdate(State, NextState, PauseFox, PauseFoxIndex);
-            Game::PauseDraw(PauseFox, State, PauseFoxIndex);
+            Game::PauseUpdate(State, NextState, PauseFox, GameInfo.PauseFoxIndex);
+            Game::PauseDraw(PauseFox, State, GameInfo.PauseFoxIndex);
 
-            if (TransitionOutTime < MaxTime) {
-                TransitionInTime = GetFrameTime();
-                DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, Opacity));
-                Opacity -= 0.01f;
+            if (GameInfo.TransitionOutTime < MaxTransitionTime) {
+                GameInfo.TransitionInTime = GetFrameTime();
+                DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, GameInfo.Opacity));
+                GameInfo.Opacity -= 0.01f;
             }
             else {
-                TransitionInTime = 0.f;
-                Opacity = 0.f;
+                GameInfo.TransitionInTime = 0.f;
+                GameInfo.Opacity = 0.f;
             }
         }
 
@@ -177,40 +175,42 @@ namespace Game
     // Manage Ticks for all objects
     void Update(Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, std::vector<Enemy>& Enemies)
     {
+        if (State != GameState::TRANSITION) {
+            // Create DeltaTime
+            float DeltaTime{GetFrameTime()};
+
+            // Call Ticks
+            Map.Tick(Character.GetWorldPos());
+            Character.Tick(DeltaTime, Props, Enemies);
+
+            for (auto& Enemy:Enemies)
+                Enemy.Tick(DeltaTime, Props, Character.GetWorldPos(), Character.GetCharPos(), Enemies);
+
+            for (auto& Proptype:*Props.Under)
+                for (auto& Prop:Proptype)
+                    Prop.Tick(DeltaTime, Map);
+
+            for (auto& Proptype:*Props.Over)
+                for (auto& Prop:Proptype)
+                    Prop.Tick(DeltaTime, Map);
+
+            // Debugging --------------------------------------
+            if (Character.GetHealth() < 11)
+                if (IsKeyPressed(KEY_RIGHT_BRACKET))
+                    Character.AddHealth(0.5f);
+
+            if (Character.GetHealth() > 0)
+                if (IsKeyPressed(KEY_LEFT_BRACKET))
+                    Character.AddHealth(-0.5f);
+
+            if (IsKeyPressed(KEY_L))
+                Character.SetSleep();
+        }
+
         if (IsKeyPressed(KEY_P)) {
             NextState = GameState::PAUSED;
             State = GameState::TRANSITION;
         }
-
-        // Create DeltaTime
-        float DeltaTime{GetFrameTime()};
-
-        // Call Ticks
-        Map.Tick(Character.GetWorldPos());
-        Character.Tick(DeltaTime, Props, Enemies);
-
-        for (auto& Enemy:Enemies)
-            Enemy.Tick(DeltaTime, Props, Character.GetWorldPos(), Character.GetCharPos(), Enemies);
-
-        for (auto& Proptype:*Props.Under)
-            for (auto& Prop:Proptype)
-                Prop.Tick(DeltaTime, Map);
-
-        for (auto& Proptype:*Props.Over)
-            for (auto& Prop:Proptype)
-                Prop.Tick(DeltaTime, Map);
-
-        // Debugging --------------------------------------
-        if (Character.GetHealth() < 11)
-            if (IsKeyPressed(KEY_RIGHT_BRACKET))
-                Character.AddHealth(0.5f);
-
-        if (Character.GetHealth() > 0)
-            if (IsKeyPressed(KEY_LEFT_BRACKET))
-                Character.AddHealth(-0.5f);
-
-        if (IsKeyPressed(KEY_L))
-            Character.SetSleep();
     }
 
     // Call Draw functions for all objects
@@ -302,6 +302,12 @@ namespace Game
     // Manage Tick functions during pause menu
     void PauseUpdate(GameState& State, GameState& NextState, std::vector<Sprite>& PauseFox, int& Index)
     {
+        if (State != GameState::TRANSITION) {
+            for (auto& Fox:PauseFox) {
+                Fox.Tick(GetFrameTime());
+            }
+        }
+
         if (IsKeyPressed(KEY_P)) {
             NextState = GameState::RUNNING;
             State = GameState::TRANSITION;
@@ -311,11 +317,6 @@ namespace Game
             ++Index;
             if (Index >= static_cast<int>(PauseFox.size())) {
                 Index = 0;
-            }
-        }
-        else {
-            for (auto& Fox:PauseFox) {
-                Fox.Tick(GetFrameTime());
             }
         }
     }

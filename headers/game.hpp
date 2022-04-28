@@ -17,11 +17,19 @@ enum class GameState
     MAINMENU, RUNNING, PAUSED, GAMEOVER, TRANSITION
 };
 
+struct GameInfo
+{
+    int PauseFoxIndex{};
+    float Opacity{0.f};
+    float TransitionInTime{0.f};
+    float TransitionOutTime{0.f};
+};
+
 namespace Game 
 {
     void Run();
     void Initialize(Window& Window, int FPS, std::string Title);
-    void Tick(Window& Window, Background& Map, GameState& State, GameState& PrevState, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Sprite>& PauseFox, int& PauseFoxIndex, float& Opacity, float& TransitionTime, float& TransitionInTime);
+    void Tick(Window& Window, Background& Map, GameState& State, GameState& PrevState, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Sprite>& PauseFox, GameInfo& GameInfo);
     void CheckScreenSizing(Window& Window);
     void SetFullScreen(Window& Window);
     void Update(Background& Map, GameState& State, GameState& PrevState, Character& Character, Props& Props, std::vector<Enemy>& Enemies);
