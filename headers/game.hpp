@@ -21,13 +21,13 @@ namespace Game
 {
     void Run();
     void Initialize(Window& Window, int FPS, std::string Title);
-    void Tick(Window& Window, Background& Map, GameState& State, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies);
+    void Tick(Window& Window, Background& Map, GameState& State, Sprite& PauseFox, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies);
     void CheckScreenSizing(Window& Window);
     void SetFullScreen(Window& Window);
     void Update(Background& Map, GameState& State, Character& Character, Props& Props, std::vector<Enemy>& Enemies);
     void Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies);
-    void PauseUpdate(GameState& State);
-    void PauseDraw();
+    void PauseUpdate(GameState& State, Sprite& PauseFox);
+    void PauseDraw(Sprite& PauseFox);
 
     std::vector<std::vector<Prop>> InitializePropsUnder();
     std::vector<std::vector<Prop>> InitializePropsOver();

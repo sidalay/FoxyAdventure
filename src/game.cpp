@@ -42,10 +42,13 @@ namespace Game
         std::vector<std::vector<Prop>> OverProps{Game::InitializePropsOver()};
         Props Props{&UnderProps, &OverProps};
 
+        // Initialize Sprite for Pause Menu
+        Sprite PauseFox{"sprites/characters/fox/Fox_sleeping.png", 4, 1};
+
         // Start Game Loop
         while (!WindowShouldClose()) 
         {
-            Game::Tick(Window, MapBG, State, Champion, Props, Hud, Enemies);
+            Game::Tick(Window, MapBG, State, PauseFox, Champion, Props, Hud, Enemies);
         }
 
         // Clean-up
@@ -63,7 +66,7 @@ namespace Game
         SetExitKey(0);
     }
 
-    void Tick(Window& Window, Background& Map, GameState& State, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies)
+    void Tick(Window& Window, Background& Map, GameState& State, Sprite& PauseFox, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies)
     {
         Game::CheckScreenSizing(Window);
 
@@ -78,8 +81,8 @@ namespace Game
         else if (State == GameState::PAUSED) {
             ClearBackground(BLACK);
 
-            Game::PauseUpdate(State);
-            Game::PauseDraw();
+            Game::PauseUpdate(State, PauseFox);
+            Game::PauseDraw(PauseFox);
         }
 
         EndDrawing();
@@ -247,19 +250,22 @@ namespace Game
     }
 
     // Manage Tick functions during pause menu
-    void PauseUpdate(GameState& State)
+    void PauseUpdate(GameState& State, Sprite& PauseFox)
     {
         if (IsKeyPressed(KEY_P)) {
             State = GameState::RUNNING;
         }
 
+        PauseFox.Tick(GetFrameTime());
         // Add audio functionality here later
     }
 
     // Draw Pause sprite
-    void PauseDraw()
+    void PauseDraw(Sprite& PauseFox)
     {
         DrawTextureEx(LoadTexture("sprites/maps/PauseBackground.png"), Vector2{0.f,0.f}, 0.0f, 4.f, WHITE);
+
+        DrawTexturePro(PauseFox.Texture, PauseFox.GetSourceRec(), PauseFox.GetPosRec(Vector2{686.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
     }
 
     // Initialize props drawn under character
