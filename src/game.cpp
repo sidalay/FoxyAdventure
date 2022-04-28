@@ -44,22 +44,35 @@ namespace Game
         Props Props{&UnderProps, &OverProps};
 
         // Initialize fox Sprites for Pause Menu
-        std::vector<Sprite> PauseFox{};
-        Sprite PauseFoxIdle{"sprites/characters/fox/Fox_idle.png", 4, 4};
-        Sprite PauseFoxWalk{"sprites/characters/fox/Fox_walk.png", 4, 4};
-        Sprite PauseFoxRun{"sprites/characters/fox/Fox_run.png", 4, 4};
-        Sprite PauseFoxSleep{"sprites/characters/fox/Fox_sleeping.png", 4, 1};
-        PauseFox.emplace_back(PauseFoxIdle);
-        PauseFox.emplace_back(PauseFoxWalk);
-        PauseFox.emplace_back(PauseFoxRun);
-        PauseFox.emplace_back(PauseFoxSleep);
+        std::array<Sprite, 5> PauseFox
+        {
+            Sprite{"sprites/characters/fox/Fox_idle.png", 4, 4},
+            Sprite{"sprites/characters/fox/Fox_walk.png", 4, 4},
+            Sprite{"sprites/characters/fox/Fox_run.png", 4, 4},
+            Sprite{"sprites/characters/fox/Fox_sleeping.png", 4, 1},
+            Sprite{"sprites/characters/fox/Fox_melee.png", 4, 1}
+        };
+
+        // Initialize button textures for Pause Menu
+        std::array<Texture2D, 9> Buttons 
+        {
+            LoadTexture("sprites/buttons/W.png"),
+            LoadTexture("sprites/buttons/A.png"),
+            LoadTexture("sprites/buttons/S.png"),
+            LoadTexture("sprites/buttons/D.png"),
+            LoadTexture("sprites/buttons/L.png"),
+            LoadTexture("sprites/buttons/M.png"),
+            LoadTexture("sprites/buttons/Shift.png"),
+            LoadTexture("sprites/buttons/Space.png"),
+            LoadTexture("sprites/buttons/Lmouse.png")
+        };
 
         GameInfo GameInfo{0, 0.f, 0.f, 0.f};
 
         // Start Game Loop
         while (!WindowShouldClose()) 
         {
-            Game::Tick(Window, MapBG, State, NextState, Champion, Props, Hud, Enemies, PauseFox, GameInfo);
+            Game::Tick(Window, MapBG, State, NextState, Champion, Props, Hud, Enemies, PauseFox, Buttons, GameInfo);
         }
 
         // Clean-up
@@ -77,7 +90,7 @@ namespace Game
         SetExitKey(0);
     }
 
-    void Tick(Window& Window, Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Sprite>& PauseFox, GameInfo& GameInfo)
+    void Tick(Window& Window, Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameInfo& GameInfo)
     {
         float MaxTransitionTime{0.3f};
         Game::CheckScreenSizing(Window);
@@ -118,8 +131,8 @@ namespace Game
 
             ClearBackground(BLACK);
 
-            Game::PauseUpdate(State, NextState, PauseFox, GameInfo.PauseFoxIndex);
-            Game::PauseDraw(PauseFox, State, GameInfo.PauseFoxIndex);
+            Game::PauseUpdate(State, NextState, PauseFox, Buttons, GameInfo.PauseFoxIndex);
+            Game::PauseDraw(PauseFox, Buttons, State, GameInfo.PauseFoxIndex);
 
             if (GameInfo.TransitionOutTime < MaxTransitionTime) {
                 GameInfo.TransitionInTime = GetFrameTime();
@@ -300,22 +313,25 @@ namespace Game
     }
 
     // Manage Tick functions during pause menu
-    void PauseUpdate(GameState& State, GameState& NextState, std::vector<Sprite>& PauseFox, int& Index)
+    void PauseUpdate(GameState& State, GameState& NextState, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, int& PauseFoxIndex)
     {
         if (State != GameState::TRANSITION) {
             if (IsKeyDown(KEY_L)) {
-                Index = 3;
+                PauseFoxIndex = 3;
             }
             else if (IsKeyDown(KEY_W) || IsKeyDown(KEY_A) || IsKeyDown(KEY_S) || IsKeyDown(KEY_D)) {
                 if (IsKeyDown(KEY_LEFT_SHIFT)) {
-                    Index = 2;
+                    PauseFoxIndex = 2;
                 }
                 else {
-                    Index = 1;
+                    PauseFoxIndex = 1;
                 }
             }
+            else if (IsKeyDown(KEY_SPACE) || IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+                PauseFoxIndex = 4;
+            }
             else {
-                Index = 0;
+                PauseFoxIndex = 0;
             }
 
             for (auto& Fox:PauseFox) {
@@ -337,12 +353,25 @@ namespace Game
     }
 
     // Draw Pause sprite
-    void PauseDraw(std::vector<Sprite>& PauseFox, GameState& State, const int Index)
+    void PauseDraw(std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameState& State, const int PauseFoxIndex)
     {
         DrawTextureEx(LoadTexture("sprites/maps/PauseBackground.png"), Vector2{0.f,0.f}, 0.0f, 4.f, WHITE);
 
         if (State != GameState::TRANSITION) {
-            DrawTexturePro(PauseFox.at(Index).Texture, PauseFox.at(Index).GetSourceRec(), PauseFox.at(Index).GetPosRec(Vector2{686.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
+            // PauseFoxIndex controls which Fox sprite is drawn
+            DrawTexturePro(PauseFox.at(PauseFoxIndex).Texture, PauseFox.at(PauseFoxIndex).GetSourceRec(), PauseFox.at(PauseFoxIndex).GetPosRec(Vector2{674.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
+
+            // Draw Buttons Depending on which are pushed
+            if (IsKeyDown(KEY_W)) DrawTextureEx(Buttons.at(0), Vector2{208.f,124.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_A)) DrawTextureEx(Buttons.at(1), Vector2{160.f,180.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_S)) DrawTextureEx(Buttons.at(2), Vector2{208.f,180.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_D)) DrawTextureEx(Buttons.at(3), Vector2{256.f,180.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_L)) DrawTextureEx(Buttons.at(4), Vector2{160.f,460.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_M)) DrawTextureEx(Buttons.at(5), Vector2{160.f,372.f}, 0.f, 4.f, WHITE);
+
+            if (IsKeyDown(KEY_LEFT_SHIFT)) DrawTextureEx(Buttons.at(6), Vector2{160.f,276.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_SPACE)) DrawTextureEx(Buttons.at(7), Vector2{152.f,552.f}, 0.f, 4.f, WHITE);
+            if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) DrawTextureEx(Buttons.at(8), Vector2{264.f,548.f}, 0.f, 4.f, WHITE);
         }
     }
 
