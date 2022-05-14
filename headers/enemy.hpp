@@ -183,6 +183,7 @@ struct Enemies
         [x] add tombstone for death animation
         [ ] add heart loot drops
         [x] add and implement enemy types
+        [ ] add different enemy attack types
         [ ] add 'boss' after defeating all of one enemy type
         [x] fix enemy collision rec
         [ ] wildlife npcs
