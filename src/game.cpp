@@ -352,7 +352,7 @@ namespace Game
         }
     }
 
-    // Draw Pause sprite
+    // Draw Pause sprite & button presses
     void PauseDraw(std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameState& State, const int PauseFoxIndex)
     {
         DrawTextureEx(LoadTexture("sprites/maps/PauseBackground.png"), Vector2{0.f,0.f}, 0.0f, 4.f, WHITE);
@@ -368,7 +368,6 @@ namespace Game
             if (IsKeyDown(KEY_D)) DrawTextureEx(Buttons.at(3), Vector2{256.f,180.f}, 0.f, 4.f, WHITE);
             if (IsKeyDown(KEY_L)) DrawTextureEx(Buttons.at(4), Vector2{160.f,460.f}, 0.f, 4.f, WHITE);
             if (IsKeyDown(KEY_M)) DrawTextureEx(Buttons.at(5), Vector2{160.f,372.f}, 0.f, 4.f, WHITE);
-
             if (IsKeyDown(KEY_LEFT_SHIFT)) DrawTextureEx(Buttons.at(6), Vector2{160.f,276.f}, 0.f, 4.f, WHITE);
             if (IsKeyDown(KEY_SPACE)) DrawTextureEx(Buttons.at(7), Vector2{152.f,552.f}, 0.f, 4.f, WHITE);
             if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) DrawTextureEx(Buttons.at(8), Vector2{264.f,548.f}, 0.f, 4.f, WHITE);
