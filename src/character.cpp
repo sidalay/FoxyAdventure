@@ -265,7 +265,9 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
 
                 // Check collision of Player against Enemy
                 if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
-                    TakingDamage();
+                    if (!Enemy.IsDying()) {
+                        TakingDamage();
+                    }
                 }
 
                 // Check collision of Player's attack against Enemy
@@ -273,6 +275,9 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                     if (Attacking) {
                         if (CheckCollisionRecs(GetAttackRec(), Enemy.GetCollisionRec())) {
                             Enemy.Damaged(true);
+                            if (Enemy.GetHealth() <= 0) {
+                                AddHealth(1.f);
+                            }
                         }
                     }
                     else {
@@ -283,7 +288,9 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                 // Check if Enemy Attack Collision is hitting Player
                 if (Enemy.IsAttacking()) {
                     if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetAttackRec())) {
-                        TakingDamage();
+                        if (!Enemy.IsDying()) {
+                            TakingDamage();
+                        }
                     }
                 }
             }
@@ -566,5 +573,8 @@ void Character::TakingDamage()
 void Character::AddHealth(float HP)
 {
     Health += HP;
+    if (Health > 11) {
+        Health = 11;
+    }
 }
 

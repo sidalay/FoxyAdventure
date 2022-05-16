@@ -146,6 +146,7 @@ public:
     bool IsAlive() {return Alive;}
     bool IsInvulnerable() {return Invulnerable;}
     bool IsAttacking() {return Attacking;}
+    bool IsDying() {return Dying;}
     int GetHealth() {return Health;}
     int GetMonstersKilled() {return MonsterDeaths;}
     int GetTotalMonsters() {return MonsterCount;}
