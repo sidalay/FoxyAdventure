@@ -112,5 +112,7 @@ public:
         [x] add damage knockback
         [x] add half-hearts to hp
         [x] fix hurt portrait not showing up
+        [x] heal fox when killing enemy
+        [ ] add healing animation
         [ ] redo attacking and combos to feel less clunky
 */
