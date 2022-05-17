@@ -412,7 +412,7 @@ void Character::CheckSleep()
         RunningTime += DeltaTime;    
 
         if (RunningTime >= UpdateTime) {
-            if (Health < 10.f) {
+            if (Health < 11.f) {
                 AddHealth(0.5f);
                 RunningTime = 0.f;
             }
