@@ -18,50 +18,6 @@ enum class Emotion
 
 class Character : public BaseCharacter
 {
-private:
-    Sprite Idle{};
-    Sprite Walk{};
-    Sprite Run{};
-    Sprite Attack{};
-    Sprite Hurt{};
-    Sprite Death{};
-    Sprite Push{};
-    Sprite Sleep{};
-    Sprite ItemGrab{};
-    Sprite* CurrentSprite{&Idle};  
-    Texture2D Interact{LoadTexture("sprites/props/Interact.png")};
-    std::vector<Sprite*> Sprites {};
-
-    Window* Screen{};
-    Background* World{};
-    Vector2 Offset{615,335};             // Player offset vs Enemy/Prop WorldPos
-    Vector2 CharacterPos{};              // Where the character is on the screen
-    Vector2 WorldPos{362.f,2594.f};      // Where the character is in the world
-    Vector2 PrevWorldPos{};
-    Rectangle Source{};
-    Rectangle Destination{};
-    
-    float Health{11.f};
-    float Scale{1.5f};
-    float Speed{1.0f};
-    float RunningTime{};
-    float DamageTime{};
-    float AttackTime{};
-    float HealTime{};
-    float AmountToHeal{};
-    bool Colliding{false};
-    bool Locked{false};
-    bool Walking{false};
-    bool Running{false};
-    bool Attacking{false};
-    bool Sleeping{false};
-    bool Interacting{false};
-    bool Interactable{false};
-    bool Hurting{false};
-    bool Healing{false};
-    Emotion State{Emotion::DEFAULT};
-    Direction Face{Direction::DOWN};
-
 public:
     Character(Sprite Idle, 
               Sprite Walk, 
@@ -107,6 +63,50 @@ public:
     void AddHealth(float HP);
     void HealOverTime(float HP);
     void CheckHealing();
+    
+private:
+    Sprite Idle{};
+    Sprite Walk{};
+    Sprite Run{};
+    Sprite Attack{};
+    Sprite Hurt{};
+    Sprite Death{};
+    Sprite Push{};
+    Sprite Sleep{};
+    Sprite ItemGrab{};
+    Sprite* CurrentSprite{&Idle};  
+    Texture2D Interact{LoadTexture("sprites/props/Interact.png")};
+    std::vector<Sprite*> Sprites {};
+
+    Window* Screen{};
+    Background* World{};
+    Vector2 Offset{615,335};             // Player offset vs Enemy/Prop WorldPos
+    Vector2 CharacterPos{};              // Where the character is on the screen
+    Vector2 WorldPos{362.f,2594.f};      // Where the character is in the world
+    Vector2 PrevWorldPos{};
+    Rectangle Source{};
+    Rectangle Destination{};
+    
+    float Health{11.f};
+    float Scale{1.5f};
+    float Speed{1.0f};
+    float RunningTime{};
+    float DamageTime{};
+    float AttackTime{};
+    float HealTime{};
+    float AmountToHeal{};
+    bool Colliding{false};
+    bool Locked{false};
+    bool Walking{false};
+    bool Running{false};
+    bool Attacking{false};
+    bool Sleeping{false};
+    bool Interacting{false};
+    bool Interactable{false};
+    bool Hurting{false};
+    bool Healing{false};
+    Emotion State{Emotion::DEFAULT};
+    Direction Face{Direction::DOWN};
 };
 
 #endif // CHARACTER_HPP

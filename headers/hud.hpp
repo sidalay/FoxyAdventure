@@ -6,6 +6,10 @@
 
 class HUD 
 {
+public:
+    void Tick();
+    void Draw(float Health, Emotion State);
+    
 private:
     Texture2D HeartFull{LoadTexture("sprites/props/Heart.png")};
     Texture2D HeartHalf{LoadTexture("sprites/props/Heart_Half.png")};
@@ -25,9 +29,6 @@ private:
     Texture2D FoxDead{LoadTexture("sprites/portraits/Fox_Dead.png")};
 
     float Scale{2.f};
-public:
-    void Tick();
-    void Draw(float Health, Emotion State);
 };
 
 #endif // HUD_HPP

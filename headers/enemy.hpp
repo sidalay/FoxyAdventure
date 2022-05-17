@@ -22,6 +22,69 @@ struct Enemies;
 
 class Enemy : public BaseCharacter
 {
+public:
+    // Enemy constructor
+    Enemy(Sprite Idle,
+          Sprite Walk,
+          Sprite Attack,
+          Sprite Hurt,
+          Sprite Death,
+          EnemyType Race,
+          EnemyType Type,
+          Vector2 WorldPos,
+          Window* Screen,
+          Background* World,
+          int Health = 3,
+          float Scale = 3.2f);
+    
+    // Wildlife NPC constructor
+    Enemy(Sprite NpcIdle,
+          Sprite NpcIdleTwo,
+          Sprite NpcWalk,
+          Sprite NpcLazy,
+          Sprite NpcSleep,
+          EnemyType Race,
+          Vector2 WorldPos,
+          Window* Screen,
+          Background* World,
+          float Scale = 3.2f);
+
+    ~Enemy();
+
+    void Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies);
+    void Draw(Vector2 HeroWorldPos);
+    void SpriteTick(float DeltaTime);
+    void CheckDirection();
+    void CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies);
+    void WalkOrIdle();
+    void UndoMovement();
+    void OutOfBounds();
+    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies);
+    void CheckAttack();
+    void UpdateSource();
+    void TakingDamage();
+    void Damaged(bool Attacked) {IsAttacked = Attacked;}
+    void CheckAlive(float DeltaTime);
+    void EnemyAI();
+    void EnemyAggro(Vector2 HeroScreenPos);
+    void DrawHP();
+
+    bool IsBlocked() {return Blocked;}
+    bool IsAlive() {return Alive;}
+    bool IsInvulnerable() {return Invulnerable;}
+    bool IsAttacking() {return Attacking;}
+    bool IsDying() {return Dying;}
+    int GetHealth() {return Health;}
+    int GetMaxHP() {return MaxHP;}
+    int GetMonstersKilled() {return MonsterDeaths;}
+    int GetTotalMonsters() {return MonsterCount;}
+    Vector2 GetWorldPos() {return WorldPos;}
+    Vector2 GetPrevWorldPos() {return PrevWorldPos;}
+    Vector2 GetEnemyPos() {return EnemyPos;}
+    EnemyType GetType() {return Type;}
+    Rectangle GetCollisionRec();
+    Rectangle GetAttackRec();
+    
 private:
     // Enemy Sprites
     Sprite Idle{};
@@ -94,69 +157,6 @@ private:
     bool OOB{false};
 
     Direction Face{Direction::DOWN};
-
-public:
-    // Enemy constructor
-    Enemy(Sprite Idle,
-          Sprite Walk,
-          Sprite Attack,
-          Sprite Hurt,
-          Sprite Death,
-          EnemyType Race,
-          EnemyType Type,
-          Vector2 WorldPos,
-          Window* Screen,
-          Background* World,
-          int Health = 3,
-          float Scale = 3.2f);
-    
-    // Wildlife NPC constructor
-    Enemy(Sprite NpcIdle,
-          Sprite NpcIdleTwo,
-          Sprite NpcWalk,
-          Sprite NpcLazy,
-          Sprite NpcSleep,
-          EnemyType Race,
-          Vector2 WorldPos,
-          Window* Screen,
-          Background* World,
-          float Scale = 3.2f);
-
-    ~Enemy();
-
-    void Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies);
-    void Draw(Vector2 HeroWorldPos);
-    void SpriteTick(float DeltaTime);
-    void CheckDirection();
-    void CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies);
-    void WalkOrIdle();
-    void UndoMovement();
-    void OutOfBounds();
-    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies);
-    void CheckAttack();
-    void UpdateSource();
-    void TakingDamage();
-    void Damaged(bool Attacked) {IsAttacked = Attacked;}
-    void CheckAlive(float DeltaTime);
-    void EnemyAI();
-    void EnemyAggro(Vector2 HeroScreenPos);
-    void DrawHP();
-
-    bool IsBlocked() {return Blocked;}
-    bool IsAlive() {return Alive;}
-    bool IsInvulnerable() {return Invulnerable;}
-    bool IsAttacking() {return Attacking;}
-    bool IsDying() {return Dying;}
-    int GetHealth() {return Health;}
-    int GetMaxHP() {return MaxHP;}
-    int GetMonstersKilled() {return MonsterDeaths;}
-    int GetTotalMonsters() {return MonsterCount;}
-    Vector2 GetWorldPos() {return WorldPos;}
-    Vector2 GetPrevWorldPos() {return PrevWorldPos;}
-    Vector2 GetEnemyPos() {return EnemyPos;}
-    EnemyType GetType() {return Type;}
-    Rectangle GetCollisionRec();
-    Rectangle GetAttackRec();
 };
 
 struct Enemies
@@ -184,7 +184,7 @@ struct Enemies
         [x] fix death animation not ticking correctly
         [x] add tombstone for death animation
         [x] add and implement enemy types
-        [ ] add different enemy attack types
+        [ ] add different enemy attack types ranged/melee
         [ ] add 'boss' after defeating all of one enemy type
         [x] fix enemy collision rec
         [ ] wildlife npcs

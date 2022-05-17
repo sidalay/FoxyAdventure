@@ -44,6 +44,38 @@ struct Props;
 
 class Prop 
 {
+public:
+    Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
+    Prop(Sprite Object, Vector2 Pos, PropType Type, std::string ItemName = "None", bool Visible = false, bool Interactable = false);           
+    Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false, 
+         Progress Act = Progress::ACT_O, PropType NPC = PropType::NPC_O, Texture2D Item = LoadTexture("sprites/props/Heart.png"), 
+         std::string ItemName = "None", float ItemScale = 2.f);
+    
+    void Tick(float DeltaTime, Background& Map);
+    void Draw(Vector2 CharacterWorldPos);
+
+    bool HasCollision() {return Collidable;}
+    bool IsInteractable() {return Interactable;}
+    bool IsMoveable() {return Moveable;}
+    bool IsOutOfBounds() {return OutOfBounds;}
+    bool IsActive() {return Active;}
+    bool IsOpened() {return Opened;}
+    bool IsVisible() {return Visible;}
+    
+    Vector2 GetWorldPos() {return WorldPos;}
+    PropType GetType() {return Type;}
+    Rectangle GetCollisionRec(Vector2 CharacterWorldPos);
+    Rectangle GetInteractRec(Vector2 CharacterWorldPos);
+    
+    void SetWorldPos(Vector2 Direction);
+    void SetActive(bool Input) {Active = Input;}
+    void SetOpened(bool Input) {Opened = Input;}
+    void UndoMovement() {WorldPos = PrevWorldPos;}
+    bool CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Direction, float Speed, std::vector<std::vector<Prop>>* Props);
+    void CheckActivity(Vector2 ScreenPos);
+
+    void DrawSpeech();
+    
 private:
     Sprite Object{};
     PropType Type{};
@@ -91,38 +123,6 @@ private:
     static inline int PiecesAdded{0};
     static inline bool FinalChest{false};                                                               
     bool InsertPiece{false};   
-
-public:
-    Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
-    Prop(Sprite Object, Vector2 Pos, PropType Type, std::string ItemName = "None", bool Visible = false, bool Interactable = false);           
-    Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false, 
-         Progress Act = Progress::ACT_O, PropType NPC = PropType::NPC_O, Texture2D Item = LoadTexture("sprites/props/Heart.png"), 
-         std::string ItemName = "None", float ItemScale = 2.f);
-    
-    void Tick(float DeltaTime, Background& Map);
-    void Draw(Vector2 CharacterWorldPos);
-
-    bool HasCollision() {return Collidable;}
-    bool IsInteractable() {return Interactable;}
-    bool IsMoveable() {return Moveable;}
-    bool IsOutOfBounds() {return OutOfBounds;}
-    bool IsActive() {return Active;}
-    bool IsOpened() {return Opened;}
-    bool IsVisible() {return Visible;}
-    
-    Vector2 GetWorldPos() {return WorldPos;}
-    PropType GetType() {return Type;}
-    Rectangle GetCollisionRec(Vector2 CharacterWorldPos);
-    Rectangle GetInteractRec(Vector2 CharacterWorldPos);
-    
-    void SetWorldPos(Vector2 Direction);
-    void SetActive(bool Input) {Active = Input;}
-    void SetOpened(bool Input) {Opened = Input;}
-    void UndoMovement() {WorldPos = PrevWorldPos;}
-    bool CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Direction, float Speed, std::vector<std::vector<Prop>>* Props);
-    void CheckActivity(Vector2 ScreenPos);
-
-    void DrawSpeech();
 };
 
 struct Props

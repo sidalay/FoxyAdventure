@@ -10,6 +10,13 @@ enum class Direction
 
 class BaseCharacter
 {
+public:
+    BaseCharacter();
+    // void undoMovement();
+    // Rectangle getCollisionRec();
+    void Tick(float DeltaTime);
+    float getHealth() const {return Health;}
+    
 protected:
     bool Alive{true};
     int CurrentFrame{};
@@ -22,13 +29,6 @@ protected:
     float Width {};
     float Height {};
     float Scale {1.f};
-
-public:
-    BaseCharacter();
-    // void undoMovement();
-    // Rectangle getCollisionRec();
-    void Tick(float DeltaTime);
-    float getHealth() const {return Health;}
 };
 
 #endif // BASECHARACTER_HPP
