@@ -47,6 +47,8 @@ private:
     float RunningTime{};
     float DamageTime{};
     float AttackTime{};
+    float HealTime{};
+    float AmountToHeal{};
     bool Colliding{false};
     bool Locked{false};
     bool Walking{false};
@@ -56,6 +58,7 @@ private:
     bool Interacting{false};
     bool Interactable{false};
     bool Hurting{false};
+    bool Healing{false};
     Emotion State{Emotion::DEFAULT};
     Direction Face{Direction::DOWN};
 
@@ -102,6 +105,8 @@ public:
 
     // Debug function
     void AddHealth(float HP);
+    void HealOverTime(float HP);
+    void CheckHealing();
 };
 
 #endif // CHARACTER_HPP
@@ -113,6 +118,6 @@ public:
         [x] add half-hearts to hp
         [x] fix hurt portrait not showing up
         [x] heal fox when killing enemy
-        [ ] add healing animation
+        [x] add healing animation
         [ ] redo attacking and combos to feel less clunky
 */

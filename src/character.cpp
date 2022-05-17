@@ -66,6 +66,8 @@ void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies)
 
     CheckSleep();
 
+    CheckHealing();
+
     IsAlive();
 }
 
@@ -275,21 +277,6 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                     if (Attacking) {
                         if (CheckCollisionRecs(GetAttackRec(), Enemy.GetCollisionRec())) {
                             Enemy.Damaged(true);
-                            if (Enemy.GetMaxHP() >= 10) {
-                                if (Enemy.GetHealth() <= 0) {
-                                    AddHealth(2.5f);
-                                }
-                            }
-                            if (Enemy.GetMaxHP() >= 5) {
-                                if (Enemy.GetHealth() <= 0) {
-                                    AddHealth(1.5f);
-                                }
-                            }
-                            else {
-                                if (Enemy.GetHealth() <= 0) {
-                                    AddHealth(1.f);
-                                }
-                            }
                         }
                     }
                     else {
@@ -302,6 +289,28 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                     if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetAttackRec())) {
                         if (!Enemy.IsDying()) {
                             TakingDamage();
+                        }
+                    }
+                }
+
+                // Heal fox if enemy is killed
+                if (Enemy.IsDying()) {
+                    if (Enemy.GetMaxHP() >= 8) {
+                        if (Enemy.GetHealth() <= 0) {
+                            Healing = true;
+                            AmountToHeal = 4.f;
+                        }
+                    }
+                    else if (Enemy.GetMaxHP() >= 5) {
+                        if (Enemy.GetHealth() <= 0) {
+                            Healing = true;
+                            AmountToHeal = 2.5f;
+                        }
+                    }
+                    else {
+                        if (Enemy.GetHealth() <= 0) {
+                            Healing = true;
+                            AmountToHeal = 1.5f;
                         }
                     }
                 }
@@ -590,3 +599,30 @@ void Character::AddHealth(float HP)
     }
 }
 
+// Gradually heal fox when killing an enemy
+void Character::HealOverTime(float HP)
+{
+    float TimeToHeal{2.f/3.f};
+    HealTime += GetFrameTime();
+    static float StopHealing{HP};
+
+    if (StopHealing >= HP) {
+        StopHealing = 0.f;
+        Healing = false;
+        return;
+    }
+    else {
+        if (HealTime >= TimeToHeal) {
+            AddHealth(0.5f);
+            StopHealing += 0.5f;
+            HealTime = 0.f;
+        }
+    }
+}
+
+void Character::CheckHealing()
+{
+    if (Healing) {
+        HealOverTime(AmountToHeal);
+    }
+}

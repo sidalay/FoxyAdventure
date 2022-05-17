@@ -3955,7 +3955,7 @@ namespace Game
             Sprite{"sprites/enemies/beholder/red_attack.png", 4, 4},
             Sprite{"sprites/enemies/beholder/red_hurt.png", 4, 4},
             Sprite{"sprites/enemies/beholder/red_death.png", 11, 4},
-            EnemyType::BEHOLDER, EnemyType::NORMAL, Vector2{1550, 3466}, &Window, &MapBG, 5
+            EnemyType::BEHOLDER, EnemyType::NORMAL, Vector2{1550, 3466}, &Window, &MapBG, 3
         };
         Enemies.emplace_back(RedBeholder);
 
