@@ -275,8 +275,20 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                     if (Attacking) {
                         if (CheckCollisionRecs(GetAttackRec(), Enemy.GetCollisionRec())) {
                             Enemy.Damaged(true);
-                            if (Enemy.GetHealth() <= 0) {
-                                AddHealth(1.f);
+                            if (Enemy.GetMaxHP() >= 10) {
+                                if (Enemy.GetHealth() <= 0) {
+                                    AddHealth(2.5f);
+                                }
+                            }
+                            if (Enemy.GetMaxHP() >= 5) {
+                                if (Enemy.GetHealth() <= 0) {
+                                    AddHealth(1.5f);
+                                }
+                            }
+                            else {
+                                if (Enemy.GetHealth() <= 0) {
+                                    AddHealth(1.f);
+                                }
                             }
                         }
                     }

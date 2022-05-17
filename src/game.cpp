@@ -3944,7 +3944,7 @@ namespace Game
             Sprite{"sprites/enemies/bear/lightbrown_attack.png", 4, 4},
             Sprite{"sprites/enemies/bear/lightbrown_hurt.png", 1, 4},
             Sprite{"sprites/enemies/bear/lightbrown_death.png", 11, 4},
-            EnemyType::BEAR, EnemyType::BOSS, Vector2{1750, 3366}, &Window, &MapBG, 1, 5.f
+            EnemyType::BEAR, EnemyType::BOSS, Vector2{1750, 3366}, &Window, &MapBG, 5, 5.f
         };
         Enemies.emplace_back(LightBrownBear);
 
@@ -3955,7 +3955,7 @@ namespace Game
             Sprite{"sprites/enemies/beholder/red_attack.png", 4, 4},
             Sprite{"sprites/enemies/beholder/red_hurt.png", 4, 4},
             Sprite{"sprites/enemies/beholder/red_death.png", 11, 4},
-            EnemyType::BEHOLDER, EnemyType::NORMAL, Vector2{1550, 3466}, &Window, &MapBG, 1
+            EnemyType::BEHOLDER, EnemyType::NORMAL, Vector2{1550, 3466}, &Window, &MapBG, 5
         };
         Enemies.emplace_back(RedBeholder);
 
@@ -4043,7 +4043,7 @@ namespace Game
             Sprite{"sprites/enemies/toad/blue_attack.png", 4, 4},
             Sprite{"sprites/enemies/toad/blue_hurt.png", 1, 4},
             Sprite{"sprites/enemies/toad/blue_death.png", 11, 4},
-            EnemyType::TOAD, EnemyType::NORMAL, Vector2{1600, 3466}, &Window, &MapBG, 1
+            EnemyType::TOAD, EnemyType::NORMAL, Vector2{1600, 3466}, &Window, &MapBG, 10
         };
         Enemies.emplace_back(BlueToad);
 

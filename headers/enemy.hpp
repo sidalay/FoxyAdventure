@@ -148,6 +148,7 @@ public:
     bool IsAttacking() {return Attacking;}
     bool IsDying() {return Dying;}
     int GetHealth() {return Health;}
+    int GetMaxHP() {return MaxHP;}
     int GetMonstersKilled() {return MonsterDeaths;}
     int GetTotalMonsters() {return MonsterCount;}
     Vector2 GetWorldPos() {return WorldPos;}
