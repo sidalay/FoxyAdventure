@@ -41,7 +41,7 @@ public:
     Enemy(Sprite NpcIdle,
           Sprite NpcIdleTwo,
           Sprite NpcWalk,
-          Sprite NpcLazy,
+          Sprite NpcMisc,
           Sprite NpcSleep,
           EnemyType Race,
           Vector2 WorldPos,
@@ -97,7 +97,7 @@ private:
     Sprite NpcIdle{};
     Sprite NpcIdleTwo{};
     Sprite NpcWalk{};
-    Sprite NpcLazy{};
+    Sprite NpcMisc{};
     Sprite NpcSleep{};
 
     Sprite* CurrentSprite{&Idle};

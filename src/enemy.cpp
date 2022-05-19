@@ -55,7 +55,7 @@ Enemy::Enemy(Sprite Idle,
 Enemy::Enemy(Sprite NpcIdle,
              Sprite NpcIdleTwo,
              Sprite NpcWalk,
-             Sprite NpcLazy,
+             Sprite NpcMisc,
              Sprite NpcSleep,
              EnemyType Race,
              Vector2 WorldPos,
@@ -65,7 +65,7 @@ Enemy::Enemy(Sprite NpcIdle,
     : NpcIdle{NpcIdle},
       NpcIdleTwo{NpcIdleTwo},
       NpcWalk{NpcWalk},
-      NpcLazy{NpcLazy},
+      NpcMisc{NpcMisc},
       NpcSleep{NpcSleep},
       Race{Race},
       Type{EnemyType::NPC},
@@ -78,7 +78,7 @@ Enemy::Enemy(Sprite NpcIdle,
     Sprites.emplace_back(this->NpcIdle);
     Sprites.emplace_back(this->NpcIdleTwo);
     Sprites.emplace_back(this->NpcWalk);
-    Sprites.emplace_back(this->NpcLazy);
+    Sprites.emplace_back(this->NpcMisc);
     Sprites.emplace_back(this->NpcSleep);
 
     CurrentSprite = &Sprites.at(0);

@@ -4047,6 +4047,8 @@ namespace Game
         };
         Enemies.emplace_back(BlueToad);
 
+        // Wildlife NPCs
+
         Enemy FoxFamOne
         {
             Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
