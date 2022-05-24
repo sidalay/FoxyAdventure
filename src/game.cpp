@@ -4104,6 +4104,17 @@ namespace Game
         };
         Enemies.emplace_back(FoxFamFive);
 
+        Enemy Crow
+        {
+            Sprite{"sprites/npc/wildlife/crow/crow_idle.png", 8, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_flying.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_ground_sleep.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_fly_sleep.png", 7, 2},
+            EnemyType::CROW, Vector2{370, 2700}, &Window, &MapBG, 2.5f
+        };
+        Enemies.emplace_back(Crow);
+
         return Enemies;
     }
 
