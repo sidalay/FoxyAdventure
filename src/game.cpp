@@ -4054,7 +4054,7 @@ namespace Game
             Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
             Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
             Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 7, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 13, 2},
             Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
             EnemyType::FOX, Vector2{473, 2524}, &Window, &MapBG
         };
@@ -4109,7 +4109,7 @@ namespace Game
             Sprite{"sprites/npc/wildlife/crow/crow_idle.png", 8, 2},
             Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
             Sprite{"sprites/npc/wildlife/crow/crow_flying.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_ground_sleep.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_walk.png", 4, 2},
             Sprite{"sprites/npc/wildlife/crow/crow_fly_sleep.png", 7, 2},
             EnemyType::CROW, Vector2{370, 2700}, &Window, &MapBG, 2.5f
         };

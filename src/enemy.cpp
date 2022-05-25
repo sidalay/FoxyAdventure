@@ -46,7 +46,7 @@ Enemy::Enemy(Sprite Idle,
     std::uniform_int_distribution<int> RandomLeftRight{1, 10};
     std::mt19937 RNG{std::mt19937{Seed()}};
 
-    MovementIdleTime = static_cast<float>(RandomIdleTime(RNG));
+    ActionIdleTime = static_cast<float>(RandomIdleTime(RNG));
     MoveXRange = RandomRange(RNG);
     MoveYRange = RandomRange(RNG);
     LeftOrRight = RandomLeftRight(RNG);
@@ -85,15 +85,17 @@ Enemy::Enemy(Sprite NpcIdle,
 
     // Generate RNG for current object used for randomizing AI movement
     std::random_device Seed;
-    std::uniform_int_distribution<int> RandomRange{60, 80};
-    std::uniform_int_distribution<int> RandomIdleTime{5, 9};
-    std::uniform_int_distribution<int> RandomLeftRight{1, 10};
+    std::uniform_int_distribution<int> RandomRange{60,80};
+    std::uniform_int_distribution<int> RandomIdleTime{5,9};
+    std::uniform_int_distribution<int> RandomLeftRight{1,10};
+    std::uniform_int_distribution<int> RandomActionState{1,10};
     std::mt19937 RNG{std::mt19937{Seed()}};
 
-    MovementIdleTime = static_cast<float>(RandomIdleTime(RNG));
+    ActionIdleTime = static_cast<float>(RandomIdleTime(RNG));
     MoveXRange = RandomRange(RNG);
     MoveYRange = RandomRange(RNG);
     LeftOrRight = RandomLeftRight(RNG);
+    ActionState = RandomActionState(RNG);
 }
       
 
@@ -308,15 +310,14 @@ void Enemy::NeutralAction()
             CurrentSprite = &Sprites.at(4); // Sleeping sprite
         }
     }
-    else if (IdleTwo) {
-        if (Type == EnemyType::NPC) {
-            CurrentSprite = &Sprites.at(1); // IdleTwo sprite
-        }
-    }
     else {
         if (Type == EnemyType::NPC) {
-            // Need to add randomization to switch between two different idle sprites
-            CurrentSprite = &Sprites.at(0); // Idle sprite
+            if (IdleTwo) {
+                CurrentSprite = &Sprites.at(1); // IdleTwo sprite
+            }
+            else {
+                CurrentSprite = &Sprites.at(0); // Idle sprite
+            }
         }
         else {
             CurrentSprite = &Sprites.at(0); // Idle sprite
@@ -493,35 +494,120 @@ void Enemy::CheckAlive(float DeltaTime)
 void Enemy::EnemyAI()
 {
     // Randomize which direction enemy will move first
+    // Only run this code block once
     if (Intro && LeftOrRight <= 5) {
         AIX = -AIX;
         AIY = -AIY;
+        IdleTwo = false;
         Intro = false;
     }
 
     if (!Chasing && !Blocked) {
-        Movement.x += AIX;
-        Movement.y += AIY;
 
-        WalkingTime += GetFrameTime();
+        ActionTime += GetFrameTime();
 
-        if (WalkingTime <= MovementIdleTime/2) {
-            Walking = true;
-            WorldPos.x += AIX;
-            WorldPos.y += AIY;
-        }
-        else if (WalkingTime >= MovementIdleTime) {
-            WalkingTime = 0.0f;
+        if (Type == EnemyType::NPC) {
+
+            switch (ActionState)
+            {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                {
+                    Movement.x += AIX;
+                    Movement.y += AIY;
+
+                    // Handle walking 
+                    if (ActionTime <= ActionIdleTime/2) {
+                        Walking = true;
+                        WorldPos.x += AIX;
+                        WorldPos.y += AIY;
+                    }
+                    else if (ActionTime >= ActionIdleTime) {
+                        ActionTime = 0.0f;
+                        std::random_device Seed;
+                        std::uniform_int_distribution<int> RandomActionState{1, 10};
+                        std::mt19937 RNG{std::mt19937{Seed()}};
+                        ActionState = RandomActionState(RNG);
+                        IdleTwo = -IdleTwo;
+                    }
+                    else {
+                        Walking = false;
+                    }
+
+                    if (Movement.x <= -MoveXRange || Movement.x >= MoveXRange) {
+                        AIX = -AIX;
+                    }
+                    if (Movement.y <= -MoveYRange || Movement.y >= MoveYRange) {
+                        AIY = -AIY;
+                    }
+                    break;
+                }
+                case 7:
+                {
+                    // Handle misc action 
+                    if (ActionTime <= ActionIdleTime) {
+                        MiscAction = true;
+                    }
+                    else {
+                        ActionTime = 0.0f;
+                        std::uniform_int_distribution<int> RandomActionState{1, 10};
+                        std::random_device Seed;
+                        std::mt19937 RNG{std::mt19937{Seed()}};
+                        ActionState = RandomActionState(RNG);
+                        MiscAction = false;
+                    }
+                    break;
+                }
+                case 8:
+                case 9:
+                case 10:
+                {
+                    // Handle sleep action
+                    if (ActionTime <= ActionIdleTime) {
+                        Sleeping = true;
+                    }
+                    else {
+                        ActionTime = 0.0f;
+                        std::uniform_int_distribution<int> RandomActionState{1, 10};
+                        std::random_device Seed;
+                        std::mt19937 RNG{std::mt19937{Seed()}};
+                        ActionState = RandomActionState(RNG);
+                        Sleeping = false;
+                    }
+                    break;
+                }
+                default:
+                    ActionState = 1;
+                    break;
+            }
         }
         else {
-            Walking = false;
-        }
+            Movement.x += AIX;
+            Movement.y += AIY;
 
-        if (Movement.x <= -MoveXRange || Movement.x >= MoveXRange) {
-            AIX = -AIX;
-        }
-        if (Movement.y <= -MoveYRange || Movement.y >= MoveYRange) {
-            AIY = -AIY;
+            // Handle walking 
+            if (ActionTime <= ActionIdleTime/2) {
+                Walking = true;
+                WorldPos.x += AIX;
+                WorldPos.y += AIY;
+            }
+            else if (ActionTime >= ActionIdleTime) {
+                ActionTime = 0.0f;
+            }
+            else {
+                Walking = false;
+            }
+
+            if (Movement.x <= -MoveXRange || Movement.x >= MoveXRange) {
+                AIX = -AIX;
+            }
+            if (Movement.y <= -MoveYRange || Movement.y >= MoveYRange) {
+                AIY = -AIY;
+            }    
         }
     }
 }

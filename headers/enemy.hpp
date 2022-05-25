@@ -128,6 +128,7 @@ private:
     int Health{};
     int MaxHP{};
     int LeftOrRight{};
+    int ActionState{};
     float Scale{3.2f};
     float Speed{1.4f};
     float Radius{25.f};                 
@@ -137,8 +138,8 @@ private:
     float RunningTime{};
     float DamageTime{};
     float StopTime{};
-    float WalkingTime{};
-    float MovementIdleTime{};
+    float ActionTime{};
+    float ActionIdleTime{};
     float MoveXRange{};
     float MoveYRange{};
     float AIX{0.6};
