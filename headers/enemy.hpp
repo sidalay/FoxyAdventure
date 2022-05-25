@@ -56,7 +56,7 @@ public:
     void SpriteTick(float DeltaTime);
     void CheckDirection();
     void CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies);
-    void WalkOrIdle();
+    void NeutralAction();
     void UndoMovement();
     void OutOfBounds();
     void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies);
@@ -156,6 +156,11 @@ private:
     bool Intro{true};
     bool OOB{false};
 
+    // Wildlife NPC
+    bool IdleTwo{false};
+    bool Sleeping{false};
+    bool MiscAction{false};
+    
     Direction Face{Direction::DOWN};
 };
 

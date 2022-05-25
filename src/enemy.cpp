@@ -119,7 +119,7 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
 
             CheckDirection();
             
-            WalkOrIdle();
+            NeutralAction();
 
             TakingDamage();
 
@@ -131,7 +131,7 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
 
         CheckDirection();
 
-        WalkOrIdle();
+        NeutralAction();
         
     }
 
@@ -288,27 +288,38 @@ void Enemy::OutOfBounds()
 }
 
 // Check if Enemy is moving and change sprites if needed
-void Enemy::WalkOrIdle()
+void Enemy::NeutralAction()
 {
-    // Assign walk sprite
-    if (Chasing || Walking) 
-    {
+    if (Chasing || Walking) {
         if (Type == EnemyType::NPC) {
-            CurrentSprite = &Sprites.at(2);
+            CurrentSprite = &Sprites.at(2); // Walking sprite for NPC
         }
         else {
-            CurrentSprite = &Sprites.at(1);
+            CurrentSprite = &Sprites.at(1); // Walking sprite 
         }
     }
-    // Assign idle sprite
-    else 
-    {
+    else if (MiscAction) {
+        if (Type == EnemyType::NPC) {
+            CurrentSprite = &Sprites.at(3); // Misc sprite
+        }
+    }
+    else if (Sleeping) {
+        if (Type == EnemyType::NPC) {
+            CurrentSprite = &Sprites.at(4); // Sleeping sprite
+        }
+    }
+    else if (IdleTwo) {
+        if (Type == EnemyType::NPC) {
+            CurrentSprite = &Sprites.at(1); // IdleTwo sprite
+        }
+    }
+    else {
         if (Type == EnemyType::NPC) {
             // Need to add randomization to switch between two different idle sprites
-            CurrentSprite = &Sprites.at(0);
+            CurrentSprite = &Sprites.at(0); // Idle sprite
         }
         else {
-            CurrentSprite = &Sprites.at(0);
+            CurrentSprite = &Sprites.at(0); // Idle sprite
         }
     }
 }
