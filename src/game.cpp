@@ -218,6 +218,9 @@ namespace Game
 
             if (IsKeyPressed(KEY_L))
                 Character.SetSleep();
+
+            if (IsKeyPressed(KEY_N))
+                Character.SwitchCollidable();
         }
 
         if (IsKeyPressed(KEY_P)) {
@@ -3926,16 +3929,16 @@ namespace Game
 
         // ----------------------------------- Test enemies below ------------------------------------
 
-        // Enemy BrownBear
-        // {
-        //     Sprite{"sprites/enemies/bear/brown_idle.png", 4, 4},
-        //     Sprite{"sprites/enemies/bear/brown_walk.png", 4, 4},
-        //     Sprite{"sprites/enemies/bear/brown_attack.png", 4, 4},
-        //     Sprite{"sprites/enemies/bear/brown_hurt.png", 1, 4},
-        //     Sprite{"sprites/enemies/bear/brown_death.png", 11, 4},
-        //     EnemyType::BEAR, EnemyType::NORMAL, Vector2{1800, 3566}, &Window, &MapBG, 1
-        // };
-        // Enemies.emplace_back(BrownBear);
+        Enemy BrownBear
+        {
+            Sprite{"sprites/enemies/bear/brown_idle.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_walk.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_attack.png", 4, 4},
+            Sprite{"sprites/enemies/bear/brown_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/bear/brown_death.png", 11, 4},
+            EnemyType::BEAR, EnemyType::NORMAL, Vector2{1800, 3566}, &Window, &MapBG, 1
+        };
+        Enemies.emplace_back(BrownBear);
 
         Enemy LightBrownBear
         {
@@ -3959,27 +3962,27 @@ namespace Game
         };
         Enemies.emplace_back(RedBeholder);
 
-        // Enemy WhiteGhost
-        // {
-        //     Sprite{"sprites/enemies/ghost/white_idle.png", 4, 4},
-        //     Sprite{"sprites/enemies/ghost/white_walk.png", 4, 4},
-        //     Sprite{"sprites/enemies/ghost/white_attack.png", 4, 4},
-        //     Sprite{"sprites/enemies/ghost/white_hurt.png", 1, 4},
-        //     Sprite{"sprites/enemies/ghost/white_death.png", 11, 4},
-        //     EnemyType::GHOST, EnemyType::NORMAL, Vector2{1850, 3566}, &Window, &MapBG, 1
-        // };
-        // Enemies.emplace_back(WhiteGhost);
+        Enemy WhiteGhost
+        {
+            Sprite{"sprites/enemies/ghost/white_idle.png", 4, 4},
+            Sprite{"sprites/enemies/ghost/white_walk.png", 4, 4},
+            Sprite{"sprites/enemies/ghost/white_attack.png", 4, 4},
+            Sprite{"sprites/enemies/ghost/white_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/ghost/white_death.png", 11, 4},
+            EnemyType::GHOST, EnemyType::NORMAL, Vector2{1850, 3566}, &Window, &MapBG, 1
+        };
+        Enemies.emplace_back(WhiteGhost);
     
-        // Enemy RedNecro
-        // {
-        //     Sprite{"sprites/enemies/necromancer/red_idle.png", 4, 4},
-        //     Sprite{"sprites/enemies/necromancer/red_walk.png", 4, 4},
-        //     Sprite{"sprites/enemies/necromancer/red_attack.png", 4, 4},
-        //     Sprite{"sprites/enemies/necromancer/red_hurt.png", 1, 4},
-        //     Sprite{"sprites/enemies/necromancer/red_death.png", 11, 4},
-        //     EnemyType::NECROMANCER, EnemyType::NORMAL, Vector2{1750, 3366}, &Window, &MapBG, 1
-        // };
-        // Enemies.emplace_back(RedNecro);
+        Enemy RedNecro
+        {
+            Sprite{"sprites/enemies/necromancer/red_idle.png", 4, 4},
+            Sprite{"sprites/enemies/necromancer/red_walk.png", 4, 4},
+            Sprite{"sprites/enemies/necromancer/red_attack.png", 4, 4},
+            Sprite{"sprites/enemies/necromancer/red_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/necromancer/red_death.png", 11, 4},
+            EnemyType::NECROMANCER, EnemyType::NORMAL, Vector2{1750, 3366}, &Window, &MapBG, 1
+        };
+        Enemies.emplace_back(RedNecro);
 
         Enemy PurpleCreature
         {
@@ -3992,16 +3995,16 @@ namespace Game
         };
         Enemies.emplace_back(PurpleCreature);
 
-        // Enemy GreenImp
-        // {
-        //     Sprite{"sprites/enemies/imp/green_idle.png", 4, 4},
-        //     Sprite{"sprites/enemies/imp/green_walk.png", 4, 4},
-        //     Sprite{"sprites/enemies/imp/green_attack.png", 4, 4},
-        //     Sprite{"sprites/enemies/imp/green_hurt.png", 1, 4},
-        //     Sprite{"sprites/enemies/imp/green_death.png", 11, 4},
-        //     EnemyType::IMP, EnemyType::NORMAL, Vector2{1800, 3666}, &Window, &MapBG, 1
-        // };
-        // Enemies.emplace_back(GreenImp);
+        Enemy GreenImp
+        {
+            Sprite{"sprites/enemies/imp/green_idle.png", 4, 4},
+            Sprite{"sprites/enemies/imp/green_walk.png", 4, 4},
+            Sprite{"sprites/enemies/imp/green_attack.png", 4, 4},
+            Sprite{"sprites/enemies/imp/green_hurt.png", 1, 4},
+            Sprite{"sprites/enemies/imp/green_death.png", 11, 4},
+            EnemyType::IMP, EnemyType::NORMAL, Vector2{1800, 3666}, &Window, &MapBG, 1
+        };
+        Enemies.emplace_back(GreenImp);
 
         // Enemy PinkMushroom
         // {
@@ -4060,27 +4063,27 @@ namespace Game
         };
         Enemies.emplace_back(FoxFamOne);
         
-        // Enemy FoxFamTwo
-        // {
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 7, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
-        //     EnemyType::FOX, Vector2{247, 2524}, &Window, &MapBG
-        // };
-        // Enemies.emplace_back(FoxFamTwo);
+        Enemy FoxFamTwo
+        {
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 13, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
+            EnemyType::FOX, Vector2{247, 2524}, &Window, &MapBG
+        };
+        Enemies.emplace_back(FoxFamTwo);
 
-        // Enemy FoxFamThree
-        // {
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 7, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
-        //     EnemyType::FOX, Vector2{347, 2724}, &Window, &MapBG, 2.5f
-        // };
-        // Enemies.emplace_back(FoxFamThree);
+        Enemy FoxFamThree
+        {
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 13, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
+            EnemyType::FOX, Vector2{307, 2724}, &Window, &MapBG, 2.5f
+        };
+        Enemies.emplace_back(FoxFamThree);
 
         Enemy FoxFamFour
         {
@@ -4103,6 +4106,17 @@ namespace Game
             EnemyType::FOX, Vector2{354, 2661}, &Window, &MapBG, 2.5f
         };
         Enemies.emplace_back(FoxFamFive);
+        
+        Enemy Squirrel
+        {
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            EnemyType::SQUIRREL, Vector2{354, 2661}, &Window, &MapBG, 2.0f
+        };
+        Enemies.emplace_back(Squirrel);
 
         Enemy Crow
         {

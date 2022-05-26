@@ -63,6 +63,7 @@ public:
     void AddHealth(float HP);
     void HealOverTime(float HP);
     void CheckHealing();
+    void SwitchCollidable() {Collidable = !Collidable;}
     
 private:
     Sprite Idle{};
@@ -107,6 +108,9 @@ private:
     bool Healing{false};
     Emotion State{Emotion::DEFAULT};
     Direction Face{Direction::DOWN};
+
+    // Debug controls
+    bool Collidable{true};
 };
 
 #endif // CHARACTER_HPP

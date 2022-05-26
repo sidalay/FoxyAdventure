@@ -180,144 +180,147 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
 {
     DamageTime += GetFrameTime();
     
-    // Loop through all Props for collision
-    for (auto& PropType:*Props) {
-        for (auto& Prop:PropType) {
-            if (Prop.HasCollision()) {
-                
-                // check physical collision
-                if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos))) {   
+    if (Collidable) {
+
+        // Loop through all Props for collision
+        for (auto& PropType:*Props) {
+            for (auto& Prop:PropType) {
+                if (Prop.HasCollision()) {
                     
-                    // manage pushable props
-                    if (Prop.IsMoveable()) {
-                        if (Prop.GetType() == PropType::BOULDER || Prop.GetType() == PropType::STUMP) {
-                            Colliding = true;   
-                            if(!Prop.IsOutOfBounds()) {
-                                if (Prop.CheckMovement(*World, WorldPos, Direction, Speed, Props)) {
+                    // check physical collision
+                    if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos))) {   
+                        
+                        // manage pushable props
+                        if (Prop.IsMoveable()) {
+                            if (Prop.GetType() == PropType::BOULDER || Prop.GetType() == PropType::STUMP) {
+                                Colliding = true;   
+                                if(!Prop.IsOutOfBounds()) {
+                                    if (Prop.CheckMovement(*World, WorldPos, Direction, Speed, Props)) {
+                                        UndoMovement();
+                                    }
+                                }
+                                else {
                                     UndoMovement();
                                 }
                             }
-                            else {
+                            if (Prop.GetType() == PropType::GRASS) {
+                                Prop.SetActive(true);
+                            }
+                        }
+
+                        // if not pushable, block movement   
+                        else {
+                            if (Prop.IsVisible()) {
                                 UndoMovement();
                             }
                         }
-                        if (Prop.GetType() == PropType::GRASS) {
-                            Prop.SetActive(true);
-                        }
+                    }
+                    else {
+                        Prop.SetActive(false);
                     }
 
-                    // if not pushable, block movement   
-                    else {
-                        if (Prop.IsVisible()) {
-                            UndoMovement();
+                    // check interactable collision
+                    if (CheckCollisionRecs(GetCollisionRec(), Prop.GetInteractRec(WorldPos))) {
+                        // Check for interact collision to display ! over character
+                        if (Prop.IsInteractable()) {
+                            if (Prop.IsVisible()) {
+                                Interactable = true;
+                            }
+                        }
+
+                        // Manage interacting with props
+                        if (Interactable == true) {
+                            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_SPACE))
+                                Interacting = true;
+                                    
+                            if (Interacting == true) {
+                                Prop.SetActive(true);
+                                Interactable = false;
+                                Locked = true;
+                            }
+
+                            if (Prop.IsOpened()) {
+                                Interacting = false;
+                                Interactable = false;
+                                Prop.SetActive(false);
+                                Locked = false;
+
+                                // Make NPC's interactable again
+                                if (Prop.GetType() == PropType::NPC_A || Prop.GetType() == PropType::NPC_B || Prop.GetType() == PropType::NPC_C || Prop.GetType() == PropType::ANIMATEDALTAR)
+                                {
+                                    Prop.SetOpened(false);
+                                }
+                            }
                         }
                     }
                 }
                 else {
-                    Prop.SetActive(false);
+                    Interactable = false;
+                    Colliding = false;
                 }
-
-                // check interactable collision
-                if (CheckCollisionRecs(GetCollisionRec(), Prop.GetInteractRec(WorldPos))) {
-                    // Check for interact collision to display ! over character
-                    if (Prop.IsInteractable()) {
-                        if (Prop.IsVisible()) {
-                            Interactable = true;
-                        }
-                    }
-
-                    // Manage interacting with props
-                    if (Interactable == true) {
-                        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_SPACE))
-                            Interacting = true;
-                                
-                        if (Interacting == true) {
-                            Prop.SetActive(true);
-                            Interactable = false;
-                            Locked = true;
-                        }
-
-                        if (Prop.IsOpened()) {
-                            Interacting = false;
-                            Interactable = false;
-                            Prop.SetActive(false);
-                            Locked = false;
-
-                            // Make NPC's interactable again
-                            if (Prop.GetType() == PropType::NPC_A || Prop.GetType() == PropType::NPC_B || Prop.GetType() == PropType::NPC_C || Prop.GetType() == PropType::ANIMATEDALTAR)
-                            {
-                                Prop.SetOpened(false);
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                Interactable = false;
-                Colliding = false;
             }
         }
-    }
-    
-    // Loop through all Enemies for collision
-    for (auto& Enemy:Enemies) {
+        
+        // Loop through all Enemies for collision
+        for (auto& Enemy:Enemies) {
 
-        if (Enemy.GetType() != EnemyType::NPC) {
-            if (Enemy.IsAlive()) {
+            if (Enemy.GetType() != EnemyType::NPC) {
+                if (Enemy.IsAlive()) {
 
-                // Check collision of Player against Enemy
-                if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
-                    if (!Enemy.IsDying()) {
-                        TakingDamage();
-                    }
-                }
-
-                // Check collision of Player's attack against Enemy
-                if (!Enemy.IsInvulnerable()) {
-                    if (Attacking) {
-                        if (CheckCollisionRecs(GetAttackRec(), Enemy.GetCollisionRec())) {
-                            Enemy.Damaged(true);
-                        }
-                    }
-                    else {
-                        Enemy.Damaged(false);
-                    }
-                }
-
-                // Check if Enemy Attack Collision is hitting Player
-                if (Enemy.IsAttacking()) {
-                    if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetAttackRec())) {
+                    // Check collision of Player against Enemy
+                    if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
                         if (!Enemy.IsDying()) {
                             TakingDamage();
                         }
                     }
-                }
 
-                // Heal fox if enemy is killed
-                if (Enemy.IsDying()) {
-                    if (Enemy.GetMaxHP() >= 8) {
-                        if (Enemy.GetHealth() <= 0) {
-                            Healing = true;
-                            AmountToHeal = 4.f;
+                    // Check collision of Player's attack against Enemy
+                    if (!Enemy.IsInvulnerable()) {
+                        if (Attacking) {
+                            if (CheckCollisionRecs(GetAttackRec(), Enemy.GetCollisionRec())) {
+                                Enemy.Damaged(true);
+                            }
+                        }
+                        else {
+                            Enemy.Damaged(false);
                         }
                     }
-                    else if (Enemy.GetMaxHP() >= 5) {
-                        if (Enemy.GetHealth() <= 0) {
-                            Healing = true;
-                            AmountToHeal = 2.5f;
+
+                    // Check if Enemy Attack Collision is hitting Player
+                    if (Enemy.IsAttacking()) {
+                        if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetAttackRec())) {
+                            if (!Enemy.IsDying()) {
+                                TakingDamage();
+                            }
                         }
                     }
-                    else {
-                        if (Enemy.GetHealth() <= 0) {
-                            Healing = true;
-                            AmountToHeal = 1.5f;
+
+                    // Heal fox if enemy is killed
+                    if (Enemy.IsDying()) {
+                        if (Enemy.GetMaxHP() >= 8) {
+                            if (Enemy.GetHealth() <= 0) {
+                                Healing = true;
+                                AmountToHeal = 4.f;
+                            }
+                        }
+                        else if (Enemy.GetMaxHP() >= 5) {
+                            if (Enemy.GetHealth() <= 0) {
+                                Healing = true;
+                                AmountToHeal = 2.5f;
+                            }
+                        }
+                        else {
+                            if (Enemy.GetHealth() <= 0) {
+                                Healing = true;
+                                AmountToHeal = 1.5f;
+                            }
                         }
                     }
                 }
-            }
-            if (Hurting) {
-                if (DamageTime >= 1.f) {
-                    Hurting = false;
+                if (Hurting) {
+                    if (DamageTime >= 1.f) {
+                        Hurting = false;
+                    }
                 }
             }
         }
