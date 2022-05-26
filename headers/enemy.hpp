@@ -195,5 +195,5 @@ struct Enemies
         [ ] add 'boss' after defeating all of one enemy type
         [x] fix enemy collision rec
         [x] wildlife npcs
-        [ ] refactor crow collision and movement ai
+        [x] refactor crow collision and movement ai
 */

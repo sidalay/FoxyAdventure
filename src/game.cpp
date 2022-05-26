@@ -4117,16 +4117,16 @@ namespace Game
         };
         Enemies.emplace_back(FoxFamFive);
         
-        Enemy Squirrel
-        {
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
-            EnemyType::SQUIRREL, Vector2{354, 2661}, &Window, &MapBG, 2.0f
-        };
-        Enemies.emplace_back(Squirrel);
+        // Enemy Squirrel
+        // {
+        //     Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
+        //     Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
+        //     Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
+        //     Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+        //     Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+        //     EnemyType::SQUIRREL, Vector2{354, 2661}, &Window, &MapBG, 2.0f
+        // };
+        // Enemies.emplace_back(Squirrel);
 
         return Enemies;
     }
@@ -4143,10 +4143,65 @@ namespace Game
             Sprite{"sprites/npc/wildlife/crow/crow_flying.png", 5, 2},
             Sprite{"sprites/npc/wildlife/crow/crow_walk.png", 4, 2},
             Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
-            EnemyType::CROW, Vector2{945, 2032}, &Window, &MapBG, 2.5f
+            EnemyType::CROW, Vector2{837, 1921}, &Window, &MapBG, 2.5f
         };
         Crows.emplace_back(CrowOne);
 
+        Enemy CrowTwo
+        {
+            Sprite{"sprites/npc/wildlife/crow/crow_idle.png", 8, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_flying.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            EnemyType::CROW, Vector2{1042, 2026}, &Window, &MapBG, 2.5f
+        };
+        Crows.emplace_back(CrowTwo);
+
+        Enemy CrowThree
+        {
+            Sprite{"sprites/npc/wildlife/crow/crow_idle.png", 8, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_flying.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            EnemyType::CROW, Vector2{847, 2037}, &Window, &MapBG, 2.5f
+        };
+        Crows.emplace_back(CrowThree);
+
+        Enemy CrowFour
+        {
+            Sprite{"sprites/npc/wildlife/crow/crow_idle.png", 8, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_flying.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            EnemyType::CROW, Vector2{932, 2256}, &Window, &MapBG, 2.5f
+        };
+        Crows.emplace_back(CrowFour);
+        
+        Enemy CrowFive
+        {
+            Sprite{"sprites/npc/wildlife/crow/crow_idle.png", 8, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_flying.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            EnemyType::CROW, Vector2{1037, 1826}, &Window, &MapBG, 2.5f
+        };
+        Crows.emplace_back(CrowFive);
+        
+        Enemy CrowSix
+        {
+            Sprite{"sprites/npc/wildlife/crow/crow_idle.png", 8, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_flying.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            EnemyType::CROW, Vector2{1055, 1955}, &Window, &MapBG, 2.5f
+        };
+        Crows.emplace_back(CrowSix);
+        
         return Crows;
     }
 
