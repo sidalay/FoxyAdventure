@@ -35,6 +35,9 @@ namespace Game
         // Initialize Enemies
         std::vector<Enemy> Enemies{Game::InitializeEnemies(MapBG, Window)};
 
+        // Initialize Crows
+        std::vector<Enemy> Crows{Game::InitializeCrows(MapBG, Window)};
+
         // Initialize HUD
         HUD Hud{};
 
@@ -72,7 +75,7 @@ namespace Game
         // Start Game Loop
         while (!WindowShouldClose()) 
         {
-            Game::Tick(Window, MapBG, State, NextState, Champion, Props, Hud, Enemies, PauseFox, Buttons, GameInfo);
+            Game::Tick(Window, MapBG, State, NextState, Champion, Props, Hud, Enemies, Crows, PauseFox, Buttons, GameInfo);
         }
 
         // Clean-up
@@ -90,7 +93,7 @@ namespace Game
         SetExitKey(0);
     }
 
-    void Tick(Window& Window, Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameInfo& GameInfo)
+    void Tick(Window& Window, Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameInfo& GameInfo)
     {
         float MaxTransitionTime{0.3f};
         Game::CheckScreenSizing(Window);
@@ -101,8 +104,8 @@ namespace Game
             ClearBackground(BLACK);
 
 
-            Game::Update(Map, State, NextState, Character, Props, Enemies);
-            Game::Draw(Map, Character, Props, Hud, Enemies);
+            Game::Update(Map, State, NextState, Character, Props, Enemies, Crows);
+            Game::Draw(Map, Character, Props, Hud, Enemies, Crows);
 
             if (GameInfo.TransitionOutTime < MaxTransitionTime) {
                 GameInfo.TransitionInTime = GetFrameTime();
@@ -186,7 +189,7 @@ namespace Game
     }
 
     // Manage Ticks for all objects
-    void Update(Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, std::vector<Enemy>& Enemies)
+    void Update(Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows)
     {
         if (State != GameState::TRANSITION) {
             // Create DeltaTime
@@ -198,6 +201,9 @@ namespace Game
 
             for (auto& Enemy:Enemies)
                 Enemy.Tick(DeltaTime, Props, Character.GetWorldPos(), Character.GetCharPos(), Enemies);
+
+            for (auto& Crow:Crows)
+                Crow.Tick(DeltaTime, Props, Character.GetWorldPos(), Character.GetCharPos(), Enemies);
 
             for (auto& Proptype:*Props.Under)
                 for (auto& Prop:Proptype)
@@ -230,7 +236,7 @@ namespace Game
     }
 
     // Call Draw functions for all objects
-    void Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies)
+    void Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows)
     {
         Map.Draw();
 
@@ -265,20 +271,20 @@ namespace Game
         //                   Character.GetAttackRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
         // }
 
-        // for (auto& Enemy:Enemies) {
-        //     Enemy.Draw(Character.GetWorldPos());
-        //     // Draw Collision Squares
-        //     // DrawRectangle(Enemy.GetCollisionRec().x,
-        //     //               Enemy.GetCollisionRec().y,
-        //     //               Enemy.GetCollisionRec().width,
-        //     //               Enemy.GetCollisionRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
-        //     // if (Enemy.IsAttacking()) {
-        //     //     DrawRectangle(Enemy.GetAttackRec().x,
-        //     //                 Enemy.GetAttackRec().y,
-        //     //                 Enemy.GetAttackRec().width,
-        //     //                 Enemy.GetAttackRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
-        //     // }
-        // }
+        for (auto& Enemy:Enemies) {
+            Enemy.Draw(Character.GetWorldPos());
+            // Draw Collision Squares
+            // DrawRectangle(Enemy.GetCollisionRec().x,
+            //               Enemy.GetCollisionRec().y,
+            //               Enemy.GetCollisionRec().width,
+            //               Enemy.GetCollisionRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
+            // if (Enemy.IsAttacking()) {
+            //     DrawRectangle(Enemy.GetAttackRec().x,
+            //                 Enemy.GetAttackRec().y,
+            //                 Enemy.GetAttackRec().width,
+            //                 Enemy.GetAttackRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
+            // }
+        }
 
         for (auto& PropType:*Props.Over) 
             for (auto& Prop:PropType) {
@@ -295,8 +301,8 @@ namespace Game
                 //                   Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
             }
 
-        for (auto& Enemy:Enemies) {
-            Enemy.Draw(Character.GetWorldPos());
+        for (auto& Crow:Crows) {
+            Crow.Draw(Character.GetWorldPos());
         }
 
         // Draw ! when within an interactable entity
@@ -4122,7 +4128,15 @@ namespace Game
         };
         Enemies.emplace_back(Squirrel);
 
-        Enemy Crow
+        return Enemies;
+    }
+
+    // Initialize crows
+    std::vector<Enemy> InitializeCrows(Background& MapBG, Window& Window)
+    {
+        std::vector<Enemy> Crows{};
+
+        Enemy CrowOne
         {
             Sprite{"sprites/npc/wildlife/crow/crow_idle.png", 8, 2},
             Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
@@ -4131,9 +4145,9 @@ namespace Game
             Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
             EnemyType::CROW, Vector2{945, 2032}, &Window, &MapBG, 2.5f
         };
-        Enemies.emplace_back(Crow);
+        Crows.emplace_back(CrowOne);
 
-        return Enemies;
+        return Crows;
     }
 
 } // namespace Game
