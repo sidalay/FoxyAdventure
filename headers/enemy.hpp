@@ -186,6 +186,7 @@ struct Enemies
         [x] fix multiple enemy instances
         [x] prevent enemies from 'overlapping' and walking over each other
         [ ] fix OutOfBounds if check parameters
+        [ ] fix prop collision is not being registered correctly sometimes
         [x] add HP bars
         [x] fix death animation not ticking correctly
         [x] add tombstone for death animation
@@ -194,4 +195,5 @@ struct Enemies
         [ ] add 'boss' after defeating all of one enemy type
         [x] fix enemy collision rec
         [x] wildlife npcs
+        [ ] refactor crow collision and movement ai
 */
