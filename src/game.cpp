@@ -314,6 +314,7 @@ namespace Game
         // Debugging info
         DrawText(TextFormat("Player.x: %i", (int)Character.GetWorldPos().x + 615), 20, 150, 20, WHITE);
         DrawText(TextFormat("Player.y: %i", (int)Character.GetWorldPos().y + 335), 20, 170, 20, WHITE);
+        // DrawText(TextFormat("Monster Counter: %i", Enemies.at(0).GetMonsterCount(EnemyType::BEAR)), 20, 300, 20, WHITE);
         // DrawText(TextFormat("Player.HP: %i", (int)Character.GetHealth()), 20, 190, 20, WHITE);
         // DrawText(TextFormat("Enemy.x: %i", (int)Enemies.at(0).GetWorldPos().x), 20, 190, 20, WHITE);
         // DrawText(TextFormat("Enemy.y: %i", (int)Enemies.at(0).GetWorldPos().y), 20, 210, 20, WHITE);

@@ -3,6 +3,16 @@
 int Enemy::MonsterCount{};
 int Enemy::MonsterDeaths{};
 
+std::unordered_map<EnemyType, int> Enemy::MonsterCounter
+{
+    {EnemyType::BEAR, 0}, {EnemyType::BEHOLDER, 0}, 
+    {EnemyType::CREATURE, 0}, {EnemyType::GHOST, 0}, 
+    {EnemyType::IMP, 0}, {EnemyType::MUSHROOM, 0},
+    {EnemyType::NECROMANCER, 0}, {EnemyType::SHADOW, 0}, 
+    {EnemyType::SPIDER, 0}, {EnemyType::TOAD, 0},
+    {EnemyType::BOSS, 0} 
+};
+
 Enemy::Enemy(Sprite Idle,
              Sprite Walk,
              Sprite Attack,
@@ -37,6 +47,12 @@ Enemy::Enemy(Sprite Idle,
     Sprites.emplace_back(this->Death);
 
     // Static variable to count how many enemies on the field
+    if (Type == EnemyType::NORMAL) {
+        MonsterCounter[Race] += 1;
+    }
+    else {
+        MonsterCounter[EnemyType::BOSS] += 1;
+    }
     MonsterCount += 1;
 
     // Generate RNG for current object used for randomizing AI movement
@@ -326,7 +342,7 @@ void Enemy::NeutralAction()
 }
 
 // Check if colliding with props
-    void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies)
+void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies)
 {
     if (Race != EnemyType::CROW) {
 
@@ -489,6 +505,12 @@ void Enemy::CheckAlive(float DeltaTime)
         if (StopTime >= EndTime) {
             MonsterDeaths += 1;
             Alive = false;
+            if (Type != EnemyType::BOSS) {
+                MonsterCounter[Race] -= 1;
+            }
+            else {
+                MonsterCounter[EnemyType::BOSS] -= 1;
+            }
         }
     }
 }

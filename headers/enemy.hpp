@@ -4,6 +4,7 @@
 #include <raylib.h>
 #include <vector>
 #include <random>
+#include <unordered_map>
 #include "headers/prop.hpp"
 #include "headers/sprite.hpp"
 #include "headers/window.hpp"
@@ -84,6 +85,7 @@ public:
     EnemyType GetType() {return Type;}
     Rectangle GetCollisionRec();
     Rectangle GetAttackRec();
+    int GetMonsterCount(EnemyType Type) {return MonsterCounter.at(Type);}
     
 private:
     // Enemy Sprites
@@ -163,6 +165,8 @@ private:
     bool MiscAction{false};
     
     Direction Face{Direction::DOWN};
+
+    static std::unordered_map<EnemyType, int> MonsterCounter;
 };
 
 struct Enemies
@@ -186,12 +190,13 @@ struct Enemies
         [x] fix multiple enemy instances
         [x] prevent enemies from 'overlapping' and walking over each other
         [ ] fix OutOfBounds if check parameters
-        [ ] fix prop collision is not being registered correctly sometimes
+        [ ] fix prop collision not being registered correctly sometimes
         [x] add HP bars
         [x] fix death animation not ticking correctly
         [x] add tombstone for death animation
         [x] add and implement enemy types
         [ ] add different enemy attack types ranged/melee
+        [x] add monster counter by EnemyType
         [ ] add 'boss' after defeating all of one enemy type
         [x] fix enemy collision rec
         [x] wildlife npcs
