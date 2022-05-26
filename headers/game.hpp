@@ -29,7 +29,9 @@ namespace Game
 {
     void Run();
     void Initialize(Window& Window, int FPS, std::string Title);
-    void Tick(Window& Window, Background& Map, GameState& State, GameState& PrevState, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameInfo& GameInfo);
+    void Tick(Window& Window, Background& Map, GameState& State, GameState& PrevState, 
+              Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, 
+              std::vector<Enemy>& Crows, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameInfo& GameInfo);
     void CheckScreenSizing(Window& Window);
     void SetFullScreen(Window& Window);
     void Update(Background& Map, GameState& State, GameState& PrevState, Character& Character, Props& Props, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows);
