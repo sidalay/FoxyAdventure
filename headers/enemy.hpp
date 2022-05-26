@@ -193,5 +193,5 @@ struct Enemies
         [ ] add different enemy attack types ranged/melee
         [ ] add 'boss' after defeating all of one enemy type
         [x] fix enemy collision rec
-        [ ] wildlife npcs
+        [x] wildlife npcs
 */
