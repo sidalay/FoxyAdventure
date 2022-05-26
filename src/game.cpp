@@ -265,20 +265,20 @@ namespace Game
         //                   Character.GetAttackRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
         // }
 
-        for (auto& Enemy:Enemies) {
-            Enemy.Draw(Character.GetWorldPos());
-            // Draw Collision Squares
-            // DrawRectangle(Enemy.GetCollisionRec().x,
-            //               Enemy.GetCollisionRec().y,
-            //               Enemy.GetCollisionRec().width,
-            //               Enemy.GetCollisionRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
-            // if (Enemy.IsAttacking()) {
-            //     DrawRectangle(Enemy.GetAttackRec().x,
-            //                 Enemy.GetAttackRec().y,
-            //                 Enemy.GetAttackRec().width,
-            //                 Enemy.GetAttackRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
-            // }
-        }
+        // for (auto& Enemy:Enemies) {
+        //     Enemy.Draw(Character.GetWorldPos());
+        //     // Draw Collision Squares
+        //     // DrawRectangle(Enemy.GetCollisionRec().x,
+        //     //               Enemy.GetCollisionRec().y,
+        //     //               Enemy.GetCollisionRec().width,
+        //     //               Enemy.GetCollisionRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
+        //     // if (Enemy.IsAttacking()) {
+        //     //     DrawRectangle(Enemy.GetAttackRec().x,
+        //     //                 Enemy.GetAttackRec().y,
+        //     //                 Enemy.GetAttackRec().width,
+        //     //                 Enemy.GetAttackRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
+        //     // }
+        // }
 
         for (auto& PropType:*Props.Over) 
             for (auto& Prop:PropType) {
@@ -287,13 +287,17 @@ namespace Game
                 // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,
                 //               Prop.GetCollisionRec(Character.GetWorldPos()).y,
                 //               Prop.GetCollisionRec(Character.GetWorldPos()).width,
-                //               Prop.GetCollisionRec(Character.GetWorldPos()).height, PURPLE);
+                //               Prop.GetCollisionRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
                 // if (Prop.IsInteractable())
                 //     DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,
                 //                   Prop.GetInteractRec(Character.GetWorldPos()).y,
                 //                   Prop.GetInteractRec(Character.GetWorldPos()).width,
                 //                   Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
             }
+
+        for (auto& Enemy:Enemies) {
+            Enemy.Draw(Character.GetWorldPos());
+        }
 
         // Draw ! when within an interactable entity
         Character.DrawIndicator();
@@ -4125,7 +4129,7 @@ namespace Game
             Sprite{"sprites/npc/wildlife/crow/crow_flying.png", 5, 2},
             Sprite{"sprites/npc/wildlife/crow/crow_walk.png", 4, 2},
             Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
-            EnemyType::CROW, Vector2{370, 2700}, &Window, &MapBG, 2.5f
+            EnemyType::CROW, Vector2{945, 2032}, &Window, &MapBG, 2.5f
         };
         Enemies.emplace_back(Crow);
 

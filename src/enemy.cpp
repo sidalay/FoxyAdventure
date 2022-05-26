@@ -326,45 +326,48 @@ void Enemy::NeutralAction()
 }
 
 // Check if colliding with props
-void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies)
+    void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies)
 {
-    // Prop collision handling
-    for (auto& PropType:*Props) {
-        for (auto& Prop:PropType) {
-            if (Prop.HasCollision()) {
-                
-                /*
-                    Undo movement wasn't working so implemented a reverse aggro logic. 
-                    When enemy gets within min aggro range of an obstacle it 'runs' away from it.
-                    Therefore it will never collide with a prop.
-                */
-                Vector2 PropScreenPos{Vector2Subtract(Prop.GetWorldPos(), HeroWorldPos)};
-                Vector2 RadiusAroundEnemy{5,5};
-                Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Prop
-                float AvoidProp{Vector2Length(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), EnemyPos))};
+    if (Race != EnemyType::CROW) {
 
-                // move away from moveable objects 
-                if (Prop.IsMoveable()) {
-                    if (Prop.GetType() == PropType::BOULDER) {
+        // Prop collision handling
+        for (auto& PropType:*Props) {
+            for (auto& Prop:PropType) {
+                if (Prop.HasCollision()) {
+                    
+                    /*
+                        Undo movement wasn't working so implemented a reverse aggro logic. 
+                        When enemy gets within min aggro range of an obstacle it 'runs' away from it.
+                        Therefore it will never collide with a prop.
+                    */
+                    Vector2 PropScreenPos{Vector2Subtract(Prop.GetWorldPos(), HeroWorldPos)};
+                    Vector2 RadiusAroundEnemy{5,5};
+                    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Prop
+                    float AvoidProp{Vector2Length(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), EnemyPos))};
+
+                    // move away from moveable objects 
+                    if (Prop.IsMoveable()) {
+                        if (Prop.GetType() == PropType::BOULDER) {
+                            if (AvoidProp <= MinRange) {
+                                WorldPos = Vector2Subtract(WorldPos, ToTarget);
+                            }
+                        }
+                    }
+                    // move away from all other objects
+                    else if (Prop.IsVisible()) {
                         if (AvoidProp <= MinRange) {
                             WorldPos = Vector2Subtract(WorldPos, ToTarget);
                         }
                     }
-                }
-                // move away from all other objects
-                else if (Prop.IsVisible()) {
-                    if (AvoidProp <= MinRange) {
-                        WorldPos = Vector2Subtract(WorldPos, ToTarget);
-                    }
-                }
 
-                // check physical collision
-                if (CheckCollisionRecs(this->GetCollisionRec(), Prop.GetCollisionRec(HeroWorldPos))) {   
+                    // check physical collision
+                    if (CheckCollisionRecs(this->GetCollisionRec(), Prop.GetCollisionRec(HeroWorldPos))) {   
 
-                    // activate grass animation
-                    if (Prop.IsMoveable()) {
-                        if (Prop.GetType() == PropType::GRASS && Alive) {
-                            Prop.SetActive(true);
+                        // activate grass animation
+                        if (Prop.IsMoveable()) {
+                            if (Prop.GetType() == PropType::GRASS && Alive) {
+                                Prop.SetActive(true);
+                            }
                         }
                     }
                 }
