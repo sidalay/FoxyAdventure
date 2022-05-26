@@ -532,7 +532,7 @@ void Enemy::EnemyAI()
                         std::uniform_int_distribution<int> RandomActionState{1, 10};
                         std::mt19937 RNG{std::mt19937{Seed()}};
                         ActionState = RandomActionState(RNG);
-                        IdleTwo = -IdleTwo;
+                        IdleTwo = !IdleTwo;
                     }
                     else {
                         Walking = false;
