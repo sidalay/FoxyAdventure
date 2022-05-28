@@ -11,30 +11,28 @@ Character::Character(Sprite Idle,
                      Sprite ItemGrab, 
                      Window* Screen, 
                      Background* World)
-    // : Idle{Idle},
-    //   Walk{Walk},
-    //   Run{Run},
-    //   Attack{Attack},
-    //   Hurt{Hurt},
-    //   Death{Death},
-    //   Push{Push},
-    //   Sleep{Sleep},
-    //   ItemGrab{ItemGrab},
-    :  Screen{Screen},
+    : Idle{Idle},
+      Walk{Walk},
+      Run{Run},
+      Attack{Attack},
+      Hurt{Hurt},
+      Death{Death},
+      Push{Push},
+      Sleep{Sleep},
+      ItemGrab{ItemGrab},
+      Screen{Screen},
       World{World}
 {
     // Fill vector<Sprite*> with Sprite objects to easily loop through and call Sprite::Tick()
-    Sprites.emplace_back(Idle);
-    Sprites.emplace_back(Walk);
-    Sprites.emplace_back(Run);
-    Sprites.emplace_back(Attack);
-    Sprites.emplace_back(Hurt);
-    Sprites.emplace_back(Death);
-    Sprites.emplace_back(Push);
-    Sprites.emplace_back(Sleep);
-    Sprites.emplace_back(ItemGrab);
-
-    CurrentSprite = &Sprites.at(0);
+    Sprites.emplace_back(&(this->Idle));
+    Sprites.emplace_back(&(this->Walk));
+    Sprites.emplace_back(&(this->Run));
+    Sprites.emplace_back(&(this->Attack));
+    Sprites.emplace_back(&(this->Hurt));
+    Sprites.emplace_back(&(this->Death));
+    Sprites.emplace_back(&(this->Push));
+    Sprites.emplace_back(&(this->Sleep));
+    Sprites.emplace_back(&(this->ItemGrab));
 
     WorldPos = Vector2Subtract(WorldPos, Offset);
 }
@@ -44,7 +42,7 @@ Character::~Character()
     // Unload all Textures when destructing Character
     for (auto& Sprite:Sprites)
     {
-        UnloadTexture(Sprite.Texture);
+        UnloadTexture(Sprite->Texture);
     }
 }
 
@@ -87,7 +85,7 @@ void Character::SpriteTick(float DeltaTime)
 {
     for (auto& Sprite:Sprites)
     {
-        Sprite.Tick(DeltaTime);
+        Sprite->Tick(DeltaTime);
     }
 }
 
@@ -363,19 +361,19 @@ void Character::WalkOrRun()
 
     if (Running && Walking) 
     {
-        CurrentSprite = &Sprites.at(2);
+        CurrentSprite = &Run;
     }
     else if (Walking) 
     {
-        CurrentSprite = &Sprites.at(1);
+        CurrentSprite = &Walk;
     }
     else if (Sleeping)
     {
-        CurrentSprite = &Sprites.at(7);
+        CurrentSprite = &Sleep;
     }
     else 
     {
-        CurrentSprite = &Sprites.at(0);
+        CurrentSprite = &Idle;
     }
 }
 
@@ -411,7 +409,7 @@ void Character::CheckAttack()
     }
 
     if (Attacking) {
-        CurrentSprite = &Sprites.at(3);
+        CurrentSprite = &Attack;
     }
 }
 
@@ -537,7 +535,7 @@ void Character::IsAlive()
     {
         Locked = true;
         Alive = false;
-        CurrentSprite = &Sprites.at(5);
+        CurrentSprite = &Death;
     }
     else
     {
@@ -560,7 +558,7 @@ void Character::TakingDamage()
 
     // How often the hurt animation should play
     if (DamageTime <= HurtUpdateTime) {
-        CurrentSprite = &Sprites.at(4);
+        CurrentSprite = &Hurt;
         Hurting = true;
     }
 
