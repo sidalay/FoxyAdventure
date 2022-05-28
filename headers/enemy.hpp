@@ -192,7 +192,7 @@ struct Enemies
         [x] add randomization to movement
         [x] fix multiple enemy instances
         [x] prevent enemies from 'overlapping' and walking over each other
-        [ ] fix OutOfBounds if check parameters
+        [x] fix OutOfBounds if check parameters
         [ ] fix prop collision not being registered correctly sometimes
         [x] add HP bars
         [x] fix death animation not ticking correctly
