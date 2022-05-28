@@ -3975,7 +3975,7 @@ namespace Game
             Sprite{"sprites/enemies/beholder/red_attack.png", 4, 4},
             Sprite{"sprites/enemies/beholder/red_hurt.png", 4, 4},
             Sprite{"sprites/enemies/beholder/red_death.png", 11, 4},
-            Sprite{"sprites/enemies/bholder/red_projectile.png", 4, 4},
+            Sprite{"sprites/enemies/beholder/red_projectile.png", 4, 4},
             EnemyType::BEHOLDER, EnemyType::NORMAL, Vector2{1550, 3466}, &Window, &MapBG, 3
         };
         Enemies.emplace_back(RedBeholder);
@@ -3999,7 +3999,7 @@ namespace Game
             Sprite{"sprites/enemies/necromancer/red_attack.png", 4, 4},
             Sprite{"sprites/enemies/necromancer/red_hurt.png", 1, 4},
             Sprite{"sprites/enemies/necromancer/red_death.png", 11, 4},
-            Sprite{"sprites/enmies/necromancer/red_projectile.png", 4, 4},
+            Sprite{"sprites/enemies/necromancer/red_projectile.png", 4, 4},
             EnemyType::NECROMANCER, EnemyType::NORMAL, Vector2{2038, 2345}, &Window, &MapBG
         };
         Enemies.emplace_back(RedNecro);

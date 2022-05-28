@@ -63,6 +63,7 @@ public:
     void OutOfBounds();
     void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies);
     void CheckAttack();
+    void UpdateProjectile(Vector2 HeroWorldPos);
     void UpdateSource();
     void TakingDamage();
     void Damaged(bool Attacked) {IsAttacked = Attacked;}
@@ -107,6 +108,7 @@ private:
     Sprite NpcSleep{};
 
     Sprite* CurrentSprite{&Idle};
+    Sprite* ShootingSprite{&Projectile};
     Sprite PreviousSprite{};
     std::vector<Sprite> Sprites{};
 

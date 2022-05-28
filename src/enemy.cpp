@@ -47,6 +47,7 @@ Enemy::Enemy(Sprite Idle,
     Sprites.emplace_back(this->Attack);
     Sprites.emplace_back(this->Hurt);
     Sprites.emplace_back(this->Death);
+    Sprites.emplace_back(this->Projectile);
 
     // Static variable to count how many enemies on the field
     if (Type == EnemyType::NORMAL) {
@@ -149,6 +150,8 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
 
             TakingDamage();
 
+            UpdateProjectile(HeroWorldPos);
+
             CheckAlive(DeltaTime);
         }
 
@@ -160,11 +163,11 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
         CheckDirection();
 
         NeutralAction();
-        
     }
 
-    if (Summoned)
-    CheckMovement(Props, HeroWorldPos, HeroScreenPos, Enemies);
+    if (Summoned) {
+        CheckMovement(Props, HeroWorldPos, HeroScreenPos, Enemies);
+    }
 }
 
 // Draw character animation
@@ -181,8 +184,14 @@ void Enemy::Draw(Vector2 HeroWorldPos)
                 else {
                     DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, WHITE);
                 }
+
+                // Draw Ranged projectile
+                if (Ranged && Attacking) {
+                    DrawTexturePro(ShootingSprite->Texture, ShootingSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, WHITE);
+                }
             }
         }
+        // OOB is used for debugging purposes only
         else {
             DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, PURPLE);
         }
@@ -426,10 +435,22 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWo
 // Manage attack sprites
 void Enemy::CheckAttack()
 {
-    if (Attacking)
-    {
+    if (Attacking) {
         CurrentSprite = &Sprites.at(2);
-        // CurrentSprite = Attack;
+
+        if (Ranged) {
+            ShootingSprite = &Sprites.at(5);
+        }
+    }
+}
+
+// Update projectile for ranged attacks
+void Enemy::UpdateProjectile(Vector2 HeroWorldPos)
+{   
+    if (Ranged) {
+        if (Attacking) {
+
+        }
     }
 }
 
