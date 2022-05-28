@@ -69,13 +69,14 @@ public:
     void EnemyAI();
     void EnemyAggro(Vector2 HeroScreenPos);
     void DrawHP();
-    void CheckBossSummon();
+    void CheckBossSummon(Vector2 HeroWorldPos);
 
     bool IsBlocked() {return Blocked;}
     bool IsAlive() {return Alive;}
     bool IsInvulnerable() {return Invulnerable;}
     bool IsAttacking() {return Attacking;}
     bool IsDying() {return Dying;}
+    bool WithinScreen(Vector2 HeroWorldPos);
     int GetHealth() {return Health;}
     int GetMaxHP() {return MaxHP;}
     int GetMonstersKilled() {return MonsterDeaths;}
@@ -159,7 +160,7 @@ private:
     bool Hurting{false};
     bool Intro{true};
     bool OOB{false};
-    bool Summoned{false};
+    bool Summoned{true};
 
     // Wildlife NPC
     bool IdleTwo{false};
@@ -199,7 +200,7 @@ struct Enemies
         [x] add and implement enemy types
         [ ] add different enemy attack types ranged/melee
         [x] add monster counter by EnemyType
-        [ ] add 'boss' after defeating all of one enemy type
+        [x] add 'boss' after defeating all of one enemy type
         [x] fix enemy collision rec
         [x] wildlife npcs
         [x] refactor crow collision and movement ai

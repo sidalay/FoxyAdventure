@@ -52,6 +52,7 @@ Enemy::Enemy(Sprite Idle,
     }
     else {
         MonsterCounter[EnemyType::BOSS] += 1;
+        Summoned = false;
     }
     MonsterCount += 1;
 
@@ -132,7 +133,7 @@ Enemy::~Enemy()
 void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies)
 {
     if (Type != EnemyType::NPC) {
-        if (Alive) {
+        if (Alive && Summoned) {
             SpriteTick(DeltaTime);
 
             CheckDirection();
@@ -143,6 +144,8 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
 
             CheckAlive(DeltaTime);
         }
+
+        CheckBossSummon(HeroWorldPos);
     }
     else {
         SpriteTick(DeltaTime);
@@ -153,6 +156,7 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
         
     }
 
+    if (Summoned)
     CheckMovement(Props, HeroWorldPos, HeroScreenPos, Enemies);
 }
 
@@ -163,18 +167,20 @@ void Enemy::Draw(Vector2 HeroWorldPos)
         (WorldPos.y >= (HeroWorldPos.y + 335) - (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))) && (WorldPos.y <= (HeroWorldPos.y + 335) + (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))))
     {
         if (!OOB) {
-            if (Hurting) {
-                DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, RED);
-            }
-            else {
-                DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, WHITE);
+            if (Type == EnemyType::NORMAL || Type == EnemyType::NPC || (Type == EnemyType::BOSS && Summoned)) {
+                if (Hurting) {
+                    DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, RED);
+                }
+                else {
+                    DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, WHITE);
+                }
             }
         }
         else {
             DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, PURPLE);
         }
 
-        if (Alive && (Type != EnemyType::NPC)) {
+        if (Alive && Summoned && (Type != EnemyType::NPC)) {
             DrawHP();
         }
     }
@@ -734,11 +740,13 @@ void Enemy::DrawHP()
 }
 
 // Check to see if Boss needs to be summoned based on type
-void Enemy::CheckBossSummon()
+void Enemy::CheckBossSummon(Vector2 HeroWorldPos)
 {
-    if (MonsterCounter[Race] == 0) {
-        if (!Summoned) {
-            Summoned = true;
+    if (!WithinScreen(HeroWorldPos)) {
+        if ((Type == EnemyType::BOSS) && (MonsterCounter[Race] <= 0)) {
+            if (!Summoned) {
+                Summoned = true;
+            }
         }
     }
 }
@@ -797,6 +805,21 @@ Rectangle Enemy::GetAttackRec()
             {
                 
             };
+    }
+}
+
+bool Enemy::WithinScreen(Vector2 HeroWorldPos)
+{
+    if (
+        (WorldPos.x >= (HeroWorldPos.x + 615) - (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) && 
+        (WorldPos.x <= (HeroWorldPos.x + 615) + (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) &&
+        (WorldPos.y >= (HeroWorldPos.y + 335) - (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))) && 
+        (WorldPos.y <= (HeroWorldPos.y + 335) + (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale)))
+       ) {
+        return true;
+    }
+    else {
+        return false;
     }
 }
 
