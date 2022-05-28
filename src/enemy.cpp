@@ -184,7 +184,7 @@ void Enemy::Draw(Vector2 HeroWorldPos)
                 }
 
                 // Draw Ranged projectile
-                if (Ranged && Attacking) {
+                if (Ranged && Attacking && !Dying && !Hurting) {
                     DrawTexturePro(ShootingSprite->Texture, ShootingSprite->GetSourceRec(), CurrentSprite->GetPosRec(UpdateProjectile(),Scale), Vector2{},0.f, WHITE);
                 }
             }
@@ -274,6 +274,24 @@ void Enemy::CheckDirection()
                 break;
             case Direction::UP: 
                 CurrentSprite->FrameY = 1;
+                break;
+        }
+    }
+
+    if (Ranged) {
+        switch (Face)
+        {
+            case Direction::DOWN: 
+                ShootingSprite->FrameY = 0;
+                break;
+            case Direction::LEFT: 
+                ShootingSprite->FrameY = 1;
+                break;
+            case Direction::RIGHT:
+                ShootingSprite->FrameY = 2;
+                break;
+            case Direction::UP: 
+                ShootingSprite->FrameY = 3;
                 break;
         }
     }
@@ -448,6 +466,10 @@ void Enemy::CheckAttack()
 // Update projectile for ranged attacks
 Vector2 Enemy::UpdateProjectile()
 {   
+    if (Trajectory >= 190.f) {
+        Trajectory = 1.f;
+    }
+
     Vector2 ProjectilePath{EnemyPos}; 
 
     switch (Face)
@@ -466,7 +488,6 @@ Vector2 Enemy::UpdateProjectile()
             break;
     }
     
-    ++Trajectory;
     return ProjectilePath;
 }
 
@@ -512,6 +533,7 @@ void Enemy::TakingDamage()
         if (DamageTime <= HurtUpdateTime) {
             CurrentSprite = &Hurt;
             Hurting = true;
+            Trajectory = 1.f;
         }
 
         // This is where the enemy takes damage
@@ -698,8 +720,8 @@ void Enemy::EnemyAggro(Vector2 HeroScreenPos)
 
         if (Ranged) {
             RadiusAroundEnemy = {10.f,10.f};
-            MaxRange = 190.f;
-            MinRange = 150.f;
+            MaxRange = 200.f;
+            MinRange = 120.f;
         }
         else {
             RadiusAroundEnemy = {50.f,50.f};
@@ -740,6 +762,7 @@ void Enemy::EnemyAggro(Vector2 HeroScreenPos)
         }
         else if (Aggro <= MinRange) {
             Attacking = true;
+            Trajectory += 1.3f;
         }
 
         CheckAttack();
@@ -821,45 +844,88 @@ Rectangle Enemy::GetCollisionRec()
 // Return enemy attack collision dimensions
 Rectangle Enemy::GetAttackRec()
 {
-    switch (Face)
-    {
-        case Direction::DOWN:
-            return Rectangle
-            {
-                EnemyPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/6.f,
-                EnemyPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY * Scale),
-                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
-                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/3.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
-            }; 
-        case Direction::LEFT: 
-            return Rectangle
-            {
-                EnemyPos.x - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/1.8f),
-                EnemyPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/6.f),
-                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/3.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
-                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
-            }; 
-        case Direction::RIGHT:
-            return Rectangle
-            {
-                EnemyPos.x + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX * Scale)/1.2f,
-                EnemyPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/6.f),
-                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/3.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
-                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
-            }; 
-        case Direction::UP:
-            return Rectangle
-            {
-                EnemyPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/6.f,
-                EnemyPos.y - CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/1.5f,
-                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
-                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/3.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
-            };
-        default:
-            return Rectangle
-            {
-                
-            };
+    if (Ranged) {
+        switch (Face) {
+            case Direction::DOWN:
+                return Rectangle
+                {
+                    UpdateProjectile().x + ShootingSprite->Texture.width/ShootingSprite->MaxFramesX/6.f,
+                    UpdateProjectile().y + ((ShootingSprite->Texture.height/ShootingSprite->MaxFramesY)/2 * Scale),
+                    ((ShootingSprite->Texture.width/ShootingSprite->MaxFramesX/2.f) * Scale - (ShootingSprite->Texture.width/ShootingSprite->MaxFramesX)/1.5f) * Scale,
+                    ((ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/3.f) * Scale - (ShootingSprite->Texture.height/ShootingSprite->MaxFramesY)/1.5f)  * Scale
+                };
+            case Direction::LEFT:
+                return Rectangle
+                {
+                    UpdateProjectile().x + (ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/2.f),
+                    UpdateProjectile().y + (ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/6.f),
+                    ((ShootingSprite->Texture.width/ShootingSprite->MaxFramesX/3.f) * Scale - (ShootingSprite->Texture.width/ShootingSprite->MaxFramesX)/1.5f) * Scale,
+                    ((ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/2.f) * Scale - (ShootingSprite->Texture.height/ShootingSprite->MaxFramesY)/1.5f)  * Scale
+                };
+            case Direction::RIGHT:
+                return Rectangle
+                {
+                    UpdateProjectile().x + (ShootingSprite->Texture.width/ShootingSprite->MaxFramesX * Scale)/2.5f,
+                    UpdateProjectile().y + (ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/6.f),
+                    ((ShootingSprite->Texture.width/ShootingSprite->MaxFramesX/3.f) * Scale - (ShootingSprite->Texture.width/ShootingSprite->MaxFramesX)/1.5f) * Scale,
+                    ((ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/2.f) * Scale - (ShootingSprite->Texture.height/ShootingSprite->MaxFramesY)/1.5f)  * Scale
+                };
+            case Direction::UP:
+                return Rectangle
+                {
+                    UpdateProjectile().x + ShootingSprite->Texture.width/ShootingSprite->MaxFramesX/6.f,
+                    UpdateProjectile().y + ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/2.f,
+                    ((ShootingSprite->Texture.width/ShootingSprite->MaxFramesX/2.f) * Scale - (ShootingSprite->Texture.width/ShootingSprite->MaxFramesX)/1.5f) * Scale,
+                    ((ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/3.f) * Scale - (ShootingSprite->Texture.height/ShootingSprite->MaxFramesY)/1.5f)  * Scale
+                };
+            default:
+                return Rectangle
+                {
+                    
+                };
+        }
+    }
+    else {
+        switch (Face)
+        {
+            case Direction::DOWN:
+                return Rectangle
+                {
+                    EnemyPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/6.f,
+                    EnemyPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY * Scale),
+                    ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
+                    ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/3.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+                }; 
+            case Direction::LEFT: 
+                return Rectangle
+                {
+                    EnemyPos.x - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/1.8f),
+                    EnemyPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/6.f),
+                    ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/3.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
+                    ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+                }; 
+            case Direction::RIGHT:
+                return Rectangle
+                {
+                    EnemyPos.x + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX * Scale)/1.2f,
+                    EnemyPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/6.f),
+                    ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/3.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
+                    ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+                }; 
+            case Direction::UP:
+                return Rectangle
+                {
+                    EnemyPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/6.f,
+                    EnemyPos.y - CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/1.5f,
+                    ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
+                    ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/3.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+                };
+            default:
+                return Rectangle
+                {
+                    
+                };
+        }
     }
 }
 

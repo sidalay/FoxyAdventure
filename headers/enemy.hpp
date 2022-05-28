@@ -137,7 +137,6 @@ private:
     int MaxHP{};
     int LeftOrRight{};
     int ActionState{};
-    int Trajectory{1};
     float Scale{3.2f};
     float Speed{1.4f};
     float Radius{25.f};                 
@@ -153,6 +152,7 @@ private:
     float MoveYRange{};
     float AIX{0.6};
     float AIY{0.6};
+    float Trajectory{1.f};
     bool Colliding{false};
     bool Attacking{false};
     bool Invulnerable{false};
@@ -204,7 +204,7 @@ struct Enemies
         [x] fix death animation not ticking correctly
         [x] add tombstone for death animation
         [x] add and implement enemy types
-        [ ] add different enemy attack types ranged/melee
+        [x] add different enemy attack types ranged/melee
         [x] add monster counter by EnemyType
         [x] add 'boss' after defeating all of one enemy type
         [x] fix enemy collision rec
