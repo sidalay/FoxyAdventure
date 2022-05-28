@@ -18,7 +18,7 @@ namespace Game
         Background MapBG{};
 
         // Initialize Character
-        Character Champion
+        Character Fox
         {
             Sprite{"sprites/characters/fox/Fox_idle.png", 4, 4}, 
             Sprite{"sprites/characters/fox/Fox_walk.png", 4, 4},
@@ -75,7 +75,7 @@ namespace Game
         // Start Game Loop
         while (!WindowShouldClose()) 
         {
-            Game::Tick(Window, MapBG, State, NextState, Champion, Props, Hud, Enemies, Crows, PauseFox, Buttons, GameInfo);
+            Game::Tick(Window, MapBG, State, NextState, Fox, Props, Hud, Enemies, Crows, PauseFox, Buttons, GameInfo);
         }
 
         // Clean-up
