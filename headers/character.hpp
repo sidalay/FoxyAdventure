@@ -66,18 +66,18 @@ public:
     void SwitchCollidable() {Collidable = !Collidable;}
     
 private:
-    Sprite Idle{};
-    Sprite Walk{};
-    Sprite Run{};
-    Sprite Attack{};
-    Sprite Hurt{};
-    Sprite Death{};
-    Sprite Push{};
-    Sprite Sleep{};
-    Sprite ItemGrab{};
-    Sprite* CurrentSprite{&Idle};  
+    // Sprite Idle{};
+    // Sprite Walk{};
+    // Sprite Run{};
+    // Sprite Attack{};
+    // Sprite Hurt{};
+    // Sprite Death{};
+    // Sprite Push{};
+    // Sprite Sleep{};
+    // Sprite ItemGrab{};
+    Sprite* CurrentSprite;  
     Texture2D Interact{LoadTexture("sprites/props/Interact.png")};
-    std::vector<Sprite*> Sprites {};
+    std::vector<Sprite> Sprites {};
 
     Window* Screen{};
     Background* World{};
