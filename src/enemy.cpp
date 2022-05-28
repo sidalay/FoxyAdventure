@@ -279,8 +279,8 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
         EnemyAggro(HeroScreenPos);
     }
 
-    // Check if moving OOB (THE IF CHECK NEEDS FIXING)
-    // OutOfBounds();
+    // Check if moving OOB 
+    OutOfBounds();
 
     // Check for collision against player or props
     if (Alive) {
@@ -298,16 +298,16 @@ void Enemy::UndoMovement()
 // UndoMovement if enemy is moving out of bounds
 void Enemy::OutOfBounds()
 {
-    if (WorldPos.x + EnemyPos.x - 615 < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
-        WorldPos.y + EnemyPos.y - 335 < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f ||
-        WorldPos.x + (Screen->x - EnemyPos.x - 615) > World->GetMap().width * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
-        WorldPos.y + (Screen->y - EnemyPos.y - 335) > World->GetMap().height * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f) 
+    if (WorldPos.x < 0.f ||
+        WorldPos.y < 0.f ||
+        WorldPos.x > World->GetMap().width * World->GetScale() - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)*Scale ||
+        WorldPos.y > World->GetMap().height * World->GetScale() - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)*Scale) 
     {
-        // UndoMovement();
-        OOB = true;
+        UndoMovement();
+        // OOB = true;
     }
     else {
-        OOB = false;
+        // OOB = false;
     }
 }
 
