@@ -3901,6 +3901,7 @@ namespace Game
             Sprite{"sprites/enemies/bear/brown_attack.png", 4, 4},
             Sprite{"sprites/enemies/bear/brown_hurt.png", 1, 4},
             Sprite{"sprites/enemies/bear/brown_death.png", 11, 4},
+            Sprite{"sprites/placeholder/placeholder.png", 0, 0},
             EnemyType::BEAR, EnemyType::NORMAL, Vector2{2940, 740}, &Window, &MapBG
         };
         Enemies.emplace_back(BrownBearTwo);
@@ -3912,6 +3913,7 @@ namespace Game
             Sprite{"sprites/enemies/bear/brown_attack.png", 4, 4},
             Sprite{"sprites/enemies/bear/brown_hurt.png", 1, 4},
             Sprite{"sprites/enemies/bear/brown_death.png", 11, 4},
+            Sprite{"sprites/placeholder/placeholder.png", 0, 0},
             EnemyType::BEAR, EnemyType::NORMAL, Vector2{2927, 1090}, &Window, &MapBG
         };
         Enemies.emplace_back(BrownBearThree);
@@ -3923,6 +3925,7 @@ namespace Game
             Sprite{"sprites/enemies/bear/lightbrown_attack.png", 4, 4},
             Sprite{"sprites/enemies/bear/lightbrown_hurt.png", 1, 4},
             Sprite{"sprites/enemies/bear/lightbrown_death.png", 11, 4},
+            Sprite{"sprites/placeholder/placeholder.png", 0, 0},
             EnemyType::BEAR, EnemyType::NORMAL, Vector2{3102, 899}, &Window, &MapBG
         };
         Enemies.emplace_back(LightBrownBearTwo);
@@ -3934,6 +3937,7 @@ namespace Game
             Sprite{"sprites/enemies/bear/lightbrown_attack.png", 4, 4},
             Sprite{"sprites/enemies/bear/lightbrown_hurt.png", 1, 4},
             Sprite{"sprites/enemies/bear/lightbrown_death.png", 11, 4},
+            Sprite{"sprites/placeholder/placeholder.png", 0, 0},
             EnemyType::BEAR, EnemyType::NORMAL, Vector2{2835, 905}, &Window, &MapBG
         };
         Enemies.emplace_back(LightBrownBearThree);
@@ -3947,6 +3951,7 @@ namespace Game
             Sprite{"sprites/enemies/bear/brown_attack.png", 4, 4},
             Sprite{"sprites/enemies/bear/brown_hurt.png", 1, 4},
             Sprite{"sprites/enemies/bear/brown_death.png", 11, 4},
+            Sprite{"sprites/placeholder/placeholder.png", 0, 0},
             EnemyType::BEAR, EnemyType::NORMAL, Vector2{1800, 3566}, &Window, &MapBG, 1
         };
         Enemies.emplace_back(BrownBear);
@@ -3958,6 +3963,7 @@ namespace Game
             Sprite{"sprites/enemies/bear/lightbrown_attack.png", 4, 4},
             Sprite{"sprites/enemies/bear/lightbrown_hurt.png", 1, 4},
             Sprite{"sprites/enemies/bear/lightbrown_death.png", 11, 4},
+            Sprite{"sprites/placeholder/placeholder.png", 0, 0},
             EnemyType::BEAR, EnemyType::BOSS, Vector2{1750, 3366}, &Window, &MapBG, 5, 5.f
         };
         Enemies.emplace_back(LightBrownBear);
@@ -3969,6 +3975,7 @@ namespace Game
             Sprite{"sprites/enemies/beholder/red_attack.png", 4, 4},
             Sprite{"sprites/enemies/beholder/red_hurt.png", 4, 4},
             Sprite{"sprites/enemies/beholder/red_death.png", 11, 4},
+            Sprite{"sprites/enemies/bholder/red_projectile.png", 4, 4},
             EnemyType::BEHOLDER, EnemyType::NORMAL, Vector2{1550, 3466}, &Window, &MapBG, 3
         };
         Enemies.emplace_back(RedBeholder);
@@ -3980,6 +3987,7 @@ namespace Game
             Sprite{"sprites/enemies/ghost/white_attack.png", 4, 4},
             Sprite{"sprites/enemies/ghost/white_hurt.png", 1, 4},
             Sprite{"sprites/enemies/ghost/white_death.png", 11, 4},
+            Sprite{"sprites/placeholder/placeholder.png", 0, 0},
             EnemyType::GHOST, EnemyType::NORMAL, Vector2{1850, 3566}, &Window, &MapBG, 1
         };
         Enemies.emplace_back(WhiteGhost);
@@ -3991,6 +3999,7 @@ namespace Game
             Sprite{"sprites/enemies/necromancer/red_attack.png", 4, 4},
             Sprite{"sprites/enemies/necromancer/red_hurt.png", 1, 4},
             Sprite{"sprites/enemies/necromancer/red_death.png", 11, 4},
+            Sprite{"sprites/enmies/necromancer/red_projectile.png", 4, 4},
             EnemyType::NECROMANCER, EnemyType::NORMAL, Vector2{2038, 2345}, &Window, &MapBG
         };
         Enemies.emplace_back(RedNecro);
@@ -4002,6 +4011,7 @@ namespace Game
             Sprite{"sprites/enemies/creature/purple_attack.png", 4, 4},
             Sprite{"sprites/enemies/creature/purple_hurt.png", 1, 4},
             Sprite{"sprites/enemies/creature/purple_death.png", 11, 4},
+            Sprite{"sprites/placeholder/placeholder.png", 0, 0},
             EnemyType::CREATURE, EnemyType::NORMAL, Vector2{1660, 3366}, &Window, &MapBG, 1
         };
         Enemies.emplace_back(PurpleCreature);
@@ -4013,6 +4023,7 @@ namespace Game
             Sprite{"sprites/enemies/imp/green_attack.png", 4, 4},
             Sprite{"sprites/enemies/imp/green_hurt.png", 1, 4},
             Sprite{"sprites/enemies/imp/green_death.png", 11, 4},
+            Sprite{"sprites/enemies/imp/green_projectile.png", 4, 4},
             EnemyType::IMP, EnemyType::NORMAL, Vector2{1800, 3666}, &Window, &MapBG, 1
         };
         Enemies.emplace_back(GreenImp);
@@ -4024,6 +4035,7 @@ namespace Game
         //     Sprite{"sprites/enemies/mushroom/pink_attack.png", 4, 4},
         //     Sprite{"sprites/enemies/mushroom/pink_hurt.png", 4, 4},
         //     Sprite{"sprites/enemies/mushroom/pink_death.png", 11, 4},
+        //     Sprite{"sprites/placeholder/placeholder.png", 0, 0},
         //     EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1500, 3666}, &Window, &MapBG, 1
         // };
         // Enemies.emplace_back(PinkMushroom);
@@ -4035,6 +4047,7 @@ namespace Game
         //     Sprite{"sprites/enemies/shadow/blue_attack.png", 4, 4},
         //     Sprite{"sprites/enemies/shadow/blue_hurt.png", 1, 4},
         //     Sprite{"sprites/enemies/shadow/blue_death.png", 11, 4},
+        //     Sprite{"sprites/placeholder/placeholder.png", 0, 0},
         //     EnemyType::SHADOW, EnemyType::NORMAL, Vector2{1800, 3666}, &Window, &MapBG
         // };
         // Enemies.emplace_back(BlueShadow);
@@ -4046,6 +4059,7 @@ namespace Game
         //     Sprite{"sprites/enemies/spider/brown_attack.png", 4, 4},
         //     Sprite{"sprites/enemies/spider/brown_hurt.png", 1, 4},
         //     Sprite{"sprites/enemies/spider/brown_death.png", 11, 4},
+        //     Sprite{"sprites/placeholder/placeholder.png", 0, 0},
         //     EnemyType::SPIDER, EnemyType::NORMAL, Vector2{1600, 3666}, &Window, &MapBG
         // };
         // Enemies.emplace_back(BrownSpider);
@@ -4057,6 +4071,7 @@ namespace Game
             Sprite{"sprites/enemies/toad/blue_attack.png", 4, 4},
             Sprite{"sprites/enemies/toad/blue_hurt.png", 1, 4},
             Sprite{"sprites/enemies/toad/blue_death.png", 11, 4},
+            Sprite{"sprites/placeholder/placeholder.png", 0, 0},
             EnemyType::TOAD, EnemyType::NORMAL, Vector2{1600, 3466}, &Window, &MapBG
         };
         Enemies.emplace_back(BlueToad);

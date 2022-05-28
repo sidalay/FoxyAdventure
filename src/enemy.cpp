@@ -18,6 +18,7 @@ Enemy::Enemy(Sprite Idle,
              Sprite Attack,
              Sprite Hurt,
              Sprite Death,
+             Sprite Projectile,
              EnemyType Race,
              EnemyType Type,
              Vector2 WorldPos,
@@ -30,6 +31,7 @@ Enemy::Enemy(Sprite Idle,
       Attack{Attack},
       Hurt{Hurt},
       Death{Death},
+      Projectile{Projectile},
       Race{Race},
       Type{Type},
       WorldPos{WorldPos},
@@ -655,8 +657,19 @@ void Enemy::EnemyAggro(Vector2 HeroScreenPos)
     Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50,50}), EnemyPos)), Speed)}; 
     
     if (!Stopped && Alive && !Invulnerable && !Blocked) {
-        Vector2 RadiusAroundEnemy{50,50};
+        Vector2 RadiusAroundEnemy{};
+
+        if (Ranged) {
+            RadiusAroundEnemy = {10.f,10.f};
+            MaxRange = 190.f;
+            MinRange = 150.f;
+        }
+        else {
+            RadiusAroundEnemy = {50.f,50.f};
+        }
+
         float Aggro{Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, RadiusAroundEnemy), EnemyPos))};
+
 
         // Only move enemy towards Player if within a certain range
         if (Aggro > MaxRange) {

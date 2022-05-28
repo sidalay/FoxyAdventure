@@ -30,6 +30,7 @@ public:
           Sprite Attack,
           Sprite Hurt,
           Sprite Death,
+          Sprite Projectile,
           EnemyType Race,
           EnemyType Type,
           Vector2 WorldPos,
@@ -96,6 +97,7 @@ private:
     Sprite Attack{};
     Sprite Hurt{};
     Sprite Death{};
+    Sprite Projectile{};
 
     // Wildlife NPC sprites
     Sprite NpcIdle{};
