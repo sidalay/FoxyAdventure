@@ -3991,7 +3991,7 @@ namespace Game
             Sprite{"sprites/enemies/necromancer/red_attack.png", 4, 4},
             Sprite{"sprites/enemies/necromancer/red_hurt.png", 1, 4},
             Sprite{"sprites/enemies/necromancer/red_death.png", 11, 4},
-            EnemyType::NECROMANCER, EnemyType::NORMAL, Vector2{1750, 3366}, &Window, &MapBG, 1
+            EnemyType::NECROMANCER, EnemyType::NORMAL, Vector2{2038, 2345}, &Window, &MapBG
         };
         Enemies.emplace_back(RedNecro);
 
@@ -4074,16 +4074,16 @@ namespace Game
         };
         Enemies.emplace_back(FoxFamOne);
         
-        // Enemy FoxFamTwo
-        // {
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 13, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
-        //     EnemyType::FOX, Vector2{247, 2524}, &Window, &MapBG
-        // };
-        // Enemies.emplace_back(FoxFamTwo);
+        Enemy FoxFamTwo
+        {
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 13, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
+            EnemyType::FOX, Vector2{247, 2524}, &Window, &MapBG
+        };
+        Enemies.emplace_back(FoxFamTwo);
 
         // Enemy FoxFamThree
         // {
@@ -4096,27 +4096,27 @@ namespace Game
         // };
         // Enemies.emplace_back(FoxFamThree);
 
-        // Enemy FoxFamFour
-        // {
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 13, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
-        //     EnemyType::FOX, Vector2{428, 2840}, &Window, &MapBG, 2.5f
-        // };
-        // Enemies.emplace_back(FoxFamFour);
+        Enemy FoxFamFour
+        {
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 13, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
+            EnemyType::FOX, Vector2{428, 2840}, &Window, &MapBG, 2.5f
+        };
+        Enemies.emplace_back(FoxFamFour);
 
-        // Enemy FoxFamFive
-        // {
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 13, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
-        //     EnemyType::FOX, Vector2{354, 2661}, &Window, &MapBG, 2.5f
-        // };
-        // Enemies.emplace_back(FoxFamFive);
+        Enemy FoxFamFive
+        {
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 13, 2},
+            Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
+            EnemyType::FOX, Vector2{354, 2661}, &Window, &MapBG, 2.5f
+        };
+        Enemies.emplace_back(FoxFamFive);
         
         // Enemy Squirrel
         // {

@@ -160,6 +160,7 @@ private:
     bool Hurting{false};
     bool Intro{true};
     bool OOB{false};
+    bool Ranged{false};
     bool Summoned{true};
 
     // Wildlife NPC

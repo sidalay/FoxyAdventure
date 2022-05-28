@@ -81,9 +81,10 @@ private:
 
     Window* Screen{};
     Background* World{};
-    Vector2 Offset{615,335};             // Player offset vs Enemy/Prop WorldPos
+    Vector2 Offset{615.f,335.f};         // Player offset vs Enemy/Prop WorldPos
     Vector2 CharacterPos{};              // Where the character is on the screen
-    Vector2 WorldPos{362.f,2594.f};      // Where the character is in the world
+    // Vector2 WorldPos{362.f,2594.f};      // Where the character is in the world
+    Vector2 WorldPos{2334.f,2431};
     Vector2 PrevWorldPos{};
     Rectangle Source{};
     Rectangle Destination{};

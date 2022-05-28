@@ -54,6 +54,11 @@ Enemy::Enemy(Sprite Idle,
         MonsterCounter[EnemyType::BOSS] += 1;
         Summoned = false;
     }
+
+    if (Race == EnemyType::BEHOLDER || Race == EnemyType::NECROMANCER || Race == EnemyType::IMP) {
+        Ranged = true;
+    }
+
     MonsterCount += 1;
 
     // Generate RNG for current object used for randomizing AI movement
