@@ -350,7 +350,7 @@ void Enemy::NeutralAction()
 // Check if colliding with props
 void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies)
 {
-    if (Race != EnemyType::CROW) {
+    if (Race != EnemyType::CROW) { // Crows should not be blocked by anything
 
         // Prop collision handling
         for (auto& PropType:*Props) {
@@ -362,7 +362,7 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWo
                         When enemy gets within min aggro range of an obstacle it 'runs' away from it.
                         Therefore it will never collide with a prop.
                     */
-                    Vector2 PropScreenPos{Vector2Subtract(Prop.GetWorldPos(), HeroWorldPos)};
+                    Vector2 PropScreenPos{Vector2{Prop.GetCollisionRec(HeroWorldPos).x, Prop.GetCollisionRec(HeroWorldPos).y}}; // Grab the collision rectangle screen position
                     Vector2 RadiusAroundEnemy{5,5};
                     Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Prop
                     float AvoidProp{Vector2Length(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), EnemyPos))};

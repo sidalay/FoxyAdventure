@@ -193,7 +193,7 @@ struct Enemies
         [x] fix multiple enemy instances
         [x] prevent enemies from 'overlapping' and walking over each other
         [x] fix OutOfBounds if check parameters
-        [ ] fix prop collision not being registered correctly sometimes
+        [x] fix prop collision not being registered correctly sometimes
         [x] add HP bars
         [x] fix death animation not ticking correctly
         [x] add tombstone for death animation
