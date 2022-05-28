@@ -124,5 +124,5 @@ private:
         [x] fix hurt portrait not showing up
         [x] heal fox when killing enemy
         [x] add healing animation
-        [ ] redo attacking and combos to feel less clunky
+        [x] redo attacking and combos to feel less clunky
 */
