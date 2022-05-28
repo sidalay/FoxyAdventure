@@ -69,6 +69,7 @@ public:
     void EnemyAI();
     void EnemyAggro(Vector2 HeroScreenPos);
     void DrawHP();
+    void CheckBossSummon();
 
     bool IsBlocked() {return Blocked;}
     bool IsAlive() {return Alive;}
@@ -158,6 +159,7 @@ private:
     bool Hurting{false};
     bool Intro{true};
     bool OOB{false};
+    bool Summoned{false};
 
     // Wildlife NPC
     bool IdleTwo{false};

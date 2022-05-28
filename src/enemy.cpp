@@ -24,7 +24,7 @@ Enemy::Enemy(Sprite Idle,
              Window* Screen,
              Background* World,
              int Health,
-             float Scale)
+             float Scale) 
     : Idle{Idle},
       Walk{Walk},
       Attack{Attack},
@@ -37,7 +37,7 @@ Enemy::Enemy(Sprite Idle,
       World{World},
       Health{Health},
       MaxHP{Health},
-      Scale{Scale}
+      Scale{Scale} 
 {
     // Fill vector<Sprite*> with Sprite objects to easily loop through and call Sprite::Tick()
     Sprites.emplace_back(this->Idle);
@@ -730,6 +730,16 @@ void Enemy::DrawHP()
 
         // add spacing between each bar
         LifeBarPos = Vector2Add(LifeBarPos, LifeBarPosAdd);
+    }
+}
+
+// Check to see if Boss needs to be summoned based on type
+void Enemy::CheckBossSummon()
+{
+    if (MonsterCounter[Race] == 0) {
+        if (!Summoned) {
+            Summoned = true;
+        }
     }
 }
 
