@@ -63,7 +63,6 @@ public:
     void OutOfBounds();
     void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies);
     void CheckAttack();
-    void UpdateProjectile(Vector2 HeroWorldPos);
     void UpdateSource();
     void TakingDamage();
     void Damaged(bool Attacked) {IsAttacked = Attacked;}
@@ -86,6 +85,7 @@ public:
     Vector2 GetWorldPos() {return WorldPos;}
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}
     Vector2 GetEnemyPos() {return EnemyPos;}
+    Vector2 UpdateProjectile();
     EnemyType GetType() {return Type;}
     Rectangle GetCollisionRec();
     Rectangle GetAttackRec();
@@ -137,6 +137,7 @@ private:
     int MaxHP{};
     int LeftOrRight{};
     int ActionState{};
+    int Trajectory{1};
     float Scale{3.2f};
     float Speed{1.4f};
     float Radius{25.f};                 

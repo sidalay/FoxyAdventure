@@ -150,8 +150,6 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
 
             TakingDamage();
 
-            UpdateProjectile(HeroWorldPos);
-
             CheckAlive(DeltaTime);
         }
 
@@ -187,7 +185,7 @@ void Enemy::Draw(Vector2 HeroWorldPos)
 
                 // Draw Ranged projectile
                 if (Ranged && Attacking) {
-                    DrawTexturePro(ShootingSprite->Texture, ShootingSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, WHITE);
+                    DrawTexturePro(ShootingSprite->Texture, ShootingSprite->GetSourceRec(), CurrentSprite->GetPosRec(UpdateProjectile(),Scale), Vector2{},0.f, WHITE);
                 }
             }
         }
@@ -442,16 +440,34 @@ void Enemy::CheckAttack()
             ShootingSprite = &Sprites.at(5);
         }
     }
+    else {
+        Trajectory = 1;
+    }
 }
 
 // Update projectile for ranged attacks
-void Enemy::UpdateProjectile(Vector2 HeroWorldPos)
+Vector2 Enemy::UpdateProjectile()
 {   
-    if (Ranged) {
-        if (Attacking) {
+    Vector2 ProjectilePath{EnemyPos}; 
 
-        }
+    switch (Face)
+    {
+        case Direction::UP: 
+            ProjectilePath.y -= Trajectory;
+            break;
+        case Direction::DOWN:
+            ProjectilePath.y += Trajectory;
+            break;
+        case Direction::LEFT:
+            ProjectilePath.x -= Trajectory;
+            break;
+        case Direction::RIGHT:
+            ProjectilePath.x += Trajectory;
+            break;
     }
+    
+    ++Trajectory;
+    return ProjectilePath;
 }
 
 // Handle enemy taking damage
