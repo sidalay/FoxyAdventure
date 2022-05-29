@@ -23,27 +23,21 @@ Character::Character(Sprite Idle,
       Screen{Screen},
       World{World}
 {
-    // Fill vector<Sprite*> with Sprite objects to easily loop through and call Sprite::Tick()
-    Sprites.emplace_back(&(this->Idle));
-    Sprites.emplace_back(&(this->Walk));
-    Sprites.emplace_back(&(this->Run));
-    Sprites.emplace_back(&(this->Attack));
-    Sprites.emplace_back(&(this->Hurt));
-    Sprites.emplace_back(&(this->Death));
-    Sprites.emplace_back(&(this->Push));
-    Sprites.emplace_back(&(this->Sleep));
-    Sprites.emplace_back(&(this->ItemGrab));
-
     WorldPos = Vector2Subtract(WorldPos, Offset);
 }
 
 Character::~Character()
 {
     // Unload all Textures when destructing Character
-    for (auto& Sprite:Sprites)
-    {
-        UnloadTexture(Sprite->Texture);
-    }
+    UnloadTexture(Idle.Texture);
+    UnloadTexture(Walk.Texture);
+    UnloadTexture(Run.Texture);
+    UnloadTexture(Attack.Texture);
+    UnloadTexture(Hurt.Texture);
+    UnloadTexture(Death.Texture);
+    UnloadTexture(Push.Texture);
+    UnloadTexture(Sleep.Texture);
+    UnloadTexture(ItemGrab.Texture);
 }
 
 void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies)
@@ -77,16 +71,17 @@ void Character::Draw()
     DrawTexturePro(CurrentSprite->Texture, Source, Destination, Vector2{}, 0.f, WHITE);
 }
 
-/* 
-    Loop through Sprites vector and call Sprite::Tick() to maintain sprite animations current 'spot'.
-    Halfway through walk animation -> Run will start from the halfway point. Etc.
-*/
 void Character::SpriteTick(float DeltaTime)
 {
-    for (auto& Sprite:Sprites)
-    {
-        Sprite->Tick(DeltaTime);
-    }
+    Idle.Tick(DeltaTime);
+    Walk.Tick(DeltaTime);
+    Run.Tick(DeltaTime);
+    Attack.Tick(DeltaTime);
+    Hurt.Tick(DeltaTime);
+    Death.Tick(DeltaTime);
+    Push.Tick(DeltaTime);
+    Sleep.Tick(DeltaTime);
+    ItemGrab.Tick(DeltaTime);
 }
 
 // Update Character to middle of screen if screen is resized

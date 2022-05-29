@@ -77,7 +77,7 @@ private:
     Sprite ItemGrab{};
     Sprite* CurrentSprite{&Idle};  
     Texture2D Interact{LoadTexture("sprites/props/Interact.png")};
-    std::vector<Sprite*> Sprites {};
+    // std::vector<Sprite*> Sprites {};
 
     Window* Screen{};
     Background* World{};
