@@ -48,7 +48,7 @@ public:
     void IsAlive();
     void SetSleep() {Sleeping = !Sleeping;}
     void DrawIndicator();
-    void TakingDamage();
+    void TakeDamage();
 
     float GetHealth() {return Health;}
     float GetSpeed() {return Speed;}

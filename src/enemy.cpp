@@ -148,7 +148,7 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
             
             NeutralAction();
 
-            TakingDamage();
+            TakeDamage();
 
             CheckAlive(DeltaTime);
         }
@@ -492,7 +492,7 @@ Vector2 Enemy::UpdateProjectile()
 }
 
 // Handle enemy taking damage
-void Enemy::TakingDamage()
+void Enemy::TakeDamage()
 {
     DamageTime += GetFrameTime();
     float UpdateTime {1.f};
@@ -561,7 +561,7 @@ void Enemy::CheckAlive(float DeltaTime)
         // Set to death sprite
         CurrentSprite = &Sprites.at(4);
         
-        // Turn off any TakingDamage() functionality
+        // Turn off any TakeDamage() functionality
         IsAttacked = false;
 
         /* 

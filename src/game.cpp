@@ -10,72 +10,74 @@ namespace Game
         Window Window {1280, 720};                               // Window Dimensions
         int FPS {144};                                           // Frames Per Second
         Game::Initialize(Window, FPS, "Cryptex Adventure");      // Create Window
-        SetTraceLogLevel(LOG_WARNING);
+        SetTraceLogLevel(LOG_FATAL);
         GameState State{GameState::RUNNING};
         GameState NextState{};
 
-        // Initialize Background
-        Background MapBG{};
-
-        // Initialize Character
-        Character Fox
         {
-            Sprite{"sprites/characters/fox/Fox_idle.png", 4, 4}, 
-            Sprite{"sprites/characters/fox/Fox_walk.png", 4, 4},
-            Sprite{"sprites/characters/fox/Fox_run.png", 4, 4}, 
-            Sprite{"sprites/characters/fox/Fox_melee.png", 4, 4},
-            Sprite{"sprites/characters/fox/Fox_hit.png", 2, 4}, 
-            Sprite{"sprites/characters/fox/Fox_die.png", 1, 4},
-            Sprite{"sprites/characters/fox/Fox_push.png", 4, 4},
-            Sprite{"sprites/characters/fox/Fox_sleeping.png", 4, 1}, 
-            Sprite{"sprites/characters/fox/Fox_itemGot.png", 1, 4},
-            &Window, &MapBG
-        };
+            // Initialize Background
+            Background MapBG{};
 
-        // Initialize Enemies
-        std::vector<Enemy> Enemies{Game::InitializeEnemies(MapBG, Window)};
+            // Initialize Character
+            Character Fox
+            {
+                Sprite{"sprites/characters/fox/Fox_idle.png", 4, 4}, 
+                Sprite{"sprites/characters/fox/Fox_walk.png", 4, 4},
+                Sprite{"sprites/characters/fox/Fox_run.png", 4, 4}, 
+                Sprite{"sprites/characters/fox/Fox_melee.png", 4, 4},
+                Sprite{"sprites/characters/fox/Fox_hit.png", 2, 4}, 
+                Sprite{"sprites/characters/fox/Fox_die.png", 1, 4},
+                Sprite{"sprites/characters/fox/Fox_push.png", 4, 4},
+                Sprite{"sprites/characters/fox/Fox_sleeping.png", 4, 1}, 
+                Sprite{"sprites/characters/fox/Fox_itemGot.png", 1, 4},
+                &Window, &MapBG
+            };
 
-        // Initialize Crows
-        std::vector<Enemy> Crows{Game::InitializeCrows(MapBG, Window)};
+            // Initialize Enemies
+            std::vector<Enemy> Enemies{Game::InitializeEnemies(MapBG, Window)};
 
-        // Initialize HUD
-        HUD Hud{};
+            // Initialize Crows
+            std::vector<Enemy> Crows{Game::InitializeCrows(MapBG, Window)};
 
-        // Initialize Props
-        std::vector<std::vector<Prop>> UnderProps{Game::InitializePropsUnder()};
-        std::vector<std::vector<Prop>> OverProps{Game::InitializePropsOver()};
-        Props Props{&UnderProps, &OverProps};
+            // Initialize HUD
+            HUD Hud{};
 
-        // Initialize fox Sprites for Pause Menu
-        std::array<Sprite, 5> PauseFox
-        {
-            Sprite{"sprites/characters/fox/Fox_idle.png", 4, 4},
-            Sprite{"sprites/characters/fox/Fox_walk.png", 4, 4},
-            Sprite{"sprites/characters/fox/Fox_run.png", 4, 4},
-            Sprite{"sprites/characters/fox/Fox_sleeping.png", 4, 1},
-            Sprite{"sprites/characters/fox/Fox_melee.png", 4, 1}
-        };
+            // Initialize Props
+            std::vector<std::vector<Prop>> UnderProps{Game::InitializePropsUnder()};
+            std::vector<std::vector<Prop>> OverProps{Game::InitializePropsOver()};
+            Props Props{&UnderProps, &OverProps};
 
-        // Initialize button textures for Pause Menu
-        std::array<Texture2D, 9> Buttons 
-        {
-            LoadTexture("sprites/buttons/W.png"),
-            LoadTexture("sprites/buttons/A.png"),
-            LoadTexture("sprites/buttons/S.png"),
-            LoadTexture("sprites/buttons/D.png"),
-            LoadTexture("sprites/buttons/L.png"),
-            LoadTexture("sprites/buttons/M.png"),
-            LoadTexture("sprites/buttons/Shift.png"),
-            LoadTexture("sprites/buttons/Space.png"),
-            LoadTexture("sprites/buttons/Lmouse.png")
-        };
+            // Initialize fox Sprites for Pause Menu
+            std::array<Sprite, 5> PauseFox
+            {
+                Sprite{"sprites/characters/fox/Fox_idle.png", 4, 4},
+                Sprite{"sprites/characters/fox/Fox_walk.png", 4, 4},
+                Sprite{"sprites/characters/fox/Fox_run.png", 4, 4},
+                Sprite{"sprites/characters/fox/Fox_sleeping.png", 4, 1},
+                Sprite{"sprites/characters/fox/Fox_melee.png", 4, 1}
+            };
 
-        GameInfo GameInfo{0, 0.f, 0.f, 0.f};
+            // Initialize button textures for Pause Menu
+            std::array<Texture2D, 9> Buttons 
+            {
+                LoadTexture("sprites/buttons/W.png"),
+                LoadTexture("sprites/buttons/A.png"),
+                LoadTexture("sprites/buttons/S.png"),
+                LoadTexture("sprites/buttons/D.png"),
+                LoadTexture("sprites/buttons/L.png"),
+                LoadTexture("sprites/buttons/M.png"),
+                LoadTexture("sprites/buttons/Shift.png"),
+                LoadTexture("sprites/buttons/Space.png"),
+                LoadTexture("sprites/buttons/Lmouse.png")
+            };
 
-        // Start Game Loop
-        while (!WindowShouldClose()) 
-        {
-            Game::Tick(Window, MapBG, State, NextState, Fox, Props, Hud, Enemies, Crows, PauseFox, Buttons, GameInfo);
+            GameInfo GameInfo{0, 0.f, 0.f, 0.f};
+
+            // Start Game Loop
+            while (!WindowShouldClose()) 
+            {
+                Game::Tick(Window, MapBG, State, NextState, Fox, Props, Hud, Enemies, Crows, PauseFox, Buttons, GameInfo);
+            }
         }
 
         // Clean-up

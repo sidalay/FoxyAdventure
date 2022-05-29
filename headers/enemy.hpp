@@ -64,7 +64,7 @@ public:
     void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies);
     void CheckAttack();
     void UpdateSource();
-    void TakingDamage();
+    void TakeDamage();
     void Damaged(bool Attacked) {IsAttacked = Attacked;}
     void CheckAlive(float DeltaTime);
     void EnemyAI();

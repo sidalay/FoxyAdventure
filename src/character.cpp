@@ -270,7 +270,7 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                     // Check collision of Player against Enemy
                     if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
                         if (!Enemy.IsDying()) {
-                            TakingDamage();
+                            TakeDamage();
                         }
                     }
 
@@ -290,7 +290,7 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                     if (Enemy.IsAttacking()) {
                         if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetAttackRec())) {
                             if (!Enemy.IsDying()) {
-                                TakingDamage();
+                                TakeDamage();
                             }
                         }
                     }
@@ -545,7 +545,7 @@ void Character::IsAlive()
 }
 
 // Manage Player animation when taking damage
-void Character::TakingDamage()
+void Character::TakeDamage()
 {
     float UpdateTime {3.f/1.f};
     float HurtUpdateTime{1.f};
