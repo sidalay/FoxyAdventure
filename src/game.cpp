@@ -10,7 +10,6 @@ namespace Game
         Window Window {1280, 720};                               // Window Dimensions
         int FPS {144};                                           // Frames Per Second
         Game::Initialize(Window, FPS, "Cryptex Adventure");      // Create Window
-        SetTraceLogLevel(LOG_FATAL);
         GameState State{GameState::RUNNING};
         GameState NextState{};
 
@@ -87,8 +86,9 @@ namespace Game
     // Set the Game's window configurations
     void Initialize(Window& Window, int FPS, std::string Title)
     {
-        assert(!GetWindowHandle());
+        // assert(!GetWindowHandle());
         SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+        SetTraceLogLevel(LOG_FATAL);
         InitWindow(Window.x, Window.y, Title.c_str());
         SetTargetFPS(FPS);
         SetExitKey(0);
