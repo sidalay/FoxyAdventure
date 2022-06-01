@@ -204,10 +204,10 @@ namespace Game
             Character.Tick(DeltaTime, Props, Enemies, Trees);
 
             for (auto& Enemy:Enemies)
-                Enemy.Tick(DeltaTime, Props, Character.GetWorldPos(), Character.GetCharPos(), Enemies);
+                Enemy.Tick(DeltaTime, Props, Character.GetWorldPos(), Character.GetCharPos(), Enemies, Trees);
 
             for (auto& Crow:Crows)
-                Crow.Tick(DeltaTime, Props, Character.GetWorldPos(), Character.GetCharPos(), Enemies);
+                Crow.Tick(DeltaTime, Props, Character.GetWorldPos(), Character.GetCharPos(), Enemies, Trees);
 
             for (auto& Proptype:*Props.Under)
                 for (auto& Prop:Proptype)

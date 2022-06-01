@@ -132,7 +132,7 @@ Enemy::~Enemy()
     // }
 }
 
-void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies)
+void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     if (Type != EnemyType::NPC) {
         if (Alive && Summoned) {
@@ -158,7 +158,7 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
     }
 
     if (Summoned) {
-        CheckMovement(Props, HeroWorldPos, HeroScreenPos, Enemies);
+        CheckMovement(Props, HeroWorldPos, HeroScreenPos, Enemies, Trees);
     }
 }
 
@@ -292,7 +292,7 @@ void Enemy::CheckDirection()
 }
 
 // Check for movement input
-void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies)
+void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     PrevWorldPos = WorldPos;
     EnemyPos = Vector2Subtract(WorldPos, HeroWorldPos); // Where the Enemy is drawn on the screen
@@ -310,8 +310,8 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
 
     // Check for collision against player or props
     if (Alive) {
-        CheckCollision(Props.Under, HeroWorldPos, Enemies);
-        CheckCollision(Props.Over, HeroWorldPos, Enemies);
+        CheckCollision(Props.Under, HeroWorldPos, Enemies, Trees);
+        CheckCollision(Props.Over, HeroWorldPos, Enemies, Trees);
     }
 }
 
@@ -374,7 +374,7 @@ void Enemy::NeutralAction()
 }
 
 // Check if colliding with props
-void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies)
+void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     if (Race != EnemyType::CROW) { // Crows should not be blocked by anything
 
@@ -421,7 +421,24 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWo
                 }
             }
         }
+        
+        // Tree collision handling
+        for (auto& Tree:Trees) {
+            if (Tree.HasCollision()) {
+                Vector2 TreeScreenPos{Vector2{Tree.GetCollisionRec(HeroWorldPos).x, Tree.GetCollisionRec(HeroWorldPos).y}}; // Grab the collision rectangle screen position
+                Vector2 RadiusAroundEnemy{5,5};
+                Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(TreeScreenPos, RadiusAroundEnemy), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Tree
+                float AvoidTree{Vector2Length(Vector2Subtract(Vector2Add(TreeScreenPos, RadiusAroundEnemy), EnemyPos))};
+
+                if (Tree.IsVisible()) {
+                    if (AvoidTree <= MinRange) {
+                        WorldPos = Vector2Subtract(WorldPos, ToTarget);
+                    }
+                }
+            }
+        }
     }
+
 
     // Enemy collision handling
     for (auto& Enemy:Enemies) {
