@@ -93,22 +93,22 @@ public:
     
 private:
     // Enemy Sprites
-    Sprite Idle{};
-    Sprite Walk{};
-    Sprite Attack{};
-    Sprite Hurt{};
-    Sprite Death{};
-    Sprite Projectile{};
+    // Sprite Idle{};
+    // Sprite Walk{};
+    // Sprite Attack{};
+    // Sprite Hurt{};
+    // Sprite Death{};
+    // Sprite Projectile{};
 
     // Wildlife NPC sprites
-    Sprite NpcIdle{};
-    Sprite NpcIdleTwo{};
-    Sprite NpcWalk{};
-    Sprite NpcMisc{};
-    Sprite NpcSleep{};
+    // Sprite NpcIdle{};
+    // Sprite NpcIdleTwo{};
+    // Sprite NpcWalk{};
+    // Sprite NpcMisc{};
+    // Sprite NpcSleep{};
 
-    Sprite* CurrentSprite{&Idle};
-    Sprite* ShootingSprite{&Projectile};
+    Sprite* CurrentSprite;
+    Sprite* ShootingSprite;
     Sprite PreviousSprite{};
     std::vector<Sprite> Sprites{};
 

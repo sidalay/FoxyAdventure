@@ -26,12 +26,7 @@ Enemy::Enemy(Sprite Idle,
              Background* World,
              int Health,
              float Scale) 
-    : Idle{Idle},
-      Walk{Walk},
-      Attack{Attack},
-      Hurt{Hurt},
-      Death{Death},
-      Projectile{Projectile},
+    : 
       Race{Race},
       Type{Type},
       WorldPos{WorldPos},
@@ -42,12 +37,15 @@ Enemy::Enemy(Sprite Idle,
       Scale{Scale} 
 {
     // Fill vector<Sprite*> with Sprite objects to easily loop through and call Sprite::Tick()
-    Sprites.emplace_back(this->Idle);
-    Sprites.emplace_back(this->Walk);
-    Sprites.emplace_back(this->Attack);
-    Sprites.emplace_back(this->Hurt);
-    Sprites.emplace_back(this->Death);
-    Sprites.emplace_back(this->Projectile);
+    Sprites.emplace_back(Idle);
+    Sprites.emplace_back(Walk);
+    Sprites.emplace_back(Attack);
+    Sprites.emplace_back(Hurt);
+    Sprites.emplace_back(Death);
+    Sprites.emplace_back(Projectile);
+
+    CurrentSprite = &Sprites.at(0);
+    ShootingSprite = &Sprites.at(5);
 
     // Static variable to count how many enemies on the field
     if (Type == EnemyType::NORMAL) {
@@ -87,11 +85,7 @@ Enemy::Enemy(Sprite NpcIdle,
              Window* Screen,
              Background* World,
              float Scale)
-    : NpcIdle{NpcIdle},
-      NpcIdleTwo{NpcIdleTwo},
-      NpcWalk{NpcWalk},
-      NpcMisc{NpcMisc},
-      NpcSleep{NpcSleep},
+    : 
       Race{Race},
       Type{EnemyType::NPC},
       WorldPos{WorldPos},
@@ -100,11 +94,11 @@ Enemy::Enemy(Sprite NpcIdle,
       Scale{Scale}
 {
     // Fill vector<Sprite*> with Sprite objects to easily loop through and call Sprite::Tick()
-    Sprites.emplace_back(this->NpcIdle);
-    Sprites.emplace_back(this->NpcIdleTwo);
-    Sprites.emplace_back(this->NpcWalk);
-    Sprites.emplace_back(this->NpcMisc);
-    Sprites.emplace_back(this->NpcSleep);
+    Sprites.emplace_back(NpcIdle);
+    Sprites.emplace_back(NpcIdleTwo);
+    Sprites.emplace_back(NpcWalk);
+    Sprites.emplace_back(NpcMisc);
+    Sprites.emplace_back(NpcSleep);
 
     CurrentSprite = &Sprites.at(0);
 
@@ -529,7 +523,7 @@ void Enemy::TakeDamage()
 
         // Time between hurt animation showing
         if (DamageTime <= HurtUpdateTime) {
-            CurrentSprite = &Hurt;
+            CurrentSprite = &Sprites.at(3);
             Hurting = true;
             Trajectory = 1.f;
         }
