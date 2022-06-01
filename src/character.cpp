@@ -376,7 +376,7 @@ void Character::WalkOrRun()
 void Character::CheckAttack()
 {
     AttackTime += GetFrameTime();
-    float AttackResetTime{1.0f};
+    float AttackResetTime{0.7f};
 
     if (!Locked) {
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE)) {
@@ -542,7 +542,7 @@ void Character::IsAlive()
 // Manage Player animation when taking damage
 void Character::TakeDamage()
 {
-    float UpdateTime {3.f/1.f};
+    float UpdateTime {2.f/1.f};
     float HurtUpdateTime{1.f};
     // float KnockBack{2.f};
 

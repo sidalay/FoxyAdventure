@@ -489,7 +489,7 @@ Vector2 Enemy::UpdateProjectile()
 void Enemy::TakeDamage()
 {
     DamageTime += GetFrameTime();
-    float UpdateTime {1.f};
+    float UpdateTime {0.7f};
     float HurtUpdateTime{0.6f};
 
     if (IsAttacked) {
