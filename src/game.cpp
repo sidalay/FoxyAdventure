@@ -201,7 +201,7 @@ namespace Game
 
             // Call Ticks
             Map.Tick(Character.GetWorldPos());
-            Character.Tick(DeltaTime, Props, Enemies);
+            Character.Tick(DeltaTime, Props, Enemies, Trees);
 
             for (auto& Enemy:Enemies)
                 Enemy.Tick(DeltaTime, Props, Character.GetWorldPos(), Character.GetCharPos(), Enemies);

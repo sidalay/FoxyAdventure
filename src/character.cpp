@@ -40,7 +40,7 @@ Character::~Character()
     UnloadTexture(ItemGrab.Texture);
 }
 
-void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies)
+void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     UpdateCharacterPos();
 
@@ -54,7 +54,7 @@ void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies)
 
     UpdateSource();
 
-    CheckMovement(Props, Enemies);
+    CheckMovement(Props, Enemies, Trees);
 
     CheckEmotion();
 
@@ -124,7 +124,7 @@ void Character::CheckDirection()
 }
 
 // Check for movement input
-void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies)
+void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     PrevWorldPos = WorldPos;
     Vector2 Direction{};
@@ -160,8 +160,8 @@ void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies)
 
     }
 
-    CheckCollision(Props.Under, Direction, Enemies);
-    CheckCollision(Props.Over, Direction, Enemies);
+    CheckCollision(Props.Under, Direction, Enemies, Trees);
+    CheckCollision(Props.Over, Direction, Enemies, Trees);
 }
 
 // Undo movement if walking out-of-bounds or colliding
@@ -171,7 +171,7 @@ void Character::UndoMovement()
 }
 
 // Check if colliding with props / npcs / enemies 
-void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, std::vector<Enemy>& Enemies)
+void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     DamageTime += GetFrameTime();
     
@@ -252,6 +252,17 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                 else {
                     Interactable = false;
                     Colliding = false;
+                }
+            }
+        }
+
+        // Loop for tree collision
+        for (auto& Tree:Trees) {
+            if (Tree.HasCollision()) {
+                if (CheckCollisionRecs(GetCollisionRec(), Tree.GetCollisionRec(WorldPos))) {
+                    if (Tree.IsVisible()) {
+                        UndoMovement();
+                    }
                 }
             }
         }

@@ -32,14 +32,14 @@ public:
               Background* World);
     ~Character();
     
-    void Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies);
+    void Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void Draw();
     void SpriteTick(float DeltaTime);
     void UpdateCharacterPos();
     void CheckDirection();
-    void CheckMovement(Props& Props, std::vector<Enemy>& Enemies);
+    void CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void UndoMovement();
-    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, std::vector<Enemy>& Enemies);
+    void CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void WalkOrRun();
     void CheckAttack();
     void UpdateSource();
