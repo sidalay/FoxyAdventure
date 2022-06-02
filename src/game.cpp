@@ -213,12 +213,12 @@ namespace Game
                 for (auto& Prop:Proptype)
                     Prop.Tick(DeltaTime, Map);
 
+            for (auto& Tree:Trees)
+                Tree.Tick(DeltaTime, Map);
+
             for (auto& Proptype:*Props.Over)
                 for (auto& Prop:Proptype)
                     Prop.Tick(DeltaTime, Map);
-            
-            for (auto& Tree:Trees)
-                Tree.Tick(DeltaTime, Map);
 
             // Debugging --------------------------------------
             if (Character.GetHealth() < 11)
@@ -293,6 +293,10 @@ namespace Game
             // }
         }
 
+        for (auto& Tree:Trees) {
+            Tree.Draw(Character.GetWorldPos());
+        }
+
         for (auto& PropType:*Props.Over) 
             for (auto& Prop:PropType) {
                 Prop.Draw(Character.GetWorldPos());
@@ -308,10 +312,6 @@ namespace Game
                 //                   Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
             }
         
-        for (auto& Tree:Trees) {
-            Tree.Draw(Character.GetWorldPos());
-        }
-
         for (auto& Crow:Crows) {
             Crow.Draw(Character.GetWorldPos());
         }
