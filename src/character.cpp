@@ -205,7 +205,7 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
 
                         // if not pushable, block movement   
                         else {
-                            if (Prop.IsVisible()) {
+                            if (Prop.IsSpawned()) {
                                 UndoMovement();
                             }
                         }
@@ -218,7 +218,7 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                     if (CheckCollisionRecs(GetCollisionRec(), Prop.GetInteractRec(WorldPos))) {
                         // Check for interact collision to display ! over character
                         if (Prop.IsInteractable()) {
-                            if (Prop.IsVisible()) {
+                            if (Prop.IsSpawned()) {
                                 Interactable = true;
                             }
                         }
@@ -260,7 +260,7 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
         for (auto& Tree:Trees) {
             if (Tree.HasCollision()) {
                 if (CheckCollisionRecs(GetCollisionRec(), Tree.GetCollisionRec(WorldPos))) {
-                    if (Tree.IsVisible()) {
+                    if (Tree.IsSpawned()) {
                         UndoMovement();
                     }
                 }

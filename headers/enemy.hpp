@@ -167,6 +167,7 @@ private:
     bool OOB{false};
     bool Ranged{false};
     bool Summoned{true};
+    bool Visible{false};
 
     // Wildlife NPC
     bool IdleTwo{false};

@@ -133,41 +133,48 @@ Enemy::~Enemy()
 }
 
 void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
-{
-    if (Type != EnemyType::NPC) {
-        if (Alive && Summoned) {
+{   
+    if (Visible) {
+        if (Type != EnemyType::NPC) {
+            if (Alive && Summoned) {
+                SpriteTick(DeltaTime);
+
+                CheckDirection();
+                
+                NeutralAction();
+
+                TakeDamage();
+
+                CheckAlive(DeltaTime);
+            }
+
+        }
+        else {
             SpriteTick(DeltaTime);
 
             CheckDirection();
-            
+
             NeutralAction();
-
-            TakeDamage();
-
-            CheckAlive(DeltaTime);
         }
 
-        CheckBossSummon(HeroWorldPos);
+        if (Summoned) {
+            CheckMovement(Props, HeroWorldPos, HeroScreenPos, Enemies, Trees);
+        }
     }
     else {
-        SpriteTick(DeltaTime);
-
-        CheckDirection();
-
-        NeutralAction();
-    }
-
-    if (Summoned) {
-        CheckMovement(Props, HeroWorldPos, HeroScreenPos, Enemies, Trees);
+        if (Type == EnemyType::BOSS) {
+            CheckBossSummon(HeroWorldPos);
+        }
     }
 }
 
 // Draw character animation
 void Enemy::Draw(Vector2 HeroWorldPos)
 {
-    if ((WorldPos.x >= (HeroWorldPos.x + 615) - (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) && (WorldPos.x <= (HeroWorldPos.x + 615) + (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) &&
-        (WorldPos.y >= (HeroWorldPos.y + 335) - (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))) && (WorldPos.y <= (HeroWorldPos.y + 335) + (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))))
+    if (WithinScreen(HeroWorldPos))
     {
+        Visible = true;
+
         if (!OOB) {
             if (Type == EnemyType::NORMAL || Type == EnemyType::NPC || (Type == EnemyType::BOSS && Summoned)) {
                 if (Hurting) {
@@ -191,6 +198,9 @@ void Enemy::Draw(Vector2 HeroWorldPos)
         if (Alive && Summoned && (Type != EnemyType::NPC)) {
             DrawHP();
         }
+    }
+    else {
+        Visible = false;
     }
 }
 
@@ -402,7 +412,7 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWo
                         }
                     }
                     // move away from all other objects
-                    else if (Prop.IsVisible()) {
+                    else if (Prop.IsSpawned()) {
                         if (AvoidProp <= MinRange) {
                             WorldPos = Vector2Subtract(WorldPos, ToTarget);
                         }
@@ -430,7 +440,7 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWo
                 Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(TreeScreenPos, RadiusAroundEnemy), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Tree
                 float AvoidTree{Vector2Length(Vector2Subtract(Vector2Add(TreeScreenPos, RadiusAroundEnemy), EnemyPos))};
 
-                if (Tree.IsVisible()) {
+                if (Tree.IsSpawned()) {
                     if (AvoidTree <= MinRange) {
                         WorldPos = Vector2Subtract(WorldPos, ToTarget);
                     }

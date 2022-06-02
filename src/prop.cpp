@@ -35,8 +35,8 @@ Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale, boo
 }
 
 // Constructor for animated altar pieces
-Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, std::string ItemName, bool Visible, bool Interactable)
-    : Object{Object}, Type{Type}, WorldPos{Pos}, Interactable{Interactable}, Visible{Visible}, ItemName{ItemName} 
+Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, std::string ItemName, bool Spawned, bool Interactable)
+    : Object{Object}, Type{Type}, WorldPos{Pos}, Interactable{Interactable}, Spawned{Spawned}, ItemName{ItemName} 
 {
     Collidable = true;
 }
@@ -78,7 +78,7 @@ Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Moveable
 
     if (Type == PropType::BIGTREASURE)
     {
-        Visible = false;
+        Spawned = false;
     }
 
     if (Type == PropType::TREASURE || Type == PropType::BIGTREASURE)
@@ -102,130 +102,134 @@ Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Moveable
 
 void Prop::Tick(float DeltaTime, Background& Map)
 {
-    // Play NPC idle animation when NOT interacting
-    if ((Type == PropType::NPC_A || Type == PropType::NPC_B || Type == PropType::NPC_C) && !Talking)
-    {
-        Object.Tick(DeltaTime);
-
-        // Update any progression and triggers for NPCs
-        if (CurrentAct != Progress::ACT_O)
-        {
-            if (Type == CurrentNPC)
-            {
-                Act = CurrentAct;
-                CurrentAct = Progress::ACT_O;
-                CurrentNPC = PropType::NPC_O;
-            }
-        }
-    }
-
-    // Tick through Altar piece sprite animation once inserted
-    if (Type == PropType::ANIMATEDALTAR)
-    {
-        for (auto& Piece:AltarPieces) 
-        {
-            if (ItemName == std::get<0>(Piece) && std::get<2>(Piece) == true)
-            {
-                Object.Tick(DeltaTime);
-            }
-        }
-    }
-
-    // Turn visibility on for BigTreasure when all 6 pieces have been inserted
-    if (Type == PropType::BIGTREASURE)
-    {
-        if (PiecesAdded >= 6)
-        {
-            Visible = true;
-        }
-    }
-
-    // determine behavior of prop when interacting with it
-    if (Active)
-    {
-        if (Type == PropType::GRASS)
+    if (Visible) {
+        // Play NPC idle animation when NOT interacting
+        if ((Type == PropType::NPC_A || Type == PropType::NPC_B || Type == PropType::NPC_C) && !Talking)
         {
             Object.Tick(DeltaTime);
-        }
-        else if (Type == PropType::TREASURE || Type == PropType::BIGTREASURE)
-        {
-            if (TriggerAct != Progress::ACT_O) 
-            {
-                CurrentAct = TriggerAct;
-                CurrentNPC = TriggerNPC;
-            }
 
-            if (!Opened)
+            // Update any progression and triggers for NPCs
+            if (CurrentAct != Progress::ACT_O)
+            {
+                if (Type == CurrentNPC)
+                {
+                    Act = CurrentAct;
+                    CurrentAct = Progress::ACT_O;
+                    CurrentNPC = PropType::NPC_O;
+                }
+            }
+        }
+
+        // Tick through Altar piece sprite animation once inserted
+        if (Type == PropType::ANIMATEDALTAR)
+        {
+            for (auto& Piece:AltarPieces) 
+            {
+                if (ItemName == std::get<0>(Piece) && std::get<2>(Piece) == true)
+                {
+                    Object.Tick(DeltaTime);
+                }
+            }
+        }
+
+        // determine behavior of prop when interacting with it
+        if (Active)
+        {
+            if (Type == PropType::GRASS)
             {
                 Object.Tick(DeltaTime);
             }
+            else if (Type == PropType::TREASURE || Type == PropType::BIGTREASURE)
+            {
+                if (TriggerAct != Progress::ACT_O) 
+                {
+                    CurrentAct = TriggerAct;
+                    CurrentNPC = TriggerNPC;
+                }
 
-            RunningTime += DeltaTime;
+                if (!Opened)
+                {
+                    Object.Tick(DeltaTime);
+                }
 
-            if (RunningTime > Object.UpdateTime * 4 && RunningTime < Object.UpdateTime * 8)
+                RunningTime += DeltaTime;
+
+                if (RunningTime > Object.UpdateTime * 4 && RunningTime < Object.UpdateTime * 8)
+                {
+                    Opened = true;
+                    Opening = true;
+                    RunningTime = 0.f; 
+                }
+
+                for (auto& Piece:AltarPieces)
+                {
+                    if (std::get<0>(Piece) == ItemName)
+                    {
+                        std::get<1>(Piece) = true;
+                    }
+                }
+            }
+            else if (Type == PropType::DOOR)
             {
                 Opened = true;
-                Opening = true;
-                RunningTime = 0.f; 
             }
-
-            for (auto& Piece:AltarPieces)
+            else if ((Type == PropType::NPC_A || Type == PropType::NPC_B || Type == PropType::NPC_C))
             {
-                if (std::get<0>(Piece) == ItemName)
+                if (TriggerAct != Progress::ACT_O) 
                 {
-                    std::get<1>(Piece) = true;
+                    CurrentAct = TriggerAct;
+                    CurrentNPC = TriggerNPC;
+                }
+
+                Talking = true;
+            }
+            else if (Type == PropType::ANIMATEDALTAR)
+            {   
+                for (auto& Piece:AltarPieces)
+                {
+                    if (std::get<1>(Piece) == true)
+                    {
+                        std::get<2>(Piece) = true;
+                        InsertPiece = true;
+                    }
+                    if (std::get<2>(Piece) == true && std::get<3>(Piece) == false)
+                    {
+                        std::get<3>(Piece) = true;
+                        PiecesAdded++;
+                    } 
+                }
+                
+                if (PiecesAdded >= 6)
+                {
+                    FinalChest = true;
+                }
+
+                Opened = true;   
+            }
+        }
+        else {
+            // Draw treasure item for (UpdateTime * X) seconds
+            if (Opening)
+            {
+                ReceiveItem = true;
+                
+                RunningTime += DeltaTime;
+                if (RunningTime >= Object.UpdateTime * 10)
+                {
+                    Opening = false;
+                    RunningTime = 0.f; 
                 }
             }
-        }
-        else if (Type == PropType::DOOR)
-        {
-            Opened = true;
-        }
-        else if ((Type == PropType::NPC_A || Type == PropType::NPC_B || Type == PropType::NPC_C))
-        {
-            if (TriggerAct != Progress::ACT_O) 
-            {
-                CurrentAct = TriggerAct;
-                CurrentNPC = TriggerNPC;
-            }
 
-            Talking = true;
-        }
-        else if (Type == PropType::ANIMATEDALTAR)
-        {   
-            for (auto& Piece:AltarPieces)
-            {
-                if (std::get<1>(Piece) == true)
-                {
-                    std::get<2>(Piece) = true;
-                    InsertPiece = true;
-                }
-                if (std::get<2>(Piece) == true && std::get<3>(Piece) == false)
-                {
-                    std::get<3>(Piece) = true;
-                    PiecesAdded++;
-                } 
-            }
-            
-            if (PiecesAdded >= 6)
-            {
-                FinalChest = true;
-            }
-
-            Opened = true;   
         }
     }
     else {
-        // Draw treasure item for (UpdateTime * X) seconds
-        if (Opening)
+        // Turn visibility on for BigTreasure when all 6 pieces have been inserted
+        if (Type == PropType::BIGTREASURE)
         {
-            ReceiveItem = true;
-            
-            RunningTime += DeltaTime;
-            if (RunningTime >= Object.UpdateTime * 10)
+            if (PiecesAdded >= 6)
             {
-                Opening = false;
-                RunningTime = 0.f; 
+                Spawned = true;
             }
         }
     }
@@ -236,7 +240,7 @@ void Prop::Draw(Vector2 CharacterWorldPos)
     Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)}; // Where the prop is drawn on the screen
     // Vector2 MaxItemDistance {0,-20};
 
-    if (Visible)
+    if (Spawned)
     {
         // Draw only if Prop is viewable in the screen frame
         if ((WorldPos.x >= (CharacterWorldPos.x + 615) - (GetScreenWidth()/2 + (Object.Texture.width * Scale))) && 
@@ -244,6 +248,8 @@ void Prop::Draw(Vector2 CharacterWorldPos)
             (WorldPos.y >= (CharacterWorldPos.y + 335) - (GetScreenHeight()/2 + (Object.Texture.height * Scale))) && 
             (WorldPos.y <= (CharacterWorldPos.y + 335) + (GetScreenHeight()/2 + (Object.Texture.height * Scale))))
         {
+            Visible = true;
+
             // Only draw final chest if conditions are met
             if (Type == PropType::BIGTREASURE)
             {
@@ -275,10 +281,12 @@ void Prop::Draw(Vector2 CharacterWorldPos)
         }
         else
         {   
+            Visible = false;
+
             // Once NPC_C has been interacted with and is offscreen, set to not draw anymore
             if (Type == PropType::NPC_C && Act == Progress::ACT_O)
             {
-                // Visible = false;
+                // Spawned = false;
                 WorldPos.x = 1283;
                 WorldPos.y = 2859;
                 Act = Progress::ACT_II;

@@ -90,7 +90,7 @@ namespace Game
     void Initialize(Window& Window, int FPS, std::string Title)
     {
         // assert(!GetWindowHandle());
-        SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+        // SetConfigFlags(FLAG_WINDOW_RESIZABLE);
         SetTraceLogLevel(LOG_WARNING);
         InitWindow(Window.x, Window.y, Title.c_str());
         SetTargetFPS(FPS);
@@ -4147,6 +4147,8 @@ namespace Game
 
         // ------------------- Wildlife NPCs ---------------------
 
+        // ------------------- Fox Family ---------------------
+
         Enemy FoxFamOne
         {
             Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
@@ -4169,17 +4171,6 @@ namespace Game
         };
         Enemies.emplace_back(FoxFamTwo);
 
-        // Enemy FoxFamThree
-        // {
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 13, 2},
-        //     Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
-        //     EnemyType::FOX, Vector2{307, 2724}, &Window, &MapBG, 2.5f
-        // };
-        // Enemies.emplace_back(FoxFamThree);
-
         Enemy FoxFamFour
         {
             Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
@@ -4201,17 +4192,118 @@ namespace Game
             EnemyType::FOX, Vector2{354, 2661}, &Window, &MapBG, 2.5f
         };
         Enemies.emplace_back(FoxFamFive);
+
+        // ------------------- Squirrels ---------------------
         
-        // Enemy Squirrel
-        // {
-        //     Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
-        //     Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
-        //     Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
-        //     Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
-        //     Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{354, 2661}, &Window, &MapBG, 2.0f
-        // };
-        // Enemies.emplace_back(Squirrel);
+        Enemy SquirrelOne
+        {
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            EnemyType::SQUIRREL, Vector2{2839, 2041}, &Window, &MapBG, 2.0f
+        };
+        Enemies.emplace_back(SquirrelOne);
+
+        Enemy SquirrelTwo
+        {
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            EnemyType::SQUIRREL, Vector2{3050, 2147}, &Window, &MapBG, 2.0f
+        };
+        Enemies.emplace_back(SquirrelTwo);
+
+        Enemy SquirrelThree
+        {
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            EnemyType::SQUIRREL, Vector2{3155, 2133}, &Window, &MapBG, 2.0f
+        };
+        Enemies.emplace_back(SquirrelThree);
+
+        Enemy SquirrelFour
+        {
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            EnemyType::SQUIRREL, Vector2{3855, 237}, &Window, &MapBG, 2.0f
+        };
+        Enemies.emplace_back(SquirrelFour);
+
+        Enemy SquirrelFive
+        {
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            EnemyType::SQUIRREL, Vector2{3251, 339}, &Window, &MapBG, 2.0f
+        };
+        Enemies.emplace_back(SquirrelFive);
+
+        Enemy SquirrelSix
+        {
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            EnemyType::SQUIRREL, Vector2{2767, 338}, &Window, &MapBG, 2.0f
+        };
+        Enemies.emplace_back(SquirrelSix);
+
+        Enemy SquirrelSeven
+        {
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            EnemyType::SQUIRREL, Vector2{916, 940}, &Window, &MapBG, 2.0f
+        };
+        Enemies.emplace_back(SquirrelSeven);
+
+        Enemy SquirrelEight
+        {
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            EnemyType::SQUIRREL, Vector2{539, 1221}, &Window, &MapBG, 2.0f
+        };
+        Enemies.emplace_back(SquirrelEight);
+
+        Enemy SquirrelNine
+        {
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            EnemyType::SQUIRREL, Vector2{932, 1265}, &Window, &MapBG, 2.0f
+        };
+        Enemies.emplace_back(SquirrelNine);
+
+        Enemy SquirrelTen
+        {
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            EnemyType::SQUIRREL, Vector2{345, 1663}, &Window, &MapBG, 2.0f
+        };
+        Enemies.emplace_back(SquirrelTen);
 
         return Enemies;
     }

@@ -46,7 +46,7 @@ class Prop
 {
 public:
     Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
-    Prop(Sprite Object, Vector2 Pos, PropType Type, std::string ItemName = "None", bool Visible = false, bool Interactable = false);           
+    Prop(Sprite Object, Vector2 Pos, PropType Type, std::string ItemName = "None", bool Spawned = false, bool Interactable = false);           
     Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false, 
          Progress Act = Progress::ACT_O, PropType NPC = PropType::NPC_O, Texture2D Item = LoadTexture("sprites/props/Heart.png"), 
          std::string ItemName = "None", float ItemScale = 2.f);
@@ -60,7 +60,7 @@ public:
     bool IsOutOfBounds() {return OutOfBounds;}
     bool IsActive() {return Active;}
     bool IsOpened() {return Opened;}
-    bool IsVisible() {return Visible;}
+    bool IsSpawned() {return Spawned;}
     
     Vector2 GetWorldPos() {return WorldPos;}
     PropType GetType() {return Type;}
@@ -90,10 +90,11 @@ private:
     bool Moveable{false};
     bool OutOfBounds{false};
     bool Talking{false};
+    bool Visible{false};
 
     // NPC variables
     Progress Act{Progress::ACT_I};
-    bool Visible{true};
+    bool Spawned{true};
     Texture2D SpeechBox{LoadTexture("sprites/npc/SpeechBox.png")};
     Texture2D SpeechName{LoadTexture("sprites/npc/SpeechName.png")};
 
