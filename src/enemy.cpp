@@ -724,7 +724,7 @@ void Enemy::EnemyAggro(Vector2 HeroScreenPos)
     // Calculate the distance from Enemy to Player
     Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50,50}), EnemyPos)), Speed)}; 
     
-    if (!Stopped && Alive && !Invulnerable && !Blocked) {
+    if (Alive && !Stopped && !Invulnerable && !Blocked && !Dying) {
         Vector2 RadiusAroundEnemy{};
 
         if (Ranged) {

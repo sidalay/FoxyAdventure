@@ -393,15 +393,16 @@ void Character::CheckAttack()
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE)) {
             // Attack animation & damage window lasts 0.4 seconds
             if (AttackTime < 0.4f) {
-                Attacking = true;
                 Sleeping = false;
+                Attacking = true;
+                CurrentSprite = &Attack;
             }
             // Reset window when reaching AttackResetTime
             else if (AttackTime >= AttackResetTime) {
                 Attacking = false;
                 AttackTime = 0.0f;
             }
-            // 0.6 cooldown before Attack Window opens up again
+            // 0.3 cooldown before Attack Window opens up again
             else {
                 Attacking = false;
             }
@@ -412,10 +413,6 @@ void Character::CheckAttack()
     }
     else {
         Attacking = false;
-    }
-
-    if (Attacking) {
-        CurrentSprite = &Attack;
     }
 }
 
