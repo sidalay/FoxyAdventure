@@ -95,6 +95,7 @@ namespace Game
         InitWindow(Window.x, Window.y, Title.c_str());
         SetTargetFPS(FPS);
         SetExitKey(0);
+        HideCursor();
     }
 
     void Tick(Window& Window, Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, std::vector<Prop> Trees, GameInfo& GameInfo)
