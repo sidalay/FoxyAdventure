@@ -1,40 +1,6 @@
 #include "headers/prop.hpp"
 
 // Constructor for inanimate props
-Prop::Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale, bool Moveable, bool Interactable)
-    : Object{TexturePath}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}
-{
-    if (Type == PropType::BOULDER ||
-        Type == PropType::BUSH ||
-        Type == PropType::STUMP ||
-        Type == PropType::TREE ||
-        Type == PropType::FENCE ||
-        Type == PropType::rHOUSELEFT ||
-        Type == PropType::rHOUSERIGHT ||
-        Type == PropType::bHOUSELEFT ||
-        Type == PropType::bHOUSERIGHT ||
-        Type == PropType::DOOR ||
-        Type == PropType::GRASS ||
-        Type == PropType::TOPWALL ||
-        Type == PropType::LEFTSIDEWALL ||
-        Type == PropType::RIGHTSIDEWALL ||
-        Type == PropType::BOTTOMWALL ||
-        Type == PropType::HOLE ||
-        Type == PropType::DUNGEONLEFT ||
-        Type == PropType::DUNGEONRIGHT ||
-        Type == PropType::DUNGEON ||
-        Type == PropType::TREASURE ||
-        Type == PropType::NPC_A ||
-        Type == PropType::NPC_B ||
-        Type == PropType::NPC_C ||
-        Type == PropType::ALTAR ||
-        Type == PropType::BIGTREASURE)
-    {
-        Collidable = true;
-    }
-}
-
-// Constructor for inanimate props
 Prop::Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, float Scale, bool Moveable, bool Interactable)
     : Object{Texture}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}
 {

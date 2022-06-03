@@ -3385,7 +3385,7 @@ namespace Game
             // Prop{GameTextures.TreeGreen, Vector2{200,2367}, PropType::TREE},  // 3 
             // Prop{GameTextures.TreeGreen, Vector2{300,2367}, PropType::TREE},  // 4 
             // Prop{GameTextures.TreeGreen, Vector2{400,2367}, PropType::TREE},  // 5 
-            Prop{"sprites/props/TreeClear.png", Vector2{550,2303}, PropType::TREE},     // 6 Invisible Wall
+            Prop{GameTextures.TreeClear, Vector2{550,2303}, PropType::TREE},     // 6 Invisible Wall
             Prop{GameTextures.TreeGreen, Vector2{550,2367}, PropType::TREE},     // 6 
             // Prop{GameTextures.TreeGreen, Vector2{600,2367}, PropType::TREE},  // 7     
             Prop{GameTextures.TreeGreen, Vector2{700,2367}, PropType::TREE},  // 8 
@@ -3431,7 +3431,7 @@ namespace Game
             // Prop{GameTextures.TreeGreen, Vector2{320,2467}, PropType::TREE},  // 4 
             // Prop{GameTextures.TreeGreen, Vector2{420,2467}, PropType::TREE},  // 5 
             // Prop{GameTextures.TreeGreen, Vector2{520,2467}, PropType::TREE},  // 6 
-            Prop{"sprites/props/TreeClear.png", Vector2{620,2403}, PropType::TREE},     // 7 Invisible Wall
+            Prop{GameTextures.TreeClear, Vector2{620,2403}, PropType::TREE},     // 7 Invisible Wall
             Prop{GameTextures.TreeGreen, Vector2{620,2467}, PropType::TREE},     // 7 
             Prop{GameTextures.TreeGreen, Vector2{720,2467}, PropType::TREE},     // 8 
             Prop{GameTextures.TreeGreen, Vector2{820,2467}, PropType::TREE},     // 9 

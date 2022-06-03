@@ -45,7 +45,6 @@ struct Props;
 class Prop 
 {
 public:
-    Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
     Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
     Prop(Sprite Object, Vector2 Pos, PropType Type, std::string ItemName = "None", bool Spawned = false, bool Interactable = false);           
     Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false, 
