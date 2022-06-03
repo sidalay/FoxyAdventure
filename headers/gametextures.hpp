@@ -2,9 +2,12 @@
 #define GAMETEXTURES_HPP
 
 #include <raylib.h>
+#include "headers/prop.hpp"
 
-namespace GameTexture {
+struct GameTexture {
 
+    // Texture2D GetTexture(PropType Type);
+public:
     const Texture2D AltarBot{LoadTexture("sprites/props/AltarBot.png")};
     const Texture2D AltarBotAnimated{LoadTexture("sprites/props/AltarBotAnimated.png")};
     const Texture2D AltarBotLeft{LoadTexture("sprites/props/AltarLeft.png")};
@@ -114,6 +117,6 @@ namespace GameTexture {
     const Texture2D WallTopLeft{LoadTexture("sprites/props/WallTopLeft.png")};
     const Texture2D WallTopRight{LoadTexture("sprites/props/WallTopRight.png")};
     
-}
+};
 
 #endif // gametextures_hpp
