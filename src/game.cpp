@@ -66,15 +66,15 @@ namespace Game
             // Initialize button textures for Pause Menu
             std::array<Texture2D, 9> Buttons 
             {
-                LoadTexture("sprites/buttons/W.png"),
-                LoadTexture("sprites/buttons/A.png"),
-                LoadTexture("sprites/buttons/S.png"),
-                LoadTexture("sprites/buttons/D.png"),
-                LoadTexture("sprites/buttons/L.png"),
-                LoadTexture("sprites/buttons/M.png"),
-                LoadTexture("sprites/buttons/Shift.png"),
-                LoadTexture("sprites/buttons/Space.png"),
-                LoadTexture("sprites/buttons/Lmouse.png")
+                GameTextures.ButtonW,
+                GameTextures.ButtonA,
+                GameTextures.ButtonS,
+                GameTextures.ButtonD,
+                GameTextures.ButtonL,
+                GameTextures.ButtonM,
+                GameTextures.Shift,
+                GameTextures.Space,
+                GameTextures.Lmouse
             };
 
             GameInfo GameInfo{0, 0.f, 0.f, 0.f};

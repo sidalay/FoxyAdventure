@@ -94,4 +94,22 @@ GameTexture::~GameTexture()
     UnloadTexture(Didi);
     UnloadTexture(Jade);
     UnloadTexture(Son);
+    UnloadTexture(FoxIdle);
+    UnloadTexture(FoxWalk);
+    UnloadTexture(FoxRun);
+    UnloadTexture(FoxMelee);
+    UnloadTexture(FoxHit);
+    UnloadTexture(FoxDie);
+    UnloadTexture(FoxPush);
+    UnloadTexture(FoxSleeping);
+    UnloadTexture(FoxItemGot);
+    UnloadTexture(ButtonW);
+    UnloadTexture(ButtonA);
+    UnloadTexture(ButtonS);
+    UnloadTexture(ButtonD);
+    UnloadTexture(ButtonL);
+    UnloadTexture(ButtonM);
+    UnloadTexture(Shift);
+    UnloadTexture(Space);
+    UnloadTexture(Lmouse);
 }

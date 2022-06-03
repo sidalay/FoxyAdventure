@@ -4,7 +4,7 @@
 #include <raylib.h>
 
 struct GameTexture {
-    
+
     GameTexture() = default;
     ~GameTexture();
     GameTexture(const GameTexture&) = delete;
@@ -135,6 +135,16 @@ struct GameTexture {
     const Texture2D FoxPush{LoadTexture("sprites/characters/fox/Fox_push.png")};
     const Texture2D FoxSleeping{LoadTexture("sprites/characters/fox/Fox_sleeping.png")};
     const Texture2D FoxItemGot{LoadTexture("sprites/characters/fox/Fox_itemGot.png")};
+
+    const Texture2D ButtonW{LoadTexture("sprites/buttons/W.png")};
+    const Texture2D ButtonA{LoadTexture("sprites/buttons/A.png")};
+    const Texture2D ButtonS{LoadTexture("sprites/buttons/S.png")};
+    const Texture2D ButtonD{LoadTexture("sprites/buttons/D.png")};
+    const Texture2D ButtonL{LoadTexture("sprites/buttons/L.png")};
+    const Texture2D ButtonM{LoadTexture("sprites/buttons/M.png")};
+    const Texture2D Shift{LoadTexture("sprites/buttons/Shift.png")};
+    const Texture2D Space{LoadTexture("sprites/buttons/Space.png")};
+    const Texture2D Lmouse{LoadTexture("sprites/buttons/Lmouse.png")};
     
 };
 
