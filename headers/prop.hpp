@@ -8,6 +8,7 @@
 #include <tuple>
 #include "headers/sprite.hpp"
 #include "headers/background.hpp"
+#include "headers/gametextures.hpp"
 
 enum class PropType
 {
@@ -45,10 +46,10 @@ struct Props;
 class Prop 
 {
 public:
-    Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
-    Prop(Sprite Object, Vector2 Pos, PropType Type, std::string ItemName = "None", bool Spawned = false, bool Interactable = false);           
-    Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false, 
-         Progress Act = Progress::ACT_O, PropType NPC = PropType::NPC_O, Texture2D Item = LoadTexture("sprites/props/Heart.png"), 
+    Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, GameTexture& GameTextures, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
+    Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, std::string ItemName = "None", bool Spawned = false, bool Interactable = false);           
+    Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, float Scale = 4.f, bool Moveable = false, bool Interactable = false, 
+         Progress Act = Progress::ACT_O, PropType NPC = PropType::NPC_O, Texture2D Item = Texture2D{}, 
          std::string ItemName = "None", float ItemScale = 2.f);
     
     void Tick(float DeltaTime, Background& Map);

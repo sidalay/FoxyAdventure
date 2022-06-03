@@ -2,11 +2,9 @@
 #define GAMETEXTURES_HPP
 
 #include <raylib.h>
-#include "headers/prop.hpp"
 
 struct GameTexture {
-    // Texture2D GetTexture(PropType Type);
-public:
+    
     GameTexture() = default;
     ~GameTexture();
     GameTexture(const GameTexture&) = delete;

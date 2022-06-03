@@ -1,8 +1,9 @@
 #include "headers/prop.hpp"
 
 // Constructor for inanimate props
-Prop::Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, float Scale, bool Moveable, bool Interactable)
-    : Object{Texture}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}
+Prop::Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, GameTexture& GameTextures, float Scale, bool Moveable, bool Interactable)
+    : Object{Texture}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, 
+      Moveable{Moveable}, SpeechBox{GameTextures.SpeechBox}, SpeechName{GameTextures.SpeechName}
 {
     if (Type == PropType::BOULDER ||
         Type == PropType::BUSH ||
@@ -35,17 +36,19 @@ Prop::Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, float Scale, bo
 }
 
 // Constructor for animated altar pieces
-Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, std::string ItemName, bool Spawned, bool Interactable)
-    : Object{Object}, Type{Type}, WorldPos{Pos}, Interactable{Interactable}, Spawned{Spawned}, ItemName{ItemName} 
+Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, std::string ItemName, bool Spawned, bool Interactable)
+    : Object{Object}, Type{Type}, WorldPos{Pos}, Interactable{Interactable}, Spawned{Spawned}, 
+      SpeechBox{GameTextures.SpeechBox}, SpeechName{GameTextures.SpeechName}, ItemName{ItemName} 
 {
     Collidable = true;
 }
 
 // Constructor for animated props
-Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale, bool Moveable, bool Interactable, 
+Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, float Scale, bool Moveable, bool Interactable, 
            Progress Act, PropType NPC, Texture2D Item, std::string ItemName, float ItemScale)
     : Object{Object}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}, 
-      TriggerAct{Act}, TriggerNPC{NPC}, Item{Item}, ItemName{ItemName}, ItemScale{ItemScale}
+      SpeechBox{GameTextures.SpeechBox}, SpeechName{GameTextures.SpeechName},
+      TriggerAct{Act}, TriggerNPC{NPC}, Item{Item}, ItemName{ItemName}, ItemScale{ItemScale} 
 {
     if (Type == PropType::BOULDER ||
         Type == PropType::BUSH ||
