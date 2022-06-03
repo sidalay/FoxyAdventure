@@ -11,7 +11,6 @@
 #include "headers/enemy.hpp"
 #include "headers/character.hpp"
 #include "headers/background.hpp"
-#include "headers/gametextures.hpp"
 
 enum class GameState 
 {
