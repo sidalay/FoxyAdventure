@@ -11,6 +11,12 @@ Sprite::Sprite(const char* TexturePath, float MaxFramesX, float MaxFramesY, floa
 
 }
 
+Sprite::Sprite(const Texture2D& Texture, float MaxFramesX, float MaxFramesY, float UpdateSpeed) 
+    : Texture{Texture}, MaxFramesX{MaxFramesX}, MaxFramesY{MaxFramesY}, UpdateTime{UpdateSpeed}
+{
+
+}
+
 Sprite::~Sprite()
 {
     // UnloadTexture(Texture);

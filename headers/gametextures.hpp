@@ -5,15 +5,21 @@
 #include "headers/prop.hpp"
 
 struct GameTexture {
-
     // Texture2D GetTexture(PropType Type);
 public:
+    GameTexture() = default;
+    ~GameTexture();
+    GameTexture(const GameTexture&) = delete;
+    GameTexture(GameTexture&&) = default;
+    GameTexture& operator=(const GameTexture&) = delete;
+    GameTexture& operator=(GameTexture&&) = default;
+
     const Texture2D AltarBot{LoadTexture("sprites/props/AltarBot.png")};
     const Texture2D AltarBotAnimated{LoadTexture("sprites/props/AltarBotAnimated.png")};
-    const Texture2D AltarBotLeft{LoadTexture("sprites/props/AltarLeft.png")};
-    const Texture2D AltarBotLeftAnimated{LoadTexture("sprites/props/AltarLeftAnimated.png")};
-    const Texture2D AltarBotRight{LoadTexture("sprites/props/AltarRight.png")};
-    const Texture2D AltarBotRightAnimated{LoadTexture("sprites/props/AltarRightAnimated.png")};
+    const Texture2D AltarBotLeft{LoadTexture("sprites/props/AltarBotLeft.png")};
+    const Texture2D AltarBotLeftAnimated{LoadTexture("sprites/props/AltarBotLeftAnimated.png")};
+    const Texture2D AltarBotRight{LoadTexture("sprites/props/AltarBotRight.png")};
+    const Texture2D AltarBotRightAnimated{LoadTexture("sprites/props/AltarBotRightAnimated.png")};
     const Texture2D AltarDormant{LoadTexture("sprites/props/AltarDormant.png")};
     const Texture2D AltarDormantRust{LoadTexture("sprites/props/AltarDormantRust.png")};
     const Texture2D AltarTop{LoadTexture("sprites/props/AltarTop.png")};
@@ -55,7 +61,7 @@ public:
 
     const Texture2D GrassWallBotLeft{LoadTexture("sprites/props/GrassWallBotLeft.png")};
     const Texture2D GrassWallBotRight{LoadTexture("sprites/props/GrassWallBotRight.png")};
-    const Texture2D GrassBottom{LoadTexture("sprites/props/GrassBottom.png")};
+    const Texture2D GrassWallBottom{LoadTexture("sprites/props/GrassWallBottom.png")};
     const Texture2D GrassWallInnerLeft{LoadTexture("sprites/props/GrassWallInnerLeft.png")};
     const Texture2D GrassWallInnerRight{LoadTexture("sprites/props/GrassWallInnerRight.png")};
     const Texture2D GrassWallLeft{LoadTexture("sprites/props/GrassWallLeft.png")};
@@ -82,6 +88,7 @@ public:
     const Texture2D LittleGrass{LoadTexture("sprites/props/LittleGrass.png")};
     const Texture2D LittleRocks{LoadTexture("sprites/props/LittleRocks.png")};
     const Texture2D MediumRocks{LoadTexture("sprites/props/MediumRocks.png")};
+    const Texture2D Placeholder{LoadTexture("sprites/placeholder/placeholder.png")};
     const Texture2D RockStump{LoadTexture("sprites/props/RockStump.png")};
 
     const Texture2D Sapling{LoadTexture("sprites/props/Sapling.png")};
@@ -116,6 +123,10 @@ public:
     const Texture2D WallRight{LoadTexture("sprites/props/WallRight.png")};
     const Texture2D WallTopLeft{LoadTexture("sprites/props/WallTopLeft.png")};
     const Texture2D WallTopRight{LoadTexture("sprites/props/WallTopRight.png")};
+
+    const Texture2D Didi{LoadTexture("sprites/npc/Didi.png")};
+    const Texture2D Jade{LoadTexture("sprites/npc/Jade.png")};
+    const Texture2D Son{LoadTexture("sprites/npc/Son.png")};
     
 };
 

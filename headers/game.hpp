@@ -11,6 +11,7 @@
 #include "headers/enemy.hpp"
 #include "headers/character.hpp"
 #include "headers/background.hpp"
+#include "headers/gametextures.hpp"
 
 enum class GameState 
 {
@@ -39,9 +40,9 @@ namespace Game
     void PauseUpdate(GameState& State, GameState& PrevState, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, int& PauseFoxIndex);
     void PauseDraw(std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameState& State, const int PauseFoxIndex);
 
-    std::vector<std::vector<Prop>> InitializePropsUnder();
-    std::vector<std::vector<Prop>> InitializePropsOver();
-    std::vector<Prop> InitializeTrees();
+    std::vector<std::vector<Prop>> InitializePropsUnder(GameTexture& GameTextures);
+    std::vector<std::vector<Prop>> InitializePropsOver(GameTexture& GameTextures);
+    std::vector<Prop> InitializeTrees(GameTexture& GameTextures);
     std::vector<Enemy> InitializeEnemies(Background& MapBG, Window& Window);
     std::vector<Enemy> InitializeCrows(Background& MapBG, Window& Window);
 }

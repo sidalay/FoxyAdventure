@@ -46,6 +46,7 @@ class Prop
 {
 public:
     Prop(const char* TexturePath, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
+    Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
     Prop(Sprite Object, Vector2 Pos, PropType Type, std::string ItemName = "None", bool Spawned = false, bool Interactable = false);           
     Prop(Sprite Object, Vector2 Pos, PropType Type, float Scale = 4.f, bool Moveable = false, bool Interactable = false, 
          Progress Act = Progress::ACT_O, PropType NPC = PropType::NPC_O, Texture2D Item = LoadTexture("sprites/props/Heart.png"), 
