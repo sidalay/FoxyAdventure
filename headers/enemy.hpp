@@ -10,6 +10,7 @@
 #include "headers/window.hpp"
 #include "headers/background.hpp"
 #include "headers/basecharacter.hpp"
+#include "headers/gametextures.hpp"
 
 enum class EnemyType 
 {
@@ -36,6 +37,7 @@ public:
           Vector2 WorldPos,
           Window* Screen,
           Background* World,
+          GameTexture& GameTextures,
           int Health = 3,
           float Scale = 3.2f);
     
@@ -49,6 +51,7 @@ public:
           Vector2 WorldPos,
           Window* Screen,
           Background* World,
+          GameTexture& GameTextures,
           float Scale = 3.2f);
 
     void Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
@@ -94,13 +97,6 @@ private:
     Sprite* ShootingSprite;
     Sprite PreviousSprite{};
     std::vector<Sprite> Sprites{};
-
-    Texture2D LifeBarLeft_Full{LoadTexture("sprites/enemies/lifebar/round_left_filled.png")};
-    Texture2D LifeBarMiddle_Full{LoadTexture("sprites/enemies/lifebar/round_middle_filled.png")};
-    Texture2D LifeBarRight_Full{LoadTexture("sprites/enemies/lifebar/round_right_filled.png")};
-    Texture2D LifeBarLeft_Empty{LoadTexture("sprites/enemies/lifebar/round_left_empty.png")};
-    Texture2D LifeBarMiddle_Empty{LoadTexture("sprites/enemies/lifebar/round_middle_empty.png")};
-    Texture2D LifeBarRight_Empty{LoadTexture("sprites/enemies/lifebar/round_right_empty.png")};
 
     EnemyType Race{};                    // What kind of Enemy
     EnemyType Type{};                    // If the Enemy is NORMAL, BOSS, or NPC type
@@ -158,6 +154,13 @@ private:
     bool MiscAction{false};
     
     Direction Face{Direction::DOWN};
+
+    Texture2D LifeBarLeft_Full{};
+    Texture2D LifeBarMiddle_Full{};
+    Texture2D LifeBarRight_Full{};
+    Texture2D LifeBarLeft_Empty{};
+    Texture2D LifeBarMiddle_Empty{};
+    Texture2D LifeBarRight_Empty{};
 
     static std::unordered_map<EnemyType, int> MonsterCounter;
 };

@@ -80,9 +80,9 @@ public:
     const Texture2D LifebarLeftEmpty{LoadTexture("sprites/enemies/lifebar/round_left_empty.png")};
     const Texture2D LifebarLeftFilled{LoadTexture("sprites/enemies/lifebar/round_left_filled.png")};
     const Texture2D LifebarMiddleEmpty{LoadTexture("sprites/enemies/lifebar/round_middle_empty.png")};
-    const Texture2D LifebarMiddleFilled{LoadTexture("sprites/enemies/lifebar/round_middle_empty.png")};
+    const Texture2D LifebarMiddleFilled{LoadTexture("sprites/enemies/lifebar/round_middle_filled.png")};
     const Texture2D LifebarRightEmpty{LoadTexture("sprites/enemies/lifebar/round_right_empty.png")};
-    const Texture2D LifebarRightFilled{LoadTexture("sprites/enemies/lifebar/round_right_empty.png")};
+    const Texture2D LifebarRightFilled{LoadTexture("sprites/enemies/lifebar/round_right_filled.png")};
 
     const Texture2D LargeRocks{LoadTexture("sprites/props/LargeRocks.png")};
     const Texture2D LittleGrass{LoadTexture("sprites/props/LittleGrass.png")};

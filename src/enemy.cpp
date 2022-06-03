@@ -24,6 +24,7 @@ Enemy::Enemy(Sprite Idle,
              Vector2 WorldPos,
              Window* Screen,
              Background* World,
+             GameTexture& GameTextures,
              int Health,
              float Scale) 
     : 
@@ -34,7 +35,13 @@ Enemy::Enemy(Sprite Idle,
       World{World},
       Health{Health},
       MaxHP{Health},
-      Scale{Scale} 
+      Scale{Scale},
+      LifeBarLeft_Full{GameTextures.LifebarLeftFilled},
+      LifeBarMiddle_Full{GameTextures.LifebarMiddleFilled},
+      LifeBarRight_Full{GameTextures.LifebarRightFilled},
+      LifeBarLeft_Empty{GameTextures.LifebarLeftEmpty},
+      LifeBarMiddle_Empty{GameTextures.LifebarMiddleEmpty},
+      LifeBarRight_Empty{GameTextures.LifebarRightEmpty} 
 {
     // Fill vector<Sprite*> with Sprite objects to easily loop through and call Sprite::Tick()
     Sprites.emplace_back(Idle);
@@ -84,6 +91,7 @@ Enemy::Enemy(Sprite NpcIdle,
              Vector2 WorldPos,
              Window* Screen,
              Background* World,
+             GameTexture& GameTextures,
              float Scale)
     : 
       Race{Race},
@@ -91,7 +99,13 @@ Enemy::Enemy(Sprite NpcIdle,
       WorldPos{WorldPos},
       Screen{Screen},
       World{World},
-      Scale{Scale}
+      Scale{Scale},
+      LifeBarLeft_Full{GameTextures.LifebarLeftFilled},
+      LifeBarMiddle_Full{GameTextures.LifebarMiddleFilled},
+      LifeBarRight_Full{GameTextures.LifebarRightFilled},
+      LifeBarLeft_Empty{GameTextures.LifebarLeftEmpty},
+      LifeBarMiddle_Empty{GameTextures.LifebarMiddleEmpty},
+      LifeBarRight_Empty{GameTextures.LifebarRightEmpty} 
 {
     // Fill vector<Sprite*> with Sprite objects to easily loop through and call Sprite::Tick()
     Sprites.emplace_back(NpcIdle);

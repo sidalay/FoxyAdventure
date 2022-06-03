@@ -43,8 +43,8 @@ namespace Game
     std::vector<std::vector<Prop>> InitializePropsUnder(GameTexture& GameTextures);
     std::vector<std::vector<Prop>> InitializePropsOver(GameTexture& GameTextures);
     std::vector<Prop> InitializeTrees(GameTexture& GameTextures);
-    std::vector<Enemy> InitializeEnemies(Background& MapBG, Window& Window);
-    std::vector<Enemy> InitializeCrows(Background& MapBG, Window& Window);
+    std::vector<Enemy> InitializeEnemies(Background& MapBG, Window& Window, GameTexture& GameTextures);
+    std::vector<Enemy> InitializeCrows(Background& MapBG, Window& Window, GameTexture& GameTextures);
 }
 
 #endif // GAME_HPP
