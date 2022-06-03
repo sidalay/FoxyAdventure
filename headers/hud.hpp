@@ -12,8 +12,8 @@ public:
     
 private:
     Texture2D HeartFull{LoadTexture("sprites/props/Heart.png")};
-    Texture2D HeartHalf{LoadTexture("sprites/props/Heart_Half.png")};
-    Texture2D HeartEmpty{LoadTexture("sprites/props/Heart_Empty.png")};
+    Texture2D HeartHalf{LoadTexture("sprites/props/HeartHalf.png")};
+    Texture2D HeartEmpty{LoadTexture("sprites/props/HeartEmpty.png")};
 
     Texture2D RecContainer{LoadTexture("sprites/props/TransparentContainer.png")};
     Texture2D SquareContainer{LoadTexture("sprites/props/TransparentSquare.png")};
