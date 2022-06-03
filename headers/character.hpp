@@ -30,6 +30,11 @@ public:
               Sprite ItemGrab, 
               Window* Screen, 
               Background* World);
+    ~Character();
+    Character(const Character&) = delete;
+    Character(Character&&) = default;
+    Character& operator=(const Character&) = delete;
+    Character& operator=(Character&&) = default;
     
     void Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void Draw();

@@ -11,9 +11,7 @@ enum class Direction
 class BaseCharacter
 {
 public:
-    BaseCharacter();
-    // void undoMovement();
-    // Rectangle getCollisionRec();
+    BaseCharacter() = default;
     void Tick(float DeltaTime);
     float getHealth() const {return Health;}
     

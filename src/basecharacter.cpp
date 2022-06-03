@@ -1,7 +1,5 @@
 #include "headers/basecharacter.hpp"
 
-BaseCharacter::BaseCharacter() {}
-
 void BaseCharacter::Tick(float DeltaTime) 
 {
     // update animation frame
