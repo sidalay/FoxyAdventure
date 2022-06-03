@@ -96,8 +96,8 @@ private:
     // NPC variables
     Progress Act{Progress::ACT_I};
     bool Spawned{true};
-    Texture2D SpeechBox{LoadTexture("sprites/npc/SpeechBox.png")};
-    Texture2D SpeechName{LoadTexture("sprites/npc/SpeechName.png")};
+    Texture2D SpeechBox{};
+    Texture2D SpeechName{};
 
     // Progress Trigger Variables
     Progress TriggerAct{};
