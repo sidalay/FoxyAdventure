@@ -1,10 +1,5 @@
 #include "headers/sprite.hpp"
 
-Sprite::Sprite()
-{
-
-}
-
 Sprite::Sprite(const char* TexturePath, float MaxFramesX, float MaxFramesY, float UpdateSpeed) 
     : Texture{LoadTexture(TexturePath)}, MaxFramesX{MaxFramesX}, MaxFramesY{MaxFramesY}, UpdateTime{UpdateSpeed}
 {
@@ -15,11 +10,6 @@ Sprite::Sprite(const Texture2D& Texture, float MaxFramesX, float MaxFramesY, flo
     : Texture{Texture}, MaxFramesX{MaxFramesX}, MaxFramesY{MaxFramesY}, UpdateTime{UpdateSpeed}
 {
 
-}
-
-Sprite::~Sprite()
-{
-    // UnloadTexture(Texture);
 }
 
 // Update X position to draw next sprite

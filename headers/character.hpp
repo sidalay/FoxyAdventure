@@ -30,7 +30,6 @@ public:
               Sprite ItemGrab, 
               Window* Screen, 
               Background* World);
-    ~Character();
     
     void Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void Draw();

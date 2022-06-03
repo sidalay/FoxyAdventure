@@ -116,21 +116,6 @@ Enemy::Enemy(Sprite NpcIdle,
     LeftOrRight = RandomLeftRight(RNG);
     ActionState = RandomActionState(RNG);
 }
-      
-
-Enemy::~Enemy()
-{
-    /* 
-        UnloadTexture was being called somewhere and breaking multiple instances of Enemy objects.
-        Disabling it fixed having more than one Enemy's textures breaking
-    */
-    
-    // Unload all Textures when destructing Character
-    // for (auto& Sprite:Sprites)
-    // {
-    //     UnloadTexture(Sprite.Texture);
-    // }
-}
 
 void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {   

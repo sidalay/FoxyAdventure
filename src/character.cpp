@@ -26,20 +26,6 @@ Character::Character(Sprite Idle,
     WorldPos = Vector2Subtract(WorldPos, Offset);
 }
 
-Character::~Character()
-{
-    // Unload all Textures when destructing Character
-    UnloadTexture(Idle.Texture);
-    UnloadTexture(Walk.Texture);
-    UnloadTexture(Run.Texture);
-    UnloadTexture(Attack.Texture);
-    UnloadTexture(Hurt.Texture);
-    UnloadTexture(Death.Texture);
-    UnloadTexture(Push.Texture);
-    UnloadTexture(Sleep.Texture);
-    UnloadTexture(ItemGrab.Texture);
-}
-
 void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     UpdateCharacterPos();

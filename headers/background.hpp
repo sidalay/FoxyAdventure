@@ -8,8 +8,12 @@
 class Background
 {
 public:
-    Background();
+    Background() = default;
     ~Background();
+    Background(const Background&) = delete;
+    Background(Background&&) = default;
+    Background& operator=(const Background&) = delete;
+    Background& operator=(Background&&) = default;
     void Tick(Vector2 WorldPos);
     void Draw();
     void DrawMiniMap(Vector2 CharWorldPos);

@@ -51,8 +51,6 @@ public:
           Background* World,
           float Scale = 3.2f);
 
-    ~Enemy();
-
     void Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void Draw(Vector2 HeroWorldPos);
     void SpriteTick(float DeltaTime);

@@ -1,13 +1,10 @@
 #include "headers/background.hpp"
 
-Background::Background()
-{
-    
-}
-
 Background::~Background()
 {
     UnloadTexture(Map);
+    UnloadTexture(MiniMap);
+    UnloadTexture(SquareContainer);
 }
 
 void Background::Tick(Vector2 WorldPos) 
