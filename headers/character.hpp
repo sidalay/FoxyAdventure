@@ -27,14 +27,10 @@ public:
               Sprite Death, 
               Sprite Push, 
               Sprite Sleep, 
-              Sprite ItemGrab, 
+              Sprite ItemGrab,
+              Texture2D Interact, 
               Window* Screen, 
               Background* World);
-    ~Character();
-    Character(const Character&) = delete;
-    Character(Character&&) = default;
-    Character& operator=(const Character&) = delete;
-    Character& operator=(Character&&) = default;
     
     void Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void Draw();
@@ -80,7 +76,7 @@ private:
     Sprite Sleep{};
     Sprite ItemGrab{};
     Sprite* CurrentSprite{&Idle};  
-    Texture2D Interact{LoadTexture("sprites/props/Interact.png")};
+    Texture2D Interact{};
 
     Window* Screen{};
     Background* World{};

@@ -127,6 +127,16 @@ public:
     const Texture2D Didi{LoadTexture("sprites/npc/Didi.png")};
     const Texture2D Jade{LoadTexture("sprites/npc/Jade.png")};
     const Texture2D Son{LoadTexture("sprites/npc/Son.png")};
+
+    const Texture2D FoxIdle{LoadTexture("sprites/characters/fox/Fox_idle.png")};
+    const Texture2D FoxWalk{LoadTexture("sprites/characters/fox/Fox_walk.png")};
+    const Texture2D FoxRun{LoadTexture("sprites/characters/fox/Fox_run.png")};
+    const Texture2D FoxMelee{LoadTexture("sprites/characters/fox/Fox_melee.png")};
+    const Texture2D FoxHit{LoadTexture("sprites/characters/fox/Fox_hit.png")};
+    const Texture2D FoxDie{LoadTexture("sprites/characters/fox/Fox_die.png")};
+    const Texture2D FoxPush{LoadTexture("sprites/characters/fox/Fox_push.png")};
+    const Texture2D FoxSleeping{LoadTexture("sprites/characters/fox/Fox_sleeping.png")};
+    const Texture2D FoxItemGot{LoadTexture("sprites/characters/fox/Fox_itemGot.png")};
     
 };
 

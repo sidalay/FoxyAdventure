@@ -23,15 +23,16 @@ namespace Game
             // Initialize Character
             Character Fox
             {
-                Sprite{"sprites/characters/fox/Fox_idle.png", 4, 4}, 
-                Sprite{"sprites/characters/fox/Fox_walk.png", 4, 4},
-                Sprite{"sprites/characters/fox/Fox_run.png", 4, 4}, 
-                Sprite{"sprites/characters/fox/Fox_melee.png", 4, 4},
-                Sprite{"sprites/characters/fox/Fox_hit.png", 2, 4}, 
-                Sprite{"sprites/characters/fox/Fox_die.png", 1, 4},
-                Sprite{"sprites/characters/fox/Fox_push.png", 4, 4},
-                Sprite{"sprites/characters/fox/Fox_sleeping.png", 4, 1}, 
-                Sprite{"sprites/characters/fox/Fox_itemGot.png", 1, 4},
+                Sprite{GameTextures.FoxIdle, 4, 4}, 
+                Sprite{GameTextures.FoxWalk, 4, 4},
+                Sprite{GameTextures.FoxRun, 4, 4}, 
+                Sprite{GameTextures.FoxMelee, 4, 4},
+                Sprite{GameTextures.FoxHit, 2, 4}, 
+                Sprite{GameTextures.FoxDie, 1, 4},
+                Sprite{GameTextures.FoxPush, 4, 4},
+                Sprite{GameTextures.FoxSleeping, 4, 1}, 
+                Sprite{GameTextures.FoxItemGot, 1, 4},
+                GameTextures.Interact,
                 &Window, &MapBG
             };
 
@@ -55,11 +56,11 @@ namespace Game
             // Initialize fox Sprites for Pause Menu
             std::array<Sprite, 5> PauseFox
             {
-                Sprite{"sprites/characters/fox/Fox_idle.png", 4, 4},
-                Sprite{"sprites/characters/fox/Fox_walk.png", 4, 4},
-                Sprite{"sprites/characters/fox/Fox_run.png", 4, 4},
-                Sprite{"sprites/characters/fox/Fox_sleeping.png", 4, 1},
-                Sprite{"sprites/characters/fox/Fox_melee.png", 4, 1}
+                Sprite{GameTextures.FoxIdle, 4, 4},
+                Sprite{GameTextures.FoxWalk, 4, 4},
+                Sprite{GameTextures.FoxRun, 4, 4},
+                Sprite{GameTextures.FoxSleeping, 4, 1},
+                Sprite{GameTextures.FoxMelee, 4, 1}
             };
 
             // Initialize button textures for Pause Menu
