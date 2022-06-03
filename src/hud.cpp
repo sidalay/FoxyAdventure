@@ -1,5 +1,23 @@
 #include "headers/hud.hpp"
 
+HUD::~HUD()
+{
+    UnloadTexture(HeartFull);
+    UnloadTexture(HeartHalf);
+    UnloadTexture(HeartEmpty);
+    UnloadTexture(RecContainer);
+    UnloadTexture(SquareContainer);
+    UnloadTexture(Fox);
+    UnloadTexture(FoxDefault);
+    UnloadTexture(FoxAngry);
+    UnloadTexture(FoxHappy);
+    UnloadTexture(FoxNervous);
+    UnloadTexture(FoxSad);
+    UnloadTexture(FoxSleeping);
+    UnloadTexture(FoxHurt);
+    UnloadTexture(FoxDead);
+}
+
 void HUD::Draw(float Health, Emotion State)
 {
     // manage which fox portraits to draw

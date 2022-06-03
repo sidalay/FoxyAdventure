@@ -7,6 +7,13 @@
 class HUD 
 {
 public:
+    HUD() = default;
+    ~HUD();
+    HUD(const HUD&) = delete;
+    HUD(HUD&&) = default;
+    HUD& operator=(const HUD&) = delete;
+    HUD& operator=(HUD&&) = default;
+    
     void Tick();
     void Draw(float Health, Emotion State);
     
