@@ -117,14 +117,16 @@ namespace Game
             Transition(State, NextState, GameInfo);
         }
         else if (State == GameState::TRANSITION) {
+
             Transition(State, NextState, GameInfo);
+            
         }
         else if (State == GameState::PAUSED) {
 
             ClearBackground(BLACK);
 
-            Game::PauseUpdate(State, NextState, PauseFox, Buttons, GameInfo.PauseFoxIndex);
-            Game::PauseDraw(PauseFox, Buttons, State, GameInfo.PauseFoxIndex);
+            Game::PauseUpdate(State, NextState, PauseFox, Buttons, GameInfo);
+            Game::PauseDraw(PauseFox, Buttons, State, GameInfo);
 
             Transition(State, NextState, GameInfo);
         }
@@ -328,25 +330,25 @@ namespace Game
     }
 
     // Manage Tick functions during pause menu
-    void PauseUpdate(GameState& State, GameState& NextState, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, int& PauseFoxIndex)
+    void PauseUpdate(GameState& State, GameState& NextState, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameInfo& GameInfo)
     {
         if (State != GameState::TRANSITION) {
             if (IsKeyDown(KEY_L)) {
-                PauseFoxIndex = 3;
+                GameInfo.PauseFoxIndex = 3;
             }
             else if (IsKeyDown(KEY_W) || IsKeyDown(KEY_A) || IsKeyDown(KEY_S) || IsKeyDown(KEY_D)) {
                 if (IsKeyDown(KEY_LEFT_SHIFT)) {
-                    PauseFoxIndex = 2;
+                    GameInfo.PauseFoxIndex = 2;
                 }
                 else {
-                    PauseFoxIndex = 1;
+                    GameInfo.PauseFoxIndex = 1;
                 }
             }
             else if (IsKeyDown(KEY_SPACE) || IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-                PauseFoxIndex = 4;
+                GameInfo.PauseFoxIndex = 4;
             }
             else {
-                PauseFoxIndex = 0;
+                GameInfo.PauseFoxIndex = 0;
             }
 
             for (auto& Fox:PauseFox) {
@@ -367,13 +369,13 @@ namespace Game
     }
 
     // Draw Pause sprite & button presses
-    void PauseDraw(std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameState& State, const int PauseFoxIndex)
+    void PauseDraw(std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameState& State, const GameInfo& GameInfo)
     {
         DrawTextureEx(LoadTexture("sprites/maps/PauseBackground.png"), Vector2{0.f,0.f}, 0.0f, 4.f, WHITE);
 
         if (State != GameState::TRANSITION) {
             // PauseFoxIndex controls which Fox sprite is drawn
-            DrawTexturePro(PauseFox.at(PauseFoxIndex).Texture, PauseFox.at(PauseFoxIndex).GetSourceRec(), PauseFox.at(PauseFoxIndex).GetPosRec(Vector2{674.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
+            DrawTexturePro(PauseFox.at(GameInfo.PauseFoxIndex).Texture, PauseFox.at(GameInfo.PauseFoxIndex).GetSourceRec(), PauseFox.at(GameInfo.PauseFoxIndex).GetPosRec(Vector2{674.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
 
             // Draw Buttons Depending on which are pushed
             if (IsKeyDown(KEY_W)) DrawTextureEx(Buttons.at(0), Vector2{208.f,124.f}, 0.f, 4.f, WHITE);
@@ -432,14 +434,14 @@ namespace Game
 
     void Transition(GameState& State, GameState& NextState, GameInfo& GameInfo)
     {
-        float MaxTransitionTime{0.3f};
+        const float MaxTransitionTime{0.3f};
         
         if (State != GameState::TRANSITION) {
             if (GameInfo.TransitionOutTime < MaxTransitionTime) {
                     GameInfo.TransitionInTime = GetFrameTime();
                     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, GameInfo.Opacity));
                     GameInfo.Opacity -= 0.01f;
-                }
+            }
             else {
                 GameInfo.TransitionInTime = 0.f;
                 GameInfo.Opacity = 0.f;
