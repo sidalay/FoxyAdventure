@@ -371,4 +371,24 @@ GameTexture::~GameTexture()
     UnloadTexture(ToadWhiteHurt);
     UnloadTexture(ToadWhiteIdle);
     UnloadTexture(ToadWhiteWalk);
+    UnloadTexture(CrowFlySleep);
+    UnloadTexture(CrowFlying);
+    UnloadTexture(CrowGroundSleep);
+    UnloadTexture(CrowIdle);
+    UnloadTexture(CrowIdleTwo);
+    UnloadTexture(CrowWalk);
+    UnloadTexture(FoxFamilyAngry);
+    UnloadTexture(FoxFamilyIdle);
+    UnloadTexture(FoxFamilyIdleTwo);
+    UnloadTexture(FoxFamilyLazy);
+    UnloadTexture(FoxFamilyRun);
+    UnloadTexture(FoxFamilySleep);
+    UnloadTexture(FoxFamilyWalk);
+    UnloadTexture(SquirrelEat);
+    UnloadTexture(SquirrelIdle);
+    UnloadTexture(SquirrelIdleTwo);
+    UnloadTexture(SquirrelJump);
+    UnloadTexture(SquirrelRun);
+    UnloadTexture(SquirrelSleep);
+    UnloadTexture(SquirrelWalk);
 }

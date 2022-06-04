@@ -414,6 +414,29 @@ struct GameTexture {
     const Texture2D ToadWhiteHurt{LoadTexture("sprites/enemies/toad/white_hurt.png")};
     const Texture2D ToadWhiteIdle{LoadTexture("sprites/enemies/toad/white_idle.png")};
     const Texture2D ToadWhiteWalk{LoadTexture("sprites/enemies/toad/white_walk.png")};
+
+    const Texture2D CrowFlySleep{LoadTexture("sprites/npc/wildlife/crow/crow_fly_sleep.png")};
+    const Texture2D CrowFlying{LoadTexture("sprites/npc/wildlife/crow/crow_flying.png")};
+    const Texture2D CrowGroundSleep{LoadTexture("sprites/npc/wildlife/crow/crow_ground_sleep.png")};
+    const Texture2D CrowIdle{LoadTexture("sprites/npc/wildlife/crow/crow_idle.png")};
+    const Texture2D CrowIdleTwo{LoadTexture("sprites/npc/wildlife/crow/crow_idle2.png")};
+    const Texture2D CrowWalk{LoadTexture("sprites/npc/wildlife/crow/crow_walk.png")};
+
+    const Texture2D FoxFamilyAngry{LoadTexture("sprites/npc/wildlife/fox/fox_family_angry.png")};
+    const Texture2D FoxFamilyIdle{LoadTexture("sprites/npc/wildlife/fox/fox_family_idle.png")};
+    const Texture2D FoxFamilyIdleTwo{LoadTexture("sprites/npc/wildlife/fox/fox_family_idle2.png")};
+    const Texture2D FoxFamilyLazy{LoadTexture("sprites/npc/wildlife/fox/fox_family_lazy.png")};
+    const Texture2D FoxFamilyRun{LoadTexture("sprites/npc/wildlife/fox/fox_family_run.png")};
+    const Texture2D FoxFamilySleep{LoadTexture("sprites/npc/wildlife/fox/fox_family_sleep.png")};
+    const Texture2D FoxFamilyWalk{LoadTexture("sprites/npc/wildlife/fox/fox_family_walk.png")};
+
+    const Texture2D SquirrelEat{LoadTexture("sprites/npc/wildlife/squirrel/squirrel_eat.png")};
+    const Texture2D SquirrelIdle{LoadTexture("sprites/npc/wildlife/squirrel/squirrel_idle.png")};
+    const Texture2D SquirrelIdleTwo{LoadTexture("sprites/npc/wildlife/squirrel/squirrel_idle2.png")};
+    const Texture2D SquirrelJump{LoadTexture("sprites/npc/wildlife/squirrel/squirrel_jump.png")};
+    const Texture2D SquirrelRun{LoadTexture("sprites/npc/wildlife/squirrel/squirrel_run.png")};
+    const Texture2D SquirrelSleep{LoadTexture("sprites/npc/wildlife/squirrel/squirrel_sleep.png")};
+    const Texture2D SquirrelWalk{LoadTexture("sprites/npc/wildlife/squirrel/squirrel_walk.png")};
 };
 
 #endif // gametextures_hpp
