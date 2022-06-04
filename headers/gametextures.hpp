@@ -136,6 +136,19 @@ struct GameTexture {
     const Texture2D FoxSleeping{LoadTexture("sprites/characters/fox/Fox_sleeping.png")};
     const Texture2D FoxItemGot{LoadTexture("sprites/characters/fox/Fox_itemGot.png")};
 
+    const Texture2D FoxPortraitAngry{LoadTexture("sprites/portraits/Fox_Angry.png")};
+    const Texture2D FoxPortraitDead{LoadTexture("sprites/portraits/Fox_Dead.png")};
+    const Texture2D FoxPortraitFrame{LoadTexture("sprites/portraits/Fox_Frame.png")};
+    const Texture2D FoxPortraitHappy{LoadTexture("sprites/portraits/Fox_Happy.png")};
+    const Texture2D FoxPortraitHurt{LoadTexture("sprites/portraits/Fox_Hurt.png")};
+    const Texture2D FoxPortraitNervous{LoadTexture("sprites/portraits/Fox_Nervous.png")};
+    const Texture2D FoxPortraitSad{LoadTexture("sprites/portraits/Fox_Sad.png")};
+    const Texture2D FoxPortraitSleeping{LoadTexture("sprites/portraits/Fox_Sleeping.png")};
+
+    const Texture2D HeartFull{LoadTexture("sprites/props/Heart.png")};
+    const Texture2D HeartHalf{LoadTexture("sprites/props/HeartHalf.png")};
+    const Texture2D HeartEmpty{LoadTexture("sprites/props/HeartEmpty.png")};
+
     const Texture2D ButtonW{LoadTexture("sprites/buttons/W.png")};
     const Texture2D ButtonA{LoadTexture("sprites/buttons/A.png")};
     const Texture2D ButtonS{LoadTexture("sprites/buttons/S.png")};

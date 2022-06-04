@@ -1,21 +1,18 @@
 #include "headers/hud.hpp"
 
-HUD::~HUD()
+HUD::HUD(GameTexture& GameTextures)
+    : HeartFull{GameTextures.HeartFull}, HeartHalf{GameTextures.HeartHalf}, HeartEmpty{GameTextures.HeartEmpty},
+      RecContainer{GameTextures.TransparentContainer}, SquareContainer{GameTextures.TransparentSquare},
+      FoxFrame{GameTextures.FoxPortraitFrame}, 
+      FoxAngry{GameTextures.FoxPortraitAngry}, 
+      FoxHappy{GameTextures.FoxPortraitHappy},
+      FoxNervous{GameTextures.FoxPortraitNervous}, 
+      FoxSad{GameTextures.FoxPortraitSad}, 
+      FoxSleeping{GameTextures.FoxPortraitSleeping},
+      FoxHurt{GameTextures.FoxPortraitHurt}, 
+      FoxDead{GameTextures.FoxPortraitDead}
 {
-    UnloadTexture(HeartFull);
-    UnloadTexture(HeartHalf);
-    UnloadTexture(HeartEmpty);
-    UnloadTexture(RecContainer);
-    UnloadTexture(SquareContainer);
-    UnloadTexture(Fox);
-    UnloadTexture(FoxDefault);
-    UnloadTexture(FoxAngry);
-    UnloadTexture(FoxHappy);
-    UnloadTexture(FoxNervous);
-    UnloadTexture(FoxSad);
-    UnloadTexture(FoxSleeping);
-    UnloadTexture(FoxHurt);
-    UnloadTexture(FoxDead);
+
 }
 
 void HUD::Draw(float Health, Emotion State)
@@ -45,7 +42,7 @@ void HUD::Draw(float Health, Emotion State)
             Fox = FoxDead;
             break;
         default:
-            Fox = FoxDefault;
+            Fox = FoxFrame;
             break;
     }
 

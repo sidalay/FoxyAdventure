@@ -103,6 +103,17 @@ GameTexture::~GameTexture()
     UnloadTexture(FoxPush);
     UnloadTexture(FoxSleeping);
     UnloadTexture(FoxItemGot);
+    UnloadTexture(FoxPortraitFrame);
+    UnloadTexture(FoxPortraitAngry);
+    UnloadTexture(FoxPortraitHappy);
+    UnloadTexture(FoxPortraitNervous);
+    UnloadTexture(FoxPortraitSad);
+    UnloadTexture(FoxPortraitSleeping);
+    UnloadTexture(FoxPortraitHurt);
+    UnloadTexture(FoxPortraitDead);
+    UnloadTexture(HeartFull);
+    UnloadTexture(HeartHalf);
+    UnloadTexture(HeartEmpty);
     UnloadTexture(ButtonW);
     UnloadTexture(ButtonA);
     UnloadTexture(ButtonS);

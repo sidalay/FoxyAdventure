@@ -43,7 +43,7 @@ namespace Game
             std::vector<Enemy> Crows{Game::InitializeCrows(MapBG, Window, GameTextures)};
 
             // Initialize HUD
-            HUD Hud{};
+            HUD Hud{GameTextures};
 
             // Initialize Props
             std::vector<std::vector<Prop>> UnderProps{Game::InitializePropsUnder(GameTextures)};

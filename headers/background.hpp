@@ -10,6 +10,11 @@ class Background
 {
 public:
     Background(GameTexture& GameTextures);
+    ~Background() = default;
+    Background(const Background&) = delete;
+    Background(Background&&) = default;
+    Background& operator=(const Background&) = delete;
+    Background& operator=(Background&&) = default;
 
     void Tick(Vector2 WorldPos);
     void Draw();
