@@ -112,6 +112,8 @@ GameTexture::~GameTexture()
     UnloadTexture(Shift);
     UnloadTexture(Space);
     UnloadTexture(Lmouse);
+    UnloadTexture(Map);
+    UnloadTexture(MiniMap);
     UnloadTexture(BearBrownAttack);
     UnloadTexture(BearBrownDeath);
     UnloadTexture(BearBrownHurt);

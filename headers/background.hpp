@@ -4,16 +4,13 @@
 #include <raylib.h>
 #include <raymath.h>
 #include "headers/window.hpp"
+#include "headers/gametextures.hpp"
 
 class Background
 {
 public:
-    Background() = default;
-    ~Background();
-    Background(const Background&) = delete;
-    Background(Background&&) = default;
-    Background& operator=(const Background&) = delete;
-    Background& operator=(Background&&) = default;
+    Background(GameTexture& GameTextures);
+
     void Tick(Vector2 WorldPos);
     void Draw();
     void DrawMiniMap(Vector2 CharWorldPos);
@@ -23,9 +20,9 @@ public:
     float GetScale() {return Scale;}
     
 private:
-    Texture2D Map {LoadTexture("sprites/maps/CodexMap.png")};
-    Texture2D MiniMap {LoadTexture("sprites/maps/MiniMap.png")};
-    Texture2D SquareContainer{LoadTexture("sprites/props/SquareContainer.png")};
+    Texture2D Map{};
+    Texture2D MiniMap{};
+    Texture2D SquareContainer{};
     Vector2 MapPos{0.f, 0.f};
     float Scale{4.f};
     bool IsMiniMap{false};

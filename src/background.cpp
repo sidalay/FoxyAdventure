@@ -1,10 +1,9 @@
 #include "headers/background.hpp"
 
-Background::~Background()
+Background::Background(GameTexture& GameTextures)
+    : Map{GameTextures.Map}, MiniMap{GameTextures.MiniMap}, SquareContainer{GameTextures.SquareContainer}
 {
-    UnloadTexture(Map);
-    UnloadTexture(MiniMap);
-    UnloadTexture(SquareContainer);
+
 }
 
 void Background::Tick(Vector2 WorldPos) 

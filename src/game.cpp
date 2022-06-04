@@ -14,11 +14,11 @@ namespace Game
         GameState NextState{};
 
         {
-            // Initialize Background
-            Background MapBG{};
-
             // Initialize GameTextures struct
             GameTexture GameTextures;
+
+            // Initialize Background
+            Background MapBG{GameTextures};
 
             // Initialize Character
             Character Fox
