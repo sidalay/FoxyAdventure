@@ -4155,44 +4155,44 @@ namespace Game
 
         Enemy FoxFamOne
         {
-            Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 13, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
+            Sprite{GameTextures.FoxFamilyIdle, 5, 2},
+            Sprite{GameTextures.FoxFamilyIdleTwo, 14, 2},
+            Sprite{GameTextures.FoxFamilyWalk, 8, 2},
+            Sprite{GameTextures.FoxFamilyLazy, 13, 2},
+            Sprite{GameTextures.FoxFamilySleep, 6, 2},
             EnemyType::FOX, Vector2{473, 2524}, &Window, &MapBG, GameTextures
         };
         Enemies.emplace_back(FoxFamOne);
         
         Enemy FoxFamTwo
         {
-            Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 13, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
+            Sprite{GameTextures.FoxFamilyIdle, 5, 2},
+            Sprite{GameTextures.FoxFamilyIdleTwo, 14, 2},
+            Sprite{GameTextures.FoxFamilyWalk, 8, 2},
+            Sprite{GameTextures.FoxFamilyLazy, 13, 2},
+            Sprite{GameTextures.FoxFamilySleep, 6, 2},
             EnemyType::FOX, Vector2{247, 2524}, &Window, &MapBG, GameTextures
         };
         Enemies.emplace_back(FoxFamTwo);
 
         Enemy FoxFamFour
         {
-            Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 13, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
+            Sprite{GameTextures.FoxFamilyIdle, 5, 2},
+            Sprite{GameTextures.FoxFamilyIdleTwo, 14, 2},
+            Sprite{GameTextures.FoxFamilyWalk, 8, 2},
+            Sprite{GameTextures.FoxFamilyLazy, 13, 2},
+            Sprite{GameTextures.FoxFamilySleep, 6, 2},
             EnemyType::FOX, Vector2{428, 2840}, &Window, &MapBG, GameTextures, 2.5f
         };
         Enemies.emplace_back(FoxFamFour);
 
         Enemy FoxFamFive
         {
-            Sprite{"sprites/npc/wildlife/fox/fox_family_idle.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_idle2.png", 14, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_walk.png", 8, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_lazy.png", 13, 2},
-            Sprite{"sprites/npc/wildlife/fox/fox_family_sleep.png", 6, 2},
+            Sprite{GameTextures.FoxFamilyIdle, 5, 2},
+            Sprite{GameTextures.FoxFamilyIdleTwo, 14, 2},
+            Sprite{GameTextures.FoxFamilyWalk, 8, 2},
+            Sprite{GameTextures.FoxFamilyLazy, 13, 2},
+            Sprite{GameTextures.FoxFamilySleep, 6, 2},
             EnemyType::FOX, Vector2{354, 2661}, &Window, &MapBG, GameTextures, 2.5f
         };
         Enemies.emplace_back(FoxFamFive);
@@ -4201,110 +4201,110 @@ namespace Game
         
         Enemy SquirrelOne
         {
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{GameTextures.SquirrelIdle, 6, 2},
+            Sprite{GameTextures.SquirrelIdleTwo, 6, 2},
+            Sprite{GameTextures.SquirrelWalk, 4, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
             EnemyType::SQUIRREL, Vector2{2839, 2041}, &Window, &MapBG, GameTextures, 2.0f
         };
         Enemies.emplace_back(SquirrelOne);
 
         Enemy SquirrelTwo
         {
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{GameTextures.SquirrelIdle, 6, 2},
+            Sprite{GameTextures.SquirrelIdleTwo, 6, 2},
+            Sprite{GameTextures.SquirrelWalk, 4, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
             EnemyType::SQUIRREL, Vector2{3050, 2147}, &Window, &MapBG, GameTextures, 2.0f
         };
         Enemies.emplace_back(SquirrelTwo);
 
         Enemy SquirrelThree
         {
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{GameTextures.SquirrelIdle, 6, 2},
+            Sprite{GameTextures.SquirrelIdleTwo, 6, 2},
+            Sprite{GameTextures.SquirrelWalk, 4, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
             EnemyType::SQUIRREL, Vector2{3155, 2133}, &Window, &MapBG, GameTextures, 2.0f
         };
         Enemies.emplace_back(SquirrelThree);
 
         Enemy SquirrelFour
         {
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{GameTextures.SquirrelIdle, 6, 2},
+            Sprite{GameTextures.SquirrelIdleTwo, 6, 2},
+            Sprite{GameTextures.SquirrelWalk, 4, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
             EnemyType::SQUIRREL, Vector2{3855, 237}, &Window, &MapBG, GameTextures, 2.0f
         };
         Enemies.emplace_back(SquirrelFour);
 
         Enemy SquirrelFive
         {
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{GameTextures.SquirrelIdle, 6, 2},
+            Sprite{GameTextures.SquirrelIdleTwo, 6, 2},
+            Sprite{GameTextures.SquirrelWalk, 4, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
             EnemyType::SQUIRREL, Vector2{3251, 339}, &Window, &MapBG, GameTextures, 2.0f
         };
         Enemies.emplace_back(SquirrelFive);
 
         Enemy SquirrelSix
         {
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{GameTextures.SquirrelIdle, 6, 2},
+            Sprite{GameTextures.SquirrelIdleTwo, 6, 2},
+            Sprite{GameTextures.SquirrelWalk, 4, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
             EnemyType::SQUIRREL, Vector2{2767, 338}, &Window, &MapBG, GameTextures, 2.0f
         };
         Enemies.emplace_back(SquirrelSix);
 
         Enemy SquirrelSeven
         {
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{GameTextures.SquirrelIdle, 6, 2},
+            Sprite{GameTextures.SquirrelIdleTwo, 6, 2},
+            Sprite{GameTextures.SquirrelWalk, 4, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
             EnemyType::SQUIRREL, Vector2{916, 940}, &Window, &MapBG, GameTextures, 2.0f
         };
         Enemies.emplace_back(SquirrelSeven);
 
         Enemy SquirrelEight
         {
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{GameTextures.SquirrelIdle, 6, 2},
+            Sprite{GameTextures.SquirrelIdleTwo, 6, 2},
+            Sprite{GameTextures.SquirrelWalk, 4, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
             EnemyType::SQUIRREL, Vector2{539, 1221}, &Window, &MapBG, GameTextures, 2.0f
         };
         Enemies.emplace_back(SquirrelEight);
 
         Enemy SquirrelNine
         {
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{GameTextures.SquirrelIdle, 6, 2},
+            Sprite{GameTextures.SquirrelIdleTwo, 6, 2},
+            Sprite{GameTextures.SquirrelWalk, 4, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
             EnemyType::SQUIRREL, Vector2{932, 1265}, &Window, &MapBG, GameTextures, 2.0f
         };
         Enemies.emplace_back(SquirrelNine);
 
         Enemy SquirrelTen
         {
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_idle2.png", 6, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
-            Sprite{"sprites/npc/wildlife/squirrel/squirrel_eat.png", 2, 2},
+            Sprite{GameTextures.SquirrelIdle, 6, 2},
+            Sprite{GameTextures.SquirrelIdleTwo, 6, 2},
+            Sprite{GameTextures.SquirrelWalk, 4, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
+            Sprite{GameTextures.SquirrelEat, 2, 2},
             EnemyType::SQUIRREL, Vector2{345, 1663}, &Window, &MapBG, GameTextures, 2.0f
         };
         Enemies.emplace_back(SquirrelTen);
@@ -4319,66 +4319,66 @@ namespace Game
 
         Enemy CrowOne
         {
-            Sprite{"sprites/npc/wildlife/crow/crow_idle.png", 8, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_flying.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            Sprite{GameTextures.CrowIdle, 8, 2},
+            Sprite{GameTextures.CrowIdleTwo, 5, 2},
+            Sprite{GameTextures.CrowFlying, 5, 2},
+            Sprite{GameTextures.CrowWalk, 4, 2},
+            Sprite{GameTextures.CrowIdleTwo, 5, 2},
             EnemyType::CROW, Vector2{837, 1921}, &Window, &MapBG, GameTextures, 2.5f
         };
         Crows.emplace_back(CrowOne);
 
         Enemy CrowTwo
         {
-            Sprite{"sprites/npc/wildlife/crow/crow_idle.png", 8, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_flying.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            Sprite{GameTextures.CrowIdle, 8, 2},
+            Sprite{GameTextures.CrowIdleTwo, 5, 2},
+            Sprite{GameTextures.CrowFlying, 5, 2},
+            Sprite{GameTextures.CrowWalk, 4, 2},
+            Sprite{GameTextures.CrowIdleTwo, 5, 2},
             EnemyType::CROW, Vector2{1042, 2026}, &Window, &MapBG, GameTextures, 2.5f
         };
         Crows.emplace_back(CrowTwo);
 
         Enemy CrowThree
         {
-            Sprite{"sprites/npc/wildlife/crow/crow_idle.png", 8, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_flying.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            Sprite{GameTextures.CrowIdle, 8, 2},
+            Sprite{GameTextures.CrowIdleTwo, 5, 2},
+            Sprite{GameTextures.CrowFlying, 5, 2},
+            Sprite{GameTextures.CrowWalk, 4, 2},
+            Sprite{GameTextures.CrowIdleTwo, 5, 2},
             EnemyType::CROW, Vector2{847, 2037}, &Window, &MapBG, GameTextures, 2.5f
         };
         Crows.emplace_back(CrowThree);
 
         Enemy CrowFour
         {
-            Sprite{"sprites/npc/wildlife/crow/crow_idle.png", 8, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_flying.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            Sprite{GameTextures.CrowIdle, 8, 2},
+            Sprite{GameTextures.CrowIdleTwo, 5, 2},
+            Sprite{GameTextures.CrowFlying, 5, 2},
+            Sprite{GameTextures.CrowWalk, 4, 2},
+            Sprite{GameTextures.CrowIdleTwo, 5, 2},
             EnemyType::CROW, Vector2{932, 2256}, &Window, &MapBG, GameTextures, 2.5f
         };
         Crows.emplace_back(CrowFour);
         
         Enemy CrowFive
         {
-            Sprite{"sprites/npc/wildlife/crow/crow_idle.png", 8, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_flying.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            Sprite{GameTextures.CrowIdle, 8, 2},
+            Sprite{GameTextures.CrowIdleTwo, 5, 2},
+            Sprite{GameTextures.CrowFlying, 5, 2},
+            Sprite{GameTextures.CrowWalk, 4, 2},
+            Sprite{GameTextures.CrowIdleTwo, 5, 2},
             EnemyType::CROW, Vector2{1037, 1826}, &Window, &MapBG, GameTextures, 2.5f
         };
         Crows.emplace_back(CrowFive);
         
         Enemy CrowSix
         {
-            Sprite{"sprites/npc/wildlife/crow/crow_idle.png", 8, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_flying.png", 5, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_walk.png", 4, 2},
-            Sprite{"sprites/npc/wildlife/crow/crow_idle2.png", 5, 2},
+            Sprite{GameTextures.CrowIdle, 8, 2},
+            Sprite{GameTextures.CrowIdleTwo, 5, 2},
+            Sprite{GameTextures.CrowFlying, 5, 2},
+            Sprite{GameTextures.CrowWalk, 4, 2},
+            Sprite{GameTextures.CrowIdleTwo, 5, 2},
             EnemyType::CROW, Vector2{1055, 1955}, &Window, &MapBG, GameTextures, 2.5f
         };
         Crows.emplace_back(CrowSix);
