@@ -111,7 +111,7 @@ namespace Game
 
             ClearBackground(BLACK);
 
-            Game::Update(Map, State, NextState, Character, Props, Enemies, Crows, Trees);
+            Game::Update(Map, State, NextState, Character, Props, Enemies, Crows, Trees, GameInfo);
             Game::Draw(Map, Character, Props, Hud, Enemies, Crows, Trees);
 
             Transition(State, NextState, GameInfo);
@@ -181,7 +181,7 @@ namespace Game
     }
 
     // Manage Ticks for all objects
-    void Update(Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::vector<Prop>& Trees)
+    void Update(Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::vector<Prop>& Trees, GameInfo& GameInfo)
     {
         if (State != GameState::TRANSITION) {
             // Create DeltaTime
@@ -228,7 +228,7 @@ namespace Game
             NextState = GameState::PAUSED;
             State = GameState::TRANSITION;
         }
-        else if (IsKeyPressed(KEY_ESCAPE)) {
+        else if (IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
             NextState = GameState::EXIT;
             State = GameState::TRANSITION;
         }
@@ -317,7 +317,7 @@ namespace Game
         // Debugging info
         DrawText(TextFormat("Player.x: %i", (int)Character.GetWorldPos().x + 615), 20, 150, 20, WHITE);
         DrawText(TextFormat("Player.y: %i", (int)Character.GetWorldPos().y + 335), 20, 170, 20, WHITE);
-        DrawText(TextFormat("Bear Counter: %i", Enemies.at(0).GetMonsterCount(EnemyType::BEAR)), 20, 300, 20, WHITE);
+        // DrawText(TextFormat("Bear Counter: %i", Enemies.at(0).GetMonsterCount(EnemyType::BEAR)), 20, 300, 20, WHITE);
         // DrawText(TextFormat("Player.HP: %i", (int)Character.GetHealth()), 20, 190, 20, WHITE);
         // DrawText(TextFormat("Enemy.x: %i", (int)Enemies.at(0).GetWorldPos().x), 20, 190, 20, WHITE);
         // DrawText(TextFormat("Enemy.y: %i", (int)Enemies.at(0).GetWorldPos().y), 20, 210, 20, WHITE);
@@ -362,7 +362,7 @@ namespace Game
             
             // Add audio functionality here later
         }
-        else if (IsKeyPressed(KEY_ESCAPE)) {
+        else if (IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
             NextState = GameState::EXIT;
             State = GameState::TRANSITION;
         }
@@ -410,7 +410,7 @@ namespace Game
             }
         }
 
-        if (IsKeyPressed(KEY_ESCAPE)) {
+        if (IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
             NextState = GameState::RUNNING;
             State = GameState::TRANSITION;
         }

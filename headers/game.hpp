@@ -37,7 +37,8 @@ namespace Game
               std::vector<Enemy>& Crows, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, std::vector<Prop>& Trees, GameInfo& GameInfo);
     void CheckScreenSizing(Window& Window);
     void SetFullScreen(Window& Window);
-    void Update(Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::vector<Prop>& Trees);
+    void Update(Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, 
+                std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::vector<Prop>& Trees, GameInfo& GameInfo);
     void Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::vector<Prop>& Trees);
     void PauseUpdate(GameState& State, GameState& NextState, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameInfo& GameInfo);
     void PauseDraw(std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameState& State, const GameInfo& GameInfo);
