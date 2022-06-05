@@ -28,7 +28,7 @@ public:
               Sprite Push, 
               Sprite Sleep, 
               Sprite ItemGrab,
-              Texture2D Interact, 
+              const Texture2D& Interact, 
               Window* Screen, 
               Background* World);
     
@@ -76,14 +76,14 @@ private:
     Sprite Sleep{};
     Sprite ItemGrab{};
     Sprite* CurrentSprite{&Idle};  
-    Texture2D Interact{};
+    const Texture2D* Interact{};
 
     Window* Screen{};
     Background* World{};
     Vector2 Offset{615.f,335.f};         // Player offset vs Enemy/Prop WorldPos
     Vector2 CharacterPos{};              // Where the character is on the screen
-    // Vector2 WorldPos{362.f,2594.f};      // Where the character is in the world
-    Vector2 WorldPos{2334.f,2431};
+    Vector2 WorldPos{362.f,2594.f};      // Where the character is in the world
+    // Vector2 WorldPos{2334.f,2431};
     Vector2 PrevWorldPos{};
     Rectangle Source{};
     Rectangle Destination{};

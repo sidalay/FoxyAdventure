@@ -48,8 +48,8 @@ class Prop
 public:
     Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, GameTexture& GameTextures, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
     Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, std::string ItemName = "None", bool Spawned = false, bool Interactable = false);           
-    Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, float Scale = 4.f, bool Moveable = false, bool Interactable = false, 
-         Progress Act = Progress::ACT_O, PropType NPC = PropType::NPC_O, Texture2D Item = Texture2D{}, 
+    Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, const Texture2D& Item, float Scale = 4.f, bool Moveable = false, bool Interactable = false, 
+         Progress Act = Progress::ACT_O, PropType NPC = PropType::NPC_O, 
          std::string ItemName = "None", float ItemScale = 2.f);
     
     void Tick(float DeltaTime, Background& Map);
@@ -93,10 +93,10 @@ private:
     bool OutOfBounds{false};
     bool Talking{false};
     bool Visible{false};
+    bool Spawned{true};
 
     // NPC variables
     Progress Act{Progress::ACT_I};
-    bool Spawned{true};
 
     // Progress Trigger Variables
     Progress TriggerAct{};
@@ -106,7 +106,7 @@ private:
 
     // Treasure member variables
     bool ReceiveItem{false};
-    Texture2D Item{};
+    const Texture2D* Item{};
     std::string ItemName{};
     float ItemScale{};
     Vector2 ItemPos{};

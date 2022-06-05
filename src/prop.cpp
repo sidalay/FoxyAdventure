@@ -43,10 +43,10 @@ Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures,
 }
 
 // Constructor for animated props
-Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, float Scale, bool Moveable, bool Interactable, 
-           Progress Act, PropType NPC, Texture2D Item, std::string ItemName, float ItemScale)
+Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, const Texture2D& Item, float Scale, bool Moveable, bool Interactable, 
+           Progress Act, PropType NPC, std::string ItemName, float ItemScale)
     : Object{Object}, Type{Type}, GameTextures{&GameTextures}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}, 
-      TriggerAct{Act}, TriggerNPC{NPC}, Item{Item}, ItemName{ItemName}, ItemScale{ItemScale} 
+      TriggerAct{Act}, TriggerNPC{NPC}, Item{&Item}, ItemName{ItemName}, ItemScale{ItemScale} 
 {
     if (Type == PropType::BOULDER ||
         Type == PropType::BUSH ||
@@ -298,7 +298,7 @@ void Prop::Draw(Vector2 CharacterWorldPos)
     // Draw Treasure Box Item
     if (Opening)
     {
-        DrawTextureEx(Item, Vector2Add(ScreenPos, ItemPos), 0.f, ItemScale, WHITE);
+        DrawTextureEx(*Item, Vector2Add(ScreenPos, ItemPos), 0.f, ItemScale, WHITE);
         ItemPos = Vector2Add(ItemPos, Vector2{0,-0.1f});
     }
 
