@@ -745,7 +745,7 @@ void Prop::SetWorldPos(Vector2 Direction)
     WorldPos = Vector2Add(WorldPos, Direction);
 }
 
-bool Prop::CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Direction, float Speed, std::vector<std::vector<Prop>>* Props)
+bool Prop::CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Direction, float Speed, std::vector<std::vector<Prop>>& Props)
 {
     bool Colliding{false};
     PrevWorldPos = WorldPos;
@@ -769,7 +769,7 @@ bool Prop::CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Directio
         OutOfBounds = false;
     }
 
-    for (auto& Proptype:*Props) {
+    for (auto& Proptype:Props) {
         for (auto& Prop:Proptype) {
             if (Prop.HasCollision()) {
                 if (CheckCollisionRecs(GetCollisionRec(CharWorldPos), Prop.GetCollisionRec(CharWorldPos))) {
@@ -1049,7 +1049,7 @@ void Prop::DrawSpeech()
 
 // ---------------------------------------------------------------------
 
-Props::Props(std::vector<std::vector<Prop>>* Under, std::vector<std::vector<Prop>>* Over)
+Props::Props(std::vector<std::vector<Prop>> Under, std::vector<std::vector<Prop>> Over)
     : Under{Under}, Over{Over}
 {
 

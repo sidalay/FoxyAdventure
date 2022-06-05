@@ -62,6 +62,7 @@ namespace Game
     void GameOverDraw(const GameInfo& GameInfo);
     void Transition(GameInfo& GameInfo);
 
+    HUD InitializeHud(GameTexture& GameTextures);
     Character InitializeFox(Window& Window, GameInfo& GameInfo, GameTexture& GameTextures);
     std::array<Sprite,5> InitializePauseFox(GameTexture& GameTextures);
     std::array<const Texture2D,9> InitializeButtons(GameTexture& GameTextures);

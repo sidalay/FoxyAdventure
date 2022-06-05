@@ -159,14 +159,14 @@ void Character::UndoMovement()
 }
 
 // Check if colliding with props / npcs / enemies 
-void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Direction, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
+void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 Direction, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     DamageTime += GetFrameTime();
     
     if (Collidable) {
 
         // Loop through all Props for collision
-        for (auto& PropType:*Props) {
+        for (auto& PropType:Props) {
             for (auto& Prop:PropType) {
                 if (Prop.HasCollision()) {
                     
@@ -212,11 +212,11 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 Di
                         }
 
                         // Manage interacting with props
-                        if (Interactable == true) {
+                        if (Interactable) {
                             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_SPACE))
                                 Interacting = true;
                                     
-                            if (Interacting == true) {
+                            if (Interacting) {
                                 Prop.SetActive(true);
                                 Interactable = false;
                                 Locked = true;

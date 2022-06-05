@@ -371,12 +371,12 @@ void Enemy::NeutralAction()
 }
 
 // Check if colliding with props
-void Enemy::CheckCollision(std::vector<std::vector<Prop>>* Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
+void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     if (Race != EnemyType::CROW) { // Crows should not be blocked by anything
 
         // Prop collision handling
-        for (auto& PropType:*Props) {
+        for (auto& PropType:Props) {
             for (auto& Prop:PropType) {
                 if (Prop.HasCollision()) {
                     

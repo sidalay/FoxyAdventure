@@ -14,12 +14,10 @@ namespace Game
             // Initialization ---------------------------
             GameTexture GameTextures;
             GameInfo GameInfo{Background{GameTextures}, 0, 0.f, 0.f, 0.f};
-            std::vector<std::vector<Prop>> PropsUnder{Game::InitializePropsUnder(GameTextures)};
-            std::vector<std::vector<Prop>> PropsOver{Game::InitializePropsOver(GameTextures)};
             GameObjects GameObjects{
-                HUD{GameTextures}, 
+                Game::InitializeHud(GameTextures), 
                 Game::InitializeFox(Window, GameInfo, GameTextures),
-                {&PropsUnder, &PropsOver},
+                {Game::InitializePropsUnder(GameTextures), Game::InitializePropsOver(GameTextures)},
                 {Game::InitializeEnemies(GameInfo.Map, Window, GameTextures)},
                 {Game::InitializeCrows(GameInfo.Map, Window, GameTextures)},
                 {Game::InitializeTrees(GameTextures)},
@@ -120,14 +118,14 @@ namespace Game
             for (auto& Crow:GameObjects.Crows)
                 Crow.Tick(DeltaTime, GameObjects.Props, GameObjects.Fox.GetWorldPos(), GameObjects.Fox.GetCharPos(), GameObjects.Enemies, GameObjects.Trees);
 
-            for (auto& Proptype:*GameObjects.Props.Under)
+            for (auto& Proptype:GameObjects.Props.Under)
                 for (auto& Prop:Proptype)
                     Prop.Tick(DeltaTime, GameInfo.Map);
 
             for (auto& Tree:GameObjects.Trees)
                 Tree.Tick(DeltaTime, GameInfo.Map);
 
-            for (auto& Proptype:*GameObjects.Props.Over)
+            for (auto& Proptype:GameObjects.Props.Over)
                 for (auto& Prop:Proptype)
                     Prop.Tick(DeltaTime, GameInfo.Map);
 
@@ -161,7 +159,7 @@ namespace Game
     {
         GameInfo.Map.Draw();
 
-        for (auto& PropType:*GameObjects.Props.Under)
+        for (auto& PropType:GameObjects.Props.Under)
             for (auto& Prop:PropType) {
                 Prop.Draw(GameObjects.Fox.GetWorldPos());
                 // Draw Collision Squares
@@ -211,7 +209,7 @@ namespace Game
             Tree.Draw(GameObjects.Fox.GetWorldPos());
         }
 
-        for (auto& PropType:*GameObjects.Props.Over) 
+        for (auto& PropType:GameObjects.Props.Over) 
             for (auto& Prop:PropType) {
                 Prop.Draw(GameObjects.Fox.GetWorldPos());
                 // Draw Collision Squares
@@ -417,6 +415,11 @@ namespace Game
                 GameInfo.State = GameInfo.NextState;
             }
         }
+    }
+
+    HUD InitializeHud(GameTexture& GameTextures)
+    {
+        return HUD(GameTextures);
     }
 
     Character InitializeFox(Window& Window, GameInfo& GameInfo, GameTexture& GameTextures)

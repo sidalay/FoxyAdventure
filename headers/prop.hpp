@@ -72,7 +72,7 @@ public:
     void SetActive(bool Input) {Active = Input;}
     void SetOpened(bool Input) {Opened = Input;}
     void UndoMovement() {WorldPos = PrevWorldPos;}
-    bool CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Direction, float Speed, std::vector<std::vector<Prop>>* Props);
+    bool CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Direction, float Speed, std::vector<std::vector<Prop>>& Props);
     void CheckActivity(Vector2 ScreenPos);
 
     void DrawSpeech();
@@ -128,10 +128,10 @@ private:
 
 struct Props
 {
-    std::vector<std::vector<Prop>>* Under{};
-    std::vector<std::vector<Prop>>* Over{};
+    Props(std::vector<std::vector<Prop>> Under, std::vector<std::vector<Prop>> Over);
 
-    Props(std::vector<std::vector<Prop>>* Under, std::vector<std::vector<Prop>>* Over);
+    std::vector<std::vector<Prop>> Under{};
+    std::vector<std::vector<Prop>> Over{};
 };
 
 #endif // PROP_HPP
