@@ -1,14 +1,9 @@
 #include "headers/hud.hpp"
 
 HUD::HUD(GameTexture& GameTextures)
-    : GameTextures{&GameTextures}
+    : GameTextures{&GameTextures}, Fox{&(GameTextures.FoxPortraitFrame)}
 {
 
-}
-
-HUD::~HUD()
-{
-    UnloadTexture(Fox);
 }
 
 void HUD::Draw(float Health, Emotion State)
@@ -17,28 +12,28 @@ void HUD::Draw(float Health, Emotion State)
     switch (State)
     {
         case Emotion::ANGRY:
-            Fox = GameTextures->FoxPortraitAngry;
+            Fox = &(GameTextures->FoxPortraitAngry);
             break;
         case Emotion::HAPPY:
-            Fox = GameTextures->FoxPortraitHappy;
+            Fox = &(GameTextures->FoxPortraitHappy);
             break;
         case Emotion::NERVOUS:
-            Fox = GameTextures->FoxPortraitNervous;
+            Fox = &(GameTextures->FoxPortraitNervous);
             break;
         case Emotion::SAD:
-            Fox = GameTextures->FoxPortraitSad;
+            Fox = &(GameTextures->FoxPortraitSad);
             break;
         case Emotion::SLEEPING:
-            Fox = GameTextures->FoxPortraitSleeping;
+            Fox = &(GameTextures->FoxPortraitSleeping);
             break;
         case Emotion::HURT:
-            Fox = GameTextures->FoxPortraitHurt;
+            Fox = &(GameTextures->FoxPortraitHurt);
             break;
         case Emotion::DEAD:
-            Fox = GameTextures->FoxPortraitDead;
+            Fox = &(GameTextures->FoxPortraitDead);
             break;
         default:
-            Fox = GameTextures->FoxPortraitFrame;
+            Fox = &(GameTextures->FoxPortraitFrame);
             break;
     }
 
@@ -48,7 +43,7 @@ void HUD::Draw(float Health, Emotion State)
     float MaxHP{10.f};
 
     DrawTextureEx(GameTextures->TransparentContainer, Vector2{15, 15}, 0.f, 5.f, WHITE);  // Draw Container holding the hearts
-    DrawTextureEx(Fox, Vector2{20,20}, 0.f, Scale, WHITE);                                // Draw fox portrait
+    DrawTextureEx(*Fox, Vector2{20,20}, 0.f, Scale, WHITE);                                // Draw fox portrait
 
     for (float i = 1; i <= MaxHP; ++i) {
         // Draw hearts 1-5 on first row
