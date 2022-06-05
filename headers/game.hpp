@@ -24,7 +24,7 @@ struct GameInfo
     float Opacity{0.f};
     float TransitionInTime{0.f};
     float TransitionOutTime{0.f};
-    bool MainMenuStart{false};
+    bool MainMenuStart{true};
     bool ExitGame{false};
     bool IsYes{false};
     GameState State{GameState::TRANSITION};
