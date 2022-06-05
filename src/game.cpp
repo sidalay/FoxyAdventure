@@ -36,7 +36,7 @@ namespace Game
                 Sprite{GameTextures.FoxPush, 4, 4},
                 Sprite{GameTextures.FoxSleeping, 4, 1}, 
                 Sprite{GameTextures.FoxItemGot, 1, 4},
-                GameTextures.Interact,
+                GameTextures,
                 &Window, &MapBG
             };
 

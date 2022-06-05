@@ -10,6 +10,7 @@
 #include "headers/window.hpp"
 #include "headers/background.hpp"
 #include "headers/basecharacter.hpp"
+#include "headers/gametextures.hpp"
 
 enum class Emotion 
 {
@@ -28,7 +29,7 @@ public:
               Sprite Push, 
               Sprite Sleep, 
               Sprite ItemGrab,
-              const Texture2D& Interact, 
+              GameTexture& GameTextures, 
               Window* Screen, 
               Background* World);
     
@@ -75,8 +76,8 @@ private:
     Sprite Push{};
     Sprite Sleep{};
     Sprite ItemGrab{};
-    Sprite* CurrentSprite{&Idle};  
-    const Texture2D* Interact{};
+    Sprite* CurrentSprite{&Idle};
+    GameTexture& GameTextures;  
 
     Window* Screen{};
     Background* World{};

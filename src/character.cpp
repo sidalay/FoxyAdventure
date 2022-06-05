@@ -9,7 +9,7 @@ Character::Character(Sprite Idle,
                      Sprite Push, 
                      Sprite Sleep, 
                      Sprite ItemGrab,
-                     const Texture2D& Interact, 
+                     GameTexture& GameTextures, 
                      Window* Screen, 
                      Background* World)
     : Idle{Idle},
@@ -21,7 +21,7 @@ Character::Character(Sprite Idle,
       Push{Push},
       Sleep{Sleep},
       ItemGrab{ItemGrab},
-      Interact{&Interact},
+      GameTextures{GameTextures},
       Screen{Screen},
       World{World}
 {
@@ -448,7 +448,7 @@ void Character::CheckEmotion()
 void Character::DrawIndicator() 
 {
     if (Interactable) {
-        DrawTextureEx(*Interact, Vector2Subtract(CharacterPos, Vector2{-58, -20}), 0.f, 2.f, WHITE);
+        DrawTextureEx(GameTextures.Interact, Vector2Subtract(CharacterPos, Vector2{-58, -20}), 0.f, 2.f, WHITE);
     }
 };
 
