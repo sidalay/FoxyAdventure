@@ -27,21 +27,15 @@ Enemy::Enemy(Sprite Idle,
              GameTexture& GameTextures,
              int Health,
              float Scale) 
-    : 
-      Race{Race},
+    : Race{Race},
       Type{Type},
       WorldPos{WorldPos},
       Screen{Screen},
       World{World},
+      GameTextures{&GameTextures},
       Health{Health},
       MaxHP{Health},
-      Scale{Scale},
-      LifeBarLeft_Full{GameTextures.LifebarLeftFilled},
-      LifeBarMiddle_Full{GameTextures.LifebarMiddleFilled},
-      LifeBarRight_Full{GameTextures.LifebarRightFilled},
-      LifeBarLeft_Empty{GameTextures.LifebarLeftEmpty},
-      LifeBarMiddle_Empty{GameTextures.LifebarMiddleEmpty},
-      LifeBarRight_Empty{GameTextures.LifebarRightEmpty} 
+      Scale{Scale}
 {
     // Fill vector<Sprite*> with Sprite objects to easily loop through and call Sprite::Tick()
     Sprites.emplace_back(Idle);
@@ -93,19 +87,13 @@ Enemy::Enemy(Sprite NpcIdle,
              Background* World,
              GameTexture& GameTextures,
              float Scale)
-    : 
-      Race{Race},
+    : Race{Race},
       Type{EnemyType::NPC},
       WorldPos{WorldPos},
       Screen{Screen},
       World{World},
-      Scale{Scale},
-      LifeBarLeft_Full{GameTextures.LifebarLeftFilled},
-      LifeBarMiddle_Full{GameTextures.LifebarMiddleFilled},
-      LifeBarRight_Full{GameTextures.LifebarRightFilled},
-      LifeBarLeft_Empty{GameTextures.LifebarLeftEmpty},
-      LifeBarMiddle_Empty{GameTextures.LifebarMiddleEmpty},
-      LifeBarRight_Empty{GameTextures.LifebarRightEmpty} 
+      GameTextures{&GameTextures},
+      Scale{Scale}
 {
     // Fill vector<Sprite*> with Sprite objects to easily loop through and call Sprite::Tick()
     Sprites.emplace_back(NpcIdle);
@@ -788,7 +776,7 @@ void Enemy::EnemyAggro(Vector2 HeroScreenPos)
 void Enemy::DrawHP()
 {
     float LifeBarScale{2.f};
-    float SingleBarWidth{static_cast<float>(LifeBarLeft_Empty.width) * LifeBarScale};
+    float SingleBarWidth{static_cast<float>(GameTextures->LifebarLeftEmpty.width) * LifeBarScale};
     float MaxBarWidth{SingleBarWidth * MaxHP};
     float CenterLifeBar {(MaxBarWidth - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)*Scale ) / 2.f};
     Vector2 LifeBarPos{};                           // Where the lifebar is positioned
@@ -801,29 +789,29 @@ void Enemy::DrawHP()
         if (i <= Health) {
             // far left of lifebar
             if (i == 1) {
-                DrawTextureEx(LifeBarLeft_Full, LifeBarPos, 0.f, LifeBarScale, WHITE);
+                DrawTextureEx(GameTextures->LifebarLeftFilled, LifeBarPos, 0.f, LifeBarScale, WHITE);
             }
             // far right of lifebar
             else if (i == MaxHP) {
-                DrawTextureEx(LifeBarRight_Full, LifeBarPos, 0.f, LifeBarScale, WHITE);
+                DrawTextureEx(GameTextures->LifebarRightFilled, LifeBarPos, 0.f, LifeBarScale, WHITE);
             }
             // middle of lifebar
             else {
-                DrawTextureEx(LifeBarMiddle_Full, LifeBarPos, 0.f, LifeBarScale, WHITE);
+                DrawTextureEx(GameTextures->LifebarMiddleFilled, LifeBarPos, 0.f, LifeBarScale, WHITE);
             }
         }
         else {
             // far left of lifebar
             if (i == 1) {
-                DrawTextureEx(LifeBarLeft_Empty, LifeBarPos, 0.f, LifeBarScale, WHITE);
+                DrawTextureEx(GameTextures->LifebarLeftEmpty, LifeBarPos, 0.f, LifeBarScale, WHITE);
             }
             // far right of lifebar
             else if (i == MaxHP) {
-                DrawTextureEx(LifeBarRight_Empty, LifeBarPos, 0.f, 2.f, WHITE);
+                DrawTextureEx(GameTextures->LifebarRightEmpty, LifeBarPos, 0.f, 2.f, WHITE);
             }
             // middle of lifebar
             else {
-                DrawTextureEx(LifeBarMiddle_Empty, LifeBarPos, 0.f, 2.f, WHITE);
+                DrawTextureEx(GameTextures->LifebarMiddleEmpty, LifeBarPos, 0.f, 2.f, WHITE);
             }
         }
 

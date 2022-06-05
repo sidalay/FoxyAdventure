@@ -108,6 +108,7 @@ private:
     Rectangle Destination{};
     Window* Screen{};
     Background* World{};
+    GameTexture* GameTextures{};
     
     static int MonsterDeaths;
     static int MonsterCount;
@@ -153,13 +154,6 @@ private:
     bool MiscAction{false};
     
     Direction Face{Direction::DOWN};
-
-    Texture2D LifeBarLeft_Full{};
-    Texture2D LifeBarMiddle_Full{};
-    Texture2D LifeBarRight_Full{};
-    Texture2D LifeBarLeft_Empty{};
-    Texture2D LifeBarMiddle_Empty{};
-    Texture2D LifeBarRight_Empty{};
 
     static std::unordered_map<EnemyType, int> MonsterCounter;
 };
