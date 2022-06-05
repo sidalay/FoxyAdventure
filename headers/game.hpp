@@ -24,10 +24,11 @@ struct GameInfo
     float Opacity{0.f};
     float TransitionInTime{0.f};
     float TransitionOutTime{0.f};
+    bool MainMenuStart{false};
     bool ExitGame{false};
     bool IsYes{false};
-    GameState State{GameState::RUNNING};
-    GameState NextState{};
+    GameState State{GameState::TRANSITION};
+    GameState NextState{GameState::MAINMENU};
 };
 
 namespace Game 

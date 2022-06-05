@@ -111,10 +111,12 @@ namespace Game
             Game::Update(Map, GameInfo, Character, Props, Enemies, Crows, Trees);
             Game::Draw(Map, Character, Props, Hud, Enemies, Crows, Trees);
         }
-        else if (GameInfo.State == GameState::TRANSITION) {
+        else if (GameInfo.State == GameState::MAINMENU) {
 
-            Transition(GameInfo);
-            
+            ClearBackground(BLACK);
+
+            Game::MainMenuUpdate(GameInfo);
+            Game::MainMenuDraw(GameInfo);
         }
         else if (GameInfo.State == GameState::PAUSED) {
 
@@ -129,6 +131,10 @@ namespace Game
 
             Game::ExitUpdate(GameInfo);
             Game::ExitDraw(GameInfo);
+        }
+        else if (GameInfo.State == GameState::TRANSITION) {
+
+            Transition(GameInfo);
         }
 
         EndDrawing();
@@ -349,7 +355,8 @@ namespace Game
 
             if (GameInfo.IsYes) {
                 if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
-                    GameInfo.ExitGame = true;
+                    GameInfo.NextState = GameState::MAINMENU;
+                    GameInfo.State = GameState::TRANSITION;
                 }
             }
             else {
@@ -384,12 +391,39 @@ namespace Game
 
     void MainMenuUpdate(GameInfo& GameInfo)
     {
+        if (GameInfo.State != GameState::TRANSITION) {
+            if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_S) || IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_DOWN)) {
+                GameInfo.MainMenuStart = !GameInfo.MainMenuStart;
+            }
 
+            if (!GameInfo.MainMenuStart) {
+                if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
+                    GameInfo.ExitGame = true;
+                }
+            }
+            else {
+                if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
+                    GameInfo.NextState = GameState::RUNNING;
+                    GameInfo.State = GameState::TRANSITION;
+                }
+            }
+        }
     }
 
     void MainMenuDraw(const GameInfo& GameInfo)
     {
-        
+        if (GameInfo.State != GameState::TRANSITION) {
+            DrawText("CRYPTEX ADVENTURE", 385, 240, 40, WHITE);
+            DrawText("START", 565, 380, 30, WHITE);
+            DrawText("QUIT", 582, 430, 30, WHITE);
+            
+            if (GameInfo.MainMenuStart) {
+                DrawRectangle(557, 370, 123, 47, (Color){ 0, 238, 135, 100 });
+            }
+            else {
+                DrawRectangle(557, 420, 123, 47, (Color){ 0, 238, 135, 100 });
+            }
+        }
     }
 
     void Transition(GameInfo& GameInfo)
