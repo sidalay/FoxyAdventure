@@ -155,7 +155,6 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
     }
 }
 
-// Draw character animation
 void Enemy::Draw(Vector2 HeroWorldPos)
 {
     if (WithinScreen(HeroWorldPos))
@@ -191,12 +190,12 @@ void Enemy::Draw(Vector2 HeroWorldPos)
     }
 }
 
-/* 
-    Loop through Sprites vector and call Sprite::Tick() to maintain sprite animations current 'spot'.
-    Halfway through walk animation -> Run will start from the halfway point. Etc.
-*/
 void Enemy::SpriteTick(float DeltaTime)
 {
+    /* 
+        Loop through Sprites vector and call Sprite::Tick() to maintain sprite animations current 'spot'.
+        Halfway through walk animation -> Run will start from the halfway point. Etc.
+    */
     for (auto& Sprite:Sprites)
     {   
         if (Type != EnemyType::NPC) {
@@ -217,7 +216,6 @@ void Enemy::SpriteTick(float DeltaTime)
     }
 }
 
-// Check which orientation the character is facing
 void Enemy::CheckDirection()
 {   
     // NPC only has left and right orientation sprites
@@ -288,7 +286,6 @@ void Enemy::CheckDirection()
     }
 }
 
-// Check for movement input
 void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     PrevWorldPos = WorldPos;
@@ -312,13 +309,11 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
     }
 }
 
-// Undo movement if walking out-of-bounds or colliding
 void Enemy::UndoMovement()
 {
     WorldPos = PrevWorldPos;
 }
 
-// UndoMovement if enemy is moving out of bounds
 void Enemy::OutOfBounds()
 {
     if (WorldPos.x < 0.f ||
@@ -334,9 +329,9 @@ void Enemy::OutOfBounds()
     }
 }
 
-// Check if Enemy is moving and change sprites if needed
 void Enemy::NeutralAction()
 {
+    // Check if Enemy is moving and change sprites if needed
     if (Chasing || Walking) {
         if (Type == EnemyType::NPC) {
             CurrentSprite = &Sprites.at(2); // Walking sprite for NPC
@@ -370,7 +365,6 @@ void Enemy::NeutralAction()
     }
 }
 
-// Check if colliding with props
 void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     if (Race != EnemyType::CROW) { // Crows should not be blocked by anything
@@ -456,7 +450,6 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWo
     }
 }
 
-// Manage attack sprites
 void Enemy::CheckAttack()
 {
     if (Attacking) {
@@ -471,7 +464,6 @@ void Enemy::CheckAttack()
     }
 }
 
-// Update projectile for ranged attacks
 Vector2 Enemy::UpdateProjectile()
 {   
     if (Trajectory >= 190.f) {
@@ -499,7 +491,6 @@ Vector2 Enemy::UpdateProjectile()
     return ProjectilePath;
 }
 
-// Handle enemy taking damage
 void Enemy::TakeDamage()
 {
     DamageTime += GetFrameTime();
@@ -556,7 +547,6 @@ void Enemy::TakeDamage()
     }
 }
 
-// Handle death animation
 void Enemy::CheckAlive(float DeltaTime) 
 {
     // Amount of time needed for death animation to complete beginning to end
@@ -590,7 +580,6 @@ void Enemy::CheckAlive(float DeltaTime)
     }
 }
 
-// Handle enemy movement AI
 void Enemy::EnemyAI()
 {
     // Randomize which direction enemy will move first
@@ -712,7 +701,6 @@ void Enemy::EnemyAI()
     }
 }
 
-// Handle enemy aggro range and chasing
 void Enemy::EnemyAggro(Vector2 HeroScreenPos)
 {
     // Calculate the distance from Enemy to Player
@@ -733,7 +721,7 @@ void Enemy::EnemyAggro(Vector2 HeroScreenPos)
         float Aggro{Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, RadiusAroundEnemy), EnemyPos))};
 
 
-        // Only move enemy towards Player if within a certain range
+        // Chasing: Only move enemy towards Player if within a certain range
         if (Aggro > MaxRange) {
             ToTarget = {0.f,0.f};
             Chasing = false;
@@ -772,7 +760,6 @@ void Enemy::EnemyAggro(Vector2 HeroScreenPos)
     }
 }
 
-// Draw enemy lifebar
 void Enemy::DrawHP()
 {
     float LifeBarScale{2.f};
@@ -820,7 +807,6 @@ void Enemy::DrawHP()
     }
 }
 
-// Check to see if Boss needs to be summoned based on type
 void Enemy::CheckBossSummon(Vector2 HeroWorldPos)
 {
     if (!WithinScreen(HeroWorldPos)) {
@@ -832,7 +818,6 @@ void Enemy::CheckBossSummon(Vector2 HeroWorldPos)
     }
 }
 
-// Return enemy physical collision dimensions
 Rectangle Enemy::GetCollisionRec()
 {
     return Rectangle 
@@ -844,7 +829,6 @@ Rectangle Enemy::GetCollisionRec()
     };
 }
 
-// Return enemy attack collision dimensions
 Rectangle Enemy::GetAttackRec()
 {
     if (Ranged) {
