@@ -106,7 +106,7 @@ private:
 
     // Treasure member variables
     bool ReceiveItem{false};
-    const Texture2D* Item{};
+    const Texture2D Item{};
     std::string ItemName{};
     float ItemScale{};
     Vector2 ItemPos{};
