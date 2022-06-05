@@ -8,8 +8,6 @@ namespace Game
     {
         Window Window {1280, 720};                                                                        
         Game::Initialize(Window, "Cryptex Adventure");      // Set the program's configurations
-        GameState State{GameState::RUNNING};
-        GameState NextState{};
 
         {
             // Initialization ---------------------------
@@ -68,7 +66,7 @@ namespace Game
             // Start Game Loop
             while (!GameInfo.ExitGame) 
             {
-                Game::Tick(Window, MapBG, State, NextState, Fox, Props, Hud, Enemies, Crows, PauseFox, Buttons, Trees, GameInfo);
+                Game::Tick(Window, MapBG, GameInfo, Fox, Props, Hud, Enemies, Crows, PauseFox, Buttons, Trees);
             }
         }
 
@@ -82,42 +80,6 @@ namespace Game
         SetTargetFPS(144);
         SetExitKey(0);
         HideCursor();
-    }
-
-    void Tick(Window& Window, Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, std::vector<Prop>& Trees, GameInfo& GameInfo)
-    {
-        Game::CheckScreenSizing(Window);
-
-        BeginDrawing();
-
-        if (State == GameState::RUNNING) {
-
-            ClearBackground(BLACK);
-
-            Game::Update(Map, State, NextState, Character, Props, Enemies, Crows, Trees, GameInfo);
-            Game::Draw(Map, Character, Props, Hud, Enemies, Crows, Trees);
-        }
-        else if (State == GameState::TRANSITION) {
-
-            Transition(State, NextState, GameInfo);
-            
-        }
-        else if (State == GameState::PAUSED) {
-
-            ClearBackground(BLACK);
-
-            Game::PauseUpdate(State, NextState, PauseFox, Buttons, GameInfo);
-            Game::PauseDraw(PauseFox, Buttons, State, GameInfo);
-        }
-        else if (State == GameState::EXIT) {
-
-            ClearBackground(BLACK);
-
-            Game::ExitUpdate(State, NextState, GameInfo);
-            Game::ExitDraw(State, GameInfo);
-        }
-
-        EndDrawing();
     }
 
     void CheckScreenSizing(Window& Window)
@@ -136,9 +98,45 @@ namespace Game
         }
     }
 
-    void Update(Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::vector<Prop>& Trees, GameInfo& GameInfo)
+    void Tick(Window& Window, Background& Map, GameInfo& GameInfo, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, std::vector<Prop>& Trees)
     {
-        if (State != GameState::TRANSITION) {
+        Game::CheckScreenSizing(Window);
+
+        BeginDrawing();
+
+        if (GameInfo.State == GameState::RUNNING) {
+
+            ClearBackground(BLACK);
+
+            Game::Update(Map, GameInfo, Character, Props, Enemies, Crows, Trees);
+            Game::Draw(Map, Character, Props, Hud, Enemies, Crows, Trees);
+        }
+        else if (GameInfo.State == GameState::TRANSITION) {
+
+            Transition(GameInfo);
+            
+        }
+        else if (GameInfo.State == GameState::PAUSED) {
+
+            ClearBackground(BLACK);
+
+            Game::PauseUpdate(GameInfo, PauseFox, Buttons);
+            Game::PauseDraw(PauseFox, Buttons, GameInfo);
+        }
+        else if (GameInfo.State == GameState::EXIT) {
+
+            ClearBackground(BLACK);
+
+            Game::ExitUpdate(GameInfo);
+            Game::ExitDraw(GameInfo);
+        }
+
+        EndDrawing();
+    }
+
+    void Update(Background& Map, GameInfo& GameInfo, Character& Character, Props& Props, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::vector<Prop>& Trees)
+    {
+        if (GameInfo.State != GameState::TRANSITION) {
             // Create DeltaTime
             float DeltaTime{GetFrameTime()};
 
@@ -180,12 +178,12 @@ namespace Game
         }
 
         if (IsKeyPressed(KEY_P)) {
-            NextState = GameState::PAUSED;
-            State = GameState::TRANSITION;
+            GameInfo.NextState = GameState::PAUSED;
+            GameInfo.State = GameState::TRANSITION;
         }
         else if (IsKeyPressed(KEY_F5) || IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
-            NextState = GameState::EXIT;
-            State = GameState::TRANSITION;
+            GameInfo.NextState = GameState::EXIT;
+            GameInfo.State = GameState::TRANSITION;
         }
     }
 
@@ -283,9 +281,9 @@ namespace Game
 
     }
 
-    void PauseUpdate(GameState& State, GameState& NextState, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameInfo& GameInfo)
+    void PauseUpdate(GameInfo& GameInfo, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons)
     {
-        if (State != GameState::TRANSITION) {
+        if (GameInfo.State != GameState::TRANSITION) {
             if (IsKeyDown(KEY_L)) {
                 GameInfo.PauseFoxIndex = 3;
             }
@@ -310,22 +308,22 @@ namespace Game
         }
 
         if (IsKeyPressed(KEY_P)) {
-            NextState = GameState::RUNNING;
-            State = GameState::TRANSITION;
+            GameInfo.NextState = GameState::RUNNING;
+            GameInfo.State = GameState::TRANSITION;
             
             // Add audio functionality here later
         }
         else if (IsKeyPressed(KEY_F5) || IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
-            NextState = GameState::EXIT;
-            State = GameState::TRANSITION;
+            GameInfo.NextState = GameState::EXIT;
+            GameInfo.State = GameState::TRANSITION;
         }
     }
 
-    void PauseDraw(std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameState& State, const GameInfo& GameInfo)
+    void PauseDraw(std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, const GameInfo& GameInfo)
     {
         DrawTextureEx(LoadTexture("sprites/maps/PauseBackground.png"), Vector2{0.f,0.f}, 0.0f, 4.f, WHITE);
 
-        if (State != GameState::TRANSITION) {
+        if (GameInfo.State != GameState::TRANSITION) {
             // PauseFoxIndex controls which Fox sprite is drawn
             DrawTexturePro(PauseFox.at(GameInfo.PauseFoxIndex).Texture, PauseFox.at(GameInfo.PauseFoxIndex).GetSourceRec(), PauseFox.at(GameInfo.PauseFoxIndex).GetPosRec(Vector2{674.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
 
@@ -342,9 +340,9 @@ namespace Game
         }
     }
 
-    void ExitUpdate(GameState& State, GameState& NextState, GameInfo& GameInfo)
+    void ExitUpdate(GameInfo& GameInfo)
     {
-        if (State != GameState::TRANSITION) {
+        if (GameInfo.State != GameState::TRANSITION) {
             if (IsKeyPressed(KEY_A) || IsKeyPressed(KEY_D) || IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_RIGHT)) {
                 GameInfo.IsYes = !GameInfo.IsYes;
             }
@@ -356,21 +354,21 @@ namespace Game
             }
             else {
                 if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
-                    NextState = GameState::RUNNING;
-                    State = GameState::TRANSITION;
+                    GameInfo.NextState = GameState::RUNNING;
+                    GameInfo.State = GameState::TRANSITION;
                 }
             }
         }
 
         if (IsKeyPressed(KEY_F5) || IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
-            NextState = GameState::RUNNING;
-            State = GameState::TRANSITION;
+            GameInfo.NextState = GameState::RUNNING;
+            GameInfo.State = GameState::TRANSITION;
         }
     }
 
-    void ExitDraw(GameState& State, const GameInfo& GameInfo)
+    void ExitDraw(const GameInfo& GameInfo)
     {
-        if (State != GameState::TRANSITION) {
+        if (GameInfo.State != GameState::TRANSITION) {
             DrawText("Quit the game?", 500, 320, 40, WHITE);
             DrawText("Yes", 570, 380, 20, WHITE);
             DrawText("No", 690, 380, 20, WHITE);
@@ -384,11 +382,21 @@ namespace Game
         }
     }
 
-    void Transition(GameState& State, GameState& NextState, GameInfo& GameInfo)
+    void MainMenuUpdate(GameInfo& GameInfo)
+    {
+
+    }
+
+    void MainMenuDraw(const GameInfo& GameInfo)
+    {
+        
+    }
+
+    void Transition(GameInfo& GameInfo)
     {
         const float MaxTransitionTime{0.3f};
         
-        if (State != GameState::TRANSITION) {
+        if (GameInfo.State != GameState::TRANSITION) {
             if (GameInfo.TransitionInTime < MaxTransitionTime) {
                     GameInfo.TransitionInTime = GetFrameTime();
                     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, GameInfo.Opacity));
@@ -408,7 +416,7 @@ namespace Game
             else {
                 GameInfo.TransitionOutTime = 0.f;
                 GameInfo.Opacity = 0.f;
-                State = NextState;
+                GameInfo.State = GameInfo.NextState;
             }
         }
     }
