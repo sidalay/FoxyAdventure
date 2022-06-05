@@ -92,8 +92,6 @@ namespace Game
     // Set the Game's window configurations
     void Initialize(Window& Window, int FPS, std::string Title)
     {
-        // assert(!GetWindowHandle());
-        // SetConfigFlags(FLAG_WINDOW_RESIZABLE);
         SetTraceLogLevel(LOG_WARNING);
         InitWindow(Window.x, Window.y, Title.c_str());
         SetTargetFPS(FPS);
@@ -113,8 +111,6 @@ namespace Game
 
             Game::Update(Map, State, NextState, Character, Props, Enemies, Crows, Trees, GameInfo);
             Game::Draw(Map, Character, Props, Hud, Enemies, Crows, Trees);
-
-            Transition(State, NextState, GameInfo);
         }
         else if (State == GameState::TRANSITION) {
 
@@ -127,8 +123,6 @@ namespace Game
 
             Game::PauseUpdate(State, NextState, PauseFox, Buttons, GameInfo);
             Game::PauseDraw(PauseFox, Buttons, State, GameInfo);
-
-            Transition(State, NextState, GameInfo);
         }
         else if (State == GameState::EXIT) {
 
@@ -136,8 +130,6 @@ namespace Game
 
             Game::ExitUpdate(State, NextState, GameInfo);
             Game::ExitDraw(State, GameInfo);
-
-            Transition(State, NextState, GameInfo);
         }
 
         EndDrawing();
@@ -228,7 +220,7 @@ namespace Game
             NextState = GameState::PAUSED;
             State = GameState::TRANSITION;
         }
-        else if (IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
+        else if (IsKeyPressed(KEY_F5) || IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
             NextState = GameState::EXIT;
             State = GameState::TRANSITION;
         }
@@ -362,7 +354,7 @@ namespace Game
             
             // Add audio functionality here later
         }
-        else if (IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
+        else if (IsKeyPressed(KEY_F5) || IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
             NextState = GameState::EXIT;
             State = GameState::TRANSITION;
         }
@@ -410,7 +402,7 @@ namespace Game
             }
         }
 
-        if (IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
+        if (IsKeyPressed(KEY_F5) || IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
             NextState = GameState::RUNNING;
             State = GameState::TRANSITION;
         }
@@ -437,14 +429,14 @@ namespace Game
         const float MaxTransitionTime{0.3f};
         
         if (State != GameState::TRANSITION) {
-            if (GameInfo.TransitionOutTime < MaxTransitionTime) {
+            if (GameInfo.TransitionInTime < MaxTransitionTime) {
                     GameInfo.TransitionInTime = GetFrameTime();
                     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, GameInfo.Opacity));
                     GameInfo.Opacity -= 0.01f;
             }
             else {
                 GameInfo.TransitionInTime = 0.f;
-                GameInfo.Opacity = 0.f;
+                GameInfo.Opacity = 1.f;
             }
         }
         else {
@@ -455,7 +447,7 @@ namespace Game
             }
             else {
                 GameInfo.TransitionOutTime = 0.f;
-                GameInfo.Opacity = 1.f;
+                GameInfo.Opacity = 0.f;
                 State = NextState;
             }
         }
