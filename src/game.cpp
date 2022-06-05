@@ -6,21 +6,26 @@ namespace Game
 {
     void Run() 
     {
-        // Initialization ---------------------------
-        Window Window {1280, 720};                               // Window Dimensions
-        int FPS {144};                                           // Frames Per Second
-        Game::Initialize(Window, FPS, "Cryptex Adventure");      // Create Window
+        Window Window {1280, 720};                                                                        
+        Game::Initialize(Window, "Cryptex Adventure");      // Set the program's configurations
         GameState State{GameState::RUNNING};
         GameState NextState{};
 
         {
-            // Initialize GameTextures struct
+            // Initialization ---------------------------
             GameTexture GameTextures;
-
-            // Initialize Background
             Background MapBG{GameTextures};
+            HUD Hud{GameTextures};
+            GameInfo GameInfo{0, 0.f, 0.f, 0.f};
 
-            // Initialize Character
+            std::vector<Enemy> Enemies{Game::InitializeEnemies(MapBG, Window, GameTextures)};
+            std::vector<Enemy> Crows{Game::InitializeCrows(MapBG, Window, GameTextures)};
+
+            std::vector<std::vector<Prop>> UnderProps{Game::InitializePropsUnder(GameTextures)};
+            std::vector<std::vector<Prop>> OverProps{Game::InitializePropsOver(GameTextures)};
+            Props Props{&UnderProps, &OverProps};
+            std::vector<Prop> Trees{Game::InitializeTrees(GameTextures)};
+
             Character Fox
             {
                 Sprite{GameTextures.FoxIdle, 4, 4}, 
@@ -36,24 +41,7 @@ namespace Game
                 &Window, &MapBG
             };
 
-            // Initialize Enemies
-            std::vector<Enemy> Enemies{Game::InitializeEnemies(MapBG, Window, GameTextures)};
-
-            // Initialize Crows
-            std::vector<Enemy> Crows{Game::InitializeCrows(MapBG, Window, GameTextures)};
-
-            // Initialize HUD
-            HUD Hud{GameTextures};
-
-            // Initialize Props
-            std::vector<std::vector<Prop>> UnderProps{Game::InitializePropsUnder(GameTextures)};
-            std::vector<std::vector<Prop>> OverProps{Game::InitializePropsOver(GameTextures)};
-            Props Props{&UnderProps, &OverProps};
-
-            // Initialize Trees
-            std::vector<Prop> Trees{Game::InitializeTrees(GameTextures)};
-
-            // Initialize fox Sprites for Pause Menu
+            // Pause Menu Fox
             std::array<Sprite, 5> PauseFox
             {
                 Sprite{GameTextures.FoxIdle, 4, 4},
@@ -63,7 +51,7 @@ namespace Game
                 Sprite{GameTextures.FoxMelee, 4, 1}
             };
 
-            // Initialize button textures for Pause Menu
+            // Pause Menu Buttons
             std::array<Texture2D, 9> Buttons 
             {
                 GameTextures.ButtonW,
@@ -77,8 +65,6 @@ namespace Game
                 GameTextures.Lmouse
             };
 
-            GameInfo GameInfo{0, 0.f, 0.f, 0.f};
-
             // Start Game Loop
             while (!GameInfo.ExitGame) 
             {
@@ -89,12 +75,11 @@ namespace Game
         CloseWindow();
     }
 
-    // Set the Game's window configurations
-    void Initialize(Window& Window, int FPS, std::string Title)
+    void Initialize(Window& Window, std::string Title)
     {
         SetTraceLogLevel(LOG_WARNING);
         InitWindow(Window.x, Window.y, Title.c_str());
-        SetTargetFPS(FPS);
+        SetTargetFPS(144);
         SetExitKey(0);
         HideCursor();
     }
@@ -135,7 +120,6 @@ namespace Game
         EndDrawing();
     }
 
-    // Check if Window has been resized or fullscreened
     void CheckScreenSizing(Window& Window)
     {
         // set window.x / window.y to resized dimensions
@@ -146,33 +130,12 @@ namespace Game
         }
 
         // check for alt + enter [FULLSCREEN]
-        if (IsKeyPressed(KEY_ENTER) && (IsKeyDown(KEY_RIGHT_ALT) || IsKeyDown(KEY_LEFT_ALT)))
+        if (IsKeyPressed(KEY_ENTER) && ((IsKeyDown(KEY_RIGHT_ALT) || IsKeyDown(KEY_LEFT_ALT))))
         {
-            SetFullScreen(Window);
-        }
-    }
-
-    // Full screen with current resolution settings
-    void SetFullScreen(Window& Window)
-    {
-        // see what display we are on right now
-        // int display = GetCurrentMonitor();
-
-        if (IsWindowFullscreen()) 
-        {
-            // if we are full screen, then go back to the windowed size
-            ToggleFullscreen();                  
-            // SetWindowSize(Window.x, Window.y); 
-        }
-        else
-        {                                        
-            // if we are not full screen, set the window size to match the monitor we are on
-            // SetWindowSize(GetMonitorWidth(display), GetMonitorHeight(display));
             ToggleFullscreen();
         }
     }
 
-    // Manage Ticks for all objects
     void Update(Background& Map, GameState& State, GameState& NextState, Character& Character, Props& Props, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::vector<Prop>& Trees, GameInfo& GameInfo)
     {
         if (State != GameState::TRANSITION) {
@@ -226,7 +189,6 @@ namespace Game
         }
     }
 
-    // Call Draw functions for all objects
     void Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::vector<Prop>& Trees)
     {
         Map.Draw();
@@ -321,7 +283,6 @@ namespace Game
 
     }
 
-    // Manage Tick functions during pause menu
     void PauseUpdate(GameState& State, GameState& NextState, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameInfo& GameInfo)
     {
         if (State != GameState::TRANSITION) {
@@ -360,7 +321,6 @@ namespace Game
         }
     }
 
-    // Draw Pause sprite & button presses
     void PauseDraw(std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, GameState& State, const GameInfo& GameInfo)
     {
         DrawTextureEx(LoadTexture("sprites/maps/PauseBackground.png"), Vector2{0.f,0.f}, 0.0f, 4.f, WHITE);
@@ -453,7 +413,6 @@ namespace Game
         }
     }
 
-    // Initialize props drawn under character
     std::vector<std::vector<Prop>> InitializePropsUnder(GameTexture& GameTextures)
     {
         std::vector<std::vector<Prop>> Props{};
@@ -1684,7 +1643,6 @@ namespace Game
         return Props;
     }
 
-    // Initialize props drawn over character
     std::vector<std::vector<Prop>> InitializePropsOver(GameTexture& GameTextures)
     {
         std::vector<std::vector<Prop>> Props{};
@@ -3956,7 +3914,6 @@ namespace Game
         };
     }
 
-    // Initialize enemies
     std::vector<Enemy> InitializeEnemies(Background& MapBG, Window& Window, GameTexture& GameTextures)
     {
         std::vector<Enemy> Enemies{};
@@ -4361,7 +4318,6 @@ namespace Game
         return Enemies;
     }
 
-    // Initialize crows
     std::vector<Enemy> InitializeCrows(Background& MapBG, Window& Window, GameTexture& GameTextures)
     {
         std::vector<Enemy> Crows{};
