@@ -14,7 +14,7 @@ public:
     
 private:
     GameTexture* GameTextures{};
-    const Texture2D* Fox{};
+    Texture2D Fox{};
 
     float Scale{2.f};
 };
