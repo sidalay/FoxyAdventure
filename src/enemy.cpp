@@ -335,8 +335,8 @@ void Enemy::OutOfBounds()
 {
     if (WorldPos.x < 0.f ||
         WorldPos.y < 0.f ||
-        WorldPos.x > World->GetMap().width * World->GetScale() - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)*Scale ||
-        WorldPos.y > World->GetMap().height * World->GetScale() - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)*Scale) 
+        WorldPos.x > World->GetMapSize().x * World->GetScale() - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)*Scale ||
+        WorldPos.y > World->GetMapSize().y * World->GetScale() - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)*Scale) 
     {
         UndoMovement();
         // OOB = true;

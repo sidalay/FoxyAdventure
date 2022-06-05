@@ -1,18 +1,14 @@
 #include "headers/hud.hpp"
 
 HUD::HUD(GameTexture& GameTextures)
-    : HeartFull{GameTextures.HeartFull}, HeartHalf{GameTextures.HeartHalf}, HeartEmpty{GameTextures.HeartEmpty},
-      RecContainer{GameTextures.TransparentContainer}, SquareContainer{GameTextures.TransparentSquare},
-      FoxFrame{GameTextures.FoxPortraitFrame}, 
-      FoxAngry{GameTextures.FoxPortraitAngry}, 
-      FoxHappy{GameTextures.FoxPortraitHappy},
-      FoxNervous{GameTextures.FoxPortraitNervous}, 
-      FoxSad{GameTextures.FoxPortraitSad}, 
-      FoxSleeping{GameTextures.FoxPortraitSleeping},
-      FoxHurt{GameTextures.FoxPortraitHurt}, 
-      FoxDead{GameTextures.FoxPortraitDead}
+    : GameTextures{&GameTextures}
 {
 
+}
+
+HUD::~HUD()
+{
+    UnloadTexture(Fox);
 }
 
 void HUD::Draw(float Health, Emotion State)
@@ -21,28 +17,28 @@ void HUD::Draw(float Health, Emotion State)
     switch (State)
     {
         case Emotion::ANGRY:
-            Fox = FoxAngry;
+            Fox = GameTextures->FoxPortraitAngry;
             break;
         case Emotion::HAPPY:
-            Fox = FoxHappy;
+            Fox = GameTextures->FoxPortraitHappy;
             break;
         case Emotion::NERVOUS:
-            Fox = FoxNervous;
+            Fox = GameTextures->FoxPortraitNervous;
             break;
         case Emotion::SAD:
-            Fox = FoxSad;
+            Fox = GameTextures->FoxPortraitSad;
             break;
         case Emotion::SLEEPING:
-            Fox = FoxSleeping;
+            Fox = GameTextures->FoxPortraitSleeping;
             break;
         case Emotion::HURT:
-            Fox = FoxHurt;
+            Fox = GameTextures->FoxPortraitHurt;
             break;
         case Emotion::DEAD:
-            Fox = FoxDead;
+            Fox = GameTextures->FoxPortraitDead;
             break;
         default:
-            Fox = FoxFrame;
+            Fox = GameTextures->FoxPortraitFrame;
             break;
     }
 
@@ -51,36 +47,36 @@ void HUD::Draw(float Health, Emotion State)
     Vector2 HeartSpacing{30,0}; 
     float MaxHP{10.f};
 
-    DrawTextureEx(RecContainer, Vector2{15, 15}, 0.f, 5.f, WHITE);  // Draw Container holding the hearts
-    DrawTextureEx(Fox, Vector2{20,20}, 0.f, Scale, WHITE);          // Draw fox portrait
+    DrawTextureEx(GameTextures->TransparentContainer, Vector2{15, 15}, 0.f, 5.f, WHITE);  // Draw Container holding the hearts
+    DrawTextureEx(Fox, Vector2{20,20}, 0.f, Scale, WHITE);                                // Draw fox portrait
 
     for (float i = 1; i <= MaxHP; ++i) {
         // Draw hearts 1-5 on first row
         if (i <= MaxHP/2.f) {
             if (i < Health) {
                 if ((i + .5f) == Health) {
-                    DrawTextureEx(HeartHalf, HeartRowOne, 0.f, 3.f, WHITE);
+                    DrawTextureEx(GameTextures->HeartHalf, HeartRowOne, 0.f, 3.f, WHITE);
                 }
                 else {
-                    DrawTextureEx(HeartFull, HeartRowOne, 0.f, 3.f, WHITE);
+                    DrawTextureEx(GameTextures->HeartFull, HeartRowOne, 0.f, 3.f, WHITE);
                 }
             }
             else {
-                DrawTextureEx(HeartEmpty, HeartRowOne, 0.f, 3.f, WHITE);
+                DrawTextureEx(GameTextures->HeartEmpty, HeartRowOne, 0.f, 3.f, WHITE);
             }
         }
         // Draw hearts 6-10 on second row
         else {
             if (i < Health) {
                 if ((i + .5f) == Health) {
-                    DrawTextureEx(HeartHalf, HeartRowTwo, 0.f, 3.f, WHITE);
+                    DrawTextureEx(GameTextures->HeartHalf, HeartRowTwo, 0.f, 3.f, WHITE);
                 }
                 else {
-                    DrawTextureEx(HeartFull, HeartRowTwo, 0.f, 3.f, WHITE);
+                    DrawTextureEx(GameTextures->HeartFull, HeartRowTwo, 0.f, 3.f, WHITE);
                 }
             }
             else {
-                DrawTextureEx(HeartEmpty, HeartRowTwo, 0.f, 3.f, WHITE);
+                DrawTextureEx(GameTextures->HeartEmpty, HeartRowTwo, 0.f, 3.f, WHITE);
             }
         }
 
@@ -90,7 +86,7 @@ void HUD::Draw(float Health, Emotion State)
     }
 
     // Rectangle for debugging info (WorldPos, FPS, etc.)
-    DrawTextureEx(RecContainer, Vector2{15, 135}, 0.f, 4.f, WHITE);
-    DrawTextureEx(RecContainer, Vector2{15, 215}, 0.f, 2.f, WHITE);
+    DrawTextureEx(GameTextures->TransparentContainer, Vector2{15, 135}, 0.f, 4.f, WHITE);
+    DrawTextureEx(GameTextures->TransparentContainer, Vector2{15, 215}, 0.f, 2.f, WHITE);
     
 }

@@ -760,8 +760,8 @@ bool Prop::CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Directio
 
     if (WorldPos.x < 0.f ||
         WorldPos.y < 0.f ||
-        WorldPos.x + (Object.Texture.width * Scale) > Map.GetMap().width * Map.GetScale() ||
-        WorldPos.y + (Object.Texture.height * Scale) > Map.GetMap().height * Map.GetScale())
+        WorldPos.x + (Object.Texture.width * Scale) > Map.GetMapSize().x * Map.GetScale() ||
+        WorldPos.y + (Object.Texture.height * Scale) > Map.GetMapSize().y * Map.GetScale())
     {
         OutOfBounds = true;
         UndoMovement();

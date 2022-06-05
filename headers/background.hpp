@@ -19,18 +19,16 @@ public:
     void Tick(Vector2 WorldPos);
     void Draw();
     void DrawMiniMap(Vector2 CharWorldPos);
-    Texture2D GetMap() {return Map;}
-    bool IsMiniMapOn() {return IsMiniMap;}
+    Vector2 GetMapSize();
+    bool IsMiniMapOn() {return MiniMapOpen;}
     Vector2 GetMapPos() {return MapPos;}
     float GetScale() {return Scale;}
     
 private:
-    Texture2D Map{};
-    Texture2D MiniMap{};
-    Texture2D SquareContainer{};
+    GameTexture* GameTextures{};
     Vector2 MapPos{0.f, 0.f};
     float Scale{4.f};
-    bool IsMiniMap{false};
+    bool MiniMapOpen{false};
 };
 
 #endif // BACKGROUND_HPP

@@ -8,7 +8,7 @@ class HUD
 {
 public:
     HUD(GameTexture& GameTextures);
-    ~HUD() = default;
+    ~HUD();
     HUD(const HUD&) = delete;
     HUD(HUD&&) = default;
     HUD& operator=(const HUD&) = delete;
@@ -18,22 +18,8 @@ public:
     void Draw(float Health, Emotion State);
     
 private:
-    Texture2D HeartFull{};
-    Texture2D HeartHalf{};
-    Texture2D HeartEmpty{};
-
-    Texture2D RecContainer{};
-    Texture2D SquareContainer{};
-    
+    GameTexture* GameTextures{};
     Texture2D Fox{};
-    Texture2D FoxFrame{};
-    Texture2D FoxAngry{};
-    Texture2D FoxHappy{};
-    Texture2D FoxNervous{};
-    Texture2D FoxSad{};
-    Texture2D FoxSleeping{};
-    Texture2D FoxHurt{};
-    Texture2D FoxDead{};
 
     float Scale{2.f};
 };
