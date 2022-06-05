@@ -20,6 +20,7 @@ enum class GameState
 
 struct GameInfo
 {
+    Background Map;
     int PauseFoxIndex{0};
     float Opacity{0.f};
     float TransitionInTime{0.f};
@@ -31,24 +32,39 @@ struct GameInfo
     GameState NextState{GameState::MAINMENU};
 };
 
+struct GameObjects
+{
+    HUD Hud;
+    Character Fox;
+    Props Props;
+    std::vector<Enemy> Enemies;
+    std::vector<Enemy> Crows;
+    std::vector<Prop> Trees;
+    std::array<Sprite, 5> PauseFox;
+    std::array<const Texture2D, 9> Buttons;
+};
+
 namespace Game 
 {
     void Run();
     void Initialize(Window& Window, std::string Title);
     void CheckScreenSizing(Window& Window);
-    void Tick(Window& Window, Background& Map, GameInfo& GameInfo, GameTexture& GameTextures, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, 
-              std::vector<Enemy>& Crows, std::array<Sprite, 5>& PauseFox, std::array<const Texture2D, 9>& Buttons, std::vector<Prop>& Trees);
-    void Update(Background& Map, GameInfo& GameInfo, Character& Character, Props& Props, 
-                std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::vector<Prop>& Trees);
-    void Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::vector<Prop>& Trees);
-    void PauseUpdate(GameInfo& GameInfo, std::array<Sprite, 5>& PauseFox);
-    void PauseDraw(GameTexture& GameTextures, std::array<Sprite, 5>& PauseFox, std::array<const Texture2D, 9>& Buttons, const GameInfo& GameInfo);
+    void Tick(Window& Window, GameInfo& GameInfo, GameTexture& GameTextures, GameObjects& GameObjects);
+    void Update(GameInfo& GameInfo, GameObjects& GameObjects);
+    void Draw(GameInfo& GameInfo, GameObjects& GameObjects);
+    void PauseUpdate(GameInfo& GameInfo, GameObjects& GameObjects);
+    void PauseDraw(const GameInfo& GameInfo, GameTexture& GameTextures, GameObjects& GameObjects);
     void ExitUpdate(GameInfo& GameInfo);
     void ExitDraw(const GameInfo& GameInfo);
     void MainMenuUpdate(GameInfo& GameInfo);
     void MainMenuDraw(const GameInfo& GameInfo);
+    void GameOverUpdate(GameInfo& GameInfo);
+    void GameOverDraw(const GameInfo& GameInfo);
     void Transition(GameInfo& GameInfo);
 
+    Character InitializeFox(Window& Window, GameInfo& GameInfo, GameTexture& GameTextures);
+    std::array<Sprite,5> InitializePauseFox(GameTexture& GameTextures);
+    std::array<const Texture2D,9> InitializeButtons(GameTexture& GameTextures);
     std::vector<std::vector<Prop>> InitializePropsUnder(GameTexture& GameTextures);
     std::vector<std::vector<Prop>> InitializePropsOver(GameTexture& GameTextures);
     std::vector<Prop> InitializeTrees(GameTexture& GameTextures);

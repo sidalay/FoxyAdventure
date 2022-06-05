@@ -13,61 +13,24 @@ namespace Game
         {
             // Initialization ---------------------------
             GameTexture GameTextures;
-            Background MapBG{GameTextures};
-            HUD Hud{GameTextures};
-            GameInfo GameInfo{0, 0.f, 0.f, 0.f};
-
-            std::vector<Enemy> Enemies{Game::InitializeEnemies(MapBG, Window, GameTextures)};
-            std::vector<Enemy> Crows{Game::InitializeCrows(MapBG, Window, GameTextures)};
-
-            std::vector<std::vector<Prop>> UnderProps{Game::InitializePropsUnder(GameTextures)};
-            std::vector<std::vector<Prop>> OverProps{Game::InitializePropsOver(GameTextures)};
-            Props Props{&UnderProps, &OverProps};
-            std::vector<Prop> Trees{Game::InitializeTrees(GameTextures)};
-
-            Character Fox
-            {
-                Sprite{GameTextures.FoxIdle, 4, 4}, 
-                Sprite{GameTextures.FoxWalk, 4, 4},
-                Sprite{GameTextures.FoxRun, 4, 4}, 
-                Sprite{GameTextures.FoxMelee, 4, 4},
-                Sprite{GameTextures.FoxHit, 2, 4}, 
-                Sprite{GameTextures.FoxDie, 1, 4},
-                Sprite{GameTextures.FoxPush, 4, 4},
-                Sprite{GameTextures.FoxSleeping, 4, 1}, 
-                Sprite{GameTextures.FoxItemGot, 1, 4},
-                GameTextures,
-                &Window, &MapBG
-            };
-
-            // Pause Menu Fox
-            std::array<Sprite, 5> PauseFox
-            {
-                Sprite{GameTextures.FoxIdle, 4, 4},
-                Sprite{GameTextures.FoxWalk, 4, 4},
-                Sprite{GameTextures.FoxRun, 4, 4},
-                Sprite{GameTextures.FoxSleeping, 4, 1},
-                Sprite{GameTextures.FoxMelee, 4, 1}
-            };
-
-            // Pause Menu Buttons
-            std::array<const Texture2D, 9> Buttons 
-            {
-                GameTextures.ButtonW,
-                GameTextures.ButtonA,
-                GameTextures.ButtonS,
-                GameTextures.ButtonD,
-                GameTextures.ButtonL,
-                GameTextures.ButtonM,
-                GameTextures.Shift,
-                GameTextures.Space,
-                GameTextures.Lmouse
+            GameInfo GameInfo{Background{GameTextures}, 0, 0.f, 0.f, 0.f};
+            std::vector<std::vector<Prop>> PropsUnder{Game::InitializePropsUnder(GameTextures)};
+            std::vector<std::vector<Prop>> PropsOver{Game::InitializePropsOver(GameTextures)};
+            GameObjects GameObjects{
+                HUD{GameTextures}, 
+                Game::InitializeFox(Window, GameInfo, GameTextures),
+                {&PropsUnder, &PropsOver},
+                {Game::InitializeEnemies(GameInfo.Map, Window, GameTextures)},
+                {Game::InitializeCrows(GameInfo.Map, Window, GameTextures)},
+                {Game::InitializeTrees(GameTextures)},
+                Game::InitializePauseFox(GameTextures),
+                Game::InitializeButtons(GameTextures)
             };
 
             // Start Game Loop
             while (!GameInfo.ExitGame) 
             {
-                Game::Tick(Window, MapBG, GameInfo, GameTextures, Fox, Props, Hud, Enemies, Crows, PauseFox, Buttons, Trees);
+                Game::Tick(Window, GameInfo, GameTextures, GameObjects);
             }
         }
 
@@ -99,8 +62,7 @@ namespace Game
         }
     }
 
-    void Tick(Window& Window, Background& Map, GameInfo& GameInfo, GameTexture& GameTextures, Character& Character, Props& Props, HUD& Hud, 
-              std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::array<Sprite, 5>& PauseFox, std::array<const Texture2D, 9>& Buttons, std::vector<Prop>& Trees)
+    void Tick(Window& Window, GameInfo& GameInfo, GameTexture& GameTextures, GameObjects& GameObjects)
     {
         Game::CheckScreenSizing(Window);
 
@@ -110,8 +72,8 @@ namespace Game
 
             ClearBackground(BLACK);
 
-            Game::Update(Map, GameInfo, Character, Props, Enemies, Crows, Trees);
-            Game::Draw(Map, Character, Props, Hud, Enemies, Crows, Trees);
+            Game::Update(GameInfo, GameObjects);
+            Game::Draw(GameInfo, GameObjects);
         }
         else if (GameInfo.State == GameState::MAINMENU) {
 
@@ -124,8 +86,8 @@ namespace Game
 
             ClearBackground(BLACK);
 
-            Game::PauseUpdate(GameInfo, PauseFox);
-            Game::PauseDraw(GameTextures, PauseFox, Buttons, GameInfo);
+            Game::PauseUpdate(GameInfo, GameObjects);
+            Game::PauseDraw(GameInfo, GameTextures, GameObjects);
         }
         else if (GameInfo.State == GameState::EXIT) {
 
@@ -136,53 +98,53 @@ namespace Game
         }
         else if (GameInfo.State == GameState::TRANSITION) {
 
-            Transition(GameInfo);
+            Game::Transition(GameInfo);
         }
 
         EndDrawing();
     }
 
-    void Update(Background& Map, GameInfo& GameInfo, Character& Character, Props& Props, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::vector<Prop>& Trees)
+    void Update(GameInfo& GameInfo, GameObjects& GameObjects)
     {
         if (GameInfo.State != GameState::TRANSITION) {
             // Create DeltaTime
             float DeltaTime{GetFrameTime()};
 
             // Call Ticks
-            Map.Tick(Character.GetWorldPos());
-            Character.Tick(DeltaTime, Props, Enemies, Trees);
+            GameInfo.Map.Tick(GameObjects.Fox.GetWorldPos());
+            GameObjects.Fox.Tick(DeltaTime, GameObjects.Props, GameObjects.Enemies, GameObjects.Trees);
 
-            for (auto& Enemy:Enemies)
-                Enemy.Tick(DeltaTime, Props, Character.GetWorldPos(), Character.GetCharPos(), Enemies, Trees);
+            for (auto& Enemy:GameObjects.Enemies)
+                Enemy.Tick(DeltaTime, GameObjects.Props, GameObjects.Fox.GetWorldPos(), GameObjects.Fox.GetCharPos(), GameObjects.Enemies, GameObjects.Trees);
 
-            for (auto& Crow:Crows)
-                Crow.Tick(DeltaTime, Props, Character.GetWorldPos(), Character.GetCharPos(), Enemies, Trees);
+            for (auto& Crow:GameObjects.Crows)
+                Crow.Tick(DeltaTime, GameObjects.Props, GameObjects.Fox.GetWorldPos(), GameObjects.Fox.GetCharPos(), GameObjects.Enemies, GameObjects.Trees);
 
-            for (auto& Proptype:*Props.Under)
+            for (auto& Proptype:*GameObjects.Props.Under)
                 for (auto& Prop:Proptype)
-                    Prop.Tick(DeltaTime, Map);
+                    Prop.Tick(DeltaTime, GameInfo.Map);
 
-            for (auto& Tree:Trees)
-                Tree.Tick(DeltaTime, Map);
+            for (auto& Tree:GameObjects.Trees)
+                Tree.Tick(DeltaTime, GameInfo.Map);
 
-            for (auto& Proptype:*Props.Over)
+            for (auto& Proptype:*GameObjects.Props.Over)
                 for (auto& Prop:Proptype)
-                    Prop.Tick(DeltaTime, Map);
+                    Prop.Tick(DeltaTime, GameInfo.Map);
 
             // Debugging --------------------------------------
-            if (Character.GetHealth() < 11)
+            if (GameObjects.Fox.GetHealth() < 11)
                 if (IsKeyPressed(KEY_RIGHT_BRACKET))
-                    Character.AddHealth(0.5f);
+                    GameObjects.Fox.AddHealth(0.5f);
 
-            if (Character.GetHealth() > 0)
+            if (GameObjects.Fox.GetHealth() > 0)
                 if (IsKeyPressed(KEY_LEFT_BRACKET))
-                    Character.AddHealth(-0.5f);
+                    GameObjects.Fox.AddHealth(-0.5f);
 
             if (IsKeyPressed(KEY_L))
-                Character.SetSleep();
+                GameObjects.Fox.SetSleep();
 
             if (IsKeyPressed(KEY_N))
-                Character.SwitchCollidable();
+                GameObjects.Fox.SwitchCollidable();
         }
 
         if (IsKeyPressed(KEY_P)) {
@@ -195,43 +157,43 @@ namespace Game
         }
     }
 
-    void Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::vector<Prop>& Trees)
+    void Draw(GameInfo& GameInfo, GameObjects& GameObjects)
     {
-        Map.Draw();
+        GameInfo.Map.Draw();
 
-        for (auto& PropType:*Props.Under)
+        for (auto& PropType:*GameObjects.Props.Under)
             for (auto& Prop:PropType) {
-                Prop.Draw(Character.GetWorldPos());
+                Prop.Draw(GameObjects.Fox.GetWorldPos());
                 // Draw Collision Squares
-                // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,
-                //               Prop.GetCollisionRec(Character.GetWorldPos()).y,
-                //               Prop.GetCollisionRec(Character.GetWorldPos()).width,
-                //               Prop.GetCollisionRec(Character.GetWorldPos()).height, CLITERAL(Color){ 0, 121, 241, 150 });
+                // DrawRectangle(Prop.GetCollisionRec(GameObjects.Fox.GetWorldPos()).x,
+                //               Prop.GetCollisionRec(GameObjects.Fox.GetWorldPos()).y,
+                //               Prop.GetCollisionRec(GameObjects.Fox.GetWorldPos()).width,
+                //               Prop.GetCollisionRec(GameObjects.Fox.GetWorldPos()).height, CLITERAL(Color){ 0, 121, 241, 150 });
                 // if (Prop.IsInteractable())
-                //     DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,
-                //                   Prop.GetInteractRec(Character.GetWorldPos()).y,
-                //                   Prop.GetInteractRec(Character.GetWorldPos()).width,
-                //                   Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
+                //     DrawRectangle(Prop.GetInteractRec(GameObjects.Fox.GetWorldPos()).x,
+                //                   Prop.GetInteractRec(GameObjects.Fox.GetWorldPos()).y,
+                //                   Prop.GetInteractRec(GameObjects.Fox.GetWorldPos()).width,
+                //                   Prop.GetInteractRec(GameObjects.Fox.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
             }
 
-        Character.Draw();
+        GameObjects.Fox.Draw();
         // Draw Collision Squares ---------------------------------
-        // DrawRectangle(Character.GetCollisionRec().x,
-        //               Character.GetCollisionRec().y,
-        //               Character.GetCollisionRec().width,
-        //               Character.GetCollisionRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
+        // DrawRectangle(GameObjects.Fox.GetCollisionRec().x,
+        //               GameObjects.Fox.GetCollisionRec().y,
+        //               GameObjects.Fox.GetCollisionRec().width,
+        //               GameObjects.Fox.GetCollisionRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
         
         // Draw Attack Rectangle ----------------------------------
         // if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
         // {
-        //     DrawRectangle(Character.GetAttackRec().x,
-        //                   Character.GetAttackRec().y,
-        //                   Character.GetAttackRec().width,
-        //                   Character.GetAttackRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
+        //     DrawRectangle(GameObjects.Fox.GetAttackRec().x,
+        //                   GameObjects.Fox.GetAttackRec().y,
+        //                   GameObjects.Fox.GetAttackRec().width,
+        //                   GameObjects.Fox.GetAttackRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
         // }
 
-        for (auto& Enemy:Enemies) {
-            Enemy.Draw(Character.GetWorldPos());
+        for (auto& Enemy:GameObjects.Enemies) {
+            Enemy.Draw(GameObjects.Fox.GetWorldPos());
             // Draw Collision Squares
             // DrawRectangle(Enemy.GetCollisionRec().x,
             //               Enemy.GetCollisionRec().y,
@@ -245,51 +207,51 @@ namespace Game
             // }
         }
 
-        for (auto& Tree:Trees) {
-            Tree.Draw(Character.GetWorldPos());
+        for (auto& Tree:GameObjects.Trees) {
+            Tree.Draw(GameObjects.Fox.GetWorldPos());
         }
 
-        for (auto& PropType:*Props.Over) 
+        for (auto& PropType:*GameObjects.Props.Over) 
             for (auto& Prop:PropType) {
-                Prop.Draw(Character.GetWorldPos());
+                Prop.Draw(GameObjects.Fox.GetWorldPos());
                 // Draw Collision Squares
-                // DrawRectangle(Prop.GetCollisionRec(Character.GetWorldPos()).x,
-                //               Prop.GetCollisionRec(Character.GetWorldPos()).y,
-                //               Prop.GetCollisionRec(Character.GetWorldPos()).width,
-                //               Prop.GetCollisionRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
+                // DrawRectangle(Prop.GetCollisionRec(GameObjects.Fox.GetWorldPos()).x,
+                //               Prop.GetCollisionRec(GameObjects.Fox.GetWorldPos()).y,
+                //               Prop.GetCollisionRec(GameObjects.Fox.GetWorldPos()).width,
+                //               Prop.GetCollisionRec(GameObjects.Fox.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
                 // if (Prop.IsInteractable())
-                //     DrawRectangle(Prop.GetInteractRec(Character.GetWorldPos()).x,
-                //                   Prop.GetInteractRec(Character.GetWorldPos()).y,
-                //                   Prop.GetInteractRec(Character.GetWorldPos()).width,
-                //                   Prop.GetInteractRec(Character.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
+                //     DrawRectangle(Prop.GetInteractRec(GameObjects.Fox.GetWorldPos()).x,
+                //                   Prop.GetInteractRec(GameObjects.Fox.GetWorldPos()).y,
+                //                   Prop.GetInteractRec(GameObjects.Fox.GetWorldPos()).width,
+                //                   Prop.GetInteractRec(GameObjects.Fox.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
             }
         
-        for (auto& Crow:Crows) {
-            Crow.Draw(Character.GetWorldPos());
+        for (auto& Crow:GameObjects.Crows) {
+            Crow.Draw(GameObjects.Fox.GetWorldPos());
         }
 
         // Draw ! when within an interactable entity
-        Character.DrawIndicator();
+        GameObjects.Fox.DrawIndicator();
         
         // Draw Portrait and Health Bars
-        Hud.Draw(Character.GetHealth(), Character.GetEmotion());
+        GameObjects.Hud.Draw(GameObjects.Fox.GetHealth(), GameObjects.Fox.GetEmotion());
 
         // Debugging info
-        DrawText(TextFormat("Player.x: %i", (int)Character.GetWorldPos().x + 615), 20, 150, 20, WHITE);
-        DrawText(TextFormat("Player.y: %i", (int)Character.GetWorldPos().y + 335), 20, 170, 20, WHITE);
-        // DrawText(TextFormat("Bear Counter: %i", Enemies.at(0).GetMonsterCount(EnemyType::BEAR)), 20, 300, 20, WHITE);
-        // DrawText(TextFormat("Player.HP: %i", (int)Character.GetHealth()), 20, 190, 20, WHITE);
-        // DrawText(TextFormat("Enemy.x: %i", (int)Enemies.at(0).GetWorldPos().x), 20, 190, 20, WHITE);
-        // DrawText(TextFormat("Enemy.y: %i", (int)Enemies.at(0).GetWorldPos().y), 20, 210, 20, WHITE);
-        // DrawText(TextFormat("Blocked: %i", Enemies.at(0).IsBlocked()), 20, 230, 20, WHITE);
-        // DrawText(TextFormat("Velocity: %i", (int)Vector2Length(Vector2Subtract(Character.GetCharPos(), Enemies.at(0).GetEnemyPos()))), 20, 190, 20, WHITE);
+        DrawText(TextFormat("Player.x: %i", (int)GameObjects.Fox.GetWorldPos().x + 615), 20, 150, 20, WHITE);
+        DrawText(TextFormat("Player.y: %i", (int)GameObjects.Fox.GetWorldPos().y + 335), 20, 170, 20, WHITE);
+        // DrawText(TextFormat("Bear Counter: %i", GameObjects.Enemies.at(0).GetMonsterCount(EnemyType::BEAR)), 20, 300, 20, WHITE);
+        // DrawText(TextFormat("Player.HP: %i", (int)GameObjects.Fox.GetHealth()), 20, 190, 20, WHITE);
+        // DrawText(TextFormat("Enemy.x: %i", (int)GameObjects.Enemies.at(0).GetWorldPos().x), 20, 190, 20, WHITE);
+        // DrawText(TextFormat("Enemy.y: %i", (int)GameObjects.Enemies.at(0).GetWorldPos().y), 20, 210, 20, WHITE);
+        // DrawText(TextFormat("Blocked: %i", GameObjects.Enemies.at(0).IsBlocked()), 20, 230, 20, WHITE);
+        // DrawText(TextFormat("Velocity: %i", (int)Vector2Length(Vector2Subtract(GameObjects.Fox.GetCharPos(), GameObjects.Enemies.at(0).GetEnemyPos()))), 20, 190, 20, WHITE);
         DrawFPS(20, 223);
 
-        Map.DrawMiniMap(Character.GetWorldPos());
+        GameInfo.Map.DrawMiniMap(GameObjects.Fox.GetWorldPos());
 
     }
 
-    void PauseUpdate(GameInfo& GameInfo, std::array<Sprite, 5>& PauseFox)
+    void PauseUpdate(GameInfo& GameInfo, GameObjects& GameObjects)
     {
         if (GameInfo.State != GameState::TRANSITION) {
             if (IsKeyDown(KEY_L)) {
@@ -310,7 +272,7 @@ namespace Game
                 GameInfo.PauseFoxIndex = 0;
             }
 
-            for (auto& Fox:PauseFox) {
+            for (auto& Fox:GameObjects.PauseFox) {
                 Fox.Tick(GetFrameTime());
             }
         }
@@ -327,24 +289,24 @@ namespace Game
         }
     }
 
-    void PauseDraw(GameTexture& GameTextures, std::array<Sprite, 5>& PauseFox, std::array<const Texture2D, 9>& Buttons, const GameInfo& GameInfo)
+    void PauseDraw(const GameInfo& GameInfo, GameTexture& GameTextures, GameObjects& GameObjects)
     {
         DrawTextureEx(GameTextures.PauseBackground, Vector2{0.f,0.f}, 0.0f, 4.f, WHITE);
 
         if (GameInfo.State != GameState::TRANSITION) {
             // PauseFoxIndex controls which Fox sprite is drawn
-            DrawTexturePro(PauseFox.at(GameInfo.PauseFoxIndex).Texture, PauseFox.at(GameInfo.PauseFoxIndex).GetSourceRec(), PauseFox.at(GameInfo.PauseFoxIndex).GetPosRec(Vector2{674.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
+            DrawTexturePro(GameObjects.PauseFox.at(GameInfo.PauseFoxIndex).Texture, GameObjects.PauseFox.at(GameInfo.PauseFoxIndex).GetSourceRec(), GameObjects.PauseFox.at(GameInfo.PauseFoxIndex).GetPosRec(Vector2{674.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
 
             // Draw Buttons Depending on which are pushed
-            if (IsKeyDown(KEY_W)) DrawTextureEx(Buttons.at(0), Vector2{208.f,124.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_A)) DrawTextureEx(Buttons.at(1), Vector2{160.f,180.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_S)) DrawTextureEx(Buttons.at(2), Vector2{208.f,180.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_D)) DrawTextureEx(Buttons.at(3), Vector2{256.f,180.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_L)) DrawTextureEx(Buttons.at(4), Vector2{160.f,460.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_M)) DrawTextureEx(Buttons.at(5), Vector2{160.f,372.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_LEFT_SHIFT)) DrawTextureEx(Buttons.at(6), Vector2{160.f,276.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_SPACE)) DrawTextureEx(Buttons.at(7), Vector2{152.f,552.f}, 0.f, 4.f, WHITE);
-            if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) DrawTextureEx(Buttons.at(8), Vector2{264.f,548.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_W)) DrawTextureEx(GameObjects.Buttons.at(0), Vector2{208.f,124.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_A)) DrawTextureEx(GameObjects.Buttons.at(1), Vector2{160.f,180.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_S)) DrawTextureEx(GameObjects.Buttons.at(2), Vector2{208.f,180.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_D)) DrawTextureEx(GameObjects.Buttons.at(3), Vector2{256.f,180.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_L)) DrawTextureEx(GameObjects.Buttons.at(4), Vector2{160.f,460.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_M)) DrawTextureEx(GameObjects.Buttons.at(5), Vector2{160.f,372.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_LEFT_SHIFT)) DrawTextureEx(GameObjects.Buttons.at(6), Vector2{160.f,276.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_SPACE)) DrawTextureEx(GameObjects.Buttons.at(7), Vector2{152.f,552.f}, 0.f, 4.f, WHITE);
+            if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) DrawTextureEx(GameObjects.Buttons.at(8), Vector2{264.f,548.f}, 0.f, 4.f, WHITE);
         }
     }
 
@@ -455,6 +417,49 @@ namespace Game
                 GameInfo.State = GameInfo.NextState;
             }
         }
+    }
+
+    Character InitializeFox(Window& Window, GameInfo& GameInfo, GameTexture& GameTextures)
+    {
+        return Character {
+            Sprite{GameTextures.FoxIdle, 4, 4}, 
+            Sprite{GameTextures.FoxWalk, 4, 4},
+            Sprite{GameTextures.FoxRun, 4, 4}, 
+            Sprite{GameTextures.FoxMelee, 4, 4},
+            Sprite{GameTextures.FoxHit, 2, 4}, 
+            Sprite{GameTextures.FoxDie, 1, 4},
+            Sprite{GameTextures.FoxPush, 4, 4},
+            Sprite{GameTextures.FoxSleeping, 4, 1}, 
+            Sprite{GameTextures.FoxItemGot, 1, 4},
+            GameTextures,
+            &Window, &GameInfo.Map
+        };
+    }
+
+    std::array<Sprite,5> InitializePauseFox(GameTexture& GameTextures)
+    {
+        return std::array<Sprite, 5>{
+            Sprite{GameTextures.FoxIdle, 4, 4},
+            Sprite{GameTextures.FoxWalk, 4, 4},
+            Sprite{GameTextures.FoxRun, 4, 4},
+            Sprite{GameTextures.FoxSleeping, 4, 1},
+            Sprite{GameTextures.FoxMelee, 4, 1}
+        };
+    }
+
+    std::array<const Texture2D,9> InitializeButtons(GameTexture& GameTextures)
+    {
+        return std::array<const Texture2D, 9>{
+            GameTextures.ButtonW,
+            GameTextures.ButtonA,
+            GameTextures.ButtonS,
+            GameTextures.ButtonD,
+            GameTextures.ButtonL,
+            GameTextures.ButtonM,
+            GameTextures.Shift,
+            GameTextures.Space,
+            GameTextures.Lmouse
+        };
     }
 
     std::vector<std::vector<Prop>> InitializePropsUnder(GameTexture& GameTextures)
