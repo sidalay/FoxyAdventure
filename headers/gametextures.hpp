@@ -161,7 +161,8 @@ struct GameTexture {
 
     const Texture2D Map{LoadTexture("sprites/maps/CodexMap.png")};
     const Texture2D MiniMap{LoadTexture("sprites/maps/MiniMap.png")};
-
+    const Texture2D PauseBackground{LoadTexture("sprites/maps/PauseBackground.png")};
+    
     const Texture2D BearBrownAttack{LoadTexture("sprites/enemies/bear/brown_attack.png")};
     const Texture2D BearBrownDeath{LoadTexture("sprites/enemies/bear/brown_death.png")};
     const Texture2D BearBrownHurt{LoadTexture("sprites/enemies/bear/brown_hurt.png")};

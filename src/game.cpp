@@ -67,7 +67,7 @@ namespace Game
             // Start Game Loop
             while (!GameInfo.ExitGame) 
             {
-                Game::Tick(Window, MapBG, GameInfo, Fox, Props, Hud, Enemies, Crows, PauseFox, Buttons, Trees);
+                Game::Tick(Window, MapBG, GameInfo, GameTextures, Fox, Props, Hud, Enemies, Crows, PauseFox, Buttons, Trees);
             }
         }
 
@@ -99,7 +99,7 @@ namespace Game
         }
     }
 
-    void Tick(Window& Window, Background& Map, GameInfo& GameInfo, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, std::vector<Prop>& Trees)
+    void Tick(Window& Window, Background& Map, GameInfo& GameInfo, GameTexture& GameTextures, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, std::vector<Prop>& Trees)
     {
         Game::CheckScreenSizing(Window);
 
@@ -124,7 +124,7 @@ namespace Game
             ClearBackground(BLACK);
 
             Game::PauseUpdate(GameInfo, PauseFox, Buttons);
-            Game::PauseDraw(PauseFox, Buttons, GameInfo);
+            Game::PauseDraw(GameTextures, PauseFox, Buttons, GameInfo);
         }
         else if (GameInfo.State == GameState::EXIT) {
 
@@ -326,9 +326,9 @@ namespace Game
         }
     }
 
-    void PauseDraw(std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, const GameInfo& GameInfo)
+    void PauseDraw(GameTexture& GameTextures, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, const GameInfo& GameInfo)
     {
-        DrawTextureEx(LoadTexture("sprites/maps/PauseBackground.png"), Vector2{0.f,0.f}, 0.0f, 4.f, WHITE);
+        DrawTextureEx(GameTextures.PauseBackground, Vector2{0.f,0.f}, 0.0f, 4.f, WHITE);
 
         if (GameInfo.State != GameState::TRANSITION) {
             // PauseFoxIndex controls which Fox sprite is drawn
@@ -2424,13 +2424,13 @@ namespace Game
 
         std::vector<Prop> Treasure
         {
-            Prop{Sprite{GameTextures.TreasureChestBig, 4, 1, 1.f/4.f}, Vector2{2198,1677}, PropType::BIGTREASURE, GameTextures, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/TreasureHeart.png")}, "Life Stone", 4.f},
-            Prop{Sprite{GameTextures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2250,3350}, PropType::TREASURE, GameTextures, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarTopRight.png")}, "Top Right Altar Piece"},
-            Prop{Sprite{GameTextures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2250,3150}, PropType::TREASURE, GameTextures, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarTop.png")}, "Top Altar Piece"},
-            Prop{Sprite{GameTextures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{130,210}, PropType::TREASURE, GameTextures, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarTopLeft.png")}, "Top Left Altar Piece"},
-            Prop{Sprite{GameTextures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{1025,2765}, PropType::TREASURE, GameTextures, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarBotLeft.png")}, "Bottom Left Altar Piece"},
-            Prop{Sprite{GameTextures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2250,2750}, PropType::TREASURE, GameTextures, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarBot.png")}, "Bottom Altar Piece"},
-            Prop{Sprite{GameTextures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2250,2550}, PropType::TREASURE, GameTextures, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{LoadTexture("sprites/props/AltarBotRight.png")}, "Bottom Right Altar Piece"},
+            Prop{Sprite{GameTextures.TreasureChestBig, 4, 1, 1.f/4.f}, Vector2{2198,1677}, PropType::BIGTREASURE, GameTextures, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{GameTextures.TreasureHeart}, "Life Stone", 4.f},
+            Prop{Sprite{GameTextures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2250,3350}, PropType::TREASURE, GameTextures, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{GameTextures.AltarTopRight}, "Top Right Altar Piece"},
+            Prop{Sprite{GameTextures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2250,3150}, PropType::TREASURE, GameTextures, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{GameTextures.AltarTop}, "Top Altar Piece"},
+            Prop{Sprite{GameTextures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{130,210}, PropType::TREASURE, GameTextures, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{GameTextures.AltarTopLeft}, "Top Left Altar Piece"},
+            Prop{Sprite{GameTextures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{1025,2765}, PropType::TREASURE, GameTextures, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{GameTextures.AltarBotLeft}, "Bottom Left Altar Piece"},
+            Prop{Sprite{GameTextures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2250,2750}, PropType::TREASURE, GameTextures, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{GameTextures.AltarBot}, "Bottom Altar Piece"},
+            Prop{Sprite{GameTextures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2250,2550}, PropType::TREASURE, GameTextures, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, Texture2D{GameTextures.AltarBotRight}, "Bottom Right Altar Piece"},
         };
         Props.emplace_back(Treasure);
 
