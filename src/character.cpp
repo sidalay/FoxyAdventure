@@ -53,7 +53,6 @@ void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies,
     IsAlive();
 }
 
-// Draw character animation
 void Character::Draw()
 {
     DrawTexturePro(CurrentSprite->Texture, Source, Destination, Vector2{}, 0.f, WHITE);
@@ -72,9 +71,9 @@ void Character::SpriteTick(float DeltaTime)
     ItemGrab.Tick(DeltaTime);
 }
 
-// Update Character to middle of screen if screen is resized
 void Character::UpdateCharacterPos()
 {
+    // Update Character to middle of screen if screen is resized
     CharacterPos.x = Screen->x/2.f - (Scale * (0.5f * CurrentSprite->Texture.width/CurrentSprite->MaxFramesX));
     CharacterPos.y = Screen->y/2.f - (Scale * (0.5f * CurrentSprite->Texture.height/CurrentSprite->MaxFramesY));
     Destination.x = CharacterPos.x;
@@ -83,7 +82,6 @@ void Character::UpdateCharacterPos()
     Destination.height = Scale * CurrentSprite->Texture.height/CurrentSprite->MaxFramesY;    
 }
 
-// Check which orientation the character is facing
 void Character::CheckDirection()
 {
     if (!Locked)
@@ -111,12 +109,12 @@ void Character::CheckDirection()
         }
 }
 
-// Check for movement input
 void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     PrevWorldPos = WorldPos;
     Vector2 Direction{};
 
+    // Check for movement input
     if (!Locked) {
 
         if (IsKeyDown(KEY_W)) {
@@ -152,13 +150,11 @@ void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::ve
     CheckCollision(Props.Over, Direction, Enemies, Trees);
 }
 
-// Undo movement if walking out-of-bounds or colliding
 void Character::UndoMovement()
 {
     WorldPos = PrevWorldPos;
 }
 
-// Check if colliding with props / npcs / enemies 
 void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 Direction, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     DamageTime += GetFrameTime();
@@ -321,7 +317,6 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 Di
     }
 }
 
-// Check if character is moving and change sprites if needed
 void Character::WalkOrRun()
 {
     if (IsKeyDown(KEY_LEFT_SHIFT))
@@ -371,7 +366,6 @@ void Character::WalkOrRun()
     }
 }
 
-// manage attack sprites
 void Character::CheckAttack()
 {
     AttackTime += GetFrameTime();
@@ -404,7 +398,6 @@ void Character::CheckAttack()
     }
 }
 
-// manage sleep skill
 void Character::CheckSleep()
 {
     float DeltaTime{GetFrameTime()};
@@ -423,7 +416,6 @@ void Character::CheckSleep()
     }
 }
 
-// manage character portraits 
 void Character::CheckEmotion()
 {
     if (Health < 1.f)
@@ -444,7 +436,6 @@ void Character::CheckEmotion()
         State = Emotion::SAD;
 }
 
-// Draw ! when interactable is true
 void Character::DrawIndicator() 
 {
     if (Interactable) {
@@ -452,16 +443,15 @@ void Character::DrawIndicator()
     }
 };
 
-// Update which portion of the spritesheet is drawn
 void Character::UpdateSource()
 {
+    // Update which portion of the sprite sheet gets drawn
     Source.x = CurrentSprite->FrameX * CurrentSprite->Texture.width / CurrentSprite->MaxFramesX;
     Source.y = CurrentSprite->FrameY * CurrentSprite->Texture.height / CurrentSprite->MaxFramesY;
     Source.width = CurrentSprite->Texture.width/CurrentSprite->MaxFramesX;
     Source.height = CurrentSprite->Texture.height/CurrentSprite->MaxFramesY;
 }
 
-// Return character collision dimensions
 Rectangle Character::GetCollisionRec()
 {
     return Rectangle 
@@ -473,7 +463,6 @@ Rectangle Character::GetCollisionRec()
     };
 }
 
-// Return attack collision rectangle
 Rectangle Character::GetAttackRec()
 {
     switch (Face)
@@ -519,7 +508,6 @@ Rectangle Character::GetAttackRec()
 
 }
 
-// Check if Player is Alive and if not set dead sprite
 void Character::IsAlive()
 {
     if (Health <= 1.f)
@@ -535,7 +523,6 @@ void Character::IsAlive()
     }
 }
 
-// Manage Player animation when taking damage
 void Character::TakeDamage()
 {
     float UpdateTime {2.f/1.f};
@@ -593,9 +580,9 @@ void Character::AddHealth(float HP)
     }
 }
 
-// Gradually heal fox when killing an enemy
 void Character::HealOverTime(float HP)
-{
+{   
+    // Gradually heal fox when killing an enemy
     float TimeToHeal{2.f/3.f};
     HealTime += GetFrameTime();
     static float StopHealing{HP};
