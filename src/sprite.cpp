@@ -6,7 +6,6 @@ Sprite::Sprite(const Texture2D& Texture, float MaxFramesX, float MaxFramesY, flo
 
 }
 
-// Update X position to draw next sprite
 void Sprite::Tick(float DeltaTime)
 {
     // update animation frame
@@ -20,9 +19,9 @@ void Sprite::Tick(float DeltaTime)
     }
 }
 
-// Returns a source rectangle that dictates what sprite to draw
 Rectangle Sprite::GetSourceRec()
 {
+    // source rectangle that shows what to draw
     Rectangle Source {
         FrameX * Texture.width / MaxFramesX,
         FrameY * Texture.height / MaxFramesY,
@@ -33,9 +32,9 @@ Rectangle Sprite::GetSourceRec()
     return Source;
 }
 
-// Returns destination rectangle that shows where to draw on screen
 Rectangle Sprite::GetPosRec(const Vector2& ScreenPos, float Scale)
 {
+    // destination rectangle that shows where to draw
     Rectangle Destination {
         ScreenPos.x,
         ScreenPos.y,
