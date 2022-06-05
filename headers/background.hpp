@@ -20,8 +20,8 @@ public:
     void Draw();
     void DrawMiniMap(Vector2 CharWorldPos);
     Vector2 GetMapSize();
-    bool IsMiniMapOn() {return MiniMapOpen;}
     Vector2 GetMapPos() {return MapPos;}
+    bool IsMiniMapOn() {return MiniMapOpen;}
     float GetScale() {return Scale;}
     
 private:
