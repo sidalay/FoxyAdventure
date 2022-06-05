@@ -80,6 +80,7 @@ public:
 private:
     Sprite Object{};
     PropType Type{};
+    GameTexture* GameTextures{};
     Vector2 WorldPos{};     // Where the prop is located in the world
     Vector2 PrevWorldPos{};
     float Scale {4.f};
@@ -96,8 +97,6 @@ private:
     // NPC variables
     Progress Act{Progress::ACT_I};
     bool Spawned{true};
-    Texture2D SpeechBox{};
-    Texture2D SpeechName{};
 
     // Progress Trigger Variables
     Progress TriggerAct{};

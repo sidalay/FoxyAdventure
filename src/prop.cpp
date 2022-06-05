@@ -2,8 +2,8 @@
 
 // Constructor for inanimate props
 Prop::Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, GameTexture& GameTextures, float Scale, bool Moveable, bool Interactable)
-    : Object{Texture}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, 
-      Moveable{Moveable}, SpeechBox{GameTextures.SpeechBox}, SpeechName{GameTextures.SpeechName}
+    : Object{Texture}, Type{Type}, GameTextures{&GameTextures}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, 
+      Moveable{Moveable}
 {
     if (Type == PropType::BOULDER ||
         Type == PropType::BUSH ||
@@ -37,8 +37,7 @@ Prop::Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, GameTexture& Ga
 
 // Constructor for animated altar pieces
 Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, std::string ItemName, bool Spawned, bool Interactable)
-    : Object{Object}, Type{Type}, WorldPos{Pos}, Interactable{Interactable}, Spawned{Spawned}, 
-      SpeechBox{GameTextures.SpeechBox}, SpeechName{GameTextures.SpeechName}, ItemName{ItemName} 
+    : Object{Object}, Type{Type}, GameTextures{&GameTextures}, WorldPos{Pos}, Interactable{Interactable}, Spawned{Spawned}, ItemName{ItemName} 
 {
     Collidable = true;
 }
@@ -46,8 +45,7 @@ Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures,
 // Constructor for animated props
 Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, float Scale, bool Moveable, bool Interactable, 
            Progress Act, PropType NPC, Texture2D Item, std::string ItemName, float ItemScale)
-    : Object{Object}, Type{Type}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}, 
-      SpeechBox{GameTextures.SpeechBox}, SpeechName{GameTextures.SpeechName},
+    : Object{Object}, Type{Type}, GameTextures{&GameTextures}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}, 
       TriggerAct{Act}, TriggerNPC{NPC}, Item{Item}, ItemName{ItemName}, ItemScale{ItemScale} 
 {
     if (Type == PropType::BOULDER ||
@@ -308,15 +306,15 @@ void Prop::Draw(Vector2 CharacterWorldPos)
     if (ReceiveItem)
     {
         // DrawTextureEx(SpeechBox, Vector2{352,518}, 0.f, 12.f, WHITE);
-        DrawTextureEx(SpeechBox, Vector2{472,574}, 0.f, 8.f, WHITE);
+        DrawTextureEx(GameTextures->SpeechBox, Vector2{472,574}, 0.f, 8.f, WHITE);
         DrawSpeech();
     }
 
     // NPC Speech Box
     if (Talking)
     {
-        DrawTextureEx(SpeechName, Vector2{376,438}, 0.f, 5.f, WHITE);
-        DrawTextureEx(SpeechBox, Vector2{352,518}, 0.f, 12.f, WHITE);
+        DrawTextureEx(GameTextures->SpeechName, Vector2{376,438}, 0.f, 5.f, WHITE);
+        DrawTextureEx(GameTextures->SpeechBox, Vector2{352,518}, 0.f, 12.f, WHITE);
 
         if (Type == PropType::NPC_A)
         {
@@ -338,7 +336,7 @@ void Prop::Draw(Vector2 CharacterWorldPos)
     // Altar Pieces Inserted
     if (InsertPiece)
     {
-        DrawTextureEx(SpeechBox, Vector2{472,574}, 0.f, 8.f, WHITE);
+        DrawTextureEx(GameTextures->SpeechBox, Vector2{472,574}, 0.f, 8.f, WHITE);
         DrawSpeech();
     }
 
