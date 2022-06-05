@@ -566,9 +566,6 @@ void Enemy::TakeDamage()
         Stopped = false;
         Hurting = false;
     }
-    // else {
-    //     CurrentSprite = PreviousSprite;
-    // }
 }
 
 // Handle death animation
