@@ -37,12 +37,12 @@ namespace Game
     void Initialize(Window& Window, std::string Title);
     void CheckScreenSizing(Window& Window);
     void Tick(Window& Window, Background& Map, GameInfo& GameInfo, GameTexture& GameTextures, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, 
-              std::vector<Enemy>& Crows, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, std::vector<Prop>& Trees);
+              std::vector<Enemy>& Crows, std::array<Sprite, 5>& PauseFox, std::array<const Texture2D*, 9>& Buttons, std::vector<Prop>& Trees);
     void Update(Background& Map, GameInfo& GameInfo, Character& Character, Props& Props, 
                 std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::vector<Prop>& Trees);
     void Draw(Background& Map, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::vector<Prop>& Trees);
-    void PauseUpdate(GameInfo& GameInfo, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons);
-    void PauseDraw(GameTexture& GameTextures, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, const GameInfo& GameInfo);
+    void PauseUpdate(GameInfo& GameInfo, std::array<Sprite, 5>& PauseFox, std::array<const Texture2D*, 9>& Buttons);
+    void PauseDraw(GameTexture& GameTextures, std::array<Sprite, 5>& PauseFox, std::array<const Texture2D*, 9>& Buttons, const GameInfo& GameInfo);
     void ExitUpdate(GameInfo& GameInfo);
     void ExitDraw(const GameInfo& GameInfo);
     void MainMenuUpdate(GameInfo& GameInfo);

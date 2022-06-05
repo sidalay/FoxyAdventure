@@ -51,17 +51,17 @@ namespace Game
             };
 
             // Pause Menu Buttons
-            std::array<Texture2D, 9> Buttons 
+            std::array<const Texture2D*, 9> Buttons 
             {
-                GameTextures.ButtonW,
-                GameTextures.ButtonA,
-                GameTextures.ButtonS,
-                GameTextures.ButtonD,
-                GameTextures.ButtonL,
-                GameTextures.ButtonM,
-                GameTextures.Shift,
-                GameTextures.Space,
-                GameTextures.Lmouse
+                &GameTextures.ButtonW,
+                &GameTextures.ButtonA,
+                &GameTextures.ButtonS,
+                &GameTextures.ButtonD,
+                &GameTextures.ButtonL,
+                &GameTextures.ButtonM,
+                &GameTextures.Shift,
+                &GameTextures.Space,
+                &GameTextures.Lmouse
             };
 
             // Start Game Loop
@@ -99,7 +99,8 @@ namespace Game
         }
     }
 
-    void Tick(Window& Window, Background& Map, GameInfo& GameInfo, GameTexture& GameTextures, Character& Character, Props& Props, HUD& Hud, std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, std::vector<Prop>& Trees)
+    void Tick(Window& Window, Background& Map, GameInfo& GameInfo, GameTexture& GameTextures, Character& Character, Props& Props, HUD& Hud, 
+              std::vector<Enemy>& Enemies, std::vector<Enemy>& Crows, std::array<Sprite, 5>& PauseFox, std::array<const Texture2D*, 9>& Buttons, std::vector<Prop>& Trees)
     {
         Game::CheckScreenSizing(Window);
 
@@ -288,7 +289,7 @@ namespace Game
 
     }
 
-    void PauseUpdate(GameInfo& GameInfo, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons)
+    void PauseUpdate(GameInfo& GameInfo, std::array<Sprite, 5>& PauseFox, std::array<const Texture2D*, 9>& Buttons)
     {
         if (GameInfo.State != GameState::TRANSITION) {
             if (IsKeyDown(KEY_L)) {
@@ -326,7 +327,7 @@ namespace Game
         }
     }
 
-    void PauseDraw(GameTexture& GameTextures, std::array<Sprite, 5>& PauseFox, std::array<Texture2D, 9>& Buttons, const GameInfo& GameInfo)
+    void PauseDraw(GameTexture& GameTextures, std::array<Sprite, 5>& PauseFox, std::array<const Texture2D*, 9>& Buttons, const GameInfo& GameInfo)
     {
         DrawTextureEx(GameTextures.PauseBackground, Vector2{0.f,0.f}, 0.0f, 4.f, WHITE);
 
@@ -335,15 +336,15 @@ namespace Game
             DrawTexturePro(PauseFox.at(GameInfo.PauseFoxIndex).Texture, PauseFox.at(GameInfo.PauseFoxIndex).GetSourceRec(), PauseFox.at(GameInfo.PauseFoxIndex).GetPosRec(Vector2{674.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
 
             // Draw Buttons Depending on which are pushed
-            if (IsKeyDown(KEY_W)) DrawTextureEx(Buttons.at(0), Vector2{208.f,124.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_A)) DrawTextureEx(Buttons.at(1), Vector2{160.f,180.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_S)) DrawTextureEx(Buttons.at(2), Vector2{208.f,180.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_D)) DrawTextureEx(Buttons.at(3), Vector2{256.f,180.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_L)) DrawTextureEx(Buttons.at(4), Vector2{160.f,460.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_M)) DrawTextureEx(Buttons.at(5), Vector2{160.f,372.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_LEFT_SHIFT)) DrawTextureEx(Buttons.at(6), Vector2{160.f,276.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_SPACE)) DrawTextureEx(Buttons.at(7), Vector2{152.f,552.f}, 0.f, 4.f, WHITE);
-            if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) DrawTextureEx(Buttons.at(8), Vector2{264.f,548.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_W)) DrawTextureEx(*(Buttons.at(0)), Vector2{208.f,124.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_A)) DrawTextureEx(*(Buttons.at(1)), Vector2{160.f,180.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_S)) DrawTextureEx(*(Buttons.at(2)), Vector2{208.f,180.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_D)) DrawTextureEx(*(Buttons.at(3)), Vector2{256.f,180.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_L)) DrawTextureEx(*(Buttons.at(4)), Vector2{160.f,460.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_M)) DrawTextureEx(*(Buttons.at(5)), Vector2{160.f,372.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_LEFT_SHIFT)) DrawTextureEx(*(Buttons.at(6)), Vector2{160.f,276.f}, 0.f, 4.f, WHITE);
+            if (IsKeyDown(KEY_SPACE)) DrawTextureEx(*(Buttons.at(7)), Vector2{152.f,552.f}, 0.f, 4.f, WHITE);
+            if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) DrawTextureEx(*(Buttons.at(8)), Vector2{264.f,548.f}, 0.f, 4.f, WHITE);
         }
     }
 
