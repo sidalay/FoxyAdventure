@@ -71,7 +71,7 @@ namespace Game
             ClearBackground(BLACK);
 
             Game::Update(Info, Objects);
-            Game::Draw(Info, Objects);
+            Game::Draw(Info, Textures, Objects);
         }
         else if (Info.State == Game::State::MAINMENU) {
 
@@ -167,17 +167,17 @@ namespace Game
                 Info.ShowDevTools = !Info.ShowDevTools;
 
             if (Objects.Fox.GetHealth() < 11)
-                if (IsKeyPressed(KEY_MINUS))
+                if (IsKeyPressed(KEY_EQUAL))
                     Objects.Fox.AddHealth(0.5f);
 
             if (Objects.Fox.GetHealth() > 0)
-                if (IsKeyPressed(KEY_EQUAL))
+                if (IsKeyPressed(KEY_MINUS))
                     Objects.Fox.AddHealth(-0.5f);
         }
 
     }
 
-    void Draw(Game::Info& Info, Game::Objects& Objects)
+    void Draw(Game::Info& Info, GameTexture& Textures, Game::Objects& Objects)
     {
         Info.Map.Draw();
 
@@ -229,6 +229,11 @@ namespace Game
 
         // Debugging info
         if (Info.DevToolsOn) {
+            // Rectangle for debugging info (WorldPos, FPS, etc.)
+            DrawTextureEx(Textures.TransparentContainer, Vector2{15, 135}, 0.f, 4.f, WHITE);
+            DrawTextureEx(Textures.TransparentContainer, Vector2{15, 215}, 0.f, 2.f, WHITE);
+            
+            DrawFPS(20, 223);
             DrawText(TextFormat("Player.x: %i", (int)Objects.Fox.GetWorldPos().x + 615), 20, 150, 20, WHITE);
             DrawText(TextFormat("Player.y: %i", (int)Objects.Fox.GetWorldPos().y + 335), 20, 170, 20, WHITE);
             // DrawText(TextFormat("Bear Counter: %i", Objects.Enemies.at(0).GetMonsterCount(EnemyType::BEAR)), 20, 300, 20, WHITE);
@@ -237,7 +242,6 @@ namespace Game
             // DrawText(TextFormat("Enemy.y: %i", (int)Objects.Enemies.at(0).GetWorldPos().y), 20, 210, 20, WHITE);
             // DrawText(TextFormat("Blocked: %i", Objects.Enemies.at(0).IsBlocked()), 20, 230, 20, WHITE);
             // DrawText(TextFormat("Velocity: %i", (int)Vector2Length(Vector2Subtract(Objects.Fox.GetCharPos(), Objects.Enemies.at(0).GetEnemyPos()))), 20, 190, 20, WHITE);
-            DrawFPS(20, 223);
         }
 
     }

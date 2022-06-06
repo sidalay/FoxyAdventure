@@ -55,7 +55,7 @@ namespace Game
     void CheckScreenSizing(Window& Window);
     void Tick(Window& Window, Game::Info& Info, GameTexture& Textures, Game::Objects& Objects);
     void Update(Game::Info& Info, Game::Objects& Objects);
-    void Draw(Game::Info& Info, Game::Objects& Objects);
+    void Draw(Game::Info& Info, GameTexture& Textures, Game::Objects& Objects);
     void PauseUpdate(Game::Info& Info, Game::Objects& Objects);
     void PauseDraw(const Game::Info& Info, GameTexture& Textures, Game::Objects& Objects);
     void ExitUpdate(Game::Info& Info);

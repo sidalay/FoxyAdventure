@@ -79,9 +79,4 @@ void HUD::Draw(float Health, Emotion State)
         HeartRowOne = Vector2Add(HeartRowOne, HeartSpacing);
         HeartRowTwo = Vector2Add(HeartRowTwo, HeartSpacing);
     }
-
-    // Rectangle for debugging info (WorldPos, FPS, etc.)
-    DrawTextureEx(GameTextures->TransparentContainer, Vector2{15, 135}, 0.f, 4.f, WHITE);
-    DrawTextureEx(GameTextures->TransparentContainer, Vector2{15, 215}, 0.f, 2.f, WHITE);
-    
 }
