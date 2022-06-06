@@ -71,7 +71,7 @@ namespace Game
             ClearBackground(BLACK);
 
             Game::Update(Info, Objects);
-            Game::Draw(Info, Textures, Objects);
+            Game::Draw(Info, Objects);
         }
         else if (Info.State == Game::State::MAINMENU) {
 
@@ -155,11 +155,19 @@ namespace Game
 
         if (Info.DevToolsOn) {
 
-            if (IsKeyPressed(KEY_ONE)) 
+            if (IsKeyPressed(KEY_ONE)) {
+                Info.NoClipOn = !Info.NoClipOn;
+                Objects.Fox.SwitchCollidable();
+            }
+
+            if (IsKeyPressed(KEY_TWO)) 
                 Info.DrawRectanglesOn = !Info.DrawRectanglesOn;
 
-            if (IsKeyPressed(KEY_TWO))
-                Objects.Fox.SwitchCollidable();
+            if (IsKeyPressed(KEY_THREE))
+                Info.ShowFPS = !Info.ShowFPS;
+
+            if (IsKeyPressed(KEY_FOUR))
+                Info.ShowPos = !Info.ShowPos;
 
             if (IsKeyPressed(KEY_ZERO))
                 Info.ShowDevTools = !Info.ShowDevTools;
@@ -172,10 +180,9 @@ namespace Game
                 if (IsKeyPressed(KEY_MINUS))
                     Objects.Fox.AddHealth(-0.5f);
         }
-
     }
 
-    void Draw(Game::Info& Info, GameTexture& Textures, Game::Objects& Objects)
+    void Draw(Game::Info& Info, Game::Objects& Objects)
     {
         Info.Map.Draw();
 
@@ -239,18 +246,31 @@ namespace Game
 
         // Debugging --------------------
         if (Info.DevToolsOn) {
-            DrawTextureEx(Textures.TransparentContainer, Vector2{15, 135}, 0.f, 4.f, WHITE);
-            DrawTextureEx(Textures.TransparentContainer, Vector2{15, 215}, 0.f, 2.f, WHITE);
-            
-            DrawFPS(20, 223);
-            DrawText(TextFormat("Player.x: %i", (int)Objects.Fox.GetWorldPos().x + 615), 20, 150, 20, WHITE);
-            DrawText(TextFormat("Player.y: %i", (int)Objects.Fox.GetWorldPos().y + 335), 20, 170, 20, WHITE);
-            // DrawText(TextFormat("Bear Counter: %i", Objects.Enemies.at(0).GetMonsterCount(EnemyType::BEAR)), 20, 300, 20, WHITE);
-            // DrawText(TextFormat("Player.HP: %i", (int)Objects.Fox.GetHealth()), 20, 190, 20, WHITE);
-            // DrawText(TextFormat("Blocked: %i", Objects.Enemies.at(0).IsBlocked()), 20, 230, 20, WHITE);
-            // DrawText(TextFormat("Velocity: %i", (int)Vector2Length(Vector2Subtract(Objects.Fox.GetCharPos(), Objects.Enemies.at(0).GetEnemyPos()))), 20, 190, 20, WHITE);
-        }
+            if (Info.ShowPos) {
+                DrawRectangle(15, 145, 150, 50, CLITERAL(Color){0,0,0,170});
+                DrawText(TextFormat("Player.x: %i", (int)Objects.Fox.GetWorldPos().x + 615), 20, 150, 20, WHITE);
+                DrawText(TextFormat("Player.y: %i", (int)Objects.Fox.GetWorldPos().y + 335), 20, 170, 20, WHITE);
+            }
 
+            if (Info.ShowFPS) {
+                DrawRectangle(15, 215, 90, 30, CLITERAL(Color){0,0,0,170});
+                DrawFPS(20, 221);
+            }
+            
+            if (Info.ShowDevTools) {
+                DrawRectangle(15, 300, 220, 240, CLITERAL(Color){0,0,0,170});
+                DrawText("  ---- Toggles ----", 20, 310, 20, WHITE);
+                DrawText("[`] Dev Tools", 20, 335, 20, WHITE);
+                !Info.NoClipOn ? DrawText("[1] Noclip", 20, 355, 20, WHITE) : DrawText("[1] Noclip", 20, 355, 20, LIME);
+                !Info.DrawRectanglesOn ? DrawText("[2] CollisionRecs", 20, 375, 20, WHITE) : DrawText("[2] CollisionRecs", 20, 375, 20, LIME);
+                !Info.ShowFPS ? DrawText("[3] FPS", 20, 395, 20, WHITE) : DrawText("[3] FPS", 20, 395, 20, LIME);
+                !Info.ShowPos ? DrawText("[4] Position", 20, 415, 20, WHITE) : DrawText("[4] Position", 20, 415, 20, LIME);
+                !Info.ShowDevTools ? DrawText("[0] Tools Menu", 20, 435, 20, WHITE) : DrawText("[0] Tools Menu", 20, 435, 20, LIME);
+                DrawText("    ---- Misc ----", 20, 460, 20, WHITE);
+                !IsKeyDown(KEY_MINUS) ? DrawText("[-] Decrease HP", 20, 485, 20, WHITE) : DrawText("[-] Decrease HP", 20, 485, 20, LIME);
+                !IsKeyDown(KEY_EQUAL) ? DrawText("[+] Increase HP", 20, 505, 20, WHITE) : DrawText("[+] Increase HP", 20, 505, 20, LIME);
+            }
+        }
     }
 
     void PauseUpdate(Game::Info& Info, Game::Objects& Objects)

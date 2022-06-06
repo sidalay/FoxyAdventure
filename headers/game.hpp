@@ -33,8 +33,13 @@ namespace Game
         Game::State State{Game::State::TRANSITION};
         Game::State NextState{Game::State::MAINMENU};
 
+        // Debugging --------------------
+        bool ShowPos{true};
+        bool ShowFPS{true};
+        bool NoClipOn{false};
+        bool ToggleAll{false};
         bool DevToolsOn{false};
-        bool ShowDevTools{false};
+        bool ShowDevTools{true};
         bool DrawRectanglesOn{false};
     };
 
@@ -55,7 +60,7 @@ namespace Game
     void CheckScreenSizing(Window& Window);
     void Tick(Window& Window, Game::Info& Info, GameTexture& Textures, Game::Objects& Objects);
     void Update(Game::Info& Info, Game::Objects& Objects);
-    void Draw(Game::Info& Info, GameTexture& Textures, Game::Objects& Objects);
+    void Draw(Game::Info& Info, Game::Objects& Objects);
     void PauseUpdate(Game::Info& Info, Game::Objects& Objects);
     void PauseDraw(const Game::Info& Info, GameTexture& Textures, Game::Objects& Objects);
     void ExitUpdate(Game::Info& Info);
@@ -76,6 +81,7 @@ namespace Game
     std::vector<Enemy> InitializeEnemies(Background& MapBG, Window& Window, GameTexture& Textures);
     std::vector<Enemy> InitializeCrows(Background& MapBG, Window& Window, GameTexture& Textures);
 
+    // Debugging --------------------
     void DrawCollisionRecs(Prop& Prop, Vector2 CharacterWorldPos, Color RecColor = CLITERAL(Color){ 0, 121, 241, 150 });
     template <typename Object>
     void DrawCollisionRecs(Object& Type, Color Color = CLITERAL(Color){ 0, 238, 135, 150 });
