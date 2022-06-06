@@ -104,46 +104,44 @@ namespace Game
 
     void Update(Game::Info& Info, Game::Objects& Objects)
     {
-        if (Info.State != Game::State::TRANSITION) {
-            // Create DeltaTime
-            float DeltaTime{GetFrameTime()};
+        // Create DeltaTime
+        float DeltaTime{GetFrameTime()};
 
-            // Call Ticks
-            Info.Map.Tick(Objects.Fox.GetWorldPos());
-            Objects.Fox.Tick(DeltaTime, Objects.Props, Objects.Enemies, Objects.Trees);
+        // Call Ticks
+        Info.Map.Tick(Objects.Fox.GetWorldPos());
+        Objects.Fox.Tick(DeltaTime, Objects.Props, Objects.Enemies, Objects.Trees);
 
-            for (auto& Enemy:Objects.Enemies)
-                Enemy.Tick(DeltaTime, Objects.Props, Objects.Fox.GetWorldPos(), Objects.Fox.GetCharPos(), Objects.Enemies, Objects.Trees);
+        for (auto& Enemy:Objects.Enemies)
+            Enemy.Tick(DeltaTime, Objects.Props, Objects.Fox.GetWorldPos(), Objects.Fox.GetCharPos(), Objects.Enemies, Objects.Trees);
 
-            for (auto& Crow:Objects.Crows)
-                Crow.Tick(DeltaTime, Objects.Props, Objects.Fox.GetWorldPos(), Objects.Fox.GetCharPos(), Objects.Enemies, Objects.Trees);
+        for (auto& Crow:Objects.Crows)
+            Crow.Tick(DeltaTime, Objects.Props, Objects.Fox.GetWorldPos(), Objects.Fox.GetCharPos(), Objects.Enemies, Objects.Trees);
 
-            for (auto& Proptype:Objects.Props.Under)
-                for (auto& Prop:Proptype)
-                    Prop.Tick(DeltaTime, Info.Map);
+        for (auto& Proptype:Objects.Props.Under)
+            for (auto& Prop:Proptype)
+                Prop.Tick(DeltaTime, Info.Map);
 
-            for (auto& Tree:Objects.Trees)
-                Tree.Tick(DeltaTime, Info.Map);
+        for (auto& Tree:Objects.Trees)
+            Tree.Tick(DeltaTime, Info.Map);
 
-            for (auto& Proptype:Objects.Props.Over)
-                for (auto& Prop:Proptype)
-                    Prop.Tick(DeltaTime, Info.Map);
+        for (auto& Proptype:Objects.Props.Over)
+            for (auto& Prop:Proptype)
+                Prop.Tick(DeltaTime, Info.Map);
 
-            // Debugging --------------------------------------
-            if (Objects.Fox.GetHealth() < 11)
-                if (IsKeyPressed(KEY_RIGHT_BRACKET))
-                    Objects.Fox.AddHealth(0.5f);
+        // Debugging --------------------------------------
+        if (Objects.Fox.GetHealth() < 11)
+            if (IsKeyPressed(KEY_RIGHT_BRACKET))
+                Objects.Fox.AddHealth(0.5f);
 
-            if (Objects.Fox.GetHealth() > 0)
-                if (IsKeyPressed(KEY_LEFT_BRACKET))
-                    Objects.Fox.AddHealth(-0.5f);
+        if (Objects.Fox.GetHealth() > 0)
+            if (IsKeyPressed(KEY_LEFT_BRACKET))
+                Objects.Fox.AddHealth(-0.5f);
 
-            if (IsKeyPressed(KEY_L))
-                Objects.Fox.SetSleep();
+        if (IsKeyPressed(KEY_L))
+            Objects.Fox.SetSleep();
 
-            if (IsKeyPressed(KEY_N))
-                Objects.Fox.SwitchCollidable();
-        }
+        if (IsKeyPressed(KEY_N))
+            Objects.Fox.SwitchCollidable();
 
         if (IsKeyPressed(KEY_P)) {
             Info.NextState = Game::State::PAUSED;
@@ -209,6 +207,10 @@ namespace Game
             Tree.Draw(Objects.Fox.GetWorldPos());
         }
 
+        for (auto& Crow:Objects.Crows) {
+            Crow.Draw(Objects.Fox.GetWorldPos());
+        }
+
         for (auto& PropType:Objects.Props.Over) 
             for (auto& Prop:PropType) {
                 Prop.Draw(Objects.Fox.GetWorldPos());
@@ -223,15 +225,9 @@ namespace Game
                 //                   Prop.GetInteractRec(Objects.Fox.GetWorldPos()).width,
                 //                   Prop.GetInteractRec(Objects.Fox.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
             }
-        
-        for (auto& Crow:Objects.Crows) {
-            Crow.Draw(Objects.Fox.GetWorldPos());
-        }
 
-        // Draw ! when within an interactable entity
         Objects.Fox.DrawIndicator();
         
-        // Draw Portrait and Health Bars
         Objects.Hud.Draw(Objects.Fox.GetHealth(), Objects.Fox.GetEmotion());
 
         // Debugging info
@@ -251,28 +247,27 @@ namespace Game
 
     void PauseUpdate(Game::Info& Info, Game::Objects& Objects)
     {
-        if (Info.State != Game::State::TRANSITION) {
-            if (IsKeyDown(KEY_L)) {
-                Info.PauseFoxIndex = 3;
-            }
-            else if (IsKeyDown(KEY_W) || IsKeyDown(KEY_A) || IsKeyDown(KEY_S) || IsKeyDown(KEY_D)) {
-                if (IsKeyDown(KEY_LEFT_SHIFT)) {
-                    Info.PauseFoxIndex = 2;
-                }
-                else {
-                    Info.PauseFoxIndex = 1;
-                }
-            }
-            else if (IsKeyDown(KEY_SPACE) || IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-                Info.PauseFoxIndex = 4;
+
+        if (IsKeyDown(KEY_L)) {
+            Info.PauseFoxIndex = 3;
+        }
+        else if (IsKeyDown(KEY_W) || IsKeyDown(KEY_A) || IsKeyDown(KEY_S) || IsKeyDown(KEY_D)) {
+            if (IsKeyDown(KEY_LEFT_SHIFT)) {
+                Info.PauseFoxIndex = 2;
             }
             else {
-                Info.PauseFoxIndex = 0;
+                Info.PauseFoxIndex = 1;
             }
+        }
+        else if (IsKeyDown(KEY_SPACE) || IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+            Info.PauseFoxIndex = 4;
+        }
+        else {
+            Info.PauseFoxIndex = 0;
+        }
 
-            for (auto& Fox:Objects.PauseFox) {
-                Fox.Tick(GetFrameTime());
-            }
+        for (auto& Fox:Objects.PauseFox) {
+            Fox.Tick(GetFrameTime());
         }
 
         if (IsKeyPressed(KEY_P)) {
@@ -291,41 +286,37 @@ namespace Game
     {
         DrawTextureEx(Textures.PauseBackground, Vector2{0.f,0.f}, 0.0f, 4.f, WHITE);
 
-        if (Info.State != Game::State::TRANSITION) {
-            // PauseFoxIndex controls which Fox sprite is drawn
-            DrawTexturePro(Objects.PauseFox.at(Info.PauseFoxIndex).Texture, Objects.PauseFox.at(Info.PauseFoxIndex).GetSourceRec(), Objects.PauseFox.at(Info.PauseFoxIndex).GetPosRec(Vector2{674.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
+        // PauseFoxIndex controls which Fox sprite is drawn
+        DrawTexturePro(Objects.PauseFox.at(Info.PauseFoxIndex).Texture, Objects.PauseFox.at(Info.PauseFoxIndex).GetSourceRec(), Objects.PauseFox.at(Info.PauseFoxIndex).GetPosRec(Vector2{674.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
 
-            // Draw Buttons Depending on which are pushed
-            if (IsKeyDown(KEY_W)) DrawTextureEx(Objects.Buttons.at(0), Vector2{208.f,124.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_A)) DrawTextureEx(Objects.Buttons.at(1), Vector2{160.f,180.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_S)) DrawTextureEx(Objects.Buttons.at(2), Vector2{208.f,180.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_D)) DrawTextureEx(Objects.Buttons.at(3), Vector2{256.f,180.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_L)) DrawTextureEx(Objects.Buttons.at(4), Vector2{160.f,460.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_M)) DrawTextureEx(Objects.Buttons.at(5), Vector2{160.f,372.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_LEFT_SHIFT)) DrawTextureEx(Objects.Buttons.at(6), Vector2{160.f,276.f}, 0.f, 4.f, WHITE);
-            if (IsKeyDown(KEY_SPACE)) DrawTextureEx(Objects.Buttons.at(7), Vector2{152.f,552.f}, 0.f, 4.f, WHITE);
-            if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) DrawTextureEx(Objects.Buttons.at(8), Vector2{264.f,548.f}, 0.f, 4.f, WHITE);
-        }
+        // Draw Buttons Depending on which are pushed
+        if (IsKeyDown(KEY_W)) DrawTextureEx(Objects.Buttons.at(0), Vector2{208.f,124.f}, 0.f, 4.f, WHITE);
+        if (IsKeyDown(KEY_A)) DrawTextureEx(Objects.Buttons.at(1), Vector2{160.f,180.f}, 0.f, 4.f, WHITE);
+        if (IsKeyDown(KEY_S)) DrawTextureEx(Objects.Buttons.at(2), Vector2{208.f,180.f}, 0.f, 4.f, WHITE);
+        if (IsKeyDown(KEY_D)) DrawTextureEx(Objects.Buttons.at(3), Vector2{256.f,180.f}, 0.f, 4.f, WHITE);
+        if (IsKeyDown(KEY_L)) DrawTextureEx(Objects.Buttons.at(4), Vector2{160.f,460.f}, 0.f, 4.f, WHITE);
+        if (IsKeyDown(KEY_M)) DrawTextureEx(Objects.Buttons.at(5), Vector2{160.f,372.f}, 0.f, 4.f, WHITE);
+        if (IsKeyDown(KEY_LEFT_SHIFT)) DrawTextureEx(Objects.Buttons.at(6), Vector2{160.f,276.f}, 0.f, 4.f, WHITE);
+        if (IsKeyDown(KEY_SPACE)) DrawTextureEx(Objects.Buttons.at(7), Vector2{152.f,552.f}, 0.f, 4.f, WHITE);
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) DrawTextureEx(Objects.Buttons.at(8), Vector2{264.f,548.f}, 0.f, 4.f, WHITE);
     }
 
     void ExitUpdate(Game::Info& Info)
     {
-        if (Info.State != Game::State::TRANSITION) {
-            if (IsKeyPressed(KEY_A) || IsKeyPressed(KEY_D) || IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_RIGHT)) {
-                Info.ExitIsYes = !Info.ExitIsYes;
-            }
+        if (IsKeyPressed(KEY_A) || IsKeyPressed(KEY_D) || IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_RIGHT)) {
+            Info.ExitIsYes = !Info.ExitIsYes;
+        }
 
-            if (Info.ExitIsYes) {
-                if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
-                    Info.NextState = Game::State::MAINMENU;
-                    Info.State = Game::State::TRANSITION;
-                }
+        if (Info.ExitIsYes) {
+            if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
+                Info.NextState = Game::State::MAINMENU;
+                Info.State = Game::State::TRANSITION;
             }
-            else {
-                if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
-                    Info.NextState = Game::State::RUNNING;
-                    Info.State = Game::State::TRANSITION;
-                }
+        }
+        else {
+            if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
+                Info.NextState = Game::State::RUNNING;
+                Info.State = Game::State::TRANSITION;
             }
         }
 
@@ -337,55 +328,59 @@ namespace Game
 
     void ExitDraw(const Game::Info& Info)
     {
-        if (Info.State != Game::State::TRANSITION) {
-            DrawText("Quit the game?", 500, 320, 40, WHITE);
-            DrawText("Yes", 570, 380, 20, WHITE);
-            DrawText("No", 690, 380, 20, WHITE);
-            
-            if (Info.ExitIsYes) {
-                DrawRectangle(560, 375, 55, 30, (Color){ 0, 238, 135, 100 });
-            }
-            else {
-                DrawRectangle(675, 375, 55, 30, (Color){ 0, 238, 135, 100 });
-            }
+        DrawText("Quit the game?", 500, 320, 40, WHITE);
+        DrawText("Yes", 570, 380, 20, WHITE);
+        DrawText("No", 690, 380, 20, WHITE);
+        
+        if (Info.ExitIsYes) {
+            DrawRectangle(560, 375, 55, 30, (Color){ 0, 238, 135, 100 });
+        }
+        else {
+            DrawRectangle(675, 375, 55, 30, (Color){ 0, 238, 135, 100 });
         }
     }
 
     void MainMenuUpdate(Game::Info& Info)
     {
-        if (Info.State != Game::State::TRANSITION) {
-            if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_S) || IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_DOWN)) {
-                Info.MainMenuStart = !Info.MainMenuStart;
-            }
+        if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_S) || IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_DOWN)) {
+            Info.MainMenuStart = !Info.MainMenuStart;
+        }
 
-            if (!Info.MainMenuStart) {
-                if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
-                    Info.ExitGame = true;
-                }
+        if (!Info.MainMenuStart) {
+            if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
+                Info.ExitGame = true;
             }
-            else {
-                if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
-                    Info.NextState = Game::State::RUNNING;
-                    Info.State = Game::State::TRANSITION;
-                }
+        }
+        else {
+            if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
+                Info.NextState = Game::State::RUNNING;
+                Info.State = Game::State::TRANSITION;
             }
         }
     }
 
     void MainMenuDraw(const Game::Info& Info)
     {
-        if (Info.State != Game::State::TRANSITION) {
-            DrawText("CRYPTEX ADVENTURE", 385, 240, 40, WHITE);
-            DrawText("START", 565, 380, 30, WHITE);
-            DrawText("QUIT", 582, 430, 30, WHITE);
-            
-            if (Info.MainMenuStart) {
-                DrawRectangle(557, 370, 123, 47, (Color){ 0, 238, 135, 100 });
-            }
-            else {
-                DrawRectangle(557, 420, 123, 47, (Color){ 0, 238, 135, 100 });
-            }
+        DrawText("CRYPTEX ADVENTURE", 385, 240, 40, WHITE);
+        DrawText("START", 565, 380, 30, WHITE);
+        DrawText("QUIT", 582, 430, 30, WHITE);
+        
+        if (Info.MainMenuStart) {
+            DrawRectangle(557, 370, 123, 47, (Color){ 0, 238, 135, 100 });
         }
+        else {
+            DrawRectangle(557, 420, 123, 47, (Color){ 0, 238, 135, 100 });
+        }
+    }
+
+    void GameOverUpdate(Game::Info& Info)
+    {
+
+    }
+
+    void GameOverDraw(const Game::Info& Info)
+    {
+
     }
 
     void Transition(Game::Info& Info)
