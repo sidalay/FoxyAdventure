@@ -139,20 +139,8 @@ namespace Game
             for (auto& Prop:Proptype)
                 Prop.Tick(DeltaTime, Info.Map);
 
-        // Debugging --------------------------------------
-        if (Objects.Fox.GetHealth() < 11)
-            if (IsKeyPressed(KEY_RIGHT_BRACKET))
-                Objects.Fox.AddHealth(0.5f);
-
-        if (Objects.Fox.GetHealth() > 0)
-            if (IsKeyPressed(KEY_LEFT_BRACKET))
-                Objects.Fox.AddHealth(-0.5f);
-
         if (IsKeyPressed(KEY_L))
             Objects.Fox.SetSleep();
-
-        if (IsKeyPressed(KEY_N))
-            Objects.Fox.SwitchCollidable();
 
         if (IsKeyPressed(KEY_P)) {
             Info.NextState = Game::State::PAUSED;
@@ -162,6 +150,31 @@ namespace Game
             Info.NextState = Game::State::EXIT;
             Info.State = Game::State::TRANSITION;
         }
+
+        // Debugging --------------------------------------
+        if (IsKeyPressed(KEY_GRAVE))
+            Info.DevToolsOn = !Info.DevToolsOn;
+
+        if (Info.DevToolsOn) {
+
+            if (IsKeyPressed(KEY_ONE)) 
+                Info.DrawRectanglesOn = !Info.DrawRectanglesOn;
+
+            if (IsKeyPressed(KEY_TWO))
+                Objects.Fox.SwitchCollidable();
+
+            if (IsKeyPressed(KEY_ZERO))
+                Info.ShowDevTools = !Info.ShowDevTools;
+
+            if (Objects.Fox.GetHealth() < 11)
+                if (IsKeyPressed(KEY_MINUS))
+                    Objects.Fox.AddHealth(0.5f);
+
+            if (Objects.Fox.GetHealth() > 0)
+                if (IsKeyPressed(KEY_EQUAL))
+                    Objects.Fox.AddHealth(-0.5f);
+        }
+
     }
 
     void Draw(Game::Info& Info, Game::Objects& Objects)
@@ -173,7 +186,7 @@ namespace Game
                 Prop.Draw(Objects.Fox.GetWorldPos());
                 
                 if (Info.DrawRectanglesOn)
-                    Game::DrawCollisionRecs(Prop, Objects.Fox.GetWorldPos(), CLITERAL(Color){ 0, 121, 241, 150 });
+                    Game::DrawCollisionRecs(Prop, Objects.Fox.GetWorldPos());
             }
 
         Objects.Fox.Draw();
@@ -187,7 +200,7 @@ namespace Game
             Enemy.Draw(Objects.Fox.GetWorldPos());
 
             if (Info.DrawRectanglesOn) {
-                Game::DrawCollisionRecs(Enemy, CLITERAL(Color){ 230, 41, 55, 150 });
+                Game::DrawCollisionRecs(Enemy, CLITERAL(Color){ 205, 0, 255, 150 });
                 Game::DrawAttackRecs(Enemy);
             }
         }
@@ -212,18 +225,20 @@ namespace Game
         
         Objects.Hud.Draw(Objects.Fox.GetHealth(), Objects.Fox.GetEmotion());
 
-        // Debugging info
-        DrawText(TextFormat("Player.x: %i", (int)Objects.Fox.GetWorldPos().x + 615), 20, 150, 20, WHITE);
-        DrawText(TextFormat("Player.y: %i", (int)Objects.Fox.GetWorldPos().y + 335), 20, 170, 20, WHITE);
-        // DrawText(TextFormat("Bear Counter: %i", Objects.Enemies.at(0).GetMonsterCount(EnemyType::BEAR)), 20, 300, 20, WHITE);
-        // DrawText(TextFormat("Player.HP: %i", (int)Objects.Fox.GetHealth()), 20, 190, 20, WHITE);
-        // DrawText(TextFormat("Enemy.x: %i", (int)Objects.Enemies.at(0).GetWorldPos().x), 20, 190, 20, WHITE);
-        // DrawText(TextFormat("Enemy.y: %i", (int)Objects.Enemies.at(0).GetWorldPos().y), 20, 210, 20, WHITE);
-        // DrawText(TextFormat("Blocked: %i", Objects.Enemies.at(0).IsBlocked()), 20, 230, 20, WHITE);
-        // DrawText(TextFormat("Velocity: %i", (int)Vector2Length(Vector2Subtract(Objects.Fox.GetCharPos(), Objects.Enemies.at(0).GetEnemyPos()))), 20, 190, 20, WHITE);
-        DrawFPS(20, 223);
-
         Info.Map.DrawMiniMap(Objects.Fox.GetWorldPos());
+
+        // Debugging info
+        if (Info.DevToolsOn) {
+            DrawText(TextFormat("Player.x: %i", (int)Objects.Fox.GetWorldPos().x + 615), 20, 150, 20, WHITE);
+            DrawText(TextFormat("Player.y: %i", (int)Objects.Fox.GetWorldPos().y + 335), 20, 170, 20, WHITE);
+            // DrawText(TextFormat("Bear Counter: %i", Objects.Enemies.at(0).GetMonsterCount(EnemyType::BEAR)), 20, 300, 20, WHITE);
+            // DrawText(TextFormat("Player.HP: %i", (int)Objects.Fox.GetHealth()), 20, 190, 20, WHITE);
+            // DrawText(TextFormat("Enemy.x: %i", (int)Objects.Enemies.at(0).GetWorldPos().x), 20, 190, 20, WHITE);
+            // DrawText(TextFormat("Enemy.y: %i", (int)Objects.Enemies.at(0).GetWorldPos().y), 20, 210, 20, WHITE);
+            // DrawText(TextFormat("Blocked: %i", Objects.Enemies.at(0).IsBlocked()), 20, 230, 20, WHITE);
+            // DrawText(TextFormat("Velocity: %i", (int)Vector2Length(Vector2Subtract(Objects.Fox.GetCharPos(), Objects.Enemies.at(0).GetEnemyPos()))), 20, 190, 20, WHITE);
+            DrawFPS(20, 223);
+        }
 
     }
 
@@ -392,54 +407,6 @@ namespace Game
                 Info.Opacity = 0.f;
                 Info.State = Info.NextState;
             }
-        }
-    }
-
-    void DrawCollisionRecs(Prop& Prop, Vector2 CharacterWorldPos, Color RecColor)
-    {
-        DrawRectangle(
-            Prop.GetCollisionRec(CharacterWorldPos).x,
-            Prop.GetCollisionRec(CharacterWorldPos).y,
-            Prop.GetCollisionRec(CharacterWorldPos).width,
-            Prop.GetCollisionRec(CharacterWorldPos).height, 
-            RecColor
-        );
-
-        if (Prop.IsInteractable()) {
-            DrawRectangle(
-                Prop.GetInteractRec(CharacterWorldPos).x,
-                Prop.GetInteractRec(CharacterWorldPos).y,
-                Prop.GetInteractRec(CharacterWorldPos).width,
-                Prop.GetInteractRec(CharacterWorldPos).height, 
-                CLITERAL(Color){ 200, 122, 255, 150 }        
-            );
-        }
-    }
-
-    template <typename Object>
-    void DrawCollisionRecs(Object& Type, Color Color)
-    {   
-        DrawRectangle(
-            Type.GetCollisionRec().x,
-            Type.GetCollisionRec().y,
-            Type.GetCollisionRec().width,
-            Type.GetCollisionRec().height, 
-            Color
-        );
-    }
-
-    template <typename Object>
-    void DrawAttackRecs(Object& Type, Color Color)
-    {
-        if (Type.IsAttacking())
-        {
-            DrawRectangle(
-                Type.GetAttackRec().x,
-                Type.GetAttackRec().y,
-                Type.GetAttackRec().width,
-                Type.GetAttackRec().height,
-                Color
-            );
         }
     }
 
@@ -4467,6 +4434,63 @@ namespace Game
         Crows.emplace_back(CrowSix);
         
         return Crows;
+    }
+
+    void DrawCollisionRecs(Prop& Prop, Vector2 CharacterWorldPos, Color RecColor)
+    {
+        if (Prop.IsInteractable()) {
+            DrawRectangle(
+                Prop.GetInteractRec(CharacterWorldPos).x,
+                Prop.GetInteractRec(CharacterWorldPos).y,
+                Prop.GetInteractRec(CharacterWorldPos).width,
+                Prop.GetInteractRec(CharacterWorldPos).height, 
+                CLITERAL(Color){ 200, 122, 255, 100 }        
+            );
+
+            DrawRectangle(
+                Prop.GetCollisionRec(CharacterWorldPos).x,
+                Prop.GetCollisionRec(CharacterWorldPos).y,
+                Prop.GetCollisionRec(CharacterWorldPos).width,
+                Prop.GetCollisionRec(CharacterWorldPos).height, 
+                CLITERAL(Color){ 51, 255, 255, 100 }
+            );
+        }
+        else {
+            DrawRectangle(
+                Prop.GetCollisionRec(CharacterWorldPos).x,
+                Prop.GetCollisionRec(CharacterWorldPos).y,
+                Prop.GetCollisionRec(CharacterWorldPos).width,
+                Prop.GetCollisionRec(CharacterWorldPos).height, 
+                RecColor
+            );
+        }
+    }
+
+    template <typename Object>
+    void DrawCollisionRecs(Object& Type, Color Color)
+    {   
+        DrawRectangle(
+            Type.GetCollisionRec().x,
+            Type.GetCollisionRec().y,
+            Type.GetCollisionRec().width,
+            Type.GetCollisionRec().height, 
+            Color
+        );
+    }
+
+    template <typename Object>
+    void DrawAttackRecs(Object& Type, Color Color)
+    {
+        if (Type.IsAttacking())
+        {
+            DrawRectangle(
+                Type.GetAttackRec().x,
+                Type.GetAttackRec().y,
+                Type.GetAttackRec().width,
+                Type.GetAttackRec().height,
+                Color
+            );
+        }
     }
 
 } // namespace Game

@@ -33,6 +33,8 @@ namespace Game
         Game::State State{Game::State::TRANSITION};
         Game::State NextState{Game::State::MAINMENU};
 
+        bool DevToolsOn{false};
+        bool ShowDevTools{false};
         bool DrawRectanglesOn{false};
     };
 
@@ -74,11 +76,11 @@ namespace Game
     std::vector<Enemy> InitializeEnemies(Background& MapBG, Window& Window, GameTexture& Textures);
     std::vector<Enemy> InitializeCrows(Background& MapBG, Window& Window, GameTexture& Textures);
 
-    void DrawCollisionRecs(Prop& Prop, Vector2 CharacterWorldPos, Color RecColor = CLITERAL(Color){ 0, 238, 135, 100 });
+    void DrawCollisionRecs(Prop& Prop, Vector2 CharacterWorldPos, Color RecColor = CLITERAL(Color){ 0, 121, 241, 150 });
     template <typename Object>
-    void DrawCollisionRecs(Object& Type, Color Color = CLITERAL(Color){ 0, 238, 135, 100 });
+    void DrawCollisionRecs(Object& Type, Color Color = CLITERAL(Color){ 0, 238, 135, 150 });
     template <typename Object>
-    void DrawAttackRecs(Object& Type, Color Color = CLITERAL(Color){ 0, 121, 241, 100 });
+    void DrawAttackRecs(Object& Type, Color Color = CLITERAL(Color){ 240, 255, 20, 150 });
 }
 
 #endif // GAME_HPP
