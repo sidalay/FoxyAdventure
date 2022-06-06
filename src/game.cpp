@@ -180,6 +180,13 @@ namespace Game
                 if (IsKeyPressed(KEY_MINUS))
                     Objects.Fox.AddHealth(-0.5f);
         }
+        else {
+            Info.NoClipOn = false;
+            Info.DrawRectanglesOn = false;
+            Info.ShowFPS = false;
+            Info.ShowPos = false;
+            Info.ShowDevTools = true;
+        }
     }
 
     void Draw(Game::Info& Info, Game::Objects& Objects)
@@ -261,14 +268,14 @@ namespace Game
                 DrawRectangle(15, 300, 220, 240, CLITERAL(Color){0,0,0,170});
                 DrawText("  ---- Toggles ----", 20, 310, 20, WHITE);
                 DrawText("[`] Dev Tools", 20, 335, 20, WHITE);
-                !Info.NoClipOn ? DrawText("[1] Noclip", 20, 355, 20, WHITE) : DrawText("[1] Noclip", 20, 355, 20, LIME);
-                !Info.DrawRectanglesOn ? DrawText("[2] CollisionRecs", 20, 375, 20, WHITE) : DrawText("[2] CollisionRecs", 20, 375, 20, LIME);
-                !Info.ShowFPS ? DrawText("[3] FPS", 20, 395, 20, WHITE) : DrawText("[3] FPS", 20, 395, 20, LIME);
-                !Info.ShowPos ? DrawText("[4] Position", 20, 415, 20, WHITE) : DrawText("[4] Position", 20, 415, 20, LIME);
-                !Info.ShowDevTools ? DrawText("[0] Tools Menu", 20, 435, 20, WHITE) : DrawText("[0] Tools Menu", 20, 435, 20, LIME);
+                DrawText("[1] Noclip", 20, 355, 20, !Info.NoClipOn ? WHITE : LIME);
+                DrawText("[2] CollisionRecs", 20, 375, 20, !Info.DrawRectanglesOn ? WHITE : LIME);
+                DrawText("[3] FPS", 20, 395, 20, Info.ShowFPS ? WHITE : LIME);
+                DrawText("[4] Position", 20, 415, 20, Info.ShowPos ? WHITE : LIME);
+                DrawText("[0] Tools Menu", 20, 435, 20, Info.ShowDevTools ? WHITE : LIME);
                 DrawText("    ---- Misc ----", 20, 460, 20, WHITE);
-                !IsKeyDown(KEY_MINUS) ? DrawText("[-] Decrease HP", 20, 485, 20, WHITE) : DrawText("[-] Decrease HP", 20, 485, 20, LIME);
-                !IsKeyDown(KEY_EQUAL) ? DrawText("[+] Increase HP", 20, 505, 20, WHITE) : DrawText("[+] Increase HP", 20, 505, 20, LIME);
+                DrawText("[-] Decrease HP", 20, 485, 20, !IsKeyDown(KEY_MINUS) ? WHITE : LIME);
+                DrawText("[+] Increase HP", 20, 505, 20, !IsKeyDown(KEY_EQUAL) ? WHITE : LIME);
             }
         }
     }

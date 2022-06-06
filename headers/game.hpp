@@ -34,8 +34,8 @@ namespace Game
         Game::State NextState{Game::State::MAINMENU};
 
         // Debugging --------------------
-        bool ShowPos{true};
-        bool ShowFPS{true};
+        bool ShowPos{false};
+        bool ShowFPS{false};
         bool NoClipOn{false};
         bool ToggleAll{false};
         bool DevToolsOn{false};
