@@ -158,13 +158,6 @@ private:
     static std::unordered_map<EnemyType, int> MonsterCounter;
 };
 
-struct Enemies
-{
-    std::vector<Enemy>* Monsters{};
-
-    Enemies(std::vector<Enemy>* Monsters);
-};
-
 #endif // ENEMY_HPP
 
 /* 

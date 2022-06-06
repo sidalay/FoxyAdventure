@@ -930,11 +930,3 @@ bool Enemy::WithinScreen(Vector2 HeroWorldPos)
         return false;
     }
 }
-
-// -----------------------------------------
-
-Enemies::Enemies(std::vector<Enemy>* Monsters) 
-    : Monsters{Monsters}
-{
-
-}
