@@ -108,7 +108,7 @@ private:
     Rectangle Destination{};
     Window* Screen{};
     Background* World{};
-    GameTexture& GameTextures;
+    GameTexture* GameTextures;
     
     static int MonsterDeaths;
     static int MonsterCount;
