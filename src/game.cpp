@@ -111,10 +111,8 @@ namespace Game
 
     void Update(Game::Info& Info, Game::Objects& Objects)
     {
-        // Create DeltaTime
         float DeltaTime{GetFrameTime()};
 
-        // Call Ticks
         Info.Map.Tick(Objects.Fox.GetWorldPos());
         Objects.Fox.Tick(DeltaTime, Objects.Props, Objects.Enemies, Objects.Trees);
         if (!Objects.Fox.IsAlive()) {
@@ -151,7 +149,7 @@ namespace Game
             Info.State = Game::State::TRANSITION;
         }
 
-        // Debugging --------------------------------------
+        // Dev Tools--------------------------------------
         if (IsKeyPressed(KEY_GRAVE))
             Info.DevToolsOn = !Info.DevToolsOn;
 
@@ -185,12 +183,14 @@ namespace Game
             for (auto& Prop:PropType) {
                 Prop.Draw(Objects.Fox.GetWorldPos());
                 
+                // Debugging --------------------
                 if (Info.DrawRectanglesOn)
                     Game::DrawCollisionRecs(Prop, Objects.Fox.GetWorldPos());
             }
 
         Objects.Fox.Draw();
 
+        // Debugging --------------------
         if (Info.DrawRectanglesOn) {
             Game::DrawCollisionRecs(Objects.Fox);
             Game::DrawAttackRecs(Objects.Fox);
@@ -199,6 +199,7 @@ namespace Game
         for (auto& Enemy:Objects.Enemies) {
             Enemy.Draw(Objects.Fox.GetWorldPos());
 
+            // Debugging --------------------
             if (Info.DrawRectanglesOn) {
                 Game::DrawCollisionRecs(Enemy, CLITERAL(Color){ 205, 0, 255, 150 });
                 Game::DrawAttackRecs(Enemy);
@@ -207,16 +208,25 @@ namespace Game
 
         for (auto& Tree:Objects.Trees) {
             Tree.Draw(Objects.Fox.GetWorldPos());
+
+            // Debugging --------------------
+            if (Info.DrawRectanglesOn)
+                Game::DrawCollisionRecs(Tree, Objects.Fox.GetWorldPos());
         }
 
         for (auto& Crow:Objects.Crows) {
             Crow.Draw(Objects.Fox.GetWorldPos());
+
+            // Debugging --------------------
+            if (Info.DrawRectanglesOn)
+                Game::DrawCollisionRecs(Crow);
         }
 
         for (auto& PropType:Objects.Props.Over) 
             for (auto& Prop:PropType) {
                 Prop.Draw(Objects.Fox.GetWorldPos());
                 
+                // Debugging --------------------
                 if (Info.DrawRectanglesOn)
                     Game::DrawCollisionRecs(Prop, Objects.Fox.GetWorldPos(), (Color){ 200, 122, 255, 150 });
             }
@@ -227,9 +237,8 @@ namespace Game
 
         Info.Map.DrawMiniMap(Objects.Fox.GetWorldPos());
 
-        // Debugging info
+        // Debugging --------------------
         if (Info.DevToolsOn) {
-            // Rectangle for debugging info (WorldPos, FPS, etc.)
             DrawTextureEx(Textures.TransparentContainer, Vector2{15, 135}, 0.f, 4.f, WHITE);
             DrawTextureEx(Textures.TransparentContainer, Vector2{15, 215}, 0.f, 2.f, WHITE);
             
@@ -238,8 +247,6 @@ namespace Game
             DrawText(TextFormat("Player.y: %i", (int)Objects.Fox.GetWorldPos().y + 335), 20, 170, 20, WHITE);
             // DrawText(TextFormat("Bear Counter: %i", Objects.Enemies.at(0).GetMonsterCount(EnemyType::BEAR)), 20, 300, 20, WHITE);
             // DrawText(TextFormat("Player.HP: %i", (int)Objects.Fox.GetHealth()), 20, 190, 20, WHITE);
-            // DrawText(TextFormat("Enemy.x: %i", (int)Objects.Enemies.at(0).GetWorldPos().x), 20, 190, 20, WHITE);
-            // DrawText(TextFormat("Enemy.y: %i", (int)Objects.Enemies.at(0).GetWorldPos().y), 20, 210, 20, WHITE);
             // DrawText(TextFormat("Blocked: %i", Objects.Enemies.at(0).IsBlocked()), 20, 230, 20, WHITE);
             // DrawText(TextFormat("Velocity: %i", (int)Vector2Length(Vector2Subtract(Objects.Fox.GetCharPos(), Objects.Enemies.at(0).GetEnemyPos()))), 20, 190, 20, WHITE);
         }
@@ -4204,9 +4211,9 @@ namespace Game
         // };
         // Enemies.emplace_back(BrownSpider);
 
-        // ------------------- Wildlife NPCs ---------------------
-
-        // ------------------- Fox Family ---------------------
+        // ------------------- Wildlife NPCs ---------------------//
+        //                                                        //
+        // -------------------- Fox Family -----------------------//
 
         Enemy FoxFamOne
         {
@@ -4440,6 +4447,7 @@ namespace Game
         return Crows;
     }
 
+    // Debugging --------------------
     void DrawCollisionRecs(Prop& Prop, Vector2 CharacterWorldPos, Color RecColor)
     {
         if (Prop.IsInteractable()) {
