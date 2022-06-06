@@ -94,6 +94,13 @@ namespace Game
             Game::ExitUpdate(Info);
             Game::ExitDraw(Info);
         }
+        else if (Info.State == Game::State::GAMEOVER) {
+
+            ClearBackground(BLACK);
+
+            Game::GameOverUpdate(Info);
+            Game::GameOverDraw(Info);
+        }
         else if (Info.State == Game::State::TRANSITION) {
 
             Game::Transition(Info);
@@ -110,6 +117,10 @@ namespace Game
         // Call Ticks
         Info.Map.Tick(Objects.Fox.GetWorldPos());
         Objects.Fox.Tick(DeltaTime, Objects.Props, Objects.Enemies, Objects.Trees);
+        if (!Objects.Fox.IsAlive()) {
+            Info.NextState = Game::State::GAMEOVER;
+            Info.State = Game::State::TRANSITION;
+        }
 
         for (auto& Enemy:Objects.Enemies)
             Enemy.Tick(DeltaTime, Objects.Props, Objects.Fox.GetWorldPos(), Objects.Fox.GetCharPos(), Objects.Enemies, Objects.Trees);
@@ -375,7 +386,8 @@ namespace Game
 
     void GameOverUpdate(Game::Info& Info)
     {
-
+        Info.NextState = Game::State::EXIT;
+        Info.State = Game::State::TRANSITION;
     }
 
     void GameOverDraw(const Game::Info& Info)

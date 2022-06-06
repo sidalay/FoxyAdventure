@@ -50,7 +50,7 @@ void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies,
 
     CheckHealing();
 
-    IsAlive();
+    CheckIfAlive();
 }
 
 void Character::Draw()
@@ -508,7 +508,7 @@ Rectangle Character::GetAttackRec()
 
 }
 
-void Character::IsAlive()
+void Character::CheckIfAlive()
 {
     if (Health <= 1.f)
     {

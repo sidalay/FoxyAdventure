@@ -46,11 +46,12 @@ public:
     void UpdateSource();
     void CheckSleep();
     void CheckEmotion();
-    void IsAlive();
+    void CheckIfAlive();
     void SetSleep() {Sleeping = !Sleeping;}
     void DrawIndicator();
     void TakeDamage();
 
+    bool IsAlive() {return Alive;}
     float GetHealth() {return Health;}
     float GetSpeed() {return Speed;}
     Vector2 GetWorldPos() {return WorldPos;}
