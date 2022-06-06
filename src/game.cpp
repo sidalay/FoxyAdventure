@@ -171,47 +171,25 @@ namespace Game
         for (auto& PropType:Objects.Props.Under)
             for (auto& Prop:PropType) {
                 Prop.Draw(Objects.Fox.GetWorldPos());
-                // Draw Collision Squares
-                // DrawRectangle(Prop.GetCollisionRec(Objects.Fox.GetWorldPos()).x,
-                //               Prop.GetCollisionRec(Objects.Fox.GetWorldPos()).y,
-                //               Prop.GetCollisionRec(Objects.Fox.GetWorldPos()).width,
-                //               Prop.GetCollisionRec(Objects.Fox.GetWorldPos()).height, CLITERAL(Color){ 0, 121, 241, 150 });
-                // if (Prop.IsInteractable())
-                //     DrawRectangle(Prop.GetInteractRec(Objects.Fox.GetWorldPos()).x,
-                //                   Prop.GetInteractRec(Objects.Fox.GetWorldPos()).y,
-                //                   Prop.GetInteractRec(Objects.Fox.GetWorldPos()).width,
-                //                   Prop.GetInteractRec(Objects.Fox.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
+                
+                if (Info.DrawRectanglesOn)
+                    Game::DrawCollisionRecs(Prop, Objects.Fox.GetWorldPos(), CLITERAL(Color){ 0, 121, 241, 150 });
             }
 
         Objects.Fox.Draw();
-        // Draw Collision Squares ---------------------------------
-        // DrawRectangle(Objects.Fox.GetCollisionRec().x,
-        //               Objects.Fox.GetCollisionRec().y,
-        //               Objects.Fox.GetCollisionRec().width,
-        //               Objects.Fox.GetCollisionRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
-        
-        // Draw Attack Rectangle ----------------------------------
-        // if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE))
-        // {
-        //     DrawRectangle(Objects.Fox.GetAttackRec().x,
-        //                   Objects.Fox.GetAttackRec().y,
-        //                   Objects.Fox.GetAttackRec().width,
-        //                   Objects.Fox.GetAttackRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
-        // }
+
+        if (Info.DrawRectanglesOn) {
+            Game::DrawCollisionRecs(Objects.Fox);
+            Game::DrawAttackRecs(Objects.Fox);
+        }
 
         for (auto& Enemy:Objects.Enemies) {
             Enemy.Draw(Objects.Fox.GetWorldPos());
-            // Draw Collision Squares
-            // DrawRectangle(Enemy.GetCollisionRec().x,
-            //               Enemy.GetCollisionRec().y,
-            //               Enemy.GetCollisionRec().width,
-            //               Enemy.GetCollisionRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
-            // if (Enemy.IsAttacking()) {
-            //     DrawRectangle(Enemy.GetAttackRec().x,
-            //                 Enemy.GetAttackRec().y,
-            //                 Enemy.GetAttackRec().width,
-            //                 Enemy.GetAttackRec().height, CLITERAL(Color){ 230, 41, 55, 150 });
-            // }
+
+            if (Info.DrawRectanglesOn) {
+                Game::DrawCollisionRecs(Enemy, CLITERAL(Color){ 230, 41, 55, 150 });
+                Game::DrawAttackRecs(Enemy);
+            }
         }
 
         for (auto& Tree:Objects.Trees) {
@@ -225,16 +203,9 @@ namespace Game
         for (auto& PropType:Objects.Props.Over) 
             for (auto& Prop:PropType) {
                 Prop.Draw(Objects.Fox.GetWorldPos());
-                // Draw Collision Squares
-                // DrawRectangle(Prop.GetCollisionRec(Objects.Fox.GetWorldPos()).x,
-                //               Prop.GetCollisionRec(Objects.Fox.GetWorldPos()).y,
-                //               Prop.GetCollisionRec(Objects.Fox.GetWorldPos()).width,
-                //               Prop.GetCollisionRec(Objects.Fox.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
-                // if (Prop.IsInteractable())
-                //     DrawRectangle(Prop.GetInteractRec(Objects.Fox.GetWorldPos()).x,
-                //                   Prop.GetInteractRec(Objects.Fox.GetWorldPos()).y,
-                //                   Prop.GetInteractRec(Objects.Fox.GetWorldPos()).width,
-                //                   Prop.GetInteractRec(Objects.Fox.GetWorldPos()).height, CLITERAL(Color){ 200, 122, 255, 150 });
+                
+                if (Info.DrawRectanglesOn)
+                    Game::DrawCollisionRecs(Prop, Objects.Fox.GetWorldPos(), (Color){ 200, 122, 255, 150 });
             }
 
         Objects.Fox.DrawIndicator();
@@ -421,6 +392,54 @@ namespace Game
                 Info.Opacity = 0.f;
                 Info.State = Info.NextState;
             }
+        }
+    }
+
+    void DrawCollisionRecs(Prop& Prop, Vector2 CharacterWorldPos, Color RecColor)
+    {
+        DrawRectangle(
+            Prop.GetCollisionRec(CharacterWorldPos).x,
+            Prop.GetCollisionRec(CharacterWorldPos).y,
+            Prop.GetCollisionRec(CharacterWorldPos).width,
+            Prop.GetCollisionRec(CharacterWorldPos).height, 
+            RecColor
+        );
+
+        if (Prop.IsInteractable()) {
+            DrawRectangle(
+                Prop.GetInteractRec(CharacterWorldPos).x,
+                Prop.GetInteractRec(CharacterWorldPos).y,
+                Prop.GetInteractRec(CharacterWorldPos).width,
+                Prop.GetInteractRec(CharacterWorldPos).height, 
+                CLITERAL(Color){ 200, 122, 255, 150 }        
+            );
+        }
+    }
+
+    template <typename Object>
+    void DrawCollisionRecs(Object& Type, Color Color)
+    {   
+        DrawRectangle(
+            Type.GetCollisionRec().x,
+            Type.GetCollisionRec().y,
+            Type.GetCollisionRec().width,
+            Type.GetCollisionRec().height, 
+            Color
+        );
+    }
+
+    template <typename Object>
+    void DrawAttackRecs(Object& Type, Color Color)
+    {
+        if (Type.IsAttacking())
+        {
+            DrawRectangle(
+                Type.GetAttackRec().x,
+                Type.GetAttackRec().y,
+                Type.GetAttackRec().width,
+                Type.GetAttackRec().height,
+                Color
+            );
         }
     }
 

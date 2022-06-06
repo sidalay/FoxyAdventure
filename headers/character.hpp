@@ -52,6 +52,7 @@ public:
     void TakeDamage();
 
     bool IsAlive() {return Alive;}
+    bool IsAttacking() {return Attacking;}
     float GetHealth() {return Health;}
     float GetSpeed() {return Speed;}
     Vector2 GetWorldPos() {return WorldPos;}

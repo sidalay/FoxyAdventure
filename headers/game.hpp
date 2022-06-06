@@ -32,6 +32,8 @@ namespace Game
         bool ExitIsYes{false};
         Game::State State{Game::State::TRANSITION};
         Game::State NextState{Game::State::MAINMENU};
+
+        bool DrawRectanglesOn{false};
     };
 
     struct Objects
@@ -71,6 +73,12 @@ namespace Game
     std::vector<Prop> InitializeTrees(GameTexture& Textures);
     std::vector<Enemy> InitializeEnemies(Background& MapBG, Window& Window, GameTexture& Textures);
     std::vector<Enemy> InitializeCrows(Background& MapBG, Window& Window, GameTexture& Textures);
+
+    void DrawCollisionRecs(Prop& Prop, Vector2 CharacterWorldPos, Color RecColor = CLITERAL(Color){ 0, 238, 135, 100 });
+    template <typename Object>
+    void DrawCollisionRecs(Object& Type, Color Color = CLITERAL(Color){ 0, 238, 135, 100 });
+    template <typename Object>
+    void DrawAttackRecs(Object& Type, Color Color = CLITERAL(Color){ 0, 121, 241, 100 });
 }
 
 #endif // GAME_HPP
