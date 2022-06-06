@@ -5,6 +5,7 @@
 #include <vector>
 #include <random>
 #include <unordered_map>
+#include "headers/game.hpp"
 #include "headers/prop.hpp"
 #include "headers/sprite.hpp"
 #include "headers/window.hpp"
@@ -108,7 +109,7 @@ private:
     Rectangle Destination{};
     Window* Screen{};
     Background* World{};
-    GameTexture* GameTextures{};
+    GameTexture& GameTextures;
     
     static int MonsterDeaths;
     static int MonsterCount;
