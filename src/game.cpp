@@ -181,6 +181,9 @@ namespace Game
                     Objects.Fox.AddHealth(-0.5f);
         }
         else {
+            if (Info.NoClipOn)
+                Objects.Fox.SwitchCollidable();
+                
             Info.NoClipOn = false;
             Info.DrawRectanglesOn = false;
             Info.ShowFPS = false;
