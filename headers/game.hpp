@@ -58,11 +58,11 @@ namespace Game
     void Run();
     void Initialize(Window& Window, std::string Title);
     void CheckScreenSizing(Window& Window);
-    void Tick(Window& Window, Game::Info& Info, GameTexture& Textures, Game::Objects& Objects);
+    void Tick(Window& Window, Game::Info& Info, Game::Objects& Objects, GameTexture& Textures);
     void Update(Game::Info& Info, Game::Objects& Objects);
     void Draw(Game::Info& Info, Game::Objects& Objects);
     void PauseUpdate(Game::Info& Info, Game::Objects& Objects);
-    void PauseDraw(const Game::Info& Info, GameTexture& Textures, Game::Objects& Objects);
+    void PauseDraw(const Game::Info& Info, Game::Objects& Objects, GameTexture& Textures);
     void ExitUpdate(Game::Info& Info);
     void ExitDraw(const Game::Info& Info);
     void MainMenuUpdate(Game::Info& Info);

@@ -28,7 +28,7 @@ namespace Game
             // Start Game Loop
             while (!Info.ExitGame) 
             {
-                Game::Tick(Window, Info, Textures, Objects);
+                Game::Tick(Window, Info, Objects, Textures);
             }
         }
 
@@ -60,7 +60,7 @@ namespace Game
         }
     }
 
-    void Tick(Window& Window, Game::Info& Info, GameTexture& Textures, Game::Objects& Objects)
+    void Tick(Window& Window, Game::Info& Info, Game::Objects& Objects, GameTexture& Textures)
     {
         Game::CheckScreenSizing(Window);
 
@@ -85,7 +85,7 @@ namespace Game
             ClearBackground(BLACK);
 
             Game::PauseUpdate(Info, Objects);
-            Game::PauseDraw(Info, Textures, Objects);
+            Game::PauseDraw(Info, Objects, Textures);
         }
         else if (Info.State == Game::State::EXIT) {
 
@@ -327,7 +327,7 @@ namespace Game
         }
     }
 
-    void PauseDraw(const Game::Info& Info, GameTexture& Textures, Game::Objects& Objects)
+    void PauseDraw(const Game::Info& Info, Game::Objects& Objects, GameTexture& Textures)
     {
         DrawTextureEx(Textures.PauseBackground, Vector2{0.f,0.f}, 0.0f, 4.f, WHITE);
 
