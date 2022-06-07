@@ -202,7 +202,8 @@ namespace Game
                 
                 // Debugging --------------------
                 if (Info.DrawRectanglesOn)
-                    Game::DrawCollisionRecs(Prop, Objects.Fox.GetWorldPos());
+                    if (Prop.WithinScreen(Objects.Fox.GetWorldPos())) 
+                        Game::DrawCollisionRecs(Prop, Objects.Fox.GetWorldPos());
             }
 
         Objects.Fox.Draw();
@@ -217,10 +218,11 @@ namespace Game
             Enemy.Draw(Objects.Fox.GetWorldPos());
 
             // Debugging --------------------
-            if (Info.DrawRectanglesOn) {
-                Game::DrawCollisionRecs(Enemy, CLITERAL(Color){ 205, 0, 255, 150 });
-                Game::DrawAttackRecs(Enemy);
-            }
+            if (Info.DrawRectanglesOn) 
+                if (Enemy.WithinScreen(Objects.Fox.GetWorldPos())) {
+                    Game::DrawCollisionRecs(Enemy, CLITERAL(Color){ 205, 0, 255, 150 });
+                    Game::DrawAttackRecs(Enemy);
+                }
         }
 
         for (auto& Tree:Objects.Trees) {
@@ -228,7 +230,8 @@ namespace Game
 
             // Debugging --------------------
             if (Info.DrawRectanglesOn)
-                Game::DrawCollisionRecs(Tree, Objects.Fox.GetWorldPos());
+                if (Tree.WithinScreen(Objects.Fox.GetWorldPos())) 
+                    Game::DrawCollisionRecs(Tree, Objects.Fox.GetWorldPos());
         }
 
         for (auto& Crow:Objects.Crows) {
@@ -236,7 +239,8 @@ namespace Game
 
             // Debugging --------------------
             if (Info.DrawRectanglesOn)
-                Game::DrawCollisionRecs(Crow);
+                if (Crow.WithinScreen(Objects.Fox.GetWorldPos())) 
+                    Game::DrawCollisionRecs(Crow);
         }
 
         for (auto& PropType:Objects.Props.Over) 
@@ -245,7 +249,8 @@ namespace Game
                 
                 // Debugging --------------------
                 if (Info.DrawRectanglesOn)
-                    Game::DrawCollisionRecs(Prop, Objects.Fox.GetWorldPos(), (Color){ 200, 122, 255, 150 });
+                    if (Prop.WithinScreen(Objects.Fox.GetWorldPos())) 
+                        Game::DrawCollisionRecs(Prop, Objects.Fox.GetWorldPos(), (Color){ 200, 122, 255, 150 });
             }
 
         Objects.Fox.DrawIndicator();
