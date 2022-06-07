@@ -268,9 +268,11 @@ namespace Game
             }
             
             if (Info.ShowDevTools) {
+                DrawRectangle(15, 270, 220, 25, CLITERAL(Color){0,0,0,170});
+                DrawText("   Dev Tools Menu", 20, 273, 20, WHITE);
                 DrawRectangle(15, 300, 220, 240, CLITERAL(Color){0,0,0,170});
                 DrawText("  ---- Toggles ----", 20, 310, 20, WHITE);
-                DrawText("[`] Dev Tools", 20, 335, 20, WHITE);
+                DrawText("[`] Dev Tools", 20, 335, 20, !Info.DevToolsOn ? WHITE : LIME);
                 DrawText("[1] Noclip", 20, 355, 20, !Info.NoClipOn ? WHITE : LIME);
                 DrawText("[2] CollisionRecs", 20, 375, 20, !Info.DrawRectanglesOn ? WHITE : LIME);
                 DrawText("[3] FPS", 20, 395, 20, !Info.ShowFPS ? WHITE : LIME);
