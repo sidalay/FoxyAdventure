@@ -62,6 +62,7 @@ public:
     bool IsActive() {return Active;}
     bool IsOpened() {return Opened;}
     bool IsSpawned() {return Spawned;}
+    bool WithinScreen(Vector2 CharacterWorldPos);
     
     Vector2 GetWorldPos() {return WorldPos;}
     PropType GetType() {return Type;}

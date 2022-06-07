@@ -244,10 +244,7 @@ void Prop::Draw(Vector2 CharacterWorldPos)
     if (Spawned)
     {
         // Draw only if Prop is viewable in the screen frame
-        if ((WorldPos.x >= (CharacterWorldPos.x + 615) - (GetScreenWidth()/2 + (Object.Texture.width * Scale))) && 
-            (WorldPos.x <= (CharacterWorldPos.x + 615) + (GetScreenWidth()/2 + (Object.Texture.width * Scale))) &&
-            (WorldPos.y >= (CharacterWorldPos.y + 335) - (GetScreenHeight()/2 + (Object.Texture.height * Scale))) && 
-            (WorldPos.y <= (CharacterWorldPos.y + 335) + (GetScreenHeight()/2 + (Object.Texture.height * Scale))))
+        if (WithinScreen(CharacterWorldPos))
         {
             Visible = true;
 
@@ -341,6 +338,21 @@ void Prop::Draw(Vector2 CharacterWorldPos)
     }
 
     // CheckActivity(ScreenPos);
+}
+
+bool Prop::WithinScreen(Vector2 CharacterWorldPos)
+{
+    if (
+        (WorldPos.x >= (CharacterWorldPos.x + 615) - (GetScreenWidth()/2 + (Object.Texture.width * Scale))) && 
+        (WorldPos.x <= (CharacterWorldPos.x + 615) + (GetScreenWidth()/2 + (Object.Texture.width * Scale))) &&
+        (WorldPos.y >= (CharacterWorldPos.y + 335) - (GetScreenHeight()/2 + (Object.Texture.height * Scale))) && 
+        (WorldPos.y <= (CharacterWorldPos.y + 335) + (GetScreenHeight()/2 + (Object.Texture.height * Scale)))
+       ) {
+            return true;
+         }
+    else {
+        return false;
+    }
 }
 
 Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
