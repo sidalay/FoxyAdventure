@@ -528,12 +528,6 @@ namespace Game
         };
         Props.emplace_back(DungeonEntrance);
 
-        // std::vector<Prop> Altar
-        // {
-        //     Prop{"sprites/props/AltarDormant.png", Vector2{700,1025}, PropType::ALTAR, 4.f, false, true},
-        // };
-        // Props.emplace_back(Altar);
-
         std::vector<Prop> Grass
         {   
             // --------------------------------------------- Far Left Column -----------------------------------------------
@@ -4109,7 +4103,7 @@ namespace Game
             Sprite{Textures.MushroomRedHurt, 4, 4},
             Sprite{Textures.MushroomRedDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{555, 335}, &Window, &MapBG, Textures, 1
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{555, 335}, &Window, &MapBG, Textures, 2
         };
         Enemies.emplace_back(RedMushroomOne);
 
@@ -4121,7 +4115,7 @@ namespace Game
             Sprite{Textures.MushroomBlueHurt, 4, 4},
             Sprite{Textures.MushroomBlueDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{628, 236}, &Window, &MapBG, Textures, 1
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{628, 236}, &Window, &MapBG, Textures, 2
         };
         Enemies.emplace_back(BlueMushroomOne);
 
@@ -4133,7 +4127,7 @@ namespace Game
             Sprite{Textures.MushroomBlueHurt, 4, 4},
             Sprite{Textures.MushroomBlueDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1782, 226}, &Window, &MapBG, Textures, 1
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1782, 226}, &Window, &MapBG, Textures, 2
         };
         Enemies.emplace_back(BlueMushroomTwo);
 
@@ -4208,7 +4202,7 @@ namespace Game
             Sprite{Textures.CreaturePurpleHurt, 1, 4},
             Sprite{Textures.CreaturePurpleDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::CREATURE, EnemyType::NORMAL, Vector2{1660, 3366}, &Window, &MapBG, Textures, 1
+            EnemyType::CREATURE, EnemyType::NORMAL, Vector2{1660, 3366}, &Window, &MapBG, Textures
         };
         Enemies.emplace_back(PurpleCreature);
 
@@ -4220,7 +4214,7 @@ namespace Game
             Sprite{Textures.ImpGreenHurt, 1, 4},
             Sprite{Textures.ImpGreenDeath, 11, 4},
             Sprite{Textures.ImpGreenProjectile, 4, 4},
-            EnemyType::IMP, EnemyType::NORMAL, Vector2{1800, 3666}, &Window, &MapBG, Textures, 1
+            EnemyType::IMP, EnemyType::NORMAL, Vector2{1800, 3666}, &Window, &MapBG, Textures
         };
         Enemies.emplace_back(GreenImp);
 
