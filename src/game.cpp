@@ -4268,7 +4268,7 @@ namespace Game
         };
         Enemies.emplace_back(FoxFamTwo);
 
-        Enemy FoxFamFour
+        Enemy FoxFamThree
         {
             Sprite{Textures.FoxFamilyIdle, 5, 2},
             Sprite{Textures.FoxFamilyIdleTwo, 14, 2},
@@ -4277,9 +4277,9 @@ namespace Game
             Sprite{Textures.FoxFamilySleep, 6, 2},
             EnemyType::FOX, Vector2{428, 2840}, &Window, &MapBG, Textures, 2.5f
         };
-        Enemies.emplace_back(FoxFamFour);
+        Enemies.emplace_back(FoxFamThree);
 
-        Enemy FoxFamFive
+        Enemy FoxFamFour
         {
             Sprite{Textures.FoxFamilyIdle, 5, 2},
             Sprite{Textures.FoxFamilyIdleTwo, 14, 2},
@@ -4288,7 +4288,7 @@ namespace Game
             Sprite{Textures.FoxFamilySleep, 6, 2},
             EnemyType::FOX, Vector2{354, 2661}, &Window, &MapBG, Textures, 2.5f
         };
-        Enemies.emplace_back(FoxFamFive);
+        Enemies.emplace_back(FoxFamFour);
 
         // ------------------- Squirrels ---------------------
         
@@ -4332,7 +4332,7 @@ namespace Game
             Sprite{Textures.SquirrelWalk, 4, 2},
             Sprite{Textures.SquirrelEat, 2, 2},
             Sprite{Textures.SquirrelEat, 2, 2},
-            EnemyType::SQUIRREL, Vector2{3855, 237}, &Window, &MapBG, Textures, 2.0f
+            EnemyType::SQUIRREL, Vector2{2392, 244}, &Window, &MapBG, Textures, 2.0f
         };
         Enemies.emplace_back(SquirrelFour);
 
@@ -4401,6 +4401,139 @@ namespace Game
             EnemyType::SQUIRREL, Vector2{345, 1663}, &Window, &MapBG, Textures, 2.0f
         };
         Enemies.emplace_back(SquirrelTen);
+
+        Enemy SquirrelEleven
+        {
+            Sprite{Textures.SquirrelIdle, 6, 2},
+            Sprite{Textures.SquirrelIdleTwo, 6, 2},
+            Sprite{Textures.SquirrelWalk, 4, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            EnemyType::SQUIRREL, Vector2{254, 532}, &Window, &MapBG, Textures, 2.0f
+        };
+        Enemies.emplace_back(SquirrelEleven);
+
+        Enemy SquirrelTwelve
+        {
+            Sprite{Textures.SquirrelIdle, 6, 2},
+            Sprite{Textures.SquirrelIdleTwo, 6, 2},
+            Sprite{Textures.SquirrelWalk, 4, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            EnemyType::SQUIRREL, Vector2{334, 432}, &Window, &MapBG, Textures, 2.0f
+        };
+        Enemies.emplace_back(SquirrelTwelve);
+
+        Enemy SquirrelThirteen
+        {
+            Sprite{Textures.SquirrelIdle, 6, 2},
+            Sprite{Textures.SquirrelIdleTwo, 6, 2},
+            Sprite{Textures.SquirrelWalk, 4, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            EnemyType::SQUIRREL, Vector2{452, 533}, &Window, &MapBG, Textures, 2.0f
+        };
+        Enemies.emplace_back(SquirrelThirteen);
+
+        Enemy SquirrelFourteen
+        {
+            Sprite{Textures.SquirrelIdle, 6, 2},
+            Sprite{Textures.SquirrelIdleTwo, 6, 2},
+            Sprite{Textures.SquirrelWalk, 4, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            EnemyType::SQUIRREL, Vector2{1588, 1780}, &Window, &MapBG, Textures, 2.0f
+        };
+        Enemies.emplace_back(SquirrelFourteen);
+
+        Enemy SquirrelFifteen
+        {
+            Sprite{Textures.SquirrelIdle, 6, 2},
+            Sprite{Textures.SquirrelIdleTwo, 6, 2},
+            Sprite{Textures.SquirrelWalk, 4, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            EnemyType::SQUIRREL, Vector2{1739, 2002}, &Window, &MapBG, Textures, 2.0f
+        };
+        Enemies.emplace_back(SquirrelFifteen);
+
+        Enemy SquirrelSixteen
+        {
+            Sprite{Textures.SquirrelIdle, 6, 2},
+            Sprite{Textures.SquirrelIdleTwo, 6, 2},
+            Sprite{Textures.SquirrelWalk, 4, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            EnemyType::SQUIRREL, Vector2{2534, 2520}, &Window, &MapBG, Textures, 2.0f
+        };
+        Enemies.emplace_back(SquirrelSixteen);
+
+        Enemy SquirrelSeventeen
+        {
+            Sprite{Textures.SquirrelIdle, 6, 2},
+            Sprite{Textures.SquirrelIdleTwo, 6, 2},
+            Sprite{Textures.SquirrelWalk, 4, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            EnemyType::SQUIRREL, Vector2{2086, 2928}, &Window, &MapBG, Textures, 2.0f
+        };
+        Enemies.emplace_back(SquirrelSeventeen);
+
+        Enemy SquirrelEighteen
+        {
+            Sprite{Textures.SquirrelIdle, 6, 2},
+            Sprite{Textures.SquirrelIdleTwo, 6, 2},
+            Sprite{Textures.SquirrelWalk, 4, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            EnemyType::SQUIRREL, Vector2{3964, 2537}, &Window, &MapBG, Textures, 2.0f
+        };
+        Enemies.emplace_back(SquirrelEighteen);
+
+        Enemy SquirrelNineTeen
+        {
+            Sprite{Textures.SquirrelIdle, 6, 2},
+            Sprite{Textures.SquirrelIdleTwo, 6, 2},
+            Sprite{Textures.SquirrelWalk, 4, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            EnemyType::SQUIRREL, Vector2{3658, 3859}, &Window, &MapBG, Textures, 2.0f
+        };
+        Enemies.emplace_back(SquirrelNineTeen);
+
+        Enemy SquirrelTwenty
+        {
+            Sprite{Textures.SquirrelIdle, 6, 2},
+            Sprite{Textures.SquirrelIdleTwo, 6, 2},
+            Sprite{Textures.SquirrelWalk, 4, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            EnemyType::SQUIRREL, Vector2{480, 3813}, &Window, &MapBG, Textures, 2.0f
+        };
+        Enemies.emplace_back(SquirrelTwenty);
+
+        Enemy SquirrelTwentyOne
+        {
+            Sprite{Textures.SquirrelIdle, 6, 2},
+            Sprite{Textures.SquirrelIdleTwo, 6, 2},
+            Sprite{Textures.SquirrelWalk, 4, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            EnemyType::SQUIRREL, Vector2{661, 3847}, &Window, &MapBG, Textures, 2.0f
+        };
+        Enemies.emplace_back(SquirrelTwentyOne);
+
+        Enemy SquirrelTwentyTwo
+        {
+            Sprite{Textures.SquirrelIdle, 6, 2},
+            Sprite{Textures.SquirrelIdleTwo, 6, 2},
+            Sprite{Textures.SquirrelWalk, 4, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            Sprite{Textures.SquirrelEat, 2, 2},
+            EnemyType::SQUIRREL, Vector2{1354, 3846}, &Window, &MapBG, Textures, 2.0f
+        };
+        Enemies.emplace_back(SquirrelTwentyTwo);
+
 
         return Enemies;
     }
