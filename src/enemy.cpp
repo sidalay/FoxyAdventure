@@ -124,6 +124,8 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
     if (Visible) {
         if (Type != EnemyType::NPC) {
             if (Alive && Summoned) {
+                UpdateScreenPos(HeroWorldPos);
+
                 SpriteTick(DeltaTime);
 
                 CheckDirection();
@@ -137,6 +139,8 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
 
         }
         else {
+            UpdateScreenPos(HeroWorldPos);
+            
             SpriteTick(DeltaTime);
 
             CheckDirection();
@@ -164,10 +168,10 @@ void Enemy::Draw(Vector2 HeroWorldPos)
         if (!OOB) {
             if (Type == EnemyType::NORMAL || Type == EnemyType::NPC || (Type == EnemyType::BOSS && Summoned)) {
                 if (Hurting) {
-                    DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, RED);
+                    DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(ScreenPos,Scale), Vector2{},0.f, RED);
                 }
                 else {
-                    DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, WHITE);
+                    DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(ScreenPos,Scale), Vector2{},0.f, WHITE);
                 }
 
                 // Draw Ranged projectile
@@ -178,7 +182,7 @@ void Enemy::Draw(Vector2 HeroWorldPos)
         }
         // OOB is used for debugging purposes only
         else {
-            DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(EnemyPos,Scale), Vector2{},0.f, PURPLE);
+            DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(ScreenPos,Scale), Vector2{},0.f, PURPLE);
         }
 
         if (Alive && Summoned && (Type != EnemyType::NPC)) {
@@ -214,6 +218,11 @@ void Enemy::SpriteTick(float DeltaTime)
             Sprite.Tick(DeltaTime);
         }
     }
+}
+
+void Enemy::UpdateScreenPos(Vector2 HeroWorldPos)
+{
+    ScreenPos = Vector2Subtract(WorldPos, HeroWorldPos);
 }
 
 void Enemy::CheckDirection()
@@ -289,7 +298,6 @@ void Enemy::CheckDirection()
 void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     PrevWorldPos = WorldPos;
-    EnemyPos = Vector2Subtract(WorldPos, HeroWorldPos); // Where the Enemy is drawn on the screen
     
     // Enemy movement AI
     EnemyAI();
@@ -381,8 +389,8 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWo
                     */
                     Vector2 PropScreenPos{Vector2{Prop.GetCollisionRec(HeroWorldPos).x, Prop.GetCollisionRec(HeroWorldPos).y}}; // Grab the collision rectangle screen position
                     Vector2 RadiusAroundEnemy{5,5};
-                    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Prop
-                    float AvoidProp{Vector2Length(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), EnemyPos))};
+                    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), ScreenPos)), Speed)}; // Calculate the distance from Enemy to Prop
+                    float AvoidProp{Vector2Length(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), ScreenPos))};
 
                     // move away from moveable objects 
                     if (Prop.IsMoveable()) {
@@ -418,8 +426,8 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWo
             if (Tree.HasCollision()) {
                 Vector2 TreeScreenPos{Vector2{Tree.GetCollisionRec(HeroWorldPos).x, Tree.GetCollisionRec(HeroWorldPos).y}}; // Grab the collision rectangle screen position
                 Vector2 RadiusAroundEnemy{5,5};
-                Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(TreeScreenPos, RadiusAroundEnemy), EnemyPos)), Speed)}; // Calculate the distance from Enemy to Tree
-                float AvoidTree{Vector2Length(Vector2Subtract(Vector2Add(TreeScreenPos, RadiusAroundEnemy), EnemyPos))};
+                Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(TreeScreenPos, RadiusAroundEnemy), ScreenPos)), Speed)}; // Calculate the distance from Enemy to Tree
+                float AvoidTree{Vector2Length(Vector2Subtract(Vector2Add(TreeScreenPos, RadiusAroundEnemy), ScreenPos))};
 
                 if (Tree.IsSpawned()) {
                     if (AvoidTree <= MinRange) {
@@ -440,8 +448,8 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWo
                 Therefore it will never collide with a Enemy.
             */
             Vector2 RadiusAroundEnemy{5,5};
-            Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), EnemyPos)), Speed)}; // Calculate the distance from this->Enemy to Enemy
-            float AvoidEnemy{Vector2Length(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), EnemyPos))};
+            Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), ScreenPos)), Speed)}; // Calculate the distance from this->Enemy to Enemy
+            float AvoidEnemy{Vector2Length(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), ScreenPos))};
 
             if ((AvoidEnemy <= MinRange) && !Dying) {
                 WorldPos = Vector2Subtract(WorldPos, ToTarget);
@@ -470,7 +478,7 @@ Vector2 Enemy::UpdateProjectile()
         Trajectory = 1.f;
     }
 
-    Vector2 ProjectilePath{EnemyPos}; 
+    Vector2 ProjectilePath{ScreenPos}; 
 
     switch (Face)
     {
@@ -704,7 +712,7 @@ void Enemy::EnemyAI()
 void Enemy::EnemyAggro(Vector2 HeroScreenPos)
 {
     // Calculate the distance from Enemy to Player
-    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50,50}), EnemyPos)), Speed)}; 
+    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50,50}), ScreenPos)), Speed)}; 
     
     if (Alive && !Stopped && !Invulnerable && !Blocked && !Dying) {
         Vector2 RadiusAroundEnemy{};
@@ -718,7 +726,7 @@ void Enemy::EnemyAggro(Vector2 HeroScreenPos)
             RadiusAroundEnemy = {50.f,50.f};
         }
 
-        float Aggro{Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, RadiusAroundEnemy), EnemyPos))};
+        float Aggro{Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, RadiusAroundEnemy), ScreenPos))};
 
 
         // Chasing: Only move enemy towards Player if within a certain range
@@ -770,7 +778,7 @@ void Enemy::DrawHP()
     Vector2 LifeBarPosAdd{SingleBarWidth, 0};       // spacing between each life 'bar'
 
     // update lifebarpos to center of enemy sprite
-    LifeBarPos = Vector2Subtract(EnemyPos, Vector2{CenterLifeBar, 20});
+    LifeBarPos = Vector2Subtract(ScreenPos, Vector2{CenterLifeBar, 20});
 
     for (auto i = 1; i <= MaxHP; ++i) {
         if (i <= Health) {
@@ -822,8 +830,8 @@ Rectangle Enemy::GetCollisionRec()
 {
     return Rectangle 
     {
-        EnemyPos.x + ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .31f,
-        EnemyPos.y + ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .31f,
+        ScreenPos.x + ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .31f,
+        ScreenPos.y + ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .31f,
         ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .40f,
         ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .60f
     };
@@ -878,32 +886,32 @@ Rectangle Enemy::GetAttackRec()
             case Direction::DOWN:
                 return Rectangle
                 {
-                    EnemyPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/6.f,
-                    EnemyPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY * Scale),
+                    ScreenPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/6.f,
+                    ScreenPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY * Scale),
                     ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
                     ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/3.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
                 }; 
             case Direction::LEFT: 
                 return Rectangle
                 {
-                    EnemyPos.x - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/1.8f),
-                    EnemyPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/6.f),
+                    ScreenPos.x - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/1.8f),
+                    ScreenPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/6.f),
                     ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/3.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
                     ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
                 }; 
             case Direction::RIGHT:
                 return Rectangle
                 {
-                    EnemyPos.x + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX * Scale)/1.2f,
-                    EnemyPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/6.f),
+                    ScreenPos.x + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX * Scale)/1.2f,
+                    ScreenPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/6.f),
                     ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/3.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
                     ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
                 }; 
             case Direction::UP:
                 return Rectangle
                 {
-                    EnemyPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/6.f,
-                    EnemyPos.y - CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/1.5f,
+                    ScreenPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/6.f,
+                    ScreenPos.y - CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/1.5f,
                     ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
                     ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/3.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
                 };

@@ -57,6 +57,7 @@ public:
     void Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void Draw(Vector2 HeroWorldPos);
     void SpriteTick(float DeltaTime);
+    void UpdateScreenPos(Vector2 HeroWorldPos);
     void CheckDirection();
     void CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void NeutralAction();
@@ -85,7 +86,7 @@ public:
     int GetTotalMonsters() {return MonsterCount;}
     Vector2 GetWorldPos() {return WorldPos;}
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}
-    Vector2 GetEnemyPos() {return EnemyPos;}
+    Vector2 GetEnemyPos() {return ScreenPos;}
     Vector2 UpdateProjectile();
     EnemyType GetType() {return Type;}
     Rectangle GetCollisionRec();
@@ -100,7 +101,7 @@ private:
     EnemyType Race{};                    // What kind of Enemy
     EnemyType Type{};                    // If the Enemy is NORMAL, BOSS, or NPC type
 
-    Vector2 EnemyPos{};                  // Where the character is on the screen
+    Vector2 ScreenPos{};                  // Where the character is on the screen
     Vector2 WorldPos{};                  // Where the character is in the world
     Vector2 PrevWorldPos{};
     Vector2 Movement{};
