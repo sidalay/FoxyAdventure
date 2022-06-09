@@ -36,7 +36,7 @@ public:
     void Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void Draw();
     void SpriteTick(float DeltaTime);
-    void UpdateCharacterPos();
+    void UpdateScreenPos();
     void CheckDirection();
     void CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void UndoMovement();
@@ -57,7 +57,7 @@ public:
     float GetSpeed() {return Speed;}
     Vector2 GetWorldPos() {return WorldPos;}
     Vector2 GetPrevWorldPos() {return PrevWorldPos;}
-    Vector2 GetCharPos() {return CharacterPos;}
+    Vector2 GetCharPos() {return ScreenPos;}
     Emotion GetEmotion() {return State;}
     Rectangle GetCollisionRec();
     Rectangle GetAttackRec();
@@ -84,7 +84,7 @@ private:
     Window* Screen{};
     Background* World{};
     Vector2 Offset{615.f,335.f};         // Player offset vs Enemy/Prop WorldPos
-    Vector2 CharacterPos{};              // Where the character is on the screen
+    Vector2 ScreenPos{};              // Where the character is on the screen
     Vector2 WorldPos{362.f,2594.f};      // Where the character is in the world
     // Vector2 WorldPos{2334.f,2431};
     Vector2 PrevWorldPos{};
