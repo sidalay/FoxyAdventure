@@ -121,8 +121,7 @@ Enemy::Enemy(Sprite NpcIdle,
 
 void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {   
-    if (Alive) 
-            UpdateScreenPos(HeroWorldPos);
+    UpdateScreenPos(HeroWorldPos);
             
     if (Visible) {
         if (Type != EnemyType::NPC) {
