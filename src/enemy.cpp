@@ -121,10 +121,12 @@ Enemy::Enemy(Sprite NpcIdle,
 
 void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {   
+    if (Alive) 
+            UpdateScreenPos(HeroWorldPos);
+            
     if (Visible) {
         if (Type != EnemyType::NPC) {
             if (Alive && Summoned) {
-                UpdateScreenPos(HeroWorldPos);
 
                 SpriteTick(DeltaTime);
 
@@ -139,7 +141,6 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
 
         }
         else {
-            UpdateScreenPos(HeroWorldPos);
             
             SpriteTick(DeltaTime);
 
@@ -153,9 +154,8 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
         }
     }
     else {
-        if (Type == EnemyType::BOSS) {
+        if (Type == EnemyType::BOSS) 
             CheckBossSummon(HeroWorldPos);
-        }
     }
 }
 
@@ -448,7 +448,7 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWo
                 Therefore it will never collide with a Enemy.
             */
             Vector2 RadiusAroundEnemy{5,5};
-            Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), ScreenPos)), Speed)}; // Calculate the distance from this->Enemy to Enemy
+            Vector2 ToTarget{Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), ScreenPos)), Speed)}; // Calculate the distance from this->Enemy to Enemy
             float AvoidEnemy{Vector2Length(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), ScreenPos))};
 
             if ((AvoidEnemy <= MinRange) && !Dying) {
