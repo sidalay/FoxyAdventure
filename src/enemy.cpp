@@ -827,13 +827,49 @@ void Enemy::CheckBossSummon(Vector2 HeroWorldPos)
 
 Rectangle Enemy::GetCollisionRec()
 {
-    return Rectangle 
-    {
-        ScreenPos.x + ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .31f,
-        ScreenPos.y + ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .31f,
-        ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .40f,
-        ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .60f
-    };
+    switch (Race)
+    {   
+        case EnemyType::FOX:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .31f,
+                ScreenPos.y + ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .40f,
+                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .40f,
+                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .30f
+            };
+        }
+        case EnemyType::CROW:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .31f,
+                ScreenPos.y + ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .31f,
+                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .40f,
+                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .30f
+            };
+        }
+        case EnemyType::SQUIRREL:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .35f,
+                ScreenPos.y + ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .35f,
+                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .20f,
+                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .30f
+            };
+        }
+        default:
+        {
+            return Rectangle 
+            {
+                ScreenPos.x + ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .31f,
+                ScreenPos.y + ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .31f,
+                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .40f,
+                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .60f
+            };
+        }
+    }
 }
 
 Rectangle Enemy::GetAttackRec()
