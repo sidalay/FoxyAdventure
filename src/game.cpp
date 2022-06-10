@@ -4655,7 +4655,6 @@ namespace Game
         };
         Enemies.emplace_back(SquirrelThirtyThree);
 
-
         return Enemies;
     }
 
@@ -4981,6 +4980,138 @@ namespace Game
             EnemyType::CROW, Vector2{2638, 1440}, &Window, &MapBG, Textures, 2.5f
         };
         Crows.emplace_back(CrowTwentynine);
+
+        Enemy CrowThirty
+        {
+            Sprite{Textures.CrowIdle, 8, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            Sprite{Textures.CrowFlying, 5, 2},
+            Sprite{Textures.CrowWalk, 4, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            EnemyType::CROW, Vector2{638, 1791}, &Window, &MapBG, Textures, 2.5f
+        };
+        Crows.emplace_back(CrowThirty);
+
+        Enemy CrowThirtyone
+        {
+            Sprite{Textures.CrowIdle, 8, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            Sprite{Textures.CrowFlying, 5, 2},
+            Sprite{Textures.CrowWalk, 4, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            EnemyType::CROW, Vector2{549, 1951}, &Window, &MapBG, Textures, 2.5f
+        };
+        Crows.emplace_back(CrowThirtyone);
+
+        Enemy CrowThirtytwo
+        {
+            Sprite{Textures.CrowIdle, 8, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            Sprite{Textures.CrowFlying, 5, 2},
+            Sprite{Textures.CrowWalk, 4, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            EnemyType::CROW, Vector2{1436, 1431}, &Window, &MapBG, Textures, 2.5f
+        };
+        Crows.emplace_back(CrowThirtytwo);
+
+        Enemy CrowThirtythree
+        {
+            Sprite{Textures.CrowIdle, 8, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            Sprite{Textures.CrowFlying, 5, 2},
+            Sprite{Textures.CrowWalk, 4, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            EnemyType::CROW, Vector2{1761, 1146}, &Window, &MapBG, Textures, 2.5f
+        };
+        Crows.emplace_back(CrowThirtythree);
+
+        Enemy CrowThirtyfour
+        {
+            Sprite{Textures.CrowIdle, 8, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            Sprite{Textures.CrowFlying, 5, 2},
+            Sprite{Textures.CrowWalk, 4, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            EnemyType::CROW, Vector2{1453, 960}, &Window, &MapBG, Textures, 2.5f
+        };
+        Crows.emplace_back(CrowThirtyfour);
+
+        Enemy CrowThirtyfive
+        {
+            Sprite{Textures.CrowIdle, 8, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            Sprite{Textures.CrowFlying, 5, 2},
+            Sprite{Textures.CrowWalk, 4, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            EnemyType::CROW, Vector2{246, 774}, &Window, &MapBG, Textures, 2.5f
+        };
+        Crows.emplace_back(CrowThirtyfive);
+
+        Enemy CrowThirtysix
+        {
+            Sprite{Textures.CrowIdle, 8, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            Sprite{Textures.CrowFlying, 5, 2},
+            Sprite{Textures.CrowWalk, 4, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            EnemyType::CROW, Vector2{255, 1186}, &Window, &MapBG, Textures, 2.5f
+        };
+        Crows.emplace_back(CrowThirtysix);
+
+        Enemy CrowThirtyseven
+        {
+            Sprite{Textures.CrowIdle, 8, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            Sprite{Textures.CrowFlying, 5, 2},
+            Sprite{Textures.CrowWalk, 4, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            EnemyType::CROW, Vector2{154, 1563}, &Window, &MapBG, Textures, 2.5f
+        };
+        Crows.emplace_back(CrowThirtyseven);
+
+        Enemy CrowThirtyeight
+        {
+            Sprite{Textures.CrowIdle, 8, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            Sprite{Textures.CrowFlying, 5, 2},
+            Sprite{Textures.CrowWalk, 4, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            EnemyType::CROW, Vector2{860, 363}, &Window, &MapBG, Textures, 2.5f
+        };
+        Crows.emplace_back(CrowThirtyeight);
+
+        Enemy CrowThirtynine
+        {
+            Sprite{Textures.CrowIdle, 8, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            Sprite{Textures.CrowFlying, 5, 2},
+            Sprite{Textures.CrowWalk, 4, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            EnemyType::CROW, Vector2{2183, 1059}, &Window, &MapBG, Textures, 2.5f
+        };
+        Crows.emplace_back(CrowThirtynine);
+
+        Enemy CrowForty
+        {
+            Sprite{Textures.CrowIdle, 8, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            Sprite{Textures.CrowFlying, 5, 2},
+            Sprite{Textures.CrowWalk, 4, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            EnemyType::CROW, Vector2{2761, 560}, &Window, &MapBG, Textures, 2.5f
+        };
+        Crows.emplace_back(CrowForty);
+
+        Enemy CrowFortyone
+        {
+            Sprite{Textures.CrowIdle, 8, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            Sprite{Textures.CrowFlying, 5, 2},
+            Sprite{Textures.CrowWalk, 4, 2},
+            Sprite{Textures.CrowIdleTwo, 5, 2},
+            EnemyType::CROW, Vector2{1647, 563}, &Window, &MapBG, Textures, 2.5f
+        };
+        Crows.emplace_back(CrowFortyone);
 
         return Crows;
     }
