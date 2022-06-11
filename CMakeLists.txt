@@ -39,5 +39,12 @@ target_include_directories(Cryptex PRIVATE headers ${raylib_INCLUDE_DIRS})
 target_compile_features(Cryptex PRIVATE cxx_std_20)
 target_compile_options(Cryptex PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-Wall -Wextra -Wpedantic -Wno-missing-field-initializers>)
 
+# Checks if OSX and links appropriate frameworks (Only required on MacOS)
+if (APPLE)
+    target_link_libraries(${PROJECT_NAME} "-framework IOKit")
+    target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
+    target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
+endif()
+
 # set up assets
 file(COPY sprites DESTINATION ${CMAKE_BINARY_DIR})
