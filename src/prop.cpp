@@ -796,11 +796,6 @@ bool Prop::CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Directio
     return Colliding;
 }
 
-void Prop::CheckActivity(Vector2 ScreenPos)
-{
-    
-}
-
 void Prop::DrawSpeech()
 {
     if (Type == PropType::TREASURE)

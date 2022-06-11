@@ -74,7 +74,6 @@ public:
     void SetOpened(bool Input) {Opened = Input;}
     void UndoMovement() {WorldPos = PrevWorldPos;}
     bool CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Direction, float Speed, std::vector<std::vector<Prop>>& Props);
-    void CheckActivity(Vector2 ScreenPos);
 
     void DrawSpeech();
     
