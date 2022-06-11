@@ -101,7 +101,7 @@ Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures,
     }
 }
 
-void Prop::Tick(float DeltaTime, Background& Map)
+void Prop::Tick(float DeltaTime)
 {
     if (Visible) {
         // Play NPC idle animation when NOT interacting

@@ -52,7 +52,7 @@ public:
          Progress Act = Progress::ACT_O, PropType NPC = PropType::NPC_O, 
          std::string ItemName = "None", float ItemScale = 2.f);
     
-    void Tick(float DeltaTime, Background& Map);
+    void Tick(float DeltaTime);
     void Draw(Vector2 CharacterWorldPos);
 
     bool HasCollision() {return Collidable;}

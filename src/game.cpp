@@ -120,22 +120,29 @@ namespace Game
             Info.State = Game::State::TRANSITION;
         }
 
-        for (auto& Enemy:Objects.Enemies)
+        for (auto& Enemy:Objects.Enemies) {
             Enemy.Tick(DeltaTime, Objects.Props, Objects.Fox.GetWorldPos(), Objects.Fox.GetCharPos(), Objects.Enemies, Objects.Trees);
+        }
 
-        for (auto& Crow:Objects.Crows)
+        for (auto& Crow:Objects.Crows) {
             Crow.Tick(DeltaTime, Objects.Props, Objects.Fox.GetWorldPos(), Objects.Fox.GetCharPos(), Objects.Enemies, Objects.Trees);
+        }
 
-        for (auto& Proptype:Objects.Props.Under)
-            for (auto& Prop:Proptype)
-                Prop.Tick(DeltaTime, Info.Map);
+        for (auto& Proptype:Objects.Props.Under) {
+            for (auto& Prop:Proptype) {
+                Prop.Tick(DeltaTime);
+            }
+        }
 
-        for (auto& Tree:Objects.Trees)
-            Tree.Tick(DeltaTime, Info.Map);
+        for (auto& Tree:Objects.Trees) {
+            Tree.Tick(DeltaTime);
+        }
 
-        for (auto& Proptype:Objects.Props.Over)
-            for (auto& Prop:Proptype)
-                Prop.Tick(DeltaTime, Info.Map);
+        for (auto& Proptype:Objects.Props.Over) {
+            for (auto& Prop:Proptype) {
+                Prop.Tick(DeltaTime);
+            }
+        }
 
         if (IsKeyPressed(KEY_L))
             Objects.Fox.SetSleep();
@@ -196,7 +203,7 @@ namespace Game
     {
         Info.Map.Draw();
 
-        for (auto& PropType:Objects.Props.Under)
+        for (auto& PropType:Objects.Props.Under) {
             for (auto& Prop:PropType) {
                 Prop.Draw(Objects.Fox.GetWorldPos());
                 
@@ -205,6 +212,7 @@ namespace Game
                     if (Prop.WithinScreen(Objects.Fox.GetWorldPos())) 
                         Game::DrawCollisionRecs(Prop, Objects.Fox.GetWorldPos());
             }
+        }
 
         Objects.Fox.Draw();
 
@@ -243,15 +251,16 @@ namespace Game
                     Game::DrawCollisionRecs(Crow);
         }
 
-        for (auto& PropType:Objects.Props.Over) 
+        for (auto& PropType:Objects.Props.Over) {
             for (auto& Prop:PropType) {
                 Prop.Draw(Objects.Fox.GetWorldPos());
                 
                 // Debugging --------------------
                 if (Info.DrawRectanglesOn)
                     if (Prop.WithinScreen(Objects.Fox.GetWorldPos())) 
-                        Game::DrawCollisionRecs(Prop, Objects.Fox.GetWorldPos(), (Color){ 200, 122, 255, 150 });
+                        Game::DrawCollisionRecs(Prop, Objects.Fox.GetWorldPos(), Color{ 200, 122, 255, 150 });
             }
+        }
 
         Objects.Fox.DrawIndicator();
         
@@ -378,10 +387,10 @@ namespace Game
         DrawText("No", 690, 380, 20, WHITE);
         
         if (Info.ExitIsYes) {
-            DrawRectangle(560, 375, 55, 30, (Color){ 0, 238, 135, 100 });
+            DrawRectangle(560, 375, 55, 30, Color{ 0, 238, 135, 100 });
         }
         else {
-            DrawRectangle(675, 375, 55, 30, (Color){ 0, 238, 135, 100 });
+            DrawRectangle(675, 375, 55, 30, Color{ 0, 238, 135, 100 });
         }
     }
 
@@ -411,10 +420,10 @@ namespace Game
         DrawText("QUIT", 582, 430, 30, WHITE);
         
         if (Info.MainMenuStart) {
-            DrawRectangle(557, 370, 123, 47, (Color){ 0, 238, 135, 100 });
+            DrawRectangle(557, 370, 123, 47, Color{ 0, 238, 135, 100 });
         }
         else {
-            DrawRectangle(557, 420, 123, 47, (Color){ 0, 238, 135, 100 });
+            DrawRectangle(557, 420, 123, 47, Color{ 0, 238, 135, 100 });
         }
     }
 
