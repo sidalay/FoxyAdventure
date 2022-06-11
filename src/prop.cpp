@@ -1,4 +1,4 @@
-#include "headers/prop.hpp"
+#include "prop.hpp"
 
 // Constructor for inanimate props
 Prop::Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, GameTexture& GameTextures, float Scale, bool Moveable, bool Interactable)

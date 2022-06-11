@@ -6,9 +6,9 @@
 #include <vector>
 #include <string>
 #include <tuple>
-#include "headers/sprite.hpp"
-#include "headers/background.hpp"
-#include "headers/gametextures.hpp"
+#include "sprite.hpp"
+#include "background.hpp"
+#include "gametextures.hpp"
 
 enum class PropType
 {

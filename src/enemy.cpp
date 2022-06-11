@@ -1,4 +1,4 @@
-#include "headers/enemy.hpp"
+#include "enemy.hpp"
 
 int Enemy::MonsterCount{};
 int Enemy::MonsterDeaths{};

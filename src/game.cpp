@@ -1,4 +1,4 @@
-#include "headers/game.hpp"
+#include "game.hpp"
 #include <assert.h>
 #include <vector>
 

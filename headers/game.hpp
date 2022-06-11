@@ -4,14 +4,14 @@
 #include <raylib.h>
 #include <string>
 #include <vector>
-#include "headers/hud.hpp"
-#include "headers/prop.hpp"
-#include "headers/sprite.hpp"
-#include "headers/window.hpp"
-#include "headers/enemy.hpp"
-#include "headers/character.hpp"
-#include "headers/background.hpp"
-#include "headers/gametextures.hpp"
+#include "hud.hpp"
+#include "prop.hpp"
+#include "sprite.hpp"
+#include "window.hpp"
+#include "enemy.hpp"
+#include "character.hpp"
+#include "background.hpp"
+#include "gametextures.hpp"
 
 namespace Game 
 {

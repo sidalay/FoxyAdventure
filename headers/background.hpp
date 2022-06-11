@@ -3,8 +3,8 @@
 
 #include <raylib.h>
 #include <raymath.h>
-#include "headers/window.hpp"
-#include "headers/gametextures.hpp"
+#include "window.hpp"
+#include "gametextures.hpp"
 
 class Background
 {

@@ -1,1 +1,1 @@
-#include "headers/treasure.hpp"
+#include "treasure.hpp"

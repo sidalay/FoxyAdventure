@@ -1,4 +1,4 @@
-#include "headers/background.hpp"
+#include "background.hpp"
 
 Background::Background(GameTexture& GameTextures)
     : GameTextures{&GameTextures}

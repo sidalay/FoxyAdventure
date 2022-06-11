@@ -1,4 +1,4 @@
-#include "headers/character.hpp"
+#include "character.hpp"
 
 Character::Character(Sprite Idle, 
                      Sprite Walk, 

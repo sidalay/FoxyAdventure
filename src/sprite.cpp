@@ -1,4 +1,4 @@
-#include "headers/sprite.hpp"
+#include "sprite.hpp"
 
 Sprite::Sprite(const Texture2D& Texture, float MaxFramesX, float MaxFramesY, float UpdateSpeed) 
     : Texture{Texture}, MaxFramesX{MaxFramesX}, MaxFramesY{MaxFramesY}, UpdateTime{UpdateSpeed}

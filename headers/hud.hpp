@@ -2,7 +2,7 @@
 #define HUD_HPP
 
 #include <raylib.h>
-#include "headers/character.hpp"
+#include "character.hpp"
 
 class HUD 
 {

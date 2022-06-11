@@ -3,3 +3,5 @@
 .VSCodeCounter
 *.ase
 *.aseprite
+cmake-build-debug
+build

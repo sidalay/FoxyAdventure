@@ -4,13 +4,13 @@
 #include <raylib.h>
 #include <raymath.h>
 #include <vector>
-#include "headers/prop.hpp"
-#include "headers/sprite.hpp"
-#include "headers/enemy.hpp"
-#include "headers/window.hpp"
-#include "headers/background.hpp"
-#include "headers/basecharacter.hpp"
-#include "headers/gametextures.hpp"
+#include "prop.hpp"
+#include "sprite.hpp"
+#include "enemy.hpp"
+#include "window.hpp"
+#include "background.hpp"
+#include "basecharacter.hpp"
+#include "gametextures.hpp"
 
 enum class Emotion 
 {

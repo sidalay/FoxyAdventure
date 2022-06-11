@@ -1,4 +1,4 @@
-#include "headers/hud.hpp"
+#include "hud.hpp"
 
 HUD::HUD(GameTexture& GameTextures)
     : GameTextures{&GameTextures}
