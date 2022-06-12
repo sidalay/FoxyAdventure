@@ -48,7 +48,7 @@ namespace Game
     {
         HUD Hud;
         Character Fox;
-        Props Props;
+        Props PropsContainer;
         std::vector<Enemy> Enemies;
         std::vector<Enemy> Crows;
         std::vector<Prop> Trees;

@@ -114,21 +114,21 @@ namespace Game
         float DeltaTime{GetFrameTime()};
 
         Info.Map.Tick(Objects.Fox.GetWorldPos());
-        Objects.Fox.Tick(DeltaTime, Objects.Props, Objects.Enemies, Objects.Trees);
+        Objects.Fox.Tick(DeltaTime, Objects.PropsContainer, Objects.Enemies, Objects.Trees);
         if (!Objects.Fox.IsAlive()) {
             Info.NextState = Game::State::GAMEOVER;
             Info.State = Game::State::TRANSITION;
         }
 
         for (auto& Enemy:Objects.Enemies) {
-            Enemy.Tick(DeltaTime, Objects.Props, Objects.Fox.GetWorldPos(), Objects.Fox.GetCharPos(), Objects.Enemies, Objects.Trees);
+            Enemy.Tick(DeltaTime, Objects.PropsContainer, Objects.Fox.GetWorldPos(), Objects.Fox.GetCharPos(), Objects.Enemies, Objects.Trees);
         }
 
         for (auto& Crow:Objects.Crows) {
-            Crow.Tick(DeltaTime, Objects.Props, Objects.Fox.GetWorldPos(), Objects.Fox.GetCharPos(), Objects.Enemies, Objects.Trees);
+            Crow.Tick(DeltaTime, Objects.PropsContainer, Objects.Fox.GetWorldPos(), Objects.Fox.GetCharPos(), Objects.Enemies, Objects.Trees);
         }
 
-        for (auto& Proptype:Objects.Props.Under) {
+        for (auto& Proptype:Objects.PropsContainer.Under) {
             for (auto& Prop:Proptype) {
                 Prop.Tick(DeltaTime);
             }
@@ -138,7 +138,7 @@ namespace Game
             Tree.Tick(DeltaTime);
         }
 
-        for (auto& Proptype:Objects.Props.Over) {
+        for (auto& Proptype:Objects.PropsContainer.Over) {
             for (auto& Prop:Proptype) {
                 Prop.Tick(DeltaTime);
             }
@@ -203,7 +203,7 @@ namespace Game
     {
         Info.Map.Draw();
 
-        for (auto& PropType:Objects.Props.Under) {
+        for (auto& PropType:Objects.PropsContainer.Under) {
             for (auto& Prop:PropType) {
                 Prop.Draw(Objects.Fox.GetWorldPos());
                 
@@ -251,7 +251,7 @@ namespace Game
                     Game::DrawCollisionRecs(Crow);
         }
 
-        for (auto& PropType:Objects.Props.Over) {
+        for (auto& PropType:Objects.PropsContainer.Over) {
             for (auto& Prop:PropType) {
                 Prop.Draw(Objects.Fox.GetWorldPos());
                 
