@@ -402,8 +402,8 @@ void Character::CheckAttack()
 void Character::CheckSleep()
 {
     if (Sleeping) {
-        
-        float DeltaTime{GetFrameTime()};\
+
+        float DeltaTime{GetFrameTime()};
         float UpdateTime{2.f/1.f};
         RunningTime += DeltaTime;    
 
