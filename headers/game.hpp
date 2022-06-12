@@ -73,11 +73,11 @@ namespace Game
     std::vector<Enemy> InitializeCrows(Background& MapBG, Window& Window, GameTexture& Textures);
 
     // Debugging --------------------
-    void DrawCollisionRecs(Prop& Prop, Vector2 CharacterWorldPos, Color RecColor = Color{ 0, 121, 241, 150 });
+    void DrawCollisionRecs(Prop& Prop, Vector2 CharacterWorldPos, Color RecColor = { 0, 121, 241, 150 });
     template <typename Object>
-    void DrawCollisionRecs(Object& Type, Color Color = Color{ 0, 238, 135, 150 });
+    void DrawCollisionRecs(Object& Type, Color RecColor = { 0, 238, 135, 150 });
     template <typename Object>
-    void DrawAttackRecs(Object& Type, Color Color = Color{ 240, 255, 20, 150 });
+    void DrawAttackRecs(Object& Type, Color RecColor = { 240, 255, 20, 150 });
 }
 
 #endif // GAME_HPP

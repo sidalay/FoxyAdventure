@@ -5155,7 +5155,7 @@ namespace Game
     }
 
     template <typename Object>
-    void DrawCollisionRecs(Object& Type, Color Color)
+    void DrawCollisionRecs(Object& Type, Color RecColor)
     {   
         DrawRectangle(
             Type.GetCollisionRec().x,
@@ -5167,7 +5167,7 @@ namespace Game
     }
 
     template <typename Object>
-    void DrawAttackRecs(Object& Type, Color Color)
+    void DrawAttackRecs(Object& Type, Color RecColor)
     {
         if (Type.IsAttacking())
         {
