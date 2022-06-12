@@ -1,8 +1,9 @@
 *.exe
 *.code-workspace
-.VSCodeCounter
 *.ase
 *.aseprite
+.vscode
+.VSCodeCounter
 cmake-build-debug
 build
 report.txt
