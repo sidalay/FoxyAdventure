@@ -7,7 +7,7 @@
 class HUD 
 {
 public:
-    HUD(GameTexture& GameTextures);
+    explicit HUD(GameTexture& GameTextures);
     
     void Tick();
     void Draw(float Health, Emotion State);

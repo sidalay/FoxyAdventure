@@ -5,3 +5,4 @@
 *.aseprite
 cmake-build-debug
 build
+report.txt

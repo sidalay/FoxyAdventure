@@ -9,7 +9,7 @@
 class Background
 {
 public:
-    Background(GameTexture& GameTextures);
+    explicit Background(GameTexture& GameTextures);
     ~Background() = default;
     Background(const Background&) = delete;
     Background(Background&&) = default;

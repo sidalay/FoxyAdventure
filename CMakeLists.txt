@@ -22,7 +22,7 @@ if (NOT raylib_FOUND)
 endif()
 
 # building an executable
-add_executable(Cryptex 
+add_executable(${PROJECT_NAME} 
     src/background.cpp
     src/basecharacter.cpp
     src/character.cpp
@@ -35,10 +35,10 @@ add_executable(Cryptex
     src/sprite.cpp
     src/treasure.cpp
 )
-target_link_libraries(Cryptex PRIVATE raylib)
-target_include_directories(Cryptex PRIVATE headers ${raylib_INCLUDE_DIRS})
-target_compile_features(Cryptex PRIVATE cxx_std_20)
-target_compile_options(Cryptex PRIVATE -Wall -Wextra -Wpedantic)
+target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
+target_include_directories(${PROJECT_NAME} PRIVATE headers ${raylib_INCLUDE_DIRS})
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
+target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic)
 
 # Checks if OSX and links appropriate frameworks (Only required on MacOS)
 if (APPLE)

@@ -15,7 +15,7 @@ struct Sprite
     float RunningTime{};
 
     Sprite() = default;
-    Sprite(const Texture2D& Texture, float MaxFramesX = 1, float MaxFramesY = 1, float UpdateSpeed = 1.f/8.f);
+    explicit Sprite(const Texture2D& Texture, float MaxFramesX = 1, float MaxFramesY = 1, float UpdateSpeed = 1.f/8.f);
     void Tick(float DeltaTime);
     Rectangle GetSourceRec();
     Rectangle GetPosRec(const Vector2& ScreenPos, float Scale);

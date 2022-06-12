@@ -56,7 +56,7 @@ namespace Game
     };
 
     void Run();
-    void Initialize(Window& Window, std::string Title);
+    void Initialize(Window& Window, const std::string& Title);
     void CheckScreenSizing(Window& Window);
     void Tick(Window& Window, Game::Info& Info, Game::Objects& Objects, GameTexture& Textures);
     void Update(Game::Info& Info, Game::Objects& Objects);

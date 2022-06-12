@@ -35,7 +35,7 @@ namespace Game
         CloseWindow();
     }
 
-    void Initialize(Window& Window, std::string Title)
+    void Initialize(Window& Window, const std::string& Title)
     {
         SetTraceLogLevel(LOG_WARNING);
         InitWindow(Window.x, Window.y, Title.c_str());
