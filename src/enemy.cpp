@@ -426,9 +426,11 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWo
                 Vector2 TreeScreenPos{Vector2{Tree.GetCollisionRec(HeroWorldPos).x, Tree.GetCollisionRec(HeroWorldPos).y}}; // Grab the collision rectangle screen position
                 Vector2 RadiusAroundEnemy{5,5};
                 Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(TreeScreenPos, RadiusAroundEnemy), ScreenPos)), Speed)}; // Calculate the distance from Enemy to Tree
-                float AvoidTree{Vector2Length(Vector2Subtract(Vector2Add(TreeScreenPos, RadiusAroundEnemy), ScreenPos))};
 
                 if (Tree.IsSpawned()) {
+
+                    float AvoidTree{Vector2Length(Vector2Subtract(Vector2Add(TreeScreenPos, RadiusAroundEnemy), ScreenPos))};
+                    
                     if (AvoidTree <= MinRange) {
                         WorldPos = Vector2Subtract(WorldPos, ToTarget);
                     }
@@ -501,10 +503,10 @@ Vector2 Enemy::UpdateProjectile()
 void Enemy::TakeDamage()
 {
     DamageTime += GetFrameTime();
-    float UpdateTime {0.7f};
-    float HurtUpdateTime{0.6f};
 
     if (IsAttacked) {
+        float UpdateTime {0.7f};
+        float HurtUpdateTime{0.6f};
         
         // Knock enemy back a few units while hurt
         if (DamageTime <= HurtUpdateTime) {
@@ -556,10 +558,10 @@ void Enemy::TakeDamage()
 
 void Enemy::CheckAlive(float DeltaTime) 
 {
-    // Amount of time needed for death animation to complete beginning to end
-    float EndTime{1.35f};
-
     if (Health <= 0) {
+        // Amount of time needed for death animation to complete beginning to end
+        float EndTime{1.35f};
+
         // Set to death sprite
         CurrentSprite = &Sprites.at(4);
         

@@ -371,9 +371,10 @@ void Character::CheckAttack()
     AttackTime += GetFrameTime();
 
     if (!Locked) {
-        float AttackResetTime{0.7f};
-
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE)) {
+            
+            float AttackResetTime{0.7f};
+
             // Attack animation & damage window lasts 0.4 seconds
             if (AttackTime < 0.4f) {
                 Sleeping = false;
