@@ -6,7 +6,7 @@ namespace Game
 {
     void Run() 
     {
-        Window Window {1280, 720};                                                                        
+        Window Window {1280, 720}; 
         Game::Initialize(Window, "Cryptex Adventure");      // Set the program's configurations
 
         if (IsWindowReady())
