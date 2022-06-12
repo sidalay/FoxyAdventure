@@ -28,7 +28,7 @@ public:
     float GetScale() {return Scale;}
     
 private:
-    GameTexture* GameTextures{};
+    GameTexture& GameTextures;
     Vector2 MapPos{0.f, 0.f};
     float Scale{4.f};
     bool MiniMapOpen{false};

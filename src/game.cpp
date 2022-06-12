@@ -120,6 +120,14 @@ namespace Game
 
         for (auto& Enemy:Objects.Enemies) {
             Enemy.Tick(DeltaTime, Objects.PropsContainer, Objects.Fox.GetWorldPos(), Objects.Fox.GetCharPos(), Objects.Enemies, Objects.Trees);
+            if (Enemy.GetRace() == EnemyType::FOX) {
+                DrawText("This is the Fox!", 300, 300, 20, WHITE);
+            }
+            // if (&Enemy == &Objects.Enemies.at(15)) {
+            //     if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
+            //         DrawText("This is the Fox!", 300, 300, 20, WHITE);
+            //     }
+            // }
         }
 
         for (auto& Crow:Objects.Crows) {
@@ -5162,7 +5170,7 @@ namespace Game
             Type.GetCollisionRec().y,
             Type.GetCollisionRec().width,
             Type.GetCollisionRec().height, 
-            Color
+            RecColor
         );
     }
 
@@ -5176,7 +5184,7 @@ namespace Game
                 Type.GetAttackRec().y,
                 Type.GetAttackRec().width,
                 Type.GetAttackRec().height,
-                Color
+                RecColor
             );
         }
     }
