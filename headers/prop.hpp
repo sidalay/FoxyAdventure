@@ -47,10 +47,10 @@ class Prop
 {
 public:
     Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, GameTexture& GameTextures, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
-    Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, std::string ItemName = "None", bool Spawned = false, bool Interactable = false);           
-    Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, const Texture2D& Item, float Scale = 4.f, bool Moveable = false, bool Interactable = false, 
+    Prop(const Sprite& Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, const std::string& ItemName = "None", bool Spawned = false, bool Interactable = false);           
+    Prop(const Sprite& Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, const Texture2D& Item, float Scale = 4.f, bool Moveable = false, bool Interactable = false, 
          Progress Act = Progress::ACT_O, PropType NPC = PropType::NPC_O, 
-         std::string ItemName = "None", float ItemScale = 2.f);
+         const std::string& ItemName = "None", float ItemScale = 2.f);
     
     void Tick(float DeltaTime);
     void Draw(Vector2 CharacterWorldPos);
@@ -69,7 +69,6 @@ public:
     Rectangle GetCollisionRec(Vector2 CharacterWorldPos);
     Rectangle GetInteractRec(Vector2 CharacterWorldPos);
     
-    void SetWorldPos(Vector2 Direction);
     void SetActive(bool Input) {Active = Input;}
     void SetOpened(bool Input) {Opened = Input;}
     void UndoMovement() {WorldPos = PrevWorldPos;}
@@ -128,7 +127,7 @@ private:
 
 struct Props
 {
-    Props(std::vector<std::vector<Prop>> Under, std::vector<std::vector<Prop>> Over);
+    Props(const std::vector<std::vector<Prop>>& Under, const std::vector<std::vector<Prop>>& Over);
 
     std::vector<std::vector<Prop>> Under{};
     std::vector<std::vector<Prop>> Over{};

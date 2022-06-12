@@ -36,15 +36,15 @@ Prop::Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, GameTexture& Ga
 }
 
 // Constructor for animated altar pieces
-Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, std::string ItemName, bool Spawned, bool Interactable)
+Prop::Prop(const Sprite& Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, const std::string& ItemName, bool Spawned, bool Interactable)
     : Object{Object}, Type{Type}, GameTextures{&GameTextures}, WorldPos{Pos}, Interactable{Interactable}, Spawned{Spawned}, ItemName{ItemName} 
 {
     Collidable = true;
 }
 
 // Constructor for animated props
-Prop::Prop(Sprite Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, const Texture2D& Item, float Scale, bool Moveable, bool Interactable, 
-           Progress Act, PropType NPC, std::string ItemName, float ItemScale)
+Prop::Prop(const Sprite& Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, const Texture2D& Item, float Scale, bool Moveable, bool Interactable, 
+           Progress Act, PropType NPC, const std::string& ItemName, float ItemScale)
     : Object{Object}, Type{Type}, GameTextures{&GameTextures}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}, 
       TriggerAct{Act}, TriggerNPC{NPC}, Item{Item}, ItemName{ItemName}, ItemScale{ItemScale} 
 {
@@ -752,11 +752,6 @@ Rectangle Prop::GetInteractRec(Vector2 CharacterWorldPos)
     }
 }
 
-void Prop::SetWorldPos(Vector2 Direction)
-{
-    WorldPos = Vector2Add(WorldPos, Direction);
-}
-
 bool Prop::CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Direction, float Speed, std::vector<std::vector<Prop>>& Props)
 {
     bool Colliding{false};
@@ -1056,7 +1051,7 @@ void Prop::DrawSpeech()
 
 // ---------------------------------------------------------------------
 
-Props::Props(std::vector<std::vector<Prop>> Under, std::vector<std::vector<Prop>> Over)
+Props::Props(const std::vector<std::vector<Prop>>& Under, const std::vector<std::vector<Prop>>& Over)
     : Under{Under}, Over{Over}
 {
 
