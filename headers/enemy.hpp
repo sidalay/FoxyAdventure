@@ -95,7 +95,7 @@ public:
     
 private:
     Sprite* CurrentSprite;
-    Sprite* ShootingSprite;
+    Sprite* ShootingSprite{};
     std::vector<Sprite> Sprites{};
 
     EnemyType Race{};                    // What kind of Enemy
