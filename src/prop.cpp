@@ -186,6 +186,10 @@ void Prop::Tick(float DeltaTime)
             }
             else if (Type == PropType::ANIMATEDALTAR)
             {   
+                if (PiecesAdded == 0) {
+                    InsertPiece = true;
+                }
+
                 for (auto& Piece:AltarPieces)
                 {
                     if (std::get<1>(Piece) == true)
@@ -370,7 +374,6 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
                 Object.Texture.width * Scale,
                 Object.Texture.height * Scale
             };
-            break;
         }
         case PropType::ANIMATEDALTAR:
         {
@@ -381,7 +384,6 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
                 (Object.Texture.width * Scale) / Object.MaxFramesX,
                 (Object.Texture.height * Scale) / Object.MaxFramesY
             };
-            break;
         }
         case PropType::TREE:
         {
@@ -392,7 +394,6 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
                 (Object.Texture.width - Object.Texture.width*.47f) * Scale,
                 (Object.Texture.height - Object.Texture.height*.75f) * Scale
             };
-            break;
         }
         case PropType::ROCK:
         {
@@ -403,7 +404,6 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
                 Object.Texture.width * Scale,
                 Object.Texture.height * Scale
             };
-            break;
         }
         case PropType::BOULDER:
         {
@@ -674,7 +674,6 @@ Rectangle Prop::GetInteractRec(Vector2 CharacterWorldPos)
                 (Object.Texture.width * Scale)/4.f + (Object.Texture.width * Scale)/4.f,
                 (Object.Texture.height * Scale) + (Object.Texture.height * Scale)
             };
-            break;
         }
         case PropType::BIGTREASURE:
         {
@@ -685,7 +684,6 @@ Rectangle Prop::GetInteractRec(Vector2 CharacterWorldPos)
                 (Object.Texture.width * Scale)/4.f + (Object.Texture.width * Scale)/4.f,
                 (Object.Texture.height * Scale) + (Object.Texture.height * Scale)
             };
-            break;
         }
         case PropType::NPC_A:
         {
@@ -726,7 +724,6 @@ Rectangle Prop::GetInteractRec(Vector2 CharacterWorldPos)
                 (Object.Texture.width * Scale) + (Object.Texture.width * Scale) * .20f,
                 (Object.Texture.height * Scale) + (Object.Texture.height * Scale) * .20f
             };
-            break;
         }
         case PropType::ANIMATEDALTAR:
         {
@@ -737,7 +734,6 @@ Rectangle Prop::GetInteractRec(Vector2 CharacterWorldPos)
                 ((Object.Texture.width * Scale) / Object.MaxFramesX) + ((Object.Texture.width * Scale) / Object.MaxFramesX) * .20f,
                 ((Object.Texture.height * Scale) / Object.MaxFramesY) + ((Object.Texture.height * Scale) / Object.MaxFramesY) * .20f
             };
-            break;
         }
         default:
         {
@@ -821,10 +817,10 @@ void Prop::DrawSpeech()
     }
     else if (Type == PropType::ANIMATEDALTAR)
     {
-        if (PiecesAdded <= 0) // This statement is not possible. DrawSpeech() isn't called until an Altar piece is inserted
+        if (PiecesAdded == 0)
         {
-            DrawText("A mysterious altar...", 490, 600, 20, WHITE);
-            DrawText("You feel a strange power resonating", 490, 625, 20, WHITE);
+            DrawText("A mysterious altar... You feel", 490, 600, 20, WHITE);
+            DrawText("a strange power resonating", 490, 625, 20, WHITE);
             DrawText("from the empty engravings...", 490, 650, 20, WHITE);
             DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
         }
