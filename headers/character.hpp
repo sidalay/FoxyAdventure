@@ -1,23 +1,14 @@
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
-#include <raylib.h>
-#include <raymath.h>
-#include <vector>
-#include "prop.hpp"
-#include "sprite.hpp"
 #include "enemy.hpp"
-#include "window.hpp"
-#include "background.hpp"
-#include "basecharacter.hpp"
-#include "gametextures.hpp"
 
 enum class Emotion 
 {
     DEFAULT, ANGRY, HAPPY, NERVOUS, SAD, SLEEPING, HURT, DEAD
 };
 
-class Character : public BaseCharacter
+class Character
 {
 public:
     Character(const Sprite& Idle, 
@@ -98,6 +89,7 @@ private:
     float AttackTime{};
     float HealTime{};
     float AmountToHeal{};
+    bool Alive{true};
     bool Colliding{false};
     bool Locked{false};
     bool Walking{false};

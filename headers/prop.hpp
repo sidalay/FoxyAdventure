@@ -1,14 +1,11 @@
 #ifndef PROP_HPP
 #define PROP_HPP
 
-#include <raylib.h>
-#include <raymath.h>
 #include <vector>
 #include <string>
 #include <tuple>
 #include "sprite.hpp"
 #include "background.hpp"
-#include "gametextures.hpp"
 
 enum class PropType
 {

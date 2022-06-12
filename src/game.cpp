@@ -1,6 +1,4 @@
 #include "game.hpp"
-#include <assert.h>
-#include <vector>
 
 namespace Game 
 {

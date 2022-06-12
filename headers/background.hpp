@@ -1,10 +1,13 @@
 #ifndef BACKGROUND_HPP
 #define BACKGROUND_HPP
 
-#include <raylib.h>
-#include <raymath.h>
-#include "window.hpp"
 #include "gametextures.hpp"
+#include <raymath.h>
+
+enum class Direction
+{
+    UP, DOWN, LEFT, RIGHT
+};
 
 class Background
 {

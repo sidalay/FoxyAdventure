@@ -1,18 +1,8 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include <raylib.h>
-#include <string>
 #include <array>
-#include <vector>
 #include "hud.hpp"
-#include "prop.hpp"
-#include "sprite.hpp"
-#include "window.hpp"
-#include "enemy.hpp"
-#include "character.hpp"
-#include "background.hpp"
-#include "gametextures.hpp"
 
 namespace Game 
 {

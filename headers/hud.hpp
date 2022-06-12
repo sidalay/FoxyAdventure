@@ -1,7 +1,6 @@
 #ifndef HUD_HPP
 #define HUD_HPP
 
-#include <raylib.h>
 #include "character.hpp"
 
 class HUD 

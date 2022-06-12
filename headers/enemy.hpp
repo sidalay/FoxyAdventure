@@ -1,16 +1,10 @@
 #ifndef ENEMY_HPP
 #define ENEMY_HPP
 
-#include <raylib.h>
-#include <vector>
 #include <random>
 #include <unordered_map>
 #include "prop.hpp"
-#include "sprite.hpp"
 #include "window.hpp"
-#include "background.hpp"
-#include "basecharacter.hpp"
-#include "gametextures.hpp"
 
 enum class EnemyType 
 {
@@ -22,7 +16,7 @@ enum class EnemyType
 
 struct Enemies;
 
-class Enemy : public BaseCharacter
+class Enemy
 {
 public:
     // Enemy constructor
@@ -133,6 +127,7 @@ private:
     float AIX{0.6};
     float AIY{0.6};
     float Trajectory{1.f};
+    bool Alive{true};
     bool Colliding{false};
     bool Attacking{false};
     bool Invulnerable{false};

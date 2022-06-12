@@ -24,7 +24,6 @@ endif()
 # building an executable
 add_executable(${PROJECT_NAME} 
     src/background.cpp
-    src/basecharacter.cpp
     src/character.cpp
     src/enemy.cpp
     src/game.cpp
@@ -33,7 +32,6 @@ add_executable(${PROJECT_NAME}
     src/main.cpp
     src/prop.cpp
     src/sprite.cpp
-    src/treasure.cpp
 )
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 target_include_directories(${PROJECT_NAME} PRIVATE headers ${raylib_INCLUDE_DIRS})
