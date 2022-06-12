@@ -20,15 +20,15 @@ enum class Emotion
 class Character : public BaseCharacter
 {
 public:
-    Character(Sprite Idle, 
-              Sprite Walk, 
-              Sprite Run, 
-              Sprite Attack, 
-              Sprite Hurt, 
-              Sprite Death, 
-              Sprite Push, 
-              Sprite Sleep, 
-              Sprite ItemGrab,
+    Character(const Sprite& Idle, 
+              const Sprite& Walk, 
+              const Sprite& Run, 
+              const Sprite& Attack, 
+              const Sprite& Hurt, 
+              const Sprite& Death, 
+              const Sprite& Push, 
+              const Sprite& Sleep, 
+              const Sprite& ItemGrab,
               GameTexture& GameTextures, 
               Window* Screen, 
               Background* World);
