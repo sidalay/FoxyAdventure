@@ -20,12 +20,12 @@ class Enemy
 {
 public:
     // Enemy constructor
-    Enemy(Sprite Idle,
-          Sprite Walk,
-          Sprite Attack,
-          Sprite Hurt,
-          Sprite Death,
-          Sprite Projectile,
+    Enemy(const Sprite& Idle,
+          const Sprite& Walk,
+          const Sprite& Attack,
+          const Sprite& Hurt,
+          const Sprite& Death,
+          const Sprite& Projectile,
           EnemyType Race,
           EnemyType Type,
           Vector2 WorldPos,
@@ -36,11 +36,11 @@ public:
           float Scale = 3.2f);
     
     // Wildlife NPC constructor
-    Enemy(Sprite NpcIdle,
-          Sprite NpcIdleTwo,
-          Sprite NpcWalk,
-          Sprite NpcMisc,
-          Sprite NpcSleep,
+    Enemy(const Sprite& NpcIdle,
+          const Sprite& NpcIdleTwo,
+          const Sprite& NpcWalk,
+          const Sprite& NpcMisc,
+          const Sprite& NpcSleep,
           EnemyType Race,
           Vector2 WorldPos,
           Window* Screen,
@@ -83,6 +83,7 @@ public:
     Vector2 GetEnemyPos() {return ScreenPos;}
     Vector2 UpdateProjectile();
     EnemyType GetType() {return Type;}
+    EnemyType GetRace() {return Race;}
     Rectangle GetCollisionRec();
     Rectangle GetAttackRec();
     int GetMonsterCount(EnemyType Type) {return MonsterCounter.at(Type);}

@@ -13,12 +13,12 @@ std::unordered_map<EnemyType, int> Enemy::MonsterCounter
     {EnemyType::BOSS, 0} 
 };
 
-Enemy::Enemy(Sprite Idle,
-             Sprite Walk,
-             Sprite Attack,
-             Sprite Hurt,
-             Sprite Death,
-             Sprite Projectile,
+Enemy::Enemy(const Sprite& Idle,
+             const Sprite& Walk,
+             const Sprite& Attack,
+             const Sprite& Hurt,
+             const Sprite& Death,
+             const Sprite& Projectile,
              EnemyType Race,
              EnemyType Type,
              Vector2 WorldPos,
@@ -76,11 +76,11 @@ Enemy::Enemy(Sprite Idle,
     LeftOrRight = RandomLeftRight(RNG);
 }
 
-Enemy::Enemy(Sprite NpcIdle,
-             Sprite NpcIdleTwo,
-             Sprite NpcWalk,
-             Sprite NpcMisc,
-             Sprite NpcSleep,
+Enemy::Enemy(const Sprite& NpcIdle,
+             const Sprite& NpcIdleTwo,
+             const Sprite& NpcWalk,
+             const Sprite& NpcMisc,
+             const Sprite& NpcSleep,
              EnemyType Race,
              Vector2 WorldPos,
              Window* Screen,
