@@ -21,8 +21,8 @@ public:
               const Sprite& Sleep, 
               const Sprite& ItemGrab,
               GameTexture& GameTextures, 
-              Window* Screen, 
-              Background* World);
+              Window& Screen, 
+              Background& World);
     
     void Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void Draw();
@@ -72,8 +72,8 @@ private:
     Sprite* CurrentSprite{&Idle};
     GameTexture& GameTextures;  
 
-    Window* Screen{};
-    Background* World{};
+    Window& Screen;
+    Background& World;
     Vector2 Offset{615.f,335.f};         // Player offset vs Enemy/Prop WorldPos
     Vector2 ScreenPos{};              // Where the character is on the screen
     Vector2 WorldPos{362.f,2594.f};      // Where the character is in the world

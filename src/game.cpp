@@ -491,7 +491,7 @@ namespace Game
             Sprite{Textures.FoxSleeping, 4, 1}, 
             Sprite{Textures.FoxItemGot, 1, 4},
             Textures,
-            &Window, &Info.Map
+            Window, Info.Map
         };
     }
 

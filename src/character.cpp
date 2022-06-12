@@ -10,8 +10,8 @@ Character::Character(const Sprite& Idle,
                      const Sprite& Sleep, 
                      const Sprite& ItemGrab,
                      GameTexture& GameTextures, 
-                     Window* Screen, 
-                     Background* World)
+                     Window& Screen, 
+                     Background& World)
     : Idle{Idle},
       Walk{Walk},
       Run{Run},
@@ -74,8 +74,8 @@ void Character::SpriteTick(float DeltaTime)
 void Character::UpdateScreenPos()
 {
     // Update Character to middle of screen if screen is resized
-    ScreenPos.x = Screen->x/2.f - (Scale * (0.5f * CurrentSprite->Texture.width/CurrentSprite->MaxFramesX));
-    ScreenPos.y = Screen->y/2.f - (Scale * (0.5f * CurrentSprite->Texture.height/CurrentSprite->MaxFramesY));
+    ScreenPos.x = Screen.x/2.f - (Scale * (0.5f * CurrentSprite->Texture.width/CurrentSprite->MaxFramesX));
+    ScreenPos.y = Screen.y/2.f - (Scale * (0.5f * CurrentSprite->Texture.height/CurrentSprite->MaxFramesY));
     Destination.x = ScreenPos.x;
     Destination.y = ScreenPos.y;
     Destination.width = Scale * CurrentSprite->Texture.width/CurrentSprite->MaxFramesX;    
@@ -138,8 +138,8 @@ void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::ve
         // Undo Movement if walking out-of-bounds
         if (WorldPos.x + ScreenPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f||
             WorldPos.y + ScreenPos.y < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f||
-            WorldPos.x + (Screen->x - ScreenPos.x) > World->GetMapSize().x * World->GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
-            WorldPos.y + (Screen->y - ScreenPos.y) > World->GetMapSize().y * World->GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f)
+            WorldPos.x + (Screen.x - ScreenPos.x) > World.GetMapSize().x * World.GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
+            WorldPos.y + (Screen.y - ScreenPos.y) > World.GetMapSize().y * World.GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f)
         {
             UndoMovement();
         }
@@ -174,7 +174,7 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 Di
                             if (Prop.GetType() == PropType::BOULDER || Prop.GetType() == PropType::STUMP) {
                                 Colliding = true;   
                                 if(!Prop.IsOutOfBounds()) {
-                                    if (Prop.CheckMovement(*World, WorldPos, Direction, Speed, Props)) {
+                                    if (Prop.CheckMovement(World, WorldPos, Direction, Speed, Props)) {
                                         UndoMovement();
                                     }
                                 }
