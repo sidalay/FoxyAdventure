@@ -90,7 +90,6 @@ private:
     Vector2 PrevWorldPos{};
     Rectangle Source{};
     Rectangle Destination{};
-    
     float Health{11.f};
     float Scale{1.5f};
     float Speed{1.0f};
