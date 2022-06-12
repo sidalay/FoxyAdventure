@@ -369,9 +369,10 @@ void Character::WalkOrRun()
 void Character::CheckAttack()
 {
     AttackTime += GetFrameTime();
-    float AttackResetTime{0.7f};
 
     if (!Locked) {
+        float AttackResetTime{0.7f};
+
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE)) {
             // Attack animation & damage window lasts 0.4 seconds
             if (AttackTime < 0.4f) {
@@ -400,11 +401,10 @@ void Character::CheckAttack()
 
 void Character::CheckSleep()
 {
-    float DeltaTime{GetFrameTime()};
-    float UpdateTime{2.f/1.f};
-
-    if (Sleeping)
-    {
+    if (Sleeping) {
+        
+        float DeltaTime{GetFrameTime()};\
+        float UpdateTime{2.f/1.f};
         RunningTime += DeltaTime;    
 
         if (RunningTime >= UpdateTime) {
