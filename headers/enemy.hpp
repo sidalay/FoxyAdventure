@@ -29,8 +29,8 @@ public:
           EnemyType Race,
           EnemyType Type,
           Vector2 WorldPos,
-          Window* Screen,
-          Background* World,
+          Window& Screen,
+          Background& World,
           GameTexture& GameTextures,
           int Health = 3,
           float Scale = 3.2f);
@@ -43,8 +43,8 @@ public:
           const Sprite& NpcSleep,
           EnemyType Race,
           Vector2 WorldPos,
-          Window* Screen,
-          Background* World,
+          Window& Screen,
+          Background& World,
           GameTexture& GameTextures,
           float Scale = 3.2f);
 
@@ -102,9 +102,9 @@ private:
     Vector2 Movement{};
     Rectangle Source{};
     Rectangle Destination{};
-    Window* Screen{};
-    Background* World{};
-    GameTexture* GameTextures;
+    Window& Screen;
+    Background& World;
+    GameTexture& GameTextures;
     
     static int MonsterDeaths;
     static int MonsterCount;

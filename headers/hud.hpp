@@ -12,7 +12,7 @@ public:
     void Draw(float Health, Emotion State);
     
 private:
-    GameTexture* GameTextures{};
+    GameTexture& GameTextures;
     Texture2D Fox{};
 
     float Scale{2.f};

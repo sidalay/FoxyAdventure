@@ -76,7 +76,7 @@ public:
 private:
     Sprite Object{};
     PropType Type{};
-    GameTexture* GameTextures{};
+    GameTexture& GameTextures;
     Vector2 WorldPos{};     // Where the prop is located in the world
     Vector2 PrevWorldPos{};
     float Scale {4.f};

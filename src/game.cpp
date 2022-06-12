@@ -4030,7 +4030,7 @@ namespace Game
             Sprite{Textures.BearBrownHurt, 1, 4},
             Sprite{Textures.BearBrownDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::BEAR, EnemyType::NORMAL, Vector2{2940, 740}, &Window, &MapBG, Textures
+            EnemyType::BEAR, EnemyType::NORMAL, Vector2{2940, 740}, Window, MapBG, Textures
         };
         Enemies.emplace_back(BrownBearTwo);
 
@@ -4042,7 +4042,7 @@ namespace Game
             Sprite{Textures.BearBrownHurt, 1, 4},
             Sprite{Textures.BearBrownDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::BEAR, EnemyType::NORMAL, Vector2{2927, 1090}, &Window, &MapBG, Textures
+            EnemyType::BEAR, EnemyType::NORMAL, Vector2{2927, 1090}, Window, MapBG, Textures
         };
         Enemies.emplace_back(BrownBearThree);
 
@@ -4054,7 +4054,7 @@ namespace Game
             Sprite{Textures.BearLightBrownHurt, 1, 4},
             Sprite{Textures.BearLightBrownDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::BEAR, EnemyType::NORMAL, Vector2{3102, 899}, &Window, &MapBG, Textures
+            EnemyType::BEAR, EnemyType::NORMAL, Vector2{3102, 899}, Window, MapBG, Textures
         };
         Enemies.emplace_back(LightBrownBearTwo);
 
@@ -4066,7 +4066,7 @@ namespace Game
             Sprite{Textures.BearLightBrownHurt, 1, 4},
             Sprite{Textures.BearLightBrownDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::BEAR, EnemyType::NORMAL, Vector2{2835, 905}, &Window, &MapBG, Textures
+            EnemyType::BEAR, EnemyType::NORMAL, Vector2{2835, 905}, Window, MapBG, Textures
         };
         Enemies.emplace_back(LightBrownBearThree);
 
@@ -4080,7 +4080,7 @@ namespace Game
             Sprite{Textures.ToadGreenHurt, 1, 4},
             Sprite{Textures.ToadGreenDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::TOAD, EnemyType::NORMAL, Vector2{1215, 230}, &Window, &MapBG, Textures
+            EnemyType::TOAD, EnemyType::NORMAL, Vector2{1215, 230}, Window, MapBG, Textures
         };
         Enemies.emplace_back(GreenToadOne);
 
@@ -4092,7 +4092,7 @@ namespace Game
             Sprite{Textures.ToadGreenHurt, 1, 4},
             Sprite{Textures.ToadGreenDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::TOAD, EnemyType::NORMAL, Vector2{1107, 346}, &Window, &MapBG, Textures
+            EnemyType::TOAD, EnemyType::NORMAL, Vector2{1107, 346}, Window, MapBG, Textures
         };
         Enemies.emplace_back(GreenToadTwo);
 
@@ -4104,7 +4104,7 @@ namespace Game
             Sprite{Textures.ToadPinkHurt, 1, 4},
             Sprite{Textures.ToadPinkDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::TOAD, EnemyType::NORMAL, Vector2{1387, 356}, &Window, &MapBG, Textures
+            EnemyType::TOAD, EnemyType::NORMAL, Vector2{1387, 356}, Window, MapBG, Textures
         };
         Enemies.emplace_back(PinkToadOne);
 
@@ -4118,7 +4118,7 @@ namespace Game
             Sprite{Textures.MushroomRedHurt, 4, 4},
             Sprite{Textures.MushroomRedDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{555, 335}, &Window, &MapBG, Textures, 2
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{555, 335}, Window, MapBG, Textures, 2
         };
         Enemies.emplace_back(RedMushroomOne);
 
@@ -4130,7 +4130,7 @@ namespace Game
             Sprite{Textures.MushroomBlueHurt, 4, 4},
             Sprite{Textures.MushroomBlueDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{628, 236}, &Window, &MapBG, Textures, 2
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{628, 236}, Window, MapBG, Textures, 2
         };
         Enemies.emplace_back(BlueMushroomOne);
 
@@ -4142,7 +4142,7 @@ namespace Game
             Sprite{Textures.MushroomBlueHurt, 4, 4},
             Sprite{Textures.MushroomBlueDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1782, 226}, &Window, &MapBG, Textures, 2
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1782, 226}, Window, MapBG, Textures, 2
         };
         Enemies.emplace_back(BlueMushroomTwo);
 
@@ -4157,7 +4157,7 @@ namespace Game
         //     Sprite{Textures.BearBrownHurt, 1, 4},
         //     Sprite{Textures.BearBrownDeath, 11, 4},
         //     Sprite{Textures.Placeholder, 0, 0},
-        //     EnemyType::BEAR, EnemyType::NORMAL, Vector2{1800, 3566}, &Window, &MapBG, Textures, 1
+        //     EnemyType::BEAR, EnemyType::NORMAL, Vector2{1800, 3566}, Window, MapBG, Textures, 1
         // };
         // Enemies.emplace_back(BrownBear);
 
@@ -4169,7 +4169,7 @@ namespace Game
             Sprite{Textures.BearGreyHurt, 1, 4},
             Sprite{Textures.BearGreyDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::BEAR, EnemyType::BOSS, Vector2{2163, 1518}, &Window, &MapBG, Textures, 5, 5.f
+            EnemyType::BEAR, EnemyType::BOSS, Vector2{2163, 1518}, Window, MapBG, Textures, 5, 5.f
         };
         Enemies.emplace_back(GreyBossBear);
 
@@ -4181,7 +4181,7 @@ namespace Game
         //     Sprite{Textures.BeholderRedHurt, 4, 4},
         //     Sprite{Textures.BeholderRedDeath, 11, 4},
         //     Sprite{Textures.BeholderRedProjectile, 4, 4},
-        //     EnemyType::BEHOLDER, EnemyType::NORMAL, Vector2{1550, 3466}, &Window, &MapBG, Textures, 3
+        //     EnemyType::BEHOLDER, EnemyType::NORMAL, Vector2{1550, 3466}, Window, MapBG, Textures, 3
         // };
         // Enemies.emplace_back(RedBeholder);
 
@@ -4193,7 +4193,7 @@ namespace Game
         //     Sprite{Textures.GhostWhiteHurt, 1, 4},
         //     Sprite{Textures.GhostWhiteDeath, 11, 4},
         //     Sprite{Textures.Placeholder, 0, 0},
-        //     EnemyType::GHOST, EnemyType::NORMAL, Vector2{1850, 3566}, &Window, &MapBG, Textures, 1
+        //     EnemyType::GHOST, EnemyType::NORMAL, Vector2{1850, 3566}, Window, MapBG, Textures, 1
         // };
         // Enemies.emplace_back(WhiteGhost);
     
@@ -4205,7 +4205,7 @@ namespace Game
             Sprite{Textures.NecromancerRedHurt, 1, 4},
             Sprite{Textures.NecromancerRedDeath, 11, 4},
             Sprite{Textures.NecromancerRedProjectile, 4, 4},
-            EnemyType::NECROMANCER, EnemyType::NORMAL, Vector2{2038, 2345}, &Window, &MapBG, Textures
+            EnemyType::NECROMANCER, EnemyType::NORMAL, Vector2{2038, 2345}, Window, MapBG, Textures
         };
         Enemies.emplace_back(RedNecro);
 
@@ -4217,7 +4217,7 @@ namespace Game
             Sprite{Textures.CreaturePurpleHurt, 1, 4},
             Sprite{Textures.CreaturePurpleDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::CREATURE, EnemyType::NORMAL, Vector2{1660, 3366}, &Window, &MapBG, Textures
+            EnemyType::CREATURE, EnemyType::NORMAL, Vector2{1660, 3366}, Window, MapBG, Textures
         };
         Enemies.emplace_back(PurpleCreature);
 
@@ -4229,7 +4229,7 @@ namespace Game
             Sprite{Textures.ImpGreenHurt, 1, 4},
             Sprite{Textures.ImpGreenDeath, 11, 4},
             Sprite{Textures.ImpGreenProjectile, 4, 4},
-            EnemyType::IMP, EnemyType::NORMAL, Vector2{1800, 3666}, &Window, &MapBG, Textures
+            EnemyType::IMP, EnemyType::NORMAL, Vector2{1800, 3666}, Window, MapBG, Textures
         };
         Enemies.emplace_back(GreenImp);
 
@@ -4241,7 +4241,7 @@ namespace Game
         //     Sprite{Textures.ShadowBlueHurt, 1, 4},
         //     Sprite{Textures.ShadowBlueDeath, 11, 4},
         //     Sprite{Textures.Placeholder, 0, 0},
-        //     EnemyType::SHADOW, EnemyType::NORMAL, Vector2{1800, 3666}, &Window, &MapBG, Textures
+        //     EnemyType::SHADOW, EnemyType::NORMAL, Vector2{1800, 3666}, Window, MapBG, Textures
         // };
         // Enemies.emplace_back(BlueShadow);
 
@@ -4253,7 +4253,7 @@ namespace Game
         //     Sprite{Textures.SpiderBrownHurt, 1, 4},
         //     Sprite{Textures.SpiderBrownDeath, 11, 4},
         //     Sprite{Textures.Placeholder, 0, 0},
-        //     EnemyType::SPIDER, EnemyType::NORMAL, Vector2{1600, 3666}, &Window, &MapBG, Textures
+        //     EnemyType::SPIDER, EnemyType::NORMAL, Vector2{1600, 3666}, Window, MapBG, Textures
         // };
         // Enemies.emplace_back(BrownSpider);
 
@@ -4268,7 +4268,7 @@ namespace Game
             Sprite{Textures.FoxFamilyWalk, 8, 2},
             Sprite{Textures.FoxFamilyLazy, 13, 2},
             Sprite{Textures.FoxFamilySleep, 6, 2},
-            EnemyType::FOX, Vector2{473, 2524}, &Window, &MapBG, Textures
+            EnemyType::FOX, Vector2{473, 2524}, Window, MapBG, Textures
         };
         Enemies.emplace_back(FoxFamOne);
         
@@ -4279,7 +4279,7 @@ namespace Game
             Sprite{Textures.FoxFamilyWalk, 8, 2},
             Sprite{Textures.FoxFamilyLazy, 13, 2},
             Sprite{Textures.FoxFamilySleep, 6, 2},
-            EnemyType::FOX, Vector2{247, 2524}, &Window, &MapBG, Textures
+            EnemyType::FOX, Vector2{247, 2524}, Window, MapBG, Textures
         };
         Enemies.emplace_back(FoxFamTwo);
 
@@ -4290,7 +4290,7 @@ namespace Game
             Sprite{Textures.FoxFamilyWalk, 8, 2},
             Sprite{Textures.FoxFamilyLazy, 13, 2},
             Sprite{Textures.FoxFamilySleep, 6, 2},
-            EnemyType::FOX, Vector2{428, 2840}, &Window, &MapBG, Textures, 2.5f
+            EnemyType::FOX, Vector2{428, 2840}, Window, MapBG, Textures, 2.5f
         };
         Enemies.emplace_back(FoxFamThree);
 
@@ -4301,7 +4301,7 @@ namespace Game
             Sprite{Textures.FoxFamilyWalk, 8, 2},
             Sprite{Textures.FoxFamilyLazy, 13, 2},
             Sprite{Textures.FoxFamilySleep, 6, 2},
-            EnemyType::FOX, Vector2{354, 2661}, &Window, &MapBG, Textures, 2.5f
+            EnemyType::FOX, Vector2{354, 2661}, Window, MapBG, Textures, 2.5f
         };
         Enemies.emplace_back(FoxFamFour);
 
@@ -4314,7 +4314,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{2839, 2041}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{2839, 2041}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelOne);
 
@@ -4325,7 +4325,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{3050, 2147}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{3050, 2147}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelTwo);
 
@@ -4336,7 +4336,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{3155, 2133}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{3155, 2133}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelThree);
 
@@ -4347,7 +4347,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{2392, 244}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{2392, 244}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelFour);
 
@@ -4358,7 +4358,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{3251, 339}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{3251, 339}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelFive);
 
@@ -4369,7 +4369,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{2767, 338}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{2767, 338}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelSix);
 
@@ -4380,7 +4380,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{916, 940}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{916, 940}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelSeven);
 
@@ -4391,7 +4391,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{539, 1221}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{539, 1221}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelEight);
 
@@ -4402,7 +4402,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{932, 1265}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{932, 1265}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelNine);
 
@@ -4413,7 +4413,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{345, 1663}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{345, 1663}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelTen);
 
@@ -4424,7 +4424,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{254, 532}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{254, 532}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelEleven);
 
@@ -4435,7 +4435,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{334, 432}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{334, 432}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelTwelve);
 
@@ -4446,7 +4446,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{452, 533}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{452, 533}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelThirteen);
 
@@ -4457,7 +4457,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{1588, 1780}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{1588, 1780}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelFourteen);
 
@@ -4468,7 +4468,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{1739, 2002}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{1739, 2002}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelFifteen);
 
@@ -4479,7 +4479,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{2534, 2520}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{2534, 2520}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelSixteen);
 
@@ -4490,7 +4490,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{2086, 2928}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{2086, 2928}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelSeventeen);
 
@@ -4501,7 +4501,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{3964, 2537}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{3964, 2537}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelEighteen);
 
@@ -4512,7 +4512,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{3658, 3859}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{3658, 3859}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelNineTeen);
 
@@ -4523,7 +4523,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{480, 3813}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{480, 3813}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelTwenty);
 
@@ -4534,7 +4534,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{661, 3847}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{661, 3847}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelTwentyOne);
 
@@ -4545,7 +4545,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{1354, 3846}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{1354, 3846}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelTwentyTwo);
 
@@ -4556,7 +4556,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{155, 1929}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{155, 1929}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelTwentyThree);
 
@@ -4567,7 +4567,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{337, 2032}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{337, 2032}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelTwentyFour);
 
@@ -4578,7 +4578,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{162, 2127}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{162, 2127}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelTwentyFive);
 
@@ -4589,7 +4589,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{752, 1933}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{752, 1933}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelTwentySix);
 
@@ -4600,7 +4600,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{934, 2033}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{934, 2033}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelTwentySeven);
 
@@ -4611,7 +4611,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{333, 1631}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{333, 1631}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelTwentyEight);
 
@@ -4622,7 +4622,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{838, 1630}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{838, 1630}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelTwentyNine);
 
@@ -4633,7 +4633,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{1107, 1525}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{1107, 1525}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelThirty);
 
@@ -4644,7 +4644,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{1061, 1728}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{1061, 1728}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelThirtyOne);
 
@@ -4655,7 +4655,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{728, 912}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{728, 912}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelThirtyTwo);
 
@@ -4666,7 +4666,7 @@ namespace Game
         //     Sprite{Textures.SquirrelWalk, 4, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
         //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{1145, 772}, &Window, &MapBG, Textures, 2.0f
+        //     EnemyType::SQUIRREL, Vector2{1145, 772}, Window, MapBG, Textures, 2.0f
         // };
         // Enemies.emplace_back(SquirrelThirtyThree);
 
@@ -4684,7 +4684,7 @@ namespace Game
             Sprite{Textures.CrowFlying, 5, 2},
             Sprite{Textures.CrowWalk, 4, 2},
             Sprite{Textures.CrowIdleTwo, 5, 2},
-            EnemyType::CROW, Vector2{3740, 2149}, &Window, &MapBG, Textures, 2.5f
+            EnemyType::CROW, Vector2{3740, 2149}, Window, MapBG, Textures, 2.5f
         };
         Crows.emplace_back(CrowOne);
 
@@ -4695,7 +4695,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3546, 2032}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3546, 2032}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowTwo);
 
@@ -4706,7 +4706,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3339, 2132}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3339, 2132}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowThree);
 
@@ -4717,7 +4717,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3848, 1936}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3848, 1936}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowFour);
         
@@ -4728,7 +4728,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3947, 1842}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3947, 1842}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowFive);
         
@@ -4739,7 +4739,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3338, 1931}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3338, 1931}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowSix);
 
@@ -4750,7 +4750,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3458, 1729}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3458, 1729}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowSeven);
 
@@ -4761,7 +4761,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3750, 1607}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3750, 1607}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowEight);
 
@@ -4772,7 +4772,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3322, 1539}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3322, 1539}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowNine);
 
@@ -4783,7 +4783,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3763, 1434}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3763, 1434}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowTen);
         
@@ -4794,7 +4794,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3339, 1355}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3339, 1355}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowEleven);
         
@@ -4805,7 +4805,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3860, 1249}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3860, 1249}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowTwelve);
         
@@ -4816,7 +4816,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3832, 939}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3832, 939}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowThirteen);
         
@@ -4827,7 +4827,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3742, 747}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3742, 747}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowFourteen);
         
@@ -4838,7 +4838,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3915, 747}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3915, 747}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowFifteen);
         
@@ -4849,7 +4849,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3763, 635}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3763, 635}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowSixteen);
         
@@ -4860,7 +4860,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3850, 544}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3850, 544}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowSeventeen);
         
@@ -4871,7 +4871,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3751, 441}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3751, 441}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowEighteen);
         
@@ -4882,7 +4882,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3928, 361}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3928, 361}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowNineteen);
         
@@ -4893,7 +4893,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{4040, 551}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{4040, 551}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowTwenty);
         
@@ -4904,7 +4904,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3459, 1170}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3459, 1170}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowTwentyone);
         
@@ -4915,7 +4915,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3463, 952}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3463, 952}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowTwentytwo);
         
@@ -4926,7 +4926,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3340, 648}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3340, 648}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowTwentythree);
         
@@ -4937,7 +4937,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3450, 470}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3450, 470}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowTwentyfour);
         
@@ -4948,7 +4948,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3357, 371}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3357, 371}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowTwentyfive);
         
@@ -4959,7 +4959,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3260, 1739}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3260, 1739}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowTwentysix);
         
@@ -4970,7 +4970,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{3039, 1835}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{3039, 1835}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowTwentyseven);
 
@@ -4981,7 +4981,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{2838, 1553}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{2838, 1553}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowTwentyeight);
 
@@ -4992,7 +4992,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{2638, 1440}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{2638, 1440}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowTwentynine);
 
@@ -5003,7 +5003,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{638, 1791}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{638, 1791}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowThirty);
 
@@ -5014,7 +5014,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{549, 1951}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{549, 1951}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowThirtyone);
 
@@ -5025,7 +5025,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{1436, 1431}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{1436, 1431}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowThirtytwo);
 
@@ -5036,7 +5036,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{1761, 1146}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{1761, 1146}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowThirtythree);
 
@@ -5047,7 +5047,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{1453, 960}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{1453, 960}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowThirtyfour);
 
@@ -5058,7 +5058,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{246, 774}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{246, 774}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowThirtyfive);
 
@@ -5069,7 +5069,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{255, 1186}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{255, 1186}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowThirtysix);
 
@@ -5080,7 +5080,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{154, 1563}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{154, 1563}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowThirtyseven);
 
@@ -5091,7 +5091,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{860, 363}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{860, 363}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowThirtyeight);
 
@@ -5102,7 +5102,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{2183, 1059}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{2183, 1059}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowThirtynine);
 
@@ -5113,7 +5113,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{2761, 560}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{2761, 560}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowForty);
 
@@ -5124,7 +5124,7 @@ namespace Game
         //     Sprite{Textures.CrowFlying, 5, 2},
         //     Sprite{Textures.CrowWalk, 4, 2},
         //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{1647, 563}, &Window, &MapBG, Textures, 2.5f
+        //     EnemyType::CROW, Vector2{1647, 563}, Window, MapBG, Textures, 2.5f
         // };
         // Crows.emplace_back(CrowFortyone);
 

@@ -22,8 +22,8 @@ Enemy::Enemy(const Sprite& Idle,
              EnemyType Race,
              EnemyType Type,
              Vector2 WorldPos,
-             Window* Screen,
-             Background* World,
+             Window& Screen,
+             Background& World,
              GameTexture& GameTextures,
              int Health,
              float Scale) 
@@ -32,7 +32,7 @@ Enemy::Enemy(const Sprite& Idle,
       WorldPos{WorldPos},
       Screen{Screen},
       World{World},
-      GameTextures{&GameTextures},
+      GameTextures{GameTextures},
       Health{Health},
       MaxHP{Health},
       Scale{Scale}
@@ -83,8 +83,8 @@ Enemy::Enemy(const Sprite& NpcIdle,
              const Sprite& NpcSleep,
              EnemyType Race,
              Vector2 WorldPos,
-             Window* Screen,
-             Background* World,
+             Window& Screen,
+             Background& World,
              GameTexture& GameTextures,
              float Scale)
     : Race{Race},
@@ -92,7 +92,7 @@ Enemy::Enemy(const Sprite& NpcIdle,
       WorldPos{WorldPos},
       Screen{Screen},
       World{World},
-      GameTextures{&GameTextures},
+      GameTextures{GameTextures},
       Scale{Scale}
 {
     // Fill vector<Sprite*> with Sprite objects to easily loop through and call Sprite::Tick()
@@ -325,8 +325,8 @@ void Enemy::OutOfBounds()
 {
     if (WorldPos.x < 0.f ||
         WorldPos.y < 0.f ||
-        WorldPos.x > World->GetMapSize().x * World->GetScale() - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)*Scale ||
-        WorldPos.y > World->GetMapSize().y * World->GetScale() - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)*Scale) 
+        WorldPos.x > World.GetMapSize().x * World.GetScale() - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)*Scale ||
+        WorldPos.y > World.GetMapSize().y * World.GetScale() - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)*Scale) 
     {
         UndoMovement();
         // OOB = true;
@@ -772,7 +772,7 @@ void Enemy::EnemyAggro(Vector2 HeroScreenPos)
 void Enemy::DrawHP()
 {
     float LifeBarScale{2.f};
-    float SingleBarWidth{static_cast<float>(GameTextures->LifebarLeftEmpty.width) * LifeBarScale};
+    float SingleBarWidth{static_cast<float>(GameTextures.LifebarLeftEmpty.width) * LifeBarScale};
     float MaxBarWidth{SingleBarWidth * MaxHP};
     float CenterLifeBar {(MaxBarWidth - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)*Scale ) / 2.f};
     Vector2 LifeBarPos{};                           // Where the lifebar is positioned
@@ -785,29 +785,29 @@ void Enemy::DrawHP()
         if (i <= Health) {
             // far left of lifebar
             if (i == 1) {
-                DrawTextureEx(GameTextures->LifebarLeftFilled, LifeBarPos, 0.f, LifeBarScale, WHITE);
+                DrawTextureEx(GameTextures.LifebarLeftFilled, LifeBarPos, 0.f, LifeBarScale, WHITE);
             }
             // far right of lifebar
             else if (i == MaxHP) {
-                DrawTextureEx(GameTextures->LifebarRightFilled, LifeBarPos, 0.f, LifeBarScale, WHITE);
+                DrawTextureEx(GameTextures.LifebarRightFilled, LifeBarPos, 0.f, LifeBarScale, WHITE);
             }
             // middle of lifebar
             else {
-                DrawTextureEx(GameTextures->LifebarMiddleFilled, LifeBarPos, 0.f, LifeBarScale, WHITE);
+                DrawTextureEx(GameTextures.LifebarMiddleFilled, LifeBarPos, 0.f, LifeBarScale, WHITE);
             }
         }
         else {
             // far left of lifebar
             if (i == 1) {
-                DrawTextureEx(GameTextures->LifebarLeftEmpty, LifeBarPos, 0.f, LifeBarScale, WHITE);
+                DrawTextureEx(GameTextures.LifebarLeftEmpty, LifeBarPos, 0.f, LifeBarScale, WHITE);
             }
             // far right of lifebar
             else if (i == MaxHP) {
-                DrawTextureEx(GameTextures->LifebarRightEmpty, LifeBarPos, 0.f, 2.f, WHITE);
+                DrawTextureEx(GameTextures.LifebarRightEmpty, LifeBarPos, 0.f, 2.f, WHITE);
             }
             // middle of lifebar
             else {
-                DrawTextureEx(GameTextures->LifebarMiddleEmpty, LifeBarPos, 0.f, 2.f, WHITE);
+                DrawTextureEx(GameTextures.LifebarMiddleEmpty, LifeBarPos, 0.f, 2.f, WHITE);
             }
         }
 
