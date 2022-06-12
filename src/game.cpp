@@ -99,7 +99,7 @@ namespace Game
             ClearBackground(BLACK);
 
             Game::GameOverUpdate(Info);
-            // Game::GameOverDraw(Info);
+            Game::GameOverDraw(Info);
         }
         else if (Info.State == Game::State::TRANSITION) {
 
@@ -433,10 +433,10 @@ namespace Game
         Info.State = Game::State::TRANSITION;
     }
 
-    // void GameOverDraw(const Game::Info& Info)
-    // {
+    void GameOverDraw(const Game::Info& Info)
+    {
 
-    // }
+    }
 
     void Transition(Game::Info& Info)
     {

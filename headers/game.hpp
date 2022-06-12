@@ -3,6 +3,7 @@
 
 #include <raylib.h>
 #include <string>
+#include <array>
 #include <vector>
 #include "hud.hpp"
 #include "prop.hpp"
