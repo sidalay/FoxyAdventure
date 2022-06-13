@@ -8,6 +8,8 @@ enum class Emotion
     DEFAULT, ANGRY, HAPPY, NERVOUS, SAD, SLEEPING, HURT, DEAD
 };
 
+enum class FoxState {IDLE, WALK, RUN, ATTACK, HURT, DEATH, PUSH, SLEEP, ITEMGRAB};
+
 class Character
 {
 public:
@@ -60,17 +62,8 @@ public:
     void SwitchCollidable() {Collidable = !Collidable;}
     
 private:
-    Sprite Idle{};
-    Sprite Walk{};
-    Sprite Run{};
-    Sprite Attack{};
-    Sprite Hurt{};
-    Sprite Death{};
-    Sprite Push{};
-    Sprite Sleep{};
-    Sprite ItemGrab{};
-    Sprite* CurrentSprite{&Idle};
     GameTexture& GameTextures;
+    std::vector<Sprite> Sprites{};
 
     Window& Screen;
     Background& World;
@@ -81,6 +74,7 @@ private:
     Vector2 PrevWorldPos{};
     Rectangle Source{};
     Rectangle Destination{};
+    int SpriteIndex{};
     float Health{11.f};
     float Scale{1.5f};
     float Speed{1.0f};

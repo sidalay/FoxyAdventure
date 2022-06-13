@@ -12,20 +12,23 @@ Character::Character(const Sprite& Idle,
                      GameTexture& GameTextures, 
                      Window& Screen, 
                      Background& World)
-    : Idle{Idle},
-      Walk{Walk},
-      Run{Run},
-      Attack{Attack},
-      Hurt{Hurt},
-      Death{Death},
-      Push{Push},
-      Sleep{Sleep},
-      ItemGrab{ItemGrab},
-      GameTextures{GameTextures},
+    : GameTextures{GameTextures},
       Screen{Screen},
       World{World}
 {
     WorldPos = Vector2Subtract(WorldPos, Offset);
+
+    Sprites.emplace_back(Idle);
+    Sprites.emplace_back(Walk);
+    Sprites.emplace_back(Run);
+    Sprites.emplace_back(Attack);
+    Sprites.emplace_back(Hurt);
+    Sprites.emplace_back(Death);
+    Sprites.emplace_back(Push);
+    Sprites.emplace_back(Sleep);
+    Sprites.emplace_back(ItemGrab);
+
+    SpriteIndex = static_cast<int>(FoxState::IDLE);
 }
 
 void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
@@ -55,31 +58,25 @@ void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies,
 
 void Character::Draw()
 {
-    DrawTexturePro(CurrentSprite->Texture, Source, Destination, Vector2{}, 0.f, WHITE);
+    DrawTexturePro(Sprites.at(SpriteIndex).Texture, Source, Destination, Vector2{}, 0.f, WHITE);
 }
 
 void Character::SpriteTick(float DeltaTime)
 {
-    Idle.Tick(DeltaTime);
-    Walk.Tick(DeltaTime);
-    Run.Tick(DeltaTime);
-    Attack.Tick(DeltaTime);
-    Hurt.Tick(DeltaTime);
-    Death.Tick(DeltaTime);
-    Push.Tick(DeltaTime);
-    Sleep.Tick(DeltaTime);
-    ItemGrab.Tick(DeltaTime);
+    for (auto& Sprite:Sprites) {
+        Sprite.Tick(DeltaTime);
+    }
 }
 
 void Character::UpdateScreenPos()
 {
     // Update Character to middle of screen if screen is resized
-    ScreenPos.x = Screen.x/2.f - (Scale * (0.5f * CurrentSprite->Texture.width/CurrentSprite->MaxFramesX));
-    ScreenPos.y = Screen.y/2.f - (Scale * (0.5f * CurrentSprite->Texture.height/CurrentSprite->MaxFramesY));
+    ScreenPos.x = Screen.x/2.f - (Scale * (0.5f * Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX));
+    ScreenPos.y = Screen.y/2.f - (Scale * (0.5f * Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY));
     Destination.x = ScreenPos.x;
     Destination.y = ScreenPos.y;
-    Destination.width = Scale * CurrentSprite->Texture.width/CurrentSprite->MaxFramesX;    
-    Destination.height = Scale * CurrentSprite->Texture.height/CurrentSprite->MaxFramesY;    
+    Destination.width = Scale * Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX;    
+    Destination.height = Scale * Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY;    
 }
 
 void Character::CheckDirection()
@@ -95,16 +92,16 @@ void Character::CheckDirection()
         switch (Face)
         {
             case Direction::DOWN: 
-                CurrentSprite->FrameY = 0;
+                Sprites.at(SpriteIndex).FrameY = 0;
                 break;
             case Direction::LEFT: 
-                CurrentSprite->FrameY = 1;
+                Sprites.at(SpriteIndex).FrameY = 1;
                 break;
             case Direction::RIGHT:
-                CurrentSprite->FrameY = 2;
+                Sprites.at(SpriteIndex).FrameY = 2;
                 break;
             case Direction::UP: 
-                CurrentSprite->FrameY = 3;
+                Sprites.at(SpriteIndex).FrameY = 3;
                 break;
         }
 }
@@ -136,10 +133,10 @@ void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::ve
         }
 
         // Undo Movement if walking out-of-bounds
-        if (WorldPos.x + ScreenPos.x < 0.f - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f||
-            WorldPos.y + ScreenPos.y < 0.f - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f||
-            WorldPos.x + (Screen.x - ScreenPos.x) > World.GetMapSize().x * World.GetScale() + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/2.f ||
-            WorldPos.y + (Screen.y - ScreenPos.y) > World.GetMapSize().y * World.GetScale() + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/2.f)
+        if (WorldPos.x + ScreenPos.x < 0.f - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f||
+            WorldPos.y + ScreenPos.y < 0.f - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f||
+            WorldPos.x + (Screen.x - ScreenPos.x) > World.GetMapSize().x * World.GetScale() + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
+            WorldPos.y + (Screen.y - ScreenPos.y) > World.GetMapSize().y * World.GetScale() + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f)
         {
             UndoMovement();
         }
@@ -350,19 +347,19 @@ void Character::WalkOrRun()
 
     if (Running && Walking) 
     {
-        CurrentSprite = &Run;
+        SpriteIndex = static_cast<int>(FoxState::RUN);
     }
     else if (Walking) 
     {
-        CurrentSprite = &Walk;
+        SpriteIndex = static_cast<int>(FoxState::WALK);
     }
     else if (Sleeping)
     {
-        CurrentSprite = &Sleep;
+        SpriteIndex = static_cast<int>(FoxState::SLEEP);
     }
     else 
     {
-        CurrentSprite = &Idle;
+        SpriteIndex = static_cast<int>(FoxState::IDLE);
     }
 }
 
@@ -379,7 +376,7 @@ void Character::CheckAttack()
             if (AttackTime < 0.4f) {
                 Sleeping = false;
                 Attacking = true;
-                CurrentSprite = &Attack;
+                SpriteIndex = static_cast<int>(FoxState::ATTACK);
             }
             // Reset window when reaching AttackResetTime
             else if (AttackTime >= AttackResetTime) {
@@ -447,20 +444,20 @@ void Character::DrawIndicator()
 void Character::UpdateSource()
 {
     // Update which portion of the sprite sheet gets drawn
-    Source.x = CurrentSprite->FrameX * CurrentSprite->Texture.width / CurrentSprite->MaxFramesX;
-    Source.y = CurrentSprite->FrameY * CurrentSprite->Texture.height / CurrentSprite->MaxFramesY;
-    Source.width = CurrentSprite->Texture.width/CurrentSprite->MaxFramesX;
-    Source.height = CurrentSprite->Texture.height/CurrentSprite->MaxFramesY;
+    Source.x = Sprites.at(SpriteIndex).FrameX * Sprites.at(SpriteIndex).Texture.width / Sprites.at(SpriteIndex).MaxFramesX;
+    Source.y = Sprites.at(SpriteIndex).FrameY * Sprites.at(SpriteIndex).Texture.height / Sprites.at(SpriteIndex).MaxFramesY;
+    Source.width = Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX;
+    Source.height = Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY;
 }
 
 Rectangle Character::GetCollisionRec()
 {
     return Rectangle 
     {
-        ScreenPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f,
-        ScreenPos.y + CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f,
-        ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
-        ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+        ScreenPos.x + Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX/2.f,
+        ScreenPos.y + Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY/2.f,
+        ((Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX) - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/1.5f) * Scale,
+        ((Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY) - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/1.5f)  * Scale
     };
 }
 
@@ -471,34 +468,34 @@ Rectangle Character::GetAttackRec()
         case Direction::DOWN:
             return Rectangle
             {
-                ScreenPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f,
-                ScreenPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f * 2),
-                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
-                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+                ScreenPos.x + Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX/2.f,
+                ScreenPos.y + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY/2.f * 2),
+                ((Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX) - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/1.5f) * Scale,
+                ((Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY) - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/1.5f)  * Scale
             }; 
         case Direction::LEFT: 
             return Rectangle
             {
                 ScreenPos.x,
-                ScreenPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f),
-                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
-                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+                ScreenPos.y + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY/2.f),
+                ((Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX) - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/1.5f) * Scale,
+                ((Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY) - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/1.5f)  * Scale
             }; 
         case Direction::RIGHT:
             return Rectangle
             {
-                ScreenPos.x + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f * 2),
-                ScreenPos.y + CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f,
-                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
-                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+                ScreenPos.x + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX/2.f * 2),
+                ScreenPos.y + Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY/2.f,
+                ((Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX) - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/1.5f) * Scale,
+                ((Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY) - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/1.5f)  * Scale
             }; 
         case Direction::UP:
             return Rectangle
             {
-                ScreenPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f,
+                ScreenPos.x + Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX/2.f,
                 ScreenPos.y,
-                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
-                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+                ((Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX) - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/1.5f) * Scale,
+                ((Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY) - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/1.5f)  * Scale
             };
         default:
             return Rectangle
@@ -515,7 +512,7 @@ void Character::CheckIfAlive()
     {
         Locked = true;
         Alive = false;
-        CurrentSprite = &Death;
+        SpriteIndex = static_cast<int>(FoxState::DEATH);
     }
     else
     {
@@ -537,7 +534,7 @@ void Character::TakeDamage()
 
     // How often the hurt animation should play
     if (DamageTime <= HurtUpdateTime) {
-        CurrentSprite = &Hurt;
+        SpriteIndex = static_cast<int>(FoxState::HURT);
         Hurting = true;
     }
 
