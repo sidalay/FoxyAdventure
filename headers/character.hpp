@@ -70,7 +70,7 @@ private:
     Sprite Sleep{};
     Sprite ItemGrab{};
     Sprite* CurrentSprite{&Idle};
-    GameTexture& GameTextures;  
+    GameTexture& GameTextures;
 
     Window& Screen;
     Background& World;

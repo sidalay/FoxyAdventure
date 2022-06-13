@@ -45,8 +45,8 @@ Enemy::Enemy(const Sprite& Idle,
     Sprites.emplace_back(Death);
     Sprites.emplace_back(Projectile);
 
-    CurrentSprite = &Sprites.at(0);
-    ShootingSprite = &Sprites.at(5);
+    CurrentSpriteIndex = Monster::IDLE;
+    ShootingSpriteIndex = Monster::PROJECTILE;
 
     // Static variable to count how many enemies on the field
     if (Type == EnemyType::NORMAL) {
@@ -102,7 +102,7 @@ Enemy::Enemy(const Sprite& NpcIdle,
     Sprites.emplace_back(NpcMisc);
     Sprites.emplace_back(NpcSleep);
 
-    CurrentSprite = &Sprites.at(0);
+    CurrentSpriteIndex = NPC::IDLING;
 
     // Generate RNG for current object used for randomizing AI movement
     std::random_device Seed;
@@ -167,21 +167,21 @@ void Enemy::Draw(Vector2 HeroWorldPos)
         if (!OOB) {
             if (Type == EnemyType::NORMAL || Type == EnemyType::NPC || (Type == EnemyType::BOSS && Summoned)) {
                 if (Hurting) {
-                    DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(ScreenPos,Scale), Vector2{},0.f, RED);
+                    DrawTexturePro(Sprites.at(CurrentSpriteIndex).Texture, Sprites.at(CurrentSpriteIndex).GetSourceRec(), Sprites.at(CurrentSpriteIndex).GetPosRec(ScreenPos,Scale), Vector2{},0.f, RED);
                 }
                 else {
-                    DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(ScreenPos,Scale), Vector2{},0.f, WHITE);
+                    DrawTexturePro(Sprites.at(CurrentSpriteIndex).Texture, Sprites.at(CurrentSpriteIndex).GetSourceRec(), Sprites.at(CurrentSpriteIndex).GetPosRec(ScreenPos,Scale), Vector2{},0.f, WHITE);
                 }
 
                 // Draw Ranged projectile
                 if (Ranged && Attacking && !Dying && !Hurting) {
-                    DrawTexturePro(ShootingSprite->Texture, ShootingSprite->GetSourceRec(), CurrentSprite->GetPosRec(UpdateProjectile(),Scale), Vector2{},0.f, WHITE);
+                    DrawTexturePro(Sprites.at(ShootingSpriteIndex).Texture, Sprites.at(ShootingSpriteIndex).GetSourceRec(), Sprites.at(CurrentSpriteIndex).GetPosRec(UpdateProjectile(),Scale), Vector2{},0.f, WHITE);
                 }
             }
         }
         // OOB is used for debugging purposes only
         else {
-            DrawTexturePro(CurrentSprite->Texture, CurrentSprite->GetSourceRec(), CurrentSprite->GetPosRec(ScreenPos,Scale), Vector2{},0.f, PURPLE);
+            DrawTexturePro(Sprites.at(CurrentSpriteIndex).Texture, Sprites.at(CurrentSpriteIndex).GetSourceRec(), Sprites.at(CurrentSpriteIndex).GetPosRec(ScreenPos,Scale), Vector2{},0.f, PURPLE);
         }
 
         if (Alive && Summoned && (Type != EnemyType::NPC)) {
@@ -244,16 +244,16 @@ void Enemy::CheckDirection()
         switch (Face)
         {
             case Direction::DOWN: 
-                CurrentSprite->FrameY = 0;
+                Sprites.at(CurrentSpriteIndex).FrameY = 0;
                 break;
             case Direction::LEFT: 
-                CurrentSprite->FrameY = 1;
+                Sprites.at(CurrentSpriteIndex).FrameY = 1;
                 break;
             case Direction::RIGHT:
-                CurrentSprite->FrameY = 2;
+                Sprites.at(CurrentSpriteIndex).FrameY = 2;
                 break;
             case Direction::UP: 
-                CurrentSprite->FrameY = 3;
+                Sprites.at(CurrentSpriteIndex).FrameY = 3;
                 break;
         }
     }
@@ -261,16 +261,16 @@ void Enemy::CheckDirection()
         switch (Face)
         {
             case Direction::DOWN: 
-                CurrentSprite->FrameY = 0;
+                Sprites.at(CurrentSpriteIndex).FrameY = 0;
                 break;
             case Direction::LEFT: 
-                CurrentSprite->FrameY = 1;
+                Sprites.at(CurrentSpriteIndex).FrameY = 1;
                 break;
             case Direction::RIGHT:
-                CurrentSprite->FrameY = 0;
+                Sprites.at(CurrentSpriteIndex).FrameY = 0;
                 break;
             case Direction::UP: 
-                CurrentSprite->FrameY = 1;
+                Sprites.at(CurrentSpriteIndex).FrameY = 1;
                 break;
         }
     }
@@ -279,16 +279,16 @@ void Enemy::CheckDirection()
         switch (Face)
         {
             case Direction::DOWN: 
-                ShootingSprite->FrameY = 0;
+                Sprites.at(ShootingSpriteIndex).FrameY = 0;
                 break;
             case Direction::LEFT: 
-                ShootingSprite->FrameY = 1;
+                Sprites.at(ShootingSpriteIndex).FrameY = 1;
                 break;
             case Direction::RIGHT:
-                ShootingSprite->FrameY = 2;
+                Sprites.at(ShootingSpriteIndex).FrameY = 2;
                 break;
             case Direction::UP: 
-                ShootingSprite->FrameY = 3;
+                Sprites.at(ShootingSpriteIndex).FrameY = 3;
                 break;
         }
     }
@@ -325,8 +325,8 @@ void Enemy::OutOfBounds()
 {
     if (WorldPos.x < 0.f ||
         WorldPos.y < 0.f ||
-        WorldPos.x > World.GetMapSize().x * World.GetScale() - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)*Scale ||
-        WorldPos.y > World.GetMapSize().y * World.GetScale() - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)*Scale) 
+        WorldPos.x > World.GetMapSize().x * World.GetScale() - (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX)*Scale ||
+        WorldPos.y > World.GetMapSize().y * World.GetScale() - (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY)*Scale) 
     {
         UndoMovement();
         // OOB = true;
@@ -341,33 +341,33 @@ void Enemy::NeutralAction()
     // Check if Enemy is moving and change sprites if needed
     if (Chasing || Walking) {
         if (Type == EnemyType::NPC) {
-            CurrentSprite = &Sprites.at(2); // Walking sprite for NPC
+            CurrentSpriteIndex = NPC::WALKING;
         }
         else {
-            CurrentSprite = &Sprites.at(1); // Walking sprite 
+            CurrentSpriteIndex = Monster::WALK; 
         }
     }
     else if (MiscAction) {
         if (Type == EnemyType::NPC) {
-            CurrentSprite = &Sprites.at(3); // Misc sprite
+            CurrentSpriteIndex = NPC::MISC;
         }
     }
     else if (Sleeping) {
         if (Type == EnemyType::NPC) {
-            CurrentSprite = &Sprites.at(4); // Sleeping sprite
+            CurrentSpriteIndex = NPC::SLEEPING;
         }
     }
     else {
         if (Type == EnemyType::NPC) {
             if (IdleTwo) {
-                CurrentSprite = &Sprites.at(1); // IdleTwo sprite
+                CurrentSpriteIndex = NPC::IDLINGTWO;
             }
             else {
-                CurrentSprite = &Sprites.at(0); // Idle sprite
+                CurrentSpriteIndex = NPC::IDLING;
             }
         }
         else {
-            CurrentSprite = &Sprites.at(0); // Idle sprite
+            CurrentSpriteIndex = Monster::IDLE;
         }
     }
 }
@@ -462,10 +462,10 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWo
 void Enemy::CheckAttack()
 {
     if (Attacking) {
-        CurrentSprite = &Sprites.at(2);
+        CurrentSpriteIndex = Monster::ATTACK;
 
         if (Ranged) {
-            ShootingSprite = &Sprites.at(5);
+            ShootingSpriteIndex = Monster::PROJECTILE;
         }
     }
     else {
@@ -537,7 +537,7 @@ void Enemy::TakeDamage()
 
         // Time between hurt animation showing
         if (DamageTime <= HurtUpdateTime) {
-            CurrentSprite = &Sprites.at(3);
+            CurrentSpriteIndex = Monster::HURT;
             Hurting = true;
             Trajectory = 1.f;
         }
@@ -563,7 +563,7 @@ void Enemy::CheckAlive(float DeltaTime)
         float EndTime{1.35f};
 
         // Set to death sprite
-        CurrentSprite = &Sprites.at(4);
+        CurrentSpriteIndex = Monster::DEATH;
         
         // Turn off any TakeDamage() functionality
         IsAttacked = false;
@@ -774,7 +774,7 @@ void Enemy::DrawHP()
     float LifeBarScale{2.f};
     float SingleBarWidth{static_cast<float>(GameTextures.LifebarLeftEmpty.width) * LifeBarScale};
     float MaxBarWidth{SingleBarWidth * MaxHP};
-    float CenterLifeBar {(MaxBarWidth - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)*Scale ) / 2.f};
+    float CenterLifeBar {(MaxBarWidth - (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX)*Scale ) / 2.f};
     Vector2 LifeBarPos{};                           // Where the lifebar is positioned
     Vector2 LifeBarPosAdd{SingleBarWidth, 0};       // spacing between each life 'bar'
 
@@ -835,40 +835,40 @@ Rectangle Enemy::GetCollisionRec()
         {
             return Rectangle
             {
-                ScreenPos.x + ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .31f,
-                ScreenPos.y + ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .40f,
-                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .40f,
-                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .30f
+                ScreenPos.x + ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .31f,
+                ScreenPos.y + ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .40f,
+                ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .40f,
+                ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .30f
             };
         }
         case EnemyType::CROW:
         {
             return Rectangle
             {
-                ScreenPos.x + ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .31f,
-                ScreenPos.y + ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .31f,
-                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .40f,
-                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .30f
+                ScreenPos.x + ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .31f,
+                ScreenPos.y + ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .31f,
+                ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .40f,
+                ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .30f
             };
         }
         case EnemyType::SQUIRREL:
         {
             return Rectangle
             {
-                ScreenPos.x + ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .35f,
-                ScreenPos.y + ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .35f,
-                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .20f,
-                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .30f
+                ScreenPos.x + ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .35f,
+                ScreenPos.y + ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .35f,
+                ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .20f,
+                ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .30f
             };
         }
         default:
         {
             return Rectangle 
             {
-                ScreenPos.x + ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .31f,
-                ScreenPos.y + ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .31f,
-                ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX) * Scale) * .40f,
-                ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY) * Scale) * .60f
+                ScreenPos.x + ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .31f,
+                ScreenPos.y + ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .31f,
+                ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .40f,
+                ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .60f
             };
         }
     }
@@ -881,34 +881,34 @@ Rectangle Enemy::GetAttackRec()
             case Direction::DOWN:
                 return Rectangle
                 {
-                    UpdateProjectile().x + ShootingSprite->Texture.width/ShootingSprite->MaxFramesX/6.f,
-                    UpdateProjectile().y + ((ShootingSprite->Texture.height/ShootingSprite->MaxFramesY)/2 * Scale),
-                    ((ShootingSprite->Texture.width/ShootingSprite->MaxFramesX/2.f) * Scale - (ShootingSprite->Texture.width/ShootingSprite->MaxFramesX)/1.5f) * Scale,
-                    ((ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/3.f) * Scale - (ShootingSprite->Texture.height/ShootingSprite->MaxFramesY)/1.5f)  * Scale
+                    UpdateProjectile().x + Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/6.f,
+                    UpdateProjectile().y + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY)/2 * Scale),
+                    ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/2.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX)/1.5f) * Scale,
+                    ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY)/1.5f)  * Scale
                 };
             case Direction::LEFT:
                 return Rectangle
                 {
-                    UpdateProjectile().x + (ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/2.f),
-                    UpdateProjectile().y + (ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/6.f),
-                    ((ShootingSprite->Texture.width/ShootingSprite->MaxFramesX/3.f) * Scale - (ShootingSprite->Texture.width/ShootingSprite->MaxFramesX)/1.5f) * Scale,
-                    ((ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/2.f) * Scale - (ShootingSprite->Texture.height/ShootingSprite->MaxFramesY)/1.5f)  * Scale
+                    UpdateProjectile().x + (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/2.f),
+                    UpdateProjectile().y + (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/6.f),
+                    ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX)/1.5f) * Scale,
+                    ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/2.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY)/1.5f)  * Scale
                 };
             case Direction::RIGHT:
                 return Rectangle
                 {
-                    UpdateProjectile().x + (ShootingSprite->Texture.width/ShootingSprite->MaxFramesX * Scale)/2.5f,
-                    UpdateProjectile().y + (ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/6.f),
-                    ((ShootingSprite->Texture.width/ShootingSprite->MaxFramesX/3.f) * Scale - (ShootingSprite->Texture.width/ShootingSprite->MaxFramesX)/1.5f) * Scale,
-                    ((ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/2.f) * Scale - (ShootingSprite->Texture.height/ShootingSprite->MaxFramesY)/1.5f)  * Scale
+                    UpdateProjectile().x + (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX * Scale)/2.5f,
+                    UpdateProjectile().y + (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/6.f),
+                    ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX)/1.5f) * Scale,
+                    ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/2.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY)/1.5f)  * Scale
                 };
             case Direction::UP:
                 return Rectangle
                 {
-                    UpdateProjectile().x + ShootingSprite->Texture.width/ShootingSprite->MaxFramesX/6.f,
-                    UpdateProjectile().y + ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/2.f,
-                    ((ShootingSprite->Texture.width/ShootingSprite->MaxFramesX/2.f) * Scale - (ShootingSprite->Texture.width/ShootingSprite->MaxFramesX)/1.5f) * Scale,
-                    ((ShootingSprite->Texture.height/ShootingSprite->MaxFramesY/3.f) * Scale - (ShootingSprite->Texture.height/ShootingSprite->MaxFramesY)/1.5f)  * Scale
+                    UpdateProjectile().x + Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/6.f,
+                    UpdateProjectile().y + Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/2.f,
+                    ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/2.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX)/1.5f) * Scale,
+                    ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY)/1.5f)  * Scale
                 };
             default:
                 return Rectangle
@@ -923,34 +923,34 @@ Rectangle Enemy::GetAttackRec()
             case Direction::DOWN:
                 return Rectangle
                 {
-                    ScreenPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/6.f,
-                    ScreenPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY * Scale),
-                    ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
-                    ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/3.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+                    ScreenPos.x + Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX/6.f,
+                    ScreenPos.y + (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY * Scale),
+                    ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX/2.f) * Scale - (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX)/1.5f) * Scale,
+                    ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY/3.f) * Scale - (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY)/1.5f)  * Scale
                 }; 
             case Direction::LEFT: 
                 return Rectangle
                 {
-                    ScreenPos.x - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/1.8f),
-                    ScreenPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/6.f),
-                    ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/3.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
-                    ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+                    ScreenPos.x - (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY/1.8f),
+                    ScreenPos.y + (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY/6.f),
+                    ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX/3.f) * Scale - (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX)/1.5f) * Scale,
+                    ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY/2.f) * Scale - (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY)/1.5f)  * Scale
                 }; 
             case Direction::RIGHT:
                 return Rectangle
                 {
-                    ScreenPos.x + (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX * Scale)/1.2f,
-                    ScreenPos.y + (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/6.f),
-                    ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/3.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
-                    ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/2.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+                    ScreenPos.x + (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX * Scale)/1.2f,
+                    ScreenPos.y + (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY/6.f),
+                    ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX/3.f) * Scale - (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX)/1.5f) * Scale,
+                    ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY/2.f) * Scale - (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY)/1.5f)  * Scale
                 }; 
             case Direction::UP:
                 return Rectangle
                 {
-                    ScreenPos.x + CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/6.f,
-                    ScreenPos.y - CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/1.5f,
-                    ((CurrentSprite->Texture.width/CurrentSprite->MaxFramesX/2.f) * Scale - (CurrentSprite->Texture.width/CurrentSprite->MaxFramesX)/1.5f) * Scale,
-                    ((CurrentSprite->Texture.height/CurrentSprite->MaxFramesY/3.f) * Scale - (CurrentSprite->Texture.height/CurrentSprite->MaxFramesY)/1.5f)  * Scale
+                    ScreenPos.x + Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX/6.f,
+                    ScreenPos.y - Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY/1.5f,
+                    ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX/2.f) * Scale - (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX)/1.5f) * Scale,
+                    ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY/3.f) * Scale - (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY)/1.5f)  * Scale
                 };
             default:
                 return Rectangle
@@ -964,10 +964,10 @@ Rectangle Enemy::GetAttackRec()
 bool Enemy::WithinScreen(Vector2 HeroWorldPos)
 {
     if (
-        (WorldPos.x >= (HeroWorldPos.x + 615) - (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) && 
-        (WorldPos.x <= (HeroWorldPos.x + 615) + (GetScreenWidth()/2 + (CurrentSprite->Texture.width * Scale))) &&
-        (WorldPos.y >= (HeroWorldPos.y + 335) - (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale))) && 
-        (WorldPos.y <= (HeroWorldPos.y + 335) + (GetScreenHeight()/2 + (CurrentSprite->Texture.height * Scale)))
+        (WorldPos.x >= (HeroWorldPos.x + 615) - (GetScreenWidth()/2 + (Sprites.at(CurrentSpriteIndex).Texture.width * Scale))) && 
+        (WorldPos.x <= (HeroWorldPos.x + 615) + (GetScreenWidth()/2 + (Sprites.at(CurrentSpriteIndex).Texture.width * Scale))) &&
+        (WorldPos.y >= (HeroWorldPos.y + 335) - (GetScreenHeight()/2 + (Sprites.at(CurrentSpriteIndex).Texture.height * Scale))) && 
+        (WorldPos.y <= (HeroWorldPos.y + 335) + (GetScreenHeight()/2 + (Sprites.at(CurrentSpriteIndex).Texture.height * Scale)))
        ) {
         return true;
     }

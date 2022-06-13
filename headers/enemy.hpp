@@ -14,6 +14,9 @@ enum class EnemyType
     FOX, CROW, SQUIRREL
 };
 
+enum Monster {IDLE, WALK, ATTACK, HURT, DEATH, PROJECTILE}; 
+enum NPC {IDLING, IDLINGTWO, WALKING, MISC, SLEEPING}; 
+
 struct Enemies;
 
 class Enemy
@@ -89,8 +92,6 @@ public:
     int GetMonsterCount(EnemyType Type) {return MonsterCounter.at(Type);}
     
 private:
-    Sprite* CurrentSprite;
-    Sprite* ShootingSprite{};
     std::vector<Sprite> Sprites{};
 
     EnemyType Race{};                    // What kind of Enemy
@@ -108,6 +109,8 @@ private:
     
     static int MonsterDeaths;
     static int MonsterCount;
+    int CurrentSpriteIndex{};
+    int ShootingSpriteIndex{};
     int Health{};
     int MaxHP{};
     int LeftOrRight{};
