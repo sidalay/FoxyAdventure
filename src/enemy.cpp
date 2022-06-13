@@ -359,18 +359,13 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWo
         for (auto& PropType:Props) {
             for (auto& Prop:PropType) {
                 if (Prop.HasCollision()) { 
-                    /*
-                        UndoMovement() wasn't working so implemented a reverse aggro logic. 
-                        When enemy gets within min aggro range of an obstacle it 'runs' away from it.
-                        Therefore it will never collide with a prop.
-                    */
-                    Vector2 PropScreenPos{Vector2{Prop.GetCollisionRec(HeroWorldPos).x, Prop.GetCollisionRec(HeroWorldPos).y}}; // Grab the collision rectangle screen position
-                    Vector2 RadiusAroundEnemy{5.f,5.f};
-                    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), ScreenPos)), Speed)}; // Calculate the distance from Enemy to Prop
-                    float AvoidProp{Vector2Length(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), ScreenPos))};
-
                     // move away from props
                     if (Prop.IsSpawned()) {
+                        Vector2 PropScreenPos{Vector2{Prop.GetCollisionRec(HeroWorldPos).x, Prop.GetCollisionRec(HeroWorldPos).y}}; // Grab the collision rectangle screen position
+                        Vector2 RadiusAroundEnemy{5.f,5.f};
+                        Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), ScreenPos)), Speed)}; // Calculate the distance from Enemy to Prop
+                        float AvoidProp{Vector2Length(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), ScreenPos))};
+                        
                         if (AvoidProp <= MinRange) {
                             WorldPos = Vector2Subtract(WorldPos, ToTarget);
                         }
@@ -407,10 +402,6 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWo
     // Enemy collision handling
     for (auto& Enemy:Enemies) {
         if (this != &Enemy) {
-            /*
-                When enemy gets within min aggro range of another enemy it 'runs' away from it.
-                Therefore it will never collide with a Enemy.
-            */
             Vector2 RadiusAroundEnemy{5.f,5.f};
             Vector2 ToTarget{Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), ScreenPos)), Speed)}; // Calculate the distance from this->Enemy to Enemy
             float AvoidEnemy{Vector2Length(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), ScreenPos))};
