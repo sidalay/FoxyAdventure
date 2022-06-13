@@ -111,6 +111,7 @@ namespace Game
 
         Info.Map.Tick(Objects.Fox.GetWorldPos());
         Objects.Fox.Tick(DeltaTime, Objects.PropsContainer, Objects.Enemies, Objects.Trees);
+
         if (!Objects.Fox.IsAlive()) {
             Info.NextState = Game::State::GAMEOVER;
             Info.State = Game::State::TRANSITION;
@@ -140,8 +141,9 @@ namespace Game
             }
         }
 
-        if (IsKeyPressed(KEY_L))
+        if (IsKeyPressed(KEY_L)) {
             Objects.Fox.SetSleep();
+        }
 
         if (IsKeyPressed(KEY_P)) {
             Info.NextState = Game::State::PAUSED;
@@ -158,35 +160,28 @@ namespace Game
         }
 
         if (Info.DevToolsOn) {
-
             if (IsKeyPressed(KEY_ONE)) {
                 Info.NoClipOn = !Info.NoClipOn;
                 Objects.Fox.SwitchCollidable();
             }
-
-            if (IsKeyPressed(KEY_TWO)) {
+            else if (IsKeyPressed(KEY_TWO)) {
                 Info.DrawRectanglesOn = !Info.DrawRectanglesOn;
             }
-
-            if (IsKeyPressed(KEY_THREE)) {
+            else if (IsKeyPressed(KEY_THREE)) {
                 Info.ShowFPS = !Info.ShowFPS;
             }
-
-            if (IsKeyPressed(KEY_FOUR)) {
+            else if (IsKeyPressed(KEY_FOUR)) {
                 Info.ShowPos = !Info.ShowPos;
             }
-
-            if (IsKeyPressed(KEY_ZERO)) {
+            else if (IsKeyPressed(KEY_ZERO)) {
                 Info.ShowDevTools = !Info.ShowDevTools;
             }
-
-            if (Objects.Fox.GetHealth() < 11) {
+            else if (Objects.Fox.GetHealth() < 11) {
                 if (IsKeyPressed(KEY_EQUAL)) {
                     Objects.Fox.AddHealth(0.5f);
                 }
             }
-
-            if (Objects.Fox.GetHealth() > 0) {
+            else if (Objects.Fox.GetHealth() > 0) {
                 if (IsKeyPressed(KEY_MINUS)) {
                     Objects.Fox.AddHealth(-0.5f);
                 }
@@ -271,9 +266,7 @@ namespace Game
         }
 
         Objects.Fox.DrawIndicator();
-        
         Objects.Hud.Draw(Objects.Fox.GetHealth(), Objects.Fox.GetEmotion());
-
         Info.Map.DrawMiniMap(Objects.Fox.GetWorldPos());
 
         // Debugging --------------------
@@ -437,13 +430,36 @@ namespace Game
 
     void GameOverUpdate(Game::Info& Info)
     {
-        Info.NextState = Game::State::EXIT;
-        Info.State = Game::State::TRANSITION;
+        if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_S) || IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_DOWN)) {
+            Info.GameOverStart = !Info.GameOverStart;
+        }
+
+        if (!Info.GameOverStart) {
+            if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
+                Info.NextState = Game::State::RUNNING;
+                Info.State = Game::State::TRANSITION;    
+            }
+        }
+        else {
+            if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
+                Info.NextState = Game::State::MAINMENU;
+                Info.State = Game::State::TRANSITION;
+            }
+        }
     }
 
     void GameOverDraw(const Game::Info& Info)
     {
-
+        DrawText("GAME OVER", 500, 240, 40, WHITE);
+        DrawText("RESUME", 563, 380, 30, WHITE);
+        DrawText("END", 597, 430, 30, WHITE);
+        
+        if (!Info.GameOverStart) {
+            DrawRectangle(557, 370, 138, 47, Color{ 0, 238, 135, 100 });
+        }
+        else {
+            DrawRectangle(557, 420, 138, 47, Color{ 0, 238, 135, 100 });
+        }
     }
 
     void Transition(Game::Info& Info)

@@ -19,6 +19,7 @@ namespace Game
         float TransitionInTime{0.f};
         float TransitionOutTime{0.f};
         bool MainMenuStart{true};
+        bool GameOverStart{true};
         bool ExitGame{false};
         bool ExitIsYes{false};
         Game::State State{Game::State::TRANSITION};
