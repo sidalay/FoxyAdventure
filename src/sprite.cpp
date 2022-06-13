@@ -1,6 +1,6 @@
 #include "sprite.hpp"
 
-Sprite::Sprite(const Texture2D& Texture, float MaxFramesX, float MaxFramesY, float UpdateSpeed) 
+Sprite::Sprite(const Texture2D& Texture, int MaxFramesX, int MaxFramesY, float UpdateSpeed) 
     : Texture{Texture}, MaxFramesX{MaxFramesX}, MaxFramesY{MaxFramesY}, UpdateTime{UpdateSpeed}
 {
 
@@ -23,10 +23,10 @@ Rectangle Sprite::GetSourceRec()
 {
     // source rectangle that shows what to draw
     Rectangle Source {
-        FrameX * Texture.width / MaxFramesX,
-        FrameY * Texture.height / MaxFramesY,
-        Texture.width / MaxFramesX,
-        Texture.height / MaxFramesY
+        static_cast<float>(FrameX * Texture.width / MaxFramesX),
+        static_cast<float>(FrameY * Texture.height / MaxFramesY),
+        static_cast<float>(Texture.width / MaxFramesX),
+        static_cast<float>(Texture.height / MaxFramesY)
     };
 
     return Source;
@@ -38,8 +38,8 @@ Rectangle Sprite::GetPosRec(const Vector2& ScreenPos, float Scale)
     Rectangle Destination {
         ScreenPos.x,
         ScreenPos.y,
-        (Texture.width/MaxFramesX) * Scale,
-        (Texture.height/MaxFramesY) * Scale
+        static_cast<float>(Texture.width/MaxFramesX) * Scale,
+        static_cast<float>(Texture.height/MaxFramesY) * Scale
     };
 
     return Destination;
