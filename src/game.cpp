@@ -588,7 +588,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ---------------------------------------------------- -3 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -598,18 +597,15 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ---------------------------------------------------- -2 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ---------------------------------------------------- -1 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1358.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1398.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
-            // ---------------------------------------------------- 0 ------------------------------------------------------
+            // ----------------------------------------------------- 0 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1462.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -618,8 +614,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1486.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
-            // ---------------------------------------------------- 1 ------------------------------------------------------
+            // ----------------------------------------------------- 1 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1550.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1590.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1550.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -628,8 +623,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
-            // ---------------------------------------------------- 2 ------------------------------------------------------
+            // ----------------------------------------------------- 2 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -638,8 +632,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
-            // ---------------------------------------------------- 3 ------------------------------------------------------
+            // ------------------------------------------------------ 3 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -648,8 +641,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
-            // ---------------------------------------------------- 3 ------------------------------------------------------
+            // ------------------------------------------------------ 3 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -658,8 +650,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
-            // ---------------------------------------------------- 4 ------------------------------------------------------
+            // ----------------------------------------------------- 4 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1974.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -668,7 +659,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ------------------------------------------------ Left Column ------------------------------------------------
             // ---------------------------------------------------- -1 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1294.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -679,7 +669,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1398.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1358.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1398.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ---------------------------------------------------- 0 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1422.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1462.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -689,7 +678,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1486.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ---------------------------------------------------- 1 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1550.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1590.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -699,7 +687,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 2 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -709,7 +696,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 3 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -719,7 +705,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 4 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1974.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -729,7 +714,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------- Far Right Column ----------------------------------------------
             // --------------------------------------------------- -6 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -739,8 +723,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            // Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- -5 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -750,7 +732,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- -4 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -760,18 +741,15 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- -3 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- -2 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1486.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- -1 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1334.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1294.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -780,7 +758,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1398.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1358.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1398.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 0 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1422.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1462.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -790,7 +767,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1486.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            
             // --------------------------------------------------- 1 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1550.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1590.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -800,7 +776,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 2 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -810,7 +785,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            
             // --------------------------------------------------- 3 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -820,7 +794,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 4 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1974.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -830,7 +803,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ------------------------------------------------ Right Column -----------------------------------------------
             // --------------------------------------------------- -1 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1334.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -839,7 +811,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1398.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1358.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1398.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 0 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1422.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1462.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -849,7 +820,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1486.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 1 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1550.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1590.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -859,7 +829,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 2 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -869,7 +838,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 3 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -879,7 +847,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 4 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1974.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -889,11 +856,9 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
             // -----------------------------------------Dungeon Entrance Grass-----------------------------------------------
             // --------------------------------------------------------------------------------------------------------------
-
             // ------------------------------------------------ Left Column -------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,170.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,210.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -903,9 +868,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,274.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,234.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,274.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,338.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -914,9 +877,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,402.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,362.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,402.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,446.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -925,9 +886,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,530.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,490.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,530.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,594.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -936,9 +895,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,658.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,618.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,658.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,722.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -947,9 +904,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,786.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,746.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,786.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,850.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -958,9 +913,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,914.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,874.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,914.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,978.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -969,9 +922,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1042.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1002.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1042.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1066.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1106.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1066.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -980,9 +931,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1170.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1130.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1170.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1194.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1234.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1194.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -991,9 +940,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1258.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1322.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1362.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1322.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1002,9 +949,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1386.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1450.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1490.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1450.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1013,9 +958,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1514.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1578.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1618.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1578.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1024,9 +967,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1642.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1706.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1746.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1706.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1035,9 +976,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1770.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1834.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1874.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1834.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1046,9 +985,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1898.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1962.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,2002.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1962.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1057,7 +994,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,2046.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,2026.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,2046.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ------------------------------------------------ Right Column -------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,170.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,210.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1067,9 +1003,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,274.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,234.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,274.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,338.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1078,9 +1012,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,402.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,362.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,402.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,446.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1089,9 +1021,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,530.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,490.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,530.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,594.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1100,9 +1030,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,658.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,618.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,658.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,722.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1111,9 +1039,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,786.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,746.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,786.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,850.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1122,9 +1048,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,914.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,874.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,914.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,978.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1133,9 +1057,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1042.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1002.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1042.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1066.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1106.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1066.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1144,9 +1066,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1170.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1130.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1170.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1194.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1234.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1194.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1155,9 +1075,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1258.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1322.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1362.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1322.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1166,9 +1084,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1386.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1450.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1490.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1450.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1177,9 +1093,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1514.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1578.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1618.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1578.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1188,9 +1102,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1642.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1706.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1746.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1706.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1199,9 +1111,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1770.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1834.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1874.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1834.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1210,9 +1120,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1898.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1962.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,2002.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1962.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1243,7 +1151,6 @@ namespace Game
             Prop{Textures.GrassWallLeft, Vector2{768.f, 3456.f}, PropType::LEFTSIDEWALL, Textures},
             Prop{Textures.GrassWallLeft, Vector2{768.f, 3520.f}, PropType::LEFTSIDEWALL, Textures},
             Prop{Textures.GrassWallBotLeft, Vector2{768.f, 3584.f}, PropType::BOTTOMWALL, Textures},
-            
             // Bottom Walls
             Prop{Textures.GrassWallBottom, Vector2{896.f, 3584.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.GrassWallBottom, Vector2{960.f, 3584.f}, PropType::BOTTOMWALL, Textures},
@@ -1251,14 +1158,12 @@ namespace Game
             Prop{Textures.GrassWallBottom, Vector2{1024.f, 3584.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.GrassWallBottom, Vector2{1216.f, 3584.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.GrassWallBotRight, Vector2{1280.f, 3584.f}, PropType::BOTTOMWALL, Textures},
-        
             // Bottom Right Walls
             Prop{Textures.GrassWallRight, Vector2{1280.f, 3520.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.GrassWallRight, Vector2{1280.f, 3456.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.GrassWallRight, Vector2{1280.f, 3392.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.GrassWallRight, Vector2{1280.f, 3328.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.GrassWallInnerRight, Vector2{1280.f, 3264.f}, PropType::RIGHTSIDEWALL, Textures},
-            
             // Bottom Walls
             Prop{Textures.GrassWallBottom, Vector2{1344.f, 3264.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.GrassWallBottom, Vector2{1408.f, 3264.f}, PropType::BOTTOMWALL, Textures},
@@ -1270,7 +1175,6 @@ namespace Game
             Prop{Textures.GrassWallBottom, Vector2{1792.f, 3264.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.GrassWallBottom, Vector2{1856.f, 3264.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.GrassWallBotRight, Vector2{1920.f, 3264.f}, PropType::BOTTOMWALL, Textures},     
-
             // Right Side Walls
             Prop{Textures.GrassWallRight, Vector2{1920.f, 3200.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.GrassWallRight, Vector2{1920.f, 3136.f}, PropType::RIGHTSIDEWALL, Textures},
@@ -1282,7 +1186,6 @@ namespace Game
             Prop{Textures.GrassWallRight, Vector2{1920.f, 2752.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.GrassWallRight, Vector2{1920.f, 2688.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.GrassWallTopRight, Vector2{1920.f, 2624.f}, PropType::TOPWALL, Textures},
-
             // Top Walls
             Prop{Textures.GrassWallTop, Vector2{1856.f, 2624.f}, PropType::TOPWALL, Textures},
             Prop{Textures.GrassWallTop, Vector2{1792.f, 2624.f}, PropType::TOPWALL, Textures},
@@ -1302,40 +1205,31 @@ namespace Game
             Prop{Textures.GrassWallTop, Vector2{896.f, 2624.f}, PropType::TOPWALL, Textures},
             Prop{Textures.GrassWallTop, Vector2{832.f, 2624.f}, PropType::TOPWALL, Textures},
             Prop{Textures.GrassWallTopLeft, Vector2{768.f, 2624.f}, PropType::TOPWALL, Textures},
-
             // Fences
             Prop{Textures.FenceDown, Vector2{832.f, 3662.f}, PropType::FENCE, Textures},
             Prop{Textures.FenceDown, Vector2{896.f, 3662.f}, PropType::FENCE, Textures},
             Prop{Textures.FenceDown, Vector2{960.f, 3662.f}, PropType::FENCE, Textures},
             Prop{Textures.FenceDown, Vector2{1024.f, 3662.f}, PropType::FENCE, Textures},
             Prop{Textures.FenceDown, Vector2{1216.f, 3662.f}, PropType::FENCE, Textures},
-
             // ---------------------------------------- Garden Fences -----------------------------------
             // Left Side
             Prop{Textures.FenceLeft, Vector2{1688.f, 3070.f}, PropType::FENCE, Textures},
             Prop{Textures.FenceLeft, Vector2{1688.f, 3198.f}, PropType::FENCE, Textures},
-
             // Right Side
             Prop{Textures.FenceRight, Vector2{1925.f, 3070.f}, PropType::FENCE, Textures},
             Prop{Textures.FenceRight, Vector2{1925.f, 3128.f}, PropType::FENCE, Textures},
             Prop{Textures.FenceRight, Vector2{1925.f, 3198.f}, PropType::FENCE, Textures},
-
             // Top Side
             Prop{Textures.FenceUp, Vector2{1728.f, 3070.f}, PropType::FENCE, Textures},
             Prop{Textures.FenceUp, Vector2{1856.f, 3070.f}, PropType::FENCE, Textures},
-            
             // Bottom Side
             Prop{Textures.FenceDown, Vector2{1728.f, 3215.f}, PropType::FENCE, Textures},
             Prop{Textures.FenceDown, Vector2{1792.f, 3215.f}, PropType::FENCE, Textures},
             Prop{Textures.FenceDown, Vector2{1856.f, 3215.f}, PropType::FENCE, Textures},
-
-
             // ---------------------------------------- Left Side Inner Hill -----------------------------------
             // Holes
             Prop{Textures.Hole, Vector2{960.f, 3008.f}, PropType::HOLE, Textures},
             Prop{Textures.Hole, Vector2{1088.f, 3008.f}, PropType::HOLE, Textures},
-
-
             // Left Side Walls
             Prop{Textures.WallLeft, Vector2{896.f, 2816.f}, PropType::LEFTSIDEWALL, Textures},
             Prop{Textures.WallLeft, Vector2{896.f, 2880.f}, PropType::LEFTSIDEWALL, Textures},
@@ -1345,12 +1239,10 @@ namespace Game
             Prop{Textures.WallLeft, Vector2{896.f, 3136.f}, PropType::LEFTSIDEWALL, Textures},
             Prop{Textures.WallLeft, Vector2{896.f, 3200.f}, PropType::LEFTSIDEWALL, Textures},
             Prop{Textures.WallBotLeft, Vector2{896.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-
             // Bottom Walls
             Prop{Textures.WallBottom, Vector2{960.f, 3264.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.WallBottom, Vector2{1024.f, 3264.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.WallBotRight, Vector2{1152.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-
             // Right Side Walls
             Prop{Textures.WallRight, Vector2{1152.f, 3200.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.WallRight, Vector2{1152.f, 3136.f}, PropType::RIGHTSIDEWALL, Textures},
@@ -1360,13 +1252,11 @@ namespace Game
             Prop{Textures.WallRight, Vector2{1152.f, 2880.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.WallRight, Vector2{1152.f, 2816.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.WallTopRight, Vector2{1152.f, 2752.f}, PropType::TOPWALL, Textures},
-
             // Top Walls
             Prop{Textures.GrassWallTop, Vector2{1088.f, 2752.f}, PropType::TOPWALL, Textures},
             Prop{Textures.GrassWallTop, Vector2{1024.f, 2752.f}, PropType::TOPWALL, Textures},
             Prop{Textures.GrassWallTop, Vector2{960.f, 2752.f}, PropType::TOPWALL, Textures},
             Prop{Textures.WallTopLeft, Vector2{896.f, 2752.f}, PropType::TOPWALL, Textures},
-
             // ---------------------------------------- Right Side Hill -----------------------------------
             // Left Side Walls
             Prop{Textures.GrassWallLeft, Vector2{2688.f, 2560.f}, PropType::LEFTSIDEWALL, Textures},
@@ -1384,7 +1274,6 @@ namespace Game
             Prop{Textures.GrassWallLeft, Vector2{2688.f, 3328.f}, PropType::LEFTSIDEWALL, Textures},
             Prop{Textures.GrassWallLeft, Vector2{2688.f, 3392.f}, PropType::LEFTSIDEWALL, Textures},
             Prop{Textures.GrassWallBotLeft, Vector2{2688.f, 3456.f}, PropType::BOTTOMWALL, Textures},
-
             // Bottom Walls
             Prop{Textures.GrassWallBottom, Vector2{2752.f, 3456.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.GrassWallBottom, Vector2{2816.f, 3456.f}, PropType::BOTTOMWALL, Textures},
@@ -1399,7 +1288,6 @@ namespace Game
             Prop{Textures.GrassWallBottom, Vector2{3712.f, 3456.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.GrassWallBottom, Vector2{3776.f, 3456.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.GrassWallBotRight, Vector2{3840.f, 3456.f}, PropType::BOTTOMWALL, Textures},
-
             // Right Side Walls
             Prop{Textures.GrassWallRight, Vector2{3840.f, 3392.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.GrassWallRight, Vector2{3840.f, 3328.f}, PropType::RIGHTSIDEWALL, Textures},
@@ -1416,7 +1304,6 @@ namespace Game
             Prop{Textures.GrassWallRight, Vector2{3840.f, 2624.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.GrassWallRight, Vector2{3840.f, 2560.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.GrassWallTopRight, Vector2{3840.f, 2496.f}, PropType::TOPWALL, Textures},
-
             // Top Side Walls
             Prop{Textures.GrassWallTop, Vector2{3776.f, 2496.f}, PropType::TOPWALL, Textures},
             Prop{Textures.GrassWallTop, Vector2{3712.f, 2496.f}, PropType::TOPWALL, Textures},
@@ -1436,8 +1323,6 @@ namespace Game
             Prop{Textures.GrassWallTop, Vector2{2816.f, 2496.f}, PropType::TOPWALL, Textures},
             Prop{Textures.GrassWallTop, Vector2{2752.f, 2496.f}, PropType::TOPWALL, Textures},
             Prop{Textures.GrassWallTopLeft, Vector2{2688.f, 2496.f}, PropType::TOPWALL, Textures},
-
-
             // ---------------------------------------- Right Side Second Hill -----------------------------------
             // Left Side Walls
             Prop{Textures.GrassWallLeft, Vector2{2752.f, 2624.f}, PropType::LEFTSIDEWALL, Textures},
@@ -1451,7 +1336,6 @@ namespace Game
             Prop{Textures.GrassWallLeft, Vector2{2752.f, 3136.f}, PropType::LEFTSIDEWALL, Textures},
             Prop{Textures.GrassWallLeft, Vector2{2752.f, 3200.f}, PropType::LEFTSIDEWALL, Textures},
             Prop{Textures.GrassWallBotLeft, Vector2{2752.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-
             // Bottom Walls
             Prop{Textures.GrassWallBottom, Vector2{2816.f, 3264.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.GrassWallBottom, Vector2{2880.f, 3264.f}, PropType::BOTTOMWALL, Textures},
@@ -1466,7 +1350,6 @@ namespace Game
             Prop{Textures.GrassWallBottom, Vector2{3584.f, 3264.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.GrassWallBottom, Vector2{3648.f, 3264.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.GrassWallBotRight, Vector2{3712.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-
             // Right Side Walls
             Prop{Textures.GrassWallRight, Vector2{3712.f, 3200.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.GrassWallRight, Vector2{3712.f, 3136.f}, PropType::RIGHTSIDEWALL, Textures},
@@ -1479,7 +1362,6 @@ namespace Game
             Prop{Textures.GrassWallRight, Vector2{3712.f, 2688.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.GrassWallRight, Vector2{3712.f, 2624.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.GrassWallTopRight, Vector2{3712.f, 2560.f}, PropType::TOPWALL, Textures},
-
             // Top Walls
             Prop{Textures.GrassWallTop, Vector2{3648.f, 2560.f}, PropType::TOPWALL, Textures},
             Prop{Textures.GrassWallTop, Vector2{3584.f, 2560.f}, PropType::TOPWALL, Textures},
@@ -1496,7 +1378,6 @@ namespace Game
             Prop{Textures.GrassWallTop, Vector2{2880.f, 2560.f}, PropType::TOPWALL, Textures},
             Prop{Textures.GrassWallTop, Vector2{2816.f, 2560.f}, PropType::TOPWALL, Textures},
             Prop{Textures.GrassWallTopLeft, Vector2{2752.f, 2560.f}, PropType::TOPWALL, Textures},
-
             // ---------------------------------------- Right Side Third Hill -----------------------------------
             // Left Side Walls
             Prop{Textures.WallLeft, Vector2{2944.f, 2688.f}, PropType::LEFTSIDEWALL, Textures},
@@ -1506,7 +1387,6 @@ namespace Game
             Prop{Textures.WallLeft, Vector2{2944.f, 2944.f}, PropType::LEFTSIDEWALL, Textures},
             Prop{Textures.WallLeft, Vector2{2944.f, 3008.f}, PropType::LEFTSIDEWALL, Textures},
             Prop{Textures.WallBotLeft, Vector2{2944.f, 3072.f}, PropType::BOTTOMWALL, Textures},
-
             // Bottom Walls
             Prop{Textures.WallBottom, Vector2{3008.f, 3072.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.WallBottom, Vector2{3136.f, 3072.f}, PropType::BOTTOMWALL, Textures},
@@ -1515,7 +1395,6 @@ namespace Game
             Prop{Textures.WallBottom, Vector2{3328.f, 3072.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.WallBottom, Vector2{3456.f, 3072.f}, PropType::BOTTOMWALL, Textures},
             Prop{Textures.WallBotRight, Vector2{3520.f, 3072.f}, PropType::BOTTOMWALL, Textures},
-
             // Right Side Walls
             Prop{Textures.WallRight, Vector2{3520.f, 3008.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.WallRight, Vector2{3520.f, 2944.f}, PropType::RIGHTSIDEWALL, Textures},
@@ -1524,7 +1403,6 @@ namespace Game
             Prop{Textures.WallRight, Vector2{3520.f, 2752.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.WallRight, Vector2{3520.f, 2688.f}, PropType::RIGHTSIDEWALL, Textures},
             Prop{Textures.WallTopRight, Vector2{3520.f, 2624.f}, PropType::TOPWALL, Textures},
-
             // Bottom Walls
             Prop{Textures.GrassWallTop, Vector2{3456.f, 2624.f}, PropType::TOPWALL, Textures},
             Prop{Textures.GrassWallTop, Vector2{3392.f, 2624.f}, PropType::TOPWALL, Textures},
@@ -1535,7 +1413,6 @@ namespace Game
             Prop{Textures.GrassWallTop, Vector2{3072.f, 2624.f}, PropType::TOPWALL, Textures},
             Prop{Textures.GrassWallTop, Vector2{3008.f, 2624.f}, PropType::TOPWALL, Textures},
             Prop{Textures.WallTopLeft, Vector2{2944.f, 2624.f}, PropType::TOPWALL, Textures},
-
             // Door
             Prop{Textures.DoorRed, Vector2{1612.f,2815.f}, PropType::DOOR, Textures, 4.f, false, true}, 
             Prop{Textures.DoorBlue, Vector2{3120.f,2685.f}, PropType::DOOR, Textures, 4.f, false, true}
@@ -1558,11 +1435,8 @@ namespace Game
 
         std::vector<Prop> Houses
         {
-            // Red House
             Prop{Textures.HouseRed, Vector2{1472.f,2688.f}, PropType::rHOUSELEFT, Textures},   
             Prop{Textures.HouseRed, Vector2{1472.f,2688.f}, PropType::rHOUSERIGHT, Textures},
-
-            // Blue House   
             Prop{Textures.HouseBlue, Vector2{3073.f,2495.f}, PropType::bHOUSELEFT, Textures},   
             Prop{Textures.HouseBlue, Vector2{3073.f,2495.f}, PropType::bHOUSERIGHT, Textures},
 
@@ -1575,7 +1449,6 @@ namespace Game
             Prop{Textures.Boulder, Vector2{1090.f,2950.f}, PropType::BOULDER, Textures},
             Prop{Textures.Boulder, Vector2{940.f,3050.f}, PropType::BOULDER, Textures},
             Prop{Textures.Boulder, Vector2{1110.f,3050.f}, PropType::BOULDER, Textures},
-
         };
         Props.emplace_back(Boulder);
 
@@ -1596,7 +1469,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- -3 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1606,18 +1478,15 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- -2 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ---------------------------------------------------- -1 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1378.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 0 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1482.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1626,7 +1495,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1506.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 1 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1570.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1610.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1636,7 +1504,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 2 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1646,7 +1513,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 3 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1656,7 +1522,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ------------------------------------------------ Left Column ------------------------------------------------
             // ---------------------------------------------------- -1 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1314.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1667,7 +1532,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1378.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ---------------------------------------------------- 0 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1482.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1677,7 +1541,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1506.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 1 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1570.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1610.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1687,7 +1550,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 2 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1697,7 +1559,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 3 -------------------------------------------------------        
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1707,7 +1568,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 4 ------------------------------------------------------- 
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1954.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1994.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1716,7 +1576,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,2058.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------- Far Right Column ----------------------------------------------
             // --------------------------------------------------- -6 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1954.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1726,7 +1585,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,2058.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- -5 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1734,7 +1592,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- -4 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1742,15 +1599,12 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- -3 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ---------------------------------------------------- -2 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ---------------------------------------------------- -1 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1314.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1354.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1760,7 +1614,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1378.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ---------------------------------------------------- 0 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1482.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1770,7 +1623,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1506.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 1 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1570.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1610.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1780,7 +1632,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 2 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1790,7 +1641,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 3 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1800,14 +1650,12 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 4 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1954.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1994.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1954.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1994.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ------------------------------------------------ Right Column -----------------------------------------------
             // --------------------------------------------------- -1 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1314.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1818,7 +1666,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1378.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 0 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1482.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1828,7 +1675,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1506.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 1 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1570.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1610.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1838,7 +1684,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 2 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1848,7 +1693,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 3 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1858,7 +1702,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------- 4 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1954.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1994.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1867,17 +1710,14 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,2058.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
             // -----------------------------------------Dungeon Entrance Grass-----------------------------------------------
             // --------------------------------------------------------------------------------------------------------------
-
             // ------------------------------------------------ Left Column -------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,150.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,190.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,214.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,254.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,278.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,318.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1943,9 +1783,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1854.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1878.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1918.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // ------------------------------------------------ Right Column -------------------------------------------------
-
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,150.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,190.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,150.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1954,9 +1792,7 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,254.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,214.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,254.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
             // --------------------------------------------------------------------------------------------------------------
-
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,278.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,318.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,278.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1966,7 +1802,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,342.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,382.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,406.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,446.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,406.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1976,7 +1811,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,470.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,510.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,534.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,574.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,534.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1986,7 +1820,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,598.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,638.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,662.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,702.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,662.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1996,7 +1829,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,726.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,766.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,790.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,830.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,790.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -2006,7 +1838,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,854.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,894.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,918.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,958.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,918.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -2016,7 +1847,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,982.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1022.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1046.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1086.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1046.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -2026,7 +1856,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1110.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1150.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1174.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1214.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1174.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -2036,7 +1865,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1238.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1278.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1302.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1342.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1302.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -2046,7 +1874,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1366.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1406.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1430.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1470.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1430.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -2056,7 +1883,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1494.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1534.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1558.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1598.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1558.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -2066,7 +1892,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1622.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1662.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1686.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1726.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1686.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -2076,7 +1901,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1750.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1790.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1814.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1854.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1814.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -2085,8 +1909,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1918.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1878.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1918.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-
-
         };
         Props.emplace_back(Grass);
 
@@ -2106,8 +1928,6 @@ namespace Game
         {
             Prop{Sprite{Textures.Didi, 4, 1, 1.f/8.f}, Vector2{3163.f, 2853.f}, PropType::NPC_A, Textures, Textures.Placeholder, 3.f, false, true},
             Prop{Sprite{Textures.Jade, 4, 1, 1.f/8.f}, Vector2{1546.f, 2959.f}, PropType::NPC_B, Textures, Textures.Placeholder, 3.f, false, true},
-            // Prop{Sprite{Textures.Didi, 4, 1, 1.f/8.f}, Vector2{2492.f, 3634.f}, PropType::NPC_A, Textures, 3.f, false, true},
-            // Prop{Sprite{"sprites/npc/Jade.png", 4, 1, 1.f/8.f}, Vector2{2044.f, 3634.f}, PropType::NPC_B, Textures, 3.f, false, true},
             Prop{Sprite{Textures.Son, 4, 1, 1.f/8.f}, Vector2{1240.f, 2036.f}, PropType::NPC_C, Textures, Textures.Placeholder, 3.f, false, true, Progress::ACT_II, PropType::NPC_B},
         };
         Props.emplace_back(NPCS);
@@ -2129,7 +1949,6 @@ namespace Game
     std::vector<Prop> InitializeTrees(GameTexture& Textures)
     {
         return std::vector<Prop> {
-
             // row1
             Prop{Textures.TreeGreen, Vector2{20.f,67.f}, PropType::TREE, Textures},        // 1
             Prop{Textures.TreeGreen, Vector2{120.f,67.f}, PropType::TREE, Textures},       // 2
@@ -2170,7 +1989,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3800.f,67.f}, PropType::TREE, Textures},      // 37
             Prop{Textures.TreeGreen, Vector2{3900.f,67.f}, PropType::TREE, Textures},      // 38
             Prop{Textures.TreeGreen, Vector2{4000.f,67.f}, PropType::TREE, Textures},      // 39
-
             // row2
             Prop{Textures.TreeGreen, Vector2{0.f,167.f}, PropType::TREE, Textures},        // 1
             Prop{Textures.TreeGreen, Vector2{200.f,167.f}, PropType::TREE, Textures},      // 3
@@ -2199,7 +2017,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3400.f,167.f}, PropType::TREE, Textures},     // 35
             Prop{Textures.TreeGreen, Vector2{3720.f,167.f}, PropType::TREE, Textures},     // 36
             Prop{Textures.TreeGreen, Vector2{3920.f,167.f}, PropType::TREE, Textures},     // 38
-
             // row3
             Prop{Textures.TreeGreen, Vector2{20.f,267.f}, PropType::TREE, Textures},       // 1 
             Prop{Textures.TreeGreen, Vector2{120.f,267.f}, PropType::TREE, Textures},      // 2 
@@ -2230,7 +2047,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3800.f,267.f}, PropType::TREE, Textures},     // 37
             Prop{Textures.TreeGreen, Vector2{3900.f,267.f}, PropType::TREE, Textures},     // 38
             Prop{Textures.TreeGreen, Vector2{4000.f,267.f}, PropType::TREE, Textures},     // 39
-
             // row4
             Prop{Textures.TreeGreen, Vector2{0.f,367.f}, PropType::TREE, Textures},        // 1 
             Prop{Textures.TreeGreen, Vector2{100.f,367.f}, PropType::TREE, Textures},      // 2 
@@ -2258,7 +2074,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3720.f,367.f}, PropType::TREE, Textures},     // 36
             Prop{Textures.TreeGreen, Vector2{3820.f,367.f}, PropType::TREE, Textures},     // 37
             Prop{Textures.TreeGreen, Vector2{3920.f,367.f}, PropType::TREE, Textures},     // 38
-
             //row5
             Prop{Textures.TreeGreen, Vector2{20.f,467.f}, PropType::TREE, Textures},       // 1 
             Prop{Textures.TreeGreen, Vector2{120.f,467.f}, PropType::TREE, Textures},      // 2 
@@ -2285,7 +2100,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3800.f,467.f}, PropType::TREE, Textures},     // 37
             Prop{Textures.TreeGreen, Vector2{3900.f,467.f}, PropType::TREE, Textures},     // 38
             Prop{Textures.TreeGreen, Vector2{4000.f,467.f}, PropType::TREE, Textures},     // 39
-
             // row6
             Prop{Textures.TreeGreen, Vector2{0.f,567.f}, PropType::TREE, Textures},        // 1 
             Prop{Textures.TreeGreen, Vector2{100.f,567.f}, PropType::TREE, Textures},      // 2 
@@ -2315,7 +2129,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3720.f,567.f}, PropType::TREE, Textures},     // 36
             Prop{Textures.TreeGreen, Vector2{3820.f,567.f}, PropType::TREE, Textures},     // 37
             Prop{Textures.TreeGreen, Vector2{3920.f,567.f}, PropType::TREE, Textures},     // 38
-
             // row7
             Prop{Textures.TreeGreen, Vector2{20.f,667.f}, PropType::TREE, Textures},       // 1 
             Prop{Textures.TreeGreen, Vector2{120.f,667.f}, PropType::TREE, Textures},      // 2 
@@ -2345,7 +2158,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3800.f,667.f}, PropType::TREE, Textures},     // 37
             Prop{Textures.TreeGreen, Vector2{3900.f,667.f}, PropType::TREE, Textures},     // 38
             Prop{Textures.TreeGreen, Vector2{4000.f,667.f}, PropType::TREE, Textures},     // 39
-
             // row8
             Prop{Textures.TreeGreen, Vector2{0.f,767.f}, PropType::TREE, Textures},        // 1 
             Prop{Textures.TreeGreen, Vector2{100.f,767.f}, PropType::TREE, Textures},      // 2 
@@ -2373,7 +2185,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3720.f,767.f}, PropType::TREE, Textures},     // 36    
             Prop{Textures.TreeGreen, Vector2{3820.f,767.f}, PropType::TREE, Textures},     // 37    
             Prop{Textures.TreeGreen, Vector2{3920.f,767.f}, PropType::TREE, Textures},     // 38
-
             // row9
             Prop{Textures.TreeGreen, Vector2{20.f,867.f}, PropType::TREE, Textures},       // 1 
             Prop{Textures.TreeGreen, Vector2{120.f,867.f}, PropType::TREE, Textures},      // 2 
@@ -2405,7 +2216,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3800.f,867.f}, PropType::TREE, Textures},     // 37
             Prop{Textures.TreeGreen, Vector2{3900.f,867.f}, PropType::TREE, Textures},     // 38
             Prop{Textures.TreeGreen, Vector2{4000.f,867.f}, PropType::TREE, Textures},     // 39
-
             // row10
             Prop{Textures.TreeGreen, Vector2{0.f,967.f}, PropType::TREE, Textures},        // 1 
             Prop{Textures.TreeGreen, Vector2{100.f,967.f}, PropType::TREE, Textures},      // 2 
@@ -2434,7 +2244,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3720.f,967.f}, PropType::TREE, Textures},     // 36
             Prop{Textures.TreeGreen, Vector2{3820.f,967.f}, PropType::TREE, Textures},     // 37
             Prop{Textures.TreeGreen, Vector2{3920.f,967.f}, PropType::TREE, Textures},     // 38
-
             // row11
             Prop{Textures.TreeGreen, Vector2{20.f,1067.f}, PropType::TREE, Textures},      // 1 
             Prop{Textures.TreeGreen, Vector2{120.f,1067.f}, PropType::TREE, Textures},     // 2     
@@ -2463,7 +2272,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3800.f,1067.f}, PropType::TREE, Textures},    // 37    
             Prop{Textures.TreeGreen, Vector2{3900.f,1067.f}, PropType::TREE, Textures},    // 38    
             Prop{Textures.TreeGreen, Vector2{4000.f,1067.f}, PropType::TREE, Textures},    // 39
-
             // row12
             Prop{Textures.TreeGreen, Vector2{0.f,1167.f}, PropType::TREE, Textures},       // 1 
             Prop{Textures.TreeGreen, Vector2{100.f,1167.f}, PropType::TREE, Textures},     // 2 
@@ -2494,7 +2302,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3720.f,1167.f}, PropType::TREE, Textures},    // 36    
             Prop{Textures.TreeGreen, Vector2{3820.f,1167.f}, PropType::TREE, Textures},    // 37    
             Prop{Textures.TreeGreen, Vector2{3920.f,1167.f}, PropType::TREE, Textures},    // 38    
-
             // row13
             Prop{Textures.TreeGreen, Vector2{120.f,1267.f}, PropType::TREE, Textures},     // 2 
             Prop{Textures.TreeGreen, Vector2{220.f,1267.f}, PropType::TREE, Textures},     // 3 
@@ -2526,7 +2333,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3800.f,1267.f}, PropType::TREE, Textures},    // 37
             Prop{Textures.TreeGreen, Vector2{3900.f,1267.f}, PropType::TREE, Textures},    // 38
             Prop{Textures.TreeGreen, Vector2{4000.f,1267.f}, PropType::TREE, Textures},    // 39
-
             // row14
             Prop{Textures.TreeGreen, Vector2{0.f,1367.f}, PropType::TREE, Textures},       // 1 
             Prop{Textures.TreeGreen, Vector2{100.f,1367.f}, PropType::TREE, Textures},     // 2     
@@ -2558,7 +2364,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3720.f,1367.f}, PropType::TREE, Textures},    // 36    
             Prop{Textures.TreeGreen, Vector2{3820.f,1367.f}, PropType::TREE, Textures},    // 37    
             Prop{Textures.TreeGreen, Vector2{3920.f,1367.f}, PropType::TREE, Textures},    // 38    
-
             // row15
             Prop{Textures.TreeGreen, Vector2{20.f,1467.f}, PropType::TREE, Textures},      // 1 
             Prop{Textures.TreeGreen, Vector2{120.f,1467.f}, PropType::TREE, Textures},     // 2 
@@ -2589,8 +2394,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3700.f,1467.f}, PropType::TREE, Textures},    // 36
             Prop{Textures.TreeGreen, Vector2{3800.f,1467.f}, PropType::TREE, Textures},    // 37
             Prop{Textures.TreeGreen, Vector2{3900.f,1467.f}, PropType::TREE, Textures},    // 38
-            Prop{Textures.TreeGreen, Vector2{4000.f,1467.f}, PropType::TREE, Textures},    // 39
-
             // row16
             Prop{Textures.TreeGreen, Vector2{0.f,1567.f}, PropType::TREE, Textures},       // 1 
             Prop{Textures.TreeGreen, Vector2{100.f,1567.f}, PropType::TREE, Textures},     // 2 
@@ -2620,7 +2423,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3720.f,1567.f}, PropType::TREE, Textures},    // 36 
             Prop{Textures.TreeGreen, Vector2{3820.f,1567.f}, PropType::TREE, Textures},    // 37
             Prop{Textures.TreeGreen, Vector2{3920.f,1567.f}, PropType::TREE, Textures},    // 38
-
             // row17
             Prop{Textures.TreeGreen, Vector2{20.f,1667.f}, PropType::TREE, Textures},      // 1 
             Prop{Textures.TreeGreen, Vector2{120.f,1667.f}, PropType::TREE, Textures},     // 2 
@@ -2643,7 +2445,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3800.f,1667.f}, PropType::TREE, Textures},    // 37
             Prop{Textures.TreeGreen, Vector2{3900.f,1667.f}, PropType::TREE, Textures},    // 38
             Prop{Textures.TreeGreen, Vector2{4000.f,1667.f}, PropType::TREE, Textures},    // 39
-
             // row18
             Prop{Textures.TreeGreen, Vector2{0.f,1767.f}, PropType::TREE, Textures},       // 1 
             Prop{Textures.TreeGreen, Vector2{100.f,1767.f}, PropType::TREE, Textures},     // 2 
@@ -2673,7 +2474,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3720.f,1767.f}, PropType::TREE, Textures},    // 36
             Prop{Textures.TreeGreen, Vector2{3820.f,1767.f}, PropType::TREE, Textures},    // 37
             Prop{Textures.TreeGreen, Vector2{3920.f,1767.f}, PropType::TREE, Textures},    // 38
-
             // row19
             Prop{Textures.TreeGreen, Vector2{20.f,1867.f}, PropType::TREE, Textures},      // 1     
             Prop{Textures.TreeGreen, Vector2{220.f,1867.f}, PropType::TREE, Textures},     // 3     
@@ -2702,7 +2502,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3800.f,1867.f}, PropType::TREE, Textures},    // 37
             Prop{Textures.TreeGreen, Vector2{3900.f,1867.f}, PropType::TREE, Textures},    // 38
             Prop{Textures.TreeGreen, Vector2{4000.f,1867.f}, PropType::TREE, Textures},    // 39
-
             // row20
             Prop{Textures.TreeGreen, Vector2{0.f,1967.f}, PropType::TREE, Textures},       // 1     
             Prop{Textures.TreeGreen, Vector2{100.f,1967.f}, PropType::TREE, Textures},     // 2 
@@ -2732,7 +2531,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3720.f,1967.f}, PropType::TREE, Textures},    // 36
             Prop{Textures.TreeGreen, Vector2{3820.f,1967.f}, PropType::TREE, Textures},    // 37
             Prop{Textures.TreeGreen, Vector2{3920.f,1967.f}, PropType::TREE, Textures},    // 38
-
             // row21
             Prop{Textures.TreeGreen, Vector2{20.f,2067.f}, PropType::TREE, Textures},      // 1 
             Prop{Textures.TreeGreen, Vector2{220.f,2067.f}, PropType::TREE, Textures},     // 3 
@@ -2760,7 +2558,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3800.f,2067.f}, PropType::TREE, Textures},    // 37
             Prop{Textures.TreeGreen, Vector2{3900.f,2067.f}, PropType::TREE, Textures},    // 38
             Prop{Textures.TreeGreen, Vector2{4000.f,2067.f}, PropType::TREE, Textures},    // 39
-
             // row22
             Prop{Textures.TreeGreen, Vector2{0.f,2167.f}, PropType::TREE, Textures},       // 1 
             Prop{Textures.TreeGreen, Vector2{100.f,2167.f}, PropType::TREE, Textures},     // 2 
@@ -2793,7 +2590,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3720.f,2167.f}, PropType::TREE, Textures},    // 36
             Prop{Textures.TreeGreen, Vector2{3820.f,2167.f}, PropType::TREE, Textures},    // 37    
             Prop{Textures.TreeGreen, Vector2{3920.f,2167.f}, PropType::TREE, Textures},    // 38
-
             // row21
             Prop{Textures.TreeGreen, Vector2{20.f,2267.f}, PropType::TREE, Textures},      // 1
             Prop{Textures.TreeGreen, Vector2{120.f,2267.f}, PropType::TREE, Textures},     // 2
@@ -2827,38 +2623,36 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3800.f,2267.f}, PropType::TREE, Textures},    // 37
             Prop{Textures.TreeGreen, Vector2{3900.f,2267.f}, PropType::TREE, Textures},    // 38
             Prop{Textures.TreeGreen, Vector2{4000.f,2267.f}, PropType::TREE, Textures},    // 39
-
             // row22
             Prop{Textures.TreeGreen, Vector2{50.f,2367.f}, PropType::TREE, Textures},      // 1 
             Prop{Textures.TreeClear, Vector2{550.f,2303.f}, PropType::TREE, Textures},     // 6 Invisible Wall
             Prop{Textures.TreeGreen, Vector2{550.f,2367.f}, PropType::TREE, Textures},     // 6 
-            Prop{Textures.TreeGreen, Vector2{700.f,2367.f}, PropType::TREE, Textures},  // 8 
-            Prop{Textures.TreeGreen, Vector2{800.f,2367.f}, PropType::TREE, Textures},  // 9 
-            Prop{Textures.TreeGreen, Vector2{900.f,2367.f}, PropType::TREE, Textures},  // 10
-            Prop{Textures.TreeGreen, Vector2{1000.f,2367.f}, PropType::TREE, Textures}, // 11
-            Prop{Textures.TreeGreen, Vector2{1100.f,2367.f}, PropType::TREE, Textures}, // 12
-            Prop{Textures.TreeGreen, Vector2{1200.f,2367.f}, PropType::TREE, Textures}, // 13
-            Prop{Textures.TreeGreen, Vector2{1300.f,2367.f}, PropType::TREE, Textures}, // 14
-            Prop{Textures.TreeGreen, Vector2{1400.f,2367.f}, PropType::TREE, Textures}, // 15
-            Prop{Textures.TreeGreen, Vector2{1500.f,2367.f}, PropType::TREE, Textures}, // 16
-            Prop{Textures.TreeGreen, Vector2{1600.f,2367.f}, PropType::TREE, Textures}, // 17
-            Prop{Textures.TreeGreen, Vector2{1700.f,2367.f}, PropType::TREE, Textures}, // 18
-            Prop{Textures.TreeGreen, Vector2{1800.f,2367.f}, PropType::TREE, Textures}, // 19
-            Prop{Textures.TreeGreen, Vector2{2600.f,2340.f}, PropType::TREE, Textures}, // 27
-            Prop{Textures.TreeGreen, Vector2{2700.f,2340.f}, PropType::TREE, Textures}, // 28
-            Prop{Textures.TreeGreen, Vector2{2800.f,2340.f}, PropType::TREE, Textures}, // 29
-            Prop{Textures.TreeGreen, Vector2{2900.f,2340.f}, PropType::TREE, Textures}, // 30
-            Prop{Textures.TreeGreen, Vector2{3000.f,2340.f}, PropType::TREE, Textures}, // 31
-            Prop{Textures.TreeGreen, Vector2{3100.f,2340.f}, PropType::TREE, Textures}, // 32
-            Prop{Textures.TreeGreen, Vector2{3200.f,2340.f}, PropType::TREE, Textures}, // 33
-            Prop{Textures.TreeGreen, Vector2{3300.f,2340.f}, PropType::TREE, Textures}, // 34
-            Prop{Textures.TreeGreen, Vector2{3400.f,2340.f}, PropType::TREE, Textures}, // 35
-            Prop{Textures.TreeGreen, Vector2{3500.f,2340.f}, PropType::TREE, Textures}, // 36
-            Prop{Textures.TreeGreen, Vector2{3600.f,2340.f}, PropType::TREE, Textures}, // 37
-            Prop{Textures.TreeGreen, Vector2{3720.f,2340.f}, PropType::TREE, Textures}, // 38
-            Prop{Textures.TreeGreen, Vector2{3820.f,2340.f}, PropType::TREE, Textures}, // 39
-            Prop{Textures.TreeGreen, Vector2{3920.f,2340.f}, PropType::TREE, Textures}, // 40
-
+            Prop{Textures.TreeGreen, Vector2{700.f,2367.f}, PropType::TREE, Textures},     // 8 
+            Prop{Textures.TreeGreen, Vector2{800.f,2367.f}, PropType::TREE, Textures},     // 9 
+            Prop{Textures.TreeGreen, Vector2{900.f,2367.f}, PropType::TREE, Textures},     // 10
+            Prop{Textures.TreeGreen, Vector2{1000.f,2367.f}, PropType::TREE, Textures},    // 11
+            Prop{Textures.TreeGreen, Vector2{1100.f,2367.f}, PropType::TREE, Textures},    // 12
+            Prop{Textures.TreeGreen, Vector2{1200.f,2367.f}, PropType::TREE, Textures},    // 13
+            Prop{Textures.TreeGreen, Vector2{1300.f,2367.f}, PropType::TREE, Textures},    // 14
+            Prop{Textures.TreeGreen, Vector2{1400.f,2367.f}, PropType::TREE, Textures},    // 15
+            Prop{Textures.TreeGreen, Vector2{1500.f,2367.f}, PropType::TREE, Textures},    // 16
+            Prop{Textures.TreeGreen, Vector2{1600.f,2367.f}, PropType::TREE, Textures},    // 17
+            Prop{Textures.TreeGreen, Vector2{1700.f,2367.f}, PropType::TREE, Textures},    // 18
+            Prop{Textures.TreeGreen, Vector2{1800.f,2367.f}, PropType::TREE, Textures},    // 19
+            Prop{Textures.TreeGreen, Vector2{2600.f,2340.f}, PropType::TREE, Textures},    // 27
+            Prop{Textures.TreeGreen, Vector2{2700.f,2340.f}, PropType::TREE, Textures},    // 28
+            Prop{Textures.TreeGreen, Vector2{2800.f,2340.f}, PropType::TREE, Textures},    // 29
+            Prop{Textures.TreeGreen, Vector2{2900.f,2340.f}, PropType::TREE, Textures},    // 30
+            Prop{Textures.TreeGreen, Vector2{3000.f,2340.f}, PropType::TREE, Textures},    // 31
+            Prop{Textures.TreeGreen, Vector2{3100.f,2340.f}, PropType::TREE, Textures},    // 32
+            Prop{Textures.TreeGreen, Vector2{3200.f,2340.f}, PropType::TREE, Textures},    // 33
+            Prop{Textures.TreeGreen, Vector2{3300.f,2340.f}, PropType::TREE, Textures},    // 34
+            Prop{Textures.TreeGreen, Vector2{3400.f,2340.f}, PropType::TREE, Textures},    // 35
+            Prop{Textures.TreeGreen, Vector2{3500.f,2340.f}, PropType::TREE, Textures},    // 36
+            Prop{Textures.TreeGreen, Vector2{3600.f,2340.f}, PropType::TREE, Textures},    // 37
+            Prop{Textures.TreeGreen, Vector2{3720.f,2340.f}, PropType::TREE, Textures},    // 38
+            Prop{Textures.TreeGreen, Vector2{3820.f,2340.f}, PropType::TREE, Textures},    // 39
+            Prop{Textures.TreeGreen, Vector2{3920.f,2340.f}, PropType::TREE, Textures},    // 40
             // row23
             Prop{Textures.TreeGreen, Vector2{20.f,2467.f}, PropType::TREE, Textures},      // 1 
             Prop{Textures.TreeClear, Vector2{620.f,2403.f}, PropType::TREE, Textures},     // 7 Invisible Wall
@@ -2876,7 +2670,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{1720.f,2467.f}, PropType::TREE, Textures},    // 18
             Prop{Textures.TreeGreen, Vector2{1820.f,2467.f}, PropType::TREE, Textures},    // 19
             Prop{Textures.TreeGreen, Vector2{1920.f,2467.f}, PropType::TREE, Textures},    // 20
-
             // row24
             Prop{Textures.TreeGreen, Vector2{50.f,2567.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{650.f,2567.f}, PropType::TREE, Textures},
@@ -2885,7 +2678,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{2590.f,2567.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{2800.f,2567.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{3920.f,2567.f}, PropType::TREE, Textures},
-
             // row25
             Prop{Textures.TreeGreen, Vector2{20.f,2667.f}, PropType::TREE, Textures}, 
             Prop{Textures.TreeGreen, Vector2{620.f,2667.f}, PropType::TREE, Textures},
@@ -2893,7 +2685,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{2520.f,2667.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{2820.f,2667.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{4000.f,2667.f}, PropType::TREE, Textures},
-
             // row26
             Prop{Textures.TreeGreen, Vector2{50.f,2767.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{100.f,2767.f}, PropType::TREE, Textures},
@@ -2904,7 +2695,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{2590.f,2767.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{2800.f,2767.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{3920.f,2767.f}, PropType::TREE, Textures},
-
             // row27
             Prop{Textures.TreeGreen, Vector2{20.f,2867.f}, PropType::TREE, Textures}, 
             Prop{Textures.TreeGreen, Vector2{120.f,2867.f}, PropType::TREE, Textures}, 
@@ -2914,7 +2704,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{2520.f,2867.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{2820.f,2867.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{4000.f,2867.f}, PropType::TREE, Textures},
-
             // row28
             Prop{Textures.TreeGreen, Vector2{50.f,2967.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{150.f,2967.f}, PropType::TREE, Textures},
@@ -2925,7 +2714,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{2490.f,2967.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{2590.f,2967.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{3920.f,2967.f}, PropType::TREE, Textures},
-
             // row29
             Prop{Textures.TreeGreen, Vector2{20.f,3067.f}, PropType::TREE, Textures}, 
             Prop{Textures.TreeGreen, Vector2{120.f,3067.f}, PropType::TREE, Textures}, 
@@ -2936,7 +2724,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{2420.f,3067.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{2520.f,3067.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{4000.f,3067.f}, PropType::TREE, Textures},
-
             // row30
             Prop{Textures.TreeGreen, Vector2{50.f,3167.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{150.f,3167.f}, PropType::TREE, Textures},
@@ -2948,7 +2735,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{2490.f,3167.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{2590.f,3167.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{3920.f,3167.f}, PropType::TREE, Textures},
-
             // row31
             Prop{Textures.TreeGreen, Vector2{20.f,3267.f}, PropType::TREE, Textures}, 
             Prop{Textures.TreeGreen, Vector2{120.f,3267.f}, PropType::TREE, Textures}, 
@@ -2958,7 +2744,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{2420.f,3267.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{2520.f,3267.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{4000.f,3267.f}, PropType::TREE, Textures},
-
             // row32
             Prop{Textures.TreeGreen, Vector2{50.f,3367.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{150.f,3367.f}, PropType::TREE, Textures},
@@ -2968,7 +2753,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{2490.f,3367.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{2590.f,3367.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{3920.f,3367.f}, PropType::TREE, Textures},
-
             // row33
             Prop{Textures.TreeGreen, Vector2{20.f,3467.f}, PropType::TREE, Textures},      
             Prop{Textures.TreeGreen, Vector2{120.f,3467.f}, PropType::TREE, Textures},         
@@ -2977,7 +2761,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{420.f,3467.f}, PropType::TREE, Textures},     
             Prop{Textures.TreeGreen, Vector2{620.f,3467.f}, PropType::TREE, Textures},     
             Prop{Textures.TreeGreen, Vector2{4000.f,3467.f}, PropType::TREE, Textures},    
-
             // row34
             Prop{Textures.TreeGreen, Vector2{0.f,3567.f}, PropType::TREE, Textures},       // 1 
             Prop{Textures.TreeGreen, Vector2{150.f,3567.f}, PropType::TREE, Textures},     // 2 
@@ -2985,7 +2768,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{350.f,3567.f}, PropType::TREE, Textures},     // 4 
             Prop{Textures.TreeGreen, Vector2{665.f,3530.f}, PropType::TREE, Textures},     // 6 
             Prop{Textures.TreeGreen, Vector2{3920.f,3567.f}, PropType::TREE, Textures},    // 21
-
             // row35
             Prop{Textures.TreeGreen, Vector2{100.f,3740.f}, PropType::TREE, Textures}, 
             Prop{Textures.TreeGreen, Vector2{200.f,3740.f}, PropType::TREE, Textures}, 
@@ -3009,7 +2791,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3300.f,3740.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{3800.f,3740.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{3900.f,3740.f}, PropType::TREE, Textures},
-
             // row36
             Prop{Textures.TreeGreen, Vector2{20.f,3840.f}, PropType::TREE, Textures},      // 1 
             Prop{Textures.TreeGreen, Vector2{120.f,3840.f}, PropType::TREE, Textures},     // 2 
@@ -3041,7 +2822,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3720.f,3840.f}, PropType::TREE, Textures},    // 38
             Prop{Textures.TreeGreen, Vector2{3820.f,3840.f}, PropType::TREE, Textures},    // 39
             Prop{Textures.TreeGreen, Vector2{3920.f,3840.f}, PropType::TREE, Textures},    // 40
-
             // row37
             Prop{Textures.TreeGreen, Vector2{0.f,3940.f}, PropType::TREE, Textures},       // 1 
             Prop{Textures.TreeGreen, Vector2{100.f,3940.f}, PropType::TREE, Textures},     // 2 
@@ -3084,7 +2864,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3800.f,3940.f}, PropType::TREE, Textures},    // 39
             Prop{Textures.TreeGreen, Vector2{3900.f,3940.f}, PropType::TREE, Textures},    // 40 
             Prop{Textures.TreeGreen, Vector2{4000.f,3940.f}, PropType::TREE, Textures},    // 41
-
             // large tree
             Prop{Textures.TreeGreen, Vector2{2185.f,2050.f}, PropType::TREE, Textures, 8.f}
         };
@@ -3095,7 +2874,6 @@ namespace Game
         std::vector<Enemy> Enemies{};
 
         // ----------------------------------- Bears ------------------------------------
-
         Enemy BrownBearTwo
         {
             Sprite{Textures.BearBrownIdle, 4, 4},
@@ -3145,7 +2923,6 @@ namespace Game
         Enemies.emplace_back(LightBrownBearThree);
 
         // ----------------------------------- Toads ------------------------------------
-
         Enemy GreenToadOne
         {
             Sprite{Textures.ToadGreenIdle, 4, 4},
@@ -3183,7 +2960,6 @@ namespace Game
         Enemies.emplace_back(PinkToadOne);
 
         // ----------------------------------- Mushrooms ------------------------------------
-
         Enemy RedMushroomOne
         {
             Sprite{Textures.MushroomRedIdle, 4, 4},
@@ -3220,9 +2996,7 @@ namespace Game
         };
         Enemies.emplace_back(BlueMushroomTwo);
 
-
         // ----------------------------------- Test enemies below ------------------------------------
-
         Enemy GreyBossBear
         {
             Sprite{Textures.BearGreyIdle, 4, 4},
@@ -3272,9 +3046,7 @@ namespace Game
         Enemies.emplace_back(GreenImp);
 
         // ------------------- Wildlife NPCs ---------------------//
-        //                                                        //
         // -------------------- Fox Family -----------------------//
-
         Enemy FoxFamOne
         {
             Sprite{Textures.FoxFamilyIdle, 5, 2},
@@ -3320,7 +3092,6 @@ namespace Game
         Enemies.emplace_back(FoxFamFour);
 
         // ------------------- Squirrels ---------------------
-        
         Enemy SquirrelOne
         {
             Sprite{Textures.SquirrelIdle, 6, 2},
@@ -4156,7 +3927,6 @@ namespace Game
                 Prop.GetInteractRec(CharacterWorldPos).height, 
                 Color{ 200, 122, 255, 100 }        
             );
-
             DrawRectangle(
                 Prop.GetCollisionRec(CharacterWorldPos).x,
                 Prop.GetCollisionRec(CharacterWorldPos).y,
