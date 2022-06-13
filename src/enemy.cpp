@@ -45,8 +45,8 @@ Enemy::Enemy(const Sprite& Idle,
     Sprites.emplace_back(Death);
     Sprites.emplace_back(Projectile);
 
-    CurrentSpriteIndex = Monster::IDLE;
-    ShootingSpriteIndex = Monster::PROJECTILE;
+    CurrentSpriteIndex = static_cast<int>(Monster::IDLE);
+    ShootingSpriteIndex = static_cast<int>(Monster::PROJECTILE);
 
     // Static variable to count how many enemies on the field
     if (Type == EnemyType::NORMAL) {
@@ -102,7 +102,7 @@ Enemy::Enemy(const Sprite& NpcIdle,
     Sprites.emplace_back(NpcMisc);
     Sprites.emplace_back(NpcSleep);
 
-    CurrentSpriteIndex = NPC::IDLING;
+    CurrentSpriteIndex = static_cast<int>(NPC::IDLE);
 
     // Generate RNG for current object used for randomizing AI movement
     std::random_device Seed;
@@ -341,33 +341,33 @@ void Enemy::NeutralAction()
     // Check if Enemy is moving and change sprites if needed
     if (Chasing || Walking) {
         if (Type == EnemyType::NPC) {
-            CurrentSpriteIndex = NPC::WALKING;
+            CurrentSpriteIndex = static_cast<int>(NPC::WALK);
         }
         else {
-            CurrentSpriteIndex = Monster::WALK; 
+            CurrentSpriteIndex = static_cast<int>(Monster::WALK);
         }
     }
     else if (MiscAction) {
         if (Type == EnemyType::NPC) {
-            CurrentSpriteIndex = NPC::MISC;
+            CurrentSpriteIndex = static_cast<int>(NPC::MISC);
         }
     }
     else if (Sleeping) {
         if (Type == EnemyType::NPC) {
-            CurrentSpriteIndex = NPC::SLEEPING;
+            CurrentSpriteIndex = static_cast<int>(NPC::SLEEP);
         }
     }
     else {
         if (Type == EnemyType::NPC) {
             if (IdleTwo) {
-                CurrentSpriteIndex = NPC::IDLINGTWO;
+                CurrentSpriteIndex = static_cast<int>(NPC::IDLETWO);
             }
             else {
-                CurrentSpriteIndex = NPC::IDLING;
+                CurrentSpriteIndex = static_cast<int>(NPC::IDLE);
             }
         }
         else {
-            CurrentSpriteIndex = Monster::IDLE;
+            CurrentSpriteIndex = static_cast<int>(Monster::IDLE);
         }
     }
 }
@@ -462,10 +462,10 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWo
 void Enemy::CheckAttack()
 {
     if (Attacking) {
-        CurrentSpriteIndex = Monster::ATTACK;
+        CurrentSpriteIndex = static_cast<int>(Monster::ATTACK);
 
         if (Ranged) {
-            ShootingSpriteIndex = Monster::PROJECTILE;
+            ShootingSpriteIndex = static_cast<int>(Monster::PROJECTILE);
         }
     }
     else {
@@ -537,7 +537,7 @@ void Enemy::TakeDamage()
 
         // Time between hurt animation showing
         if (DamageTime <= HurtUpdateTime) {
-            CurrentSpriteIndex = Monster::HURT;
+            CurrentSpriteIndex = static_cast<int>(Monster::HURT);
             Hurting = true;
             Trajectory = 1.f;
         }
@@ -563,7 +563,7 @@ void Enemy::CheckAlive(float DeltaTime)
         float EndTime{1.35f};
 
         // Set to death sprite
-        CurrentSpriteIndex = Monster::DEATH;
+        CurrentSpriteIndex = static_cast<int>(Monster::DEATH);
         
         // Turn off any TakeDamage() functionality
         IsAttacked = false;
