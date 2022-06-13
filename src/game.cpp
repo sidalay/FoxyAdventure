@@ -7,8 +7,7 @@ namespace Game
         Window Window{1280, 720}; 
         Game::Initialize(Window, "Cryptex Adventure");
 
-        if (IsWindowReady())
-        {
+        if (IsWindowReady()) {
             // Initialization ---------------------------
             GameTexture Textures;
             Game::Info Info{Background{Textures}, 0, 0.f, 0.f, 0.f};
@@ -44,14 +43,12 @@ namespace Game
 
     void CheckScreenSizing(Window& Window)
     {
-        if (IsWindowResized()) 
-        {
+        if (IsWindowResized()) {
             Window.x = GetScreenWidth();
             Window.y = GetScreenHeight();
         }
 
-        if (IsKeyPressed(KEY_ENTER) && ((IsKeyDown(KEY_RIGHT_ALT) || IsKeyDown(KEY_LEFT_ALT))))
-        {
+        if (IsKeyPressed(KEY_ENTER) && ((IsKeyDown(KEY_RIGHT_ALT) || IsKeyDown(KEY_LEFT_ALT)))) {
             ToggleFullscreen();
         }
     }
@@ -345,15 +342,33 @@ namespace Game
         DrawTexturePro(Objects.PauseFox.at(Info.PauseFoxIndex).Texture, Objects.PauseFox.at(Info.PauseFoxIndex).GetSourceRec(), Objects.PauseFox.at(Info.PauseFoxIndex).GetPosRec(Vector2{674.f,396.f}, 4.f), Vector2{}, 0.f, WHITE);
 
         // Draw Buttons Depending on which are pushed
-        if (IsKeyDown(KEY_W)) DrawTextureEx(Objects.Buttons.at(0), Vector2{208.f,124.f}, 0.f, 4.f, WHITE);
-        if (IsKeyDown(KEY_A)) DrawTextureEx(Objects.Buttons.at(1), Vector2{160.f,180.f}, 0.f, 4.f, WHITE);
-        if (IsKeyDown(KEY_S)) DrawTextureEx(Objects.Buttons.at(2), Vector2{208.f,180.f}, 0.f, 4.f, WHITE);
-        if (IsKeyDown(KEY_D)) DrawTextureEx(Objects.Buttons.at(3), Vector2{256.f,180.f}, 0.f, 4.f, WHITE);
-        if (IsKeyDown(KEY_L)) DrawTextureEx(Objects.Buttons.at(4), Vector2{160.f,460.f}, 0.f, 4.f, WHITE);
-        if (IsKeyDown(KEY_M)) DrawTextureEx(Objects.Buttons.at(5), Vector2{160.f,372.f}, 0.f, 4.f, WHITE);
-        if (IsKeyDown(KEY_LEFT_SHIFT)) DrawTextureEx(Objects.Buttons.at(6), Vector2{160.f,276.f}, 0.f, 4.f, WHITE);
-        if (IsKeyDown(KEY_SPACE)) DrawTextureEx(Objects.Buttons.at(7), Vector2{152.f,552.f}, 0.f, 4.f, WHITE);
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) DrawTextureEx(Objects.Buttons.at(8), Vector2{264.f,548.f}, 0.f, 4.f, WHITE);
+        if (IsKeyDown(KEY_W)) {
+            DrawTextureEx(Objects.Buttons.at(0), Vector2{208.f,124.f}, 0.f, 4.f, WHITE);
+        }
+        if (IsKeyDown(KEY_A)) {
+            DrawTextureEx(Objects.Buttons.at(1), Vector2{160.f,180.f}, 0.f, 4.f, WHITE);
+        }
+        if (IsKeyDown(KEY_S)) {
+            DrawTextureEx(Objects.Buttons.at(2), Vector2{208.f,180.f}, 0.f, 4.f, WHITE);
+        }
+        if (IsKeyDown(KEY_D)) {
+            DrawTextureEx(Objects.Buttons.at(3), Vector2{256.f,180.f}, 0.f, 4.f, WHITE);
+        }
+        if (IsKeyDown(KEY_L)) {
+            DrawTextureEx(Objects.Buttons.at(4), Vector2{160.f,460.f}, 0.f, 4.f, WHITE);
+        }
+        if (IsKeyDown(KEY_M)) {
+            DrawTextureEx(Objects.Buttons.at(5), Vector2{160.f,372.f}, 0.f, 4.f, WHITE);
+        }
+        if (IsKeyDown(KEY_LEFT_SHIFT)) {
+            DrawTextureEx(Objects.Buttons.at(6), Vector2{160.f,276.f}, 0.f, 4.f, WHITE);
+        }
+        if (IsKeyDown(KEY_SPACE)) {
+            DrawTextureEx(Objects.Buttons.at(7), Vector2{152.f,552.f}, 0.f, 4.f, WHITE);
+        }
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+            DrawTextureEx(Objects.Buttons.at(8), Vector2{264.f,548.f}, 0.f, 4.f, WHITE);
+        }
     }
 
     void ExitUpdate(Game::Info& Info)
