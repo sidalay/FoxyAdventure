@@ -77,27 +77,32 @@ Prop::Prop(const Sprite& Object, Vector2 Pos, PropType Type, GameTexture& GameTe
         Collidable = true;
     }
 
-    if (Type == PropType::BIGTREASURE)
-    {
+    if (Type == PropType::BIGTREASURE) {
         Spawned = false;
     }
 
-    if (Type == PropType::TREASURE || Type == PropType::BIGTREASURE)
-    {
-        if (ItemScale == 1.f)
+    if (Type == PropType::TREASURE || Type == PropType::BIGTREASURE) {
+        if (ItemScale == 1.f) {
             ItemPos.x = 24.f;
-        else if (ItemScale == 2.f)
+        }
+        else if (ItemScale == 2.f) {
             ItemPos.x = 16.f;
-        else if (ItemScale == 3.f)
+        }
+        else if (ItemScale == 3.f) {
             ItemPos.x = 8.f;
-        else if (ItemScale == 4.f)
+        }
+        else if (ItemScale == 4.f) {
             ItemPos.x = 0.f;
-        else if (ItemScale == 5.f)
+        }
+        else if (ItemScale == 5.f) {
             ItemPos.x = -8.f;
-        else if (ItemScale == 6.f)
+        }
+        else if (ItemScale == 6.f) {
             ItemPos.x = -16.f;
-        else 
+        }
+        else  {
             ItemPos.x = 0.f;
+        }
     }
 }
 
@@ -105,15 +110,12 @@ void Prop::Tick(float DeltaTime)
 {
     if (Visible) {
         // Play NPC idle animation when NOT interacting
-        if ((Type == PropType::NPC_A || Type == PropType::NPC_B || Type == PropType::NPC_C) && !Talking)
-        {
+        if ((Type == PropType::NPC_A || Type == PropType::NPC_B || Type == PropType::NPC_C) && !Talking) {
             Object.Tick(DeltaTime);
 
             // Update any progression and triggers for NPCs
-            if (CurrentAct != Progress::ACT_O)
-            {
-                if (Type == CurrentNPC)
-                {
+            if (CurrentAct != Progress::ACT_O) {
+                if (Type == CurrentNPC) {
                     Act = CurrentAct;
                     CurrentAct = Progress::ACT_O;
                     CurrentNPC = PropType::NPC_O;
@@ -122,90 +124,71 @@ void Prop::Tick(float DeltaTime)
         }
 
         // Tick through Altar piece sprite animation once inserted
-        if (Type == PropType::ANIMATEDALTAR)
-        {
-            for (auto& Piece:AltarPieces) 
-            {
-                if (ItemName == std::get<0>(Piece) && std::get<2>(Piece) == true)
-                {
+        if (Type == PropType::ANIMATEDALTAR) {
+            for (auto& Piece:AltarPieces) {
+                if (ItemName == std::get<0>(Piece) && std::get<2>(Piece) == true) {
                     Object.Tick(DeltaTime);
                 }
             }
         }
 
         // determine behavior of prop when interacting with it
-        if (Active)
-        {
-            if (Type == PropType::GRASS)
-            {
+        if (Active) {
+            if (Type == PropType::GRASS) {
                 Object.Tick(DeltaTime);
             }
-            else if (Type == PropType::TREASURE || Type == PropType::BIGTREASURE)
-            {
-                if (TriggerAct != Progress::ACT_O) 
-                {
+            else if (Type == PropType::TREASURE || Type == PropType::BIGTREASURE) {
+                if (TriggerAct != Progress::ACT_O) {
                     CurrentAct = TriggerAct;
                     CurrentNPC = TriggerNPC;
                 }
 
-                if (!Opened)
-                {
+                if (!Opened) {
                     Object.Tick(DeltaTime);
                 }
 
                 RunningTime += DeltaTime;
 
-                if (RunningTime > Object.UpdateTime * 4.f && RunningTime < Object.UpdateTime * 8.f)
-                {
+                if (RunningTime > Object.UpdateTime * 4.f && RunningTime < Object.UpdateTime * 8.f) {
                     Opened = true;
                     Opening = true;
                     RunningTime = 0.f; 
                 }
 
-                for (auto& Piece:AltarPieces)
-                {
-                    if (std::get<0>(Piece) == ItemName)
-                    {
+                for (auto& Piece:AltarPieces) {
+                    if (std::get<0>(Piece) == ItemName) {
                         std::get<1>(Piece) = true;
                     }
                 }
             }
-            else if (Type == PropType::DOOR)
-            {
+            else if (Type == PropType::DOOR) {
                 Opened = true;
             }
-            else if ((Type == PropType::NPC_A || Type == PropType::NPC_B || Type == PropType::NPC_C))
-            {
-                if (TriggerAct != Progress::ACT_O) 
-                {
+            else if ((Type == PropType::NPC_A || Type == PropType::NPC_B || Type == PropType::NPC_C)) {
+                if (TriggerAct != Progress::ACT_O) {
                     CurrentAct = TriggerAct;
                     CurrentNPC = TriggerNPC;
                 }
 
                 Talking = true;
             }
-            else if (Type == PropType::ANIMATEDALTAR)
-            {   
+            else if (Type == PropType::ANIMATEDALTAR) {   
                 if (PiecesAdded == 0) {
                     InsertPiece = true;
                 }
 
-                for (auto& Piece:AltarPieces)
-                {
-                    if (std::get<1>(Piece) == true)
-                    {
+                for (auto& Piece:AltarPieces) {
+                    if (std::get<1>(Piece) == true) {
                         std::get<2>(Piece) = true;
                         InsertPiece = true;
                     }
-                    if (std::get<2>(Piece) == true && std::get<3>(Piece) == false)
-                    {
+                    if (std::get<2>(Piece) == true && std::get<3>(Piece) == false) {
                         std::get<3>(Piece) = true;
                         PiecesAdded++;
                     } 
                 }
                 
-                if (PiecesAdded >= 6)
-                {
+                if (PiecesAdded >= 6) {
                     FinalChest = true;
                 }
 
@@ -214,13 +197,10 @@ void Prop::Tick(float DeltaTime)
         }
         else {
             // Draw treasure item for (UpdateTime * X) seconds
-            if (Opening)
-            {
+            if (Opening) {
                 ReceiveItem = true;
-                
                 RunningTime += DeltaTime;
-                if (RunningTime >= Object.UpdateTime * 10.f)
-                {
+                if (RunningTime >= Object.UpdateTime * 10.f) {
                     Opening = false;
                     RunningTime = 0.f; 
                 }
@@ -230,10 +210,8 @@ void Prop::Tick(float DeltaTime)
     }
     else {
         // Turn visibility on for BigTreasure when all 6 pieces have been inserted
-        if (Type == PropType::BIGTREASURE)
-        {
-            if (PiecesAdded >= 6)
-            {
+        if (Type == PropType::BIGTREASURE) {
+            if (PiecesAdded >= 6) {
                 Spawned = true;
             }
         }
@@ -245,49 +223,38 @@ void Prop::Draw(Vector2 CharacterWorldPos)
     Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)}; // Where the prop is drawn on the screen
     // Vector2 MaxItemDistance {0,-20};
 
-    if (Spawned)
-    {
+    if (Spawned) {
         // Draw only if Prop is viewable in the screen frame
-        if (WithinScreen(CharacterWorldPos))
-        {
+        if (WithinScreen(CharacterWorldPos)) {
             Visible = true;
 
             // Only draw final chest if conditions are met
-            if (Type == PropType::BIGTREASURE)
-            {
-                if (FinalChest) 
-                {
+            if (Type == PropType::BIGTREASURE) {
+                if (FinalChest) {
                     DrawTexturePro(Object.Texture, Object.GetSourceRec(), Object.GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
                 }
             }
             // Draw the object
-            else 
-            {
+            else {
                 DrawTexturePro(Object.Texture, Object.GetSourceRec(), Object.GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
             }
 
             // Draw the animated altar piece
-            if (Type == PropType::ANIMATEDALTAR)
-            {
-                for (auto& Piece:AltarPieces)
-                {
-                    if (std::get<2>(Piece) == true)
-                    {
-                        if (std::get<0>(Piece) == ItemName)
-                        {
+            if (Type == PropType::ANIMATEDALTAR) {
+                for (auto& Piece:AltarPieces) {
+                    if (std::get<2>(Piece) == true) {
+                        if (std::get<0>(Piece) == ItemName) {
                             DrawTextureEx(Object.Texture, WorldPos, 0.f, Scale, WHITE);
                         }
                     }
                 }
             }
         }
-        else
-        {   
+        else {   
             Visible = false;
 
             // Once NPC_C has been interacted with and is offscreen, set to not draw anymore
-            if (Type == PropType::NPC_C && Act == Progress::ACT_O)
-            {
+            if (Type == PropType::NPC_C && Act == Progress::ACT_O) {
                 // Spawned = false;
                 WorldPos.x = 1283.f;
                 WorldPos.y = 2859.f;
@@ -297,46 +264,39 @@ void Prop::Draw(Vector2 CharacterWorldPos)
     }
     
     // Draw Treasure Box Item
-    if (Opening)
-    {
+    if (Opening) {
         DrawTextureEx(Item, Vector2Add(ScreenPos, ItemPos), 0.f, ItemScale, WHITE);
         ItemPos = Vector2Add(ItemPos, Vector2{0.f,-0.1f});
     }
 
     // Treasure Speech Box
-    if (ReceiveItem)
-    {
+    if (ReceiveItem) {
         // DrawTextureEx(SpeechBox, Vector2{352,518}, 0.f, 12.f, WHITE);
         DrawTextureEx(GameTextures.SpeechBox, Vector2{472.f,574.f}, 0.f, 8.f, WHITE);
         DrawSpeech();
     }
 
     // NPC Speech Box
-    if (Talking)
-    {
+    if (Talking) {
         DrawTextureEx(GameTextures.SpeechName, Vector2{376.f,438.f}, 0.f, 5.f, WHITE);
         DrawTextureEx(GameTextures.SpeechBox, Vector2{352.f,518.f}, 0.f, 12.f, WHITE);
 
-        if (Type == PropType::NPC_A)
-        {
+        if (Type == PropType::NPC_A) {
             DrawText("Diana", 399, 490, 30, WHITE);
             DrawSpeech();
         }
-        else if (Type == PropType::NPC_B)
-        {
+        else if (Type == PropType::NPC_B) {
             DrawText("Jade", 399, 490, 30, WHITE);
             DrawSpeech();
         }
-        else if (Type == PropType::NPC_C)
-        {
+        else if (Type == PropType::NPC_C) {
             DrawText("Louie", 399, 490, 30, WHITE);
             DrawSpeech();
         }
     }
 
     // Altar Pieces Inserted
-    if (InsertPiece)
-    {
+    if (InsertPiece) {
         DrawTextureEx(GameTextures.SpeechBox, Vector2{472.f,574.f}, 0.f, 8.f, WHITE);
         DrawSpeech();
     }
@@ -753,8 +713,7 @@ bool Prop::CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Directio
     bool Colliding{false};
     PrevWorldPos = WorldPos;
 
-    if (Vector2Length(Direction) != 0.f)
-    {
+    if (Vector2Length(Direction) != 0.f) {
         // set MapPos -= Direction
         WorldPos = Vector2Add(WorldPos, Vector2Scale(Vector2Normalize(Direction), Speed));
     }
@@ -762,13 +721,12 @@ bool Prop::CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Directio
     if (WorldPos.x < 0.f ||
         WorldPos.y < 0.f ||
         WorldPos.x + (Object.Texture.width * Scale) > Map.GetMapSize().x * Map.GetScale() ||
-        WorldPos.y + (Object.Texture.height * Scale) > Map.GetMapSize().y * Map.GetScale())
+        WorldPos.y + (Object.Texture.height * Scale) > Map.GetMapSize().y * Map.GetScale()) 
     {
         OutOfBounds = true;
         UndoMovement();
     }
-    else
-    {
+    else {
         OutOfBounds = false;
     }
 
@@ -789,8 +747,7 @@ bool Prop::CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Directio
 
 void Prop::DrawSpeech()
 {
-    if (Type == PropType::TREASURE)
-    {
+    if (Type == PropType::TREASURE) {
         DrawText("", 510, 550, 20, WHITE);
         DrawText("", 510, 575, 20, WHITE);
         DrawText(TextFormat("Received: %s!", ItemName.c_str()), 490, 625, 20, WHITE);
@@ -798,34 +755,28 @@ void Prop::DrawSpeech()
         DrawText("", 510, 650, 20, WHITE);
         DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
 
-        if (IsKeyPressed(KEY_ENTER))
-        {
+        if (IsKeyPressed(KEY_ENTER)) {
             ReceiveItem = false;
         }
     }
-    else if (Type == PropType::BIGTREASURE)
-    {
+    else if (Type == PropType::BIGTREASURE) {
         DrawText(TextFormat("Received: %s!", ItemName.c_str()), 510, 600, 20, WHITE);
         DrawText("Diana is written on the bottom...", 510, 625, 20, WHITE);
         DrawText("Bring it back to her!", 510, 650, 20, WHITE);
         DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
 
-        if (IsKeyPressed(KEY_ENTER))
-        {
+        if (IsKeyPressed(KEY_ENTER)) {
             ReceiveItem = false;
         }
     }
-    else if (Type == PropType::ANIMATEDALTAR)
-    {
-        if (PiecesAdded == 0)
-        {
+    else if (Type == PropType::ANIMATEDALTAR) {
+        if (PiecesAdded == 0) {
             DrawText("A mysterious altar... You feel", 490, 600, 20, WHITE);
             DrawText("a strange power resonating", 490, 625, 20, WHITE);
             DrawText("from the empty engravings...", 490, 650, 20, WHITE);
             DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
         }
-        else if (PiecesAdded > 0 && PiecesAdded < 6)
-        {
+        else if (PiecesAdded > 0 && PiecesAdded < 6) {
             DrawText("", 510, 550, 20, WHITE);
             DrawText("", 510, 575, 20, WHITE);
             DrawText("Altar piece inserted!", 510, 625, 20, WHITE);
@@ -833,8 +784,7 @@ void Prop::DrawSpeech()
             DrawText("", 510, 650, 20, WHITE);
             DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
         }
-        else
-        {
+        else {
             DrawText("All pieces have been collected!", 490, 600, 20, WHITE);
             DrawText("You hear sounds coming from", 490, 625, 20, WHITE);
             DrawText("the middle of the forest...", 490, 650, 20, WHITE);
@@ -842,20 +792,17 @@ void Prop::DrawSpeech()
             DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
         }
 
-        if (IsKeyPressed(KEY_ENTER))
-        {
+        if (IsKeyPressed(KEY_ENTER)) {
             InsertPiece = false;
         }
     }
     // Manage NPC speech
-    else
-    {
+    else {
         switch(Act)
         {
             case Progress::ACT_O:
             {
-                if (Type == PropType::NPC_C)
-                {
+                if (Type == PropType::NPC_C) {
                     DrawText("...Mom told you to find me?...", 390, 550, 20, WHITE);
                     DrawText("She said that I keep wandering off???", 390, 575, 20, WHITE);
                     DrawText("SHES the one who left ME here!!", 390, 600, 20, WHITE);
@@ -864,8 +811,7 @@ void Prop::DrawSpeech()
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
 
-                if (IsKeyReleased(KEY_ENTER))
-                {
+                if (IsKeyReleased(KEY_ENTER)) {
                     Opened = true;
                     Talking = false;
                 }
@@ -873,8 +819,7 @@ void Prop::DrawSpeech()
             }
             case Progress::ACT_I:
             {   
-                if (Type == PropType::NPC_A)
-                {
+                if (Type == PropType::NPC_A) {
                     DrawText("Hello there, little Foxy! You look a little lost.", 390, 550, 20, WHITE);
                     DrawText("Have you ran into my neighbor, Jade? I know she", 390, 575, 20, WHITE);
                     DrawText("can be noisy, but she means no harm...", 390, 600, 20, WHITE);
@@ -882,16 +827,14 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else if (Type == PropType::NPC_B)
-                {
+                else if (Type == PropType::NPC_B) {
                     DrawText("Why HELLO, Love! Have you seen my little one?", 390, 550, 20, WHITE);
                     DrawText("Could have sworn he was right here...", 390, 575, 20, WHITE);
                     DrawText("I really hope he didn't wander into the forest", 390, 600, 20, WHITE);
                     DrawText("AGAIN!!", 390, 625, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else
-                {
+                else {
                     DrawText("...Mom told you to find me?...", 390, 550, 20, WHITE);
                     DrawText("She said that I keep wandering off???", 390, 575, 20, WHITE);
                     DrawText("SHES the one who left ME here!!", 390, 600, 20, WHITE);
@@ -900,21 +843,17 @@ void Prop::DrawSpeech()
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 };
 
-                if (IsKeyReleased(KEY_ENTER))
-                {
-                    if (Type != PropType::NPC_A)
-                    {
+                if (IsKeyReleased(KEY_ENTER)) {
+                    if (Type != PropType::NPC_A) {
                         Opened = true;
                         Talking = false;
                     }
 
                     // Update NPC_C's act to ACT_O as it doesn't need to be seen anymore once it leaves screen
-                    if (Type == PropType::NPC_A)
-                    {
+                    if (Type == PropType::NPC_A) {
                         Act = Progress::ACT_II;
                     }
-                    else if (Type == PropType::NPC_C)
-                    {
+                    else if (Type == PropType::NPC_C) {
                         Act = Progress::ACT_O;
                     }
                 }
@@ -922,8 +861,7 @@ void Prop::DrawSpeech()
             }
             case Progress::ACT_II:
             {
-                if (Type == PropType::NPC_A)
-                {
+                if (Type == PropType::NPC_A) {
                     DrawText("By the way, do you live in the flower forest", 390, 550, 20, WHITE);
                     DrawText("WEST of here? There's a strange stone", 390, 575, 20, WHITE);
                     DrawText("monument NORTH of that location...", 390, 600, 20, WHITE);
@@ -931,8 +869,7 @@ void Prop::DrawSpeech()
                     DrawText("but no one really knows...", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);   
                 }
-                else if (Type == PropType::NPC_B)
-                {
+                else if (Type == PropType::NPC_B) {
                     DrawText("You found my boy! He's alawys wandering", 390, 550, 20, WHITE);
                     DrawText("off and getting in trouble... This time", 390, 575, 20, WHITE);
                     DrawText("the FOREST!! Thank you for finding him.", 390, 600, 20, WHITE);
@@ -940,8 +877,7 @@ void Prop::DrawSpeech()
                     DrawText("there... maybe he was looking for it?", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else
-                {
+                else {
                     DrawText("Hi, Foxy! Thanks again for your help! ", 390, 550, 20, WHITE);
                     DrawText("Mom is still blaming me about getting lost..", 390, 575, 20, WHITE);
                     DrawText("While I was lost, I think I saw a treasure", 390, 600, 20, WHITE);
@@ -950,14 +886,10 @@ void Prop::DrawSpeech()
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 };
 
-
-                if (IsKeyPressed(KEY_ENTER))
-                {
+                if (IsKeyPressed(KEY_ENTER)) {
                     Opened = true;
                     Talking = false;
-
-                    if (Type == PropType::NPC_A)
-                    {
+                    if (Type == PropType::NPC_A){
                         Act = Progress::ACT_I;
                     }
                 }
@@ -965,8 +897,7 @@ void Prop::DrawSpeech()
             }
             case Progress::ACT_III:
             {
-                if (Type == PropType::NPC_A)
-                {
+                if (Type == PropType::NPC_A) {
                     DrawText("", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
@@ -974,8 +905,7 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else if (Type == PropType::NPC_B) 
-                {
+                else if (Type == PropType::NPC_B)  {
                     DrawText("", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
@@ -983,8 +913,7 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else
-                {
+                else {
                     DrawText("", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
@@ -993,8 +922,7 @@ void Prop::DrawSpeech()
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 };
 
-                if (IsKeyPressed(KEY_ENTER))
-                {
+                if (IsKeyPressed(KEY_ENTER)) {
                     Opened = true;
                     Talking = false;
                 }
@@ -1002,8 +930,7 @@ void Prop::DrawSpeech()
             }
             case Progress::ACT_IV:
             {
-                if (Type == PropType::NPC_A)
-                {
+                if (Type == PropType::NPC_A) {
                     DrawText("", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
@@ -1011,8 +938,7 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                 }
-                else if (Type == PropType::NPC_B)
-                {
+                else if (Type == PropType::NPC_B) {
                     DrawText("", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
@@ -1020,8 +946,7 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else
-                {
+                else {
                     DrawText("", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
@@ -1030,8 +955,7 @@ void Prop::DrawSpeech()
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 };
             
-                if (IsKeyPressed(KEY_ENTER))
-                {
+                if (IsKeyPressed(KEY_ENTER)) {
                     Opened = true;
                     Talking = false;
                 }

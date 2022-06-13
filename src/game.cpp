@@ -5,7 +5,7 @@ namespace Game
     void Run() 
     {
         Window Window{1280, 720}; 
-        Game::Initialize(Window, "Cryptex Adventure");      // Set the program's configurations
+        Game::Initialize(Window, "Cryptex Adventure");
 
         if (IsWindowReady())
         {
@@ -44,14 +44,12 @@ namespace Game
 
     void CheckScreenSizing(Window& Window)
     {
-        // set window.x / window.y to resized dimensions
         if (IsWindowResized()) 
         {
             Window.x = GetScreenWidth();
             Window.y = GetScreenHeight();
         }
 
-        // check for alt + enter [FULLSCREEN]
         if (IsKeyPressed(KEY_ENTER) && ((IsKeyDown(KEY_RIGHT_ALT) || IsKeyDown(KEY_LEFT_ALT))))
         {
             ToggleFullscreen();
@@ -550,9 +548,8 @@ namespace Game
         std::vector<Prop> Grass
         {   
             // --------------------------------------------- Far Left Column -----------------------------------------------
-
             // ---------------------------------------------------- -4 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder, 4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -642,7 +639,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
 
             // ------------------------------------------------ Left Column ------------------------------------------------
-
             // ---------------------------------------------------- -1 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1294.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1334.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -704,7 +700,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
 
             // --------------------------------------------- Far Right Column ----------------------------------------------
-
             // --------------------------------------------------- -6 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1974.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -806,7 +801,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
 
             // ------------------------------------------------ Right Column -----------------------------------------------
-
             // --------------------------------------------------- -1 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1334.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1334.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1196,15 +1190,12 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,2046.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,2026.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,2046.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            
-            
         };
         Props.emplace_back(Grass);
 
         std::vector<Prop> Walls
         {
             // ---------------------------------------- Left Side Hill -----------------------------------
-
             // Left Side Walls
             Prop{Textures.GrassWallLeft, Vector2{768.f, 2688.f}, PropType::LEFTSIDEWALL, Textures},
             Prop{Textures.GrassWallLeft, Vector2{768.f, 2752.f}, PropType::LEFTSIDEWALL, Textures},
@@ -1289,7 +1280,6 @@ namespace Game
             Prop{Textures.FenceDown, Vector2{1216.f, 3662.f}, PropType::FENCE, Textures},
 
             // ---------------------------------------- Garden Fences -----------------------------------
-
             // Left Side
             Prop{Textures.FenceLeft, Vector2{1688.f, 3070.f}, PropType::FENCE, Textures},
             Prop{Textures.FenceLeft, Vector2{1688.f, 3198.f}, PropType::FENCE, Textures},
@@ -1310,7 +1300,6 @@ namespace Game
 
 
             // ---------------------------------------- Left Side Inner Hill -----------------------------------
-            
             // Holes
             Prop{Textures.Hole, Vector2{960.f, 3008.f}, PropType::HOLE, Textures},
             Prop{Textures.Hole, Vector2{1088.f, 3008.f}, PropType::HOLE, Textures},
@@ -1348,7 +1337,6 @@ namespace Game
             Prop{Textures.WallTopLeft, Vector2{896.f, 2752.f}, PropType::TOPWALL, Textures},
 
             // ---------------------------------------- Right Side Hill -----------------------------------
-
             // Left Side Walls
             Prop{Textures.GrassWallLeft, Vector2{2688.f, 2560.f}, PropType::LEFTSIDEWALL, Textures},
             Prop{Textures.GrassWallLeft, Vector2{2688.f, 2624.f}, PropType::LEFTSIDEWALL, Textures},
@@ -1420,7 +1408,6 @@ namespace Game
 
 
             // ---------------------------------------- Right Side Second Hill -----------------------------------
-            
             // Left Side Walls
             Prop{Textures.GrassWallLeft, Vector2{2752.f, 2624.f}, PropType::LEFTSIDEWALL, Textures},
             Prop{Textures.GrassWallLeft, Vector2{2752.f, 2688.f}, PropType::LEFTSIDEWALL, Textures},
@@ -1480,7 +1467,6 @@ namespace Game
             Prop{Textures.GrassWallTopLeft, Vector2{2752.f, 2560.f}, PropType::TOPWALL, Textures},
 
             // ---------------------------------------- Right Side Third Hill -----------------------------------
-
             // Left Side Walls
             Prop{Textures.WallLeft, Vector2{2944.f, 2688.f}, PropType::LEFTSIDEWALL, Textures},
             Prop{Textures.WallLeft, Vector2{2944.f, 2752.f}, PropType::LEFTSIDEWALL, Textures},
@@ -1572,7 +1558,6 @@ namespace Game
         std::vector<Prop> Grass
         {
             // --------------------------------------------- Far Left Column -----------------------------------------------
-
             // --------------------------------------------------- -4 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1642,7 +1627,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
 
             // ------------------------------------------------ Left Column ------------------------------------------------
-
             // ---------------------------------------------------- -1 ------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1314.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1354.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1703,7 +1687,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
 
             // --------------------------------------------- Far Right Column ----------------------------------------------
-
             // --------------------------------------------------- -6 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1954.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1994.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -1795,7 +1778,6 @@ namespace Game
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
 
             // ------------------------------------------------ Right Column -----------------------------------------------
-
             // --------------------------------------------------- -1 -------------------------------------------------------
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1314.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
             Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1354.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
@@ -3210,18 +3192,6 @@ namespace Game
 
         // ----------------------------------- Test enemies below ------------------------------------
 
-        // Enemy BrownBear
-        // {
-        //     Sprite{Textures.BearBrownIdle, 4, 4},
-        //     Sprite{Textures.BearBrownWalk, 4, 4},
-        //     Sprite{Textures.BearBrownAttack, 4, 4},
-        //     Sprite{Textures.BearBrownHurt, 1, 4},
-        //     Sprite{Textures.BearBrownDeath, 11, 4},
-        //     Sprite{Textures.Placeholder, 0, 0},
-        //     EnemyType::BEAR, EnemyType::NORMAL, Vector2{1800.f, 3566.f}, Window, MapBG, Textures, 1
-        // };
-        // Enemies.emplace_back(BrownBear);
-
         Enemy GreyBossBear
         {
             Sprite{Textures.BearGreyIdle, 4, 4},
@@ -3233,30 +3203,6 @@ namespace Game
             EnemyType::BEAR, EnemyType::BOSS, Vector2{2163.f, 1518.f}, Window, MapBG, Textures, 5, 5.f
         };
         Enemies.emplace_back(GreyBossBear);
-
-        // Enemy RedBeholder
-        // {
-        //     Sprite{Textures.BeholderRedIdle, 4, 4},
-        //     Sprite{Textures.BeholderRedWalk, 4, 4},
-        //     Sprite{Textures.BeholderRedAttack, 4, 4},
-        //     Sprite{Textures.BeholderRedHurt, 4, 4},
-        //     Sprite{Textures.BeholderRedDeath, 11, 4},
-        //     Sprite{Textures.BeholderRedProjectile, 4, 4},
-        //     EnemyType::BEHOLDER, EnemyType::NORMAL, Vector2{1550.f, 3466.f}, Window, MapBG, Textures, 3
-        // };
-        // Enemies.emplace_back(RedBeholder);
-
-        // Enemy WhiteGhost
-        // {
-        //     Sprite{Textures.GhostWhiteIdle, 4, 4},
-        //     Sprite{Textures.GhostWhiteWalk, 4, 4},
-        //     Sprite{Textures.GhostWhiteAttack, 4, 4},
-        //     Sprite{Textures.GhostWhiteHurt, 1, 4},
-        //     Sprite{Textures.GhostWhiteDeath, 11, 4},
-        //     Sprite{Textures.Placeholder, 0, 0},
-        //     EnemyType::GHOST, EnemyType::NORMAL, Vector2{1850.f, 3566.f}, Window, MapBG, Textures, 1
-        // };
-        // Enemies.emplace_back(WhiteGhost);
     
         Enemy RedNecro
         {
@@ -3293,30 +3239,6 @@ namespace Game
             EnemyType::IMP, EnemyType::NORMAL, Vector2{1800.f, 3666.f}, Window, MapBG, Textures
         };
         Enemies.emplace_back(GreenImp);
-
-        // Enemy BlueShadow
-        // {
-        //     Sprite{Textures.ShadowBlueIdle, 4, 4},
-        //     Sprite{Textures.ShadowBlueWalk, 4, 4},
-        //     Sprite{Textures.ShadowBlueAttack, 4, 4},
-        //     Sprite{Textures.ShadowBlueHurt, 1, 4},
-        //     Sprite{Textures.ShadowBlueDeath, 11, 4},
-        //     Sprite{Textures.Placeholder, 0, 0},
-        //     EnemyType::SHADOW, EnemyType::NORMAL, Vector2{1800.f, 3666.f}, Window, MapBG, Textures
-        // };
-        // Enemies.emplace_back(BlueShadow);
-
-        // Enemy BrownSpider
-        // {
-        //     Sprite{Textures.SpiderBrownIdle, 4, 4},
-        //     Sprite{Textures.SpiderBrownWalk, 4, 4},
-        //     Sprite{Textures.SpiderBrownAttack, 4, 4},
-        //     Sprite{Textures.SpiderBrownHurt, 1, 4},
-        //     Sprite{Textures.SpiderBrownDeath, 11, 4},
-        //     Sprite{Textures.Placeholder, 0, 0},
-        //     EnemyType::SPIDER, EnemyType::NORMAL, Vector2{1600.f, 3666.f}, Window, MapBG, Textures
-        // };
-        // Enemies.emplace_back(BrownSpider);
 
         // ------------------- Wildlife NPCs ---------------------//
         //                                                        //

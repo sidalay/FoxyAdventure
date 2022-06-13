@@ -95,7 +95,6 @@ Enemy::Enemy(const Sprite& NpcIdle,
       GameTextures{GameTextures},
       Scale{Scale}
 {
-    // Fill vector<Sprite*> with Sprite objects to easily loop through and call Sprite::Tick()
     Sprites.emplace_back(NpcIdle);
     Sprites.emplace_back(NpcIdleTwo);
     Sprites.emplace_back(NpcWalk);
@@ -104,7 +103,6 @@ Enemy::Enemy(const Sprite& NpcIdle,
 
     CurrentSpriteIndex = static_cast<int>(NPC::IDLE);
 
-    // Generate RNG for current object used for randomizing AI movement
     std::random_device Seed;
     std::uniform_int_distribution<int> RandomRange{60,80};
     std::uniform_int_distribution<int> RandomIdleTime{5,9};
@@ -126,25 +124,16 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
     if (Visible) {
         if (Type != EnemyType::NPC) {
             if (Alive && Summoned) {
-
                 SpriteTick(DeltaTime);
-
                 CheckDirection();
-                
                 NeutralAction();
-
                 TakeDamage();
-
                 CheckAlive(DeltaTime);
             }
-
         }
         else {
-            
             SpriteTick(DeltaTime);
-
             CheckDirection();
-
             NeutralAction();
         }
 
@@ -153,15 +142,15 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
         }
     }
     else {
-        if (Type == EnemyType::BOSS) 
+        if (Type == EnemyType::BOSS) {
             CheckBossSummon(HeroWorldPos);
+        }
     }
 }
 
 void Enemy::Draw(Vector2 HeroWorldPos)
 {
-    if (WithinScreen(HeroWorldPos))
-    {
+    if (WithinScreen(HeroWorldPos)) {
         Visible = true;
 
         if (!OOB) {
@@ -195,18 +184,12 @@ void Enemy::Draw(Vector2 HeroWorldPos)
 
 void Enemy::SpriteTick(float DeltaTime)
 {
-    /* 
-        Loop through Sprites vector and call Sprite::Tick() to maintain sprite animations current 'spot'.
-        Halfway through walk animation -> Run will start from the halfway point. Etc.
-    */
-    for (auto& Sprite:Sprites)
-    {   
+    for (auto& Sprite:Sprites) {   
         if (Type != EnemyType::NPC) {
-            // Call Sprite::Tick() on all sprites that are NOT death sprite
+            // Don't call Sprite::Tick() on the death sprite UNTIL Dying==true so that it will start from FrameX=0 when it does need to play
             if (&Sprite != &Sprites.at(4)) {
                 Sprite.Tick(DeltaTime);
             }
-            // Don't call Sprite::Tick() on the death sprite until Dying=true so that it will start from FrameX=0 when it does need to play
             else {
                 if (Dying) {
                     Sprite.Tick(DeltaTime);
@@ -307,7 +290,7 @@ void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreen
     }
 
     // Check if moving OOB 
-    OutOfBounds();
+    CheckOutOfBounds();
 
     // Check for collision against player or props
     if (Alive) {
@@ -321,7 +304,7 @@ void Enemy::UndoMovement()
     WorldPos = PrevWorldPos;
 }
 
-void Enemy::OutOfBounds()
+void Enemy::CheckOutOfBounds()
 {
     if (WorldPos.x < 0.f ||
         WorldPos.y < 0.f ||
@@ -329,16 +312,11 @@ void Enemy::OutOfBounds()
         WorldPos.y > World.GetMapSize().y * World.GetScale() - (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY)*Scale) 
     {
         UndoMovement();
-        // OOB = true;
-    }
-    else {
-        // OOB = false;
     }
 }
 
 void Enemy::NeutralAction()
 {
-    // Check if Enemy is moving and change sprites if needed
     if (Chasing || Walking) {
         if (Type == EnemyType::NPC) {
             CurrentSpriteIndex = static_cast<int>(NPC::WALK);
@@ -374,15 +352,15 @@ void Enemy::NeutralAction()
 
 void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
-    if (Race != EnemyType::CROW) { // Crows should not be blocked by anything
+    // Crows should not be blocked by anything
+    if (Race != EnemyType::CROW) {
 
         // Prop collision handling
         for (auto& PropType:Props) {
             for (auto& Prop:PropType) {
-                if (Prop.HasCollision()) {
-                    
+                if (Prop.HasCollision()) { 
                     /*
-                        Undo movement wasn't working so implemented a reverse aggro logic. 
+                        UndoMovement() wasn't working so implemented a reverse aggro logic. 
                         When enemy gets within min aggro range of an obstacle it 'runs' away from it.
                         Therefore it will never collide with a prop.
                     */
@@ -391,25 +369,15 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWo
                     Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), ScreenPos)), Speed)}; // Calculate the distance from Enemy to Prop
                     float AvoidProp{Vector2Length(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), ScreenPos))};
 
-                    // move away from moveable objects 
-                    if (Prop.IsMoveable()) {
-                        if (Prop.GetType() == PropType::BOULDER) {
-                            if (AvoidProp <= MinRange) {
-                                WorldPos = Vector2Subtract(WorldPos, ToTarget);
-                            }
-                        }
-                    }
-                    // move away from all other objects
-                    else if (Prop.IsSpawned()) {
+                    // move away from props
+                    if (Prop.IsSpawned()) {
                         if (AvoidProp <= MinRange) {
                             WorldPos = Vector2Subtract(WorldPos, ToTarget);
                         }
                     }
 
-                    // check physical collision
+                    // activate grass animation
                     if (CheckCollisionRecs(this->GetCollisionRec(), Prop.GetCollisionRec(HeroWorldPos))) {   
-
-                        // activate grass animation
                         if (Prop.IsMoveable()) {
                             if (Prop.GetType() == PropType::GRASS && Alive) {
                                 Prop.SetActive(true);
@@ -422,18 +390,14 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWo
         
         // Tree collision handling
         for (auto& Tree:Trees) {
-            if (Tree.HasCollision()) {
+            if (Tree.HasCollision() && Tree.IsSpawned()) {
                 Vector2 TreeScreenPos{Vector2{Tree.GetCollisionRec(HeroWorldPos).x, Tree.GetCollisionRec(HeroWorldPos).y}}; // Grab the collision rectangle screen position
                 Vector2 RadiusAroundEnemy{5.f,5.f};
                 Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(TreeScreenPos, RadiusAroundEnemy), ScreenPos)), Speed)}; // Calculate the distance from Enemy to Tree
-
-                if (Tree.IsSpawned()) {
-
-                    float AvoidTree{Vector2Length(Vector2Subtract(Vector2Add(TreeScreenPos, RadiusAroundEnemy), ScreenPos))};
-                    
-                    if (AvoidTree <= MinRange) {
-                        WorldPos = Vector2Subtract(WorldPos, ToTarget);
-                    }
+                float AvoidTree{Vector2Length(Vector2Subtract(Vector2Add(TreeScreenPos, RadiusAroundEnemy), ScreenPos))};
+                
+                if (AvoidTree <= MinRange) {
+                    WorldPos = Vector2Subtract(WorldPos, ToTarget);
                 }
             }
         }
@@ -443,7 +407,6 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWo
     // Enemy collision handling
     for (auto& Enemy:Enemies) {
         if (this != &Enemy) {
-
             /*
                 When enemy gets within min aggro range of another enemy it 'runs' away from it.
                 Therefore it will never collide with a Enemy.
@@ -480,7 +443,6 @@ Vector2 Enemy::UpdateProjectile()
     }
 
     Vector2 ProjectilePath{ScreenPos}; 
-
     switch (Face)
     {
         case Direction::UP: 
@@ -775,8 +737,8 @@ void Enemy::DrawHP()
     float SingleBarWidth{static_cast<float>(GameTextures.LifebarLeftEmpty.width) * LifeBarScale};
     float MaxBarWidth{SingleBarWidth * MaxHP};
     float CenterLifeBar {(MaxBarWidth - (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX)*Scale ) / 2.f};
-    Vector2 LifeBarPos{};                           // Where the lifebar is positioned
-    Vector2 LifeBarPosAdd{SingleBarWidth, 0.f};       // spacing between each life 'bar'
+    Vector2 LifeBarPos{};                               // Where the lifebar is positioned
+    Vector2 LifeBarPosAdd{SingleBarWidth, 0.f};         // spacing between each life 'bar'
 
     // update lifebarpos to center of enemy sprite
     LifeBarPos = Vector2Subtract(ScreenPos, Vector2{CenterLifeBar, 20.f});

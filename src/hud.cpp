@@ -43,7 +43,7 @@ void HUD::Draw(float Health, Emotion State)
     float MaxHP{10.f};
 
     DrawTextureEx(GameTextures.TransparentContainer, Vector2{15.f, 15.f}, 0.f, 5.f, WHITE);  // Draw Container holding the hearts
-    DrawTextureEx(Fox, Vector2{20.f,20.f}, 0.f, Scale, WHITE);                                // Draw fox portrait
+    DrawTextureEx(Fox, Vector2{20.f,20.f}, 0.f, Scale, WHITE);                               // Draw fox portrait
 
     for (float i = 1.f; i <= MaxHP; ++i) {
         // Draw hearts 1-5 on first row

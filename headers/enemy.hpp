@@ -66,7 +66,7 @@ public:
     void CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void NeutralAction();
     void UndoMovement();
-    void OutOfBounds();
+    void CheckOutOfBounds();
     void CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void CheckAttack();
     void UpdateSource();

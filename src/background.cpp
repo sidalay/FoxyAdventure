@@ -28,13 +28,8 @@ void Background::DrawMiniMap(Vector2 CharWorldPos)
     };
 
     if (MiniMapOpen) {
-
-        // Draw MiniMap Border
         DrawTextureEx(GameTextures.SquareContainer, Vector2Subtract(Position, Vector2{10.f, 10.f}), 0.f, 7.9f, WHITE);
-        
-        // Draw MiniMap
         DrawTextureEx(GameTextures.MiniMap, Position, 0.0f, .35f, WHITE);
-
         // Draw MiniMap Character Indicator
         DrawRectangle(Position.x + 54.f + ((CharWorldPos.x/4.f) * .35f), Position.y + 30.f + ((CharWorldPos.y/4.f) * .35f), 5, 5, RED);  
     }

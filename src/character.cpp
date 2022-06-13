@@ -70,7 +70,6 @@ void Character::SpriteTick(float DeltaTime)
 
 void Character::UpdateScreenPos()
 {
-    // Update Character to middle of screen if screen is resized
     ScreenPos.x = Screen.x/2.f - (Scale * (0.5f * Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX));
     ScreenPos.y = Screen.y/2.f - (Scale * (0.5f * Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY));
     Destination.x = ScreenPos.x;
@@ -128,19 +127,17 @@ void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::ve
         }
 
         if (Vector2Length(Direction) != 0.f) {
-            // set MapPos -= Direction
             WorldPos = Vector2Add(WorldPos, Vector2Scale(Vector2Normalize(Direction), Speed));
         }
 
         // Undo Movement if walking out-of-bounds
-        if (WorldPos.x + ScreenPos.x < 0.f - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f||
-            WorldPos.y + ScreenPos.y < 0.f - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f||
+        if (WorldPos.x + ScreenPos.x < 0.f - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
+            WorldPos.y + ScreenPos.y < 0.f - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f ||
             WorldPos.x + (Screen.x - ScreenPos.x) > World.GetMapSize().x * World.GetScale() + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
             WorldPos.y + (Screen.y - ScreenPos.y) > World.GetMapSize().y * World.GetScale() + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f)
         {
             UndoMovement();
         }
-
     }
 
     CheckCollision(Props.Under, Direction, Enemies, Trees);
@@ -183,7 +180,6 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 Di
                                 Prop.SetActive(true);
                             }
                         }
-
                         // if not pushable, block movement   
                         else {
                             if (Prop.IsSpawned()) {
@@ -316,49 +312,35 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 Di
 
 void Character::WalkOrRun()
 {
-    if (IsKeyDown(KEY_LEFT_SHIFT))
-    {
+    if (IsKeyDown(KEY_LEFT_SHIFT)) {
         Running = true;
-
-        if (Colliding)
-            Speed = 0.9f;
-        else 
-            Speed = 2.5f;
+        if (Colliding) {Speed = 0.9f;}
+        else {Speed = 2.5f;}
     }
-    else 
-    {
+    else {
         Running = false;
-
-        if (Colliding)
-            Speed = 0.4f;
-        else
-            Speed = 1.5f;
-
+        if (Colliding) {Speed = 0.4f;}
+        else {Speed = 1.5f;}
     }
-    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_A) || IsKeyDown(KEY_S) || IsKeyDown(KEY_D))
-    {
+
+    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_A) || IsKeyDown(KEY_S) || IsKeyDown(KEY_D)) {
         Walking = true;
         Sleeping = false;
     }
-    else
-    {
+    else {
         Walking = false;
     }
 
-    if (Running && Walking) 
-    {
+    if (Running && Walking) {
         SpriteIndex = static_cast<int>(FoxState::RUN);
     }
-    else if (Walking) 
-    {
+    else if (Walking) {
         SpriteIndex = static_cast<int>(FoxState::WALK);
     }
-    else if (Sleeping)
-    {
+    else if (Sleeping) {
         SpriteIndex = static_cast<int>(FoxState::SLEEP);
     }
-    else 
-    {
+    else {
         SpriteIndex = static_cast<int>(FoxState::IDLE);
     }
 }
@@ -416,22 +398,30 @@ void Character::CheckSleep()
 
 void Character::CheckEmotion()
 {
-    if (Health < 1.f)
+    if (Health < 1.f) {
         State = Emotion::DEAD;
-    else if (Attacking)
+    }
+    else if (Attacking) {
         State = Emotion::ANGRY;
-    else if (Hurting)
+    }
+    else if (Hurting) {
         State = Emotion::HURT;
-    else if (Sleeping)
+    }
+    else if (Sleeping) {
         State = Emotion::SLEEPING;
-    else if (Health >= 10.f)
+    }
+    else if (Health >= 10.f) {
         State = Emotion::HAPPY;
-    else if (Health > 6.f && Health < 10.f)
+    }
+    else if (Health > 6.f && Health < 10.f) {
         State = Emotion::DEFAULT;
-    else if (Health > 3.f && Health <= 6.f)
+    }
+    else if (Health > 3.f && Health <= 6.f) {
         State = Emotion::NERVOUS;
-    else if (Health > 1.f && Health <= 3.f)
+    }
+    else if (Health > 1.f && Health <= 3.f) {
         State = Emotion::SAD;
+    }
 }
 
 void Character::DrawIndicator() 
@@ -525,7 +515,6 @@ void Character::TakeDamage()
 {
     float UpdateTime {2.f/1.f};
     float HurtUpdateTime{1.f};
-    // float KnockBack{2.f};
 
     // Cancel sleeping state if attacked
     if (Sleeping) {
@@ -545,26 +534,6 @@ void Character::TakeDamage()
         }
         DamageTime = 0.f;
     }
-
-
-    // Knock player back a few units while hurt
-    // if (DamageTime <= HurtUpdateTime) {
-    //     switch (Face) 
-    //     {
-    //         case Direction::UP:
-    //             WorldPos.y += KnockBack;
-    //             break;
-    //         case Direction::DOWN:
-    //             WorldPos.y -= KnockBack;
-    //             break;
-    //         case Direction::LEFT:
-    //             WorldPos.x += KnockBack;
-    //             break;
-    //         case Direction::RIGHT:
-    //             WorldPos.x -= KnockBack;
-    //             break;
-    //     }
-    // }
 }
 
 // -------------------------------------------------------- //

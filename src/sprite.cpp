@@ -10,12 +10,13 @@ void Sprite::Tick(float DeltaTime)
 {
     // update animation frame
     RunningTime += DeltaTime;
-    if (RunningTime >= UpdateTime)
-    {
+    if (RunningTime >= UpdateTime) {
         PreviousFrame = FrameX;
         ++FrameX;
         RunningTime = 0.f;
-        if (FrameX > MaxFramesX) FrameX = 0;
+        if (FrameX > MaxFramesX) {
+            FrameX = 0;
+        }
     }
 }
 
