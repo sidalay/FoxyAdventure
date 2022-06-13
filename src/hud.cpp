@@ -37,15 +37,15 @@ void HUD::Draw(float Health, Emotion State)
             break;
     }
 
-    Vector2 HeartRowOne{100, 30}; 
-    Vector2 HeartRowTwo{-50, 60}; 
-    Vector2 HeartSpacing{30,0}; 
+    Vector2 HeartRowOne{100.f, 30.f}; 
+    Vector2 HeartRowTwo{-50.f, 60.f}; 
+    Vector2 HeartSpacing{30.f,0.f}; 
     float MaxHP{10.f};
 
-    DrawTextureEx(GameTextures.TransparentContainer, Vector2{15, 15}, 0.f, 5.f, WHITE);  // Draw Container holding the hearts
-    DrawTextureEx(Fox, Vector2{20,20}, 0.f, Scale, WHITE);                                // Draw fox portrait
+    DrawTextureEx(GameTextures.TransparentContainer, Vector2{15.f, 15.f}, 0.f, 5.f, WHITE);  // Draw Container holding the hearts
+    DrawTextureEx(Fox, Vector2{20.f,20.f}, 0.f, Scale, WHITE);                                // Draw fox portrait
 
-    for (float i = 1; i <= MaxHP; ++i) {
+    for (float i = 1.f; i <= MaxHP; ++i) {
         // Draw hearts 1-5 on first row
         if (i <= MaxHP/2.f) {
             if (i < Health) {

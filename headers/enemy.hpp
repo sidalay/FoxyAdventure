@@ -135,8 +135,8 @@ private:
     float ActionIdleTime{};
     float MoveXRange{};
     float MoveYRange{};
-    float AIX{0.6};
-    float AIY{0.6};
+    float AIX{0.6f};
+    float AIY{0.6f};
     float Trajectory{1.f};
     bool Alive{true};
     bool Colliding{false};

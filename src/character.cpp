@@ -437,7 +437,7 @@ void Character::CheckEmotion()
 void Character::DrawIndicator() 
 {
     if (Interactable) {
-        DrawTextureEx(GameTextures.Interact, Vector2Subtract(ScreenPos, Vector2{-58, -20}), 0.f, 2.f, WHITE);
+        DrawTextureEx(GameTextures.Interact, Vector2Subtract(ScreenPos, Vector2{-58.f, -20.f}), 0.f, 2.f, WHITE);
     }
 };
 
@@ -469,7 +469,7 @@ Rectangle Character::GetAttackRec()
             return Rectangle
             {
                 ScreenPos.x + Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX/2.f,
-                ScreenPos.y + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY/2.f * 2),
+                ScreenPos.y + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY/2.f * 2.f),
                 ((Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX) - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/1.5f) * Scale,
                 ((Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY) - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/1.5f)  * Scale
             }; 
@@ -484,7 +484,7 @@ Rectangle Character::GetAttackRec()
         case Direction::RIGHT:
             return Rectangle
             {
-                ScreenPos.x + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX/2.f * 2),
+                ScreenPos.x + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX/2.f * 2.f),
                 ScreenPos.y + Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY/2.f,
                 ((Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX) - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/1.5f) * Scale,
                 ((Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY) - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/1.5f)  * Scale

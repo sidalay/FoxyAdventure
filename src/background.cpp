@@ -30,7 +30,7 @@ void Background::DrawMiniMap(Vector2 CharWorldPos)
     if (MiniMapOpen) {
 
         // Draw MiniMap Border
-        DrawTextureEx(GameTextures.SquareContainer, Vector2Subtract(Position, Vector2{10, 10}), 0.f, 7.9f, WHITE);
+        DrawTextureEx(GameTextures.SquareContainer, Vector2Subtract(Position, Vector2{10.f, 10.f}), 0.f, 7.9f, WHITE);
         
         // Draw MiniMap
         DrawTextureEx(GameTextures.MiniMap, Position, 0.0f, .35f, WHITE);

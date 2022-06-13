@@ -85,19 +85,19 @@ Prop::Prop(const Sprite& Object, Vector2 Pos, PropType Type, GameTexture& GameTe
     if (Type == PropType::TREASURE || Type == PropType::BIGTREASURE)
     {
         if (ItemScale == 1.f)
-            ItemPos.x = 24;
+            ItemPos.x = 24.f;
         else if (ItemScale == 2.f)
-            ItemPos.x = 16;
+            ItemPos.x = 16.f;
         else if (ItemScale == 3.f)
-            ItemPos.x = 8;
+            ItemPos.x = 8.f;
         else if (ItemScale == 4.f)
-            ItemPos.x = 0;
+            ItemPos.x = 0.f;
         else if (ItemScale == 5.f)
-            ItemPos.x = -8;
+            ItemPos.x = -8.f;
         else if (ItemScale == 6.f)
-            ItemPos.x = -16;
+            ItemPos.x = -16.f;
         else 
-            ItemPos.x = 0;
+            ItemPos.x = 0.f;
     }
 }
 
@@ -155,7 +155,7 @@ void Prop::Tick(float DeltaTime)
 
                 RunningTime += DeltaTime;
 
-                if (RunningTime > Object.UpdateTime * 4 && RunningTime < Object.UpdateTime * 8)
+                if (RunningTime > Object.UpdateTime * 4.f && RunningTime < Object.UpdateTime * 8.f)
                 {
                     Opened = true;
                     Opening = true;
@@ -219,7 +219,7 @@ void Prop::Tick(float DeltaTime)
                 ReceiveItem = true;
                 
                 RunningTime += DeltaTime;
-                if (RunningTime >= Object.UpdateTime * 10)
+                if (RunningTime >= Object.UpdateTime * 10.f)
                 {
                     Opening = false;
                     RunningTime = 0.f; 
@@ -289,8 +289,8 @@ void Prop::Draw(Vector2 CharacterWorldPos)
             if (Type == PropType::NPC_C && Act == Progress::ACT_O)
             {
                 // Spawned = false;
-                WorldPos.x = 1283;
-                WorldPos.y = 2859;
+                WorldPos.x = 1283.f;
+                WorldPos.y = 2859.f;
                 Act = Progress::ACT_II;
             }
         }
@@ -300,22 +300,22 @@ void Prop::Draw(Vector2 CharacterWorldPos)
     if (Opening)
     {
         DrawTextureEx(Item, Vector2Add(ScreenPos, ItemPos), 0.f, ItemScale, WHITE);
-        ItemPos = Vector2Add(ItemPos, Vector2{0,-0.1f});
+        ItemPos = Vector2Add(ItemPos, Vector2{0.f,-0.1f});
     }
 
     // Treasure Speech Box
     if (ReceiveItem)
     {
         // DrawTextureEx(SpeechBox, Vector2{352,518}, 0.f, 12.f, WHITE);
-        DrawTextureEx(GameTextures.SpeechBox, Vector2{472,574}, 0.f, 8.f, WHITE);
+        DrawTextureEx(GameTextures.SpeechBox, Vector2{472.f,574.f}, 0.f, 8.f, WHITE);
         DrawSpeech();
     }
 
     // NPC Speech Box
     if (Talking)
     {
-        DrawTextureEx(GameTextures.SpeechName, Vector2{376,438}, 0.f, 5.f, WHITE);
-        DrawTextureEx(GameTextures.SpeechBox, Vector2{352,518}, 0.f, 12.f, WHITE);
+        DrawTextureEx(GameTextures.SpeechName, Vector2{376.f,438.f}, 0.f, 5.f, WHITE);
+        DrawTextureEx(GameTextures.SpeechBox, Vector2{352.f,518.f}, 0.f, 12.f, WHITE);
 
         if (Type == PropType::NPC_A)
         {
@@ -337,7 +337,7 @@ void Prop::Draw(Vector2 CharacterWorldPos)
     // Altar Pieces Inserted
     if (InsertPiece)
     {
-        DrawTextureEx(GameTextures.SpeechBox, Vector2{472,574}, 0.f, 8.f, WHITE);
+        DrawTextureEx(GameTextures.SpeechBox, Vector2{472.f,574.f}, 0.f, 8.f, WHITE);
         DrawSpeech();
     }
 
@@ -347,10 +347,10 @@ void Prop::Draw(Vector2 CharacterWorldPos)
 bool Prop::WithinScreen(Vector2 CharacterWorldPos)
 {
     if (
-        (WorldPos.x >= (CharacterWorldPos.x + 615) - (GetScreenWidth()/2 + (Object.Texture.width * Scale))) && 
-        (WorldPos.x <= (CharacterWorldPos.x + 615) + (GetScreenWidth()/2 + (Object.Texture.width * Scale))) &&
-        (WorldPos.y >= (CharacterWorldPos.y + 335) - (GetScreenHeight()/2 + (Object.Texture.height * Scale))) && 
-        (WorldPos.y <= (CharacterWorldPos.y + 335) + (GetScreenHeight()/2 + (Object.Texture.height * Scale)))
+        (WorldPos.x >= (CharacterWorldPos.x + 615.f) - (GetScreenWidth()/2 + (Object.Texture.width * Scale))) && 
+        (WorldPos.x <= (CharacterWorldPos.x + 615.f) + (GetScreenWidth()/2 + (Object.Texture.width * Scale))) &&
+        (WorldPos.y >= (CharacterWorldPos.y + 335.f) - (GetScreenHeight()/2 + (Object.Texture.height * Scale))) && 
+        (WorldPos.y <= (CharacterWorldPos.y + 335.f) + (GetScreenHeight()/2 + (Object.Texture.height * Scale)))
        ) {
             return true;
          }
