@@ -14,8 +14,15 @@ enum class EnemyType
     FOX, CROW, SQUIRREL
 };
 
-enum class Monster {IDLE, WALK, ATTACK, HURT, DEATH, PROJECTILE}; 
-enum class NPC {IDLE, IDLETWO, WALK, MISC, SLEEP}; 
+enum class Monster 
+{
+    IDLE, WALK, ATTACK, HURT, DEATH, PROJECTILE
+}; 
+
+enum class NPC 
+{
+    IDLE, IDLETWO, WALK, MISC, SLEEP
+};
 
 struct Enemies;
 

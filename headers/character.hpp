@@ -8,7 +8,10 @@ enum class Emotion
     DEFAULT, ANGRY, HAPPY, NERVOUS, SAD, SLEEPING, HURT, DEAD
 };
 
-enum class FoxState {IDLE, WALK, RUN, ATTACK, HURT, DEATH, PUSH, SLEEP, ITEMGRAB};
+enum class FoxState 
+{
+    IDLE, WALK, RUN, ATTACK, HURT, DEATH, PUSH, SLEEP, ITEMGRAB
+};
 
 class Character
 {
@@ -63,17 +66,17 @@ public:
     
 private:
     GameTexture& GameTextures;
-    std::vector<Sprite> Sprites{};
-
     Window& Screen;
     Background& World;
     Vector2 Offset{615.f,335.f};         // Player offset vs Enemy/Prop WorldPos
-    Vector2 ScreenPos{};              // Where the character is on the screen
+    Vector2 ScreenPos{};                 // Where the character is on the screen
     Vector2 WorldPos{362.f,2594.f};      // Where the character is in the world
     // Vector2 WorldPos{2334.f,2431};
     Vector2 PrevWorldPos{};
     Rectangle Source{};
     Rectangle Destination{};
+    std::vector<Sprite> Sprites{};
+
     int SpriteIndex{};
     float Health{11.f};
     float Scale{1.5f};
