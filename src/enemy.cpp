@@ -553,75 +553,49 @@ void Enemy::EnemyAI()
     if (!Chasing && !Blocked) {
 
         ActionTime += GetFrameTime();
+        
+        if (ActionTime >= ActionIdleTime) {
+            ActionTime = 0.0f;
+            ActionState = RandomEngine.Randomize(RandomActionState);
+            IdleTwo = !IdleTwo;
+            MiscAction = false;
+            Sleeping = false;
+        }
 
         if (Type == EnemyType::NPC) {
 
-            switch (ActionState)
-            {
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                case 6:
-                {
-                    Movement.x += AIX;
-                    Movement.y += AIY;
+            if (ActionState >= 1 && ActionState <= 6) {
+                Movement.x += AIX;
+                Movement.y += AIY;
 
-                    // Handle walking 
-                    if (ActionTime <= ActionIdleTime/2) {
-                        Walking = true;
-                        WorldPos.x += AIX;
-                        WorldPos.y += AIY;
-                    }
-                    else if (ActionTime >= ActionIdleTime) {
-                        ActionTime = 0.0f;
-                        ActionState = RandomEngine.Randomize(RandomActionState);
-                        IdleTwo = !IdleTwo;
-                    }
-                    else {
-                        Walking = false;
-                    }
+                // Handle walking 
+                if (ActionTime <= ActionIdleTime/2) {
+                    Walking = true;
+                    WorldPos.x += AIX;
+                    WorldPos.y += AIY;
+                }
+                else {
+                    Walking = false;
+                }
 
-                    if (Movement.x <= -MoveXRange || Movement.x >= MoveXRange) {
-                        AIX = -AIX;
-                    }
-                    if (Movement.y <= -MoveYRange || Movement.y >= MoveYRange) {
-                        AIY = -AIY;
-                    }
-                    break;
+                if (Movement.x <= -MoveXRange || Movement.x >= MoveXRange) {
+                    AIX = -AIX;
                 }
-                case 7:
-                {
-                    // Handle misc action 
-                    if (ActionTime <= ActionIdleTime) {
-                        MiscAction = true;
-                    }
-                    else {
-                        ActionTime = 0.0f;
-                        ActionState = RandomEngine.Randomize(RandomActionState);
-                        MiscAction = false;
-                    }
-                    break;
+                if (Movement.y <= -MoveYRange || Movement.y >= MoveYRange) {
+                    AIY = -AIY;
                 }
-                case 8:
-                case 9:
-                case 10:
-                {
-                    // Handle sleep action
-                    if (ActionTime <= ActionIdleTime) {
-                        Sleeping = true;
-                    }
-                    else {
-                        ActionTime = 0.0f;
-                        ActionState = RandomEngine.Randomize(RandomActionState);
-                        Sleeping = false;
-                    }
-                    break;
+            }
+            else if (ActionState == 7) {
+                // Handle misc action 
+                if (ActionTime <= ActionIdleTime) {
+                    MiscAction = true;
                 }
-                default:
-                    ActionState = 1;
-                    break;
+            }
+            else {
+                // Handle sleep action
+                if (ActionTime <= ActionIdleTime) {
+                    Sleeping = true;
+                }
             }
         }
         else {
@@ -633,9 +607,6 @@ void Enemy::EnemyAI()
                 Walking = true;
                 WorldPos.x += AIX;
                 WorldPos.y += AIY;
-            }
-            else if (ActionTime >= ActionIdleTime) {
-                ActionTime = 0.0f;
             }
             else {
                 Walking = false;
