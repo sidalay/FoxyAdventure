@@ -552,7 +552,7 @@ void Enemy::EnemyAI()
             else if (ActionState == 7 && (ActionTime <= ActionIdleTime)) {
                 MiscAction = true;
             }
-            else if ((ActionState >= 8 && ActionState <= 10) && (ActionTime <= ActionIdleTime)){
+            else if ((ActionState >= 8 && ActionState <= 10) && (ActionTime <= ActionIdleTime)) {
                 Sleeping = true;
             }
         }
