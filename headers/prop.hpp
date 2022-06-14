@@ -43,40 +43,66 @@ struct Props;
 class Prop 
 {
 public:
-    Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, GameTexture& GameTextures, float Scale = 4.f, bool Moveable = false, bool Interactable = false);
-    Prop(const Sprite& Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, const std::string& ItemName = "None", bool Spawned = false, bool Interactable = false);           
-    Prop(const Sprite& Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, const Texture2D& Item, float Scale = 4.f, bool Moveable = false, bool Interactable = false, 
-         Progress Act = Progress::ACT_O, PropType NPC = PropType::NPC_O, 
-         const std::string& ItemName = "None", float ItemScale = 2.f);
-    
-    void Tick(float DeltaTime);
-    void Draw(Vector2 CharacterWorldPos);
+    // Constructor for inanimate props
+    Prop(const Texture2D& Texture, 
+         const Vector2 Pos, 
+         const PropType Type, 
+         const GameTexture& GameTextures, 
+         const float Scale = 4.f, 
+         const bool Moveable = false, 
+         const bool Interactable = false);
 
-    bool HasCollision() {return Collidable;}
-    bool IsInteractable() {return Interactable;}
-    bool IsMoveable() {return Moveable;}
-    bool IsOutOfBounds() {return OutOfBounds;}
-    bool IsActive() {return Active;}
-    bool IsOpened() {return Opened;}
-    bool IsSpawned() {return Spawned;}
-    bool WithinScreen(Vector2 CharacterWorldPos);
+    // Constructor for animated altar pieces
+    Prop(const Sprite& Object, 
+         const Vector2 Pos, 
+         const PropType Type, 
+         const GameTexture& GameTextures, 
+         const std::string& ItemName = "None", 
+         const bool Spawned = false, 
+         const bool Interactable = false);      
+
+    // Constructor for animated props
+    Prop(const Sprite& Object, 
+         const Vector2 Pos, 
+         const PropType Type, 
+         const GameTexture& GameTextures, 
+         const Texture2D& Item, 
+         const float Scale = 4.f, 
+         const bool Moveable = false, 
+         const bool Interactable = false, 
+         const Progress Act = Progress::ACT_O, 
+         const PropType NPC = PropType::NPC_O, 
+         const std::string& ItemName = "None", 
+         const float ItemScale = 2.f);
     
-    Vector2 GetWorldPos() {return WorldPos;}
-    PropType GetType() {return Type;}
-    Rectangle GetCollisionRec(Vector2 CharacterWorldPos);
-    Rectangle GetInteractRec(Vector2 CharacterWorldPos);
+    void Tick(const float DeltaTime);
+    void Draw(const Vector2 CharacterWorldPos);
+
+    constexpr bool HasCollision() const {return Collidable;}
+    constexpr bool IsInteractable() const {return Interactable;}
+    constexpr bool IsMoveable() const {return Moveable;}
+    constexpr bool IsOutOfBounds() const {return OutOfBounds;}
+    constexpr bool IsActive() const {return Active;}
+    constexpr bool IsOpened() const {return Opened;}
+    constexpr bool IsSpawned() const {return Spawned;}
+    bool WithinScreen(const Vector2 CharacterWorldPos);
     
-    void SetActive(bool Input) {Active = Input;}
-    void SetOpened(bool Input) {Opened = Input;}
+    constexpr Vector2 GetWorldPos() const {return WorldPos;}
+    constexpr PropType GetType() const {return Type;}
+    Rectangle GetCollisionRec(const Vector2 CharacterWorldPos);
+    Rectangle GetInteractRec(const Vector2 CharacterWorldPos);
+    
+    void SetActive(const bool Input) {Active = Input;}
+    void SetOpened(const bool Input) {Opened = Input;}
     void UndoMovement() {WorldPos = PrevWorldPos;}
-    bool CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Direction, float Speed, std::vector<std::vector<Prop>>& Props);
+    bool CheckMovement(Background& Map, const Vector2 CharWorldPos, const Vector2 Direction, const float Speed, std::vector<std::vector<Prop>>& Props);
 
     void DrawSpeech();
     
 private:
     Sprite Object{};
-    PropType Type{};
-    GameTexture& GameTextures;
+    const PropType Type{};
+    const GameTexture& GameTextures;
     Vector2 WorldPos{};     // Where the prop is located in the world
     Vector2 PrevWorldPos{};
     float Scale {4.f};
@@ -103,7 +129,7 @@ private:
     // Treasure member variables
     bool ReceiveItem{false};
     const Texture2D Item{};
-    std::string ItemName{};
+    const std::string ItemName{};
     float ItemScale{};
     Vector2 ItemPos{};
     float RunningTime{};

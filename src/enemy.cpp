@@ -21,12 +21,12 @@ Enemy::Enemy(const Sprite& Idle,
              const Sprite& Projectile,
              const EnemyType Race,
              const EnemyType Type,
-             Vector2 WorldPos,
+             const Vector2 WorldPos,
              const Window& Screen,
              Background& World,
              const GameTexture& GameTextures,
-             int Health,
-             float Scale) 
+             const int Health,
+             const float Scale) 
     : Race{Race},
       Type{Type},
       WorldPos{WorldPos},
@@ -82,11 +82,11 @@ Enemy::Enemy(const Sprite& NpcIdle,
              const Sprite& NpcMisc,
              const Sprite& NpcSleep,
              const EnemyType Race,
-             Vector2 WorldPos,
+             const Vector2 WorldPos,
              const Window& Screen,
              Background& World,
              const GameTexture& GameTextures,
-             float Scale)
+             const float Scale)
     : Race{Race},
       Type{EnemyType::NPC},
       WorldPos{WorldPos},
@@ -117,7 +117,7 @@ Enemy::Enemy(const Sprite& NpcIdle,
     ActionState = RandomActionState(RNG);
 }
 
-void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
+void Enemy::Tick(float DeltaTime, Props& Props, const Vector2 HeroWorldPos, const Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {   
     UpdateScreenPos(HeroWorldPos);
             
@@ -148,7 +148,7 @@ void Enemy::Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 He
     }
 }
 
-void Enemy::Draw(Vector2 HeroWorldPos)
+void Enemy::Draw(const Vector2 HeroWorldPos)
 {
     if (WithinScreen(HeroWorldPos)) {
         Visible = true;
@@ -202,7 +202,7 @@ void Enemy::SpriteTick(float DeltaTime)
     }
 }
 
-void Enemy::UpdateScreenPos(Vector2 HeroWorldPos)
+void Enemy::UpdateScreenPos(const Vector2 HeroWorldPos)
 {
     ScreenPos = Vector2Subtract(WorldPos, HeroWorldPos);
 }
@@ -289,7 +289,7 @@ void Enemy::CheckDirection()
     }
 }
 
-void Enemy::CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
+void Enemy::CheckMovement(Props& Props, const Vector2 HeroWorldPos, const Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     PrevWorldPos = WorldPos;
     
@@ -362,7 +362,7 @@ void Enemy::NeutralAction()
     }
 }
 
-void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
+void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, const Vector2 HeroWorldPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     // Crows should not be blocked by anything
     if (Race != EnemyType::CROW) {
@@ -675,7 +675,7 @@ void Enemy::EnemyAI()
     }
 }
 
-void Enemy::EnemyAggro(Vector2 HeroScreenPos)
+void Enemy::EnemyAggro(const Vector2 HeroScreenPos)
 {
     // Calculate the distance from Enemy to Player
     Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50.f,50.f}), ScreenPos)), Speed)}; 
@@ -781,7 +781,7 @@ void Enemy::DrawHP()
     }
 }
 
-void Enemy::CheckBossSummon(Vector2 HeroWorldPos)
+void Enemy::CheckBossSummon(const Vector2 HeroWorldPos)
 {
     if (!WithinScreen(HeroWorldPos)) {
         if ((Type == EnemyType::BOSS) && (MonsterCounter[Race] <= 0)) {
@@ -926,7 +926,7 @@ Rectangle Enemy::GetAttackRec()
     }
 }
 
-bool Enemy::WithinScreen(Vector2 HeroWorldPos)
+bool Enemy::WithinScreen(const Vector2 HeroWorldPos)
 {
     if (
         (WorldPos.x >= (HeroWorldPos.x + 615.f) - (GetScreenWidth()/2 + (Sprites.at(CurrentSpriteIndex).Texture.width * Scale))) && 

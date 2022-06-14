@@ -149,7 +149,7 @@ void Character::UndoMovement()
     WorldPos = PrevWorldPos;
 }
 
-void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 Direction, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
+void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, const Vector2 Direction, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     DamageTime += GetFrameTime();
     

@@ -32,7 +32,7 @@ namespace Game
         CloseWindow();
     }
 
-    void Initialize(Window& Window, const std::string& Title)
+    void Initialize(const Window& Window, const std::string& Title)
     {
         SetTraceLogLevel(LOG_WARNING);
         InitWindow(Window.x, Window.y, Title.c_str());
@@ -53,7 +53,7 @@ namespace Game
         }
     }
 
-    void Tick(Window& Window, Game::Info& Info, Game::Objects& Objects, GameTexture& Textures)
+    void Tick(Window& Window, Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures)
     {
         Game::CheckScreenSizing(Window);
 
@@ -334,7 +334,7 @@ namespace Game
         }
     }
 
-    void PauseDraw(const Game::Info& Info, Game::Objects& Objects, GameTexture& Textures)
+    void PauseDraw(const Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures)
     {
         DrawTextureEx(Textures.PauseBackground, Vector2{0.f,0.f}, 0.f, 4.f, WHITE);
 
@@ -506,12 +506,12 @@ namespace Game
         }
     }
 
-    HUD InitializeHud(GameTexture& Textures)
+    HUD InitializeHud(const GameTexture& Textures)
     {
         return HUD(Textures);
     }
 
-    Character InitializeFox(Window& Window, Game::Info& Info, GameTexture& Textures)
+    Character InitializeFox(const Window& Window, Game::Info& Info, const GameTexture& Textures)
     {
         return Character {
             Sprite{Textures.FoxIdle, 4, 4}, 
@@ -528,7 +528,7 @@ namespace Game
         };
     }
 
-    std::array<Sprite,5> InitializePauseFox(GameTexture& Textures)
+    std::array<Sprite,5> InitializePauseFox(const GameTexture& Textures)
     {
         return std::array<Sprite, 5>{
             Sprite{Textures.FoxIdle, 4, 4},
@@ -539,7 +539,7 @@ namespace Game
         };
     }
 
-    std::array<const Texture2D,9> InitializeButtons(GameTexture& Textures)
+    std::array<const Texture2D,9> InitializeButtons(const GameTexture& Textures)
     {
         return std::array<const Texture2D, 9>{
             Textures.ButtonW,
@@ -554,7 +554,7 @@ namespace Game
         };
     }
 
-    std::vector<std::vector<Prop>> InitializePropsUnder(GameTexture& Textures)
+    std::vector<std::vector<Prop>> InitializePropsUnder(const GameTexture& Textures)
     {
         std::vector<std::vector<Prop>> Props{};
 
@@ -1429,7 +1429,7 @@ namespace Game
         return Props;
     }
 
-    std::vector<std::vector<Prop>> InitializePropsOver(GameTexture& Textures)
+    std::vector<std::vector<Prop>> InitializePropsOver(const GameTexture& Textures)
     {
         std::vector<std::vector<Prop>> Props{};
 
@@ -1946,7 +1946,7 @@ namespace Game
         return Props;
     }
 
-    std::vector<Prop> InitializeTrees(GameTexture& Textures)
+    std::vector<Prop> InitializeTrees(const GameTexture& Textures)
     {
         return std::vector<Prop> {
             // row1
@@ -2869,7 +2869,7 @@ namespace Game
         };
     }
 
-    std::vector<Enemy> InitializeEnemies(Background& MapBG, Window& Window, GameTexture& Textures)
+    std::vector<Enemy> InitializeEnemies(Background& MapBG, const Window& Window, const GameTexture& Textures)
     {
         std::vector<Enemy> Enemies{};
 
@@ -3458,7 +3458,7 @@ namespace Game
         return Enemies;
     }
 
-    std::vector<Enemy> InitializeCrows(Background& MapBG, Window& Window, GameTexture& Textures)
+    std::vector<Enemy> InitializeCrows(Background& MapBG, const Window& Window, const GameTexture& Textures)
     {
         std::vector<Enemy> Crows{};
 
@@ -3917,7 +3917,7 @@ namespace Game
     }
 
     // Debugging --------------------
-    void DrawCollisionRecs(Prop& Prop, Vector2 CharacterWorldPos, Color RecColor)
+    void DrawCollisionRecs(Prop& Prop, const Vector2 CharacterWorldPos, Color RecColor)
     {
         if (Prop.IsInteractable()) {
             DrawRectangle(

@@ -1,7 +1,13 @@
 #include "prop.hpp"
 
 // Constructor for inanimate props
-Prop::Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, GameTexture& GameTextures, float Scale, bool Moveable, bool Interactable)
+Prop::Prop(const Texture2D& Texture, 
+           const Vector2 Pos, 
+           const PropType Type, 
+           const GameTexture& GameTextures, 
+           const float Scale, 
+           const bool Moveable, 
+           const bool Interactable)
     : Object{Texture}, Type{Type}, GameTextures{GameTextures}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, 
       Moveable{Moveable}
 {
@@ -36,15 +42,31 @@ Prop::Prop(const Texture2D& Texture, Vector2 Pos, PropType Type, GameTexture& Ga
 }
 
 // Constructor for animated altar pieces
-Prop::Prop(const Sprite& Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, const std::string& ItemName, bool Spawned, bool Interactable)
+Prop::Prop(const Sprite& Object, 
+           const Vector2 Pos, 
+           const PropType Type, 
+           const GameTexture& GameTextures, 
+           const std::string& ItemName, 
+           const bool Spawned, 
+           const bool Interactable)
     : Object{Object}, Type{Type}, GameTextures{GameTextures}, WorldPos{Pos}, Interactable{Interactable}, Spawned{Spawned}, ItemName{ItemName} 
 {
     Collidable = true;
 }
 
 // Constructor for animated props
-Prop::Prop(const Sprite& Object, Vector2 Pos, PropType Type, GameTexture& GameTextures, const Texture2D& Item, float Scale, bool Moveable, bool Interactable, 
-           Progress Act, PropType NPC, const std::string& ItemName, float ItemScale)
+Prop::Prop(const Sprite& Object, 
+           const Vector2 Pos, 
+           const PropType Type, 
+           const GameTexture& GameTextures, 
+           const Texture2D& Item, 
+           const float Scale, 
+           const bool Moveable, 
+           const bool Interactable, 
+           const Progress Act, 
+           const PropType NPC, 
+           const std::string& ItemName, 
+           const float ItemScale)
     : Object{Object}, Type{Type}, GameTextures{GameTextures}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}, 
       TriggerAct{Act}, TriggerNPC{NPC}, Item{Item}, ItemName{ItemName}, ItemScale{ItemScale} 
 {
@@ -106,7 +128,7 @@ Prop::Prop(const Sprite& Object, Vector2 Pos, PropType Type, GameTexture& GameTe
     }
 }
 
-void Prop::Tick(float DeltaTime)
+void Prop::Tick(const float DeltaTime)
 {
     if (Visible) {
         // Play NPC idle animation when NOT interacting
@@ -218,7 +240,7 @@ void Prop::Tick(float DeltaTime)
     }
 }
 
-void Prop::Draw(Vector2 CharacterWorldPos)
+void Prop::Draw(const Vector2 CharacterWorldPos)
 {
     Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)}; // Where the prop is drawn on the screen
     // Vector2 MaxItemDistance {0,-20};
@@ -304,7 +326,7 @@ void Prop::Draw(Vector2 CharacterWorldPos)
     // CheckActivity(ScreenPos);
 }
 
-bool Prop::WithinScreen(Vector2 CharacterWorldPos)
+bool Prop::WithinScreen(const Vector2 CharacterWorldPos)
 {
     if (
         (WorldPos.x >= (CharacterWorldPos.x + 615.f) - (GetScreenWidth()/2 + (Object.Texture.width * Scale))) && 
@@ -319,7 +341,7 @@ bool Prop::WithinScreen(Vector2 CharacterWorldPos)
     }
 }
 
-Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
+Rectangle Prop::GetCollisionRec(const Vector2 CharacterWorldPos)
 {
     Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)};
 
@@ -609,7 +631,7 @@ Rectangle Prop::GetCollisionRec(Vector2 CharacterWorldPos)
     }
 }
 
-Rectangle Prop::GetInteractRec(Vector2 CharacterWorldPos)
+Rectangle Prop::GetInteractRec(const Vector2 CharacterWorldPos)
 {
     Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)};
 
@@ -708,7 +730,7 @@ Rectangle Prop::GetInteractRec(Vector2 CharacterWorldPos)
     }
 }
 
-bool Prop::CheckMovement(Background& Map, Vector2 CharWorldPos, Vector2 Direction, float Speed, std::vector<std::vector<Prop>>& Props)
+bool Prop::CheckMovement(Background& Map, const Vector2 CharWorldPos, const Vector2 Direction, const float Speed, std::vector<std::vector<Prop>>& Props)
 {
     bool Colliding{false};
     PrevWorldPos = WorldPos;

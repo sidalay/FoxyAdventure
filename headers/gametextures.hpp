@@ -5,7 +5,7 @@
 
 struct GameTexture {
 
-    GameTexture() = default;
+    constexpr GameTexture() = default;
     ~GameTexture();
     GameTexture(const GameTexture&) = delete;
     GameTexture(GameTexture&&) = default;

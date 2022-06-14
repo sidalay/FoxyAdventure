@@ -19,9 +19,9 @@ public:
     constexpr Background& operator=(const Background&) = delete;
     constexpr Background& operator=(Background&&) = default;
 
-    void Tick(Vector2 WorldPos);
+    void Tick(const Vector2 WorldPos);
     void Draw();
-    void DrawMiniMap(Vector2 CharWorldPos);
+    void DrawMiniMap(const Vector2 CharWorldPos);
     Vector2 GetMapSize();
     constexpr Vector2 GetMapPos() const {return MapPos;}
     constexpr bool IsMiniMapOn() const {return MiniMapOpen;}

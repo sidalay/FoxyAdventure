@@ -1,6 +1,6 @@
 #include "sprite.hpp"
 
-Sprite::Sprite(const Texture2D& Texture, int MaxFramesX, int MaxFramesY, float UpdateSpeed) 
+Sprite::Sprite(const Texture2D& Texture, const int MaxFramesX, const int MaxFramesY, const float UpdateSpeed) 
     : Texture{Texture}, MaxFramesX{MaxFramesX}, MaxFramesY{MaxFramesY}, UpdateTime{UpdateSpeed}
 {
 
@@ -33,7 +33,7 @@ Rectangle Sprite::GetSourceRec()
     return Source;
 }
 
-Rectangle Sprite::GetPosRec(const Vector2& ScreenPos, float Scale)
+Rectangle Sprite::GetPosRec(const Vector2& ScreenPos, const float Scale)
 {
     // destination rectangle that shows where to draw
     Rectangle Destination {

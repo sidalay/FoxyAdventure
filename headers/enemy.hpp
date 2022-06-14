@@ -38,12 +38,12 @@ public:
           const Sprite& Projectile,
           const EnemyType Race,
           const EnemyType Type,
-          Vector2 WorldPos,
+          const Vector2 WorldPos,
           const Window& Screen,
           Background& World,
           const GameTexture& GameTextures,
-          int Health = 3,
-          float Scale = 3.2f);
+          const int Health = 3,
+          const float Scale = 3.2f);
     
     // Wildlife NPC constructor
     Enemy(const Sprite& NpcIdle,
@@ -52,32 +52,32 @@ public:
           const Sprite& NpcMisc,
           const Sprite& NpcSleep,
           const EnemyType Race,
-          Vector2 WorldPos,
+          const Vector2 WorldPos,
           const Window& Screen,
           Background& World,
           const GameTexture& GameTextures,
-          float Scale = 3.2f);
+          const float Scale = 3.2f);
 
-    void Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
-    void Draw(Vector2 HeroWorldPos);
+    void Tick(float DeltaTime, Props& Props, const Vector2 HeroWorldPos, const Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
+    void Draw(const Vector2 HeroWorldPos);
     void SpriteTick(float DeltaTime);
     void UpdateScreenPos(Vector2 HeroWorldPos);
     void CheckDirection();
-    void CheckMovement(Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
+    void CheckMovement(Props& Props, const Vector2 HeroWorldPos, const Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void NeutralAction();
     void UndoMovement();
     void CheckOutOfBounds();
-    void CheckCollision(std::vector<std::vector<Prop>>& Props, Vector2 HeroWorldPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
+    void CheckCollision(std::vector<std::vector<Prop>>& Props, const Vector2 HeroWorldPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void CheckAttack();
     void UpdateSource();
     void TakeDamage();
     void CheckAlive(float DeltaTime);
     void EnemyAI();
-    void EnemyAggro(Vector2 HeroScreenPos);
+    void EnemyAggro(const Vector2 HeroScreenPos);
     void DrawHP();
-    void CheckBossSummon(Vector2 HeroWorldPos);
+    void CheckBossSummon(const Vector2 HeroWorldPos);
 
-    constexpr void Damaged(bool Attacked) {IsAttacked = Attacked;}
+    constexpr void Damaged(const bool Attacked) {IsAttacked = Attacked;}
     constexpr bool IsBlocked() const {return Blocked;}
     constexpr bool IsAlive() const {return Alive;}
     constexpr bool IsInvulnerable() const {return Invulnerable;}
@@ -95,8 +95,8 @@ public:
     Rectangle GetCollisionRec();
     Rectangle GetAttackRec();
     Vector2 UpdateProjectile();
-    bool WithinScreen(Vector2 HeroWorldPos);
-    int GetMonsterCount(EnemyType Type) {return MonsterCounter.at(Type);}
+    bool WithinScreen(const Vector2 HeroWorldPos);
+    int GetMonsterCount(const EnemyType Type) {return MonsterCounter.at(Type);}
     
 private:
     std::vector<Sprite> Sprites{};

@@ -6,13 +6,13 @@
 class HUD 
 {
 public:
-    explicit HUD(GameTexture& GameTextures);
+    explicit HUD(const GameTexture& GameTextures);
     
     void Tick();
     void Draw(float Health, Emotion State);
     
 private:
-    GameTexture& GameTextures;
+    const GameTexture& GameTextures;
     Texture2D Fox{};
 
     float Scale{2.f};

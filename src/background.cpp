@@ -6,7 +6,7 @@ Background::Background(const GameTexture& GameTextures)
 
 }
 
-void Background::Tick(Vector2 WorldPos) 
+void Background::Tick(const Vector2 WorldPos) 
 {
     MapPos = Vector2Scale(WorldPos, -1.f);
 
@@ -20,7 +20,7 @@ void Background::Draw()
     DrawTextureEx(GameTextures.Map, MapPos, 0.0f, Scale, WHITE);
 }
 
-void Background::DrawMiniMap(Vector2 CharWorldPos)
+void Background::DrawMiniMap(const Vector2 CharWorldPos)
 {
     Vector2 Position {
         static_cast<float>(GetScreenWidth()/1.3f - (GameTextures.MiniMap.width/2) * .35f),

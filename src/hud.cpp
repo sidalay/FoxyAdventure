@@ -1,6 +1,6 @@
 #include "hud.hpp"
 
-HUD::HUD(GameTexture& GameTextures)
+HUD::HUD(const GameTexture& GameTextures)
     : GameTextures{GameTextures}
 {
 

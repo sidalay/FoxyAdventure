@@ -48,13 +48,13 @@ namespace Game
     };
 
     void Run();
-    void Initialize(Window& Window, const std::string& Title);
+    void Initialize(const Window& Window, const std::string& Title);
     void CheckScreenSizing(Window& Window);
-    void Tick(Window& Window, Game::Info& Info, Game::Objects& Objects, GameTexture& Textures);
+    void Tick(Window& Window, Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures);
     void Update(Game::Info& Info, Game::Objects& Objects);
     void Draw(Game::Info& Info, Game::Objects& Objects);
     void PauseUpdate(Game::Info& Info, Game::Objects& Objects);
-    void PauseDraw(const Game::Info& Info, Game::Objects& Objects, GameTexture& Textures);
+    void PauseDraw(const Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures);
     void ExitUpdate(Game::Info& Info);
     void ExitDraw(const Game::Info& Info);
     void MainMenuUpdate(Game::Info& Info);
@@ -63,18 +63,18 @@ namespace Game
     void GameOverDraw(const Game::Info& Info);
     void Transition(Game::Info& Info);
 
-    HUD InitializeHud(GameTexture& Textures);
-    Character InitializeFox(Window& Window, Game::Info& Info, GameTexture& Textures);
-    std::array<Sprite,5> InitializePauseFox(GameTexture& Textures);
-    std::array<const Texture2D,9> InitializeButtons(GameTexture& Textures);
-    std::vector<std::vector<Prop>> InitializePropsUnder(GameTexture& Textures);
-    std::vector<std::vector<Prop>> InitializePropsOver(GameTexture& Textures);
-    std::vector<Prop> InitializeTrees(GameTexture& Textures);
-    std::vector<Enemy> InitializeEnemies(Background& MapBG, Window& Window, GameTexture& Textures);
-    std::vector<Enemy> InitializeCrows(Background& MapBG, Window& Window, GameTexture& Textures);
+    HUD InitializeHud(const GameTexture& Textures);
+    Character InitializeFox(const Window& Window, Game::Info& Info, const GameTexture& Textures);
+    std::array<Sprite,5> InitializePauseFox(const GameTexture& Textures);
+    std::array<const Texture2D,9> InitializeButtons(const GameTexture& Textures);
+    std::vector<std::vector<Prop>> InitializePropsUnder(const GameTexture& Textures);
+    std::vector<std::vector<Prop>> InitializePropsOver(const GameTexture& Textures);
+    std::vector<Prop> InitializeTrees(const GameTexture& Textures);
+    std::vector<Enemy> InitializeEnemies(Background& MapBG, const Window& Window, const GameTexture& Textures);
+    std::vector<Enemy> InitializeCrows(Background& MapBG, const Window& Window, const GameTexture& Textures);
 
     // Debugging --------------------
-    void DrawCollisionRecs(Prop& Prop, Vector2 CharacterWorldPos, Color RecColor = {0, 121, 241, 150});
+    void DrawCollisionRecs(Prop& Prop, const Vector2 CharacterWorldPos, Color RecColor = {0, 121, 241, 150});
     template <typename Object>
     void DrawCollisionRecs(Object& Type, Color RecColor = {0, 238, 135, 150});
     template <typename Object>
