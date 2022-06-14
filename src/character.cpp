@@ -212,8 +212,7 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, const Vect
                             Locked = false;
 
                             // Make NPCs & Props interactable again
-                            if (Prop.GetType() == PropType::NPC_A || Prop.GetType() == PropType::NPC_B || Prop.GetType() == PropType::NPC_C || Prop.GetType() == PropType::ANIMATEDALTAR)
-                            {
+                            if (Prop.GetType() == PropType::NPC_A || Prop.GetType() == PropType::NPC_B || Prop.GetType() == PropType::NPC_C || Prop.GetType() == PropType::ANIMATEDALTAR) {
                                 Prop.SetOpened(false);
                             }
                         }
@@ -287,13 +286,21 @@ void Character::WalkOrRun()
 {
     if (IsKeyDown(KEY_LEFT_SHIFT)) {
         Running = true;
-        if (Colliding) {Speed = 0.9f;}
-        else {Speed = 2.5f;}
+        if (Colliding) {
+            Speed = 0.9f;
+        }
+        else {
+            Speed = 2.5f;
+        }
     }
     else {
         Running = false;
-        if (Colliding) {Speed = 0.4f;}
-        else {Speed = 1.5f;}
+        if (Colliding) {
+            Speed = 0.4f;
+        }
+        else {
+            Speed = 1.5f;
+        }
     }
 
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_A) || IsKeyDown(KEY_S) || IsKeyDown(KEY_D)) {
@@ -471,14 +478,12 @@ Rectangle Character::GetAttackRec()
 
 void Character::CheckIfAlive()
 {
-    if (Health <= 1.f)
-    {
+    if (Health <= 1.f) {
         Locked = true;
         Alive = false;
         SpriteIndex = static_cast<int>(FoxState::DEATH);
     }
-    else
-    {
+    else {
         Locked = false;
         Alive = true;
     }
