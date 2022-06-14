@@ -12,23 +12,23 @@ enum class Direction
 class Background
 {
 public:
-    explicit Background(GameTexture& GameTextures);
+    explicit Background(const GameTexture& GameTextures);
     ~Background() = default;
-    Background(const Background&) = delete;
-    Background(Background&&) = default;
-    Background& operator=(const Background&) = delete;
-    Background& operator=(Background&&) = default;
+    constexpr Background(const Background&) = delete;
+    constexpr Background(Background&&) = default;
+    constexpr Background& operator=(const Background&) = delete;
+    constexpr Background& operator=(Background&&) = default;
 
     void Tick(Vector2 WorldPos);
     void Draw();
     void DrawMiniMap(Vector2 CharWorldPos);
     Vector2 GetMapSize();
-    Vector2 GetMapPos() {return MapPos;}
-    bool IsMiniMapOn() {return MiniMapOpen;}
-    float GetScale() {return Scale;}
+    constexpr Vector2 GetMapPos() const {return MapPos;}
+    constexpr bool IsMiniMapOn() const {return MiniMapOpen;}
+    constexpr float GetScale() const {return Scale;}
     
 private:
-    GameTexture& GameTextures;
+    const GameTexture& GameTextures;
     Vector2 MapPos{0.f, 0.f};
     float Scale{4.f};
     bool MiniMapOpen{false};

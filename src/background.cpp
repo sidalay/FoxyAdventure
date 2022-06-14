@@ -1,6 +1,6 @@
 #include "background.hpp"
 
-Background::Background(GameTexture& GameTextures)
+Background::Background(const GameTexture& GameTextures)
     : GameTextures{GameTextures}
 {
 

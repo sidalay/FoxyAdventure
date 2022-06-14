@@ -211,15 +211,27 @@ void Enemy::CheckDirection()
 {   
     // NPC only has left and right orientation sprites
     if (Type == EnemyType::NPC) {
-        if (AIX < 0.f) Face = Direction::LEFT;
-        if (AIX > 0.f) Face = Direction::RIGHT;
+        if (AIX < 0.f) {
+            Face = Direction::LEFT;
+        }
+        if (AIX > 0.f) {
+            Face = Direction::RIGHT;
+        }
     }
     else {
         if (!Chasing) {
-            if (AIY < 0.f) Face = Direction::UP;
-            if (AIX < 0.f) Face = Direction::LEFT;
-            if (AIY > 0.f) Face = Direction::DOWN;
-            if (AIX > 0.f) Face = Direction::RIGHT;
+            if (AIY < 0.f) {
+                Face = Direction::UP;
+            }
+            if (AIX < 0.f) {
+                Face = Direction::LEFT;
+            }
+            if (AIY > 0.f) {
+                Face = Direction::DOWN;
+            }
+            if (AIX > 0.f) {
+                Face = Direction::RIGHT;
+            }
         }
     }
 

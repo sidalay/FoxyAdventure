@@ -25,8 +25,8 @@ public:
               const Sprite& Push, 
               const Sprite& Sleep, 
               const Sprite& ItemGrab,
-              GameTexture& GameTextures, 
-              Window& Screen, 
+              const GameTexture& GameTextures, 
+              const Window& Screen, 
               Background& World);
     
     void Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
@@ -47,14 +47,14 @@ public:
     void DrawIndicator();
     void TakeDamage();
 
-    bool IsAlive() {return Alive;}
-    bool IsAttacking() {return Attacking;}
-    float GetHealth() {return Health;}
-    float GetSpeed() {return Speed;}
-    Vector2 GetWorldPos() {return WorldPos;}
-    Vector2 GetPrevWorldPos() {return PrevWorldPos;}
-    Vector2 GetCharPos() {return ScreenPos;}
-    Emotion GetEmotion() {return State;}
+    constexpr bool IsAlive() const {return Alive;}
+    constexpr bool IsAttacking() const {return Attacking;}
+    constexpr float GetHealth() const {return Health;}
+    constexpr float GetSpeed() const {return Speed;}
+    constexpr Vector2 GetWorldPos() const {return WorldPos;}
+    constexpr Vector2 GetPrevWorldPos() const {return PrevWorldPos;}
+    constexpr Vector2 GetCharPos() const {return ScreenPos;}
+    constexpr Emotion GetEmotion() const {return State;}
     Rectangle GetCollisionRec();
     Rectangle GetAttackRec();
 
@@ -65,8 +65,8 @@ public:
     void SwitchCollidable() {Collidable = !Collidable;}
     
 private:
-    GameTexture& GameTextures;
-    Window& Screen;
+    const GameTexture& GameTextures;
+    const Window& Screen;
     Background& World;
     Vector2 Offset{615.f,335.f};         // Player offset vs Enemy/Prop WorldPos
     Vector2 ScreenPos{};                 // Where the character is on the screen
