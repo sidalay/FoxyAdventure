@@ -107,7 +107,7 @@ public:
 private:
     std::vector<Sprite> Sprites{};
 
-    const EnemyType Race{};           // What kind of Enemy
+    const EnemyType Race{};
     const EnemyType Type{};           // If the Enemy is NORMAL, BOSS, or NPC type
 
     Vector2 ScreenPos{};                  
@@ -152,7 +152,7 @@ private:
     bool Chasing{false};
     bool Walking{false};
     bool IsAttacked{false};
-    bool Stopped{false};            // Whether or not the enemy should be able to move
+    bool Stopped{false};
     bool Dying{false};
     bool Blocked{false};            // Whether enemy is colliding with an object or not
     bool Hurting{false};
