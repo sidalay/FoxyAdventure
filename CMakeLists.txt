@@ -31,6 +31,7 @@ add_executable(${PROJECT_NAME}
     src/hud.cpp
     src/main.cpp
     src/prop.cpp
+    src/randomizer.cpp
     src/sprite.cpp
 )
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)

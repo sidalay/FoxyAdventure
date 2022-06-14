@@ -25,6 +25,7 @@ Enemy::Enemy(const Sprite& Idle,
              const Window& Screen,
              Background& World,
              const GameTexture& GameTextures,
+             Randomizer& RandomEngine,
              const int Health,
              const float Scale) 
     : Race{Race},
@@ -33,6 +34,7 @@ Enemy::Enemy(const Sprite& Idle,
       Screen{Screen},
       World{World},
       GameTextures{GameTextures},
+      RandomEngine{RandomEngine},
       Health{Health},
       MaxHP{Health},
       Scale{Scale}
@@ -64,16 +66,10 @@ Enemy::Enemy(const Sprite& Idle,
     MonsterCount += 1;
 
     // Generate RNG for current object used for randomizing AI movement
-    std::random_device Seed;
-    std::uniform_int_distribution<int> RandomRange{60, 80};
-    std::uniform_int_distribution<int> RandomIdleTime{5, 9};
-    std::uniform_int_distribution<int> RandomLeftRight{1, 10};
-    std::mt19937 RNG{std::mt19937{Seed()}};
-
-    ActionIdleTime = static_cast<float>(RandomIdleTime(RNG));
-    MoveXRange = RandomRange(RNG);
-    MoveYRange = RandomRange(RNG);
-    LeftOrRight = RandomLeftRight(RNG);
+    ActionIdleTime = static_cast<float>(RandomEngine.Randomize(RandomIdleTime));
+    MoveXRange = RandomEngine.Randomize(RandomRange);
+    MoveYRange = RandomEngine.Randomize(RandomRange);
+    LeftOrRight = RandomEngine.Randomize(RandomLeftRight);
 }
 
 Enemy::Enemy(const Sprite& NpcIdle,
@@ -86,6 +82,7 @@ Enemy::Enemy(const Sprite& NpcIdle,
              const Window& Screen,
              Background& World,
              const GameTexture& GameTextures,
+             Randomizer& RandomEngine,
              const float Scale)
     : Race{Race},
       Type{EnemyType::NPC},
@@ -93,6 +90,7 @@ Enemy::Enemy(const Sprite& NpcIdle,
       Screen{Screen},
       World{World},
       GameTextures{GameTextures},
+      RandomEngine{RandomEngine},
       Scale{Scale}
 {
     Sprites.emplace_back(NpcIdle);
@@ -103,18 +101,11 @@ Enemy::Enemy(const Sprite& NpcIdle,
 
     CurrentSpriteIndex = static_cast<int>(NPC::IDLE);
 
-    std::random_device Seed;
-    std::uniform_int_distribution<int> RandomRange{60,80};
-    std::uniform_int_distribution<int> RandomIdleTime{5,9};
-    std::uniform_int_distribution<int> RandomLeftRight{1,10};
-    std::uniform_int_distribution<int> RandomActionState{1,10};
-    std::mt19937 RNG{std::mt19937{Seed()}};
-
-    ActionIdleTime = static_cast<float>(RandomIdleTime(RNG));
-    MoveXRange = RandomRange(RNG);
-    MoveYRange = RandomRange(RNG);
-    LeftOrRight = RandomLeftRight(RNG);
-    ActionState = RandomActionState(RNG);
+    ActionIdleTime = static_cast<float>(RandomEngine.Randomize(RandomIdleTime));
+    MoveXRange = RandomEngine.Randomize(RandomRange);
+    MoveYRange = RandomEngine.Randomize(RandomRange);
+    LeftOrRight = RandomEngine.Randomize(RandomLeftRight);
+    ActionState = RandomEngine.Randomize(RandomActionState);
 }
 
 void Enemy::Tick(float DeltaTime, Props& Props, const Vector2 HeroWorldPos, const Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
@@ -585,10 +576,7 @@ void Enemy::EnemyAI()
                     }
                     else if (ActionTime >= ActionIdleTime) {
                         ActionTime = 0.0f;
-                        std::random_device Seed;
-                        std::uniform_int_distribution<int> RandomActionState{1, 10};
-                        std::mt19937 RNG{std::mt19937{Seed()}};
-                        ActionState = RandomActionState(RNG);
+                        ActionState = RandomEngine.Randomize(RandomActionState);
                         IdleTwo = !IdleTwo;
                     }
                     else {
@@ -611,10 +599,7 @@ void Enemy::EnemyAI()
                     }
                     else {
                         ActionTime = 0.0f;
-                        std::uniform_int_distribution<int> RandomActionState{1, 10};
-                        std::random_device Seed;
-                        std::mt19937 RNG{std::mt19937{Seed()}};
-                        ActionState = RandomActionState(RNG);
+                        ActionState = RandomEngine.Randomize(RandomActionState);
                         MiscAction = false;
                     }
                     break;
@@ -629,10 +614,7 @@ void Enemy::EnemyAI()
                     }
                     else {
                         ActionTime = 0.0f;
-                        std::uniform_int_distribution<int> RandomActionState{1, 10};
-                        std::random_device Seed;
-                        std::mt19937 RNG{std::mt19937{Seed()}};
-                        ActionState = RandomActionState(RNG);
+                        ActionState = RandomEngine.Randomize(RandomActionState);
                         Sleeping = false;
                     }
                     break;

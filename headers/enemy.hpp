@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include "prop.hpp"
 #include "window.hpp"
+#include "randomizer.hpp"
 
 enum class EnemyType 
 {
@@ -42,6 +43,7 @@ public:
           const Window& Screen,
           Background& World,
           const GameTexture& GameTextures,
+          Randomizer& RandomEngine,
           const int Health = 3,
           const float Scale = 3.2f);
     
@@ -56,6 +58,7 @@ public:
           const Window& Screen,
           Background& World,
           const GameTexture& GameTextures,
+          Randomizer& RandomEngine,
           const float Scale = 3.2f);
 
     void Tick(float DeltaTime, Props& Props, const Vector2 HeroWorldPos, const Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
@@ -113,6 +116,7 @@ private:
     const Window& Screen;
     Background& World;
     const GameTexture& GameTextures;
+    Randomizer& RandomEngine;
     
     static int MonsterDeaths;
     static int MonsterCount;
@@ -162,6 +166,11 @@ private:
     
     Direction Face{Direction::DOWN};
 
+    std::uniform_int_distribution<int> RandomRange{60,80};
+    std::uniform_int_distribution<int> RandomIdleTime{5,9};
+    std::uniform_int_distribution<int> RandomLeftRight{1,10};
+    std::uniform_int_distribution<int> RandomActionState{1,10};
+    
     static std::unordered_map<EnemyType, int> MonsterCounter;
 };
 

@@ -6,11 +6,12 @@
 class Randomizer
 {
 public:
-    constexpr Randomizer() = default;
+    Randomizer() = default;
     
-    constexpr int Randomize(const std::uniform_int_distribution<int>& Range) {return Range(RandomEngine);}
+    int Randomize(std::uniform_int_distribution<int>& Range);
 private:
-    std::mt19937 RandomEngine{std::mt19937{std::random_device}};
+    std::random_device Seed;
+    std::mt19937 RandomEngine{std::mt19937{Seed()}};
 };
 
 #endif // RANDOMIZER_HPP
