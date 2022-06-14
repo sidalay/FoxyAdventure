@@ -324,15 +324,11 @@ void Enemy::NeutralAction()
             CurrentSpriteIndex = static_cast<int>(Monster::WALK);
         }
     }
-    else if (MiscAction) {
-        if (Type == EnemyType::NPC) {
-            CurrentSpriteIndex = static_cast<int>(NPC::MISC);
-        }
+    else if (MiscAction && Type == EnemyType::NPC) {
+        CurrentSpriteIndex = static_cast<int>(NPC::MISC);
     }
-    else if (Sleeping) {
-        if (Type == EnemyType::NPC) {
-            CurrentSpriteIndex = static_cast<int>(NPC::SLEEP);
-        }
+    else if (Sleeping && Type == EnemyType::NPC) {
+        CurrentSpriteIndex = static_cast<int>(NPC::SLEEP);
     }
     else {
         if (Type == EnemyType::NPC) {
@@ -476,12 +472,10 @@ void Enemy::TakeDamage()
         // Make enemy unable to move
         Stopped = true;
 
-        // Make invulnerable when HP <= 0
         if (Health <= 0) {
             Invulnerable = true;
         }
 
-        // Time between hurt animation showing
         if (DamageTime <= HurtUpdateTime) {
             CurrentSpriteIndex = static_cast<int>(Monster::HURT);
             Hurting = true;
@@ -505,19 +499,10 @@ void Enemy::TakeDamage()
 void Enemy::CheckAlive(float DeltaTime) 
 {
     if (Health <= 0) {
+        CurrentSpriteIndex = static_cast<int>(Monster::DEATH);
         // Amount of time needed for death animation to complete beginning to end
         float EndTime{1.35f};
-
-        // Set to death sprite
-        CurrentSpriteIndex = static_cast<int>(Monster::DEATH);
-        
-        // Turn off any TakeDamage() functionality
         IsAttacked = false;
-
-        /* 
-            Dying=true will trigger some final Enemy::Tick() functionality.
-            Alive=false will turn off majority of Enemy::Tick().
-        */
         Dying = true;
 
         // Allow time for death animation to finish before setting alive=false which turns off SpriteTick()
@@ -538,15 +523,13 @@ void Enemy::CheckAlive(float DeltaTime)
 void Enemy::EnemyAI()
 {
     // Randomize which direction enemy will move first
-    // Only run this code block once
     if (!InitializedAI) {
         InitializeAI();
     } 
 
     if (!Chasing && !Blocked) {
-
         ActionTime += GetFrameTime();
-        
+
         if (ActionTime >= ActionIdleTime) {
             ActionTime = 0.0f;
             IdleTwo = !IdleTwo;
@@ -576,7 +559,6 @@ void Enemy::EnemyAI()
         // all other enemies
         else {
             CheckMovementAI();  
-
             if (ActionTime <= ActionIdleTime/2) {
                 Walking = true;
                 WorldPos.x += AIX;
@@ -711,7 +693,6 @@ void Enemy::DrawHP()
                 DrawTextureEx(GameTextures.LifebarMiddleEmpty, LifeBarPos, 0.f, 2.f, WHITE);
             }
         }
-
         // add spacing between each bar
         LifeBarPos = Vector2Add(LifeBarPos, LifeBarPosAdd);
     }
@@ -719,12 +700,8 @@ void Enemy::DrawHP()
 
 void Enemy::CheckBossSummon(const Vector2 HeroWorldPos)
 {
-    if (!WithinScreen(HeroWorldPos)) {
-        if ((Type == EnemyType::BOSS) && (MonsterCounter[Race] <= 0)) {
-            if (!Summoned) {
-                Summoned = true;
-            }
-        }
+    if (!WithinScreen(HeroWorldPos) && (Type == EnemyType::BOSS) && (MonsterCounter[Race] <= 0) && !Summoned) {
+        Summoned = true;
     }
 }
 
