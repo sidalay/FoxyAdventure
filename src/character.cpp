@@ -240,10 +240,8 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, const Vect
                 if (Enemy.IsAlive()) {
 
                     // Check collision of Player against Enemy
-                    if (CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
-                        if (!Enemy.IsDying()) {
-                            TakeDamage();
-                        }
+                    if ((Enemy.IsSummoned() && !Enemy.IsDying()) && CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
+                        TakeDamage();
                     }
 
                     // Check collision of Player's attack against Enemy

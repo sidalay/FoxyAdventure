@@ -85,6 +85,7 @@ public:
     constexpr void Damaged(const bool Attacked) {IsAttacked = Attacked;}
     constexpr bool IsBlocked() const {return Blocked;}
     constexpr bool IsAlive() const {return Alive;}
+    constexpr bool IsSummoned() const {return Summoned;}
     constexpr bool IsInvulnerable() const {return Invulnerable;}
     constexpr bool IsAttacking() const {return Attacking;}
     constexpr bool IsDying() const {return Dying;}
