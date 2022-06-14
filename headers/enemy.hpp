@@ -36,12 +36,12 @@ public:
           const Sprite& Hurt,
           const Sprite& Death,
           const Sprite& Projectile,
-          EnemyType Race,
-          EnemyType Type,
+          const EnemyType Race,
+          const EnemyType Type,
           Vector2 WorldPos,
-          Window& Screen,
+          const Window& Screen,
           Background& World,
-          GameTexture& GameTextures,
+          const GameTexture& GameTextures,
           int Health = 3,
           float Scale = 3.2f);
     
@@ -51,11 +51,11 @@ public:
           const Sprite& NpcWalk,
           const Sprite& NpcMisc,
           const Sprite& NpcSleep,
-          EnemyType Race,
+          const EnemyType Race,
           Vector2 WorldPos,
-          Window& Screen,
+          const Window& Screen,
           Background& World,
-          GameTexture& GameTextures,
+          const GameTexture& GameTextures,
           float Scale = 3.2f);
 
     void Tick(float DeltaTime, Props& Props, Vector2 HeroWorldPos, Vector2 HeroScreenPos, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
@@ -71,48 +71,48 @@ public:
     void CheckAttack();
     void UpdateSource();
     void TakeDamage();
-    void Damaged(bool Attacked) {IsAttacked = Attacked;}
     void CheckAlive(float DeltaTime);
     void EnemyAI();
     void EnemyAggro(Vector2 HeroScreenPos);
     void DrawHP();
     void CheckBossSummon(Vector2 HeroWorldPos);
 
-    bool IsBlocked() {return Blocked;}
-    bool IsAlive() {return Alive;}
-    bool IsInvulnerable() {return Invulnerable;}
-    bool IsAttacking() {return Attacking;}
-    bool IsDying() {return Dying;}
-    bool WithinScreen(Vector2 HeroWorldPos);
-    int GetHealth() {return Health;}
-    int GetMaxHP() {return MaxHP;}
+    constexpr void Damaged(bool Attacked) {IsAttacked = Attacked;}
+    constexpr bool IsBlocked() const {return Blocked;}
+    constexpr bool IsAlive() const {return Alive;}
+    constexpr bool IsInvulnerable() const {return Invulnerable;}
+    constexpr bool IsAttacking() const {return Attacking;}
+    constexpr bool IsDying() const {return Dying;}
+    constexpr int GetHealth() const {return Health;}
+    constexpr int GetMaxHP() const {return MaxHP;}
     int GetMonstersKilled() {return MonsterDeaths;}
     int GetTotalMonsters() {return MonsterCount;}
-    Vector2 GetWorldPos() {return WorldPos;}
-    Vector2 GetPrevWorldPos() {return PrevWorldPos;}
-    Vector2 GetEnemyPos() {return ScreenPos;}
-    Vector2 UpdateProjectile();
-    EnemyType GetType() {return Type;}
-    EnemyType GetRace() {return Race;}
+    constexpr Vector2 GetWorldPos() const {return WorldPos;}
+    constexpr Vector2 GetPrevWorldPos() const {return PrevWorldPos;}
+    constexpr Vector2 GetEnemyPos() const {return ScreenPos;}
+    constexpr EnemyType GetType() const {return Type;}
+    constexpr EnemyType GetRace() const {return Race;}
     Rectangle GetCollisionRec();
     Rectangle GetAttackRec();
+    Vector2 UpdateProjectile();
+    bool WithinScreen(Vector2 HeroWorldPos);
     int GetMonsterCount(EnemyType Type) {return MonsterCounter.at(Type);}
     
 private:
     std::vector<Sprite> Sprites{};
 
-    EnemyType Race{};                    // What kind of Enemy
-    EnemyType Type{};                    // If the Enemy is NORMAL, BOSS, or NPC type
+    const EnemyType Race{};           // What kind of Enemy
+    const EnemyType Type{};           // If the Enemy is NORMAL, BOSS, or NPC type
 
-    Vector2 ScreenPos{};                  // Where the character is on the screen
-    Vector2 WorldPos{};                  // Where the character is in the world
+    Vector2 ScreenPos{};                  
+    Vector2 WorldPos{};                  
     Vector2 PrevWorldPos{};
     Vector2 Movement{};
     Rectangle Source{};
     Rectangle Destination{};
-    Window& Screen;
+    const Window& Screen;
     Background& World;
-    GameTexture& GameTextures;
+    const GameTexture& GameTextures;
     
     static int MonsterDeaths;
     static int MonsterCount;
