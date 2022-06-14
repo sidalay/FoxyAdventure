@@ -77,6 +77,8 @@ public:
     void CheckAlive(float DeltaTime);
     void EnemyAI();
     void EnemyAggro(const Vector2 HeroScreenPos);
+    void CheckMovementAI();
+    void InitializeAI();
     void DrawHP();
     void CheckBossSummon(const Vector2 HeroWorldPos);
 
@@ -153,7 +155,7 @@ private:
     bool Dying{false};
     bool Blocked{false};            // Whether enemy is colliding with an object or not
     bool Hurting{false};
-    bool Intro{true};
+    bool InitializedAI{false};
     bool OOB{false};
     bool Ranged{false};
     bool Summoned{true};
@@ -167,10 +169,10 @@ private:
     Direction Face{Direction::DOWN};
 
     std::uniform_int_distribution<int> RandomRange{60,80};
-    std::uniform_int_distribution<int> RandomIdleTime{5,9};
+    std::uniform_int_distribution<int> RandomIdleTime{3,6};
     std::uniform_int_distribution<int> RandomLeftRight{1,10};
     std::uniform_int_distribution<int> RandomActionState{1,10};
-    
+
     static std::unordered_map<EnemyType, int> MonsterCounter;
 };
 

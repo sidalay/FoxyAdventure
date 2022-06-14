@@ -284,18 +284,14 @@ void Enemy::CheckMovement(Props& Props, const Vector2 HeroWorldPos, const Vector
 {
     PrevWorldPos = WorldPos;
     
-    // Enemy movement AI
     EnemyAI();
 
-    // Chase Player
     if (Type != EnemyType::NPC) {
         EnemyAggro(HeroScreenPos);
     }
 
-    // Check if moving OOB 
     CheckOutOfBounds();
 
-    // Check for collision against player or props
     if (Alive) {
         CheckCollision(Props.Under, HeroWorldPos, Enemies, Trees);
         CheckCollision(Props.Over, HeroWorldPos, Enemies, Trees);
@@ -543,12 +539,9 @@ void Enemy::EnemyAI()
 {
     // Randomize which direction enemy will move first
     // Only run this code block once
-    if (Intro && LeftOrRight <= 5) {
-        AIX = -AIX;
-        AIY = -AIY;
-        IdleTwo = false;
-        Intro = false;
-    }
+    if (!InitializedAI) {
+        InitializeAI();
+    } 
 
     if (!Chasing && !Blocked) {
 
@@ -556,53 +549,34 @@ void Enemy::EnemyAI()
         
         if (ActionTime >= ActionIdleTime) {
             ActionTime = 0.0f;
-            ActionState = RandomEngine.Randomize(RandomActionState);
             IdleTwo = !IdleTwo;
             MiscAction = false;
             Sleeping = false;
+            Walking = false;
+            ActionState = RandomEngine.Randomize(RandomActionState);
         }
 
         if (Type == EnemyType::NPC) {
-
-            if (ActionState >= 1 && ActionState <= 6) {
-                Movement.x += AIX;
-                Movement.y += AIY;
-
-                // Handle walking 
-                if (ActionTime <= ActionIdleTime/2) {
-                    Walking = true;
-                    WorldPos.x += AIX;
-                    WorldPos.y += AIY;
-                }
-                else {
-                    Walking = false;
-                }
-
-                if (Movement.x <= -MoveXRange || Movement.x >= MoveXRange) {
-                    AIX = -AIX;
-                }
-                if (Movement.y <= -MoveYRange || Movement.y >= MoveYRange) {
-                    AIY = -AIY;
-                }
+            if (ActionState >= 1 && ActionState <= 3) {
+                Walking = false;
             }
-            else if (ActionState == 7) {
-                // Handle misc action 
-                if (ActionTime <= ActionIdleTime) {
-                    MiscAction = true;
-                }
+            else if ((ActionState >= 4 && ActionState <= 6) && (ActionTime <= ActionIdleTime)) {
+                CheckMovementAI();
+                Walking = true;
+                WorldPos.x += AIX;
+                WorldPos.y += AIY;
             }
-            else {
-                // Handle sleep action
-                if (ActionTime <= ActionIdleTime) {
-                    Sleeping = true;
-                }
+            else if (ActionState == 7 && (ActionTime <= ActionIdleTime)) {
+                MiscAction = true;
+            }
+            else if ((ActionState >= 8 && ActionState <= 10) && (ActionTime <= ActionIdleTime)){
+                Sleeping = true;
             }
         }
+        // all other enemies
         else {
-            Movement.x += AIX;
-            Movement.y += AIY;
+            CheckMovementAI();  
 
-            // Handle walking 
             if (ActionTime <= ActionIdleTime/2) {
                 Walking = true;
                 WorldPos.x += AIX;
@@ -611,13 +585,6 @@ void Enemy::EnemyAI()
             else {
                 Walking = false;
             }
-
-            if (Movement.x <= -MoveXRange || Movement.x >= MoveXRange) {
-                AIX = -AIX;
-            }
-            if (Movement.y <= -MoveYRange || Movement.y >= MoveYRange) {
-                AIY = -AIY;
-            }    
         }
     }
 }
@@ -627,7 +594,7 @@ void Enemy::EnemyAggro(const Vector2 HeroScreenPos)
     // Calculate the distance from Enemy to Player
     Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50.f,50.f}), ScreenPos)), Speed)}; 
     
-    if (Alive && !Stopped && !Invulnerable && !Blocked && !Dying) {
+    if (Alive && Summoned && !Stopped && !Invulnerable && !Blocked && !Dying) {
         Vector2 RadiusAroundEnemy{};
 
         if (Ranged) {
@@ -640,7 +607,6 @@ void Enemy::EnemyAggro(const Vector2 HeroScreenPos)
         }
 
         float Aggro{Vector2Length(Vector2Subtract(Vector2Add(HeroScreenPos, RadiusAroundEnemy), ScreenPos))};
-
 
         // Chasing: Only move enemy towards Player if within a certain range
         if (Aggro > MaxRange) {
@@ -679,6 +645,29 @@ void Enemy::EnemyAggro(const Vector2 HeroScreenPos)
 
         CheckAttack();
     }
+}
+
+void Enemy::CheckMovementAI()
+{
+    Movement.x += AIX;
+    Movement.y += AIY;
+
+    if (Movement.x <= -MoveXRange || Movement.x >= MoveXRange) {
+        AIX = -AIX;
+    }
+    if (Movement.y <= -MoveYRange || Movement.y >= MoveYRange) {
+        AIY = -AIY;
+    }    
+}
+
+void Enemy::InitializeAI()
+{
+    if (LeftOrRight <= 5) {
+        AIX = -AIX;
+        AIY = -AIY;
+        IdleTwo = true;
+    }
+    InitializedAI = true;
 }
 
 void Enemy::DrawHP()
