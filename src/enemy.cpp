@@ -370,26 +370,20 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, const Vector2 
         // Prop collision handling
         for (auto& PropType:Props) {
             for (auto& Prop:PropType) {
-                if (Prop.HasCollision()) { 
+                if (Prop.HasCollision() && Prop.IsSpawned()) { 
                     // move away from props
-                    if (Prop.IsSpawned()) {
-                        Vector2 PropScreenPos{Vector2{Prop.GetCollisionRec(HeroWorldPos).x, Prop.GetCollisionRec(HeroWorldPos).y}}; // Grab the collision rectangle screen position
-                        Vector2 RadiusAroundEnemy{5.f,5.f};
-                        Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), ScreenPos)), Speed)}; // Calculate the distance from Enemy to Prop
-                        float AvoidProp{Vector2Length(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), ScreenPos))};
-                        
-                        if (AvoidProp <= MinRange) {
-                            WorldPos = Vector2Subtract(WorldPos, ToTarget);
-                        }
+                    Vector2 PropScreenPos{Vector2{Prop.GetCollisionRec(HeroWorldPos).x, Prop.GetCollisionRec(HeroWorldPos).y}}; // Grab the collision rectangle screen position
+                    Vector2 RadiusAroundEnemy{5.f,5.f};
+                    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), ScreenPos)), Speed)}; // Calculate the distance from Enemy to Prop
+                    float AvoidProp{Vector2Length(Vector2Subtract(Vector2Add(PropScreenPos, RadiusAroundEnemy), ScreenPos))};
+                    
+                    if (AvoidProp <= MinRange && Prop.GetType() != PropType::GRASS) {
+                        WorldPos = Vector2Subtract(WorldPos, ToTarget);
                     }
 
                     // activate grass animation
-                    if (CheckCollisionRecs(this->GetCollisionRec(), Prop.GetCollisionRec(HeroWorldPos))) {   
-                        if (Prop.IsMoveable()) {
-                            if (Prop.GetType() == PropType::GRASS && Alive) {
-                                Prop.SetActive(true);
-                            }
-                        }
+                    if (CheckCollisionRecs(this->GetCollisionRec(), Prop.GetCollisionRec(HeroWorldPos)) && Prop.GetType() == PropType::GRASS && Alive) {   
+                        Prop.SetActive(true);
                     }
                 }
             }
