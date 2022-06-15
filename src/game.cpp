@@ -271,8 +271,8 @@ namespace Game
         if (Info.DevToolsOn) {
             if (Info.ShowPos) {
                 DrawRectangle(15, 145, 150, 50, Color{0,0,0,170});
-                DrawText(TextFormat("Player.x: %i", (int)Objects.Fox.GetWorldPos().x + 615.f), 20, 150, 20, WHITE);
-                DrawText(TextFormat("Player.y: %i", (int)Objects.Fox.GetWorldPos().y + 335.f), 20, 170, 20, WHITE);
+                DrawText(TextFormat("Player.x: %i", static_cast<int>(Objects.Fox.GetWorldPos().x + 615.f)), 20, 150, 20, WHITE);
+                DrawText(TextFormat("Player.y: %i", static_cast<int>(Objects.Fox.GetWorldPos().y + 335.f)), 20, 170, 20, WHITE);
             }
 
             if (Info.ShowFPS) {
