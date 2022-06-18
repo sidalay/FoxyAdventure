@@ -2104,9 +2104,9 @@ namespace Game
             // row6
             Prop{Textures.TreeGreen, Vector2{0.f,567.f}, PropType::TREE, Textures},        // 1 
             Prop{Textures.TreeGreen, Vector2{100.f,567.f}, PropType::TREE, Textures},      // 2 
-            Prop{Textures.TreeGreen, Vector2{200.f,567.f}, PropType::TREE, Textures},      // 3 
-            Prop{Textures.TreeGreen, Vector2{300.f,567.f}, PropType::TREE, Textures},      // 4 
-            Prop{Textures.TreeGreen, Vector2{400.f,567.f}, PropType::TREE, Textures},      // 5 
+            // Prop{Textures.TreeGreen, Vector2{200.f,567.f}, PropType::TREE, Textures},      // 3 
+            // Prop{Textures.TreeGreen, Vector2{300.f,567.f}, PropType::TREE, Textures},      // 4 
+            // Prop{Textures.TreeGreen, Vector2{400.f,567.f}, PropType::TREE, Textures},      // 5 
             Prop{Textures.TreeGreen, Vector2{500.f,567.f}, PropType::TREE, Textures},      // 6 
             Prop{Textures.TreeGreen, Vector2{600.f,567.f}, PropType::TREE, Textures},      // 7 
             Prop{Textures.TreeGreen, Vector2{800.f,567.f}, PropType::TREE, Textures},      // 9 
@@ -2132,10 +2132,10 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3920.f,567.f}, PropType::TREE, Textures},     // 38
             // row7
             Prop{Textures.TreeGreen, Vector2{20.f,667.f}, PropType::TREE, Textures},       // 1 
-            Prop{Textures.TreeGreen, Vector2{120.f,667.f}, PropType::TREE, Textures},      // 2 
-            Prop{Textures.TreeGreen, Vector2{220.f,667.f}, PropType::TREE, Textures},      // 3 
-            Prop{Textures.TreeGreen, Vector2{320.f,667.f}, PropType::TREE, Textures},      // 4 
-            Prop{Textures.TreeGreen, Vector2{420.f,667.f}, PropType::TREE, Textures},      // 5 
+            // Prop{Textures.TreeGreen, Vector2{120.f,667.f}, PropType::TREE, Textures},      // 2 
+            // Prop{Textures.TreeGreen, Vector2{220.f,667.f}, PropType::TREE, Textures},      // 3 
+            // Prop{Textures.TreeGreen, Vector2{320.f,667.f}, PropType::TREE, Textures},      // 4 
+            // Prop{Textures.TreeGreen, Vector2{420.f,667.f}, PropType::TREE, Textures},      // 5 
             Prop{Textures.TreeGreen, Vector2{520.f,667.f}, PropType::TREE, Textures},      // 6 
             Prop{Textures.TreeGreen, Vector2{720.f,667.f}, PropType::TREE, Textures},      // 8 
             Prop{Textures.TreeGreen, Vector2{820.f,667.f}, PropType::TREE, Textures},      // 9 
@@ -2147,7 +2147,7 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{1520.f,667.f}, PropType::TREE, Textures},     // 16
             Prop{Textures.TreeGreen, Vector2{1720.f,667.f}, PropType::TREE, Textures},     // 18
             Prop{Textures.TreeGreen, Vector2{1820.f,667.f}, PropType::TREE, Textures},     // 19
-            Prop{Textures.TreeGreen, Vector2{2420.f,667.f}, PropType::TREE, Textures},     // 25
+            // Prop{Textures.TreeGreen, Vector2{2420.f,667.f}, PropType::TREE, Textures},     // 25
             Prop{Textures.TreeGreen, Vector2{2520.f,667.f}, PropType::TREE, Textures},     // 26
             Prop{Textures.TreeGreen, Vector2{2620.f,667.f}, PropType::TREE, Textures},     // 27
             Prop{Textures.TreeGreen, Vector2{2720.f,667.f}, PropType::TREE, Textures},     // 28    
@@ -2161,9 +2161,9 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{4000.f,667.f}, PropType::TREE, Textures},     // 39
             // row8
             Prop{Textures.TreeGreen, Vector2{0.f,767.f}, PropType::TREE, Textures},        // 1 
-            Prop{Textures.TreeGreen, Vector2{100.f,767.f}, PropType::TREE, Textures},      // 2 
-            Prop{Textures.TreeGreen, Vector2{200.f,767.f}, PropType::TREE, Textures},      // 3 
-            Prop{Textures.TreeGreen, Vector2{300.f,767.f}, PropType::TREE, Textures},      // 4 
+            // Prop{Textures.TreeGreen, Vector2{100.f,767.f}, PropType::TREE, Textures},      // 2 
+            // Prop{Textures.TreeGreen, Vector2{200.f,767.f}, PropType::TREE, Textures},      // 3 
+            // Prop{Textures.TreeGreen, Vector2{300.f,767.f}, PropType::TREE, Textures},      // 4 
             Prop{Textures.TreeGreen, Vector2{400.f,767.f}, PropType::TREE, Textures},      // 5 
             Prop{Textures.TreeGreen, Vector2{500.f,767.f}, PropType::TREE, Textures},      // 6 
             Prop{Textures.TreeGreen, Vector2{600.f,767.f}, PropType::TREE, Textures},      // 7 
@@ -2177,7 +2177,7 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{1600.f,767.f}, PropType::TREE, Textures},     // 17
             Prop{Textures.TreeGreen, Vector2{1700.f,767.f}, PropType::TREE, Textures},     // 18
             Prop{Textures.TreeGreen, Vector2{1900.f,767.f}, PropType::TREE, Textures},     // 20
-            Prop{Textures.TreeGreen, Vector2{2400.f,767.f}, PropType::TREE, Textures},     // 25
+            // Prop{Textures.TreeGreen, Vector2{2400.f,767.f}, PropType::TREE, Textures},     // 25
             Prop{Textures.TreeGreen, Vector2{2500.f,767.f}, PropType::TREE, Textures},     // 26
             Prop{Textures.TreeGreen, Vector2{2600.f,767.f}, PropType::TREE, Textures},     // 27
             Prop{Textures.TreeGreen, Vector2{3200.f,767.f}, PropType::TREE, Textures},     // 33
@@ -2188,27 +2188,27 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3920.f,767.f}, PropType::TREE, Textures},     // 38
             // row9
             Prop{Textures.TreeGreen, Vector2{20.f,867.f}, PropType::TREE, Textures},       // 1 
-            Prop{Textures.TreeGreen, Vector2{120.f,867.f}, PropType::TREE, Textures},      // 2 
-            Prop{Textures.TreeGreen, Vector2{220.f,867.f}, PropType::TREE, Textures},      // 3 
+            // Prop{Textures.TreeGreen, Vector2{120.f,867.f}, PropType::TREE, Textures},      // 2 
+            // Prop{Textures.TreeGreen, Vector2{220.f,867.f}, PropType::TREE, Textures},      // 3 
             Prop{Textures.TreeGreen, Vector2{320.f,867.f}, PropType::TREE, Textures},      // 4 
             Prop{Textures.TreeGreen, Vector2{420.f,867.f}, PropType::TREE, Textures},      // 5 
             Prop{Textures.TreeGreen, Vector2{520.f,867.f}, PropType::TREE, Textures},      // 6 
-            Prop{Textures.TreeGreen, Vector2{1020.f,867.f}, PropType::TREE, Textures},     // 11
+            // Prop{Textures.TreeGreen, Vector2{1020.f,867.f}, PropType::TREE, Textures},     // 11
             Prop{Textures.TreeGreen, Vector2{1120.f,867.f}, PropType::TREE, Textures},     // 12
             Prop{Textures.TreeGreen, Vector2{1220.f,867.f}, PropType::TREE, Textures},     // 13
             Prop{Textures.TreeGreen, Vector2{1320.f,867.f}, PropType::TREE, Textures},     // 14
             Prop{Textures.TreeGreen, Vector2{1420.f,867.f}, PropType::TREE, Textures},     // 15
-            Prop{Textures.TreeGreen, Vector2{1520.f,867.f}, PropType::TREE, Textures},     // 16
-            Prop{Textures.TreeGreen, Vector2{1620.f,867.f}, PropType::TREE, Textures},     // 17
+            // Prop{Textures.TreeGreen, Vector2{1520.f,867.f}, PropType::TREE, Textures},     // 16
+            // Prop{Textures.TreeGreen, Vector2{1620.f,867.f}, PropType::TREE, Textures},     // 17
             Prop{Textures.TreeGreen, Vector2{1720.f,867.f}, PropType::TREE, Textures},     // 18
             Prop{Textures.TreeGreen, Vector2{1820.f,867.f}, PropType::TREE, Textures},     // 19
-            Prop{Textures.TreeGreen, Vector2{1920.f,867.f}, PropType::TREE, Textures},     // 20
+            // Prop{Textures.TreeGreen, Vector2{1920.f,867.f}, PropType::TREE, Textures},     // 20
             Prop{Textures.TreeGreen, Vector2{2020.f,867.f}, PropType::TREE, Textures},     // 21
             Prop{Textures.TreeGreen, Vector2{2120.f,867.f}, PropType::TREE, Textures},     // 22
             Prop{Textures.TreeGreen, Vector2{2220.f,867.f}, PropType::TREE, Textures},     // 23
             Prop{Textures.TreeGreen, Vector2{2320.f,867.f}, PropType::TREE, Textures},     // 24
             Prop{Textures.TreeGreen, Vector2{2420.f,867.f}, PropType::TREE, Textures},     // 25
-            Prop{Textures.TreeGreen, Vector2{2520.f,867.f}, PropType::TREE, Textures},     // 26
+            // Prop{Textures.TreeGreen, Vector2{2520.f,867.f}, PropType::TREE, Textures},     // 26
             Prop{Textures.TreeGreen, Vector2{2620.f,867.f}, PropType::TREE, Textures},     // 27
             Prop{Textures.TreeGreen, Vector2{3220.f,867.f}, PropType::TREE, Textures},     // 33
             Prop{Textures.TreeGreen, Vector2{3320.f,867.f}, PropType::TREE, Textures},     // 34
@@ -2219,24 +2219,24 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{4000.f,867.f}, PropType::TREE, Textures},     // 39
             // row10
             Prop{Textures.TreeGreen, Vector2{0.f,967.f}, PropType::TREE, Textures},        // 1 
-            Prop{Textures.TreeGreen, Vector2{100.f,967.f}, PropType::TREE, Textures},      // 2 
-            Prop{Textures.TreeGreen, Vector2{200.f,967.f}, PropType::TREE, Textures},      // 3 
+            // Prop{Textures.TreeGreen, Vector2{100.f,967.f}, PropType::TREE, Textures},      // 2 
+            // Prop{Textures.TreeGreen, Vector2{200.f,967.f}, PropType::TREE, Textures},      // 3 
             Prop{Textures.TreeGreen, Vector2{300.f,967.f}, PropType::TREE, Textures},      // 4 
             Prop{Textures.TreeGreen, Vector2{400.f,967.f}, PropType::TREE, Textures},      // 5 
             Prop{Textures.TreeGreen, Vector2{1100.f,967.f}, PropType::TREE, Textures},     // 12
             Prop{Textures.TreeGreen, Vector2{1200.f,967.f}, PropType::TREE, Textures},     // 13
             Prop{Textures.TreeGreen, Vector2{1300.f,967.f}, PropType::TREE, Textures},     // 14
-            Prop{Textures.TreeGreen, Vector2{1400.f,967.f}, PropType::TREE, Textures},     // 15
+            // Prop{Textures.TreeGreen, Vector2{1400.f,967.f}, PropType::TREE, Textures},     // 15
             Prop{Textures.TreeGreen, Vector2{1500.f,967.f}, PropType::TREE, Textures},     // 16
             Prop{Textures.TreeGreen, Vector2{1600.f,967.f}, PropType::TREE, Textures},     // 17
-            Prop{Textures.TreeGreen, Vector2{1700.f,967.f}, PropType::TREE, Textures},     // 18
-            Prop{Textures.TreeGreen, Vector2{1800.f,967.f}, PropType::TREE, Textures},     // 19
+            // Prop{Textures.TreeGreen, Vector2{1700.f,967.f}, PropType::TREE, Textures},     // 18
+            // Prop{Textures.TreeGreen, Vector2{1800.f,967.f}, PropType::TREE, Textures},     // 19
             Prop{Textures.TreeGreen, Vector2{1900.f,967.f}, PropType::TREE, Textures},     // 20
             Prop{Textures.TreeGreen, Vector2{2000.f,967.f}, PropType::TREE, Textures},     // 21
             Prop{Textures.TreeGreen, Vector2{2100.f,967.f}, PropType::TREE, Textures},     // 22
             Prop{Textures.TreeGreen, Vector2{2200.f,967.f}, PropType::TREE, Textures},     // 23
             Prop{Textures.TreeGreen, Vector2{2300.f,967.f}, PropType::TREE, Textures},     // 24
-            Prop{Textures.TreeGreen, Vector2{2400.f,967.f}, PropType::TREE, Textures},     // 25
+            // Prop{Textures.TreeGreen, Vector2{2400.f,967.f}, PropType::TREE, Textures},     // 25
             Prop{Textures.TreeGreen, Vector2{2500.f,967.f}, PropType::TREE, Textures},     // 26
             Prop{Textures.TreeGreen, Vector2{2600.f,967.f}, PropType::TREE, Textures},     // 27
             Prop{Textures.TreeGreen, Vector2{3200.f,967.f}, PropType::TREE, Textures},     // 33
@@ -2261,8 +2261,8 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{2120.f,1067.f}, PropType::TREE, Textures},    // 22    
             Prop{Textures.TreeGreen, Vector2{2220.f,1067.f}, PropType::TREE, Textures},    // 23    
             Prop{Textures.TreeGreen, Vector2{2320.f,1067.f}, PropType::TREE, Textures},    // 24    
-            Prop{Textures.TreeGreen, Vector2{2420.f,1067.f}, PropType::TREE, Textures},    // 25    
-            Prop{Textures.TreeGreen, Vector2{2520.f,1067.f}, PropType::TREE, Textures},    // 26    
+            // Prop{Textures.TreeGreen, Vector2{2420.f,1067.f}, PropType::TREE, Textures},    // 25    
+            // Prop{Textures.TreeGreen, Vector2{2520.f,1067.f}, PropType::TREE, Textures},    // 26    
             Prop{Textures.TreeGreen, Vector2{2620.f,1067.f}, PropType::TREE, Textures},    // 27    
             Prop{Textures.TreeGreen, Vector2{2720.f,1067.f}, PropType::TREE, Textures},    // 28    
             Prop{Textures.TreeGreen, Vector2{3120.f,1067.f}, PropType::TREE, Textures},    // 32    
@@ -2282,7 +2282,7 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{1100.f,1167.f}, PropType::TREE, Textures},    // 12    
             Prop{Textures.TreeGreen, Vector2{1200.f,1167.f}, PropType::TREE, Textures},    // 13    
             Prop{Textures.TreeGreen, Vector2{1300.f,1167.f}, PropType::TREE, Textures},    // 14    
-            Prop{Textures.TreeGreen, Vector2{1400.f,1167.f}, PropType::TREE, Textures},    // 15    
+            // Prop{Textures.TreeGreen, Vector2{1400.f,1167.f}, PropType::TREE, Textures},    // 15    
             Prop{Textures.TreeGreen, Vector2{1500.f,1167.f}, PropType::TREE, Textures},    // 16    
             Prop{Textures.TreeGreen, Vector2{1600.f,1167.f}, PropType::TREE, Textures},    // 17    
             Prop{Textures.TreeGreen, Vector2{1700.f,1167.f}, PropType::TREE, Textures},    // 18    
@@ -2304,6 +2304,7 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3820.f,1167.f}, PropType::TREE, Textures},    // 37    
             Prop{Textures.TreeGreen, Vector2{3920.f,1167.f}, PropType::TREE, Textures},    // 38    
             // row13
+            Prop{Textures.TreeGreen, Vector2{20.f,1267.f}, PropType::TREE, Textures},     // 2 
             Prop{Textures.TreeGreen, Vector2{120.f,1267.f}, PropType::TREE, Textures},     // 2 
             Prop{Textures.TreeGreen, Vector2{220.f,1267.f}, PropType::TREE, Textures},     // 3 
             Prop{Textures.TreeGreen, Vector2{320.f,1267.f}, PropType::TREE, Textures},     // 4 
@@ -2314,13 +2315,13 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{1220.f,1267.f}, PropType::TREE, Textures},    // 13
             Prop{Textures.TreeGreen, Vector2{1320.f,1267.f}, PropType::TREE, Textures},    // 14
             Prop{Textures.TreeGreen, Vector2{1420.f,1267.f}, PropType::TREE, Textures},    // 15
-            Prop{Textures.TreeGreen, Vector2{1520.f,1267.f}, PropType::TREE, Textures},    // 16
-            Prop{Textures.TreeGreen, Vector2{1620.f,1267.f}, PropType::TREE, Textures},    // 17
-            Prop{Textures.TreeGreen, Vector2{1720.f,1267.f}, PropType::TREE, Textures},    // 18
+            // Prop{Textures.TreeGreen, Vector2{1520.f,1267.f}, PropType::TREE, Textures},    // 16
+            // Prop{Textures.TreeGreen, Vector2{1620.f,1267.f}, PropType::TREE, Textures},    // 17
+            // Prop{Textures.TreeGreen, Vector2{1720.f,1267.f}, PropType::TREE, Textures},    // 18
             Prop{Textures.TreeGreen, Vector2{1820.f,1267.f}, PropType::TREE, Textures},    // 19
             Prop{Textures.TreeGreen, Vector2{1920.f,1267.f}, PropType::TREE, Textures},    // 20
             Prop{Textures.TreeGreen, Vector2{2420.f,1267.f}, PropType::TREE, Textures},    // 25
-            Prop{Textures.TreeGreen, Vector2{2520.f,1267.f}, PropType::TREE, Textures},    // 26
+            // Prop{Textures.TreeGreen, Vector2{2520.f,1267.f}, PropType::TREE, Textures},    // 26
             Prop{Textures.TreeGreen, Vector2{2620.f,1267.f}, PropType::TREE, Textures},    // 27
             Prop{Textures.TreeGreen, Vector2{2720.f,1267.f}, PropType::TREE, Textures},    // 28
             Prop{Textures.TreeGreen, Vector2{2820.f,1267.f}, PropType::TREE, Textures},    // 29
@@ -2340,10 +2341,10 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{200.f,1367.f}, PropType::TREE, Textures},     // 3     
             Prop{Textures.TreeGreen, Vector2{300.f,1367.f}, PropType::TREE, Textures},     // 4     
             Prop{Textures.TreeGreen, Vector2{400.f,1367.f}, PropType::TREE, Textures},     // 5     
-            Prop{Textures.TreeGreen, Vector2{500.f,1367.f}, PropType::TREE, Textures},     // 6     
+            // Prop{Textures.TreeGreen, Vector2{500.f,1367.f}, PropType::TREE, Textures},     // 6     
             Prop{Textures.TreeGreen, Vector2{700.f,1367.f}, PropType::TREE, Textures},     // 8     
             Prop{Textures.TreeGreen, Vector2{800.f,1367.f}, PropType::TREE, Textures},     // 9     
-            Prop{Textures.TreeGreen, Vector2{900.f,1367.f}, PropType::TREE, Textures},     // 10    
+            // Prop{Textures.TreeGreen, Vector2{900.f,1367.f}, PropType::TREE, Textures},     // 10    
             Prop{Textures.TreeGreen, Vector2{1000.f,1367.f}, PropType::TREE, Textures},    // 11    
             Prop{Textures.TreeGreen, Vector2{1100.f,1367.f}, PropType::TREE, Textures},    // 12    
             Prop{Textures.TreeGreen, Vector2{1200.f,1367.f}, PropType::TREE, Textures},    // 13    
@@ -2352,7 +2353,7 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{1500.f,1367.f}, PropType::TREE, Textures},    // 16    
             Prop{Textures.TreeGreen, Vector2{1600.f,1367.f}, PropType::TREE, Textures},    // 17    
             Prop{Textures.TreeGreen, Vector2{1700.f,1367.f}, PropType::TREE, Textures},    // 18    
-            Prop{Textures.TreeGreen, Vector2{1800.f,1367.f}, PropType::TREE, Textures},    // 19    
+            // Prop{Textures.TreeGreen, Vector2{1800.f,1367.f}, PropType::TREE, Textures},    // 19    
             Prop{Textures.TreeGreen, Vector2{2500.f,1367.f}, PropType::TREE, Textures},    // 26    
             Prop{Textures.TreeGreen, Vector2{2600.f,1367.f}, PropType::TREE, Textures},    // 27    
             Prop{Textures.TreeGreen, Vector2{2700.f,1367.f}, PropType::TREE, Textures},    // 28    
@@ -2374,8 +2375,8 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{720.f,1467.f}, PropType::TREE, Textures},     // 8 
             Prop{Textures.TreeGreen, Vector2{820.f,1467.f}, PropType::TREE, Textures},     // 9 
             Prop{Textures.TreeGreen, Vector2{920.f,1467.f}, PropType::TREE, Textures},     // 10
-            Prop{Textures.TreeGreen, Vector2{1220.f,1467.f}, PropType::TREE, Textures},    // 13
-            Prop{Textures.TreeGreen, Vector2{1320.f,1467.f}, PropType::TREE, Textures},    // 14
+            // Prop{Textures.TreeGreen, Vector2{1220.f,1467.f}, PropType::TREE, Textures},    // 13
+            // Prop{Textures.TreeGreen, Vector2{1320.f,1467.f}, PropType::TREE, Textures},    // 14
             Prop{Textures.TreeGreen, Vector2{1420.f,1467.f}, PropType::TREE, Textures},    // 15
             Prop{Textures.TreeGreen, Vector2{1520.f,1467.f}, PropType::TREE, Textures},    // 16
             Prop{Textures.TreeGreen, Vector2{1620.f,1467.f}, PropType::TREE, Textures},    // 17
@@ -2403,12 +2404,13 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{500.f,1567.f}, PropType::TREE, Textures},     // 6 
             Prop{Textures.TreeGreen, Vector2{600.f,1567.f}, PropType::TREE, Textures},     // 7 
             Prop{Textures.TreeGreen, Vector2{700.f,1567.f}, PropType::TREE, Textures},     // 8 
+            Prop{Textures.TreeGreen, Vector2{800.f,1567.f}, PropType::TREE, Textures},     // 9 
             Prop{Textures.TreeGreen, Vector2{900.f,1567.f}, PropType::TREE, Textures},     // 10
             Prop{Textures.TreeGreen, Vector2{1000.f,1567.f}, PropType::TREE, Textures},    // 11    
             Prop{Textures.TreeGreen, Vector2{1100.f,1567.f}, PropType::TREE, Textures},    // 12
             Prop{Textures.TreeGreen, Vector2{1200.f,1567.f}, PropType::TREE, Textures},    // 13
             Prop{Textures.TreeGreen, Vector2{1300.f,1567.f}, PropType::TREE, Textures},    // 14
-            Prop{Textures.TreeGreen, Vector2{1400.f,1567.f}, PropType::TREE, Textures},    // 15
+            // Prop{Textures.TreeGreen, Vector2{1400.f,1567.f}, PropType::TREE, Textures},    // 15
             Prop{Textures.TreeGreen, Vector2{1500.f,1567.f}, PropType::TREE, Textures},    // 16
             Prop{Textures.TreeGreen, Vector2{1600.f,1567.f}, PropType::TREE, Textures},    // 17
             Prop{Textures.TreeGreen, Vector2{2500.f,1567.f}, PropType::TREE, Textures},    // 26
@@ -2427,9 +2429,9 @@ namespace Game
             // row17
             Prop{Textures.TreeGreen, Vector2{20.f,1667.f}, PropType::TREE, Textures},      // 1 
             Prop{Textures.TreeGreen, Vector2{120.f,1667.f}, PropType::TREE, Textures},     // 2 
-            Prop{Textures.TreeGreen, Vector2{220.f,1667.f}, PropType::TREE, Textures},     // 3 
-            Prop{Textures.TreeGreen, Vector2{520.f,1667.f}, PropType::TREE, Textures},     // 6 
-            Prop{Textures.TreeGreen, Vector2{620.f,1667.f}, PropType::TREE, Textures},     // 7 
+            // Prop{Textures.TreeGreen, Vector2{220.f,1667.f}, PropType::TREE, Textures},     // 3 
+            // Prop{Textures.TreeGreen, Vector2{520.f,1667.f}, PropType::TREE, Textures},     // 6 
+            // Prop{Textures.TreeGreen, Vector2{620.f,1667.f}, PropType::TREE, Textures},     // 7 
             Prop{Textures.TreeGreen, Vector2{720.f,1667.f}, PropType::TREE, Textures},     // 8 
             Prop{Textures.TreeGreen, Vector2{820.f,1667.f}, PropType::TREE, Textures},     // 9 
             Prop{Textures.TreeGreen, Vector2{920.f,1667.f}, PropType::TREE, Textures},     // 10
@@ -2449,12 +2451,12 @@ namespace Game
             // row18
             Prop{Textures.TreeGreen, Vector2{0.f,1767.f}, PropType::TREE, Textures},       // 1 
             Prop{Textures.TreeGreen, Vector2{100.f,1767.f}, PropType::TREE, Textures},     // 2 
-            Prop{Textures.TreeGreen, Vector2{200.f,1767.f}, PropType::TREE, Textures},     // 3 
-            Prop{Textures.TreeGreen, Vector2{300.f,1767.f}, PropType::TREE, Textures},     // 4 
-            Prop{Textures.TreeGreen, Vector2{400.f,1767.f}, PropType::TREE, Textures},     // 5 
-            Prop{Textures.TreeGreen, Vector2{500.f,1767.f}, PropType::TREE, Textures},     // 6 
-            Prop{Textures.TreeGreen, Vector2{600.f,1767.f}, PropType::TREE, Textures},     // 7 
-            Prop{Textures.TreeGreen, Vector2{700.f,1767.f}, PropType::TREE, Textures},     // 8 
+            // Prop{Textures.TreeGreen, Vector2{200.f,1767.f}, PropType::TREE, Textures},     // 3 
+            // Prop{Textures.TreeGreen, Vector2{300.f,1767.f}, PropType::TREE, Textures},     // 4 
+            // Prop{Textures.TreeGreen, Vector2{400.f,1767.f}, PropType::TREE, Textures},     // 5 
+            // Prop{Textures.TreeGreen, Vector2{500.f,1767.f}, PropType::TREE, Textures},     // 6 
+            // Prop{Textures.TreeGreen, Vector2{600.f,1767.f}, PropType::TREE, Textures},     // 7 
+            // Prop{Textures.TreeGreen, Vector2{700.f,1767.f}, PropType::TREE, Textures},     // 8 
             Prop{Textures.TreeGreen, Vector2{800.f,1767.f}, PropType::TREE, Textures},     // 9 
             Prop{Textures.TreeGreen, Vector2{900.f,1767.f}, PropType::TREE, Textures},     // 10
             Prop{Textures.TreeGreen, Vector2{1000.f,1767.f}, PropType::TREE, Textures},    // 11
@@ -2477,11 +2479,11 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3920.f,1767.f}, PropType::TREE, Textures},    // 38
             // row19
             Prop{Textures.TreeGreen, Vector2{20.f,1867.f}, PropType::TREE, Textures},      // 1     
-            Prop{Textures.TreeGreen, Vector2{220.f,1867.f}, PropType::TREE, Textures},     // 3     
-            Prop{Textures.TreeGreen, Vector2{320.f,1867.f}, PropType::TREE, Textures},     // 4 
-            Prop{Textures.TreeGreen, Vector2{420.f,1867.f}, PropType::TREE, Textures},     // 5 
-            Prop{Textures.TreeGreen, Vector2{520.f,1867.f}, PropType::TREE, Textures},     // 6 
-            Prop{Textures.TreeGreen, Vector2{620.f,1867.f}, PropType::TREE, Textures},     // 7 
+            // Prop{Textures.TreeGreen, Vector2{220.f,1867.f}, PropType::TREE, Textures},     // 3     
+            // Prop{Textures.TreeGreen, Vector2{320.f,1867.f}, PropType::TREE, Textures},     // 4 
+            // Prop{Textures.TreeGreen, Vector2{420.f,1867.f}, PropType::TREE, Textures},     // 5 
+            // Prop{Textures.TreeGreen, Vector2{520.f,1867.f}, PropType::TREE, Textures},     // 6 
+            // Prop{Textures.TreeGreen, Vector2{620.f,1867.f}, PropType::TREE, Textures},     // 7 
             Prop{Textures.TreeGreen, Vector2{820.f,1867.f}, PropType::TREE, Textures},     // 9 
             Prop{Textures.TreeGreen, Vector2{920.f,1867.f}, PropType::TREE, Textures},     // 10
             Prop{Textures.TreeGreen, Vector2{1020.f,1867.f}, PropType::TREE, Textures},    // 11
@@ -2506,10 +2508,10 @@ namespace Game
             // row20
             Prop{Textures.TreeGreen, Vector2{0.f,1967.f}, PropType::TREE, Textures},       // 1     
             Prop{Textures.TreeGreen, Vector2{100.f,1967.f}, PropType::TREE, Textures},     // 2 
-            Prop{Textures.TreeGreen, Vector2{200.f,1967.f}, PropType::TREE, Textures},     // 3 
-            Prop{Textures.TreeGreen, Vector2{400.f,1967.f}, PropType::TREE, Textures},     // 5 
-            Prop{Textures.TreeGreen, Vector2{500.f,1967.f}, PropType::TREE, Textures},     // 6 
-            Prop{Textures.TreeGreen, Vector2{600.f,1967.f}, PropType::TREE, Textures},     // 7 
+            // Prop{Textures.TreeGreen, Vector2{200.f,1967.f}, PropType::TREE, Textures},     // 3 
+            // Prop{Textures.TreeGreen, Vector2{400.f,1967.f}, PropType::TREE, Textures},     // 5 
+            // Prop{Textures.TreeGreen, Vector2{500.f,1967.f}, PropType::TREE, Textures},     // 6 
+            // Prop{Textures.TreeGreen, Vector2{600.f,1967.f}, PropType::TREE, Textures},     // 7 
             Prop{Textures.TreeGreen, Vector2{700.f,1967.f}, PropType::TREE, Textures},     // 8 
             Prop{Textures.TreeGreen, Vector2{800.f,1967.f}, PropType::TREE, Textures},     // 9 
             Prop{Textures.TreeGreen, Vector2{1000.f,1967.f}, PropType::TREE, Textures},    // 11
@@ -2570,8 +2572,8 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{800.f,2167.f}, PropType::TREE, Textures},     // 9 
             Prop{Textures.TreeGreen, Vector2{900.f,2167.f}, PropType::TREE, Textures},     // 10
             Prop{Textures.TreeGreen, Vector2{1000.f,2167.f}, PropType::TREE, Textures},    // 11
-            Prop{Textures.TreeGreen, Vector2{1300.f,2167.f}, PropType::TREE, Textures},    // 14
-            Prop{Textures.TreeGreen, Vector2{1400.f,2167.f}, PropType::TREE, Textures},    // 15
+            // Prop{Textures.TreeGreen, Vector2{1300.f,2167.f}, PropType::TREE, Textures},    // 14
+            // Prop{Textures.TreeGreen, Vector2{1400.f,2167.f}, PropType::TREE, Textures},    // 15
             Prop{Textures.TreeGreen, Vector2{1500.f,2167.f}, PropType::TREE, Textures},    // 16
             Prop{Textures.TreeGreen, Vector2{1600.f,2167.f}, PropType::TREE, Textures},    // 17
             Prop{Textures.TreeGreen, Vector2{1700.f,2167.f}, PropType::TREE, Textures},    // 18
@@ -2609,6 +2611,8 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{1420.f,2267.f}, PropType::TREE, Textures},    // 15
             Prop{Textures.TreeGreen, Vector2{1520.f,2267.f}, PropType::TREE, Textures},    // 16
             Prop{Textures.TreeGreen, Vector2{1620.f,2267.f}, PropType::TREE, Textures},    // 17
+            Prop{Textures.TreeGreen, Vector2{1720.f,2267.f}, PropType::TREE, Textures},    // 18
+            Prop{Textures.TreeGreen, Vector2{1820.f,2267.f}, PropType::TREE, Textures},    // 19
             Prop{Textures.TreeGreen, Vector2{2620.f,2267.f}, PropType::TREE, Textures},    // 27
             Prop{Textures.TreeGreen, Vector2{2720.f,2267.f}, PropType::TREE, Textures},    // 28
             Prop{Textures.TreeGreen, Vector2{2820.f,2267.f}, PropType::TREE, Textures},    // 29
@@ -2770,7 +2774,7 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{665.f,3530.f}, PropType::TREE, Textures},     // 6 
             Prop{Textures.TreeGreen, Vector2{3920.f,3567.f}, PropType::TREE, Textures},    // 21
             // row35
-            Prop{Textures.TreeGreen, Vector2{100.f,3740.f}, PropType::TREE, Textures}, 
+            // Prop{Textures.TreeGreen, Vector2{100.f,3740.f}, PropType::TREE, Textures}, 
             Prop{Textures.TreeGreen, Vector2{200.f,3740.f}, PropType::TREE, Textures}, 
             Prop{Textures.TreeGreen, Vector2{300.f,3740.f}, PropType::TREE, Textures},
             Prop{Textures.TreeGreen, Vector2{500.f,3740.f}, PropType::TREE, Textures},
@@ -3006,7 +3010,7 @@ namespace Game
             Sprite{Textures.BearGreyHurt, 1, 4},
             Sprite{Textures.BearGreyDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::BEAR, EnemyType::BOSS, Vector2{2163.f, 1518.f}, Window, MapBG, Textures, RandomEngine, 5, 5.f
+            EnemyType::BEAR, EnemyType::BOSS, Vector2{2918.f, 895.f}, Window, MapBG, Textures, RandomEngine, 5, 5.f
         };
         Enemies.emplace_back(GreyBossBear);
     
@@ -3782,27 +3786,27 @@ namespace Game
         };
         Crows.emplace_back(CrowTwentynine);
 
-        Enemy CrowThirty
-        {
-            Sprite{Textures.CrowIdle, 8, 2},
-            Sprite{Textures.CrowIdleTwo, 5, 2},
-            Sprite{Textures.CrowFlying, 5, 2},
-            Sprite{Textures.CrowWalk, 4, 2},
-            Sprite{Textures.CrowIdleTwo, 5, 2},
-            EnemyType::CROW, Vector2{638.f, 1791.f}, Window, MapBG, Textures, RandomEngine, 2.5f
-        };
-        Crows.emplace_back(CrowThirty);
+        // Enemy CrowThirty
+        // {
+        //     Sprite{Textures.CrowIdle, 8, 2},
+        //     Sprite{Textures.CrowIdleTwo, 5, 2},
+        //     Sprite{Textures.CrowFlying, 5, 2},
+        //     Sprite{Textures.CrowWalk, 4, 2},
+        //     Sprite{Textures.CrowIdleTwo, 5, 2},
+        //     EnemyType::CROW, Vector2{638.f, 1791.f}, Window, MapBG, Textures, RandomEngine, 2.5f
+        // };
+        // Crows.emplace_back(CrowThirty);
 
-        Enemy CrowThirtyone
-        {
-            Sprite{Textures.CrowIdle, 8, 2},
-            Sprite{Textures.CrowIdleTwo, 5, 2},
-            Sprite{Textures.CrowFlying, 5, 2},
-            Sprite{Textures.CrowWalk, 4, 2},
-            Sprite{Textures.CrowIdleTwo, 5, 2},
-            EnemyType::CROW, Vector2{549.f, 1951.f}, Window, MapBG, Textures, RandomEngine, 2.5f
-        };
-        Crows.emplace_back(CrowThirtyone);
+        // Enemy CrowThirtyone
+        // {
+        //     Sprite{Textures.CrowIdle, 8, 2},
+        //     Sprite{Textures.CrowIdleTwo, 5, 2},
+        //     Sprite{Textures.CrowFlying, 5, 2},
+        //     Sprite{Textures.CrowWalk, 4, 2},
+        //     Sprite{Textures.CrowIdleTwo, 5, 2},
+        //     EnemyType::CROW, Vector2{549.f, 1951.f}, Window, MapBG, Textures, RandomEngine, 2.5f
+        // };
+        // Crows.emplace_back(CrowThirtyone);
 
         Enemy CrowThirtytwo
         {
@@ -3837,16 +3841,16 @@ namespace Game
         };
         Crows.emplace_back(CrowThirtyfour);
 
-        Enemy CrowThirtyfive
-        {
-            Sprite{Textures.CrowIdle, 8, 2},
-            Sprite{Textures.CrowIdleTwo, 5, 2},
-            Sprite{Textures.CrowFlying, 5, 2},
-            Sprite{Textures.CrowWalk, 4, 2},
-            Sprite{Textures.CrowIdleTwo, 5, 2},
-            EnemyType::CROW, Vector2{246.f, 774.f}, Window, MapBG, Textures, RandomEngine, 2.5f
-        };
-        Crows.emplace_back(CrowThirtyfive);
+        // Enemy CrowThirtyfive
+        // {
+        //     Sprite{Textures.CrowIdle, 8, 2},
+        //     Sprite{Textures.CrowIdleTwo, 5, 2},
+        //     Sprite{Textures.CrowFlying, 5, 2},
+        //     Sprite{Textures.CrowWalk, 4, 2},
+        //     Sprite{Textures.CrowIdleTwo, 5, 2},
+        //     EnemyType::CROW, Vector2{246.f, 774.f}, Window, MapBG, Textures, RandomEngine, 2.5f
+        // };
+        // Crows.emplace_back(CrowThirtyfive);
 
         Enemy CrowThirtysix
         {

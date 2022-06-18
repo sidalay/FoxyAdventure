@@ -71,7 +71,7 @@ namespace Game
     std::vector<std::vector<Prop>> InitializePropsOver(const GameTexture& Textures);
     std::vector<Prop> InitializeTrees(const GameTexture& Textures);
     std::vector<Enemy> InitializeEnemies(Background& MapBG, const Window& Window, const GameTexture& Textures, Randomizer& RandomEngine);
-    std::vector<Enemy> InitializeCrows(Background& MapBG, const Window& Window, const GameTexture& Textures, Randomizer& RandomEngine);
+    std::vector<Enemy> InitializeCrows(Background& MapaBG, const Window& Window, const GameTexture& Textures, Randomizer& RandomEngine);
 
     // Debugging --------------------
     void DrawCollisionRecs(Prop& Prop, const Vector2 CharacterWorldPos, Color RecColor = {0, 121, 241, 150});
