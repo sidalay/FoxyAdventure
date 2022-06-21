@@ -523,6 +523,9 @@ void Character::AddHealth(float HP)
     if (Health > 11) {
         Health = 11;
     }
+    else if (Health < 0) {
+        Health = 0;
+    }
 }
 
 void Character::HealOverTime(float HP)
