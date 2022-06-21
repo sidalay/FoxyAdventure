@@ -3253,41 +3253,197 @@ namespace Game
         Enemies.emplace_back(PinkToadOne);
 
         // ----------------------------------- Mushrooms ------------------------------------
-        // Enemy RedMushroomOne
-        // {
-        //     Sprite{Textures.MushroomRedIdle, 4, 4},
-        //     Sprite{Textures.MushroomRedWalk, 4, 4},
-        //     Sprite{Textures.MushroomRedAttack, 4, 4},
-        //     Sprite{Textures.MushroomRedHurt, 4, 4},
-        //     Sprite{Textures.MushroomRedDeath, 11, 4},
-        //     Sprite{Textures.Placeholder, 0, 0},
-        //     EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{555.f, 335.f}, Window, MapBG, Textures, RandomEngine, 2
-        // };
-        // Enemies.emplace_back(RedMushroomOne);
+        Enemy RedMushroomOne
+        {
+            Sprite{Textures.MushroomRedIdle, 4, 4},
+            Sprite{Textures.MushroomRedWalk, 4, 4},
+            Sprite{Textures.MushroomRedAttack, 4, 4},
+            Sprite{Textures.MushroomRedHurt, 4, 4},
+            Sprite{Textures.MushroomRedDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1433.f, 1045.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(RedMushroomOne);
 
-        // Enemy BlueMushroomOne
-        // {
-        //     Sprite{Textures.MushroomBlueIdle, 4, 4},
-        //     Sprite{Textures.MushroomBlueWalk, 4, 4},
-        //     Sprite{Textures.MushroomBlueAttack, 4, 4},
-        //     Sprite{Textures.MushroomBlueHurt, 4, 4},
-        //     Sprite{Textures.MushroomBlueDeath, 11, 4},
-        //     Sprite{Textures.Placeholder, 0, 0},
-        //     EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{628.f, 236.f}, Window, MapBG, Textures, RandomEngine, 2
-        // };
-        // Enemies.emplace_back(BlueMushroomOne);
+        Enemy RedMushroomTwo
+        {
+            Sprite{Textures.MushroomRedIdle, 4, 4},
+            Sprite{Textures.MushroomRedWalk, 4, 4},
+            Sprite{Textures.MushroomRedAttack, 4, 4},
+            Sprite{Textures.MushroomRedHurt, 4, 4},
+            Sprite{Textures.MushroomRedDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1840.f, 637.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(RedMushroomTwo);
 
-        // Enemy BlueMushroomTwo
-        // {
-        //     Sprite{Textures.MushroomBlueIdle, 4, 4},
-        //     Sprite{Textures.MushroomBlueWalk, 4, 4},
-        //     Sprite{Textures.MushroomBlueAttack, 4, 4},
-        //     Sprite{Textures.MushroomBlueHurt, 4, 4},
-        //     Sprite{Textures.MushroomBlueDeath, 11, 4},
-        //     Sprite{Textures.Placeholder, 0, 0},
-        //     EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1782.f, 226.f}, Window, MapBG, Textures, RandomEngine, 2
-        // };
-        // Enemies.emplace_back(BlueMushroomTwo);
+        Enemy RedMushroomThree
+        {
+            Sprite{Textures.MushroomRedIdle, 4, 4},
+            Sprite{Textures.MushroomRedWalk, 4, 4},
+            Sprite{Textures.MushroomRedAttack, 4, 4},
+            Sprite{Textures.MushroomRedHurt, 4, 4},
+            Sprite{Textures.MushroomRedDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{131.f, 1927.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(RedMushroomThree);
+
+        Enemy RedMushroomFour
+        {
+            Sprite{Textures.MushroomRedIdle, 4, 4},
+            Sprite{Textures.MushroomRedWalk, 4, 4},
+            Sprite{Textures.MushroomRedAttack, 4, 4},
+            Sprite{Textures.MushroomRedHurt, 4, 4},
+            Sprite{Textures.MushroomRedDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1935.f, 2130.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(RedMushroomFour);
+
+        Enemy RedMushroomFive
+        {
+            Sprite{Textures.MushroomRedIdle, 4, 4},
+            Sprite{Textures.MushroomRedWalk, 4, 4},
+            Sprite{Textures.MushroomRedAttack, 4, 4},
+            Sprite{Textures.MushroomRedHurt, 4, 4},
+            Sprite{Textures.MushroomRedDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{248.f, 340.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(RedMushroomFive);
+
+        Enemy RedMushroomSix
+        {
+            Sprite{Textures.MushroomRedIdle, 4, 4},
+            Sprite{Textures.MushroomRedWalk, 4, 4},
+            Sprite{Textures.MushroomRedAttack, 4, 4},
+            Sprite{Textures.MushroomRedHurt, 4, 4},
+            Sprite{Textures.MushroomRedDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1821.f, 3131.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(RedMushroomSix);
+
+        Enemy BrownMushroomOne
+        {
+            Sprite{Textures.MushroomBrownIdle, 4, 4},
+            Sprite{Textures.MushroomBrownWalk, 4, 4},
+            Sprite{Textures.MushroomBrownAttack, 4, 4},
+            Sprite{Textures.MushroomBrownHurt, 4, 4},
+            Sprite{Textures.MushroomBrownDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{733.f, 849.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(BrownMushroomOne);
+
+        Enemy BrownMushroomTwo
+        {
+            Sprite{Textures.MushroomBrownIdle, 4, 4},
+            Sprite{Textures.MushroomBrownWalk, 4, 4},
+            Sprite{Textures.MushroomBrownAttack, 4, 4},
+            Sprite{Textures.MushroomBrownHurt, 4, 4},
+            Sprite{Textures.MushroomBrownDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{2156.f, 343.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(BrownMushroomTwo);
+
+        Enemy BrownMushroomThree
+        {
+            Sprite{Textures.MushroomBrownIdle, 4, 4},
+            Sprite{Textures.MushroomBrownWalk, 4, 4},
+            Sprite{Textures.MushroomBrownAttack, 4, 4},
+            Sprite{Textures.MushroomBrownHurt, 4, 4},
+            Sprite{Textures.MushroomBrownDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1660.f, 1555.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(BrownMushroomThree);
+
+        Enemy BrownMushroomFour
+        {
+            Sprite{Textures.MushroomBrownIdle, 4, 4},
+            Sprite{Textures.MushroomBrownWalk, 4, 4},
+            Sprite{Textures.MushroomBrownAttack, 4, 4},
+            Sprite{Textures.MushroomBrownHurt, 4, 4},
+            Sprite{Textures.MushroomBrownDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1142.f, 2238.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(BrownMushroomFour);
+
+        Enemy BrownMushroomFive
+        {
+            Sprite{Textures.MushroomBrownIdle, 4, 4},
+            Sprite{Textures.MushroomBrownWalk, 4, 4},
+            Sprite{Textures.MushroomBrownAttack, 4, 4},
+            Sprite{Textures.MushroomBrownHurt, 4, 4},
+            Sprite{Textures.MushroomBrownDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{2634.f, 2130.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(BrownMushroomFive);
+
+        Enemy GreenMushroomOne
+        {
+            Sprite{Textures.MushroomGreenIdle, 4, 4},
+            Sprite{Textures.MushroomGreenWalk, 4, 4},
+            Sprite{Textures.MushroomGreenAttack, 4, 4},
+            Sprite{Textures.MushroomGreenHurt, 4, 4},
+            Sprite{Textures.MushroomGreenDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{3243.f, 3903.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(GreenMushroomOne);
+
+        Enemy GreenMushroomTwo
+        {
+            Sprite{Textures.MushroomGreenIdle, 4, 4},
+            Sprite{Textures.MushroomGreenWalk, 4, 4},
+            Sprite{Textures.MushroomGreenAttack, 4, 4},
+            Sprite{Textures.MushroomGreenHurt, 4, 4},
+            Sprite{Textures.MushroomGreenDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{3936.f, 3532.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(GreenMushroomTwo);
+
+        Enemy GreenMushroomThree
+        {
+            Sprite{Textures.MushroomGreenIdle, 4, 4},
+            Sprite{Textures.MushroomGreenWalk, 4, 4},
+            Sprite{Textures.MushroomGreenAttack, 4, 4},
+            Sprite{Textures.MushroomGreenHurt, 4, 4},
+            Sprite{Textures.MushroomGreenDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{2835.f, 3803.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(GreenMushroomThree);
+
+        Enemy GreenMushroomFour
+        {
+            Sprite{Textures.MushroomGreenIdle, 4, 4},
+            Sprite{Textures.MushroomGreenWalk, 4, 4},
+            Sprite{Textures.MushroomGreenAttack, 4, 4},
+            Sprite{Textures.MushroomGreenHurt, 4, 4},
+            Sprite{Textures.MushroomGreenDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{2134.f, 3819.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(GreenMushroomFour);
+
+        Enemy GreenMushroomFive
+        {
+            Sprite{Textures.MushroomGreenIdle, 4, 4},
+            Sprite{Textures.MushroomGreenWalk, 4, 4},
+            Sprite{Textures.MushroomGreenAttack, 4, 4},
+            Sprite{Textures.MushroomGreenHurt, 4, 4},
+            Sprite{Textures.MushroomGreenDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{954.f, 3901.f}, Window, MapBG, Textures, RandomEngine, 2
+        };
+        Enemies.emplace_back(GreenMushroomFive);
 
         // ----------------------------------- Test enemies below ------------------------------------
         Enemy GreyBossBear
@@ -3302,41 +3458,41 @@ namespace Game
         };
         Enemies.emplace_back(GreyBossBear);
     
-        Enemy RedNecro
-        {
-            Sprite{Textures.NecromancerRedIdle, 4, 4},
-            Sprite{Textures.NecromancerRedWalk, 4, 4},
-            Sprite{Textures.NecromancerRedAttack, 4, 4},
-            Sprite{Textures.NecromancerRedHurt, 1, 4},
-            Sprite{Textures.NecromancerRedDeath, 11, 4},
-            Sprite{Textures.NecromancerRedProjectile, 4, 4},
-            EnemyType::NECROMANCER, EnemyType::NORMAL, Vector2{2038.f, 2345.f}, Window, MapBG, Textures, RandomEngine
-        };
-        Enemies.emplace_back(RedNecro);
+        // Enemy RedNecro
+        // {
+        //     Sprite{Textures.NecromancerRedIdle, 4, 4},
+        //     Sprite{Textures.NecromancerRedWalk, 4, 4},
+        //     Sprite{Textures.NecromancerRedAttack, 4, 4},
+        //     Sprite{Textures.NecromancerRedHurt, 1, 4},
+        //     Sprite{Textures.NecromancerRedDeath, 11, 4},
+        //     Sprite{Textures.NecromancerRedProjectile, 4, 4},
+        //     EnemyType::NECROMANCER, EnemyType::NORMAL, Vector2{2038.f, 2345.f}, Window, MapBG, Textures, RandomEngine
+        // };
+        // Enemies.emplace_back(RedNecro);
 
-        Enemy PurpleCreature
-        {
-            Sprite{Textures.CreaturePurpleIdle, 4, 4},
-            Sprite{Textures.CreaturePurpleWalk, 4, 4},
-            Sprite{Textures.CreaturePurpleAttack, 4, 4},
-            Sprite{Textures.CreaturePurpleHurt, 1, 4},
-            Sprite{Textures.CreaturePurpleDeath, 11, 4},
-            Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::CREATURE, EnemyType::NORMAL, Vector2{1660.f, 3366.f}, Window, MapBG, Textures, RandomEngine
-        };
-        Enemies.emplace_back(PurpleCreature);
+        // Enemy PurpleCreature
+        // {
+        //     Sprite{Textures.CreaturePurpleIdle, 4, 4},
+        //     Sprite{Textures.CreaturePurpleWalk, 4, 4},
+        //     Sprite{Textures.CreaturePurpleAttack, 4, 4},
+        //     Sprite{Textures.CreaturePurpleHurt, 1, 4},
+        //     Sprite{Textures.CreaturePurpleDeath, 11, 4},
+        //     Sprite{Textures.Placeholder, 0, 0},
+        //     EnemyType::CREATURE, EnemyType::NORMAL, Vector2{1660.f, 3366.f}, Window, MapBG, Textures, RandomEngine
+        // };
+        // Enemies.emplace_back(PurpleCreature);
 
-        Enemy GreenImp
-        {
-            Sprite{Textures.ImpGreenIdle, 4, 4},
-            Sprite{Textures.ImpGreenWalk, 4, 4},
-            Sprite{Textures.ImpGreenAttack, 4, 4},
-            Sprite{Textures.ImpGreenHurt, 1, 4},
-            Sprite{Textures.ImpGreenDeath, 11, 4},
-            Sprite{Textures.ImpGreenProjectile, 4, 4},
-            EnemyType::IMP, EnemyType::NORMAL, Vector2{1800.f, 3666.f}, Window, MapBG, Textures, RandomEngine
-        };
-        Enemies.emplace_back(GreenImp);
+        // Enemy GreenImp
+        // {
+        //     Sprite{Textures.ImpGreenIdle, 4, 4},
+        //     Sprite{Textures.ImpGreenWalk, 4, 4},
+        //     Sprite{Textures.ImpGreenAttack, 4, 4},
+        //     Sprite{Textures.ImpGreenHurt, 1, 4},
+        //     Sprite{Textures.ImpGreenDeath, 11, 4},
+        //     Sprite{Textures.ImpGreenProjectile, 4, 4},
+        //     EnemyType::IMP, EnemyType::NORMAL, Vector2{1800.f, 3666.f}, Window, MapBG, Textures, RandomEngine
+        // };
+        // Enemies.emplace_back(GreenImp);
 
         // ------------------- Wildlife NPCs ---------------------//
         // -------------------- Fox Family -----------------------//

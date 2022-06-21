@@ -210,7 +210,7 @@ void Enemy::CheckDirection()
         }
     }
     else {
-        if (!Chasing) {
+        if (!Chasing && (Race != EnemyType::MUSHROOM)) {
             if (AIY < 0.f) {
                 Face = Direction::UP;
             }
@@ -284,7 +284,10 @@ void Enemy::CheckMovement(Props& Props, const Vector2 HeroWorldPos, const Vector
 {
     PrevWorldPos = WorldPos;
     
-    EnemyAI();
+    if (Race != EnemyType::MUSHROOM) {
+        EnemyAI();
+    }
+
 
     if (Type != EnemyType::NPC) {
         EnemyAggro(HeroScreenPos);
