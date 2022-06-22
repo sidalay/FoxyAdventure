@@ -3445,6 +3445,118 @@ namespace Game
         };
         Enemies.emplace_back(GreenMushroomFive);
 
+        // ----------------------------------- Spiders ------------------------------------
+
+        Enemy BrownSpiderOne
+        {
+            Sprite{Textures.SpiderBrownIdle, 4, 4},
+            Sprite{Textures.SpiderBrownWalk, 4, 4},
+            Sprite{Textures.SpiderBrownAttack, 4, 4},
+            Sprite{Textures.SpiderBrownHurt, 1, 4},
+            Sprite{Textures.SpiderBrownDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::SPIDER, EnemyType::NORMAL, Vector2{186.f, 788.f}, Window, MapBG, Textures, RandomEngine, 2, 3.f
+        };
+        Enemies.emplace_back(BrownSpiderOne);
+
+        Enemy BrownSpiderTwo
+        {
+            Sprite{Textures.SpiderBrownIdle, 4, 4},
+            Sprite{Textures.SpiderBrownWalk, 4, 4},
+            Sprite{Textures.SpiderBrownAttack, 4, 4},
+            Sprite{Textures.SpiderBrownHurt, 1, 4},
+            Sprite{Textures.SpiderBrownDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::SPIDER, EnemyType::NORMAL, Vector2{413.f, 661.f}, Window, MapBG, Textures, RandomEngine, 2, 3.f
+        };
+        Enemies.emplace_back(BrownSpiderTwo);
+
+        Enemy BrownSpiderThree
+        {
+            Sprite{Textures.SpiderBrownIdle, 4, 4},
+            Sprite{Textures.SpiderBrownWalk, 4, 4},
+            Sprite{Textures.SpiderBrownAttack, 4, 4},
+            Sprite{Textures.SpiderBrownHurt, 1, 4},
+            Sprite{Textures.SpiderBrownDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::SPIDER, EnemyType::NORMAL, Vector2{295.f, 818.f}, Window, MapBG, Textures, RandomEngine, 2, 3.f
+        };
+        Enemies.emplace_back(BrownSpiderThree);
+
+        Enemy BrownSpiderFour
+        {
+            Sprite{Textures.SpiderBrownIdle, 4, 4},
+            Sprite{Textures.SpiderBrownWalk, 4, 4},
+            Sprite{Textures.SpiderBrownAttack, 4, 4},
+            Sprite{Textures.SpiderBrownHurt, 1, 4},
+            Sprite{Textures.SpiderBrownDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::SPIDER, EnemyType::NORMAL, Vector2{260.f, 548.f}, Window, MapBG, Textures, RandomEngine, 2, 3.f
+        };
+        Enemies.emplace_back(BrownSpiderFour);
+
+        // ----------------------------------- Creature ------------------------------------
+
+        Enemy OrangeCreatureOne
+        {
+            Sprite{Textures.CreatureOrangeIdle, 4, 4},
+            Sprite{Textures.CreatureOrangeWalk, 4, 4},
+            Sprite{Textures.CreatureOrangeAttack, 4, 4},
+            Sprite{Textures.CreatureOrangeHurt, 1, 4},
+            Sprite{Textures.CreatureOrangeDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::CREATURE, EnemyType::NORMAL, Vector2{2186.f, 550.f}, Window, MapBG, Textures, RandomEngine, 4
+        };
+        Enemies.emplace_back(OrangeCreatureOne);
+
+        Enemy OrangeCreatureTwo
+        {
+            Sprite{Textures.CreatureOrangeIdle, 4, 4},
+            Sprite{Textures.CreatureOrangeWalk, 4, 4},
+            Sprite{Textures.CreatureOrangeAttack, 4, 4},
+            Sprite{Textures.CreatureOrangeHurt, 1, 4},
+            Sprite{Textures.CreatureOrangeDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::CREATURE, EnemyType::NORMAL, Vector2{2130.f, 777.f}, Window, MapBG, Textures, RandomEngine, 4
+        };
+        Enemies.emplace_back(OrangeCreatureTwo);
+
+        Enemy GreyCreatureOne
+        {
+            Sprite{Textures.CreatureGreyIdle, 4, 4},
+            Sprite{Textures.CreatureGreyWalk, 4, 4},
+            Sprite{Textures.CreatureGreyAttack, 4, 4},
+            Sprite{Textures.CreatureGreyHurt, 1, 4},
+            Sprite{Textures.CreatureGreyDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::CREATURE, EnemyType::NORMAL, Vector2{2364.f, 651.f}, Window, MapBG, Textures, RandomEngine, 4
+        };
+        Enemies.emplace_back(GreyCreatureOne);
+
+        Enemy GreyCreatureTwo
+        {
+            Sprite{Textures.CreatureGreyIdle, 4, 4},
+            Sprite{Textures.CreatureGreyWalk, 4, 4},
+            Sprite{Textures.CreatureGreyAttack, 4, 4},
+            Sprite{Textures.CreatureGreyHurt, 1, 4},
+            Sprite{Textures.CreatureGreyDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::CREATURE, EnemyType::NORMAL, Vector2{2013.f, 690.f}, Window, MapBG, Textures, RandomEngine, 4
+        };
+        Enemies.emplace_back(GreyCreatureTwo);
+
+        Enemy BossImp
+        {
+            Sprite{Textures.ImpRedIdle, 4, 4},
+            Sprite{Textures.ImpRedWalk, 4, 4},
+            Sprite{Textures.ImpRedAttack, 4, 4},
+            Sprite{Textures.ImpRedHurt, 1, 4},
+            Sprite{Textures.ImpRedDeath, 11, 4},
+            Sprite{Textures.ImpRedProjectile, 4, 4},
+            EnemyType::IMP, EnemyType::BOSS, Vector2{2184.f, 659.f}, Window, MapBG, Textures, RandomEngine, 4, 5.f
+        };
+        Enemies.emplace_back(BossImp);
+
         // ----------------------------------- Test enemies below ------------------------------------
         Enemy GreyBossBear
         {
@@ -3651,38 +3763,38 @@ namespace Game
         };
         Enemies.emplace_back(SquirrelTen);
 
-        Enemy SquirrelEleven
-        {
-            Sprite{Textures.SquirrelIdle, 6, 2},
-            Sprite{Textures.SquirrelIdleTwo, 6, 2},
-            Sprite{Textures.SquirrelWalk, 4, 2},
-            Sprite{Textures.SquirrelEat, 2, 2},
-            Sprite{Textures.SquirrelEat, 2, 2},
-            EnemyType::SQUIRREL, Vector2{254.f, 532.f}, Window, MapBG, Textures, RandomEngine, 2.0f
-        };
-        Enemies.emplace_back(SquirrelEleven);
+        // Enemy SquirrelEleven
+        // {
+        //     Sprite{Textures.SquirrelIdle, 6, 2},
+        //     Sprite{Textures.SquirrelIdleTwo, 6, 2},
+        //     Sprite{Textures.SquirrelWalk, 4, 2},
+        //     Sprite{Textures.SquirrelEat, 2, 2},
+        //     Sprite{Textures.SquirrelEat, 2, 2},
+        //     EnemyType::SQUIRREL, Vector2{254.f, 532.f}, Window, MapBG, Textures, RandomEngine, 2.0f
+        // };
+        // Enemies.emplace_back(SquirrelEleven);
 
-        Enemy SquirrelTwelve
-        {
-            Sprite{Textures.SquirrelIdle, 6, 2},
-            Sprite{Textures.SquirrelIdleTwo, 6, 2},
-            Sprite{Textures.SquirrelWalk, 4, 2},
-            Sprite{Textures.SquirrelEat, 2, 2},
-            Sprite{Textures.SquirrelEat, 2, 2},
-            EnemyType::SQUIRREL, Vector2{334.f, 432.f}, Window, MapBG, Textures, RandomEngine, 2.0f
-        };
-        Enemies.emplace_back(SquirrelTwelve);
+        // Enemy SquirrelTwelve
+        // {
+        //     Sprite{Textures.SquirrelIdle, 6, 2},
+        //     Sprite{Textures.SquirrelIdleTwo, 6, 2},
+        //     Sprite{Textures.SquirrelWalk, 4, 2},
+        //     Sprite{Textures.SquirrelEat, 2, 2},
+        //     Sprite{Textures.SquirrelEat, 2, 2},
+        //     EnemyType::SQUIRREL, Vector2{334.f, 432.f}, Window, MapBG, Textures, RandomEngine, 2.0f
+        // };
+        // Enemies.emplace_back(SquirrelTwelve);
 
-        Enemy SquirrelThirteen
-        {
-            Sprite{Textures.SquirrelIdle, 6, 2},
-            Sprite{Textures.SquirrelIdleTwo, 6, 2},
-            Sprite{Textures.SquirrelWalk, 4, 2},
-            Sprite{Textures.SquirrelEat, 2, 2},
-            Sprite{Textures.SquirrelEat, 2, 2},
-            EnemyType::SQUIRREL, Vector2{452.f, 533.f}, Window, MapBG, Textures, RandomEngine, 2.0f
-        };
-        Enemies.emplace_back(SquirrelThirteen);
+        // Enemy SquirrelThirteen
+        // {
+        //     Sprite{Textures.SquirrelIdle, 6, 2},
+        //     Sprite{Textures.SquirrelIdleTwo, 6, 2},
+        //     Sprite{Textures.SquirrelWalk, 4, 2},
+        //     Sprite{Textures.SquirrelEat, 2, 2},
+        //     Sprite{Textures.SquirrelEat, 2, 2},
+        //     EnemyType::SQUIRREL, Vector2{452.f, 533.f}, Window, MapBG, Textures, RandomEngine, 2.0f
+        // };
+        // Enemies.emplace_back(SquirrelThirteen);
 
         Enemy SquirrelFourteen
         {
