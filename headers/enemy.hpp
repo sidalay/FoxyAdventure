@@ -12,7 +12,7 @@ enum class EnemyType
     BEAR, BEHOLDER, CREATURE, GHOST, 
     IMP, MUSHROOM, NECROMANCER, SHADOW, 
     SPIDER, TOAD, NORMAL, BOSS, NPC,
-    FOX, CROW, SQUIRREL
+    FOX, CROW, SQUIRREL, DEFAULT
 };
 
 enum class Monster 
@@ -45,7 +45,8 @@ public:
           const GameTexture& GameTextures,
           Randomizer& RandomEngine,
           const int Health = 3,
-          const float Scale = 3.2f);
+          const float Scale = 3.2f,
+          const EnemyType BossSpawner = EnemyType::DEFAULT);
     
     // Wildlife NPC constructor
     Enemy(const Sprite& NpcIdle,
@@ -120,6 +121,7 @@ private:
     Background& World;
     const GameTexture& GameTextures;
     Randomizer& RandomEngine;
+    EnemyType BossSpawner{};    // Spawn Boss after this EnemyType is all killed
     
     static int MonsterDeaths;
     static int MonsterCount;

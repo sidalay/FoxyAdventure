@@ -3545,7 +3545,9 @@ namespace Game
         };
         Enemies.emplace_back(GreyCreatureTwo);
 
-        Enemy BossImp
+        // ----------------------------------- Bosses ------------------------------------
+
+        Enemy RedBossImp
         {
             Sprite{Textures.ImpRedIdle, 4, 4},
             Sprite{Textures.ImpRedWalk, 4, 4},
@@ -3553,11 +3555,10 @@ namespace Game
             Sprite{Textures.ImpRedHurt, 1, 4},
             Sprite{Textures.ImpRedDeath, 11, 4},
             Sprite{Textures.ImpRedProjectile, 4, 4},
-            EnemyType::IMP, EnemyType::BOSS, Vector2{2184.f, 659.f}, Window, MapBG, Textures, RandomEngine, 4, 5.f
+            EnemyType::IMP, EnemyType::BOSS, Vector2{2184.f, 659.f}, Window, MapBG, Textures, RandomEngine, 5, 5.f, EnemyType::CREATURE
         };
-        Enemies.emplace_back(BossImp);
+        Enemies.emplace_back(RedBossImp);
 
-        // ----------------------------------- Test enemies below ------------------------------------
         Enemy GreyBossBear
         {
             Sprite{Textures.BearGreyIdle, 4, 4},
@@ -3570,6 +3571,7 @@ namespace Game
         };
         Enemies.emplace_back(GreyBossBear);
     
+        // ----------------------------------- Test enemies below ------------------------------------
         // Enemy RedNecro
         // {
         //     Sprite{Textures.NecromancerRedIdle, 4, 4},

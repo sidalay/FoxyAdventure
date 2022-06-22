@@ -27,7 +27,8 @@ Enemy::Enemy(const Sprite& Idle,
              const GameTexture& GameTextures,
              Randomizer& RandomEngine,
              const int Health,
-             const float Scale) 
+             const float Scale, 
+             const EnemyType BossSpawner)
     : Race{Race},
       Type{Type},
       WorldPos{WorldPos},
@@ -35,6 +36,7 @@ Enemy::Enemy(const Sprite& Idle,
       World{World},
       GameTextures{GameTextures},
       RandomEngine{RandomEngine},
+      BossSpawner{BossSpawner},
       Health{Health},
       MaxHP{Health},
       Scale{Scale}
@@ -57,6 +59,10 @@ Enemy::Enemy(const Sprite& Idle,
     else {
         MonsterCounter[EnemyType::BOSS] += 1;
         Summoned = false;
+    }
+
+    if (BossSpawner == EnemyType::DEFAULT) {
+        this->BossSpawner = Race;
     }
 
     if (Race == EnemyType::BEHOLDER || Race == EnemyType::NECROMANCER || Race == EnemyType::IMP) {
@@ -702,7 +708,7 @@ void Enemy::DrawHP()
 
 void Enemy::CheckBossSummon(const Vector2 HeroWorldPos)
 {
-    if (!WithinScreen(HeroWorldPos) && (Type == EnemyType::BOSS) && (MonsterCounter[Race] <= 0) && !Summoned) {
+    if (!WithinScreen(HeroWorldPos) && (Type == EnemyType::BOSS) && (MonsterCounter[BossSpawner] <= 0) && !Summoned) {
         Summoned = true;
     }
 }
