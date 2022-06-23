@@ -298,7 +298,7 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
             DrawSpeech();
         }
         else if (Type == PropType::NPC_D) {
-            DrawText("Rumby", 395, 490, 30, WHITE);
+            DrawText("Rumby", 393, 490, 30, WHITE);
             DrawSpeech();
         }
     }
