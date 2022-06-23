@@ -86,6 +86,7 @@ private:
     float DamageTime{};
     float AttackTime{};
     float HealTime{};
+    float DamageTaken{0.5f};
     float AmountToHeal{};
     bool Alive{true};
     bool Colliding{false};

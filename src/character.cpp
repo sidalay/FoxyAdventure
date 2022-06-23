@@ -245,6 +245,12 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, const Vect
 
                     // Check collision of Player against Enemy
                     if ((Enemy.IsSummoned() && !Enemy.IsDying()) && CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
+                        if (Enemy.GetType() == EnemyType::NORMAL) {
+                            DamageTaken = 0.5f;
+                        }
+                        else {
+                            DamageTaken = 1.f;
+                        }
                         TakeDamage();
                     }
 
@@ -523,7 +529,7 @@ void Character::TakeDamage()
     // How often health should decrease when colliding into enemy
     if (DamageTime >= UpdateTime) {
         if (Health > 0.f) {
-            Health -= 0.5f;
+            Health -= DamageTaken;
         }
         DamageTime = 0.f;
     }
