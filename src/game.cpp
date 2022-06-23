@@ -666,6 +666,9 @@ namespace Game
             Prop{Textures.Bush, Vector2{1594.f,334.f}, PropType::BUSH, Textures},
             Prop{Textures.Bush, Vector2{1465.f,222.f}, PropType::BUSH, Textures},
             Prop{Textures.Bush, Vector2{3152.f,1222.f}, PropType::BUSH, Textures},
+            Prop{Textures.Bush, Vector2{2155.f,966.f}, PropType::BUSH, Textures, 3.f}, 
+            Prop{Textures.Bush, Vector2{2274.f,966.f}, PropType::BUSH, Textures, 3.f}, 
+            Prop{Textures.Bush, Vector2{2395.f,966.f}, PropType::BUSH, Textures, 3.f}, 
         };
         Props.emplace_back(Bushes);
 
