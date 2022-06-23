@@ -195,6 +195,9 @@ void Prop::Tick(const float DeltaTime)
 
                 Opened = true;   
             }
+            else if (Type == PropType::STUMP) {
+                Reading = true;
+            }
         }
         else {
             // Draw treasure item for (UpdateTime * X) seconds
@@ -306,7 +309,7 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
         DrawSpeech();
     }
 
-    if (Type == PropType::STUMP && Active) {
+    if (Reading) {
         DrawTextureEx(GameTextures.SpeechBox, Vector2{352.f,518.f}, 0.f, 12.f, WHITE);
         DrawSpeech();
     }
@@ -833,6 +836,7 @@ void Prop::DrawSpeech()
         DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
 
         if (IsKeyReleased(KEY_ENTER)) {
+            Reading = false;
             Opened = true;
         }
     }

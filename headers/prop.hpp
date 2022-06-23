@@ -117,6 +117,7 @@ private:
     bool Talking{false};
     bool Visible{false};
     bool Spawned{true};
+    bool Reading{false};
 
     // NPC variables
     Progress Act{Progress::ACT_I};
