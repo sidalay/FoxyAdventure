@@ -765,36 +765,43 @@ Rectangle Enemy::GetAttackRec()
     if (Ranged) {
         switch (Face) {
             case Direction::DOWN:
+                // return Rectangle
+                // {
+                //     UpdateProjectile().x + Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/6.f,
+                //     UpdateProjectile().y + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY)/2.f * Scale),
+                //     ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX)/1.5f) * Scale,
+                //     ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY)/1.5f)  * Scale
+                // };
                 return Rectangle
                 {
-                    UpdateProjectile().x + Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/6.f,
-                    UpdateProjectile().y + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY)/2.f * Scale),
-                    ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX)/1.5f) * Scale,
-                    ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY)/1.5f)  * Scale
+                    UpdateProjectile().x,
+                    UpdateProjectile().y + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale) * 0.3f,
+                    (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale,
+                    ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale) * 0.5f
                 };
             case Direction::LEFT:
                 return Rectangle
                 {
-                    UpdateProjectile().x + (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesX/2.f),
-                    UpdateProjectile().y + (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/6.f),
-                    ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX)/1.5f) * Scale,
-                    ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY)/1.5f)  * Scale
+                    UpdateProjectile().x + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale) * 0.25f,
+                    UpdateProjectile().y,
+                    ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale) * 0.5f,
+                    (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale
                 };
             case Direction::RIGHT:
                 return Rectangle
                 {
-                    UpdateProjectile().x + (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX * Scale)/2.5f,
-                    UpdateProjectile().y + (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/6.f),
-                    ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX)/1.5f) * Scale,
-                    ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY)/1.5f)  * Scale
+                    UpdateProjectile().x + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale) * 0.3f,
+                    UpdateProjectile().y,
+                    ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale) * 0.5f,
+                    (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale
                 };
             case Direction::UP:
                 return Rectangle
                 {
-                    UpdateProjectile().x + Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/6.f,
-                    UpdateProjectile().y + Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/2.f,
-                    ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX)/1.5f) * Scale,
-                    ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY)/1.5f)  * Scale
+                    UpdateProjectile().x,
+                    UpdateProjectile().y + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale) * 0.25f,
+                    (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale,
+                    ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale) * 0.5f
                 };
             default:
                 return Rectangle
