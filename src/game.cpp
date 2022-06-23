@@ -2195,6 +2195,12 @@ namespace Game
         };
         Props.emplace_back(Grass);
 
+        std::vector<Prop> Stumps
+        {
+            Prop{Textures.RockStump, Vector2{440.f,1883.f}, PropType::STUMP, Textures, 5.f, false, true},
+        };
+        Props.emplace_back(Stumps);
+
         std::vector<Prop> Treasure
         {
             Prop{Sprite{Textures.TreasureChestBig, 4, 1, 1.f/4.f}, Vector2{2198.f,1677.f}, PropType::BIGTREASURE, Textures, Textures.TreasureHeart,  4.f, false, true, Progress::ACT_O, PropType::NPC_O, "Life Stone", 4.f},

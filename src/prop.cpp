@@ -27,6 +27,7 @@ Prop::Prop(const Texture2D& Texture,
         Type == PropType::RIGHTSIDEWALL ||
         Type == PropType::BOTTOMWALL ||
         Type == PropType::HOLE ||
+        Type == PropType::ROCK ||
         Type == PropType::DUNGEONLEFT ||
         Type == PropType::DUNGEONRIGHT ||
         Type == PropType::DUNGEON ||
@@ -305,7 +306,10 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
         DrawSpeech();
     }
 
-    // CheckActivity(ScreenPos);
+    if (Type == PropType::STUMP && Active) {
+        DrawTextureEx(GameTextures.SpeechBox, Vector2{352.f,518.f}, 0.f, 12.f, WHITE);
+        DrawSpeech();
+    }
 }
 
 bool Prop::WithinScreen(const Vector2 CharacterWorldPos)
@@ -820,6 +824,18 @@ void Prop::DrawSpeech()
             InsertPiece = false;
         }
     }
+    else if (Type == PropType::STUMP) {
+        DrawText("Foxy's favorite spot in the forest.", 390, 550, 20, WHITE);
+        DrawText("Every time he steps foot in this area", 390, 575, 20, WHITE);
+        DrawText("he feels rejuvenated and can't wipe", 390, 600, 20, WHITE);
+        DrawText("the smile off of his face. He keeps", 390, 625, 20, WHITE);
+        DrawText("this spot super secret!", 390, 650, 20, WHITE);
+        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+
+        if (IsKeyReleased(KEY_ENTER)) {
+            Opened = true;
+        }
+    }
     // Manage NPC speech
     else {
         switch(Act)
@@ -1026,7 +1042,7 @@ void Prop::DrawSpeech()
                 if (IsKeyPressed(KEY_ENTER)) {
                     Opened = true;
                     Talking = false;
-                    
+
                     if (Type == PropType::NPC_D) {
                         Act = Progress::ACT_I;
                     }
