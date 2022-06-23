@@ -125,6 +125,8 @@ struct GameTexture {
     const Texture2D Didi{LoadTexture("sprites/npc/Didi.png")};
     const Texture2D Jade{LoadTexture("sprites/npc/Jade.png")};
     const Texture2D Son{LoadTexture("sprites/npc/Son.png")};
+    const Texture2D Rumby{LoadTexture("sprites/npc/Rumby.png")};
+    const Texture2D RumbySide{LoadTexture("sprites/npc/RumbySide.png")};
 
     const Texture2D FoxIdle{LoadTexture("sprites/characters/fox/Fox_idle.png")};
     const Texture2D FoxWalk{LoadTexture("sprites/characters/fox/Fox_walk.png")};

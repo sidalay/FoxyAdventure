@@ -94,6 +94,8 @@ GameTexture::~GameTexture()
     UnloadTexture(Didi);
     UnloadTexture(Jade);
     UnloadTexture(Son);
+    UnloadTexture(Rumby);
+    UnloadTexture(RumbySide);
     UnloadTexture(FoxIdle);
     UnloadTexture(FoxWalk);
     UnloadTexture(FoxRun);
