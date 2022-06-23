@@ -857,72 +857,43 @@ Rectangle Enemy::GetCollisionRec()
 Rectangle Enemy::GetAttackRec()
 {
     if (Ranged) {
-        switch (Face) {
-            case Direction::UP:
-            case Direction::DOWN:
-                return Rectangle
-                {
-                    UpdateProjectile().x + ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale) * 0.3f,
-                    UpdateProjectile().y + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale) * 0.3f,
-                    ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale) * 0.45f,
-                    ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale) * 0.5f
-                };
-            case Direction::LEFT:
-            case Direction::RIGHT:
-                return Rectangle
-                {
-                    UpdateProjectile().x + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale) * 0.25f,
-                    UpdateProjectile().y + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale) * 0.3f,
-                    ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale) * 0.5f,
-                    ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale) * 0.45f
-                };
-            default:
-                return Rectangle
-                {
-                    
-                };
-        }
+        float ShootingSpriteWidth{static_cast<float>(Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale};
+        float ShootingSpriteHeight{static_cast<float>(Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale};
+        
+        return Rectangle
+        {
+            UpdateProjectile().x + (ShootingSpriteWidth * 0.3f),
+            UpdateProjectile().y + (ShootingSpriteHeight * 0.3f),
+            ShootingSpriteWidth * 0.45f,
+            ShootingSpriteHeight * 0.45f
+        };
     }
     else {
+        float CurrentSpriteWidth{static_cast<float>(Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale};
+        float CurrentSpriteHeight{static_cast<float>(Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale};
+
         switch (Face)
         {
+            case Direction::UP:
             case Direction::DOWN:
                 return Rectangle
                 {
                     ScreenPos.x,
-                    ScreenPos.y + ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * 0.4f,
-                    (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale,
-                    (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale
+                    ScreenPos.y + (CurrentSpriteHeight * 0.4f),
+                    CurrentSpriteWidth,
+                    CurrentSpriteHeight
                 }; 
             case Direction::LEFT: 
-                return Rectangle
-                {
-                    ScreenPos.x - ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * 0.4f,
-                    ScreenPos.y,
-                    (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale,
-                    (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale
-                }; 
             case Direction::RIGHT:
                 return Rectangle
                 {
-                    ScreenPos.x + ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * 0.4f,
+                    ScreenPos.x - (CurrentSpriteWidth * 0.4f),
                     ScreenPos.y,
-                    (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale,
-                    (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale
-                }; 
-            case Direction::UP:
-                return Rectangle
-                {
-                    ScreenPos.x,
-                    ScreenPos.y - ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * 0.4f,
-                    (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale,
-                    (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale
+                    CurrentSpriteWidth,
+                    CurrentSpriteHeight
                 }; 
             default:
-                return Rectangle
-                {
-                    
-                };
+                return Rectangle{};
         }
     }
 }
