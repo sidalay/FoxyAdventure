@@ -161,7 +161,14 @@ void Enemy::Draw(const Vector2 HeroWorldPos)
 
                 // Draw Ranged projectile
                 if (Ranged && Attacking && !Dying && !Hurting) {
-                    DrawTexturePro(Sprites.at(ShootingSpriteIndex).Texture, Sprites.at(ShootingSpriteIndex).GetSourceRec(), Sprites.at(CurrentSpriteIndex).GetPosRec(UpdateProjectile(),Scale), Vector2{},0.f, WHITE);
+                    if (Type == EnemyType::NORMAL) {
+                        DrawTexturePro(Sprites.at(ShootingSpriteIndex).Texture, Sprites.at(ShootingSpriteIndex).GetSourceRec(), Sprites.at(CurrentSpriteIndex).GetPosRec(UpdateProjectile(),Scale), Vector2{},0.f, WHITE);
+                    }
+                    else if (Type == EnemyType::BOSS) {
+                        DrawTexturePro(Sprites.at(ShootingSpriteIndex).Texture, Sprites.at(ShootingSpriteIndex).GetSourceRec(), Sprites.at(CurrentSpriteIndex).GetPosRec(UpdateMultiProjectile().at(0),Scale), Vector2{},0.f, WHITE);
+                        DrawTexturePro(Sprites.at(ShootingSpriteIndex).Texture, Sprites.at(ShootingSpriteIndex).GetSourceRec(), Sprites.at(CurrentSpriteIndex).GetPosRec(UpdateMultiProjectile().at(1),Scale), Vector2{},0.f, WHITE);
+                        DrawTexturePro(Sprites.at(ShootingSpriteIndex).Texture, Sprites.at(ShootingSpriteIndex).GetSourceRec(), Sprites.at(CurrentSpriteIndex).GetPosRec(UpdateMultiProjectile().at(2),Scale), Vector2{},0.f, WHITE);
+                    }
                 }
             }
         }
@@ -446,8 +453,69 @@ Vector2 Enemy::UpdateProjectile()
             ProjectilePath.x += Trajectory;
             break;
     }
-    
     return ProjectilePath;
+}
+
+std::array<Vector2,3> Enemy::UpdateMultiProjectile()
+{
+    if (Trajectory >= 190.f) {
+        Trajectory = 1.f;
+    }
+ 
+    std::array<Vector2,3> ProjectilePaths{Vector2{ScreenPos},Vector2{ScreenPos},Vector2{ScreenPos}};
+ 
+    switch (Face)
+    {
+        case Direction::UP:
+        {
+            ProjectilePaths.at(0).x -= Trajectory;
+            ProjectilePaths.at(0).y -= Trajectory;
+
+            ProjectilePaths.at(1).x += 0.f;
+            ProjectilePaths.at(1).y -= Trajectory;
+
+            ProjectilePaths.at(2).x += Trajectory;
+            ProjectilePaths.at(2).y -= Trajectory;
+            break;
+        } 
+        case Direction::DOWN:
+        {
+            ProjectilePaths.at(0).x -= Trajectory;
+            ProjectilePaths.at(0).y += Trajectory;
+
+            ProjectilePaths.at(1).x += 0.f;
+            ProjectilePaths.at(1).y += Trajectory;
+
+            ProjectilePaths.at(2).x += Trajectory;
+            ProjectilePaths.at(2).y += Trajectory;
+            break;
+        }
+        case Direction::LEFT:
+        {
+            ProjectilePaths.at(0).x -= Trajectory;
+            ProjectilePaths.at(0).y += Trajectory;
+
+            ProjectilePaths.at(1).x -= Trajectory;
+            ProjectilePaths.at(1).y += 0.f;
+
+            ProjectilePaths.at(2).x -= Trajectory;
+            ProjectilePaths.at(2).y -= Trajectory;
+            break;
+        }
+        case Direction::RIGHT:
+        {
+            ProjectilePaths.at(0).x += Trajectory;
+            ProjectilePaths.at(0).y -= Trajectory;
+
+            ProjectilePaths.at(1).x += Trajectory;
+            ProjectilePaths.at(1).y += 0.f;
+
+            ProjectilePaths.at(2).x += Trajectory;
+            ProjectilePaths.at(2).y += Trajectory;
+            break;
+        }
+    }
+    return ProjectilePaths;
 }
 
 void Enemy::TakeDamage()
@@ -790,37 +858,23 @@ Rectangle Enemy::GetAttackRec()
 {
     if (Ranged) {
         switch (Face) {
+            case Direction::UP:
             case Direction::DOWN:
                 return Rectangle
                 {
-                    UpdateProjectile().x,
+                    UpdateProjectile().x + ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale) * 0.3f,
                     UpdateProjectile().y + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale) * 0.3f,
-                    (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale,
+                    ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale) * 0.45f,
                     ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale) * 0.5f
                 };
             case Direction::LEFT:
-                return Rectangle
-                {
-                    UpdateProjectile().x + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale) * 0.25f,
-                    UpdateProjectile().y,
-                    ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale) * 0.5f,
-                    (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale
-                };
             case Direction::RIGHT:
                 return Rectangle
                 {
-                    UpdateProjectile().x + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale) * 0.3f,
-                    UpdateProjectile().y,
+                    UpdateProjectile().x + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale) * 0.25f,
+                    UpdateProjectile().y + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale) * 0.3f,
                     ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale) * 0.5f,
-                    (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale
-                };
-            case Direction::UP:
-                return Rectangle
-                {
-                    UpdateProjectile().x,
-                    UpdateProjectile().y + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale) * 0.25f,
-                    (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale,
-                    ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale) * 0.5f
+                    ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale) * 0.45f
                 };
             default:
                 return Rectangle

@@ -102,6 +102,7 @@ public:
     Rectangle GetCollisionRec();
     Rectangle GetAttackRec();
     Vector2 UpdateProjectile();
+    std::array<Vector2,3> UpdateMultiProjectile();
     bool WithinScreen(const Vector2 HeroWorldPos);
     int GetMonsterCount(const EnemyType Type) {return MonsterCounter.at(Type);}
     
