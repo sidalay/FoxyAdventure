@@ -30,12 +30,7 @@ Prop::Prop(const Texture2D& Texture,
         Type == PropType::DUNGEONLEFT ||
         Type == PropType::DUNGEONRIGHT ||
         Type == PropType::DUNGEON ||
-        Type == PropType::TREASURE ||
-        Type == PropType::NPC_A ||
-        Type == PropType::NPC_B ||
-        Type == PropType::NPC_C ||
-        Type == PropType::ALTAR ||
-        Type == PropType::BIGTREASURE)
+        Type == PropType::ALTAR)
     {
         Collidable = true;
     }
@@ -70,29 +65,12 @@ Prop::Prop(const Sprite& Object,
     : Object{Object}, Type{Type}, GameTextures{GameTextures}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}, 
       TriggerAct{Act}, TriggerNPC{NPC}, Item{Item}, ItemName{ItemName}, ItemScale{ItemScale} 
 {
-    if (Type == PropType::BOULDER ||
-        Type == PropType::BUSH ||
-        Type == PropType::STUMP ||
-        Type == PropType::TREE ||
-        Type == PropType::FENCE ||
-        Type == PropType::rHOUSELEFT ||
-        Type == PropType::rHOUSERIGHT ||
-        Type == PropType::bHOUSELEFT ||
-        Type == PropType::bHOUSERIGHT ||
-        Type == PropType::DOOR ||
-        Type == PropType::GRASS ||
-        Type == PropType::TOPWALL ||
-        Type == PropType::LEFTSIDEWALL ||
-        Type == PropType::RIGHTSIDEWALL ||
-        Type == PropType::BOTTOMWALL ||
-        Type == PropType::HOLE ||
-        Type == PropType::DUNGEONLEFT ||
-        Type == PropType::DUNGEONRIGHT ||
-        Type == PropType::DUNGEON ||
+    if (Type == PropType::GRASS ||
         Type == PropType::TREASURE ||
         Type == PropType::NPC_A ||
         Type == PropType::NPC_B ||
         Type == PropType::NPC_C ||
+        Type == PropType::NPC_D ||
         Type == PropType::ALTAR ||
         Type == PropType::BIGTREASURE)
     {
@@ -132,7 +110,7 @@ void Prop::Tick(const float DeltaTime)
 {
     if (Visible) {
         // Play NPC idle animation when NOT interacting
-        if ((Type == PropType::NPC_A || Type == PropType::NPC_B || Type == PropType::NPC_C) && !Talking) {
+        if ((Type == PropType::NPC_A || Type == PropType::NPC_B || Type == PropType::NPC_C || Type == PropType::NPC_D) && !Talking) {
             Object.Tick(DeltaTime);
 
             // Update any progression and triggers for NPCs
@@ -186,7 +164,7 @@ void Prop::Tick(const float DeltaTime)
             else if (Type == PropType::DOOR) {
                 Opened = true;
             }
-            else if ((Type == PropType::NPC_A || Type == PropType::NPC_B || Type == PropType::NPC_C)) {
+            else if ((Type == PropType::NPC_A || Type == PropType::NPC_B || Type == PropType::NPC_C || Type == PropType::NPC_D)) {
                 if (TriggerAct != Progress::ACT_O) {
                     CurrentAct = TriggerAct;
                     CurrentNPC = TriggerNPC;
@@ -313,6 +291,10 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
         }
         else if (Type == PropType::NPC_C) {
             DrawText("Louie", 399, 490, 30, WHITE);
+            DrawSpeech();
+        }
+        else if (Type == PropType::NPC_D) {
+            DrawText("Rumby", 395, 490, 30, WHITE);
             DrawSpeech();
         }
     }
@@ -618,6 +600,16 @@ Rectangle Prop::GetCollisionRec(const Vector2 CharacterWorldPos)
                 Object.Texture.height * Scale - (Object.Texture.height * Scale) * .10f
             };
         }
+        case PropType::NPC_D:
+        {
+            return Rectangle
+            {
+                ScreenPos.x + (Object.Texture.width * Scale)/4.f * .10f,
+                ScreenPos.y + (Object.Texture.height * Scale) * .10f,
+                (Object.Texture.width * Scale)/4.f - (Object.Texture.width * Scale)/4.f * .10f,
+                Object.Texture.height * Scale - (Object.Texture.height * Scale) * .10f
+            };
+        }
         default:
         {
             return Rectangle
@@ -688,6 +680,16 @@ Rectangle Prop::GetInteractRec(const Vector2 CharacterWorldPos)
             };
         }
         case PropType::NPC_C:
+        {
+            return Rectangle
+            {
+                ScreenPos.x - (Object.Texture.width * Scale)/4.f * .45f,
+                ScreenPos.y - (Object.Texture.height * Scale) * .45f,
+                (Object.Texture.width * Scale)/4.f + (Object.Texture.width * Scale)/4.f,
+                (Object.Texture.height * Scale) + (Object.Texture.height * Scale)
+            };
+        }
+        case PropType::NPC_D:
         {
             return Rectangle
             {
@@ -856,27 +858,35 @@ void Prop::DrawSpeech()
                     DrawText("AGAIN!!", 390, 625, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else {
+                else if (Type == PropType::NPC_C) {
                     DrawText("...Mom told you to find me?...", 390, 550, 20, WHITE);
                     DrawText("She said that I keep wandering off???", 390, 575, 20, WHITE);
                     DrawText("SHES the one who left ME here!!", 390, 600, 20, WHITE);
                     DrawText("...Well, thank you for finding me...", 390, 625, 20, WHITE);
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                }
+                else if (Type == PropType::NPC_D) {
+                    DrawText("Hi, friend! My name is Rumby. I am the forest", 390, 550, 20, WHITE);
+                    DrawText("travel guide. I can show you the basics of", 390, 575, 20, WHITE);
+                    DrawText("surviving the great big forest!", 390, 600, 20, WHITE);
+                    DrawText("Though a wild Foxy like you probably knows", 390, 625, 20, WHITE);
+                    DrawText("more than I would, haha!", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 };
 
                 if (IsKeyReleased(KEY_ENTER)) {
-                    if (Type != PropType::NPC_A) {
-                        Opened = true;
-                        Talking = false;
+                    // Update NPC_C's act to ACT_O as it doesn't need to be seen anymore once it leaves screen
+                    if (Type == PropType::NPC_C) {
+                        Act = Progress::ACT_O;
                     }
 
-                    // Update NPC_C's act to ACT_O as it doesn't need to be seen anymore once it leaves screen
-                    if (Type == PropType::NPC_A) {
+                    if (Type == PropType::NPC_A || Type == PropType::NPC_D) {
                         Act = Progress::ACT_II;
                     }
-                    else if (Type == PropType::NPC_C) {
-                        Act = Progress::ACT_O;
+                    else {
+                        Opened = true;
+                        Talking = false;
                     }
                 }
                 break;
@@ -899,20 +909,35 @@ void Prop::DrawSpeech()
                     DrawText("there... maybe he was looking for it?", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else {
+                else if (Type == PropType::NPC_C) {
                     DrawText("Hi, Foxy! Thanks again for your help! ", 390, 550, 20, WHITE);
                     DrawText("Mom is still blaming me about getting lost..", 390, 575, 20, WHITE);
                     DrawText("While I was lost, I think I saw a treasure", 390, 600, 20, WHITE);
                     DrawText("in the NORTH WEST region of the forest...", 390, 625, 20, WHITE);
                     DrawText("Might be worth checking out!", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                }
+                else if (Type == PropType::NPC_D) {
+                    DrawText("Firstly, you can use [SPACE] or [LEFT CLICK]", 390, 550, 20, WHITE);
+                    DrawText("to attack and fend off monsters!", 390, 575, 20, WHITE);
+                    DrawText("Now, after fighting you might be low on health.", 390, 600, 20, WHITE);
+                    DrawText("Hold [SHIFT] while moving to run and find cover", 390, 625, 20, WHITE);
+                    DrawText("so you can press [L] to rest!", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 };
 
                 if (IsKeyPressed(KEY_ENTER)) {
-                    Opened = true;
-                    Talking = false;
-                    if (Type == PropType::NPC_A){
+                    if (Type == PropType::NPC_A) {
                         Act = Progress::ACT_I;
+                        Opened = true;
+                        Talking = false;
+                    }
+                    else if (Type == PropType::NPC_D) {
+                        Act = Progress::ACT_III;
+                    }
+                    else {
+                        Opened = true;
+                        Talking = false;
                     }
                 }
                 break;
@@ -935,18 +960,31 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else {
+                else if (Type == PropType::NPC_C) {
                     DrawText("", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
                     DrawText("", 390, 625, 20, WHITE);
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                }
+                else if (Type == PropType::NPC_D) {
+                    DrawText("Thirdly, the forest is a giant, and", 390, 550, 20, WHITE);
+                    DrawText("it is easy to get lost. You're a smart", 390, 575, 20, WHITE);
+                    DrawText("Foxy, so here is a map! Press [M] to use it!", 390, 600, 20, WHITE);
+                    DrawText("And if you ever need to take a break, [P] will", 390, 625, 20, WHITE);
+                    DrawText("bring up the lovely pause menu!", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 };
 
                 if (IsKeyPressed(KEY_ENTER)) {
-                    Opened = true;
-                    Talking = false;
+                    if (Type == PropType::NPC_D) {
+                        Act = Progress::ACT_IV;
+                    }
+                    else {
+                        Opened = true;
+                        Talking = false;
+                    }
                 }
                 break;
             }
@@ -968,18 +1006,30 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else {
+                else if (Type == PropType::NPC_C) {
                     DrawText("", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
                     DrawText("", 390, 625, 20, WHITE);
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                }
+                else if (Type == PropType::NPC_D) {
+                    DrawText("Lastly, if you need to call it quits,", 390, 550, 20, WHITE);
+                    DrawText("bring up the quit menu by pressing [PERIOD]", 390, 575, 20, WHITE);
+                    DrawText("or [ESCAPE]. Thats about it! Be safe", 390, 600, 20, WHITE);
+                    DrawText("and have fun my dear Foxy! Oh and please take", 390, 625, 20, WHITE);
+                    DrawText("care of the evil mushrooms...", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 };
             
                 if (IsKeyPressed(KEY_ENTER)) {
                     Opened = true;
                     Talking = false;
+                    
+                    if (Type == PropType::NPC_D) {
+                        Act = Progress::ACT_I;
+                    }
                 }
                 break;
             }

@@ -30,6 +30,7 @@ enum class PropType
     NPC_A,
     NPC_B,
     NPC_C,
+    NPC_D,
     PLACEHOLDER
 };
 
