@@ -860,13 +860,29 @@ Rectangle Enemy::GetAttackRec()
         float ShootingSpriteWidth{static_cast<float>(Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX) * Scale};
         float ShootingSpriteHeight{static_cast<float>(Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY) * Scale};
         
-        return Rectangle
-        {
-            UpdateProjectile().x + (ShootingSpriteWidth * 0.3f),
-            UpdateProjectile().y + (ShootingSpriteHeight * 0.3f),
-            ShootingSpriteWidth * 0.45f,
-            ShootingSpriteHeight * 0.45f
-        };
+        if (Type == EnemyType::NORMAL) {
+            return Rectangle
+            {
+                UpdateProjectile().x + (ShootingSpriteWidth * 0.3f),
+                UpdateProjectile().y + (ShootingSpriteHeight * 0.3f),
+                ShootingSpriteWidth * 0.45f,
+                ShootingSpriteHeight * 0.45f
+            };
+        }
+        else {
+            Rectangle MultiProjectileRec
+            {
+                UpdateMultiProjectile().at(AttackRecIndex).x + (ShootingSpriteWidth * 0.3f),
+                UpdateMultiProjectile().at(AttackRecIndex).y + (ShootingSpriteHeight * 0.3f),
+                ShootingSpriteWidth * 0.45f,
+                ShootingSpriteHeight * 0.45f
+            };
+            ++AttackRecIndex;
+            if (AttackRecIndex > 2) {
+                AttackRecIndex = 0;
+            }
+            return MultiProjectileRec;
+        }
     }
     else {
         float CurrentSpriteWidth{static_cast<float>(Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale};

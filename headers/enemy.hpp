@@ -128,6 +128,7 @@ private:
     static int MonsterCount;
     int CurrentSpriteIndex{};
     int ShootingSpriteIndex{};
+    int AttackRecIndex{};
     int Health{};
     int MaxHP{};
     int LeftOrRight{};
