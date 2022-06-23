@@ -582,15 +582,41 @@ void Enemy::EnemyAI()
 void Enemy::EnemyAggro(const Vector2 HeroScreenPos)
 {
     // Calculate the distance from Enemy to Player
-    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos,{50.f,50.f}), ScreenPos)), Speed)}; 
+    Vector2 ToTarget {Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(HeroScreenPos, {50.f, 50.f}), ScreenPos)), Speed)}; 
     
     if (Alive && Summoned && !Stopped && !Invulnerable && !Blocked && !Dying) {
         Vector2 RadiusAroundEnemy{};
 
         if (Ranged) {
-            RadiusAroundEnemy = {10.f,10.f};
-            MaxRange = 200.f;
-            MinRange = 120.f;
+            RadiusAroundEnemy = {10.f,10.f}; 
+
+            switch (Face)
+            {
+                case Direction::DOWN:
+                {
+                    MinRange = 80.f;
+                    MaxRange = 180.f;
+                    break;
+                }
+                case Direction::LEFT:
+                {
+                    MinRange = 160;
+                    MaxRange = 210;
+                    break;
+                }
+                case Direction::RIGHT:
+                {
+                    MinRange = 100;
+                    MaxRange = 180;
+                    break;
+                }
+                case Direction::UP:
+                {
+                    MinRange = 160;
+                    MaxRange = 210;
+                    break;
+                }
+            }
         }
         else {
             RadiusAroundEnemy = {50.f,50.f};
@@ -765,13 +791,6 @@ Rectangle Enemy::GetAttackRec()
     if (Ranged) {
         switch (Face) {
             case Direction::DOWN:
-                // return Rectangle
-                // {
-                //     UpdateProjectile().x + Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/6.f,
-                //     UpdateProjectile().y + ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY)/2.f * Scale),
-                //     ((Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.width/Sprites.at(ShootingSpriteIndex).MaxFramesX)/1.5f) * Scale,
-                //     ((Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY/3.f) * Scale - (Sprites.at(ShootingSpriteIndex).Texture.height/Sprites.at(ShootingSpriteIndex).MaxFramesY)/1.5f)  * Scale
-                // };
                 return Rectangle
                 {
                     UpdateProjectile().x,

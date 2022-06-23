@@ -3224,7 +3224,7 @@ namespace Game
             Sprite{Textures.ToadGreenHurt, 1, 4},
             Sprite{Textures.ToadGreenDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::TOAD, EnemyType::NORMAL, Vector2{1215.f, 230.f}, Window, MapBG, Textures, RandomEngine
+            EnemyType::TOAD, EnemyType::NORMAL, Vector2{1215.f, 230.f}, Window, MapBG, Textures, RandomEngine, 2, 2.8f
         };
         Enemies.emplace_back(GreenToadOne);
 
@@ -3236,7 +3236,7 @@ namespace Game
             Sprite{Textures.ToadGreenHurt, 1, 4},
             Sprite{Textures.ToadGreenDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::TOAD, EnemyType::NORMAL, Vector2{1107.f, 346.f}, Window, MapBG, Textures, RandomEngine
+            EnemyType::TOAD, EnemyType::NORMAL, Vector2{1107.f, 346.f}, Window, MapBG, Textures, RandomEngine, 2, 2.8f
         };
         Enemies.emplace_back(GreenToadTwo);
 
@@ -3248,7 +3248,7 @@ namespace Game
             Sprite{Textures.ToadPinkHurt, 1, 4},
             Sprite{Textures.ToadPinkDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::TOAD, EnemyType::NORMAL, Vector2{1387.f, 356.f}, Window, MapBG, Textures, RandomEngine
+            EnemyType::TOAD, EnemyType::NORMAL, Vector2{1387.f, 356.f}, Window, MapBG, Textures, RandomEngine, 2, 2.8f
         };
         Enemies.emplace_back(PinkToadOne);
 
@@ -3545,6 +3545,18 @@ namespace Game
         };
         Enemies.emplace_back(GreyCreatureTwo);
 
+        Enemy RedImpOne
+        {
+            Sprite{Textures.ImpRedIdle, 4, 4},
+            Sprite{Textures.ImpRedWalk, 4, 4},
+            Sprite{Textures.ImpRedAttack, 4, 4},
+            Sprite{Textures.ImpRedHurt, 1, 4},
+            Sprite{Textures.ImpRedDeath, 11, 4},
+            Sprite{Textures.ImpRedProjectile, 4, 4},
+            EnemyType::IMP, EnemyType::NORMAL, Vector2{2152.f, 1531.f}, Window, MapBG, Textures, RandomEngine, 5
+        };
+        Enemies.emplace_back(RedImpOne);
+
         // ----------------------------------- Bosses ------------------------------------
 
         Enemy RedBossImp
@@ -3555,7 +3567,7 @@ namespace Game
             Sprite{Textures.ImpRedHurt, 1, 4},
             Sprite{Textures.ImpRedDeath, 11, 4},
             Sprite{Textures.ImpRedProjectile, 4, 4},
-            EnemyType::IMP, EnemyType::BOSS, Vector2{2184.f, 659.f}, Window, MapBG, Textures, RandomEngine, 5, 5.f, EnemyType::CREATURE
+            EnemyType::IMP, EnemyType::BOSS, Vector2{2184.f, 659.f}, Window, MapBG, Textures, RandomEngine, 5, 4.f, EnemyType::CREATURE
         };
         Enemies.emplace_back(RedBossImp);
 
