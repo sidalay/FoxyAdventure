@@ -405,7 +405,7 @@ void Enemy::CheckCollision(std::vector<std::vector<Prop>>& Props, const Vector2 
 
     // Enemy collision handling
     for (auto& Enemy:Enemies) {
-        if (this != &Enemy && (Enemy.GetType() != EnemyType::BOSS) && !Dying) {
+        if (this != &Enemy && (Type != EnemyType::BOSS) && (Enemy.GetType() != EnemyType::BOSS) && !Dying) {
             Vector2 RadiusAroundEnemy{5.f,5.f};
             Vector2 ToTarget{Vector2Scale(Vector2Normalize(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), ScreenPos)), Speed)}; // Calculate the distance from this->Enemy to Enemy
             float AvoidEnemy{Vector2Length(Vector2Subtract(Vector2Add(Enemy.GetEnemyPos(), RadiusAroundEnemy), ScreenPos))};
@@ -657,31 +657,30 @@ void Enemy::EnemyAggro(const Vector2 HeroScreenPos)
 
         if (Ranged) {
             RadiusAroundEnemy = {10.f,10.f}; 
-
             switch (Face)
             {
                 case Direction::DOWN:
                 {
                     MinRange = 80.f;
-                    MaxRange = 180.f;
+                    MaxRange = 260.f;
                     break;
                 }
                 case Direction::LEFT:
                 {
-                    MinRange = 160;
-                    MaxRange = 210;
+                    MinRange = 140.f;
+                    MaxRange = 200.f;
                     break;
                 }
                 case Direction::RIGHT:
                 {
-                    MinRange = 100;
-                    MaxRange = 180;
+                    MinRange = 80.f;
+                    MaxRange = 260.f;
                     break;
                 }
                 case Direction::UP:
                 {
-                    MinRange = 160;
-                    MaxRange = 210;
+                    MinRange = 140.f;
+                    MaxRange = 200.f;
                     break;
                 }
             }
@@ -706,20 +705,36 @@ void Enemy::EnemyAggro(const Vector2 HeroScreenPos)
 
             // Control what direction the enemy will face when chasing
             if (ToTarget.x >= 0.f && ToTarget.y <= 0.f) {
-                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::RIGHT;}
-                else {Face = Direction::UP;}
+                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {
+                    Face = Direction::RIGHT;
+                }
+                else {
+                    Face = Direction::UP;
+                }
             }
             else if (ToTarget.x >= 0.f && ToTarget.y > 0.f)  {
-                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::RIGHT;}
-                else {Face = Direction::DOWN;}
+                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {
+                    Face = Direction::RIGHT;
+                }
+                else {
+                    Face = Direction::DOWN;
+                }
             }
             else if (ToTarget.x <= 0.f && ToTarget.y <= 0.f)  {
-                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::LEFT;}
-                else {Face = Direction::UP;}
+                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {
+                    Face = Direction::LEFT;
+                }
+                else {
+                    Face = Direction::UP;
+                }
             }
             else if (ToTarget.x <= 0.f && ToTarget.y > 0.f)  {
-                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {Face = Direction::LEFT;}
-                else {Face = Direction::DOWN;}
+                if (std::abs(ToTarget.x) > std::abs(ToTarget.y)) {
+                    Face = Direction::LEFT;
+                }
+                else {
+                    Face = Direction::DOWN;
+                }
             }
         }
         else if (Aggro <= MinRange) {
