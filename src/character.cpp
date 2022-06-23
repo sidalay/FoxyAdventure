@@ -54,6 +54,8 @@ void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies,
     CheckHealing();
 
     CheckIfAlive();
+
+    CheckSecretSpot();
 }
 
 void Character::Draw()
@@ -492,6 +494,16 @@ void Character::CheckIfAlive()
     }
 }
 
+void Character::CheckSecretSpot()
+{
+    Vector2 OffsetWorldPos{Vector2Add(WorldPos,Offset)};
+
+    if ((OffsetWorldPos.x >= 80.f) && (OffsetWorldPos.x <= 830.f) && (OffsetWorldPos.y >= 1722.f) && (OffsetWorldPos.y <= 2122.f)) {
+        State = Emotion::HAPPY;
+        HealOverTime(5.f,.3f);
+    }
+}
+
 void Character::TakeDamage()
 {
     float UpdateTime {2.f/1.f};
@@ -531,10 +543,9 @@ void Character::AddHealth(float HP)
     }
 }
 
-void Character::HealOverTime(float HP)
+void Character::HealOverTime(float HP, float TimeToHeal)
 {   
     // Gradually heal fox when killing an enemy
-    float TimeToHeal{2.f/3.f};
     HealTime += GetFrameTime();
     static float StopHealing{HP};
 

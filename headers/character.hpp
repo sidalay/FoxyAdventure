@@ -43,6 +43,7 @@ public:
     void CheckSleep();
     void CheckEmotion();
     void CheckIfAlive();
+    void CheckSecretSpot();
     void SetSleep() {Sleeping = !Sleeping;}
     void DrawIndicator();
     void TakeDamage();
@@ -60,7 +61,7 @@ public:
 
     // Debug function
     void AddHealth(float HP);
-    void HealOverTime(float HP);
+    void HealOverTime(float HP, float TimeToHeal = 0.6f);
     void CheckHealing();
     void SwitchCollidable() {Collidable = !Collidable;}
     
