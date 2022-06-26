@@ -45,6 +45,7 @@ public:
     void CheckIfAlive();
     void CheckSecretSpot();
     void SetSleep() {Sleeping = !Sleeping;}
+    void SetWorldPos(Vector2 Pos) {WorldPos = Pos;}
     void DrawIndicator();
     void TakeDamage();
 
@@ -52,6 +53,7 @@ public:
     constexpr bool IsAttacking() const {return Attacking;}
     constexpr float GetHealth() const {return Health;}
     constexpr float GetSpeed() const {return Speed;}
+    constexpr Vector2 GetOffset() const {return Offset;}
     constexpr Vector2 GetWorldPos() const {return WorldPos;}
     constexpr Vector2 GetPrevWorldPos() const {return PrevWorldPos;}
     constexpr Vector2 GetCharPos() const {return ScreenPos;}

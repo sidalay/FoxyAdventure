@@ -22,6 +22,7 @@ namespace Game
         bool GameOverStart{true};
         bool ExitGame{false};
         bool ExitIsYes{false};
+        bool TeleportOn{false};
         Game::State State{Game::State::TRANSITION};
         Game::State NextState{Game::State::MAINMENU};
 

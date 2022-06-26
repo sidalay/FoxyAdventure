@@ -147,7 +147,7 @@ namespace Game
             Info.NextState = Game::State::PAUSED;
             Info.State = Game::State::TRANSITION;
         }
-        else if (IsKeyPressed(KEY_F5) || IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
+        else if (IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
             Info.NextState = Game::State::EXIT;
             Info.State = Game::State::TRANSITION;
         }
@@ -155,6 +155,27 @@ namespace Game
         // Dev Tools--------------------------------------
         if (IsKeyPressed(KEY_GRAVE)) {
             Info.DevToolsOn = !Info.DevToolsOn;
+        }
+
+        if (Info.TeleportOn) {
+            if (IsKeyPressed(KEY_F1)) {
+                Objects.Fox.SetWorldPos(Vector2Subtract(Vector2{335.f,2753.f},Objects.Fox.GetOffset()));
+            }
+            else if (IsKeyPressed(KEY_F2)) {
+                Objects.Fox.SetWorldPos(Vector2Subtract(Vector2{40.f,3763.f},Objects.Fox.GetOffset()));
+            }
+            else if (IsKeyPressed(KEY_F3)) {
+                Objects.Fox.SetWorldPos(Vector2Subtract(Vector2{1387.f,3065.f},Objects.Fox.GetOffset()));
+            }   
+            else if (IsKeyPressed(KEY_F4)) {
+                Objects.Fox.SetWorldPos(Vector2Subtract(Vector2{3162.f,2940.f},Objects.Fox.GetOffset()));
+            }
+            else if (IsKeyPressed(KEY_F5)) {
+                Objects.Fox.SetWorldPos(Vector2Subtract(Vector2{2137.f,1537.f},Objects.Fox.GetOffset()));
+            }
+            else if (IsKeyPressed(KEY_F6)) {
+                Objects.Fox.SetWorldPos(Vector2Subtract(Vector2{453.f,1751.f},Objects.Fox.GetOffset()));
+            }
         }
 
         if (Info.DevToolsOn) {
@@ -170,6 +191,9 @@ namespace Game
             }
             else if (IsKeyPressed(KEY_FOUR)) {
                 Info.ShowPos = !Info.ShowPos;
+            }
+            else if (IsKeyPressed(KEY_FIVE)) {
+                Info.TeleportOn = !Info.TeleportOn;
             }
             else if (IsKeyPressed(KEY_ZERO)) {
                 Info.ShowDevTools = !Info.ShowDevTools;
@@ -190,6 +214,7 @@ namespace Game
             Info.DrawRectanglesOn = false;
             Info.ShowFPS = false;
             Info.ShowPos = false;
+            Info.TeleportOn = false;
             Info.ShowDevTools = true;
         }
     }
@@ -275,21 +300,35 @@ namespace Game
                 DrawRectangle(15, 215, 90, 30, Color{0,0,0,170});
                 DrawFPS(20, 221);
             }
+
+            if (Info.TeleportOn) {
+                DrawRectangle(240, 270, 220, 25, Color{0,0,0,170});
+                DrawText("     Teleport", 245, 273, 20, WHITE);
+                DrawRectangle(240, 300, 220, 180, Color{0,0,0,170});
+                DrawText("  -- Destinations --", 245, 310, 20, WHITE);
+                DrawText("[F1] Fox Spawn", 245, 335, 20, !IsKeyDown(KEY_F1) ? WHITE : LIME);
+                DrawText("[F2] Rumby", 245, 355, 20, !IsKeyDown(KEY_F2) ? WHITE : LIME);
+                DrawText("[F3] Jade", 245, 375, 20, !IsKeyDown(KEY_F3) ? WHITE : LIME);
+                DrawText("[F4] Diana", 245, 395, 20, !IsKeyDown(KEY_F4) ? WHITE : LIME);
+                DrawText("[F5] Middle Grass", 245, 415, 20, !IsKeyDown(KEY_F5) ? WHITE : LIME);
+                DrawText("[F6] Secret Spot", 245, 435, 20, !IsKeyDown(KEY_F6) ? WHITE : LIME);
+            }
             
             if (Info.ShowDevTools) {
                 DrawRectangle(15, 270, 220, 25, Color{0,0,0,170});
                 DrawText("   Dev Tools Menu", 20, 273, 20, WHITE);
-                DrawRectangle(15, 300, 220, 240, Color{0,0,0,170});
+                DrawRectangle(15, 300, 220, 260, Color{0,0,0,170});
                 DrawText("  ---- Toggles ----", 20, 310, 20, WHITE);
                 DrawText("[`] Dev Tools", 20, 335, 20, !Info.DevToolsOn ? WHITE : LIME);
                 DrawText("[1] Noclip", 20, 355, 20, !Info.NoClipOn ? WHITE : LIME);
                 DrawText("[2] CollisionRecs", 20, 375, 20, !Info.DrawRectanglesOn ? WHITE : LIME);
                 DrawText("[3] FPS", 20, 395, 20, !Info.ShowFPS ? WHITE : LIME);
                 DrawText("[4] Position", 20, 415, 20, !Info.ShowPos ? WHITE : LIME);
-                DrawText("[0] Tools Menu", 20, 435, 20, !Info.ShowDevTools ? WHITE : LIME);
-                DrawText("    ---- Misc ----", 20, 460, 20, WHITE);
-                DrawText("[-] Decrease HP", 20, 485, 20, !IsKeyDown(KEY_MINUS) ? WHITE : LIME);
-                DrawText("[+] Increase HP", 20, 505, 20, !IsKeyDown(KEY_EQUAL) ? WHITE : LIME);
+                DrawText("[5] Teleport", 20, 435, 20, !Info.TeleportOn ? WHITE : LIME);
+                DrawText("[0] Tools Menu", 20, 455, 20, !Info.ShowDevTools ? WHITE : LIME);
+                DrawText("    ---- Misc ----", 20, 480, 20, WHITE);
+                DrawText("[-] Decrease HP", 20, 505, 20, !IsKeyDown(KEY_MINUS) ? WHITE : LIME);
+                DrawText("[+] Increase HP", 20, 525, 20, !IsKeyDown(KEY_EQUAL) ? WHITE : LIME);
             }
         }
     }
