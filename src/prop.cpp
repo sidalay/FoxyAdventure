@@ -107,114 +107,49 @@ Prop::Prop(const Sprite& Object,
 void Prop::Tick(const float DeltaTime)
 {
     if (Visible) {
-        // Play NPC idle animation when NOT interacting
-        if ((Type == PropType::NPC_A || Type == PropType::NPC_B || Type == PropType::NPC_C || Type == PropType::NPC_D) && !Talking) {
-            Object.Tick(DeltaTime);
-
-            // Update any progression and triggers for NPCs
-            if (CurrentAct != Progress::ACT_O) {
-                if (Type == CurrentNPC) {
-                    Act = CurrentAct;
-                    CurrentAct = Progress::ACT_O;
-                    CurrentNPC = PropType::NPC_O;
-                }
-            }
+        if ((Type == PropType::NPC_A || 
+             Type == PropType::NPC_B || 
+             Type == PropType::NPC_C || 
+             Type == PropType::NPC_D) && !Talking) 
+        {
+            NpcTick(DeltaTime);
         }
 
-        // Tick through Altar piece sprite animation once inserted
         if (Type == PropType::ANIMATEDALTAR) {
-            for (auto& Piece:AltarPieces) {
-                if (ItemName == std::get<0>(Piece) && std::get<2>(Piece) == true) {
-                    Object.Tick(DeltaTime);
-                }
-            }
+            AltarTick(DeltaTime);
         }
 
-        // determine behavior of prop when interacting with it
         if (Active) {
-            if (Type == PropType::GRASS) {
-                Object.Tick(DeltaTime);
-            }
-            else if (Type == PropType::TREASURE || Type == PropType::BIGTREASURE) {
-                if (TriggerAct != Progress::ACT_O) {
-                    CurrentAct = TriggerAct;
-                    CurrentNPC = TriggerNPC;
-                }
-
-                if (!Opened) {
+            switch (Type)
+            {
+                case PropType::GRASS:
                     Object.Tick(DeltaTime);
-                }
-
-                RunningTime += DeltaTime;
-
-                if (RunningTime > Object.UpdateTime * 4.f && RunningTime < Object.UpdateTime * 8.f) {
+                    break;
+                case PropType::TREASURE:
+                case PropType::BIGTREASURE:
+                    TreasureTick(DeltaTime);
+                    break;
+                case PropType::DOOR:
                     Opened = true;
-                    Opening = true;
-                    RunningTime = 0.f; 
-                }
-
-                for (auto& Piece:AltarPieces) {
-                    if (std::get<0>(Piece) == ItemName) {
-                        std::get<1>(Piece) = true;
-                    }
-                }
-            }
-            else if (Type == PropType::DOOR) {
-                Opened = true;
-            }
-            else if ((Type == PropType::NPC_A || Type == PropType::NPC_B || Type == PropType::NPC_C || Type == PropType::NPC_D)) {
-                if (TriggerAct != Progress::ACT_O) {
-                    CurrentAct = TriggerAct;
-                    CurrentNPC = TriggerNPC;
-                }
-
-                Talking = true;
-            }
-            else if (Type == PropType::ANIMATEDALTAR) {   
-                if (PiecesAdded == 0) {
-                    InsertPiece = true;
-                }
-
-                for (auto& Piece:AltarPieces) {
-                    if (std::get<1>(Piece) == true) {
-                        std::get<2>(Piece) = true;
-                        InsertPiece = true;
-                    }
-                    if (std::get<2>(Piece) == true && std::get<3>(Piece) == false) {
-                        std::get<3>(Piece) = true;
-                        PiecesAdded++;
-                    } 
-                }
-                
-                if (PiecesAdded >= 6) {
-                    FinalChest = true;
-                }
-
-                Opened = true;   
-            }
-            else if (Type == PropType::STUMP) {
-                Reading = true;
+                    break;
+                case PropType::NPC_A:
+                case PropType::NPC_B:
+                case PropType::NPC_C:
+                case PropType::NPC_D:
+                    TalkToNpc();
+                    break;
+                case PropType::ANIMATEDALTAR:
+                    InsertAltarPiece();
+                    break;
+                case PropType::STUMP:
+                    Reading = true;
+                    break;
+                default:
+                    break;
             }
         }
-        else {
-            // Draw treasure item for (UpdateTime * X) seconds
-            if (Opening) {
-                ReceiveItem = true;
-                RunningTime += DeltaTime;
-                if (RunningTime >= Object.UpdateTime * 10.f) {
-                    Opening = false;
-                    RunningTime = 0.f; 
-                }
-            }
-
-        }
-    }
-    else {
-        // Turn visibility on for BigTreasure when all 6 pieces have been inserted
-        if (Type == PropType::BIGTREASURE) {
-            if (PiecesAdded >= 6) {
-                Spawned = true;
-            }
+        else if (!Active && Opening) {
+            OpenChest(DeltaTime);
         }
     }
 }
@@ -309,6 +244,100 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
     if (Reading) {
         DrawTextureEx(GameTextures.SpeechBox, Vector2{352.f,518.f}, 0.f, 12.f, WHITE);
         DrawSpeech();
+    }
+}
+
+void Prop::NpcTick(const float DeltaTime)
+{
+    Object.Tick(DeltaTime);
+
+    // Update any progression and triggers for NPCs
+    if (CurrentAct != Progress::ACT_O) {
+        if (Type == CurrentNPC) {
+            Act = CurrentAct;
+            CurrentAct = Progress::ACT_O;
+            CurrentNPC = PropType::NPC_O;
+        }
+    }
+}
+
+void Prop::AltarTick(const float DeltaTime)
+{
+    for (auto& Piece:AltarPieces) {
+        if (ItemName == std::get<0>(Piece) && std::get<2>(Piece) == true) {
+            Object.Tick(DeltaTime);
+        }
+    }
+}
+
+void Prop::TreasureTick(const float DeltaTime)
+{
+    if (TriggerAct != Progress::ACT_O) {
+        CurrentAct = TriggerAct;
+        CurrentNPC = TriggerNPC;
+    }
+
+    if (!Opened) {
+        Object.Tick(DeltaTime);
+    }
+
+    RunningTime += DeltaTime;
+
+    if (RunningTime > Object.UpdateTime * 4.f && RunningTime < Object.UpdateTime * 8.f) {
+        Opened = true;
+        Opening = true;
+        RunningTime = 0.f; 
+    }
+
+    for (auto& Piece:AltarPieces) {
+        if (std::get<0>(Piece) == ItemName) {
+            std::get<1>(Piece) = true;
+        }
+    }
+}
+
+void Prop::InsertAltarPiece()
+{
+    if (PiecesAdded == 0) {
+        InsertPiece = true;
+    }
+
+    for (auto& Piece:AltarPieces) {
+        if (std::get<1>(Piece) == true) {
+            std::get<2>(Piece) = true;
+            InsertPiece = true;
+        }
+        if (std::get<2>(Piece) == true && std::get<3>(Piece) == false) {
+            std::get<3>(Piece) = true;
+            PiecesAdded++;
+        }
+    }
+    
+    if (PiecesAdded >= 6) {
+        FinalChest = true;
+    }
+
+    Opened = true;
+}
+
+void Prop::TalkToNpc()
+{
+    if (TriggerAct != Progress::ACT_O) {
+        CurrentAct = TriggerAct;
+        CurrentNPC = TriggerNPC;
+    }
+
+    Talking = true;
+}
+
+void Prop::OpenChest(const float DeltaTime)
+{
+    // Draw treasure item for (UpdateTime * X) seconds
+    ReceiveItem = true;
+    RunningTime += DeltaTime;
+    if (RunningTime >= Object.UpdateTime * 10.f) {
+        Opening = false;
+        RunningTime = 0.f;
     }
 }
 

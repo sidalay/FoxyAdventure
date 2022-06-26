@@ -80,6 +80,13 @@ public:
     void Tick(const float DeltaTime);
     void Draw(const Vector2 CharacterWorldPos);
 
+    void NpcTick(const float DeltaTime);
+    void AltarTick(const float DeltaTime);
+    void OpenChest(const float DeltaTime);
+    void TreasureTick(const float DeltaTime);
+    void InsertAltarPiece();
+    void TalkToNpc();
+
     constexpr bool HasCollision() const {return Collidable;}
     constexpr bool IsInteractable() const {return Interactable;}
     constexpr bool IsMoveable() const {return Moveable;}
