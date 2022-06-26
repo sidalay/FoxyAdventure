@@ -115,7 +115,7 @@ private:
     Sprite Object{};
     const PropType Type{};
     const GameTexture& GameTextures;
-    Vector2 WorldPos{};     // Where the prop is located in the world
+    Vector2 WorldPos{};
     Vector2 PrevWorldPos{};
     float Scale {4.f};
     bool Opened{false};
@@ -132,14 +132,12 @@ private:
 
     // NPC variables
     Progress Act{Progress::ACT_I};
-
-    // Progress Trigger Variables
     Progress TriggerAct{};
     PropType TriggerNPC{};
     static inline Progress CurrentAct{Progress::ACT_O};
     static inline PropType CurrentNPC{PropType::NPC_O};
 
-    // Treasure member variables
+    // Treasure variables
     bool ReceiveItem{false};
     const Texture2D Item{};
     const std::string ItemName{};
@@ -147,8 +145,8 @@ private:
     Vector2 ItemPos{};
     float RunningTime{};
 
-    // {"ItemName", ItemUnlocked, ItemVisible, ItemInserted}
     static inline std::vector<std::tuple<std::string, bool, bool, bool>> AltarPieces {
+            // {"ItemName", ItemUnlocked, ItemVisible, ItemInserted}
             {"Top Left Altar Piece", false, false, false}, 
             {"Top Altar Piece", false, false, false}, 
             {"Top Right Altar Piece", false, false, false}, 
