@@ -61,10 +61,11 @@ Prop::Prop(const Sprite& Object,
            const bool Interactable, 
            const Progress Act, 
            const PropType NPC, 
+           const bool Spawn,
            const std::string& ItemName, 
            const float ItemScale)
     : Object{Object}, Type{Type}, GameTextures{GameTextures}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}, 
-      TriggerAct{Act}, TriggerNPC{NPC}, Item{Item}, ItemName{ItemName}, ItemScale{ItemScale} 
+      Spawned{Spawn}, TriggerAct{Act}, TriggerNPC{NPC}, Item{Item}, ItemName{ItemName}, ItemScale{ItemScale} 
 {
     if (Type == PropType::GRASS ||
         Type == PropType::TREASURE ||
@@ -76,10 +77,6 @@ Prop::Prop(const Sprite& Object,
         Type == PropType::BIGTREASURE)
     {
         Collidable = true;
-    }
-
-    if (Type == PropType::BIGTREASURE) {
-        Spawned = false;
     }
 
     if (Type == PropType::TREASURE || Type == PropType::BIGTREASURE) {

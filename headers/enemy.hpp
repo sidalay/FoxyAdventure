@@ -82,6 +82,7 @@ public:
     void InitializeAI();
     void DrawHP();
     void CheckBossSummon(const Vector2 HeroWorldPos);
+    void CheckSpawnChest(std::vector<std::vector<Prop>>& Props);
 
     constexpr void Damaged(const bool Attacked) {IsAttacked = Attacked;}
     constexpr bool IsBlocked() const {return Blocked;}

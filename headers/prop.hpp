@@ -73,6 +73,7 @@ public:
          const bool Interactable = false, 
          const Progress Act = Progress::ACT_O, 
          const PropType NPC = PropType::NPC_O, 
+         const bool Spawn = true,
          const std::string& ItemName = "None", 
          const float ItemScale = 2.f);
     
@@ -90,11 +91,13 @@ public:
     
     constexpr Vector2 GetWorldPos() const {return WorldPos;}
     constexpr PropType GetType() const {return Type;}
+    std::string GetItemName() const {return ItemName;}
     Rectangle GetCollisionRec(const Vector2 CharacterWorldPos);
     Rectangle GetInteractRec(const Vector2 CharacterWorldPos);
     
     void SetActive(const bool Input) {Active = Input;}
     void SetOpened(const bool Input) {Opened = Input;}
+    void SetSpawned(const bool Input) {Spawned = Input;}
     void UndoMovement() {WorldPos = PrevWorldPos;}
     bool CheckMovement(Background& Map, const Vector2 CharWorldPos, const Vector2 Direction, const float Speed, std::vector<std::vector<Prop>>& Props);
 
