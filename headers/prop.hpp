@@ -84,6 +84,7 @@ public:
     void AltarTick(const float DeltaTime);
     void OpenChest(const float DeltaTime);
     void TreasureTick(const float DeltaTime);
+    void CheckVisibility(const Vector2 CharacterWorldPos);
     void InsertAltarPiece();
     void TalkToNpc();
 

@@ -156,46 +156,37 @@ void Prop::Tick(const float DeltaTime)
 
 void Prop::Draw(const Vector2 CharacterWorldPos)
 {
-    Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)}; // Where the prop is drawn on the screen
-    // Vector2 MaxItemDistance {0,-20};
+    Vector2 ScreenPos {Vector2Subtract(WorldPos, CharacterWorldPos)};
 
-    if (Spawned) {
-        // Draw only if Prop is viewable in the screen frame
-        if (WithinScreen(CharacterWorldPos)) {
-            Visible = true;
+    CheckVisibility(CharacterWorldPos);
 
-            // Only draw final chest if conditions are met
-            if (Type == PropType::BIGTREASURE) {
-                if (FinalChest) {
-                    DrawTexturePro(Object.Texture, Object.GetSourceRec(), Object.GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
-                }
-            }
-            // Draw the object
-            else {
+    if (Visible) {
+        if (Type == PropType::BIGTREASURE) {
+            if (FinalChest) {
                 DrawTexturePro(Object.Texture, Object.GetSourceRec(), Object.GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
             }
+        }
+        else {
+            DrawTexturePro(Object.Texture, Object.GetSourceRec(), Object.GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
+        }
 
-            // Draw the animated altar piece
-            if (Type == PropType::ANIMATEDALTAR) {
-                for (auto& Piece:AltarPieces) {
-                    if (std::get<2>(Piece) == true) {
-                        if (std::get<0>(Piece) == ItemName) {
-                            DrawTextureEx(Object.Texture, WorldPos, 0.f, Scale, WHITE);
-                        }
+        // Draw the animated altar piece
+        if (Type == PropType::ANIMATEDALTAR) {
+            for (auto& Piece:AltarPieces) {
+                if (std::get<2>(Piece) == true) {
+                    if (std::get<0>(Piece) == ItemName) {
+                        DrawTextureEx(Object.Texture, WorldPos, 0.f, Scale, WHITE);
                     }
                 }
             }
         }
-        else {   
-            Visible = false;
-
-            // Once NPC_C has been interacted with and is offscreen, set to not draw anymore
-            if (Type == PropType::NPC_C && Act == Progress::ACT_O) {
-                // Spawned = false;
-                WorldPos.x = 1283.f;
-                WorldPos.y = 2859.f;
-                Act = Progress::ACT_II;
-            }
+    }
+    else {   
+        // Once NPC_C has been interacted with and is offscreen, set to not draw anymore
+        if (Type == PropType::NPC_C && Act == Progress::ACT_O) {
+            WorldPos.x = 1283.f;
+            WorldPos.y = 2859.f;
+            Act = Progress::ACT_II;
         }
     }
     
@@ -207,8 +198,19 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
 
     // Treasure Speech Box
     if (ReceiveItem) {
-        // DrawTextureEx(SpeechBox, Vector2{352,518}, 0.f, 12.f, WHITE);
         DrawTextureEx(GameTextures.SpeechBox, Vector2{472.f,574.f}, 0.f, 8.f, WHITE);
+        DrawSpeech();
+    }
+
+    // Altar Pieces Inserted
+    if (InsertPiece) {
+        DrawTextureEx(GameTextures.SpeechBox, Vector2{472.f,574.f}, 0.f, 8.f, WHITE);
+        DrawSpeech();
+    }
+
+    // Foxy Secret Spot
+    if (Reading) {
+        DrawTextureEx(GameTextures.SpeechBox, Vector2{352.f,518.f}, 0.f, 12.f, WHITE);
         DrawSpeech();
     }
 
@@ -233,17 +235,6 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
             DrawText("Rumby", 393, 490, 30, WHITE);
             DrawSpeech();
         }
-    }
-
-    // Altar Pieces Inserted
-    if (InsertPiece) {
-        DrawTextureEx(GameTextures.SpeechBox, Vector2{472.f,574.f}, 0.f, 8.f, WHITE);
-        DrawSpeech();
-    }
-
-    if (Reading) {
-        DrawTextureEx(GameTextures.SpeechBox, Vector2{352.f,518.f}, 0.f, 12.f, WHITE);
-        DrawSpeech();
     }
 }
 
@@ -328,6 +319,16 @@ void Prop::TalkToNpc()
     }
 
     Talking = true;
+}
+
+void Prop::CheckVisibility(const Vector2 CharacterWorldPos)
+{
+    if (Spawned && WithinScreen(CharacterWorldPos)) {
+        Visible = true;
+    }
+    else {
+        Visible = false;
+    }
 }
 
 void Prop::OpenChest(const float DeltaTime)
