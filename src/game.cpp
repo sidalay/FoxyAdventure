@@ -197,6 +197,7 @@ namespace Game
             }
             else if (IsKeyPressed(KEY_ZERO)) {
                 Info.ShowDevTools = !Info.ShowDevTools;
+                Info.TeleportOn = false;
             }
             else if (IsKeyPressed(KEY_EQUAL)) {
                 Objects.Fox.AddHealth(0.5f);
@@ -303,7 +304,7 @@ namespace Game
 
             if (Info.TeleportOn) {
                 DrawRectangle(240, 270, 220, 25, Color{0,0,0,170});
-                DrawText("     Teleport", 245, 273, 20, WHITE);
+                DrawText("        Teleport", 245, 273, 20, WHITE);
                 DrawRectangle(240, 300, 220, 180, Color{0,0,0,170});
                 DrawText("  -- Destinations --", 245, 310, 20, WHITE);
                 DrawText("[F1] Fox Spawn", 245, 335, 20, !IsKeyDown(KEY_F1) ? WHITE : LIME);
