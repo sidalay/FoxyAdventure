@@ -274,7 +274,8 @@ void Prop::TreasureTick(const float DeltaTime)
 
     RunningTime += DeltaTime;
 
-    if (RunningTime > Object.UpdateTime * 4.f && RunningTime < Object.UpdateTime * 8.f) {
+    // controls duration of opening animation
+    if (RunningTime > Object.UpdateTime * 4.f) {
         Opened = true;
         Opening = true;
         RunningTime = 0.f; 
@@ -333,10 +334,10 @@ void Prop::CheckVisibility(const Vector2 CharacterWorldPos)
 
 void Prop::OpenChest(const float DeltaTime)
 {
-    // Draw treasure item for (UpdateTime * X) seconds
+    // controls 'press enter' delay to close dialogue
     ReceiveItem = true;
     RunningTime += DeltaTime;
-    if (RunningTime >= Object.UpdateTime * 10.f) {
+    if (RunningTime >= Object.UpdateTime * 4.f) {
         Opening = false;
         RunningTime = 0.f;
     }
