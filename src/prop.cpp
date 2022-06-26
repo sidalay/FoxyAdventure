@@ -337,7 +337,7 @@ void Prop::OpenChest(const float DeltaTime)
     // controls 'press enter' delay to close dialogue
     ReceiveItem = true;
     RunningTime += DeltaTime;
-    if (RunningTime >= Object.UpdateTime * 4.f) {
+    if (RunningTime >= Object.UpdateTime * 6.f) {
         Opening = false;
         RunningTime = 0.f;
     }
