@@ -355,31 +355,6 @@ void Prop::UpdateNpcActs()
 {
     switch (Act) 
     {
-        case Progress::ACT_O:
-        {
-            switch (Type)
-            {
-                case PropType::NPC_DIANA:
-                {
-                    break;
-                }
-                case PropType::NPC_JADE:
-                {
-                    break;
-                }
-                case PropType::NPC_SON:
-                {
-                    break;
-                }
-                case PropType::NPC_RUMBY:
-                {
-                    break;
-                }
-                default:
-                    break;
-            }
-            break;
-        }
         case Progress::ACT_I:
         {
             switch (Type)
@@ -517,6 +492,8 @@ void Prop::UpdateNpcActs()
             }
             break;    
         }
+        default:
+            break;
     }
 
     // if (TriggerAct != Progress::ACT_O) {
@@ -1056,15 +1033,21 @@ void Prop::DrawSpeech()
         {
             case Progress::ACT_O:
             {
-                if (Type == PropType::NPC_SON) {
-                    DrawText("Hey there, Foxy... *sniffle*", 390, 550, 20, WHITE);
-                    DrawText("Have you seen my mom? We were walking", 390, 575, 20, WHITE);
-                    DrawText("together and we got lost... *sniffle*", 390, 600, 20, WHITE);
-                    DrawText("She always does this...", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                switch (Type)
+                {
+                    case PropType::NPC_SON:
+                    {
+                        DrawText("Hey there, Foxy... *sniffle*", 390, 550, 20, WHITE);
+                        DrawText("Have you seen my mom? We were walking", 390, 575, 20, WHITE);
+                        DrawText("together and we got lost... *sniffle*", 390, 600, 20, WHITE);
+                        DrawText("She always does this...", 390, 625, 20, WHITE);
+                        DrawText("", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                    }
+                    default:
+                        break;
                 }
-
+                
                 if (IsKeyReleased(KEY_ENTER)) {
                     Opened = true;
                     Talking = false;
@@ -1073,38 +1056,51 @@ void Prop::DrawSpeech()
             }
             case Progress::ACT_I:
             {   
-                if (Type == PropType::NPC_DIANA) {
-                    DrawText("Hello there, little Foxy! You look a little lost.", 390, 550, 20, WHITE);
-                    DrawText("Have you ran into my neighbor, Jade? I know she", 390, 575, 20, WHITE);
-                    DrawText("can be noisy, but she means no harm...", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                switch (Type)
+                {
+                    case PropType::NPC_DIANA:
+                    {
+                        DrawText("Hello there, little Foxy! You look a little lost.", 390, 550, 20, WHITE);
+                        DrawText("Have you ran into my neighbor, Jade? I know she", 390, 575, 20, WHITE);
+                        DrawText("can be noisy, but she means no harm...", 390, 600, 20, WHITE);
+                        DrawText("", 390, 625, 20, WHITE);
+                        DrawText("", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                        break;
+                    }
+                    case PropType::NPC_JADE:
+                    {
+                        DrawText("Why HELLO, Love! Have you seen my little one?", 390, 550, 20, WHITE);
+                        DrawText("Could have sworn he was right here...", 390, 575, 20, WHITE);
+                        DrawText("I really hope he didn't wander into the forest", 390, 600, 20, WHITE);
+                        DrawText("AGAIN!!", 390, 625, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                        break;
+                    }
+                    case PropType::NPC_SON:
+                    {
+                        DrawText("...Mom told you to find me?...", 390, 550, 20, WHITE);
+                        DrawText("She said that I keep wandering off???", 390, 575, 20, WHITE);
+                        DrawText("SHES the one who left ME here!!", 390, 600, 20, WHITE);
+                        DrawText("...Well, thank you for finding me...", 390, 625, 20, WHITE);
+                        DrawText("", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                        break;
+                    }
+                    case PropType::NPC_RUMBY:
+                    {
+                        DrawText("Hi, friend! My name is Rumby. I am the forest", 390, 550, 20, WHITE);
+                        DrawText("travel guide. I can show you the basics of", 390, 575, 20, WHITE);
+                        DrawText("surviving the great big forest!", 390, 600, 20, WHITE);
+                        DrawText("Though a wild Foxy like you probably knows", 390, 625, 20, WHITE);
+                        DrawText("more than I would, haha!", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                        break;
+                    }
+                    default:
+                        break;
                 }
-                else if (Type == PropType::NPC_JADE) {
-                    DrawText("Why HELLO, Love! Have you seen my little one?", 390, 550, 20, WHITE);
-                    DrawText("Could have sworn he was right here...", 390, 575, 20, WHITE);
-                    DrawText("I really hope he didn't wander into the forest", 390, 600, 20, WHITE);
-                    DrawText("AGAIN!!", 390, 625, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
-                }
-                else if (Type == PropType::NPC_SON) {
-                    DrawText("...Mom told you to find me?...", 390, 550, 20, WHITE);
-                    DrawText("She said that I keep wandering off???", 390, 575, 20, WHITE);
-                    DrawText("SHES the one who left ME here!!", 390, 600, 20, WHITE);
-                    DrawText("...Well, thank you for finding me...", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
-                }
-                else if (Type == PropType::NPC_RUMBY) {
-                    DrawText("Hi, friend! My name is Rumby. I am the forest", 390, 550, 20, WHITE);
-                    DrawText("travel guide. I can show you the basics of", 390, 575, 20, WHITE);
-                    DrawText("surviving the great big forest!", 390, 600, 20, WHITE);
-                    DrawText("Though a wild Foxy like you probably knows", 390, 625, 20, WHITE);
-                    DrawText("more than I would, haha!", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
-                };
-
+                
                 if (IsKeyReleased(KEY_ENTER)) {
                     if (Type == PropType::NPC_DIANA || Type == PropType::NPC_RUMBY) {
                         Act = Progress::ACT_II;
@@ -1118,39 +1114,52 @@ void Prop::DrawSpeech()
             }
             case Progress::ACT_II:
             {
-                if (Type == PropType::NPC_DIANA) {
-                    DrawText("By the way, do you live in the flower forest", 390, 550, 20, WHITE);
-                    DrawText("WEST of here? There's a strange stone", 390, 575, 20, WHITE);
-                    DrawText("monument NORTH of that location...", 390, 600, 20, WHITE);
-                    DrawText("People have been wondering what it is", 390, 625, 20, WHITE);
-                    DrawText("but no one really knows...", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);   
+                switch (Type)
+                {
+                    case PropType::NPC_DIANA:
+                    {
+                        DrawText("By the way, do you live in the flower forest", 390, 550, 20, WHITE);
+                        DrawText("WEST of here? There's a strange stone", 390, 575, 20, WHITE);
+                        DrawText("monument NORTH of that location...", 390, 600, 20, WHITE);
+                        DrawText("People have been wondering what it is", 390, 625, 20, WHITE);
+                        DrawText("but no one really knows...", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                        break;
+                    }
+                    case PropType::NPC_JADE:
+                    {
+                        DrawText("You found my boy! He's alawys wandering", 390, 550, 20, WHITE);
+                        DrawText("off and getting in trouble... This time", 390, 575, 20, WHITE);
+                        DrawText("the FOREST!! Thank you for finding him.", 390, 600, 20, WHITE);
+                        DrawText("There are rumors of a hidden treasure out", 390, 625, 20, WHITE);
+                        DrawText("there... maybe he was looking for it?", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                        break;
+                    }
+                    case PropType::NPC_SON:
+                    {
+                        DrawText("Hi, Foxy! Thanks again for your help! ", 390, 550, 20, WHITE);
+                        DrawText("Mom is still blaming me about getting lost..", 390, 575, 20, WHITE);
+                        DrawText("While I was lost, I think I saw a treasure", 390, 600, 20, WHITE);
+                        DrawText("in the NORTH WEST region of the forest...", 390, 625, 20, WHITE);
+                        DrawText("Might be worth checking out!", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                        break;
+                    }
+                    case PropType::NPC_RUMBY:
+                    {
+                        DrawText("Firstly, you can use [SPACE] or [LEFT CLICK]", 390, 550, 20, WHITE);
+                        DrawText("to attack and fend off monsters!", 390, 575, 20, WHITE);
+                        DrawText("Now, after fighting you might be low on health.", 390, 600, 20, WHITE);
+                        DrawText("Hold [SHIFT] while moving to run and find cover", 390, 625, 20, WHITE);
+                        DrawText("so you can press [L] to rest!", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                        break;
+                    }
+                    default:
+                        break;
                 }
-                else if (Type == PropType::NPC_JADE) {
-                    DrawText("You found my boy! He's alawys wandering", 390, 550, 20, WHITE);
-                    DrawText("off and getting in trouble... This time", 390, 575, 20, WHITE);
-                    DrawText("the FOREST!! Thank you for finding him.", 390, 600, 20, WHITE);
-                    DrawText("There are rumors of a hidden treasure out", 390, 625, 20, WHITE);
-                    DrawText("there... maybe he was looking for it?", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
-                }
-                else if (Type == PropType::NPC_SON) {
-                    DrawText("Hi, Foxy! Thanks again for your help! ", 390, 550, 20, WHITE);
-                    DrawText("Mom is still blaming me about getting lost..", 390, 575, 20, WHITE);
-                    DrawText("While I was lost, I think I saw a treasure", 390, 600, 20, WHITE);
-                    DrawText("in the NORTH WEST region of the forest...", 390, 625, 20, WHITE);
-                    DrawText("Might be worth checking out!", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
-                }
-                else if (Type == PropType::NPC_RUMBY) {
-                    DrawText("Firstly, you can use [SPACE] or [LEFT CLICK]", 390, 550, 20, WHITE);
-                    DrawText("to attack and fend off monsters!", 390, 575, 20, WHITE);
-                    DrawText("Now, after fighting you might be low on health.", 390, 600, 20, WHITE);
-                    DrawText("Hold [SHIFT] while moving to run and find cover", 390, 625, 20, WHITE);
-                    DrawText("so you can press [L] to rest!", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
-                };
-
+                
                 if (IsKeyPressed(KEY_ENTER)) {
                     if (Type == PropType::NPC_RUMBY) {
                         Act = Progress::ACT_III;
@@ -1164,39 +1173,52 @@ void Prop::DrawSpeech()
             }
             case Progress::ACT_III:
             {
-                if (Type == PropType::NPC_DIANA) {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                switch (Type)
+                {
+                    case PropType::NPC_DIANA:
+                    {
+                        DrawText("", 390, 550, 20, WHITE);
+                        DrawText("", 390, 575, 20, WHITE);
+                        DrawText("", 390, 600, 20, WHITE);
+                        DrawText("", 390, 625, 20, WHITE);
+                        DrawText("", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                        break;
+                    }
+                    case PropType::NPC_JADE:
+                    {
+                        DrawText("", 390, 550, 20, WHITE);
+                        DrawText("", 390, 575, 20, WHITE);
+                        DrawText("", 390, 600, 20, WHITE);
+                        DrawText("", 390, 625, 20, WHITE);
+                        DrawText("", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                        break;
+                    }
+                    case PropType::NPC_SON:
+                    {
+                        DrawText("", 390, 550, 20, WHITE);
+                        DrawText("", 390, 575, 20, WHITE);
+                        DrawText("", 390, 600, 20, WHITE);
+                        DrawText("", 390, 625, 20, WHITE);
+                        DrawText("", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                        break;
+                    }
+                    case PropType::NPC_RUMBY:
+                    {
+                        DrawText("Thirdly, the forest is gigantic! And", 390, 550, 20, WHITE);
+                        DrawText("it is easy to get lost. You're a smart", 390, 575, 20, WHITE);
+                        DrawText("Foxy, so here is a map! Press [M] to use it!", 390, 600, 20, WHITE);
+                        DrawText("And if you ever need to take a break, [P] will", 390, 625, 20, WHITE);
+                        DrawText("bring up the lovely pause menu!", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                        break;
+                    }
+                    default:
+                        break;
                 }
-                else if (Type == PropType::NPC_JADE)  {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
-                }
-                else if (Type == PropType::NPC_SON) {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
-                }
-                else if (Type == PropType::NPC_RUMBY) {
-                    DrawText("Thirdly, the forest is gigantic! And", 390, 550, 20, WHITE);
-                    DrawText("it is easy to get lost. You're a smart", 390, 575, 20, WHITE);
-                    DrawText("Foxy, so here is a map! Press [M] to use it!", 390, 600, 20, WHITE);
-                    DrawText("And if you ever need to take a break, [P] will", 390, 625, 20, WHITE);
-                    DrawText("bring up the lovely pause menu!", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
-                };
-
+                
                 if (IsKeyPressed(KEY_ENTER)) {
                     if (Type == PropType::NPC_RUMBY) {
                         Act = Progress::ACT_IV;
@@ -1210,39 +1232,106 @@ void Prop::DrawSpeech()
             }
             case Progress::ACT_IV:
             {
-                if (Type == PropType::NPC_DIANA) {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                switch (Type)
+                {
+                    case PropType::NPC_DIANA:
+                    {
+                        DrawText("", 390, 550, 20, WHITE);
+                        DrawText("", 390, 575, 20, WHITE);
+                        DrawText("", 390, 600, 20, WHITE);
+                        DrawText("", 390, 625, 20, WHITE);
+                        DrawText("", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                        break;
+                    }
+                    case PropType::NPC_JADE:
+                    {
+                        DrawText("", 390, 550, 20, WHITE);
+                        DrawText("", 390, 575, 20, WHITE);
+                        DrawText("", 390, 600, 20, WHITE);
+                        DrawText("", 390, 625, 20, WHITE);
+                        DrawText("", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                        break;
+                    }
+                    case PropType::NPC_SON:
+                    {
+                        DrawText("", 390, 550, 20, WHITE);
+                        DrawText("", 390, 575, 20, WHITE);
+                        DrawText("", 390, 600, 20, WHITE);
+                        DrawText("", 390, 625, 20, WHITE);
+                        DrawText("", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                        break;
+                    }
+                    case PropType::NPC_RUMBY:
+                    {
+                        DrawText("Lastly, if you need to call it quits,", 390, 550, 20, WHITE);
+                        DrawText("bring up the quit menu by pressing [PERIOD]", 390, 575, 20, WHITE);
+                        DrawText("or [ESCAPE]. Thats about it! Be safe", 390, 600, 20, WHITE);
+                        DrawText("and have fun my dear Foxy! Oh and please take", 390, 625, 20, WHITE);
+                        DrawText("care of the evil mushrooms...", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                        break;
+                    }
+                    default:
+                        break;
                 }
-                else if (Type == PropType::NPC_JADE) {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                
+                if (IsKeyPressed(KEY_ENTER)) {
+                    Opened = true;
+                    Talking = false;
                 }
-                else if (Type == PropType::NPC_SON) {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
+                break;
+            }
+            case Progress::ACT_V:
+            {
+                switch (Type)
+                {
+                    case PropType::NPC_DIANA:
+                    {
+                        DrawText("", 390, 550, 20, WHITE);
+                        DrawText("", 390, 575, 20, WHITE);
+                        DrawText("", 390, 600, 20, WHITE);
+                        DrawText("", 390, 625, 20, WHITE);
+                        DrawText("", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                        break;
+                    }
+                    case PropType::NPC_JADE:
+                    {
+                        DrawText("", 390, 550, 20, WHITE);
+                        DrawText("", 390, 575, 20, WHITE);
+                        DrawText("", 390, 600, 20, WHITE);
+                        DrawText("", 390, 625, 20, WHITE);
+                        DrawText("", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                        break;
+                    }
+                    case PropType::NPC_SON:
+                    {
+                        DrawText("", 390, 550, 20, WHITE);
+                        DrawText("", 390, 575, 20, WHITE);
+                        DrawText("", 390, 600, 20, WHITE);
+                        DrawText("", 390, 625, 20, WHITE);
+                        DrawText("", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                        break;
+                    }
+                    case PropType::NPC_RUMBY:
+                    {
+                        DrawText("", 390, 550, 20, WHITE);
+                        DrawText("", 390, 575, 20, WHITE);
+                        DrawText("", 390, 600, 20, WHITE);
+                        DrawText("", 390, 625, 20, WHITE);
+                        DrawText("", 390, 650, 20, WHITE);
+                        DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                        break;
+                    }
+                    default:
+                        break;
                 }
-                else if (Type == PropType::NPC_RUMBY) {
-                    DrawText("Lastly, if you need to call it quits,", 390, 550, 20, WHITE);
-                    DrawText("bring up the quit menu by pressing [PERIOD]", 390, 575, 20, WHITE);
-                    DrawText("or [ESCAPE]. Thats about it! Be safe", 390, 600, 20, WHITE);
-                    DrawText("and have fun my dear Foxy! Oh and please take", 390, 625, 20, WHITE);
-                    DrawText("care of the evil mushrooms...", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
-                };
-            
+                
                 if (IsKeyPressed(KEY_ENTER)) {
                     Opened = true;
                     Talking = false;
