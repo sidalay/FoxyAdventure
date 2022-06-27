@@ -247,6 +247,11 @@ void Prop::NpcTick(const float DeltaTime)
     Object.Tick(DeltaTime);
 
     // Update any progression and triggers for NPCs
+    // if (TriggerAct != Progress::ACT_O) {
+    //     CurrentAct = TriggerAct;
+    //     CurrentNPC = TriggerNPC;
+    // }
+
     if (CurrentAct != Progress::ACT_O) {
         if (Type == CurrentNPC) {
             Act = CurrentAct;
@@ -278,11 +283,6 @@ void Prop::OpenChest(const float DeltaTime)
 
 void Prop::TreasureTick(const float DeltaTime)
 {
-    if (TriggerAct != Progress::ACT_O) {
-        CurrentAct = TriggerAct;
-        CurrentNPC = TriggerNPC;
-    }
-
     if (!Opened) {
         Object.Tick(DeltaTime);
     }
@@ -353,10 +353,176 @@ void Prop::TalkToNpc()
 
 void Prop::UpdateNpcActs()
 {
-    if (TriggerAct != Progress::ACT_O) {
-        CurrentAct = TriggerAct;
-        CurrentNPC = TriggerNPC;
+    switch (Act) 
+    {
+        case Progress::ACT_O:
+        {
+            switch (Type)
+            {
+                case PropType::NPC_DIANA:
+                {
+                    break;
+                }
+                case PropType::NPC_JADE:
+                {
+                    break;
+                }
+                case PropType::NPC_SON:
+                {
+                    break;
+                }
+                case PropType::NPC_RUMBY:
+                {
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        case Progress::ACT_I:
+        {
+            switch (Type)
+            {
+                case PropType::NPC_DIANA:
+                {
+                    CurrentAct = Progress::ACT_II;
+                    CurrentNPC = PropType::NPC_DIANA;
+                    break;
+                }
+                case PropType::NPC_JADE:
+                {
+                    CurrentAct = Progress::ACT_I;
+                    CurrentNPC = PropType::NPC_SON;
+                    break;
+                }
+                case PropType::NPC_SON:
+                {
+                    CurrentAct = Progress::ACT_II;
+                    CurrentNPC = PropType::NPC_JADE;
+                    break;
+                }
+                case PropType::NPC_RUMBY:
+                {
+                    CurrentAct = Progress::ACT_II;
+                    CurrentNPC = PropType::NPC_RUMBY;
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        case Progress::ACT_II:
+        {
+            switch (Type)
+            {
+                case PropType::NPC_DIANA:
+                {
+                    CurrentAct = Progress::ACT_I;
+                    CurrentNPC = PropType::NPC_DIANA;
+                    break;
+                }
+                case PropType::NPC_JADE:
+                {
+                    break;
+                }
+                case PropType::NPC_SON:
+                {
+                    break;
+                }
+                case PropType::NPC_RUMBY:
+                {
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        case Progress::ACT_III:
+        {
+            switch (Type)
+            {
+                case PropType::NPC_DIANA:
+                {
+                    break;
+                }
+                case PropType::NPC_JADE:
+                {
+                    break;
+                }
+                case PropType::NPC_SON:
+                {
+                    break;
+                }
+                case PropType::NPC_RUMBY:
+                {
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        case Progress::ACT_IV:
+        {
+            switch (Type)
+            {
+                case PropType::NPC_DIANA:
+                {
+                    break;
+                }
+                case PropType::NPC_JADE:
+                {
+                    break;
+                }
+                case PropType::NPC_SON:
+                {
+                    break;
+                }
+                case PropType::NPC_RUMBY:
+                {
+                    CurrentAct = Progress::ACT_I;
+                    CurrentNPC = PropType::NPC_RUMBY;
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        case Progress::ACT_V:
+        {
+            switch (Type)
+            {
+                case PropType::NPC_DIANA:
+                {
+                    break;
+                }
+                case PropType::NPC_JADE:
+                {
+                    break;
+                }
+                case PropType::NPC_SON:
+                {
+                    break;
+                }
+                case PropType::NPC_RUMBY:
+                {
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;    
+        }
     }
+
+    // if (TriggerAct != Progress::ACT_O) {
+    //     CurrentAct = TriggerAct;
+    //     CurrentNPC = TriggerNPC;
+    // }
 }
 
 bool Prop::WithinScreen(const Vector2 CharacterWorldPos)
@@ -986,12 +1152,7 @@ void Prop::DrawSpeech()
                 };
 
                 if (IsKeyPressed(KEY_ENTER)) {
-                    if (Type == PropType::NPC_DIANA) {
-                        Act = Progress::ACT_I;
-                        Opened = true;
-                        Talking = false;
-                    }
-                    else if (Type == PropType::NPC_RUMBY) {
+                    if (Type == PropType::NPC_RUMBY) {
                         Act = Progress::ACT_III;
                     }
                     else {
@@ -1028,7 +1189,7 @@ void Prop::DrawSpeech()
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
                 else if (Type == PropType::NPC_RUMBY) {
-                    DrawText("Thirdly, the forest is a giant, and", 390, 550, 20, WHITE);
+                    DrawText("Thirdly, the forest is gigantic! And", 390, 550, 20, WHITE);
                     DrawText("it is easy to get lost. You're a smart", 390, 575, 20, WHITE);
                     DrawText("Foxy, so here is a map! Press [M] to use it!", 390, 600, 20, WHITE);
                     DrawText("And if you ever need to take a break, [P] will", 390, 625, 20, WHITE);
@@ -1085,10 +1246,6 @@ void Prop::DrawSpeech()
                 if (IsKeyPressed(KEY_ENTER)) {
                     Opened = true;
                     Talking = false;
-
-                    if (Type == PropType::NPC_RUMBY) {
-                        Act = Progress::ACT_I;
-                    }
                 }
                 break;
             }
