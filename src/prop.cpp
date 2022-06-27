@@ -59,20 +59,20 @@ Prop::Prop(const Sprite& Object,
            const float Scale, 
            const bool Moveable, 
            const bool Interactable, 
-           const Progress Act, 
-           const PropType NPC, 
+           const Progress TriggerAct, 
+           const PropType TriggerNPC, 
            const bool Spawn,
            const std::string& ItemName, 
            const float ItemScale)
     : Object{Object}, Type{Type}, GameTextures{GameTextures}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}, 
-      Spawned{Spawn}, TriggerAct{Act}, TriggerNPC{NPC}, Item{Item}, ItemName{ItemName}, ItemScale{ItemScale} 
+      Spawned{Spawn}, TriggerAct{TriggerAct}, TriggerNPC{TriggerNPC}, Item{Item}, ItemName{ItemName}, ItemScale{ItemScale} 
 {
     if (Type == PropType::GRASS ||
         Type == PropType::TREASURE ||
-        Type == PropType::NPC_A ||
-        Type == PropType::NPC_B ||
-        Type == PropType::NPC_C ||
-        Type == PropType::NPC_D ||
+        Type == PropType::NPC_DIANA ||
+        Type == PropType::NPC_JADE ||
+        Type == PropType::NPC_SON ||
+        Type == PropType::NPC_RUMBY ||
         Type == PropType::ALTAR ||
         Type == PropType::BIGTREASURE)
     {
@@ -102,15 +102,19 @@ Prop::Prop(const Sprite& Object,
             ItemPos.x = 0.f;
         }
     }
+
+    if (Type == PropType::NPC_SON) {
+        Act = Progress::ACT_O;
+    }
 }
 
 void Prop::Tick(const float DeltaTime)
 {
     if (Visible) {
-        if ((Type == PropType::NPC_A || 
-             Type == PropType::NPC_B || 
-             Type == PropType::NPC_C || 
-             Type == PropType::NPC_D) && !Talking) 
+        if ((Type == PropType::NPC_DIANA || 
+             Type == PropType::NPC_JADE || 
+             Type == PropType::NPC_SON || 
+             Type == PropType::NPC_RUMBY) && !Talking) 
         {
             NpcTick(DeltaTime);
         }
@@ -132,10 +136,10 @@ void Prop::Tick(const float DeltaTime)
                 case PropType::DOOR:
                     Opened = true;
                     break;
-                case PropType::NPC_A:
-                case PropType::NPC_B:
-                case PropType::NPC_C:
-                case PropType::NPC_D:
+                case PropType::NPC_DIANA:
+                case PropType::NPC_JADE:
+                case PropType::NPC_SON:
+                case PropType::NPC_RUMBY:
                     TalkToNpc();
                     break;
                 case PropType::ANIMATEDALTAR:
@@ -183,7 +187,7 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
     }
     else {   
         // Once NPC_C has been interacted with and is offscreen, set to not draw anymore
-        if (Type == PropType::NPC_C && Act == Progress::ACT_O) {
+        if (Type == PropType::NPC_SON && Act == Progress::ACT_I) {
             WorldPos.x = 1283.f;
             WorldPos.y = 2859.f;
             Act = Progress::ACT_II;
@@ -219,19 +223,19 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
         DrawTextureEx(GameTextures.SpeechName, Vector2{376.f,438.f}, 0.f, 5.f, WHITE);
         DrawTextureEx(GameTextures.SpeechBox, Vector2{352.f,518.f}, 0.f, 12.f, WHITE);
 
-        if (Type == PropType::NPC_A) {
+        if (Type == PropType::NPC_DIANA) {
             DrawText("Diana", 399, 490, 30, WHITE);
             DrawSpeech();
         }
-        else if (Type == PropType::NPC_B) {
+        else if (Type == PropType::NPC_JADE) {
             DrawText("Jade", 399, 490, 30, WHITE);
             DrawSpeech();
         }
-        else if (Type == PropType::NPC_C) {
+        else if (Type == PropType::NPC_SON) {
             DrawText("Louie", 399, 490, 30, WHITE);
             DrawSpeech();
         }
-        else if (Type == PropType::NPC_D) {
+        else if (Type == PropType::NPC_RUMBY) {
             DrawText("Rumby", 393, 490, 30, WHITE);
             DrawSpeech();
         }
@@ -261,6 +265,17 @@ void Prop::AltarTick(const float DeltaTime)
     }
 }
 
+void Prop::OpenChest(const float DeltaTime)
+{
+    // controls 'press enter' delay to close dialogue
+    ReceiveItem = true;
+    RunningTime += DeltaTime;
+    if (RunningTime >= Object.UpdateTime * 6.f) {
+        Opening = false;
+        RunningTime = 0.f;
+    }
+}
+
 void Prop::TreasureTick(const float DeltaTime)
 {
     if (TriggerAct != Progress::ACT_O) {
@@ -285,6 +300,16 @@ void Prop::TreasureTick(const float DeltaTime)
         if (std::get<0>(Piece) == ItemName) {
             std::get<1>(Piece) = true;
         }
+    }
+}
+
+void Prop::CheckVisibility(const Vector2 CharacterWorldPos)
+{
+    if (Spawned && WithinScreen(CharacterWorldPos)) {
+        Visible = true;
+    }
+    else {
+        Visible = false;
     }
 }
 
@@ -321,32 +346,16 @@ void Prop::InsertAltarPiece()
 
 void Prop::TalkToNpc()
 {
+    Talking = true;
+
+    UpdateNpcActs();
+}
+
+void Prop::UpdateNpcActs()
+{
     if (TriggerAct != Progress::ACT_O) {
         CurrentAct = TriggerAct;
         CurrentNPC = TriggerNPC;
-    }
-
-    Talking = true;
-}
-
-void Prop::CheckVisibility(const Vector2 CharacterWorldPos)
-{
-    if (Spawned && WithinScreen(CharacterWorldPos)) {
-        Visible = true;
-    }
-    else {
-        Visible = false;
-    }
-}
-
-void Prop::OpenChest(const float DeltaTime)
-{
-    // controls 'press enter' delay to close dialogue
-    ReceiveItem = true;
-    RunningTime += DeltaTime;
-    if (RunningTime >= Object.UpdateTime * 6.f) {
-        Opening = false;
-        RunningTime = 0.f;
     }
 }
 
@@ -612,7 +621,7 @@ Rectangle Prop::GetCollisionRec(const Vector2 CharacterWorldPos)
                 Object.Texture.height * Scale - (Object.Texture.height * Scale) * .10f
             };
         }
-        case PropType::NPC_A:
+        case PropType::NPC_DIANA:
         {
             return Rectangle
             {
@@ -622,7 +631,7 @@ Rectangle Prop::GetCollisionRec(const Vector2 CharacterWorldPos)
                 Object.Texture.height * Scale - (Object.Texture.height * Scale) * .10f
             };
         }
-        case PropType::NPC_B:
+        case PropType::NPC_JADE:
         {
             return Rectangle
             {
@@ -632,7 +641,7 @@ Rectangle Prop::GetCollisionRec(const Vector2 CharacterWorldPos)
                 Object.Texture.height * Scale - (Object.Texture.height * Scale) * .10f
             };
         }
-        case PropType::NPC_C:
+        case PropType::NPC_SON:
         {
             return Rectangle
             {
@@ -642,7 +651,7 @@ Rectangle Prop::GetCollisionRec(const Vector2 CharacterWorldPos)
                 Object.Texture.height * Scale - (Object.Texture.height * Scale) * .10f
             };
         }
-        case PropType::NPC_D:
+        case PropType::NPC_RUMBY:
         {
             return Rectangle
             {
@@ -701,7 +710,7 @@ Rectangle Prop::GetInteractRec(const Vector2 CharacterWorldPos)
                 (Object.Texture.height * Scale) + (Object.Texture.height * Scale)
             };
         }
-        case PropType::NPC_A:
+        case PropType::NPC_DIANA:
         {
             return Rectangle
             {
@@ -711,7 +720,7 @@ Rectangle Prop::GetInteractRec(const Vector2 CharacterWorldPos)
                 (Object.Texture.height * Scale) + (Object.Texture.height * Scale)
             };
         }
-        case PropType::NPC_B:
+        case PropType::NPC_JADE:
         {
             return Rectangle
             {
@@ -721,7 +730,7 @@ Rectangle Prop::GetInteractRec(const Vector2 CharacterWorldPos)
                 (Object.Texture.height * Scale) + (Object.Texture.height * Scale)
             };
         }
-        case PropType::NPC_C:
+        case PropType::NPC_SON:
         {
             return Rectangle
             {
@@ -731,7 +740,7 @@ Rectangle Prop::GetInteractRec(const Vector2 CharacterWorldPos)
                 (Object.Texture.height * Scale) + (Object.Texture.height * Scale)
             };
         }
-        case PropType::NPC_D:
+        case PropType::NPC_RUMBY:
         {
             return Rectangle
             {
@@ -881,11 +890,11 @@ void Prop::DrawSpeech()
         {
             case Progress::ACT_O:
             {
-                if (Type == PropType::NPC_C) {
-                    DrawText("...Mom told you to find me?...", 390, 550, 20, WHITE);
-                    DrawText("She said that I keep wandering off???", 390, 575, 20, WHITE);
-                    DrawText("SHES the one who left ME here!!", 390, 600, 20, WHITE);
-                    DrawText("...Well, thank you for finding me...", 390, 625, 20, WHITE);
+                if (Type == PropType::NPC_SON) {
+                    DrawText("Hey there, Foxy... *sniffle*", 390, 550, 20, WHITE);
+                    DrawText("Have you seen my mom? We were walking", 390, 575, 20, WHITE);
+                    DrawText("together and we got lost... *sniffle*", 390, 600, 20, WHITE);
+                    DrawText("She always does this...", 390, 625, 20, WHITE);
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
@@ -898,7 +907,7 @@ void Prop::DrawSpeech()
             }
             case Progress::ACT_I:
             {   
-                if (Type == PropType::NPC_A) {
+                if (Type == PropType::NPC_DIANA) {
                     DrawText("Hello there, little Foxy! You look a little lost.", 390, 550, 20, WHITE);
                     DrawText("Have you ran into my neighbor, Jade? I know she", 390, 575, 20, WHITE);
                     DrawText("can be noisy, but she means no harm...", 390, 600, 20, WHITE);
@@ -906,14 +915,14 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else if (Type == PropType::NPC_B) {
+                else if (Type == PropType::NPC_JADE) {
                     DrawText("Why HELLO, Love! Have you seen my little one?", 390, 550, 20, WHITE);
                     DrawText("Could have sworn he was right here...", 390, 575, 20, WHITE);
                     DrawText("I really hope he didn't wander into the forest", 390, 600, 20, WHITE);
                     DrawText("AGAIN!!", 390, 625, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else if (Type == PropType::NPC_C) {
+                else if (Type == PropType::NPC_SON) {
                     DrawText("...Mom told you to find me?...", 390, 550, 20, WHITE);
                     DrawText("She said that I keep wandering off???", 390, 575, 20, WHITE);
                     DrawText("SHES the one who left ME here!!", 390, 600, 20, WHITE);
@@ -921,7 +930,7 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else if (Type == PropType::NPC_D) {
+                else if (Type == PropType::NPC_RUMBY) {
                     DrawText("Hi, friend! My name is Rumby. I am the forest", 390, 550, 20, WHITE);
                     DrawText("travel guide. I can show you the basics of", 390, 575, 20, WHITE);
                     DrawText("surviving the great big forest!", 390, 600, 20, WHITE);
@@ -931,12 +940,7 @@ void Prop::DrawSpeech()
                 };
 
                 if (IsKeyReleased(KEY_ENTER)) {
-                    // Update NPC_C's act to ACT_O as it doesn't need to be seen anymore once it leaves screen
-                    if (Type == PropType::NPC_C) {
-                        Act = Progress::ACT_O;
-                    }
-
-                    if (Type == PropType::NPC_A || Type == PropType::NPC_D) {
+                    if (Type == PropType::NPC_DIANA || Type == PropType::NPC_RUMBY) {
                         Act = Progress::ACT_II;
                     }
                     else {
@@ -948,7 +952,7 @@ void Prop::DrawSpeech()
             }
             case Progress::ACT_II:
             {
-                if (Type == PropType::NPC_A) {
+                if (Type == PropType::NPC_DIANA) {
                     DrawText("By the way, do you live in the flower forest", 390, 550, 20, WHITE);
                     DrawText("WEST of here? There's a strange stone", 390, 575, 20, WHITE);
                     DrawText("monument NORTH of that location...", 390, 600, 20, WHITE);
@@ -956,7 +960,7 @@ void Prop::DrawSpeech()
                     DrawText("but no one really knows...", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);   
                 }
-                else if (Type == PropType::NPC_B) {
+                else if (Type == PropType::NPC_JADE) {
                     DrawText("You found my boy! He's alawys wandering", 390, 550, 20, WHITE);
                     DrawText("off and getting in trouble... This time", 390, 575, 20, WHITE);
                     DrawText("the FOREST!! Thank you for finding him.", 390, 600, 20, WHITE);
@@ -964,7 +968,7 @@ void Prop::DrawSpeech()
                     DrawText("there... maybe he was looking for it?", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else if (Type == PropType::NPC_C) {
+                else if (Type == PropType::NPC_SON) {
                     DrawText("Hi, Foxy! Thanks again for your help! ", 390, 550, 20, WHITE);
                     DrawText("Mom is still blaming me about getting lost..", 390, 575, 20, WHITE);
                     DrawText("While I was lost, I think I saw a treasure", 390, 600, 20, WHITE);
@@ -972,7 +976,7 @@ void Prop::DrawSpeech()
                     DrawText("Might be worth checking out!", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else if (Type == PropType::NPC_D) {
+                else if (Type == PropType::NPC_RUMBY) {
                     DrawText("Firstly, you can use [SPACE] or [LEFT CLICK]", 390, 550, 20, WHITE);
                     DrawText("to attack and fend off monsters!", 390, 575, 20, WHITE);
                     DrawText("Now, after fighting you might be low on health.", 390, 600, 20, WHITE);
@@ -982,12 +986,12 @@ void Prop::DrawSpeech()
                 };
 
                 if (IsKeyPressed(KEY_ENTER)) {
-                    if (Type == PropType::NPC_A) {
+                    if (Type == PropType::NPC_DIANA) {
                         Act = Progress::ACT_I;
                         Opened = true;
                         Talking = false;
                     }
-                    else if (Type == PropType::NPC_D) {
+                    else if (Type == PropType::NPC_RUMBY) {
                         Act = Progress::ACT_III;
                     }
                     else {
@@ -999,7 +1003,7 @@ void Prop::DrawSpeech()
             }
             case Progress::ACT_III:
             {
-                if (Type == PropType::NPC_A) {
+                if (Type == PropType::NPC_DIANA) {
                     DrawText("", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
@@ -1007,7 +1011,7 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else if (Type == PropType::NPC_B)  {
+                else if (Type == PropType::NPC_JADE)  {
                     DrawText("", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
@@ -1015,7 +1019,7 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else if (Type == PropType::NPC_C) {
+                else if (Type == PropType::NPC_SON) {
                     DrawText("", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
@@ -1023,7 +1027,7 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else if (Type == PropType::NPC_D) {
+                else if (Type == PropType::NPC_RUMBY) {
                     DrawText("Thirdly, the forest is a giant, and", 390, 550, 20, WHITE);
                     DrawText("it is easy to get lost. You're a smart", 390, 575, 20, WHITE);
                     DrawText("Foxy, so here is a map! Press [M] to use it!", 390, 600, 20, WHITE);
@@ -1033,7 +1037,7 @@ void Prop::DrawSpeech()
                 };
 
                 if (IsKeyPressed(KEY_ENTER)) {
-                    if (Type == PropType::NPC_D) {
+                    if (Type == PropType::NPC_RUMBY) {
                         Act = Progress::ACT_IV;
                     }
                     else {
@@ -1045,7 +1049,7 @@ void Prop::DrawSpeech()
             }
             case Progress::ACT_IV:
             {
-                if (Type == PropType::NPC_A) {
+                if (Type == PropType::NPC_DIANA) {
                     DrawText("", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
@@ -1053,7 +1057,7 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                 }
-                else if (Type == PropType::NPC_B) {
+                else if (Type == PropType::NPC_JADE) {
                     DrawText("", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
@@ -1061,7 +1065,7 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else if (Type == PropType::NPC_C) {
+                else if (Type == PropType::NPC_SON) {
                     DrawText("", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
@@ -1069,7 +1073,7 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                 }
-                else if (Type == PropType::NPC_D) {
+                else if (Type == PropType::NPC_RUMBY) {
                     DrawText("Lastly, if you need to call it quits,", 390, 550, 20, WHITE);
                     DrawText("bring up the quit menu by pressing [PERIOD]", 390, 575, 20, WHITE);
                     DrawText("or [ESCAPE]. Thats about it! Be safe", 390, 600, 20, WHITE);
@@ -1082,7 +1086,7 @@ void Prop::DrawSpeech()
                     Opened = true;
                     Talking = false;
 
-                    if (Type == PropType::NPC_D) {
+                    if (Type == PropType::NPC_RUMBY) {
                         Act = Progress::ACT_I;
                     }
                 }

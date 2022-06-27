@@ -214,8 +214,8 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, const Vect
                             Locked = false;
 
                             // Make NPCs & Props interactable again
-                            if (Prop.GetType() == PropType::NPC_A || Prop.GetType() == PropType::NPC_B || 
-                                Prop.GetType() == PropType::NPC_C || Prop.GetType() == PropType::NPC_D ||
+                            if (Prop.GetType() == PropType::NPC_DIANA || Prop.GetType() == PropType::NPC_JADE || 
+                                Prop.GetType() == PropType::NPC_SON || Prop.GetType() == PropType::NPC_RUMBY ||
                                 Prop.GetType() == PropType::ANIMATEDALTAR || Prop.GetType() == PropType::STUMP) 
                             {
                                 Prop.SetOpened(false);

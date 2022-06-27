@@ -27,10 +27,10 @@ enum class PropType
     ALTAR,
     ANIMATEDALTAR,
     NPC_O,
-    NPC_A,
-    NPC_B,
-    NPC_C,
-    NPC_D,
+    NPC_DIANA,
+    NPC_JADE,
+    NPC_SON,
+    NPC_RUMBY,
     PLACEHOLDER
 };
 
@@ -71,8 +71,8 @@ public:
          const float Scale = 4.f, 
          const bool Moveable = false, 
          const bool Interactable = false, 
-         const Progress Act = Progress::ACT_O, 
-         const PropType NPC = PropType::NPC_O, 
+         const Progress TriggerAct = Progress::ACT_O, 
+         const PropType TriggerNPC = PropType::NPC_O, 
          const bool Spawn = true,
          const std::string& ItemName = "None", 
          const float ItemScale = 2.f);
@@ -87,6 +87,7 @@ public:
     void CheckVisibility(const Vector2 CharacterWorldPos);
     void InsertAltarPiece();
     void TalkToNpc();
+    void UpdateNpcActs();
 
     constexpr bool HasCollision() const {return Collidable;}
     constexpr bool IsInteractable() const {return Interactable;}

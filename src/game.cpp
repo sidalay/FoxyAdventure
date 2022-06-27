@@ -2255,10 +2255,10 @@ namespace Game
 
         std::vector<Prop> NPCS
         {
-            Prop{Sprite{Textures.Didi, 4, 1, 1.f/8.f}, Vector2{3163.f, 2853.f}, PropType::NPC_A, Textures, Textures.Placeholder, 3.f, false, true},
-            Prop{Sprite{Textures.Jade, 4, 1, 1.f/8.f}, Vector2{1546.f, 2959.f}, PropType::NPC_B, Textures, Textures.Placeholder, 3.f, false, true},
-            Prop{Sprite{Textures.Son, 4, 1, 1.f/8.f}, Vector2{1240.f, 2036.f}, PropType::NPC_C, Textures, Textures.Placeholder, 3.f, false, true, Progress::ACT_II, PropType::NPC_B},
-            Prop{Sprite{Textures.Rumby, 4, 1, 1.f/8.f}, Vector2{106.f, 3684.f}, PropType::NPC_D, Textures, Textures.Placeholder, 3.f, false, true},
+            Prop{Sprite{Textures.Didi, 4, 1, 1.f/8.f}, Vector2{3163.f, 2853.f}, PropType::NPC_DIANA, Textures, Textures.Placeholder, 3.f, false, true},
+            Prop{Sprite{Textures.Jade, 4, 1, 1.f/8.f}, Vector2{1030.f, 3120.f}, PropType::NPC_JADE, Textures, Textures.Placeholder, 3.f, false, true, Progress::ACT_I, PropType::NPC_SON},
+            Prop{Sprite{Textures.Son, 4, 1, 1.f/8.f}, Vector2{1240.f, 2036.f}, PropType::NPC_SON, Textures, Textures.Placeholder, 3.f, false, true, Progress::ACT_II, PropType::NPC_JADE},
+            Prop{Sprite{Textures.Rumby, 4, 1, 1.f/8.f}, Vector2{106.f, 3684.f}, PropType::NPC_RUMBY, Textures, Textures.Placeholder, 3.f, false, true},
         };
         Props.emplace_back(NPCS);
 
