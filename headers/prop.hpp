@@ -110,6 +110,7 @@ public:
     void UndoMovement() {WorldPos = PrevWorldPos;}
     bool CheckMovement(Background& Map, const Vector2 CharWorldPos, const Vector2 Direction, const float Speed, std::vector<std::vector<Prop>>& Props);
 
+    void DrawPropText();
     void DrawSpeech();
     
 private:
