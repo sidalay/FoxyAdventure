@@ -294,22 +294,29 @@ void Prop::InsertAltarPiece()
         InsertPiece = true;
     }
 
-    for (auto& Piece:AltarPieces) {
-        if (std::get<1>(Piece) == true) {
-            std::get<2>(Piece) = true;
-            InsertPiece = true;
+    if (FirstPieceInserted) {
+        for (auto& Piece:AltarPieces) {
+            if (std::get<1>(Piece) == true) {
+                std::get<2>(Piece) = true;
+                InsertPiece = true;
+            }
+            if (std::get<2>(Piece) == true && std::get<3>(Piece) == false) {
+                std::get<3>(Piece) = true;
+                PiecesAdded++;
+            }
         }
-        if (std::get<2>(Piece) == true && std::get<3>(Piece) == false) {
-            std::get<3>(Piece) = true;
-            PiecesAdded++;
+        
+        if (PiecesAdded >= 6) {
+            FinalChest = true;
         }
-    }
-    
-    if (PiecesAdded >= 6) {
-        FinalChest = true;
-    }
 
-    Opened = true;
+        Opened = true;
+    }
+    else {
+        if (IsKeyPressed(KEY_ENTER)) {
+            FirstPieceInserted = true;
+        }
+    }
 }
 
 void Prop::TalkToNpc()
@@ -829,10 +836,10 @@ void Prop::DrawSpeech()
         }
     }
     else if (Type == PropType::ANIMATEDALTAR) {
-        if (PiecesAdded == 0) {
+        if (PiecesAdded == 0 || !FirstPieceInserted) {
             DrawText("A mysterious altar... You feel", 490, 600, 20, WHITE);
             DrawText("a strange power resonating", 490, 625, 20, WHITE);
-            DrawText("from the empty engravings...", 490, 650, 20, WHITE);
+            DrawText("from the engravings...", 490, 650, 20, WHITE);
             DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
         }
         else if (PiecesAdded > 0 && PiecesAdded < 6) {

@@ -155,7 +155,8 @@ private:
             {"Bottom Right Altar Piece", false, false, false}
     };
     static inline int PiecesAdded{0};
-    static inline bool FinalChest{false};                                                            
+    static inline bool FinalChest{false};
+    static inline bool FirstPieceInserted{false};                                                         
     bool InsertPiece{false};   
 };
 
