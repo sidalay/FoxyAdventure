@@ -162,7 +162,7 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
 
     if (Visible) {
         if (Type == PropType::BIGTREASURE) {
-            if (FinalChest) {
+            if (FinalChestSpawned) {
                 DrawTexturePro(Object.Texture, Object.GetSourceRec(), Object.GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
             }
         }
@@ -192,14 +192,21 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
             WorldPos.x = 1549.f;
             WorldPos.y = 2959.f;
         }
+        else if (Type == PropType::NPC_DIANA && FinalChestSpawned) {
+            WorldPos.x = 645.f;
+            WorldPos.y = 1777.f;
+        }
         else if (Type == PropType::NPC_DIANA && PiecesAdded >= 1) {
             WorldPos.x = 3163.f;
             WorldPos.y = 2853.f;
-            Act = Progress::ACT_IV;
+            // Act = Progress::ACT_IV;
         }   
         else if (Type == PropType::NPC_DIANA && PiecesReceived == 1) {
             Act = Progress::ACT_III;
         }
+        // else if (Type == PropType::NPC_DIANA && CryptexReceived) {
+        //     Act = Progress::ACT_IV;
+        // }
         else if (Type == PropType::NPC_SON && PiecesReceived >= 1) {
             Act = Progress::ACT_IV;
         }   
@@ -279,8 +286,13 @@ void Prop::AltarTick(const float DeltaTime)
 void Prop::OpenChest(const float DeltaTime)
 {
     // controls 'press enter' delay to close dialogue
-    ++PiecesReceived;
     ReceiveItem = true;
+    if (ItemName == "Cryptex") {
+        CryptexReceived = true;
+    }
+    else {
+        ++PiecesReceived;
+    }
     RunningTime += DeltaTime;
     if (RunningTime >= Object.UpdateTime * 6.f) {
         Opening = false;
@@ -344,7 +356,7 @@ void Prop::InsertAltarPiece()
         }
         
         if (PiecesAdded >= 6) {
-            FinalChest = true;
+            FinalChestSpawned = true;
         }
 
         Opened = true;
@@ -1228,10 +1240,10 @@ void Prop::DrawSpeech()
             {
                 case PropType::NPC_DIANA:
                 {
-                    DrawText("Hi, Foxy!!", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
+                    DrawText("Is that a Cryptex? That looks like one I", 390, 550, 20, WHITE);
+                    DrawText("used to have a long time ago... I wonder", 390, 575, 20, WHITE);
+                    DrawText("what secrets it holds inside? Lets try to", 390, 600, 20, WHITE);
+                    DrawText("find the code, Mr. Foxy!", 390, 625, 20, WHITE);
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;
@@ -1282,11 +1294,11 @@ void Prop::DrawSpeech()
             {
                 case PropType::NPC_DIANA:
                 {
-                    DrawText("Hey, Foxy, I'm on ACT_V.", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
+                    DrawText("My sweet Foxy, I think I have deciphered", 390, 550, 20, WHITE);
+                    DrawText("the engravings on the altar! They seem to", 390, 575, 20, WHITE);
+                    DrawText("spell out... L...I...L...A...C....", 390, 600, 20, WHITE);
+                    DrawText("LILAC! My favorite flower! Maybe we should", 390, 625, 20, WHITE);
+                    DrawText("try that on the cryptex you found?", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;
                 }

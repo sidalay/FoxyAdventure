@@ -157,7 +157,8 @@ private:
     float RunningTime{};
     static inline int PiecesReceived{0};
     static inline int PiecesAdded{0};
-    static inline bool FinalChest{false};
+    static inline bool CryptexReceived{false};
+    static inline bool FinalChestSpawned{false};
     static inline bool FirstPieceInserted{false};
 
     static inline std::vector<std::tuple<std::string, bool, bool, bool>> AltarPieces {
