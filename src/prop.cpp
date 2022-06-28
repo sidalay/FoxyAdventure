@@ -173,10 +173,8 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
         // Draw the animated altar piece
         if (Type == PropType::ANIMATEDALTAR) {
             for (auto& Piece:AltarPieces) {
-                if (std::get<2>(Piece) == true) {
-                    if (std::get<0>(Piece) == ItemName) {
-                        DrawTextureEx(Object.Texture, WorldPos, 0.f, Scale, WHITE);
-                    }
+                if (std::get<2>(Piece) == true && std::get<0>(Piece) == ItemName) {
+                    DrawTextureEx(Object.Texture, WorldPos, 0.f, Scale, WHITE);
                 }
             }
         }
@@ -520,10 +518,10 @@ void Prop::UpdateNpcActs()
 bool Prop::WithinScreen(const Vector2 CharacterWorldPos)
 {
     if (
-        (WorldPos.x >= (CharacterWorldPos.x + 615.f) - (GetScreenWidth()/2 + (Object.Texture.width * Scale))) && 
-        (WorldPos.x <= (CharacterWorldPos.x + 615.f) + (GetScreenWidth()/2 + (Object.Texture.width * Scale))) &&
-        (WorldPos.y >= (CharacterWorldPos.y + 335.f) - (GetScreenHeight()/2 + (Object.Texture.height * Scale))) && 
-        (WorldPos.y <= (CharacterWorldPos.y + 335.f) + (GetScreenHeight()/2 + (Object.Texture.height * Scale)))
+        (WorldPos.x >= (CharacterWorldPos.x + 615.f) - static_cast<float>((GetScreenWidth()/2 + (Object.Texture.width * Scale)))) && 
+        (WorldPos.x <= (CharacterWorldPos.x + 615.f) + static_cast<float>((GetScreenWidth()/2 + (Object.Texture.width * Scale)))) &&
+        (WorldPos.y >= (CharacterWorldPos.y + 335.f) - static_cast<float>((GetScreenHeight()/2 + (Object.Texture.height * Scale)))) && 
+        (WorldPos.y <= (CharacterWorldPos.y + 335.f) + static_cast<float>((GetScreenHeight()/2 + (Object.Texture.height * Scale))))
        ) {
             return true;
          }

@@ -41,6 +41,8 @@ struct GameTexture {
     const Texture2D Bush{LoadTexture("sprites/props/Bush.png")};
     const Texture2D ClayPot{LoadTexture("sprites/props/ClayPot.png")};
 
+    const Texture2D Cryptex{LoadTexture("sprites/props/Cryptex.png")};
+
     const Texture2D Door{LoadTexture("sprites/props/Door.png")};
     const Texture2D DoorBlue{LoadTexture("sprites/props/DoorBlue.png")};
     const Texture2D DoorRed{LoadTexture("sprites/props/DoorRed.png")};

@@ -27,6 +27,7 @@ GameTexture::~GameTexture()
     UnloadTexture(BridgeVertical);
     UnloadTexture(Bush);
     UnloadTexture(ClayPot);
+    UnloadTexture(Cryptex);
     UnloadTexture(Door);
     UnloadTexture(DoorBlue);
     UnloadTexture(DoorRed);
