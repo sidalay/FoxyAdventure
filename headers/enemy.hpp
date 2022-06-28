@@ -2,7 +2,6 @@
 #define ENEMY_HPP
 
 #include <random>
-#include <unordered_map>
 #include "prop.hpp"
 #include "window.hpp"
 #include "randomizer.hpp"

@@ -58,9 +58,9 @@ Prop::Prop(const Sprite& Object,
            const Texture2D& Item, 
            const float Scale, 
            const bool Moveable, 
-           const bool Interactable, 
+           const bool Interactable,
            const Progress TriggerAct, 
-           const PropType TriggerNPC, 
+           const PropType TriggerNPC,  
            const bool Spawn,
            const std::string& ItemName, 
            const float ItemScale)
@@ -102,10 +102,6 @@ Prop::Prop(const Sprite& Object,
             ItemPos.x = 0.f;
         }
     }
-
-    // if (Type == PropType::NPC_SON) {
-    //     Act = Progress::ACT_O;
-    // }
 }
 
 void Prop::Tick(const float DeltaTime)
@@ -186,21 +182,28 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
         }
     }
     else {   
-        // Once NPC_C has been interacted with and is offscreen, set to not draw anymore
         if (Type == PropType::NPC_SON && Act == Progress::ACT_II) {
             WorldPos.x = 1283.f;
             WorldPos.y = 2859.f;
             Act = Progress::ACT_III;
         }
-        else if (Type == PropType::NPC_JADE && Act == Progress::ACT_II) {
+        else if (Type == PropType::NPC_JADE && PiecesReceived >= 1) {
+            Act = Progress::ACT_IV;
+        }
+        else if (Type == PropType::NPC_JADE && (Act == Progress::ACT_II || Act == Progress::ACT_III)) {
             WorldPos.x = 1549.f;
             WorldPos.y = 2959.f;
-            Act = Progress::ACT_III;
         }
         else if (Type == PropType::NPC_DIANA && PiecesAdded >= 1) {
             WorldPos.x = 3163.f;
             WorldPos.y = 2853.f;
+            Act = Progress::ACT_IV;
+        }   
+        else if (Type == PropType::NPC_DIANA && PiecesReceived == 1) {
             Act = Progress::ACT_III;
+        }
+        else if (Type == PropType::NPC_SON && PiecesReceived >= 1) {
+            Act = Progress::ACT_IV;
         }   
     }
     
@@ -257,16 +260,11 @@ void Prop::NpcTick(const float DeltaTime)
     Object.Tick(DeltaTime);
 
     // Update any progression and triggers for NPCs
-    // if (TriggerAct != Progress::ACT_O) {
-    //     CurrentAct = TriggerAct;
-    //     CurrentNPC = TriggerNPC;
-    // }
-
-    if (CurrentAct != Progress::ACT_O) {
-        if (Type == CurrentNPC) {
-            Act = CurrentAct;
-            CurrentAct = Progress::ACT_O;
-            CurrentNPC = PropType::NPC_O;
+    for (auto& [ParentNpc,Pair]:QuestlineProgress) {
+        if (Type == Pair.second) {
+            Act = Pair.first;
+            Pair.first = Progress::ACT_O;
+            Pair.second = PropType::NPC_O;
         }
     }
 }
@@ -283,6 +281,7 @@ void Prop::AltarTick(const float DeltaTime)
 void Prop::OpenChest(const float DeltaTime)
 {
     // controls 'press enter' delay to close dialogue
+    ++PiecesReceived;
     ReceiveItem = true;
     RunningTime += DeltaTime;
     if (RunningTime >= Object.UpdateTime * 6.f) {
@@ -310,6 +309,11 @@ void Prop::TreasureTick(const float DeltaTime)
         if (std::get<0>(Piece) == ItemName) {
             std::get<1>(Piece) = true;
         }
+    }
+
+    if (TriggerAct != Progress::ACT_O) {
+        QuestlineProgress.at(PropType::TREASURE).first = TriggerAct;
+        QuestlineProgress.at(PropType::TREASURE).second = TriggerNPC;
     }
 }
 
@@ -371,14 +375,14 @@ void Prop::UpdateNpcActs()
             {
                 case PropType::NPC_DIANA:
                 {
-                    CurrentAct = Progress::ACT_II;
-                    CurrentNPC = PropType::NPC_DIANA;
+                    QuestlineProgress.at(PropType::NPC_DIANA).first = Progress::ACT_II; 
+                    QuestlineProgress.at(PropType::NPC_DIANA).second = PropType::NPC_DIANA;
                     break;
                 }
                 case PropType::NPC_JADE:
                 {
-                    CurrentAct = Progress::ACT_II;
-                    CurrentNPC = PropType::NPC_SON;
+                    QuestlineProgress.at(PropType::NPC_JADE).first = Progress::ACT_II;
+                    QuestlineProgress.at(PropType::NPC_JADE).second = PropType::NPC_SON;
                     break;
                 }
                 case PropType::NPC_SON:
@@ -387,8 +391,8 @@ void Prop::UpdateNpcActs()
                 }
                 case PropType::NPC_RUMBY:
                 {
-                    CurrentAct = Progress::ACT_II;
-                    CurrentNPC = PropType::NPC_RUMBY;
+                    QuestlineProgress.at(PropType::NPC_RUMBY).first = Progress::ACT_II;
+                    QuestlineProgress.at(PropType::NPC_RUMBY).second = PropType::NPC_RUMBY;
                     break;
                 }
                 default:
@@ -402,22 +406,26 @@ void Prop::UpdateNpcActs()
             {
                 case PropType::NPC_DIANA:
                 {
-                    CurrentAct = Progress::ACT_I;
-                    CurrentNPC = PropType::NPC_DIANA;
+                    QuestlineProgress.at(PropType::NPC_DIANA).first = Progress::ACT_I; 
+                    QuestlineProgress.at(PropType::NPC_DIANA).second = PropType::NPC_DIANA;
                     break;
                 }
                 case PropType::NPC_JADE:
                 {
+                    QuestlineProgress.at(PropType::NPC_JADE).first = Progress::ACT_III;
+                    QuestlineProgress.at(PropType::NPC_JADE).second = PropType::NPC_JADE;
                     break;
                 }
                 case PropType::NPC_SON:
                 {
-                    CurrentAct = Progress::ACT_II;
-                    CurrentNPC = PropType::NPC_JADE;
+                    QuestlineProgress.at(PropType::NPC_SON).first = Progress::ACT_II;
+                    QuestlineProgress.at(PropType::NPC_SON).second = PropType::NPC_JADE;
                     break;
                 }
                 case PropType::NPC_RUMBY:
                 {
+                    QuestlineProgress.at(PropType::NPC_RUMBY).first = Progress::ACT_III;
+                    QuestlineProgress.at(PropType::NPC_RUMBY).second = PropType::NPC_RUMBY;
                     break;
                 }
                 default:
@@ -443,6 +451,8 @@ void Prop::UpdateNpcActs()
                 }
                 case PropType::NPC_RUMBY:
                 {
+                    QuestlineProgress.at(PropType::NPC_RUMBY).first = Progress::ACT_IV;
+                    QuestlineProgress.at(PropType::NPC_RUMBY).second = PropType::NPC_RUMBY;
                     break;
                 }
                 default:
@@ -468,8 +478,8 @@ void Prop::UpdateNpcActs()
                 }
                 case PropType::NPC_RUMBY:
                 {
-                    CurrentAct = Progress::ACT_I;
-                    CurrentNPC = PropType::NPC_RUMBY;
+                    QuestlineProgress.at(PropType::NPC_RUMBY).first = Progress::ACT_I;
+                    QuestlineProgress.at(PropType::NPC_RUMBY).second = PropType::NPC_RUMBY;
                     break;
                 }
                 default:
@@ -1161,10 +1171,10 @@ void Prop::DrawSpeech()
             {
                 case PropType::NPC_DIANA:
                 {
-                    DrawText("Hi Foxy!", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
+                    DrawText("Wow Foxy! Looks like you got some kind of", 390, 550, 20, WHITE);
+                    DrawText("magical stone... there is a strange altar", 390, 575, 20, WHITE);
+                    DrawText("in the forest with mystical engravings..", 390, 600, 20, WHITE);
+                    DrawText("Maybe you can check it out?", 390, 625, 20, WHITE);
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                     break;
@@ -1220,7 +1230,7 @@ void Prop::DrawSpeech()
             {
                 case PropType::NPC_DIANA:
                 {
-                    DrawText("", 390, 550, 20, WHITE);
+                    DrawText("Hi, Foxy!!", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
                     DrawText("", 390, 625, 20, WHITE);
@@ -1230,21 +1240,21 @@ void Prop::DrawSpeech()
                 }
                 case PropType::NPC_JADE:
                 {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
+                    DrawText("Hey, you found the treasure!!!!!!!", 390, 550, 20, WHITE);
+                    DrawText("Wait... It was just a dusty old rock???", 390, 575, 20, WHITE);
+                    DrawText("We have plenty of those lying around", 390, 600, 20, WHITE);
+                    DrawText("everywhere!!!", 390, 625, 20, WHITE);
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;
                 }
                 case PropType::NPC_SON:
                 {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
+                    DrawText("Wow! That stone looks fancy...", 390, 550, 20, WHITE);
+                    DrawText("Is that the treasure we were looking", 390, 575, 20, WHITE);
+                    DrawText("for?? I found an altar with matching", 390, 600, 20, WHITE);
+                    DrawText("engravings NORTH of here when I got", 390, 625, 20, WHITE);
+                    DrawText("lost...maybe check  it out?", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;
                 }
@@ -1274,7 +1284,7 @@ void Prop::DrawSpeech()
             {
                 case PropType::NPC_DIANA:
                 {
-                    DrawText("", 390, 550, 20, WHITE);
+                    DrawText("Hey, Foxy, I'm on ACT_V.", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
                     DrawText("", 390, 625, 20, WHITE);

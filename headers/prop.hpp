@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <tuple>
+#include <unordered_map>
 #include "sprite.hpp"
 #include "background.hpp"
 
@@ -136,16 +137,28 @@ private:
     Progress Act{Progress::ACT_I};
     Progress TriggerAct{};
     PropType TriggerNPC{};
-    static inline Progress CurrentAct{Progress::ACT_O};
-    static inline PropType CurrentNPC{PropType::NPC_O};
+
+    static inline std::unordered_map<PropType, std::pair<Progress, PropType>> QuestlineProgress
+    {
+        {PropType::NPC_DIANA, std::make_pair(Progress::ACT_O, PropType::NPC_O)},
+        {PropType::NPC_JADE, std::make_pair(Progress::ACT_O, PropType::NPC_O)},
+        {PropType::NPC_SON, std::make_pair(Progress::ACT_O, PropType::NPC_O)},
+        {PropType::NPC_RUMBY, std::make_pair(Progress::ACT_O, PropType::NPC_O)},
+        {PropType::TREASURE, std::make_pair(Progress::ACT_O, PropType::NPC_O)},
+    };
 
     // Treasure variables
     bool ReceiveItem{false};
+    bool InsertPiece{false};
     const Texture2D Item{};
     const std::string ItemName{};
     float ItemScale{};
     Vector2 ItemPos{};
     float RunningTime{};
+    static inline int PiecesReceived{0};
+    static inline int PiecesAdded{0};
+    static inline bool FinalChest{false};
+    static inline bool FirstPieceInserted{false};
 
     static inline std::vector<std::tuple<std::string, bool, bool, bool>> AltarPieces {
             // {"ItemName", ItemUnlocked, ItemVisible, ItemInserted}
@@ -156,10 +169,6 @@ private:
             {"Bottom Altar Piece", false, false, false}, 
             {"Bottom Right Altar Piece", false, false, false}
     };
-    static inline int PiecesAdded{0};
-    static inline bool FinalChest{false};
-    static inline bool FirstPieceInserted{false};                                                         
-    bool InsertPiece{false};   
 };
 
 struct Props
