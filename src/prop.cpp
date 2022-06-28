@@ -195,7 +195,13 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
         else if (Type == PropType::NPC_JADE && Act == Progress::ACT_II) {
             WorldPos.x = 1549.f;
             WorldPos.y = 2959.f;
+            Act = Progress::ACT_III;
         }
+        else if (Type == PropType::NPC_DIANA && PiecesAdded >= 1) {
+            WorldPos.x = 3163.f;
+            WorldPos.y = 2853.f;
+            Act = Progress::ACT_III;
+        }   
     }
     
     // Draw Treasure Box Item
@@ -1106,9 +1112,9 @@ void Prop::DrawSpeech()
                 }
                 case PropType::NPC_JADE:
                 {
-                    DrawText("You found my boy! He's alawys wandering", 390, 550, 20, WHITE);
+                    DrawText("You found my boy! He's always wandering", 390, 550, 20, WHITE);
                     DrawText("off and getting in trouble... This time", 390, 575, 20, WHITE);
-                    DrawText("the FOREST!! Thank you for finding him.", 390, 600, 20, WHITE);
+                    DrawText("the FOREST!! Thank you for finding him!!", 390, 600, 20, WHITE);
                     DrawText("There are rumors of a hidden treasure out", 390, 625, 20, WHITE);
                     DrawText("there... maybe he was looking for it?", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
@@ -1155,7 +1161,7 @@ void Prop::DrawSpeech()
             {
                 case PropType::NPC_DIANA:
                 {
-                    DrawText("", 390, 550, 20, WHITE);
+                    DrawText("Hi Foxy!", 390, 550, 20, WHITE);
                     DrawText("", 390, 575, 20, WHITE);
                     DrawText("", 390, 600, 20, WHITE);
                     DrawText("", 390, 625, 20, WHITE);
@@ -1165,10 +1171,10 @@ void Prop::DrawSpeech()
                 }
                 case PropType::NPC_JADE:
                 {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
+                    DrawText("There seem to be treasures hidden", 390, 550, 20, WHITE);
+                    DrawText("all throughout the forest! But I", 390, 575, 20, WHITE);
+                    DrawText("heard you need to hunt some monsters", 390, 600, 20, WHITE);
+                    DrawText("to find them... Be careful out there!!", 390, 625, 20, WHITE);
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                     break;

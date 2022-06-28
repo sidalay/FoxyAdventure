@@ -709,6 +709,10 @@ namespace Game
             Prop{Textures.Bush, Vector2{2155.f,966.f}, PropType::BUSH, Textures, 3.f}, 
             Prop{Textures.Bush, Vector2{2274.f,966.f}, PropType::BUSH, Textures, 3.f}, 
             Prop{Textures.Bush, Vector2{2395.f,966.f}, PropType::BUSH, Textures, 3.f}, 
+            Prop{Textures.Bush, Vector2{2534.f,3525.f}, PropType::BUSH, Textures, 3.f}, 
+            Prop{Textures.Bush, Vector2{2749.f,3906.f}, PropType::BUSH, Textures, 3.f}, 
+            Prop{Textures.Bush, Vector2{2749.f,4006.f}, PropType::BUSH, Textures, 3.f}, 
+            Prop{Textures.Bush, Vector2{2550.f,3715.f}, PropType::BUSH, Textures}, 
         };
         Props.emplace_back(Bushes);
 
@@ -2275,7 +2279,7 @@ namespace Game
 
         std::vector<Prop> NPCS
         {
-            Prop{Sprite{Textures.Didi, 4, 1, 1.f/8.f}, Vector2{3163.f, 2853.f}, PropType::NPC_DIANA, Textures, Textures.Placeholder, 3.f, false, true},
+            Prop{Sprite{Textures.Didi, 4, 1, 1.f/8.f}, Vector2{2480.f, 3640.f}, PropType::NPC_DIANA, Textures, Textures.Placeholder, 3.f, false, true},
             Prop{Sprite{Textures.Jade, 4, 1, 1.f/8.f}, Vector2{1030.f, 3120.f}, PropType::NPC_JADE, Textures, Textures.Placeholder, 3.f, false, true},
             Prop{Sprite{Textures.Son, 4, 1, 1.f/8.f}, Vector2{1240.f, 2036.f}, PropType::NPC_SON, Textures, Textures.Placeholder, 3.f, false, true},
             Prop{Sprite{Textures.Rumby, 4, 1, 1.f/8.f}, Vector2{106.f, 3684.f}, PropType::NPC_RUMBY, Textures, Textures.Placeholder, 3.f, false, true},
@@ -3123,6 +3127,7 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{320.f,3467.f}, PropType::TREE, Textures},     
             Prop{Textures.TreeGreen, Vector2{420.f,3467.f}, PropType::TREE, Textures},     
             Prop{Textures.TreeGreen, Vector2{620.f,3467.f}, PropType::TREE, Textures},     
+            Prop{Textures.TreeGreen, Vector2{2420.f,3467.f}, PropType::TREE, Textures},     
             Prop{Textures.TreeGreen, Vector2{2520.f,3467.f}, PropType::TREE, Textures},     
             Prop{Textures.TreeGreen, Vector2{2620.f,3467.f}, PropType::TREE, Textures},     
             Prop{Textures.TreeGreen, Vector2{2720.f,3467.f}, PropType::TREE, Textures},     
@@ -3134,6 +3139,7 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{350.f,3567.f}, PropType::TREE, Textures},     // 4 
             Prop{Textures.TreeGreen, Vector2{665.f,3530.f}, PropType::TREE, Textures},     // 6 
             Prop{Textures.TreeGreen, Vector2{3920.f,3567.f}, PropType::TREE, Textures},    // 21
+            Prop{Textures.TreeGreen, Vector2{2320.f,3667.f}, PropType::TREE, Textures},    // 21
             Prop{Textures.TreeGreen, Vector2{2520.f,3667.f}, PropType::TREE, Textures},    // 21
             Prop{Textures.TreeGreen, Vector2{2620.f,3667.f}, PropType::TREE, Textures},    // 21
             // row35
