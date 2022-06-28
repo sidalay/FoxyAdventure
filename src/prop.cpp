@@ -499,11 +499,6 @@ void Prop::UpdateNpcActs()
         default:
             break;
     }
-
-    // if (TriggerAct != Progress::ACT_O) {
-    //     CurrentAct = TriggerAct;
-    //     CurrentNPC = TriggerNPC;
-    // }
 }
 
 bool Prop::WithinScreen(const Vector2 CharacterWorldPos)
