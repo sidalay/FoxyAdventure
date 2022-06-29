@@ -831,7 +831,8 @@ void Enemy::CheckSpawnChest(std::vector<std::vector<Prop>>& Props)
             if (Type == EnemyType::BOSS && Prop.GetType() == PropType::TREASURE) {
                 if ((Race == EnemyType::CREATURE && !Alive && Prop.GetItemName() == "Top Right Altar Piece") || 
                     (Race == EnemyType::IMP && !Alive && Prop.GetItemName() == "Top Altar Piece") || 
-                    (Race == EnemyType::BEHOLDER && !Alive && Prop.GetItemName() == "Bottom Altar Piece")) 
+                    (Race == EnemyType::BEHOLDER && !Alive && Prop.GetItemName() == "Bottom Altar Piece") ||
+                    (Race == EnemyType::NECROMANCER && !Alive && Prop.GetItemName() == "Bottom Right Altar Piece")) 
                 {
                     Prop.SetSpawned(true);
                 }
