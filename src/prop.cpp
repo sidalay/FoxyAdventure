@@ -1149,8 +1149,8 @@ void Prop::DrawPropText()
     }
     else if (Type == PropType::BIGTREASURE) {
         DrawText(TextFormat("Received: %s!", ItemName.c_str()), 510, 600, 20, WHITE);
-        DrawText("Diana is written on the bottom...", 510, 625, 20, WHITE);
-        DrawText("Bring it back to her!", 510, 650, 20, WHITE);
+        DrawText("This might look good on Diana...", 510, 625, 20, WHITE);
+        DrawText("Lets bring it back to her!", 510, 650, 20, WHITE);
         DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
 
         if (IsKeyPressed(KEY_ENTER)) {
