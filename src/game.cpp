@@ -2267,7 +2267,7 @@ namespace Game
 
         std::vector<Prop> Treasure
         {
-            Prop{Sprite{Textures.TreasureChestBig, 4, 1, 1.f/4.f}, Vector2{2136.f,1677.f}, PropType::BIGTREASURE, Textures, Textures.Bracelet, 4.f, false, true, Progress::ACT_V, PropType::NPC_DIANA, true, "Silver Bracelet", 4.f},
+            Prop{Sprite{Textures.TreasureChestBig, 4, 1, 1.f/4.f}, Vector2{2136.f,1677.f}, PropType::BIGTREASURE, Textures, Textures.Bracelet, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Silver Bracelet", 4.f},
             Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2010.f,1797.f}, PropType::TREASURE, Textures, Textures.AltarTopRight, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Top Right Altar Piece"},
             Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2137.f,1797.f}, PropType::TREASURE, Textures, Textures.AltarTop, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Top Altar Piece"},
             Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{130.f,210.f}, PropType::TREASURE, Textures, Textures.AltarTopLeft, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, true, "Top Left Altar Piece"},

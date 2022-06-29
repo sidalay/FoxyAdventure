@@ -37,7 +37,7 @@ enum class PropType
 
 enum class Progress
 {
-    ACT_O, ACT_I, ACT_II, ACT_III, ACT_IV, ACT_V
+    ACT_O, ACT_I, ACT_II, ACT_III, ACT_IV, ACT_V, ACT_VI, ACT_VII
 };
 
 struct Props;
@@ -90,6 +90,7 @@ public:
     void TalkToNpc();
     void UpdateNpcPos();
     void UpdateNpcActs();
+    void CheckFinalChest();
 
     constexpr bool HasCollision() const {return Collidable;}
     constexpr bool IsInteractable() const {return Interactable;}

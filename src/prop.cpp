@@ -153,6 +153,7 @@ void Prop::Tick(const float DeltaTime)
         }
     }
     UpdateNpcPos();
+    CheckFinalChest();
 }
 
 void Prop::Draw(const Vector2 CharacterWorldPos)
@@ -347,38 +348,46 @@ void Prop::TalkToNpc()
 void Prop::UpdateNpcPos()
 {
     if (!Visible) {
-        if (Type == PropType::NPC_SON && Act == Progress::ACT_II && ReadyToProgress) {
-            WorldPos.x = 1283.f;
-            WorldPos.y = 2859.f;
-            Act = Progress::ACT_III;
-            ReadyToProgress = false;
+        switch (Type)
+        {
+            case PropType::NPC_DIANA:
+            {
+                if (PiecesAdded >= 1 && PiecesAdded <= 5) {
+                    WorldPos.x = 3163.f;
+                    WorldPos.y = 2853.f;
+                    Act = Progress::ACT_V;
+                }
+
+                if (PiecesAdded == 6 && ReadyToProgress) {
+                    WorldPos.x = 645.f;
+                    WorldPos.y = 1777.f;
+                    Act = Progress::ACT_VI;
+                    ReadyToProgress = false;
+                }
+                break;
+            }
+            case PropType::NPC_JADE:
+            {   
+                if (Act == Progress::ACT_III && ReadyToProgress) {
+                    WorldPos.x = 1549.f;
+                    WorldPos.y = 2945.f;
+                    ReadyToProgress = false;
+                }
+                break;
+            }
+            case PropType::NPC_SON:
+            {
+                if (Act == Progress::ACT_II && ReadyToProgress) {
+                    WorldPos.x = 1283.f;
+                    WorldPos.y = 2859.f;
+                    Act = Progress::ACT_III;
+                    ReadyToProgress = false;
+                }
+                break;
+            }
+            default:
+                break;
         }
-        else if (Type == PropType::NPC_JADE && PiecesReceived >= 1) {
-            Act = Progress::ACT_IV;
-        }
-        else if (Type == PropType::NPC_JADE && Act == Progress::ACT_III && ReadyToProgress) {
-            WorldPos.x = 1549.f;
-            WorldPos.y = 2945.f;
-            ReadyToProgress = false;
-        }
-        else if (Type == PropType::NPC_DIANA && FinalChestSpawned) {
-            WorldPos.x = 645.f;
-            WorldPos.y = 1777.f;
-        }
-        else if (Type == PropType::NPC_DIANA && PiecesAdded >= 1) {
-            WorldPos.x = 3163.f;
-            WorldPos.y = 2853.f;
-            // Act = Progress::ACT_IV;
-        }   
-        else if (Type == PropType::NPC_DIANA && PiecesReceived == 1) {
-            Act = Progress::ACT_III;
-        }
-        // else if (Type == PropType::NPC_DIANA && CryptexReceived) {
-        //     Act = Progress::ACT_IV;
-        // }
-        else if (Type == PropType::NPC_SON && PiecesReceived >= 1) {
-            Act = Progress::ACT_IV;
-        }   
     }
 }
 
@@ -392,8 +401,13 @@ void Prop::UpdateNpcActs()
             {
                 case PropType::NPC_DIANA:
                 {
-                    QuestlineProgress.at(PropType::NPC_DIANA).first = Progress::ACT_II; 
-                    QuestlineProgress.at(PropType::NPC_DIANA).second = PropType::NPC_DIANA;
+                    if (PiecesReceived >= 1) {
+                        Act = Progress::ACT_III;
+                    }
+                    else {
+                        QuestlineProgress.at(PropType::NPC_DIANA).first = Progress::ACT_II; 
+                        QuestlineProgress.at(PropType::NPC_DIANA).second = PropType::NPC_DIANA;
+                    }
                     break;
                 }
                 case PropType::NPC_JADE:
@@ -458,14 +472,21 @@ void Prop::UpdateNpcActs()
             {
                 case PropType::NPC_DIANA:
                 {
+                    ReadyToProgress = true;
                     break;
                 }
                 case PropType::NPC_JADE:
                 {
+                    if (PiecesReceived >= 1) {
+                        Act = Progress::ACT_IV;
+                    }
                     break;
                 }
                 case PropType::NPC_SON:
                 {
+                    if (PiecesReceived >= 1) {
+                        Act = Progress::ACT_IV;
+                    }
                     break;
                 }
                 case PropType::NPC_RUMBY:
@@ -533,6 +554,13 @@ void Prop::UpdateNpcActs()
         }
         default:
             break;
+    }
+}
+
+void Prop::CheckFinalChest()
+{
+    if (Type == PropType::BIGTREASURE && FinalChestSpawned) {
+        Spawned = true;
     }
 }
 
@@ -1303,11 +1331,65 @@ void Prop::DrawSpeech()
             {
                 case PropType::NPC_DIANA:
                 {
+                    DrawText("The stone fit in the engraving!", 390, 550, 20, WHITE);
+                    DrawText("It seems to be spelling some kind of word..?", 390, 575, 20, WHITE);
+                    DrawText("Ah! I have a book on ancient engravings!", 390, 600, 20, WHITE);
+                    DrawText("Keep finding more stones and lets try to", 390, 625, 20, WHITE);
+                    DrawText("decipher it, Foxy!", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    break;
+                }
+                case PropType::NPC_JADE:
+                {
+                    DrawText("", 390, 550, 20, WHITE);
+                    DrawText("", 390, 575, 20, WHITE);
+                    DrawText("", 390, 600, 20, WHITE);
+                    DrawText("", 390, 625, 20, WHITE);
+                    DrawText("", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    break;
+                }
+                case PropType::NPC_SON:
+                {
+                    DrawText("", 390, 550, 20, WHITE);
+                    DrawText("", 390, 575, 20, WHITE);
+                    DrawText("", 390, 600, 20, WHITE);
+                    DrawText("", 390, 625, 20, WHITE);
+                    DrawText("", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    break;
+                }
+                case PropType::NPC_RUMBY:
+                {
+                    DrawText("", 390, 550, 20, WHITE);
+                    DrawText("", 390, 575, 20, WHITE);
+                    DrawText("", 390, 600, 20, WHITE);
+                    DrawText("", 390, 625, 20, WHITE);
+                    DrawText("", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    break;
+                }
+                default:
+                    break;
+            }
+            
+            if (IsKeyPressed(KEY_ENTER)) {
+                Opened = true;
+                Talking = false;
+            }
+            break;
+        }
+        case Progress::ACT_VI:
+        {
+            switch (Type)
+            {
+                case PropType::NPC_DIANA:
+                {
                     DrawText("My sweet Foxy, I think I have deciphered", 390, 550, 20, WHITE);
                     DrawText("the engravings on the altar! They seem to", 390, 575, 20, WHITE);
                     DrawText("spell out... L...I...L...A...C.... LILAC!", 390, 600, 20, WHITE);
                     DrawText("My favorite flower! Maybe we should", 390, 625, 20, WHITE);
-                    DrawText("try that on the cryptex you found?", 390, 650, 20, WHITE);
+                    DrawText("try it on our cryptex!!", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;
                 }
