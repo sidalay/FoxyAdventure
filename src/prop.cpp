@@ -126,8 +126,12 @@ void Prop::Tick(const float DeltaTime)
                     Object.Tick(DeltaTime);
                     break;
                 case PropType::TREASURE:
-                case PropType::BIGTREASURE:
                     TreasureTick(DeltaTime);
+                    break;
+                case PropType::BIGTREASURE:
+                    if (FinalChestKey) {
+                        TreasureTick(DeltaTime);
+                    }
                     break;
                 case PropType::DOOR:
                     Opened = true;
@@ -152,7 +156,7 @@ void Prop::Tick(const float DeltaTime)
             OpenChest(DeltaTime);
         }
     }
-    UpdateNpcPos();
+    UpdateNpcInactive();
     CheckFinalChest();
 }
 
@@ -291,6 +295,10 @@ void Prop::TreasureTick(const float DeltaTime)
         }
     }
 
+    if (Type == PropType::BIGTREASURE) {
+        BraceletReceived = true;
+    }
+
     if (TriggerAct != Progress::ACT_O) {
         QuestlineProgress.at(PropType::TREASURE).first = TriggerAct;
         QuestlineProgress.at(PropType::TREASURE).second = TriggerNPC;
@@ -342,23 +350,30 @@ void Prop::TalkToNpc()
 {
     Talking = true;
 
-    UpdateNpcActs();
+    UpdateNpcActive();
 }
 
-void Prop::UpdateNpcPos()
+void Prop::UpdateNpcInactive()
 {
     if (!Visible) {
         switch (Type)
         {
             case PropType::NPC_DIANA:
             {
-                if (PiecesAdded >= 1 && PiecesAdded <= 5) {
-                    WorldPos.x = 3163.f;
-                    WorldPos.y = 2853.f;
-                    Act = Progress::ACT_V;
+                if (BraceletReceived) {
+                    Act = Progress::ACT_VIII;
                 }
 
-                if (PiecesAdded == 6 && ReadyToProgress) {
+                if (PiecesAdded >= 1 && PiecesAdded <= 5 && ReadyToProgress) {
+                    WorldPos.x = 3163.f;
+                    WorldPos.y = 2853.f;
+                    ReadyToProgress = false;
+                }
+                else if (PiecesAdded >= 1 && PiecesAdded <= 5 && !ReadyToProgress) {
+                    Act = Progress::ACT_IV;
+                }
+
+                if (PiecesAdded == 6 && (Act == Progress::ACT_IV || Act == Progress::ACT_V) && ReadyToProgress) {
                     WorldPos.x = 645.f;
                     WorldPos.y = 1777.f;
                     Act = Progress::ACT_VI;
@@ -368,7 +383,10 @@ void Prop::UpdateNpcPos()
             }
             case PropType::NPC_JADE:
             {   
-                if (Act == Progress::ACT_III && ReadyToProgress) {
+                if (BraceletReceived) {
+                    Act = Progress::ACT_VIII;
+                }
+                else if (Act == Progress::ACT_III && ReadyToProgress) {
                     WorldPos.x = 1549.f;
                     WorldPos.y = 2945.f;
                     ReadyToProgress = false;
@@ -377,11 +395,21 @@ void Prop::UpdateNpcPos()
             }
             case PropType::NPC_SON:
             {
-                if (Act == Progress::ACT_II && ReadyToProgress) {
+                if (BraceletReceived) {
+                    Act = Progress::ACT_VIII;
+                }
+                else if (Act == Progress::ACT_II && ReadyToProgress) {
                     WorldPos.x = 1283.f;
                     WorldPos.y = 2859.f;
                     Act = Progress::ACT_III;
                     ReadyToProgress = false;
+                }
+                break;
+            }
+            case PropType::NPC_RUMBY:
+            {
+                if (BraceletReceived) {
+                    Act = Progress::ACT_VIII;
                 }
                 break;
             }
@@ -391,7 +419,7 @@ void Prop::UpdateNpcPos()
     }
 }
 
-void Prop::UpdateNpcActs()
+void Prop::UpdateNpcActive()
 {
     switch (Act) 
     {
@@ -472,7 +500,6 @@ void Prop::UpdateNpcActs()
             {
                 case PropType::NPC_DIANA:
                 {
-                    ReadyToProgress = true;
                     break;
                 }
                 case PropType::NPC_JADE:
@@ -506,6 +533,7 @@ void Prop::UpdateNpcActs()
             {
                 case PropType::NPC_DIANA:
                 {
+                    ReadyToProgress = true;
                     break;
                 }
                 case PropType::NPC_JADE:
@@ -533,6 +561,7 @@ void Prop::UpdateNpcActs()
             {
                 case PropType::NPC_DIANA:
                 {
+                    ReadyToProgress = true;
                     break;
                 }
                 case PropType::NPC_JADE:
@@ -552,6 +581,85 @@ void Prop::UpdateNpcActs()
             }
             break;    
         }
+        case Progress::ACT_VI:
+        {
+            switch (Type)
+            {
+                case PropType::NPC_DIANA:
+                {
+                    break;
+                }
+                case PropType::NPC_JADE:
+                {
+                    break;
+                }
+                case PropType::NPC_SON:
+                {
+                    break;
+                }
+                case PropType::NPC_RUMBY:
+                {
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        case Progress::ACT_VII:
+        {
+            switch (Type)
+            {
+                case PropType::NPC_DIANA:
+                {
+                    QuestlineProgress.at(PropType::NPC_DIANA).first = Progress::ACT_VI; 
+                    QuestlineProgress.at(PropType::NPC_DIANA).second = PropType::NPC_DIANA;
+                    FinalChestKey = true;
+                    ChestKeyReceived = true;
+                    break;
+                }
+                case PropType::NPC_JADE:
+                {
+                    break;
+                }
+                case PropType::NPC_SON:
+                {
+                    break;
+                }
+                case PropType::NPC_RUMBY:
+                {
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;    
+        }
+        case Progress::ACT_VIII:
+        {
+            switch (Type)
+            {
+                case PropType::NPC_DIANA:
+                {
+                    break;
+                }
+                case PropType::NPC_JADE:
+                {
+                    break;
+                }
+                case PropType::NPC_SON:
+                {
+                    break;
+                }
+                case PropType::NPC_RUMBY:
+                {
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;    
+        }    
         default:
             break;
     }
@@ -1096,7 +1204,7 @@ void Prop::DrawSpeech()
     switch(Act)
     {
         case Progress::ACT_I:
-        {   
+        {
             switch (Type)
             {
                 case PropType::NPC_DIANA:
@@ -1182,8 +1290,8 @@ void Prop::DrawSpeech()
                     DrawText("...Mom told you to find me?...", 390, 550, 20, WHITE);
                     DrawText("She said that I keep wandering off???", 390, 575, 20, WHITE);
                     DrawText("SHES the one who left ME here!!", 390, 600, 20, WHITE);
-                    DrawText("...Well, thank you for finding me...", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
+                    DrawText("Could you please lead me back home...?", 390, 625, 20, WHITE);
+                    DrawText("I'll follow along behind you!", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                     break;
                 }
@@ -1277,11 +1385,11 @@ void Prop::DrawSpeech()
             {
                 case PropType::NPC_DIANA:
                 {
-                    DrawText("Is that my Cryptex? I put that away long ago...", 390, 550, 20, WHITE);
-                    DrawText("It was a gift but I could not figure out how", 390, 575, 20, WHITE);
-                    DrawText("to open it... I wonder what secrets it holds inside?", 390, 600, 20, WHITE);
-                    DrawText("Lets find the code together, Mr. Foxy!", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
+                    DrawText("The stone fit in the engraving!", 390, 550, 20, WHITE);
+                    DrawText("It seems to be spelling some kind of word..?", 390, 575, 20, WHITE);
+                    DrawText("Ah! I have a book on ancient engravings!", 390, 600, 20, WHITE);
+                    DrawText("Keep finding more stones and lets try to", 390, 625, 20, WHITE);
+                    DrawText("decipher it, Foxy!", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;
                 }
@@ -1331,12 +1439,12 @@ void Prop::DrawSpeech()
             {
                 case PropType::NPC_DIANA:
                 {
-                    DrawText("The stone fit in the engraving!", 390, 550, 20, WHITE);
-                    DrawText("It seems to be spelling some kind of word..?", 390, 575, 20, WHITE);
-                    DrawText("Ah! I have a book on ancient engravings!", 390, 600, 20, WHITE);
-                    DrawText("Keep finding more stones and lets try to", 390, 625, 20, WHITE);
-                    DrawText("decipher it, Foxy!", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    DrawText("Is that my Cryptex? I put that away long ago...", 390, 550, 20, WHITE);
+                    DrawText("It was a gift but I could not figure out how", 390, 575, 20, WHITE);
+                    DrawText("to open it... I wonder what secrets it holds inside?", 390, 600, 20, WHITE);
+                    DrawText("Lets find the code together, Mr. Foxy!", 390, 625, 20, WHITE);
+                    DrawText("", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                     break;
                 }
                 case PropType::NPC_JADE:
@@ -1420,6 +1528,119 @@ void Prop::DrawSpeech()
                     DrawText("", 390, 600, 20, WHITE);
                     DrawText("", 390, 625, 20, WHITE);
                     DrawText("", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    break;
+                }
+                default:
+                    break;
+            }
+            
+            if (IsKeyPressed(KEY_ENTER)) {
+                if (Type == PropType::NPC_DIANA) {
+                    Act = Progress::ACT_VII;
+                }
+                else {
+                    Opened = true;
+                    Talking = false;
+                }
+            }
+            break;
+        }
+        case Progress::ACT_VII:
+        {
+            switch (Type)
+            {
+                case PropType::NPC_DIANA:
+                {
+                    DrawText("It opened!!", 390, 550, 20, WHITE);
+                    DrawText("...There was a key inside?", 390, 575, 20, WHITE);
+                    DrawText("I wonder what it could be for....?", 390, 600, 20, WHITE);
+                    DrawText("", 390, 625, 20, WHITE);
+                    DrawText("                   **Key Received**", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    break;
+                }
+                case PropType::NPC_JADE:
+                {
+                    DrawText("", 390, 550, 20, WHITE);
+                    DrawText("", 390, 575, 20, WHITE);
+                    DrawText("", 390, 600, 20, WHITE);
+                    DrawText("", 390, 625, 20, WHITE);
+                    DrawText("", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    break;
+                }
+                case PropType::NPC_SON:
+                {
+                    DrawText("", 390, 550, 20, WHITE);
+                    DrawText("", 390, 575, 20, WHITE);
+                    DrawText("", 390, 600, 20, WHITE);
+                    DrawText("", 390, 625, 20, WHITE);
+                    DrawText("", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    break;
+                }
+                case PropType::NPC_RUMBY:
+                {
+                    DrawText("", 390, 550, 20, WHITE);
+                    DrawText("", 390, 575, 20, WHITE);
+                    DrawText("", 390, 600, 20, WHITE);
+                    DrawText("", 390, 625, 20, WHITE);
+                    DrawText("", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    break;
+                }
+                default:
+                    break;
+            }
+            
+            if (IsKeyPressed(KEY_ENTER)) {
+                Opened = true;
+                Talking = false;
+            }
+            break;
+        }
+        case Progress::ACT_VIII:
+        {
+            switch (Type)
+            {
+                case PropType::NPC_DIANA:
+                {
+                    DrawText("The key unlocked a treasure chest?", 390, 550, 20, WHITE);
+                    DrawText("There was a silver bracelet inside?", 390, 575, 20, WHITE);
+                    DrawText("You want... to give it to me?", 390, 600, 20, WHITE);
+                    DrawText("Mr. Foxy, you are the sweetest!", 390, 625, 20, WHITE);
+                    DrawText("Thank you so muchhhhh", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    break;
+                }
+                case PropType::NPC_JADE:
+                {
+                    DrawText("Thank you again for finding my boy!", 390, 550, 20, WHITE);
+                    DrawText("If he gets lost again the next time I send him", 390, 575, 20, WHITE);
+                    DrawText("to look for... err... I mean the next time he", 390, 600, 20, WHITE);
+                    DrawText("goes looking for treasure... I can count on", 390, 625, 20, WHITE);
+                    DrawText("you to save him, right?!!", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    break;
+                }
+                case PropType::NPC_SON:
+                {
+                    DrawText("Hey, Mr. Foxy! Great job finding all the", 390, 550, 20, WHITE);
+                    DrawText("treasures! Diana is super excited about", 390, 575, 20, WHITE);
+                    DrawText("the bracelet. She wouldn't stop showing", 390, 600, 20, WHITE);
+                    DrawText("it off!! And thank you again for saving me.", 390, 625, 20, WHITE);
+                    DrawText("I don't know where I would be without you!", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    break;
+                }
+                case PropType::NPC_RUMBY:
+                {
+                    DrawText("I've heard of your great adventures, Mr. Foxy.", 390, 550, 20, WHITE);
+                    DrawText("Well done mastering the forest and besting all", 390, 575, 20, WHITE);
+                    DrawText("the wild monsters! You are a wonderful Foxy", 390, 600, 20, WHITE);
+                    DrawText("and I wish you the best in all your upcoming", 390, 625, 20, WHITE);
+                    DrawText("ventures. Take care, little one!", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;
                 }

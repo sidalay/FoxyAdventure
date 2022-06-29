@@ -198,8 +198,9 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, const Vect
                         Interactable = true;
 
                         // Manage interacting with props
-                        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_SPACE))
+                        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsKeyPressed(KEY_SPACE)) {
                             Interacting = true;
+                        }
                                 
                         if (Interacting) {
                             Prop.SetActive(true);

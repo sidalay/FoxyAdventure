@@ -37,7 +37,7 @@ enum class PropType
 
 enum class Progress
 {
-    ACT_O, ACT_I, ACT_II, ACT_III, ACT_IV, ACT_V, ACT_VI, ACT_VII
+    ACT_O, ACT_I, ACT_II, ACT_III, ACT_IV, ACT_V, ACT_VI, ACT_VII, ACT_VIII
 };
 
 struct Props;
@@ -88,8 +88,8 @@ public:
     void CheckVisibility(const Vector2 CharacterWorldPos);
     void InsertAltarPiece();
     void TalkToNpc();
-    void UpdateNpcPos();
-    void UpdateNpcActs();
+    void UpdateNpcInactive();
+    void UpdateNpcActive();
     void CheckFinalChest();
 
     constexpr bool HasCollision() const {return Collidable;}
@@ -161,8 +161,10 @@ private:
     float RunningTime{};
     static inline int PiecesReceived{0};
     static inline int PiecesAdded{0};
+    static inline bool BraceletReceived{false};
     static inline bool CryptexReceived{false};
     static inline bool FinalChestKey{false};
+    static inline bool ChestKeyReceived{false};
     static inline bool FinalChestSpawned{false};
     static inline bool FirstPieceInserted{false};
 
