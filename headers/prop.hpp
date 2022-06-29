@@ -88,6 +88,7 @@ public:
     void CheckVisibility(const Vector2 CharacterWorldPos);
     void InsertAltarPiece();
     void TalkToNpc();
+    void UpdateNpcPos();
     void UpdateNpcActs();
 
     constexpr bool HasCollision() const {return Collidable;}
@@ -132,6 +133,7 @@ private:
     bool Visible{false};
     bool Spawned{true};
     bool Reading{false};
+    bool ReadyToProgress{false};
 
     // NPC variables
     Progress Act{Progress::ACT_I};
@@ -144,6 +146,7 @@ private:
         {PropType::NPC_JADE, std::make_pair(Progress::ACT_O, PropType::NPC_O)},
         {PropType::NPC_SON, std::make_pair(Progress::ACT_O, PropType::NPC_O)},
         {PropType::NPC_RUMBY, std::make_pair(Progress::ACT_O, PropType::NPC_O)},
+        {PropType::NPC_O, std::make_pair(Progress::ACT_O, PropType::NPC_O)},
         {PropType::TREASURE, std::make_pair(Progress::ACT_O, PropType::NPC_O)},
     };
 
@@ -158,6 +161,7 @@ private:
     static inline int PiecesReceived{0};
     static inline int PiecesAdded{0};
     static inline bool CryptexReceived{false};
+    static inline bool FinalChestKey{false};
     static inline bool FinalChestSpawned{false};
     static inline bool FirstPieceInserted{false};
 

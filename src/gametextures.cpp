@@ -19,6 +19,7 @@ GameTexture::~GameTexture()
     UnloadTexture(AxeStump);
     UnloadTexture(BigGrass);
     UnloadTexture(Boulder);
+    UnloadTexture(Bracelet);
     UnloadTexture(BridgeHorizontal);
     UnloadTexture(BridgeRopeBottom);
     UnloadTexture(BridgeRopeLeft);

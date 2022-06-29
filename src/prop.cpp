@@ -152,6 +152,7 @@ void Prop::Tick(const float DeltaTime)
             OpenChest(DeltaTime);
         }
     }
+    UpdateNpcPos();
 }
 
 void Prop::Draw(const Vector2 CharacterWorldPos)
@@ -178,38 +179,6 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
                 }
             }
         }
-    }
-    else {   
-        if (Type == PropType::NPC_SON && Act == Progress::ACT_II) {
-            WorldPos.x = 1283.f;
-            WorldPos.y = 2859.f;
-            Act = Progress::ACT_III;
-        }
-        else if (Type == PropType::NPC_JADE && PiecesReceived >= 1) {
-            Act = Progress::ACT_IV;
-        }
-        else if (Type == PropType::NPC_JADE && (Act == Progress::ACT_II || Act == Progress::ACT_III)) {
-            WorldPos.x = 1549.f;
-            WorldPos.y = 2959.f;
-        }
-        else if (Type == PropType::NPC_DIANA && FinalChestSpawned) {
-            WorldPos.x = 645.f;
-            WorldPos.y = 1777.f;
-        }
-        else if (Type == PropType::NPC_DIANA && PiecesAdded >= 1) {
-            WorldPos.x = 3163.f;
-            WorldPos.y = 2853.f;
-            // Act = Progress::ACT_IV;
-        }   
-        else if (Type == PropType::NPC_DIANA && PiecesReceived == 1) {
-            Act = Progress::ACT_III;
-        }
-        // else if (Type == PropType::NPC_DIANA && CryptexReceived) {
-        //     Act = Progress::ACT_IV;
-        // }
-        else if (Type == PropType::NPC_SON && PiecesReceived >= 1) {
-            Act = Progress::ACT_IV;
-        }   
     }
     
     // Draw Treasure Box Item
@@ -343,6 +312,10 @@ void Prop::InsertAltarPiece()
         InsertPiece = true;
     }
 
+    if (PiecesAdded >= 6) {
+        FinalChestSpawned = true;
+    }
+
     if (FirstPieceInserted) {
         for (auto& Piece:AltarPieces) {
             if (std::get<1>(Piece) == true) {
@@ -353,10 +326,6 @@ void Prop::InsertAltarPiece()
                 std::get<3>(Piece) = true;
                 PiecesAdded++;
             }
-        }
-        
-        if (PiecesAdded >= 6) {
-            FinalChestSpawned = true;
         }
 
         Opened = true;
@@ -373,6 +342,44 @@ void Prop::TalkToNpc()
     Talking = true;
 
     UpdateNpcActs();
+}
+
+void Prop::UpdateNpcPos()
+{
+    if (!Visible) {
+        if (Type == PropType::NPC_SON && Act == Progress::ACT_II && ReadyToProgress) {
+            WorldPos.x = 1283.f;
+            WorldPos.y = 2859.f;
+            Act = Progress::ACT_III;
+            ReadyToProgress = false;
+        }
+        else if (Type == PropType::NPC_JADE && PiecesReceived >= 1) {
+            Act = Progress::ACT_IV;
+        }
+        else if (Type == PropType::NPC_JADE && Act == Progress::ACT_III && ReadyToProgress) {
+            WorldPos.x = 1549.f;
+            WorldPos.y = 2945.f;
+            ReadyToProgress = false;
+        }
+        else if (Type == PropType::NPC_DIANA && FinalChestSpawned) {
+            WorldPos.x = 645.f;
+            WorldPos.y = 1777.f;
+        }
+        else if (Type == PropType::NPC_DIANA && PiecesAdded >= 1) {
+            WorldPos.x = 3163.f;
+            WorldPos.y = 2853.f;
+            // Act = Progress::ACT_IV;
+        }   
+        else if (Type == PropType::NPC_DIANA && PiecesReceived == 1) {
+            Act = Progress::ACT_III;
+        }
+        // else if (Type == PropType::NPC_DIANA && CryptexReceived) {
+        //     Act = Progress::ACT_IV;
+        // }
+        else if (Type == PropType::NPC_SON && PiecesReceived >= 1) {
+            Act = Progress::ACT_IV;
+        }   
+    }
 }
 
 void Prop::UpdateNpcActs()
@@ -424,12 +431,14 @@ void Prop::UpdateNpcActs()
                 {
                     QuestlineProgress.at(PropType::NPC_JADE).first = Progress::ACT_III;
                     QuestlineProgress.at(PropType::NPC_JADE).second = PropType::NPC_JADE;
+                    ReadyToProgress = true;
                     break;
                 }
                 case PropType::NPC_SON:
                 {
                     QuestlineProgress.at(PropType::NPC_SON).first = Progress::ACT_II;
                     QuestlineProgress.at(PropType::NPC_SON).second = PropType::NPC_JADE;
+                    ReadyToProgress = true;
                     break;
                 }
                 case PropType::NPC_RUMBY:
@@ -1132,11 +1141,11 @@ void Prop::DrawSpeech()
                 }
                 case PropType::NPC_JADE:
                 {
-                    DrawText("You found my boy! He's always wandering", 390, 550, 20, WHITE);
-                    DrawText("off and getting in trouble... This time", 390, 575, 20, WHITE);
-                    DrawText("the FOREST!! Thank you for finding him!!", 390, 600, 20, WHITE);
-                    DrawText("There are rumors of a hidden treasure out", 390, 625, 20, WHITE);
-                    DrawText("there... maybe he was looking for it?", 390, 650, 20, WHITE);
+                    DrawText("You found my boy! Thank you! Always wandering", 390, 550, 20, WHITE);
+                    DrawText("off and getting in trouble... This time the FOREST!", 390, 575, 20, WHITE);
+                    DrawText("I've been trying to get this treasure back here,", 390, 600, 20, WHITE);
+                    DrawText("but I'm not strong enough!!!!!!!! Do you think", 390, 625, 20, WHITE);
+                    DrawText("you can help me one more time, Foxy?!", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                     break;
                 }
@@ -1240,10 +1249,10 @@ void Prop::DrawSpeech()
             {
                 case PropType::NPC_DIANA:
                 {
-                    DrawText("Is that a Cryptex? That looks like one I", 390, 550, 20, WHITE);
-                    DrawText("used to have a long time ago... I wonder", 390, 575, 20, WHITE);
-                    DrawText("what secrets it holds inside? Lets try to", 390, 600, 20, WHITE);
-                    DrawText("find the code, Mr. Foxy!", 390, 625, 20, WHITE);
+                    DrawText("Is that my Cryptex? I put that away long ago...", 390, 550, 20, WHITE);
+                    DrawText("It was a gift but I could not figure out how", 390, 575, 20, WHITE);
+                    DrawText("to open it... I wonder what secrets it holds inside?", 390, 600, 20, WHITE);
+                    DrawText("Lets find the code together, Mr. Foxy!", 390, 625, 20, WHITE);
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;
@@ -1253,7 +1262,7 @@ void Prop::DrawSpeech()
                     DrawText("Hey, you found the treasure!!!!!!!", 390, 550, 20, WHITE);
                     DrawText("Wait... It was just a dusty old rock???", 390, 575, 20, WHITE);
                     DrawText("We have plenty of those lying around", 390, 600, 20, WHITE);
-                    DrawText("everywhere!!!", 390, 625, 20, WHITE);
+                    DrawText("everywhere!!! You can keep it if you like!", 390, 625, 20, WHITE);
                     DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;
@@ -1296,8 +1305,8 @@ void Prop::DrawSpeech()
                 {
                     DrawText("My sweet Foxy, I think I have deciphered", 390, 550, 20, WHITE);
                     DrawText("the engravings on the altar! They seem to", 390, 575, 20, WHITE);
-                    DrawText("spell out... L...I...L...A...C....", 390, 600, 20, WHITE);
-                    DrawText("LILAC! My favorite flower! Maybe we should", 390, 625, 20, WHITE);
+                    DrawText("spell out... L...I...L...A...C.... LILAC!", 390, 600, 20, WHITE);
+                    DrawText("My favorite flower! Maybe we should", 390, 625, 20, WHITE);
                     DrawText("try that on the cryptex you found?", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;

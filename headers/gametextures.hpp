@@ -31,6 +31,8 @@ struct GameTexture {
     const Texture2D BigGrass{LoadTexture("sprites/props/BigGrass.png")};
     const Texture2D Boulder{LoadTexture("sprites/props/Boulder.png")};
 
+    const Texture2D Bracelet{LoadTexture("sprites/props/Bracelet.png")};
+
     const Texture2D BridgeHorizontal{LoadTexture("sprites/props/BridgeHorizontal.png")};
     const Texture2D BridgeRopeBottom{LoadTexture("sprites/props/BridgeRopeBottom.png")};
     const Texture2D BridgeRopeLeft{LoadTexture("sprites/props/BridgeRopeLeft.png")};
