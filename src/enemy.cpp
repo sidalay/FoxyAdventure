@@ -325,8 +325,8 @@ void Enemy::CheckOutOfBounds()
 {
     if (WorldPos.x < 0.f ||
         WorldPos.y < 0.f ||
-        WorldPos.x > World.GetMapSize().x * World.GetScale() - (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX)*Scale ||
-        WorldPos.y > World.GetMapSize().y * World.GetScale() - (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY)*Scale) 
+        WorldPos.x > World.GetForestMapSize().x * World.GetScale() - (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX)*Scale ||
+        WorldPos.y > World.GetForestMapSize().y * World.GetScale() - (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY)*Scale) 
     {
         UndoMovement();
     }

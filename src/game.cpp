@@ -222,7 +222,7 @@ namespace Game
 
     void Draw(Game::Info& Info, Game::Objects& Objects)
     {
-        Info.Map.Draw();
+        Info.Map.DrawForest();
 
         for (auto& PropType:Objects.PropsContainer.Under) {
             for (auto& Prop:PropType) {

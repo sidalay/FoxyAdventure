@@ -20,9 +20,11 @@ public:
     constexpr Background& operator=(Background&&) = default;
 
     void Tick(const Vector2 WorldPos);
-    void Draw();
+    void DrawForest();
+    void DrawDungeon();
     void DrawMiniMap(const Vector2 CharWorldPos);
-    Vector2 GetMapSize();
+    Vector2 GetForestMapSize();
+    Vector2 GetDungeonMapSize();
     constexpr Vector2 GetMapPos() const {return MapPos;}
     constexpr bool IsMiniMapOn() const {return MiniMapOpen;}
     constexpr float GetScale() const {return Scale;}

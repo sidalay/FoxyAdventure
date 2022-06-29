@@ -135,8 +135,8 @@ void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::ve
         // Undo Movement if walking out-of-bounds
         if (WorldPos.x + ScreenPos.x < 0.f - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
             WorldPos.y + ScreenPos.y < 0.f - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f ||
-            WorldPos.x + (Screen.x - ScreenPos.x) > World.GetMapSize().x * World.GetScale() + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
-            WorldPos.y + (Screen.y - ScreenPos.y) > World.GetMapSize().y * World.GetScale() + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f)
+            WorldPos.x + (Screen.x - ScreenPos.x) > World.GetForestMapSize().x * World.GetScale() + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
+            WorldPos.y + (Screen.y - ScreenPos.y) > World.GetForestMapSize().y * World.GetScale() + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f)
         {
             UndoMovement();
         }

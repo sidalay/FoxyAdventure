@@ -15,9 +15,14 @@ void Background::Tick(const Vector2 WorldPos)
     }
 }
 
-void Background::Draw() 
+void Background::DrawForest() 
 {
     DrawTextureEx(GameTextures.Map, MapPos, 0.0f, Scale, WHITE);
+}
+
+void Background::DrawDungeon()
+{
+    DrawTextureEx(GameTextures.DungeonMap, MapPos, 0.0f, Scale, WHITE);
 }
 
 void Background::DrawMiniMap(const Vector2 CharWorldPos)
@@ -35,7 +40,12 @@ void Background::DrawMiniMap(const Vector2 CharWorldPos)
     }
 }
 
-Vector2 Background::GetMapSize()
+Vector2 Background::GetForestMapSize()
 {
     return Vector2{static_cast<float>(GameTextures.Map.width), static_cast<float>(GameTextures.Map.height)};
+}
+
+Vector2 Background::GetDungeonMapSize()
+{
+    return Vector2{static_cast<float>(GameTextures.DungeonMap.width), static_cast<float>(GameTextures.DungeonMap.height)};
 }
