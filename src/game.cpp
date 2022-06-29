@@ -60,12 +60,19 @@ namespace Game
 
         BeginDrawing();
 
-        if (Info.State == Game::State::RUNNING) {
+        if (Info.State == Game::State::FOREST) {
 
             ClearBackground(BLACK);
 
             Game::Update(Info, Objects);
             Game::Draw(Info, Objects);
+        }
+        else if (Info.State == Game::State::DUNGEON) {
+            
+            ClearBackground(BLACK);
+
+            Game::DungeonUpdate(Info, Objects);
+            Game::DungeonDraw(Info, Objects);
         }
         else if (Info.State == Game::State::MAINMENU) {
 
@@ -334,6 +341,36 @@ namespace Game
         }
     }
 
+    void DungeonUpdate(Game::Info& Info, Game::Objects& Objects)
+    {
+        float DeltaTime{GetFrameTime()};
+
+        Info.Map.Tick(Objects.Fox.GetWorldPos());
+
+        if (!Objects.Fox.IsAlive()) {
+            Info.NextState = Game::State::GAMEOVER;
+            Info.State = Game::State::TRANSITION;
+        }
+        
+        if (IsKeyPressed(KEY_L)) {
+            Objects.Fox.SetSleep();
+        }
+
+        if (IsKeyPressed(KEY_P)) {
+            Info.NextState = Game::State::PAUSED;
+            Info.State = Game::State::TRANSITION;
+        }
+        else if (IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
+            Info.NextState = Game::State::EXIT;
+            Info.State = Game::State::TRANSITION;
+        }
+    }
+
+    void DungeonDraw(Game::Info& Info, Game::Objects& Objects)
+    {
+
+    }
+
     void PauseUpdate(Game::Info& Info, Game::Objects& Objects)
     {
 
@@ -360,7 +397,7 @@ namespace Game
         }
 
         if (IsKeyPressed(KEY_P)) {
-            Info.NextState = Game::State::RUNNING;
+            Info.NextState = Game::State::FOREST;
             Info.State = Game::State::TRANSITION;
             
             // Add audio functionality here later
@@ -422,13 +459,13 @@ namespace Game
         }
         else {
             if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
-                Info.NextState = Game::State::RUNNING;
+                Info.NextState = Game::State::FOREST;
                 Info.State = Game::State::TRANSITION;
             }
         }
 
         if (IsKeyPressed(KEY_F5) || IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
-            Info.NextState = Game::State::RUNNING;
+            Info.NextState = Game::State::FOREST;
             Info.State = Game::State::TRANSITION;
         }
     }
@@ -460,7 +497,7 @@ namespace Game
         }
         else {
             if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
-                Info.NextState = Game::State::RUNNING;
+                Info.NextState = Game::State::FOREST;
                 Info.State = Game::State::TRANSITION;
             }
         }
@@ -488,7 +525,7 @@ namespace Game
 
         if (!Info.GameOverStart) {
             if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
-                Info.NextState = Game::State::RUNNING;
+                Info.NextState = Game::State::FOREST;
                 Info.State = Game::State::TRANSITION;    
             }
         }

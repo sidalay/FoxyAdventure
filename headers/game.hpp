@@ -8,7 +8,7 @@ namespace Game
 {
     enum class State 
     {
-        MAINMENU, RUNNING, PAUSED, GAMEOVER, TRANSITION, EXIT
+        MAINMENU, FOREST, DUNGEON, PAUSED, GAMEOVER, TRANSITION, EXIT
     };
 
     struct Info
@@ -54,6 +54,8 @@ namespace Game
     void Tick(Window& Window, Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures);
     void Update(Game::Info& Info, Game::Objects& Objects);
     void Draw(Game::Info& Info, Game::Objects& Objects);
+    void DungeonUpdate(Game::Info& Info, Game::Objects& Objects);
+    void DungeonDraw(Game::Info& Info, Game::Objects& Objects);
     void PauseUpdate(Game::Info& Info, Game::Objects& Objects);
     void PauseDraw(const Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures);
     void ExitUpdate(Game::Info& Info);
