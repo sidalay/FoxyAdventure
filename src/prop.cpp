@@ -615,7 +615,6 @@ void Prop::UpdateNpcActive()
                     QuestlineProgress.at(PropType::NPC_DIANA).first = Progress::ACT_VI; 
                     QuestlineProgress.at(PropType::NPC_DIANA).second = PropType::NPC_DIANA;
                     FinalChestKey = true;
-                    ChestKeyReceived = true;
                     break;
                 }
                 case PropType::NPC_JADE:

@@ -164,7 +164,6 @@ private:
     static inline bool BraceletReceived{false};
     static inline bool CryptexReceived{false};
     static inline bool FinalChestKey{false};
-    static inline bool ChestKeyReceived{false};
     static inline bool FinalChestSpawned{false};
     static inline bool FirstPieceInserted{false};
 
