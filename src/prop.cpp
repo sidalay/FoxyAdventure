@@ -402,7 +402,13 @@ void Prop::UpdateNpcInactive()
                 if (BraceletReceived) {
                     Act = Progress::ACT_VIII;
                     WorldPos.x = 1160.f;
-                    WorldPos.y =3409.f;
+                    WorldPos.y = 3409.f;
+                }
+                else if (PiecesAdded >= 1 && PiecesAdded <= 4) {
+                    Act = Progress::ACT_V;
+                }
+                else if (PiecesAdded > 4) {
+                    Act = Progress::ACT_VI;
                 }
                 else if (Act == Progress::ACT_II && ReadyToProgress) {
                     WorldPos.x = 1283.f;
@@ -510,6 +516,9 @@ void Prop::UpdateNpcActive()
                 {
                     if (PiecesReceived >= 1) {
                         Act = Progress::ACT_IV;
+                    }
+                    else {
+                        Act = Progress::ACT_II;
                     }
                     break;
                 }
@@ -1233,9 +1242,9 @@ void Prop::DrawSpeech()
                 {
                     DrawText("You found my boy! Thank you! Always wandering", 390, 550, 20, WHITE);
                     DrawText("off and getting in trouble... This time the FOREST!", 390, 575, 20, WHITE);
-                    DrawText("I've been trying to get this treasure back here,", 390, 600, 20, WHITE);
-                    DrawText("but I'm not strong enough!!!!!!!! Do you think", 390, 625, 20, WHITE);
-                    DrawText("you can help me one more time, Foxy?!", 390, 650, 20, WHITE);
+                    DrawText("I've been trying to get the treasure behind the,", 390, 600, 20, WHITE);
+                    DrawText("boulder but I'm not strong enough!!!!!!!! Do you", 390, 625, 20, WHITE);
+                    DrawText("think you can help me one more time, Foxy?!", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                     break;
                 }
@@ -1413,11 +1422,11 @@ void Prop::DrawSpeech()
                 }
                 case PropType::NPC_SON:
                 {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
+                    DrawText("There has been a lot of monsters roaming", 390, 550, 20, WHITE);
+                    DrawText("about lately... I heard explorer Rumby mentioning", 390, 575, 20, WHITE);
+                    DrawText("that the monsters need to be wiped out..Maybe", 390, 600, 20, WHITE);
+                    DrawText("something will happen if you clear the camps?", 390, 625, 20, WHITE);
+                    DrawText("Maybe there will be more treasures!", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;
                 }
@@ -1455,6 +1464,16 @@ void Prop::DrawSpeech()
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;
                 }
+                case PropType::NPC_SON:
+                {
+                    DrawText("You know while I was lost in the woods", 390, 550, 20, WHITE);
+                    DrawText("I noticed an area where some trees were all", 390, 575, 20, WHITE);
+                    DrawText("BROWN!! I noticed a secret path near the brown", 390, 600, 20, WHITE);
+                    DrawText("trees but there were so many spiders I was", 390, 625, 20, WHITE);
+                    DrawText("too scared to go in! Maybe you can check it out!", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    break;
+                }
                 default:
                     break;
             }
@@ -1481,6 +1500,16 @@ void Prop::DrawSpeech()
                     DrawText("I wonder what it could be for....?", 390, 600, 20, WHITE);
                     DrawText("", 390, 625, 20, WHITE);
                     DrawText("                   **Key Received**", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    break;
+                }
+                case PropType::NPC_SON:
+                {
+                    DrawText("", 390, 550, 20, WHITE);
+                    DrawText("", 390, 575, 20, WHITE);
+                    DrawText("", 390, 600, 20, WHITE);
+                    DrawText("", 390, 625, 20, WHITE);
+                    DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;
                 }
