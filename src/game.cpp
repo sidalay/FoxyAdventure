@@ -2426,14 +2426,14 @@ namespace Game
 
         std::vector<Prop> Treasure
         {
-            Prop{Sprite{Textures.TreasureChestBig, 4, 1, 1.f/4.f}, Vector2{2136.f,1677.f}, PropType::BIGTREASURE, Textures, Textures.Bracelet, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Silver Bracelet", 4.f},
-            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2010.f,1797.f}, PropType::TREASURE, Textures, Textures.AltarTopRight, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Top Right Altar Piece"},
-            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2137.f,1797.f}, PropType::TREASURE, Textures, Textures.AltarTop, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Top Altar Piece"},
+            Prop{Sprite{Textures.TreasureChestBig, 4, 1, 1.f/4.f}, Vector2{2270.f,2375.f}, PropType::BIGTREASURE, Textures, Textures.Bracelet, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Silver Bracelet", 4.f},
+            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{3462.f,2760.f}, PropType::TREASURE, Textures, Textures.Cryptex, 4.f, false, true, Progress::ACT_V, PropType::NPC_DIANA, true, "Cryptex"},
             Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{130.f,210.f}, PropType::TREASURE, Textures, Textures.AltarTopLeft, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, true, "Top Left Altar Piece"},
             Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{1025.f,2765.f}, PropType::TREASURE, Textures, Textures.AltarBotLeft, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, true, "Bottom Left Altar Piece"},
-            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2268.f,1797.f}, PropType::TREASURE, Textures, Textures.AltarBot, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Bottom Altar Piece"},
-            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2137.f,1917.f}, PropType::TREASURE, Textures, Textures.AltarTopRight, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Bottom Right Altar Piece"},
-            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{3462.f,2760.f}, PropType::TREASURE, Textures, Textures.Cryptex, 4.f, false, true, Progress::ACT_V, PropType::NPC_DIANA, true, "Cryptex"},
+            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2110.f,2429.f}, PropType::TREASURE, Textures, Textures.AltarBot, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Bottom Altar Piece"},
+            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2433.f,2429.f}, PropType::TREASURE, Textures, Textures.AltarTopRight, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Bottom Right Altar Piece"},
+            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2110.f,2175.f}, PropType::TREASURE, Textures, Textures.AltarTopRight, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Top Right Altar Piece"},
+            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2433.f,2175.f}, PropType::TREASURE, Textures, Textures.AltarTop, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Top Altar Piece"},
 };
         Props.emplace_back(Treasure);
 
