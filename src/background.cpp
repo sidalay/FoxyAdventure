@@ -42,10 +42,10 @@ void Background::DrawMiniMap(const Vector2 CharWorldPos)
 
 Vector2 Background::GetForestMapSize()
 {
-    return Vector2{static_cast<float>(GameTextures.Map.width), static_cast<float>(GameTextures.Map.height)};
+    return Vector2{static_cast<float>(GameTextures.Map.width) * Scale, static_cast<float>(GameTextures.Map.height) * Scale};
 }
 
 Vector2 Background::GetDungeonMapSize()
 {
-    return Vector2{static_cast<float>(GameTextures.DungeonMap.width), static_cast<float>(GameTextures.DungeonMap.height)};
+    return Vector2{static_cast<float>(GameTextures.DungeonMap.width) * Scale, static_cast<float>(GameTextures.DungeonMap.height) * Scale};
 }

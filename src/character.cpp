@@ -138,8 +138,8 @@ void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::ve
         if (World.GetArea() == Area::FOREST) {
             if (WorldPos.x + ScreenPos.x < 0.f - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
                 WorldPos.y + ScreenPos.y < 0.f - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f ||
-                WorldPos.x + (Screen.x - ScreenPos.x) > World.GetForestMapSize().x * World.GetScale() + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
-                WorldPos.y + (Screen.y - ScreenPos.y) > World.GetForestMapSize().y * World.GetScale() + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f)
+                WorldPos.x + (Screen.x - ScreenPos.x) > World.GetForestMapSize().x + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
+                WorldPos.y + (Screen.y - ScreenPos.y) > World.GetForestMapSize().y + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f)
             {
                 UndoMovement();
             }
@@ -150,8 +150,8 @@ void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::ve
         else if (World.GetArea() == Area::DUNGEON) {
             if (WorldPos.x + ScreenPos.x < 0.f - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
                 WorldPos.y + ScreenPos.y < 0.f - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f ||
-                WorldPos.x + (Screen.x - ScreenPos.x) > World.GetDungeonMapSize().x * World.GetScale() + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
-                WorldPos.y + (Screen.y - ScreenPos.y) > World.GetDungeonMapSize().y * World.GetScale() + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f)
+                WorldPos.x + (Screen.x - ScreenPos.x) > World.GetDungeonMapSize().x + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
+                WorldPos.y + (Screen.y - ScreenPos.y) > World.GetDungeonMapSize().y + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f)
             {
                 UndoMovement();
             }
