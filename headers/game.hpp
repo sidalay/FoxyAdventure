@@ -24,7 +24,7 @@ namespace Game
         bool ExitIsYes{false};
         bool TeleportOn{false};
         Game::State State{Game::State::TRANSITION};
-        Game::State PrevState{};
+        Game::State PrevState{Game::State::FOREST};
         Game::State NextState{Game::State::MAINMENU};
 
         // Debugging --------------------
@@ -53,8 +53,8 @@ namespace Game
     void Initialize(const Window& Window, const std::string& Title);
     void CheckScreenSizing(Window& Window);
     void Tick(Window& Window, Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures);
-    void Update(Game::Info& Info, Game::Objects& Objects);
-    void Draw(Game::Info& Info, Game::Objects& Objects);
+    void ForestUpdate(Game::Info& Info, Game::Objects& Objects);
+    void ForestDraw(Game::Info& Info, Game::Objects& Objects);
     void DungeonUpdate(Game::Info& Info, Game::Objects& Objects);
     void DungeonDraw(Game::Info& Info, Game::Objects& Objects);
     void PauseUpdate(Game::Info& Info, Game::Objects& Objects);
