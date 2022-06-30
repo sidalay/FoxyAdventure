@@ -36,6 +36,7 @@ public:
     void CheckDirection();
     void CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void UndoMovement();
+    void CheckOutOfBounds();
     void CheckCollision(std::vector<std::vector<Prop>>& Props, const Vector2 Direction, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void CheckCollision(std::vector<Enemy>& Enemies);
     void WalkOrRun();

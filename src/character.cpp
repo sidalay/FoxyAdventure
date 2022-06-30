@@ -136,25 +136,13 @@ void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::ve
 
         // Undo Movement if walking out-of-bounds
         if (World.GetArea() == Area::FOREST) {
-            if (WorldPos.x + ScreenPos.x < 0.f - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
-                WorldPos.y + ScreenPos.y < 0.f - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f ||
-                WorldPos.x + (Screen.x - ScreenPos.x) > World.GetForestMapSize().x + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
-                WorldPos.y + (Screen.y - ScreenPos.y) > World.GetForestMapSize().y + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f)
-            {
-                UndoMovement();
-            }
+            CheckOutOfBounds();
 
             CheckCollision(Props.Under, Direction, Enemies, Trees);
             CheckCollision(Props.Over, Direction, Enemies, Trees);
         }
         else if (World.GetArea() == Area::DUNGEON) {
-            if (WorldPos.x + ScreenPos.x < 0.f - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
-                WorldPos.y + ScreenPos.y < 0.f - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f ||
-                WorldPos.x + (Screen.x - ScreenPos.x) > World.GetDungeonMapSize().x + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
-                WorldPos.y + (Screen.y - ScreenPos.y) > World.GetDungeonMapSize().y + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f)
-            {
-                UndoMovement();
-            }
+            CheckOutOfBounds();
 
             CheckCollision(Enemies);
         }
@@ -164,6 +152,31 @@ void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::ve
 void Character::UndoMovement()
 {
     WorldPos = PrevWorldPos;
+}
+
+void Character::CheckOutOfBounds()
+{
+    float CurrentSpriteWidth{static_cast<float>(Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)};
+    float CurrentSpriteHeight{static_cast<float>(Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)};
+
+    if (World.GetArea() == Area::FOREST) {
+        if (WorldPos.x + ScreenPos.x < 0.f - (CurrentSpriteWidth)/2.f ||
+            WorldPos.y + ScreenPos.y < 0.f - (CurrentSpriteHeight)/2.f ||
+            WorldPos.x + (Screen.x - ScreenPos.x) > World.GetForestMapSize().x + (CurrentSpriteWidth)/2.f ||
+            WorldPos.y + (Screen.y - ScreenPos.y) > World.GetForestMapSize().y + (CurrentSpriteHeight)/2.f)
+        {
+            UndoMovement();
+        }
+    }
+    else if (World.GetArea() == Area::DUNGEON) {
+        if (WorldPos.x + ScreenPos.x < 64.f - (CurrentSpriteWidth)/2.f ||
+            WorldPos.y + ScreenPos.y < 128.f - (CurrentSpriteHeight)/2.f ||
+            WorldPos.x + (Screen.x - ScreenPos.x) > World.GetDungeonMapSize().x + (CurrentSpriteWidth)/2.f - 65.f||
+            WorldPos.y + (Screen.y - ScreenPos.y) > World.GetDungeonMapSize().y + (CurrentSpriteHeight)/2.f - 54.f)
+        {
+            UndoMovement();
+        }
+    }
 }
 
 void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, const Vector2 Direction, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)

@@ -326,20 +326,23 @@ void Enemy::UndoMovement()
 
 void Enemy::CheckOutOfBounds()
 {
+    float CurrentSpriteWidth{static_cast<float>((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale)};
+    float CurrentSpriteHeight{static_cast<float>((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale)};
+
     if (World.GetArea() == Area::FOREST) {
         if (WorldPos.x < 0.f ||
             WorldPos.y < 0.f ||
-            WorldPos.x > World.GetForestMapSize().x - (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX)*Scale ||
-            WorldPos.y > World.GetForestMapSize().y - (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY)*Scale) 
+            WorldPos.x > World.GetForestMapSize().x - CurrentSpriteWidth ||
+            WorldPos.y > World.GetForestMapSize().y - CurrentSpriteHeight)
         {
             UndoMovement();
         }
     }
     else if (World.GetArea() == Area::DUNGEON) {
-        if (WorldPos.x < 0.f ||
-            WorldPos.y < 0.f ||
-            WorldPos.x > World.GetDungeonMapSize().x - (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX)*Scale ||
-            WorldPos.y > World.GetDungeonMapSize().y - (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY)*Scale) 
+        if (WorldPos.x < 64.f ||
+            WorldPos.y < 128.f ||
+            WorldPos.x > World.GetDungeonMapSize().x - CurrentSpriteWidth - 64.f ||
+            WorldPos.y > World.GetDungeonMapSize().y - CurrentSpriteHeight - 54.f) 
         {
             UndoMovement();
         }
