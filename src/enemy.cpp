@@ -833,7 +833,10 @@ void Enemy::DrawHP()
 
 void Enemy::CheckBossSummon(const Vector2 HeroWorldPos)
 {
-    if (!WithinScreen(HeroWorldPos) && (Type == EnemyType::BOSS || Type == EnemyType::FINALBOSS) && (MonsterCounter[BossSpawner] <= 0) && !Summoned) {
+    if (!WithinScreen(HeroWorldPos) && Type == EnemyType::BOSS && (MonsterCounter[BossSpawner] <= 0) && !Summoned) {
+        Summoned = true;
+    }
+    else if (Type == EnemyType::FINALBOSS && (MonsterCounter[BossSpawner] <= 0) && !Summoned && World.GetArea() == Area::DUNGEON) {
         Summoned = true;
     }
 }
