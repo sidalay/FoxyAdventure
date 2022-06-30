@@ -3833,43 +3833,18 @@ namespace Game
             EnemyType::BEHOLDER, EnemyType::BOSS, Vector2{1317.f, 383.f}, Window, MapBG, Textures, RandomEngine, 4, 2.5f, EnemyType::TOAD
         };
         Enemies.emplace_back(BlackBossBeholderTwo);
-    
-        // ----------------------------------- Test enemies below ------------------------------------
-        // Enemy RedNecro
-        // {
-        //     Sprite{Textures.NecromancerRedIdle, 4, 4},
-        //     Sprite{Textures.NecromancerRedWalk, 4, 4},
-        //     Sprite{Textures.NecromancerRedAttack, 4, 4},
-        //     Sprite{Textures.NecromancerRedHurt, 1, 4},
-        //     Sprite{Textures.NecromancerRedDeath, 11, 4},
-        //     Sprite{Textures.NecromancerRedProjectile, 4, 4},
-        //     EnemyType::NECROMANCER, EnemyType::NORMAL, Vector2{2038.f, 2345.f}, Window, MapBG, Textures, RandomEngine
-        // };
-        // Enemies.emplace_back(RedNecro);
 
-        // Enemy PurpleCreature
-        // {
-        //     Sprite{Textures.CreaturePurpleIdle, 4, 4},
-        //     Sprite{Textures.CreaturePurpleWalk, 4, 4},
-        //     Sprite{Textures.CreaturePurpleAttack, 4, 4},
-        //     Sprite{Textures.CreaturePurpleHurt, 1, 4},
-        //     Sprite{Textures.CreaturePurpleDeath, 11, 4},
-        //     Sprite{Textures.Placeholder, 0, 0},
-        //     EnemyType::CREATURE, EnemyType::NORMAL, Vector2{1660.f, 3366.f}, Window, MapBG, Textures, RandomEngine
-        // };
-        // Enemies.emplace_back(PurpleCreature);
-
-        // Enemy GreenImp
-        // {
-        //     Sprite{Textures.ImpGreenIdle, 4, 4},
-        //     Sprite{Textures.ImpGreenWalk, 4, 4},
-        //     Sprite{Textures.ImpGreenAttack, 4, 4},
-        //     Sprite{Textures.ImpGreenHurt, 1, 4},
-        //     Sprite{Textures.ImpGreenDeath, 11, 4},
-        //     Sprite{Textures.ImpGreenProjectile, 4, 4},
-        //     EnemyType::IMP, EnemyType::NORMAL, Vector2{1800.f, 3666.f}, Window, MapBG, Textures, RandomEngine
-        // };
-        // Enemies.emplace_back(GreenImp);
+        Enemy BossRedNecro
+        {
+            Sprite{Textures.NecromancerRedIdle, 4, 4},
+            Sprite{Textures.NecromancerRedWalk, 4, 4},
+            Sprite{Textures.NecromancerRedAttack, 4, 4},
+            Sprite{Textures.NecromancerRedHurt, 1, 4},
+            Sprite{Textures.NecromancerRedDeath, 11, 4},
+            Sprite{Textures.NecromancerRedProjectile, 4, 4},
+            EnemyType::NECROMANCER, EnemyType::FINALBOSS, Vector2{2147.f, 1646.f}, Window, MapBG, Textures, RandomEngine, 8, 5.f, EnemyType::BOSS
+        };
+        Enemies.emplace_back(BossRedNecro);
 
         // ------------------- Wildlife NPCs ---------------------//
         // -------------------- Fox Family -----------------------//
@@ -3973,17 +3948,6 @@ namespace Game
         };
         Enemies.emplace_back(SquirrelFive);
 
-        // Enemy SquirrelSix
-        // {
-        //     Sprite{Textures.SquirrelIdle, 6, 2},
-        //     Sprite{Textures.SquirrelIdleTwo, 6, 2},
-        //     Sprite{Textures.SquirrelWalk, 4, 2},
-        //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{2767.f, 338.f}, Window, MapBG, Textures, RandomEngine, 2.0f
-        // };
-        // Enemies.emplace_back(SquirrelSix);
-
         Enemy SquirrelSeven
         {
             Sprite{Textures.SquirrelIdle, 6, 2},
@@ -4027,39 +3991,6 @@ namespace Game
             EnemyType::SQUIRREL, Vector2{345.f, 1663.f}, Window, MapBG, Textures, RandomEngine, 2.0f
         };
         Enemies.emplace_back(SquirrelTen);
-
-        // Enemy SquirrelEleven
-        // {
-        //     Sprite{Textures.SquirrelIdle, 6, 2},
-        //     Sprite{Textures.SquirrelIdleTwo, 6, 2},
-        //     Sprite{Textures.SquirrelWalk, 4, 2},
-        //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{254.f, 532.f}, Window, MapBG, Textures, RandomEngine, 2.0f
-        // };
-        // Enemies.emplace_back(SquirrelEleven);
-
-        // Enemy SquirrelTwelve
-        // {
-        //     Sprite{Textures.SquirrelIdle, 6, 2},
-        //     Sprite{Textures.SquirrelIdleTwo, 6, 2},
-        //     Sprite{Textures.SquirrelWalk, 4, 2},
-        //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{334.f, 432.f}, Window, MapBG, Textures, RandomEngine, 2.0f
-        // };
-        // Enemies.emplace_back(SquirrelTwelve);
-
-        // Enemy SquirrelThirteen
-        // {
-        //     Sprite{Textures.SquirrelIdle, 6, 2},
-        //     Sprite{Textures.SquirrelIdleTwo, 6, 2},
-        //     Sprite{Textures.SquirrelWalk, 4, 2},
-        //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{452.f, 533.f}, Window, MapBG, Textures, RandomEngine, 2.0f
-        // };
-        // Enemies.emplace_back(SquirrelThirteen);
 
         Enemy SquirrelFourteen
         {
@@ -4248,17 +4179,6 @@ namespace Game
         };
         Enemies.emplace_back(SquirrelThirty);
 
-        // Enemy SquirrelThirtyOne
-        // {
-        //     Sprite{Textures.SquirrelIdle, 6, 2},
-        //     Sprite{Textures.SquirrelIdleTwo, 6, 2},
-        //     Sprite{Textures.SquirrelWalk, 4, 2},
-        //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{1061.f, 1728.f}, Window, MapBG, Textures, RandomEngine, 2.0f
-        // };
-        // Enemies.emplace_back(SquirrelThirtyOne);
-
         Enemy SquirrelThirtyTwo
         {
             Sprite{Textures.SquirrelIdle, 6, 2},
@@ -4269,17 +4189,6 @@ namespace Game
             EnemyType::SQUIRREL, Vector2{728.f, 912.f}, Window, MapBG, Textures, RandomEngine, 2.0f
         };
         Enemies.emplace_back(SquirrelThirtyTwo);
-
-        // Enemy SquirrelThirtyThree
-        // {
-        //     Sprite{Textures.SquirrelIdle, 6, 2},
-        //     Sprite{Textures.SquirrelIdleTwo, 6, 2},
-        //     Sprite{Textures.SquirrelWalk, 4, 2},
-        //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     Sprite{Textures.SquirrelEat, 2, 2},
-        //     EnemyType::SQUIRREL, Vector2{1145.f, 772.f}, Window, MapBG, Textures, RandomEngine, 2.0f
-        // };
-        // Enemies.emplace_back(SquirrelThirtyThree);
 
         return Enemies;
     }
@@ -4607,28 +4516,6 @@ namespace Game
         };
         Crows.emplace_back(CrowTwentynine);
 
-        // Enemy CrowThirty
-        // {
-        //     Sprite{Textures.CrowIdle, 8, 2},
-        //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     Sprite{Textures.CrowFlying, 5, 2},
-        //     Sprite{Textures.CrowWalk, 4, 2},
-        //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{638.f, 1791.f}, Window, MapBG, Textures, RandomEngine, 2.5f
-        // };
-        // Crows.emplace_back(CrowThirty);
-
-        // Enemy CrowThirtyone
-        // {
-        //     Sprite{Textures.CrowIdle, 8, 2},
-        //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     Sprite{Textures.CrowFlying, 5, 2},
-        //     Sprite{Textures.CrowWalk, 4, 2},
-        //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{549.f, 1951.f}, Window, MapBG, Textures, RandomEngine, 2.5f
-        // };
-        // Crows.emplace_back(CrowThirtyone);
-
         Enemy CrowThirtytwo
         {
             Sprite{Textures.CrowIdle, 8, 2},
@@ -4661,17 +4548,6 @@ namespace Game
             EnemyType::CROW, Vector2{1453.f, 960.f}, Window, MapBG, Textures, RandomEngine, 2.5f
         };
         Crows.emplace_back(CrowThirtyfour);
-
-        // Enemy CrowThirtyfive
-        // {
-        //     Sprite{Textures.CrowIdle, 8, 2},
-        //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     Sprite{Textures.CrowFlying, 5, 2},
-        //     Sprite{Textures.CrowWalk, 4, 2},
-        //     Sprite{Textures.CrowIdleTwo, 5, 2},
-        //     EnemyType::CROW, Vector2{246.f, 774.f}, Window, MapBG, Textures, RandomEngine, 2.5f
-        // };
-        // Crows.emplace_back(CrowThirtyfive);
 
         Enemy CrowThirtysix
         {

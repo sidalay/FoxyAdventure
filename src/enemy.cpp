@@ -56,8 +56,11 @@ Enemy::Enemy(const Sprite& Idle,
     if (Type == EnemyType::NORMAL) {
         MonsterCounter[Race] += 1;
     }
-    else {
+    else if (Type == EnemyType::BOSS) {
         MonsterCounter[EnemyType::BOSS] += 1;
+        Summoned = false;
+    }
+    else {
         Summoned = false;
     }
 
@@ -139,7 +142,7 @@ void Enemy::Tick(float DeltaTime, Props& Props, const Vector2 HeroWorldPos, cons
         }
     }
     else {
-        if (Type == EnemyType::BOSS) {
+        if (Type == EnemyType::BOSS || Type == EnemyType::FINALBOSS) {
             CheckBossSummon(HeroWorldPos);
         }
     }
@@ -153,7 +156,7 @@ void Enemy::Draw(const Vector2 HeroWorldPos)
         Visible = true;
 
         if (!OOB) {
-            if (Type == EnemyType::NORMAL || Type == EnemyType::NPC || (Type == EnemyType::BOSS && Summoned)) {
+            if (Type == EnemyType::NORMAL || Type == EnemyType::NPC || (Type == EnemyType::BOSS && Summoned) || (Type == EnemyType::FINALBOSS && Summoned)) {
                 if (Hurting) {
                     DrawTexturePro(Sprites.at(CurrentSpriteIndex).Texture, Sprites.at(CurrentSpriteIndex).GetSourceRec(), Sprites.at(CurrentSpriteIndex).GetPosRec(ScreenPos,Scale), Vector2{},0.f, RED);
                 }
@@ -166,7 +169,7 @@ void Enemy::Draw(const Vector2 HeroWorldPos)
                     if (Type == EnemyType::NORMAL) {
                         DrawTexturePro(Sprites.at(ShootingSpriteIndex).Texture, Sprites.at(ShootingSpriteIndex).GetSourceRec(), Sprites.at(CurrentSpriteIndex).GetPosRec(UpdateProjectile(),Scale), Vector2{},0.f, WHITE);
                     }
-                    else if (Type == EnemyType::BOSS) {
+                    else if (Type == EnemyType::BOSS || Type == EnemyType::FINALBOSS) {
                         DrawTexturePro(Sprites.at(ShootingSpriteIndex).Texture, Sprites.at(ShootingSpriteIndex).GetSourceRec(), Sprites.at(CurrentSpriteIndex).GetPosRec(UpdateMultiProjectile().at(0),Scale), Vector2{},0.f, WHITE);
                         DrawTexturePro(Sprites.at(ShootingSpriteIndex).Texture, Sprites.at(ShootingSpriteIndex).GetSourceRec(), Sprites.at(CurrentSpriteIndex).GetPosRec(UpdateMultiProjectile().at(1),Scale), Vector2{},0.f, WHITE);
                         DrawTexturePro(Sprites.at(ShootingSpriteIndex).Texture, Sprites.at(ShootingSpriteIndex).GetSourceRec(), Sprites.at(CurrentSpriteIndex).GetPosRec(UpdateMultiProjectile().at(2),Scale), Vector2{},0.f, WHITE);
@@ -819,7 +822,7 @@ void Enemy::DrawHP()
 
 void Enemy::CheckBossSummon(const Vector2 HeroWorldPos)
 {
-    if (!WithinScreen(HeroWorldPos) && (Type == EnemyType::BOSS) && (MonsterCounter[BossSpawner] <= 0) && !Summoned) {
+    if (!WithinScreen(HeroWorldPos) && (Type == EnemyType::BOSS || Type == EnemyType::FINALBOSS) && (MonsterCounter[BossSpawner] <= 0) && !Summoned) {
         Summoned = true;
     }
 }
