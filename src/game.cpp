@@ -3842,7 +3842,7 @@ namespace Game
         };
         Enemies.emplace_back(BlueMushroomMainOne);
 
-        // ----------------------------------- Spiders ------------------------------------
+        // ----------------------------------- Side-Forest Spiders ------------------------------------
 
         Enemy BrownSpiderOne
         {
@@ -3891,6 +3891,68 @@ namespace Game
             EnemyType::SPIDER, EnemyType::NORMAL, Vector2{260.f, 548.f}, Window, MapBG, Textures, RandomEngine, 2, 3.f
         };
         Enemies.emplace_back(BrownSpiderFour);
+
+        // ----------------------------------- Main Grass Spiders ------------------------------------
+
+        Enemy RedSpiderOne
+        {
+            Sprite{Textures.SpiderRedIdle, 4, 4},
+            Sprite{Textures.SpiderRedWalk, 4, 4},
+            Sprite{Textures.SpiderRedAttack, 4, 4},
+            Sprite{Textures.SpiderRedHurt, 1, 4},
+            Sprite{Textures.SpiderRedDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::SPIDER, EnemyType::NORMAL, Vector2{2145.f, 1397.f}, Window, MapBG, Textures, RandomEngine, 2, 3.f
+        };
+        Enemies.emplace_back(RedSpiderOne);
+
+        Enemy RedSpiderTwo
+        {
+            Sprite{Textures.SpiderRedIdle, 4, 4},
+            Sprite{Textures.SpiderRedWalk, 4, 4},
+            Sprite{Textures.SpiderRedAttack, 4, 4},
+            Sprite{Textures.SpiderRedHurt, 1, 4},
+            Sprite{Textures.SpiderRedDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::SPIDER, EnemyType::NORMAL, Vector2{2092.f, 1649.f}, Window, MapBG, Textures, RandomEngine, 2, 3.f
+        };
+        Enemies.emplace_back(RedSpiderTwo);
+
+        Enemy RedSpiderThree
+        {
+            Sprite{Textures.SpiderRedIdle, 4, 4},
+            Sprite{Textures.SpiderRedWalk, 4, 4},
+            Sprite{Textures.SpiderRedAttack, 4, 4},
+            Sprite{Textures.SpiderRedHurt, 1, 4},
+            Sprite{Textures.SpiderRedDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::SPIDER, EnemyType::NORMAL, Vector2{1951.f, 1762.f}, Window, MapBG, Textures, RandomEngine, 2, 3.f
+        };
+        Enemies.emplace_back(RedSpiderThree);
+
+        Enemy BlackSpiderOne
+        {
+            Sprite{Textures.SpiderBlackIdle, 4, 4},
+            Sprite{Textures.SpiderBlackWalk, 4, 4},
+            Sprite{Textures.SpiderBlackAttack, 4, 4},
+            Sprite{Textures.SpiderBlackHurt, 1, 4},
+            Sprite{Textures.SpiderBlackDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::SPIDER, EnemyType::NORMAL, Vector2{2289.f, 1549.f}, Window, MapBG, Textures, RandomEngine, 2, 3.f
+        };
+        Enemies.emplace_back(BlackSpiderOne);
+
+        Enemy BlackSpiderTwo
+        {
+            Sprite{Textures.SpiderBlackIdle, 4, 4},
+            Sprite{Textures.SpiderBlackWalk, 4, 4},
+            Sprite{Textures.SpiderBlackAttack, 4, 4},
+            Sprite{Textures.SpiderBlackHurt, 1, 4},
+            Sprite{Textures.SpiderBlackDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::SPIDER, EnemyType::NORMAL, Vector2{2505.f, 1752.f}, Window, MapBG, Textures, RandomEngine, 2, 3.f
+        };
+        Enemies.emplace_back(BlackSpiderTwo);
 
         // ----------------------------------- Bosses ------------------------------------
 
