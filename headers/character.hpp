@@ -49,6 +49,7 @@ public:
     void SetWorldPos(Vector2 Pos) {WorldPos = Pos;}
     void DrawIndicator();
     void TakeDamage();
+    void CheckMapChange(const Area& CurrentMap);
     void MapChangeWorldPos(const Area& NextMap);
 
     constexpr bool IsAlive() const {return Alive;}
@@ -80,6 +81,7 @@ private:
     Vector2 DungeonEntrance{485.f, 894.f};
     // Vector2 WorldPos{2334.f,2431};
     Vector2 PrevWorldPos{};
+    Area PrevMap{};
     Rectangle Source{};
     Rectangle Destination{};
     std::vector<Sprite> Sprites{};

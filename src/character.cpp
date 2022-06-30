@@ -56,6 +56,8 @@ void Character::Tick(float DeltaTime, Props& Props, const Area& Map, std::vector
     CheckIfAlive();
 
     CheckSecretSpot();
+
+    CheckMapChange(Map);
 }
 
 void Character::Draw()
@@ -607,6 +609,15 @@ void Character::TakeDamage()
         }
         DamageTime = 0.f;
     }
+}
+
+void Character::CheckMapChange(const Area& CurrentMap)
+{
+    if (CurrentMap != PrevMap) {
+        MapChangeWorldPos(CurrentMap);
+    }
+    
+    PrevMap = CurrentMap;
 }
 
 void Character::MapChangeWorldPos(const Area& NextMap) {

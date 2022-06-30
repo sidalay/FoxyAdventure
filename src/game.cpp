@@ -152,7 +152,6 @@ namespace Game
 
         if (Objects.Fox.GetWorldPos().x >= (3580.f - 615.f) && Objects.Fox.GetWorldPos().x <= (3650.f - 615.f) && Objects.Fox.GetWorldPos().y <= (135.f - 335.f)) {
             Info.Map.SetArea(Area::DUNGEON);
-            Objects.Fox.MapChangeWorldPos(Area::DUNGEON);
             Info.NextState = Game::State::DUNGEON;
             Info.State = Game::State::TRANSITION;
         }
@@ -372,7 +371,6 @@ namespace Game
 
         if (Objects.Fox.GetWorldPos().x >= (450.f - 615.f) && Objects.Fox.GetWorldPos().x <= (570.f - 615.f) && Objects.Fox.GetWorldPos().y >= (925.f - 335.f)) {
             Info.Map.SetArea(Area::FOREST);
-            Objects.Fox.MapChangeWorldPos(Area::FOREST);
             Info.NextState = Game::State::FOREST;
             Info.State = Game::State::TRANSITION;
         }
