@@ -863,46 +863,49 @@ void Enemy::CheckSpawnChest(std::vector<std::vector<Prop>>& Props)
 
 Rectangle Enemy::GetCollisionRec()
 {
+    float CurrentSpriteWidth{static_cast<float>((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale)};
+    float CurrentSpriteHeight{static_cast<float>((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale)};
+
     switch (Race)
     {   
         case EnemyType::FOX:
         {
             return Rectangle
             {
-                ScreenPos.x + ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .31f,
-                ScreenPos.y + ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .40f,
-                ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .40f,
-                ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .30f
+                ScreenPos.x + CurrentSpriteWidth * .31f,
+                ScreenPos.y + CurrentSpriteHeight * .40f,
+                CurrentSpriteWidth * .40f,
+                CurrentSpriteHeight * .30f
             };
         }
         case EnemyType::CROW:
         {
             return Rectangle
             {
-                ScreenPos.x + ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .31f,
-                ScreenPos.y + ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .31f,
-                ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .40f,
-                ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .30f
+                ScreenPos.x + CurrentSpriteWidth * .31f,
+                ScreenPos.y + CurrentSpriteHeight * .31f,
+                CurrentSpriteWidth * .40f,
+                CurrentSpriteHeight * .30f
             };
         }
         case EnemyType::SQUIRREL:
         {
             return Rectangle
             {
-                ScreenPos.x + ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .35f,
-                ScreenPos.y + ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .35f,
-                ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .20f,
-                ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .30f
+                ScreenPos.x + CurrentSpriteWidth * .35f,
+                ScreenPos.y + CurrentSpriteHeight * .35f,
+                CurrentSpriteWidth * .20f,
+                CurrentSpriteHeight * .30f
             };
         }
         default:
         {
             return Rectangle 
             {
-                ScreenPos.x + ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .31f,
-                ScreenPos.y + ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .31f,
-                ((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale) * .40f,
-                ((Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY) * Scale) * .60f
+                ScreenPos.x + CurrentSpriteWidth * .31f,
+                ScreenPos.y + CurrentSpriteHeight * .31f,
+                CurrentSpriteWidth * .40f,
+                CurrentSpriteHeight * .60f
             };
         }
     }

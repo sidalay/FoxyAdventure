@@ -74,12 +74,15 @@ void Character::SpriteTick(float DeltaTime)
 
 void Character::UpdateScreenPos()
 {
-    ScreenPos.x = Screen.x/2.f - (Scale * (0.5f * Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX));
-    ScreenPos.y = Screen.y/2.f - (Scale * (0.5f * Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY));
+    float CurrentSpriteWidth{static_cast<float>(Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)};
+    float CurrentSpriteHeight{static_cast<float>(Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)};
+
+    ScreenPos.x = Screen.x/2.f - (Scale * (0.5f * CurrentSpriteWidth));
+    ScreenPos.y = Screen.y/2.f - (Scale * (0.5f * CurrentSpriteHeight));
     Destination.x = ScreenPos.x;
     Destination.y = ScreenPos.y;
-    Destination.width = Scale * Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX;    
-    Destination.height = Scale * Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY;    
+    Destination.width = Scale * CurrentSpriteWidth;    
+    Destination.height = Scale * CurrentSpriteHeight;    
 }
 
 void Character::CheckDirection()
@@ -524,58 +527,60 @@ void Character::UpdateSource()
 
 Rectangle Character::GetCollisionRec()
 {
+    float CurrentSpriteWidth{static_cast<float>(Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)};
+    float CurrentSpriteHeight{static_cast<float>(Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)};
+
     return Rectangle 
     {
-        ScreenPos.x + Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX/2.f,
-        ScreenPos.y + Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY/2.f,
-        ((Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX) - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/1.5f) * Scale,
-        ((Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY) - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/1.5f)  * Scale
+        ScreenPos.x + CurrentSpriteWidth/2.f,
+        ScreenPos.y + CurrentSpriteHeight/2.f,
+        ((CurrentSpriteWidth) - (CurrentSpriteWidth)/1.5f) * Scale,
+        ((CurrentSpriteHeight) - (CurrentSpriteHeight)/1.5f)  * Scale
     };
 }
 
 Rectangle Character::GetAttackRec()
 {
+    float CurrentSpriteWidth{static_cast<float>(Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)};
+    float CurrentSpriteHeight{static_cast<float>(Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)};
+
     switch (Face)
     {
         case Direction::DOWN:
             return Rectangle
             {
-                ScreenPos.x + Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX/2.f,
-                ScreenPos.y + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY/2.f * 2.f),
-                ((Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX) - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/1.5f) * Scale,
-                ((Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY) - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/1.5f)  * Scale
+                ScreenPos.x + CurrentSpriteWidth/2.f,
+                ScreenPos.y + (CurrentSpriteHeight/2.f * 2.f),
+                ((CurrentSpriteWidth) - (CurrentSpriteWidth)/1.5f) * Scale,
+                ((CurrentSpriteHeight) - (CurrentSpriteHeight)/1.5f)  * Scale
             }; 
         case Direction::LEFT: 
             return Rectangle
             {
                 ScreenPos.x,
-                ScreenPos.y + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY/2.f),
-                ((Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX) - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/1.5f) * Scale,
-                ((Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY) - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/1.5f)  * Scale
+                ScreenPos.y + (CurrentSpriteHeight/2.f),
+                ((CurrentSpriteWidth) - (CurrentSpriteWidth)/1.5f) * Scale,
+                ((CurrentSpriteHeight) - (CurrentSpriteHeight)/1.5f)  * Scale
             }; 
         case Direction::RIGHT:
             return Rectangle
             {
-                ScreenPos.x + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX/2.f * 2.f),
-                ScreenPos.y + Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY/2.f,
-                ((Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX) - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/1.5f) * Scale,
-                ((Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY) - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/1.5f)  * Scale
+                ScreenPos.x + (CurrentSpriteWidth/2.f * 2.f),
+                ScreenPos.y + CurrentSpriteHeight/2.f,
+                ((CurrentSpriteWidth) - (CurrentSpriteWidth)/1.5f) * Scale,
+                ((CurrentSpriteHeight) - (CurrentSpriteHeight)/1.5f)  * Scale
             }; 
         case Direction::UP:
             return Rectangle
             {
-                ScreenPos.x + Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX/2.f,
+                ScreenPos.x + CurrentSpriteWidth/2.f,
                 ScreenPos.y,
-                ((Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX) - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/1.5f) * Scale,
-                ((Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY) - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/1.5f)  * Scale
+                ((CurrentSpriteWidth) - (CurrentSpriteWidth)/1.5f) * Scale,
+                ((CurrentSpriteHeight) - (CurrentSpriteHeight)/1.5f)  * Scale
             };
         default:
-            return Rectangle
-            {
-                
-            };
+            return Rectangle{};
     }
-
 }
 
 void Character::CheckIfAlive()
