@@ -313,7 +313,7 @@ void Enemy::CheckMovement(Props& Props, const Vector2 HeroWorldPos, const Vector
 
     CheckOutOfBounds();
 
-    if (Alive) {
+    if (Alive && World.GetArea() == Area::FOREST) {
         CheckCollision(Props.Under, HeroWorldPos, Enemies, Trees);
         CheckCollision(Props.Over, HeroWorldPos, Enemies, Trees);
     }
@@ -326,12 +326,23 @@ void Enemy::UndoMovement()
 
 void Enemy::CheckOutOfBounds()
 {
-    if (WorldPos.x < 0.f ||
-        WorldPos.y < 0.f ||
-        WorldPos.x > World.GetForestMapSize().x * World.GetScale() - (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX)*Scale ||
-        WorldPos.y > World.GetForestMapSize().y * World.GetScale() - (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY)*Scale) 
-    {
-        UndoMovement();
+    if (World.GetArea() == Area::FOREST) {
+        if (WorldPos.x < 0.f ||
+            WorldPos.y < 0.f ||
+            WorldPos.x > World.GetForestMapSize().x * World.GetScale() - (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX)*Scale ||
+            WorldPos.y > World.GetForestMapSize().y * World.GetScale() - (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY)*Scale) 
+        {
+            UndoMovement();
+        }
+    }
+    else if (World.GetArea() == Area::DUNGEON) {
+        if (WorldPos.x < 0.f ||
+            WorldPos.y < 0.f ||
+            WorldPos.x > World.GetDungeonMapSize().x * World.GetScale() - (Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX)*Scale ||
+            WorldPos.y > World.GetDungeonMapSize().y * World.GetScale() - (Sprites.at(CurrentSpriteIndex).Texture.height/Sprites.at(CurrentSpriteIndex).MaxFramesY)*Scale) 
+        {
+            UndoMovement();
+        }
     }
 }
 
