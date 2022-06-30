@@ -31,7 +31,7 @@ Character::Character(const Sprite& Idle,
     SpriteIndex = static_cast<int>(FoxState::IDLE);
 }
 
-void Character::Tick(float DeltaTime, Props& Props, const Area& Map, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
+void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     UpdateScreenPos();
 
@@ -45,7 +45,7 @@ void Character::Tick(float DeltaTime, Props& Props, const Area& Map, std::vector
 
     UpdateSource();
 
-    CheckMovement(Props, Map, Enemies, Trees);
+    CheckMovement(Props, Enemies, Trees);
 
     CheckEmotion();
 
@@ -57,7 +57,7 @@ void Character::Tick(float DeltaTime, Props& Props, const Area& Map, std::vector
 
     CheckSecretSpot();
 
-    CheckMapChange(Map);
+    CheckMapChange(World.GetArea());
 }
 
 void Character::Draw()
@@ -109,7 +109,7 @@ void Character::CheckDirection()
         }
 }
 
-void Character::CheckMovement(Props& Props, const Area& Map, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
+void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     PrevWorldPos = WorldPos;
     Vector2 Direction{};
@@ -135,7 +135,7 @@ void Character::CheckMovement(Props& Props, const Area& Map, std::vector<Enemy>&
         }
 
         // Undo Movement if walking out-of-bounds
-        if (Map == Area::FOREST) {
+        if (World.GetArea() == Area::FOREST) {
             if (WorldPos.x + ScreenPos.x < 0.f - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
                 WorldPos.y + ScreenPos.y < 0.f - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f ||
                 WorldPos.x + (Screen.x - ScreenPos.x) > World.GetForestMapSize().x * World.GetScale() + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
@@ -147,7 +147,7 @@ void Character::CheckMovement(Props& Props, const Area& Map, std::vector<Enemy>&
             CheckCollision(Props.Under, Direction, Enemies, Trees);
             CheckCollision(Props.Over, Direction, Enemies, Trees);
         }
-        else if (Map == Area::DUNGEON) {
+        else if (World.GetArea() == Area::DUNGEON) {
             if (WorldPos.x + ScreenPos.x < 0.f - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
                 WorldPos.y + ScreenPos.y < 0.f - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f ||
                 WorldPos.x + (Screen.x - ScreenPos.x) > World.GetDungeonMapSize().x * World.GetScale() + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||

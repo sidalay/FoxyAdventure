@@ -115,7 +115,7 @@ namespace Game
         float DeltaTime{GetFrameTime()};
 
         Info.Map.Tick(Objects.Fox.GetWorldPos());
-        Objects.Fox.Tick(DeltaTime, Objects.PropsContainer, Info.Map.GetArea(), Objects.Enemies, Objects.Trees);
+        Objects.Fox.Tick(DeltaTime, Objects.PropsContainer, Objects.Enemies, Objects.Trees);
 
         for (auto& Enemy:Objects.Enemies) {
             Enemy.Tick(DeltaTime, Objects.PropsContainer, Objects.Fox.GetWorldPos(), Objects.Fox.GetCharPos(), Objects.Enemies, Objects.Trees);
@@ -354,7 +354,7 @@ namespace Game
         float DeltaTime{GetFrameTime()};
 
         Info.Map.Tick(Objects.Fox.GetWorldPos());
-        Objects.Fox.Tick(DeltaTime, Objects.PropsContainer, Info.Map.GetArea(), Objects.Enemies, Objects.Trees);
+        Objects.Fox.Tick(DeltaTime, Objects.PropsContainer, Objects.Enemies, Objects.Trees);
 
         for (auto& Enemy:Objects.Enemies) {
             if (Enemy.GetType() == EnemyType::FINALBOSS) {
@@ -3908,53 +3908,53 @@ namespace Game
 
         // ----------------------------------- Bosses ------------------------------------
 
-        Enemy RedBossImp
-        {
-            Sprite{Textures.ImpRedIdle, 4, 4},
-            Sprite{Textures.ImpRedWalk, 4, 4},
-            Sprite{Textures.ImpRedAttack, 4, 4},
-            Sprite{Textures.ImpRedHurt, 1, 4},
-            Sprite{Textures.ImpRedDeath, 11, 4},
-            Sprite{Textures.ImpRedProjectile, 4, 4},
-            EnemyType::IMP, EnemyType::BOSS, Vector2{2184.f, 659.f}, Window, MapBG, Textures, RandomEngine, 5, 4.f, EnemyType::MUSHROOM
-        };
-        Enemies.emplace_back(RedBossImp);
+        // Enemy RedBossImp
+        // {
+        //     Sprite{Textures.ImpRedIdle, 4, 4},
+        //     Sprite{Textures.ImpRedWalk, 4, 4},
+        //     Sprite{Textures.ImpRedAttack, 4, 4},
+        //     Sprite{Textures.ImpRedHurt, 1, 4},
+        //     Sprite{Textures.ImpRedDeath, 11, 4},
+        //     Sprite{Textures.ImpRedProjectile, 4, 4},
+        //     EnemyType::IMP, EnemyType::BOSS, Vector2{2184.f, 659.f}, Window, MapBG, Textures, RandomEngine, 5, 4.f, EnemyType::MUSHROOM
+        // };
+        // Enemies.emplace_back(RedBossImp);
 
-        Enemy OrangeBossCreature
-        {
-            Sprite{Textures.CreatureOrangeIdle, 4, 4},
-            Sprite{Textures.CreatureOrangeWalk, 4, 4},
-            Sprite{Textures.CreatureOrangeAttack, 4, 4},
-            Sprite{Textures.CreatureOrangeHurt, 1, 4},
-            Sprite{Textures.CreatureOrangeDeath, 11, 4},
-            Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::CREATURE, EnemyType::BOSS, Vector2{2918.f, 895.f}, Window, MapBG, Textures, RandomEngine, 7, 5.f, EnemyType::BEAR
-        };
-        Enemies.emplace_back(OrangeBossCreature);
+        // Enemy OrangeBossCreature
+        // {
+        //     Sprite{Textures.CreatureOrangeIdle, 4, 4},
+        //     Sprite{Textures.CreatureOrangeWalk, 4, 4},
+        //     Sprite{Textures.CreatureOrangeAttack, 4, 4},
+        //     Sprite{Textures.CreatureOrangeHurt, 1, 4},
+        //     Sprite{Textures.CreatureOrangeDeath, 11, 4},
+        //     Sprite{Textures.Placeholder, 0, 0},
+        //     EnemyType::CREATURE, EnemyType::BOSS, Vector2{2918.f, 895.f}, Window, MapBG, Textures, RandomEngine, 7, 5.f, EnemyType::BEAR
+        // };
+        // Enemies.emplace_back(OrangeBossCreature);
 
-        Enemy BlackBossBeholder
-        {
-            Sprite{Textures.BeholderBlackIdle, 4, 4},
-            Sprite{Textures.BeholderBlackWalk, 4, 4},
-            Sprite{Textures.BeholderBlackAttack, 4, 4},
-            Sprite{Textures.BeholderBlackHurt, 4, 4},
-            Sprite{Textures.BeholderBlackDeath, 11, 4},
-            Sprite{Textures.BeholderBlackProjectile, 4, 4},
-            EnemyType::BEHOLDER, EnemyType::BOSS, Vector2{1064.f, 383.f}, Window, MapBG, Textures, RandomEngine, 4, 2.5f, EnemyType::TOAD
-        };
-        Enemies.emplace_back(BlackBossBeholder);
+        // Enemy BlackBossBeholder
+        // {
+        //     Sprite{Textures.BeholderBlackIdle, 4, 4},
+        //     Sprite{Textures.BeholderBlackWalk, 4, 4},
+        //     Sprite{Textures.BeholderBlackAttack, 4, 4},
+        //     Sprite{Textures.BeholderBlackHurt, 4, 4},
+        //     Sprite{Textures.BeholderBlackDeath, 11, 4},
+        //     Sprite{Textures.BeholderBlackProjectile, 4, 4},
+        //     EnemyType::BEHOLDER, EnemyType::BOSS, Vector2{1064.f, 383.f}, Window, MapBG, Textures, RandomEngine, 4, 2.5f, EnemyType::TOAD
+        // };
+        // Enemies.emplace_back(BlackBossBeholder);
 
-        Enemy BlackBossBeholderTwo
-        {
-            Sprite{Textures.BeholderBlackIdle, 4, 4},
-            Sprite{Textures.BeholderBlackWalk, 4, 4},
-            Sprite{Textures.BeholderBlackAttack, 4, 4},
-            Sprite{Textures.BeholderBlackHurt, 4, 4},
-            Sprite{Textures.BeholderBlackDeath, 11, 4},
-            Sprite{Textures.BeholderBlackProjectile, 4, 4},
-            EnemyType::BEHOLDER, EnemyType::BOSS, Vector2{1317.f, 383.f}, Window, MapBG, Textures, RandomEngine, 4, 2.5f, EnemyType::TOAD
-        };
-        Enemies.emplace_back(BlackBossBeholderTwo);
+        // Enemy BlackBossBeholderTwo
+        // {
+        //     Sprite{Textures.BeholderBlackIdle, 4, 4},
+        //     Sprite{Textures.BeholderBlackWalk, 4, 4},
+        //     Sprite{Textures.BeholderBlackAttack, 4, 4},
+        //     Sprite{Textures.BeholderBlackHurt, 4, 4},
+        //     Sprite{Textures.BeholderBlackDeath, 11, 4},
+        //     Sprite{Textures.BeholderBlackProjectile, 4, 4},
+        //     EnemyType::BEHOLDER, EnemyType::BOSS, Vector2{1317.f, 383.f}, Window, MapBG, Textures, RandomEngine, 4, 2.5f, EnemyType::TOAD
+        // };
+        // Enemies.emplace_back(BlackBossBeholderTwo);
 
         Enemy BossRedNecro
         {

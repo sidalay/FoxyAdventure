@@ -29,12 +29,12 @@ public:
               const Window& Screen, 
               Background& World);
     
-    void Tick(float DeltaTime, Props& Props, const Area& Map, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
+    void Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void Draw();
     void SpriteTick(float DeltaTime);
     void UpdateScreenPos();
     void CheckDirection();
-    void CheckMovement(Props& Props, const Area& Map, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
+    void CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void UndoMovement();
     void CheckCollision(std::vector<std::vector<Prop>>& Props, const Vector2 Direction, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void CheckCollision(std::vector<Enemy>& Enemies);
