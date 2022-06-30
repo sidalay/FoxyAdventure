@@ -1521,9 +1521,9 @@ void Prop::DrawSpeech()
                 case PropType::NPC_SON:
                 {
                     DrawText("Hey, Mr. Foxy! Great job finding all the", 390, 550, 20, WHITE);
-                    DrawText("treasures! Diana is super excited about", 390, 575, 20, WHITE);
-                    DrawText("the bracelet. She wouldn't stop showing", 390, 600, 20, WHITE);
-                    DrawText("it off!! And thank you again for saving me.", 390, 625, 20, WHITE);
+                    DrawText("treasures! That bracelet feels magical...", 390, 575, 20, WHITE);
+                    DrawText("I'm sure Diana is gonna love it!", 390, 600, 20, WHITE);
+                    DrawText("And thank you again for saving me.", 390, 625, 20, WHITE);
                     DrawText("I don't know where I would be without you!", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;

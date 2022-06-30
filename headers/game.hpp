@@ -16,6 +16,7 @@ namespace Game
         Background Map;
         int PauseFoxIndex{0};
         float Opacity{0.f};
+        float EndGameTime{0.f};
         float TransitionInTime{0.f};
         float TransitionOutTime{0.f};
         bool MainMenuStart{true};

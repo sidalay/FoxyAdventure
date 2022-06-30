@@ -53,9 +53,12 @@ public:
     void CheckMapChange(const Area& CurrentMap);
     void MapChangeWorldPos(const Area& NextMap);
     void CheckDungeonExit(Enemy& FinalBoss);
+    void CheckEndGame();
+    void EndGame();
 
     constexpr bool IsAlive() const {return Alive;}
     constexpr bool IsAttacking() const {return Attacking;}
+    constexpr bool IsEndGameFinished() const {return FinishEndGame;}
     constexpr bool IsDungeonExitable() const {return CanExitDungeon;}
     constexpr float GetHealth() const {return Health;}
     constexpr float GetSpeed() const {return Speed;}
@@ -79,10 +82,10 @@ private:
     Background& World;
     Vector2 Offset{615.f,335.f};         // Player offset vs Enemy/Prop WorldPos
     Vector2 ScreenPos{};                 // Where the character is on the screen
-    Vector2 WorldPos{436.f,3758.f};      // Where the character is in the world
+    Vector2 WorldPos{344.f,2560.f};      // Where the character is in the world
     Vector2 ForestEntrance{3600.f, 175.f};
     Vector2 DungeonEntrance{485.f, 894.f};
-    // Vector2 WorldPos{2334.f,2431};
+    // Vector2 WorldPos{504.f,3431};
     Vector2 PrevWorldPos{};
     Area PrevMap{};
     Rectangle Source{};
@@ -110,9 +113,12 @@ private:
     bool Interactable{false};
     bool Hurting{false};
     bool Healing{false};
+    bool FinalAct{false};
     bool FinalBossDefeated{false};
     bool FinalBossSummoned{false};
     bool CanExitDungeon{false};
+    bool StartEndGame{false};
+    bool FinishEndGame{false};
     Emotion State{Emotion::DEFAULT};
     Direction Face{Direction::DOWN};
 

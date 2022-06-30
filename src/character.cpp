@@ -37,27 +37,34 @@ void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies,
 
     SpriteTick(DeltaTime);
 
-    CheckDirection();
-
-    WalkOrRun();
-
-    CheckAttack();
-
     UpdateSource();
 
-    CheckMovement(Props, Enemies, Trees);
+    if (!StartEndGame) {
+        CheckDirection();
 
-    CheckEmotion();
+        WalkOrRun();
 
-    CheckSleep();
+        CheckAttack();
 
-    CheckHealing();
+        CheckMovement(Props, Enemies, Trees);
 
-    CheckIfAlive();
+        CheckEmotion();
 
-    CheckSecretSpot();
+        CheckSleep();
 
-    CheckMapChange(World.GetArea());
+        CheckHealing();
+
+        CheckIfAlive();
+
+        CheckSecretSpot();
+
+        CheckMapChange(World.GetArea());
+
+        CheckEndGame();
+    }
+    else {
+        EndGame();
+    }
 }
 
 void Character::Draw()
@@ -190,8 +197,11 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, const Vect
         // Loop through all Props for collision
         for (auto& PropType:Props) {
             for (auto& Prop:PropType) {
-                if (Prop.HasCollision()) {
-                    
+                if (Prop.HasCollision()) {    
+                    if (Prop.IsFinalAct()) {
+                        FinalAct = true;
+                    }
+
                     // check physical collision
                     if (CheckCollisionRecs(GetCollisionRec(), Prop.GetCollisionRec(WorldPos))) {   
                         
@@ -603,6 +613,45 @@ void Character::CheckSecretSpot()
     if ((OffsetWorldPos.x >= 80.f) && (OffsetWorldPos.x <= 830.f) && (OffsetWorldPos.y >= 1722.f) && (OffsetWorldPos.y <= 2122.f)) {
         State = Emotion::HAPPY;
         HealOverTime(5.f,.3f);
+    }
+}
+
+void Character::CheckEndGame()
+{
+    Vector2 OffsetWorldPos{Vector2Add(WorldPos,Offset)};
+
+    if (FinalAct && (OffsetWorldPos.x >= 321.f) && (OffsetWorldPos.x <= 435.f) && (OffsetWorldPos.y >= 2420.f) && (OffsetWorldPos.y <= 3233.f)) {
+        State = Emotion::HAPPY;
+        StartEndGame = true;
+    }
+}
+
+void Character::EndGame()
+{
+    Vector2 OffsetWorldPos{Vector2Add(WorldPos,Offset)};
+    State = Emotion::HAPPY;
+
+    if (OffsetWorldPos.x < 352.f) {
+        SpriteIndex = static_cast<int>(FoxState::WALK);
+        WorldPos.x += 0.1f;
+    }
+    else if (OffsetWorldPos.x > 352.f) {
+        SpriteIndex = static_cast<int>(FoxState::WALK);
+        WorldPos.x -= 0.1f;
+    }
+    else {
+        SpriteIndex = static_cast<int>(FoxState::WALK);
+    }
+    
+    if (OffsetWorldPos.y >= 2476.f) {
+        Sprites.at(SpriteIndex).FrameY = 3;
+        SpriteIndex = static_cast<int>(FoxState::WALK);
+        WorldPos.y -= 0.5f;
+    }
+    else if (OffsetWorldPos.y <= 2480.f) {
+        Sprites.at(SpriteIndex).FrameY = 0;
+        SpriteIndex = static_cast<int>(FoxState::SLEEP);
+        FinishEndGame = true;
     }
 }
 
