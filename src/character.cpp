@@ -175,7 +175,7 @@ void Character::CheckOutOfBounds()
         if (WorldPos.x + ScreenPos.x < 64.f - (CurrentSpriteWidth)/2.f ||
             WorldPos.y + ScreenPos.y < 128.f - (CurrentSpriteHeight)/2.f ||
             WorldPos.x + (Screen.x - ScreenPos.x) > World.GetDungeonMapSize().x + (CurrentSpriteWidth)/2.f - 65.f||
-            WorldPos.y + (Screen.y - ScreenPos.y) > World.GetDungeonMapSize().y + (CurrentSpriteHeight)/2.f - 54.f)
+            WorldPos.y + (Screen.y - ScreenPos.y) > World.GetDungeonMapSize().y + (CurrentSpriteHeight)/2.f - 44.f)
         {
             UndoMovement();
         }
