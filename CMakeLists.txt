@@ -27,6 +27,7 @@ add_executable(${PROJECT_NAME}
     src/character.cpp
     src/enemy.cpp
     src/game.cpp
+    src/gameaudio.cpp
     src/gametextures.cpp
     src/hud.cpp
     src/main.cpp
