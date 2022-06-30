@@ -297,6 +297,7 @@ void Prop::TreasureTick(const float DeltaTime)
 
     if (Type == PropType::BIGTREASURE) {
         BraceletReceived = true;
+        FinalAct = true;
     }
 
     if (TriggerAct != Progress::ACT_O) {
@@ -362,6 +363,8 @@ void Prop::UpdateNpcInactive()
             {
                 if (BraceletReceived) {
                     Act = Progress::ACT_VIII;
+                    WorldPos.x = 500.f;
+                    WorldPos.y = 3653.f;
                 }
 
                 if (PiecesAdded >= 1 && PiecesAdded <= 5 && ReadyToProgress) {
@@ -373,11 +376,10 @@ void Prop::UpdateNpcInactive()
                     Act = Progress::ACT_IV;
                 }
 
-                if (PiecesAdded == 6 && (Act == Progress::ACT_IV || Act == Progress::ACT_V) && ReadyToProgress) {
+                if (PiecesAdded == 6 && (Act == Progress::ACT_IV || Act == Progress::ACT_V)) {
                     WorldPos.x = 645.f;
                     WorldPos.y = 1777.f;
                     Act = Progress::ACT_VI;
-                    ReadyToProgress = false;
                 }
                 break;
             }
@@ -385,6 +387,8 @@ void Prop::UpdateNpcInactive()
             {   
                 if (BraceletReceived) {
                     Act = Progress::ACT_VIII;
+                    WorldPos.x = 1060.f;
+                    WorldPos.y = 3409.f;
                 }
                 else if (Act == Progress::ACT_III && ReadyToProgress) {
                     WorldPos.x = 1549.f;
@@ -397,6 +401,8 @@ void Prop::UpdateNpcInactive()
             {
                 if (BraceletReceived) {
                     Act = Progress::ACT_VIII;
+                    WorldPos.x = 1160.f;
+                    WorldPos.y =3409.f;
                 }
                 else if (Act == Progress::ACT_II && ReadyToProgress) {
                     WorldPos.x = 1283.f;
@@ -410,6 +416,8 @@ void Prop::UpdateNpcInactive()
             {
                 if (BraceletReceived) {
                     Act = Progress::ACT_VIII;
+                    WorldPos.x = 769.f;
+                    WorldPos.y = 3665.f;
                 }
                 break;
             }
@@ -498,10 +506,6 @@ void Prop::UpdateNpcActive()
         {
             switch (Type)
             {
-                case PropType::NPC_DIANA:
-                {
-                    break;
-                }
                 case PropType::NPC_JADE:
                 {
                     if (PiecesReceived >= 1) {
@@ -536,14 +540,6 @@ void Prop::UpdateNpcActive()
                     ReadyToProgress = true;
                     break;
                 }
-                case PropType::NPC_JADE:
-                {
-                    break;
-                }
-                case PropType::NPC_SON:
-                {
-                    break;
-                }
                 case PropType::NPC_RUMBY:
                 {
                     QuestlineProgress.at(PropType::NPC_RUMBY).first = Progress::ACT_I;
@@ -564,18 +560,6 @@ void Prop::UpdateNpcActive()
                     ReadyToProgress = true;
                     break;
                 }
-                case PropType::NPC_JADE:
-                {
-                    break;
-                }
-                case PropType::NPC_SON:
-                {
-                    break;
-                }
-                case PropType::NPC_RUMBY:
-                {
-                    break;
-                }
                 default:
                     break;
             }
@@ -585,22 +569,6 @@ void Prop::UpdateNpcActive()
         {
             switch (Type)
             {
-                case PropType::NPC_DIANA:
-                {
-                    break;
-                }
-                case PropType::NPC_JADE:
-                {
-                    break;
-                }
-                case PropType::NPC_SON:
-                {
-                    break;
-                }
-                case PropType::NPC_RUMBY:
-                {
-                    break;
-                }
                 default:
                     break;
             }
@@ -617,18 +585,6 @@ void Prop::UpdateNpcActive()
                     FinalChestKey = true;
                     break;
                 }
-                case PropType::NPC_JADE:
-                {
-                    break;
-                }
-                case PropType::NPC_SON:
-                {
-                    break;
-                }
-                case PropType::NPC_RUMBY:
-                {
-                    break;
-                }
                 default:
                     break;
             }
@@ -638,20 +594,19 @@ void Prop::UpdateNpcActive()
         {
             switch (Type)
             {
+                default:
+                    break;
+            }
+            break;    
+        }    
+        case Progress::ACT_IX:
+        {
+            switch (Type)
+            {
                 case PropType::NPC_DIANA:
                 {
-                    break;
-                }
-                case PropType::NPC_JADE:
-                {
-                    break;
-                }
-                case PropType::NPC_SON:
-                {
-                    break;
-                }
-                case PropType::NPC_RUMBY:
-                {
+                    QuestlineProgress.at(PropType::NPC_DIANA).first = Progress::ACT_VIII; 
+                    QuestlineProgress.at(PropType::NPC_DIANA).second = PropType::NPC_DIANA;
                     break;
                 }
                 default:
@@ -1500,36 +1455,6 @@ void Prop::DrawSpeech()
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;
                 }
-                case PropType::NPC_JADE:
-                {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
-                    break;
-                }
-                case PropType::NPC_SON:
-                {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
-                    break;
-                }
-                case PropType::NPC_RUMBY:
-                {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
-                    break;
-                }
                 default:
                     break;
             }
@@ -1556,36 +1481,6 @@ void Prop::DrawSpeech()
                     DrawText("I wonder what it could be for....?", 390, 600, 20, WHITE);
                     DrawText("", 390, 625, 20, WHITE);
                     DrawText("                   **Key Received**", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
-                    break;
-                }
-                case PropType::NPC_JADE:
-                {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
-                    break;
-                }
-                case PropType::NPC_SON:
-                {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
-                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
-                    break;
-                }
-                case PropType::NPC_RUMBY:
-                {
-                    DrawText("", 390, 550, 20, WHITE);
-                    DrawText("", 390, 575, 20, WHITE);
-                    DrawText("", 390, 600, 20, WHITE);
-                    DrawText("", 390, 625, 20, WHITE);
-                    DrawText("", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;
                 }
@@ -1640,6 +1535,35 @@ void Prop::DrawSpeech()
                     DrawText("the wild monsters! You are a wonderful Foxy", 390, 600, 20, WHITE);
                     DrawText("and I wish you the best in all your upcoming", 390, 625, 20, WHITE);
                     DrawText("ventures. Take care, little one!", 390, 650, 20, WHITE);
+                    DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
+                    break;
+                }
+                default:
+                    break;
+            }
+            
+            if (IsKeyPressed(KEY_ENTER)) {
+                if (Type == PropType::NPC_DIANA) {
+                    Act = Progress::ACT_IX;
+                }
+                else {
+                    Opened = true;
+                    Talking = false;
+                }
+            }
+            break;
+        }
+        case Progress::ACT_IX:
+        {
+            switch (Type)
+            {
+                case PropType::NPC_DIANA:
+                {
+                    DrawText("Thank you for bringing me on this adventure", 390, 550, 20, WHITE);
+                    DrawText("with you Mr. Foxy! I can't wait to have more", 390, 575, 20, WHITE);
+                    DrawText("journeys with you. Come by the house", 390, 600, 20, WHITE);
+                    DrawText("sometime, okay? Now run along Mr. Foxy, your", 390, 625, 20, WHITE);
+                    DrawText("family must be getting worried about you!", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE); 
                     break;
                 }

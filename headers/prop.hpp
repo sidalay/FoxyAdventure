@@ -37,7 +37,7 @@ enum class PropType
 
 enum class Progress
 {
-    ACT_O, ACT_I, ACT_II, ACT_III, ACT_IV, ACT_V, ACT_VI, ACT_VII, ACT_VIII
+    ACT_O, ACT_I, ACT_II, ACT_III, ACT_IV, ACT_V, ACT_VI, ACT_VII, ACT_VIII, ACT_IX, ACT_X
 };
 
 struct Props;
@@ -99,6 +99,7 @@ public:
     constexpr bool IsActive() const {return Active;}
     constexpr bool IsOpened() const {return Opened;}
     constexpr bool IsSpawned() const {return Spawned;}
+    bool IsFinalAct() const {return FinalAct;}
     bool WithinScreen(const Vector2 CharacterWorldPos);
     
     constexpr Vector2 GetWorldPos() const {return WorldPos;}
@@ -161,6 +162,7 @@ private:
     float RunningTime{};
     static inline int PiecesReceived{0};
     static inline int PiecesAdded{0};
+    static inline bool FinalAct{false};
     static inline bool BraceletReceived{false};
     static inline bool CryptexReceived{false};
     static inline bool FinalChestKey{false};
