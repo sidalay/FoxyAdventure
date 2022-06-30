@@ -115,12 +115,7 @@ namespace Game
         float DeltaTime{GetFrameTime()};
 
         Info.Map.Tick(Objects.Fox.GetWorldPos());
-        Objects.Fox.Tick(DeltaTime, Objects.PropsContainer, Objects.Enemies, Objects.Trees);
-
-        if (!Objects.Fox.IsAlive()) {
-            Info.NextState = Game::State::GAMEOVER;
-            Info.State = Game::State::TRANSITION;
-        }
+        Objects.Fox.Tick(DeltaTime, Objects.PropsContainer, Info.Map.GetArea(), Objects.Enemies, Objects.Trees);
 
         for (auto& Enemy:Objects.Enemies) {
             Enemy.Tick(DeltaTime, Objects.PropsContainer, Objects.Fox.GetWorldPos(), Objects.Fox.GetCharPos(), Objects.Enemies, Objects.Trees);
@@ -148,6 +143,18 @@ namespace Game
 
         if (IsKeyPressed(KEY_L)) {
             Objects.Fox.SetSleep();
+        }
+
+        if (!Objects.Fox.IsAlive()) {
+            Info.NextState = Game::State::GAMEOVER;
+            Info.State = Game::State::TRANSITION;
+        }
+
+        if (Objects.Fox.GetWorldPos().x >= (3580.f - 615.f) && Objects.Fox.GetWorldPos().x <= (3650.f - 615.f) && Objects.Fox.GetWorldPos().y <= (135.f - 335.f)) {
+            Info.Map.SetArea(Area::DUNGEON);
+            Objects.Fox.MapChangeWorldPos(Area::DUNGEON);
+            Info.NextState = Game::State::DUNGEON;
+            Info.State = Game::State::TRANSITION;
         }
 
         if (IsKeyPressed(KEY_P)) {
@@ -346,14 +353,28 @@ namespace Game
         float DeltaTime{GetFrameTime()};
 
         Info.Map.Tick(Objects.Fox.GetWorldPos());
+        Objects.Fox.Tick(DeltaTime, Objects.PropsContainer, Info.Map.GetArea(), Objects.Enemies, Objects.Trees);
+
+        for (auto& Enemy:Objects.Enemies) {
+            if (Enemy.GetType() == EnemyType::FINALBOSS) {
+                Enemy.Tick(DeltaTime, Objects.PropsContainer, Objects.Fox.GetWorldPos(), Objects.Fox.GetCharPos(), Objects.Enemies, Objects.Trees);
+            }
+        }
+        
+        if (IsKeyPressed(KEY_L)) {
+            Objects.Fox.SetSleep();
+        }
 
         if (!Objects.Fox.IsAlive()) {
             Info.NextState = Game::State::GAMEOVER;
             Info.State = Game::State::TRANSITION;
         }
-        
-        if (IsKeyPressed(KEY_L)) {
-            Objects.Fox.SetSleep();
+
+        if (Objects.Fox.GetWorldPos().x >= (450.f - 615.f) && Objects.Fox.GetWorldPos().x <= (570.f - 615.f) && Objects.Fox.GetWorldPos().y >= (925.f - 335.f)) {
+            Info.Map.SetArea(Area::FOREST);
+            Objects.Fox.MapChangeWorldPos(Area::FOREST);
+            Info.NextState = Game::State::FOREST;
+            Info.State = Game::State::TRANSITION;
         }
 
         if (IsKeyPressed(KEY_P)) {
@@ -364,11 +385,106 @@ namespace Game
             Info.NextState = Game::State::EXIT;
             Info.State = Game::State::TRANSITION;
         }
+
+        // Dev Tools--------------------------------------
+        if (IsKeyPressed(KEY_GRAVE)) {
+            Info.DevToolsOn = !Info.DevToolsOn;
+        }
+
+        if (Info.DevToolsOn) {
+            if (IsKeyPressed(KEY_ONE)) {
+                Info.NoClipOn = !Info.NoClipOn;
+                Objects.Fox.SwitchCollidable();
+            }
+            else if (IsKeyPressed(KEY_TWO)) {
+                Info.DrawRectanglesOn = !Info.DrawRectanglesOn;
+            }
+            else if (IsKeyPressed(KEY_THREE)) {
+                Info.ShowFPS = !Info.ShowFPS;
+            }
+            else if (IsKeyPressed(KEY_FOUR)) {
+                Info.ShowPos = !Info.ShowPos;
+            }
+            else if (IsKeyPressed(KEY_ZERO)) {
+                Info.ShowDevTools = !Info.ShowDevTools;
+            }
+            else if (IsKeyPressed(KEY_EQUAL)) {
+                Objects.Fox.AddHealth(0.5f);
+            }
+            else if (IsKeyPressed(KEY_MINUS)) {
+                Objects.Fox.AddHealth(-0.5f);
+            }
+        }
+        else {
+            if (Info.NoClipOn) {
+                Objects.Fox.SwitchCollidable();
+            }
+                
+            Info.NoClipOn = false;
+            Info.DrawRectanglesOn = false;
+            Info.ShowFPS = false;
+            Info.ShowPos = false;
+            Info.ShowDevTools = true;
+        }
     }
 
     void DungeonDraw(Game::Info& Info, Game::Objects& Objects)
     {
+        Info.Map.DrawDungeon();
 
+        Objects.Fox.Draw();
+
+        // Debugging --------------------
+        if (Info.DrawRectanglesOn) {
+            Game::DrawCollisionRecs(Objects.Fox);
+            Game::DrawAttackRecs(Objects.Fox);
+        }
+
+        for (auto& Enemy:Objects.Enemies) {
+            if (Enemy.GetType() == EnemyType::FINALBOSS) {
+                Enemy.Draw(Objects.Fox.GetWorldPos());
+            }
+
+            // Debugging --------------------
+            if (Info.DrawRectanglesOn) 
+                if (Enemy.GetType() == EnemyType::FINALBOSS && Enemy.WithinScreen(Objects.Fox.GetWorldPos())) {
+                    Game::DrawCollisionRecs(Enemy, Color{ 205, 0, 255, 150 });
+                    Game::DrawAttackRecs(Enemy);
+                }
+        }
+
+        Objects.Hud.Draw(Objects.Fox.GetHealth(), Objects.Fox.GetEmotion());
+
+        // Debugging --------------------
+        if (Info.DevToolsOn) {
+            if (Info.ShowPos) {
+                DrawRectangle(15, 145, 150, 50, Color{0,0,0,170});
+                DrawText(TextFormat("Player.x: %i", static_cast<int>(Objects.Fox.GetWorldPos().x + 615.f)), 20, 150, 20, WHITE);
+                DrawText(TextFormat("Player.y: %i", static_cast<int>(Objects.Fox.GetWorldPos().y + 335.f)), 20, 170, 20, WHITE);
+            }
+
+            if (Info.ShowFPS) {
+                DrawRectangle(15, 215, 90, 30, Color{0,0,0,170});
+                DrawFPS(20, 221);
+            }
+            
+            if (Info.ShowDevTools) {
+                DrawRectangle(15, 270, 220, 25, Color{0,0,0,170});
+                DrawText("   Dev Tools Menu", 20, 273, 20, WHITE);
+                DrawRectangle(15, 300, 220, 260, Color{0,0,0,170});
+                DrawText("  ---- Toggles ----", 20, 310, 20, WHITE);
+                DrawText("[`] Dev Tools", 20, 335, 20, !Info.DevToolsOn ? WHITE : LIME);
+                DrawText("[1] Noclip", 20, 355, 20, !Info.NoClipOn ? WHITE : LIME);
+                DrawText("[2] CollisionRecs", 20, 375, 20, !Info.DrawRectanglesOn ? WHITE : LIME);
+                DrawText("[3] FPS", 20, 395, 20, !Info.ShowFPS ? WHITE : LIME);
+                DrawText("[4] Position", 20, 415, 20, !Info.ShowPos ? WHITE : LIME);
+                DrawText("[5] Teleport", 20, 435, 20, !Info.TeleportOn ? GRAY : GRAY);
+                DrawText("[0] Tools Menu", 20, 455, 20, !Info.ShowDevTools ? WHITE : LIME);
+                DrawText("    ---- Misc ----", 20, 480, 20, WHITE);
+                DrawText("[-] Decrease HP", 20, 505, 20, !IsKeyDown(KEY_MINUS) ? WHITE : LIME);
+                DrawText("[+] Increase HP", 20, 525, 20, !IsKeyDown(KEY_EQUAL) ? WHITE : LIME);
+            }
+        }
     }
 
     void PauseUpdate(Game::Info& Info, Game::Objects& Objects)

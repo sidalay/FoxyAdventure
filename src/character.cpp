@@ -31,7 +31,7 @@ Character::Character(const Sprite& Idle,
     SpriteIndex = static_cast<int>(FoxState::IDLE);
 }
 
-void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
+void Character::Tick(float DeltaTime, Props& Props, const Area& Map, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     UpdateScreenPos();
 
@@ -45,7 +45,7 @@ void Character::Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies,
 
     UpdateSource();
 
-    CheckMovement(Props, Enemies, Trees);
+    CheckMovement(Props, Map, Enemies, Trees);
 
     CheckEmotion();
 
@@ -107,7 +107,7 @@ void Character::CheckDirection()
         }
 }
 
-void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
+void Character::CheckMovement(Props& Props, const Area& Map, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees)
 {
     PrevWorldPos = WorldPos;
     Vector2 Direction{};
@@ -133,17 +133,30 @@ void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::ve
         }
 
         // Undo Movement if walking out-of-bounds
-        if (WorldPos.x + ScreenPos.x < 0.f - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
-            WorldPos.y + ScreenPos.y < 0.f - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f ||
-            WorldPos.x + (Screen.x - ScreenPos.x) > World.GetForestMapSize().x * World.GetScale() + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
-            WorldPos.y + (Screen.y - ScreenPos.y) > World.GetForestMapSize().y * World.GetScale() + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f)
-        {
-            UndoMovement();
+        if (Map == Area::FOREST) {
+            if (WorldPos.x + ScreenPos.x < 0.f - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
+                WorldPos.y + ScreenPos.y < 0.f - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f ||
+                WorldPos.x + (Screen.x - ScreenPos.x) > World.GetForestMapSize().x * World.GetScale() + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
+                WorldPos.y + (Screen.y - ScreenPos.y) > World.GetForestMapSize().y * World.GetScale() + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f)
+            {
+                UndoMovement();
+            }
+
+            CheckCollision(Props.Under, Direction, Enemies, Trees);
+            CheckCollision(Props.Over, Direction, Enemies, Trees);
+        }
+        else if (Map == Area::DUNGEON) {
+            if (WorldPos.x + ScreenPos.x < 0.f - (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
+                WorldPos.y + ScreenPos.y < 0.f - (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f ||
+                WorldPos.x + (Screen.x - ScreenPos.x) > World.GetDungeonMapSize().x * World.GetScale() + (Sprites.at(SpriteIndex).Texture.width/Sprites.at(SpriteIndex).MaxFramesX)/2.f ||
+                WorldPos.y + (Screen.y - ScreenPos.y) > World.GetDungeonMapSize().y * World.GetScale() + (Sprites.at(SpriteIndex).Texture.height/Sprites.at(SpriteIndex).MaxFramesY)/2.f)
+            {
+                UndoMovement();
+            }
+
+            CheckCollision(Enemies);
         }
     }
-
-    CheckCollision(Props.Under, Direction, Enemies, Trees);
-    CheckCollision(Props.Over, Direction, Enemies, Trees);
 }
 
 void Character::UndoMovement()
@@ -241,6 +254,66 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, const Vect
         // Loop through all Enemies for collision
         for (auto& Enemy:Enemies) {
 
+            if (Enemy.GetType() != EnemyType::NPC) {
+                if (Enemy.IsAlive()) {
+
+                    // Check collision of Player against Enemy
+                    if ((Enemy.IsSummoned() && !Enemy.IsDying()) && CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
+                        if (Enemy.GetType() == EnemyType::NORMAL) {
+                            DamageTaken = 0.5f;
+                        }
+                        else {
+                            DamageTaken = 1.f;
+                        }
+                        TakeDamage();
+                    }
+
+                    // Check collision of Player's attack against Enemy
+                    if (Attacking && !Enemy.IsInvulnerable() && (CheckCollisionRecs(GetAttackRec(), Enemy.GetCollisionRec()))) {
+                        Enemy.Damaged(true);
+                    }
+                    else {
+                        Enemy.Damaged(false);
+                    }
+
+                    // Check if Enemy Attack Collision is hitting Player
+                    if (Enemy.IsAttacking() && !Enemy.IsDying() && (CheckCollisionRecs(GetCollisionRec(), Enemy.GetAttackRec()))) {
+                        TakeDamage();
+                    }
+
+                    // Heal fox if enemy is killed
+                    if (Enemy.IsDying()) {
+                        if (Enemy.GetMaxHP() >= 8 && Enemy.GetHealth() <= 0) {
+                            Healing = true;
+                            AmountToHeal = 4.f;
+                        }
+                        else if (Enemy.GetMaxHP() >= 5 && Enemy.GetHealth() <= 0) {
+                            Healing = true;
+                            AmountToHeal = 2.5f;
+                        }
+                        else if (Enemy.GetMaxHP() >= 1 && Enemy.GetHealth() <= 0) {
+                            Healing = true;
+                            AmountToHeal = 1.5f;
+                        }
+                    }
+                }
+                if (Hurting) {
+                    if (DamageTime >= 1.f) {
+                        Hurting = false;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void Character::CheckCollision(std::vector<Enemy>& Enemies)
+{
+    DamageTime += GetFrameTime();
+
+    if (Collidable) {
+        // Loop through all Enemies for collision
+        for (auto& Enemy:Enemies) {
             if (Enemy.GetType() != EnemyType::NPC) {
                 if (Enemy.IsAlive()) {
 
@@ -536,6 +609,14 @@ void Character::TakeDamage()
     }
 }
 
+void Character::MapChangeWorldPos(const Area& NextMap) {
+    if (NextMap == Area::FOREST) {
+        WorldPos = Vector2Subtract(ForestEntrance, Offset);
+    }
+    else if (NextMap == Area::DUNGEON) {
+        WorldPos = Vector2Subtract(DungeonEntrance, Offset);
+    }
+}
 // -------------------------------------------------------- //
 
 // Debug Function

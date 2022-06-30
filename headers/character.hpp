@@ -29,14 +29,15 @@ public:
               const Window& Screen, 
               Background& World);
     
-    void Tick(float DeltaTime, Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
+    void Tick(float DeltaTime, Props& Props, const Area& Map, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void Draw();
     void SpriteTick(float DeltaTime);
     void UpdateScreenPos();
     void CheckDirection();
-    void CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
+    void CheckMovement(Props& Props, const Area& Map, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
     void UndoMovement();
     void CheckCollision(std::vector<std::vector<Prop>>& Props, const Vector2 Direction, std::vector<Enemy>& Enemies, std::vector<Prop>& Trees);
+    void CheckCollision(std::vector<Enemy>& Enemies);
     void WalkOrRun();
     void CheckAttack();
     void UpdateSource();
@@ -48,6 +49,7 @@ public:
     void SetWorldPos(Vector2 Pos) {WorldPos = Pos;}
     void DrawIndicator();
     void TakeDamage();
+    void MapChangeWorldPos(const Area& NextMap);
 
     constexpr bool IsAlive() const {return Alive;}
     constexpr bool IsAttacking() const {return Attacking;}
@@ -74,6 +76,8 @@ private:
     Vector2 Offset{615.f,335.f};         // Player offset vs Enemy/Prop WorldPos
     Vector2 ScreenPos{};                 // Where the character is on the screen
     Vector2 WorldPos{436.f,3758.f};      // Where the character is in the world
+    Vector2 ForestEntrance{3600.f, 175.f};
+    Vector2 DungeonEntrance{485.f, 894.f};
     // Vector2 WorldPos{2334.f,2431};
     Vector2 PrevWorldPos{};
     Rectangle Source{};
