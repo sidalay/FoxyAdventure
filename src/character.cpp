@@ -316,17 +316,15 @@ void Character::CheckCollision(std::vector<Enemy>& Enemies)
     if (Collidable) {
         // Loop through all Enemies for collision
         for (auto& Enemy:Enemies) {
-            if (Enemy.GetType() != EnemyType::NPC) {
-                if (Enemy.IsAlive()) {
+            if (Enemy.GetType() == EnemyType::FINALBOSS) {
+                CheckDungeonExit(Enemy);
+
+                if (Enemy.IsSummoned() && Enemy.IsAlive()) {
+                    FinalBossSummoned = true;
 
                     // Check collision of Player against Enemy
-                    if ((Enemy.IsSummoned() && !Enemy.IsDying()) && CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
-                        if (Enemy.GetType() == EnemyType::NORMAL) {
-                            DamageTaken = 0.5f;
-                        }
-                        else {
-                            DamageTaken = 1.f;
-                        }
+                    if (!Enemy.IsDying() && CheckCollisionRecs(GetCollisionRec(), Enemy.GetCollisionRec())) {
+                        DamageTaken = 0.5f;
                         TakeDamage();
                     }
 
@@ -340,6 +338,7 @@ void Character::CheckCollision(std::vector<Enemy>& Enemies)
 
                     // Check if Enemy Attack Collision is hitting Player
                     if (Enemy.IsAttacking() && !Enemy.IsDying() && (CheckCollisionRecs(GetCollisionRec(), Enemy.GetAttackRec()))) {
+                        DamageTaken = 1.f;
                         TakeDamage();
                     }
 
@@ -358,6 +357,9 @@ void Character::CheckCollision(std::vector<Enemy>& Enemies)
                             AmountToHeal = 1.5f;
                         }
                     }
+                }
+                else if (Enemy.IsSummoned() && !Enemy.IsAlive()){
+                    FinalBossDefeated = true;
                 }
                 if (Hurting) {
                     if (DamageTime >= 1.f) {
@@ -626,6 +628,19 @@ void Character::MapChangeWorldPos(const Area& NextMap) {
     }
     else if (NextMap == Area::DUNGEON) {
         WorldPos = Vector2Subtract(DungeonEntrance, Offset);
+    }
+}
+
+void Character::CheckDungeonExit(Enemy& FinalBoss)
+{
+    if (!FinalBoss.IsSummoned()) {
+        CanExitDungeon = true;
+    }
+    else if (FinalBoss.IsSummoned() && FinalBoss.IsAlive()) {
+        CanExitDungeon = false;
+    }
+    else if  (FinalBoss.IsSummoned() && !FinalBoss.IsAlive()) {
+        CanExitDungeon = true;
     }
 }
 // -------------------------------------------------------- //

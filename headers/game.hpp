@@ -24,6 +24,7 @@ namespace Game
         bool ExitIsYes{false};
         bool TeleportOn{false};
         Game::State State{Game::State::TRANSITION};
+        Game::State PrevState{};
         Game::State NextState{Game::State::MAINMENU};
 
         // Debugging --------------------

@@ -369,7 +369,11 @@ namespace Game
             Info.State = Game::State::TRANSITION;
         }
 
-        if (Objects.Fox.GetWorldPos().x >= (450.f - 615.f) && Objects.Fox.GetWorldPos().x <= (570.f - 615.f) && Objects.Fox.GetWorldPos().y >= (925.f - 335.f)) {
+        if (Objects.Fox.GetWorldPos().x >= (450.f - 615.f) && 
+            Objects.Fox.GetWorldPos().x <= (570.f - 615.f) && 
+            Objects.Fox.GetWorldPos().y >= (925.f - 335.f) &&
+            Objects.Fox.IsDungeonExitable()) 
+        {
             Info.Map.SetArea(Area::FOREST);
             Info.NextState = Game::State::FOREST;
             Info.State = Game::State::TRANSITION;
@@ -2425,7 +2429,7 @@ namespace Game
             Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{1025.f,2765.f}, PropType::TREASURE, Textures, Textures.AltarBotLeft, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, true, "Bottom Left Altar Piece"},
             Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2268.f,1797.f}, PropType::TREASURE, Textures, Textures.AltarBot, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Bottom Altar Piece"},
             Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2250.f,2550.f}, PropType::TREASURE, Textures, Textures.AltarTopRight, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, true, "Bottom Right Altar Piece"},
-            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{3462.f,2760.f}, PropType::TREASURE, Textures, Textures.Cryptex, 4.f, false, true, Progress::ACT_V, PropType::NPC_DIANA, true, "Cryptex"},
+            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2137.f,1917.f}, PropType::TREASURE, Textures, Textures.Cryptex, 4.f, false, true, Progress::ACT_V, PropType::NPC_DIANA, false, "Cryptex"},
 };
         Props.emplace_back(Treasure);
 
@@ -3956,7 +3960,7 @@ namespace Game
             Sprite{Textures.NecromancerRedHurt, 1, 4},
             Sprite{Textures.NecromancerRedDeath, 11, 4},
             Sprite{Textures.NecromancerRedProjectile, 4, 4},
-            EnemyType::NECROMANCER, EnemyType::FINALBOSS, Vector2{2147.f, 1646.f}, Window, MapBG, Textures, RandomEngine, 8, 5.f, EnemyType::BOSS
+            EnemyType::NECROMANCER, EnemyType::FINALBOSS, Vector2{485.f, 341.f}, Window, MapBG, Textures, RandomEngine, 8, 5.f, EnemyType::BOSS
         };
         Enemies.emplace_back(BossRedNecro);
 

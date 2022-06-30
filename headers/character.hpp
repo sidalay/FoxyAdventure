@@ -51,9 +51,11 @@ public:
     void TakeDamage();
     void CheckMapChange(const Area& CurrentMap);
     void MapChangeWorldPos(const Area& NextMap);
+    void CheckDungeonExit(Enemy& FinalBoss);
 
     constexpr bool IsAlive() const {return Alive;}
     constexpr bool IsAttacking() const {return Attacking;}
+    constexpr bool IsDungeonExitable() const {return CanExitDungeon;}
     constexpr float GetHealth() const {return Health;}
     constexpr float GetSpeed() const {return Speed;}
     constexpr Vector2 GetOffset() const {return Offset;}
@@ -107,6 +109,9 @@ private:
     bool Interactable{false};
     bool Hurting{false};
     bool Healing{false};
+    bool FinalBossDefeated{false};
+    bool FinalBossSummoned{false};
+    bool CanExitDungeon{false};
     Emotion State{Emotion::DEFAULT};
     Direction Face{Direction::DOWN};
 
