@@ -1822,12 +1822,31 @@ namespace Game
         };
         Props.emplace_back(Walls);
 
+        std::vector<Prop> Stumps
+        {
+            Prop{Textures.TreeStump, Vector2{3274.f,3625.f}, PropType::STUMP, Textures, 5.f, false},
+            Prop{Textures.TreeStump, Vector2{3352.f,3552.f}, PropType::STUMP, Textures, 4.f, false},
+            Prop{Textures.TreeStump, Vector2{3293.f,3745.f}, PropType::STUMP, Textures, 3.5f, false},
+            Prop{Textures.TreeStump, Vector2{3375.f,3667.f}, PropType::STUMP, Textures, 3.f, false},
+            Prop{Textures.TreeStump, Vector2{3473.f,3649.f}, PropType::STUMP, Textures, 3.f, false},
+            Prop{Textures.TreeStump, Vector2{3420.f,3736.f}, PropType::STUMP, Textures, 6.f, false},
+            Prop{Textures.TreeStump, Vector2{3607.f,3795.f}, PropType::STUMP, Textures, 4.f, false},
+            Prop{Textures.TreeStump, Vector2{3706.f,3748.f}, PropType::STUMP, Textures, 3.5f, false},
+            Prop{Textures.TreeStump, Vector2{3857.f,3634.f}, PropType::STUMP, Textures, 4.f, false},
+            Prop{Textures.TreeStump, Vector2{3630.f,3527.f}, PropType::STUMP, Textures, 6.f, false},
+            Prop{Textures.TreeStump, Vector2{3636.f,3698.f}, PropType::STUMP, Textures, 3.5f, false},
+            Prop{Textures.TreeStump, Vector2{3655.f,3877.f}, PropType::STUMP, Textures, 3.5f, false},
+            Prop{Textures.AxeStump, Vector2{3439.f,3531.f}, PropType::STUMP, Textures, 4.f, false},
+        };
+        Props.emplace_back(Stumps);
+
         std::vector<Prop> Moveable
         {
-            Prop{Textures.TreeStump, Vector2{3525.f,3640.f}, PropType::STUMP, Textures, 4.f, true},
+            Prop{Textures.Boulder, Vector2{3525.f,3640.f}, PropType::STUMP, Textures, 5.f, true},
             Prop{Textures.Boulder, Vector2{1025.f,3050.f}, PropType::BOULDER, Textures, 4.f, true},
         };
         Props.emplace_back(Moveable);
+
         
         return Props;
     }
@@ -1877,7 +1896,7 @@ namespace Game
 
         std::vector<Prop> Moveable
         {
-            Prop{Textures.TreeStump, Vector2{3525.f,3640.f}, PropType::STUMP, Textures, 4.f, true},
+            Prop{Textures.Boulder, Vector2{3525.f,3640.f}, PropType::STUMP, Textures, 5.f, true},
             Prop{Textures.Boulder, Vector2{1025.f,3050.f}, PropType::BOULDER, Textures, 4.f, true},
         };
         Props.emplace_back(Moveable);
@@ -3709,6 +3728,18 @@ namespace Game
             EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{2835.f, 3803.f}, Window, MapBG, Textures, RandomEngine, 2, 2.f
         };
         Enemies.emplace_back(GreenMushroomThree);
+
+        Enemy RedMushroomTen
+        {
+            Sprite{Textures.MushroomRedIdle, 4, 4},
+            Sprite{Textures.MushroomRedWalk, 4, 4},
+            Sprite{Textures.MushroomRedAttack, 4, 4},
+            Sprite{Textures.MushroomRedHurt, 4, 4},
+            Sprite{Textures.MushroomRedDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{4024.f, 3733.f}, Window, MapBG, Textures, RandomEngine, 2, 2.f
+        };
+        Enemies.emplace_back(RedMushroomTen);
 
         Enemy BlueMushroomFour
         {
