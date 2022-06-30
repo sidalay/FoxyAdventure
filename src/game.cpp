@@ -3954,6 +3954,80 @@ namespace Game
         };
         Enemies.emplace_back(BlackSpiderTwo);
 
+        // ----------------------------------- Ghosts ------------------------------------
+
+        Enemy ShadowOne
+        {
+            Sprite{Textures.ShadowYellowIdle, 4, 4},
+            Sprite{Textures.ShadowYellowWalk, 4, 4},
+            Sprite{Textures.ShadowYellowAttack, 4, 4},
+            Sprite{Textures.ShadowYellowHurt, 1, 4},
+            Sprite{Textures.ShadowYellowDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::SHADOW, EnemyType::NORMAL, Vector2{3052.f, 1552.f}, Window, MapBG, Textures, RandomEngine, 3, 3.f
+        };
+        Enemies.emplace_back(ShadowOne);
+
+        Enemy ShadowTwo
+        {
+            Sprite{Textures.ShadowYellowIdle, 4, 4},
+            Sprite{Textures.ShadowYellowWalk, 4, 4},
+            Sprite{Textures.ShadowYellowAttack, 4, 4},
+            Sprite{Textures.ShadowYellowHurt, 1, 4},
+            Sprite{Textures.ShadowYellowDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::SHADOW, EnemyType::NORMAL, Vector2{3134.f, 1681.f}, Window, MapBG, Textures, RandomEngine, 3, 3.f
+        };
+        Enemies.emplace_back(ShadowTwo);
+
+        Enemy ShadowThree
+        {
+            Sprite{Textures.ShadowYellowIdle, 4, 4},
+            Sprite{Textures.ShadowYellowWalk, 4, 4},
+            Sprite{Textures.ShadowYellowAttack, 4, 4},
+            Sprite{Textures.ShadowYellowHurt, 1, 4},
+            Sprite{Textures.ShadowYellowDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::SHADOW, EnemyType::NORMAL, Vector2{3311.f, 1847.f}, Window, MapBG, Textures, RandomEngine, 3, 3.f
+        };
+        Enemies.emplace_back(ShadowThree);
+
+        Enemy ShadowFour
+        {
+            Sprite{Textures.ShadowTealIdle, 4, 4},
+            Sprite{Textures.ShadowTealWalk, 4, 4},
+            Sprite{Textures.ShadowTealAttack, 4, 4},
+            Sprite{Textures.ShadowTealHurt, 1, 4},
+            Sprite{Textures.ShadowTealDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::SHADOW, EnemyType::NORMAL, Vector2{3565.f, 1600.f}, Window, MapBG, Textures, RandomEngine, 3, 3.f
+        };
+        Enemies.emplace_back(ShadowFour);
+
+        Enemy ShadowFive
+        {
+            Sprite{Textures.ShadowTealIdle, 4, 4},
+            Sprite{Textures.ShadowTealWalk, 4, 4},
+            Sprite{Textures.ShadowTealAttack, 4, 4},
+            Sprite{Textures.ShadowTealHurt, 1, 4},
+            Sprite{Textures.ShadowTealDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::SHADOW, EnemyType::NORMAL, Vector2{3629.f, 1430.f}, Window, MapBG, Textures, RandomEngine, 3, 3.f
+        };
+        Enemies.emplace_back(ShadowFive);
+
+        Enemy ShadowSix
+        {
+            Sprite{Textures.ShadowTealIdle, 4, 4},
+            Sprite{Textures.ShadowTealWalk, 4, 4},
+            Sprite{Textures.ShadowTealAttack, 4, 4},
+            Sprite{Textures.ShadowTealHurt, 1, 4},
+            Sprite{Textures.ShadowTealDeath, 11, 4},
+            Sprite{Textures.Placeholder, 0, 0},
+            EnemyType::SHADOW, EnemyType::NORMAL, Vector2{3624.f, 1899.f}, Window, MapBG, Textures, RandomEngine, 3, 3.f
+        };
+        Enemies.emplace_back(ShadowSix);
+
         // ----------------------------------- Bosses ------------------------------------
 
         Enemy RedBossImp
