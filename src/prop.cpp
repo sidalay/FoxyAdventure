@@ -199,18 +199,21 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
     if (ReceiveItem) {
         DrawTextureEx(GameTextures.SpeechBox, Vector2{472.f,574.f}, 0.f, 8.f, WHITE);
         DrawPropText();
+        TextAudio();
     }
 
     // Altar Pieces Inserted
     if (InsertPiece) {
         DrawTextureEx(GameTextures.SpeechBox, Vector2{472.f,574.f}, 0.f, 8.f, WHITE);
         DrawPropText();
+        TextAudio();
     }
 
     // Foxy Secret Spot
     if (Reading) {
         DrawTextureEx(GameTextures.SpeechBox, Vector2{352.f,518.f}, 0.f, 12.f, WHITE);
         DrawPropText();
+        TextAudio();
     }
 
     // NPC Speech Box
@@ -221,18 +224,22 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
         if (Type == PropType::NPC_DIANA) {
             DrawText("Diana", 399, 490, 30, WHITE);
             DrawSpeech();
+            TextAudio();
         }
         else if (Type == PropType::NPC_JADE) {
             DrawText("Jade", 399, 490, 30, WHITE);
             DrawSpeech();
+            TextAudio();
         }
         else if (Type == PropType::NPC_SON) {
             DrawText("Louie", 399, 490, 30, WHITE);
             DrawSpeech();
+            TextAudio();
         }
         else if (Type == PropType::NPC_RUMBY) {
             DrawText("Rumby", 393, 490, 30, WHITE);
             DrawSpeech();
+            TextAudio();
         }
     }
 }
@@ -1630,6 +1637,11 @@ void Prop::AltarAudio()
 {
     SetSoundVolume(Audio.AltarInsert, 0.4f);
     PlaySound(Audio.AltarInsert);
+}
+
+void Prop::TextAudio()
+{
+    PlaySound(Audio.NpcTalk);
 }
 
 // ---------------------------------------------------------------------

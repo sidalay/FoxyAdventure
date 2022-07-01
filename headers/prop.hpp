@@ -99,6 +99,7 @@ public:
     // Audio
     void TreasureAudio();
     void AltarAudio();
+    void TextAudio();
 
     constexpr bool HasCollision() const {return Collidable;}
     constexpr bool IsInteractable() const {return Interactable;}
