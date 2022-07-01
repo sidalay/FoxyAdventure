@@ -730,13 +730,18 @@ void Character::AttackAudio()
 
 void Character::DamageAudio()
 {
-    SetSoundVolume(Audio.FoxAttack, 0.4f);
-    PlaySound(Audio.ImpactMedium);
+    SetSoundVolume(Audio.FoxAttack, 0.2f);
+    DamageAudioTime += GetFrameTime();
+
+    if (DamageAudioTime >= 0.7f) {
+        PlaySoundMulti(Audio.ImpactMedium);
+        DamageAudioTime = 0.f;
+    }
 }
 
 void Character::WalkingAudio()
 {
-    SetSoundVolume(Audio.Walking, 0.20f);
+    SetSoundVolume(Audio.Walking, 0.2f);
     WalkingAudioTime += GetFrameTime();
 
     if (Walking && WalkingAudioTime >= 1.f/3.f) {

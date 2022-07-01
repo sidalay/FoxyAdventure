@@ -110,6 +110,7 @@ private:
     float HealTime{};
     float WalkingAudioTime{};
     float PushingAudioTime{};
+    float DamageAudioTime{};
     float DamageTaken{0.5f};
     float AmountToHeal{};
     bool Alive{true};
