@@ -70,7 +70,7 @@ namespace Game
     void MainMenuDraw(const Game::Info& Info);
     void GameOverUpdate(Game::Info& Info);
     void GameOverDraw(const Game::Info& Info);
-    void Transition(Game::Info& Info);
+    void Transition(Game::Info& Info, const GameAudio& Audio);
 
     HUD InitializeHud(const GameTexture& Textures);
     Character InitializeFox(const Window& Window, Game::Info& Info, const GameTexture& Textures, const GameAudio& Audio);

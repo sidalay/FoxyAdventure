@@ -110,7 +110,7 @@ namespace Game
         }
         else if (Info.State == Game::State::TRANSITION) {
 
-            Game::Transition(Info);
+            Game::Transition(Info, Audio);
         }
 
         EndDrawing();
@@ -388,7 +388,7 @@ namespace Game
     {
         if (!Info.DungeonThemeStarted) {
             Info.DungeonThemeStarted = true;
-            // SetMusicVolume(Audio.DungeonTheme, 0.5f);
+            SetMusicVolume(Audio.DungeonTheme, 0.15f);
             PlayMusicStream(Audio.DungeonTheme);
         }
         if (Info.DungeonThemePaused) {
@@ -727,10 +727,19 @@ namespace Game
         }
     }
 
-    void Transition(Game::Info& Info)
+    void Transition(Game::Info& Info, const GameAudio& Audio)
     {
         const float MaxTransitionTime{0.3f};
         
+        if ((Info.PrevState == Game::State::FOREST && Info.NextState == Game::State::DUNGEON) ||
+            (Info.PrevState == Game::State::DUNGEON && Info.NextState == Game::State::FOREST))
+        {
+            PlaySound(Audio.MapChange);   
+        }
+        else {
+            PlaySound(Audio.Transition);
+        }
+
         if (Info.State != Game::State::TRANSITION) {
             if (Info.TransitionInTime < MaxTransitionTime) {
                     Info.TransitionInTime = GetFrameTime();
