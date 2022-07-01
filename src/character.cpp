@@ -125,7 +125,7 @@ void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::ve
 {
     PrevWorldPos = WorldPos;
     Vector2 Direction{};
-    WalkingSounds();
+    WalkingAudio();
 
     // Check for movement input
     if (!Locked) {
@@ -449,13 +449,14 @@ void Character::CheckAttack()
 
     if (!Locked) {
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsKeyDown(KEY_SPACE)) {
-            
+
             float AttackResetTime{0.7f};
 
             // Attack animation & damage window lasts 0.4 seconds
             if (AttackTime < 0.4f) {
                 Sleeping = false;
                 Attacking = true;
+                AttackAudio();
                 SpriteIndex = static_cast<int>(FoxState::ATTACK);
             }
             // Reset window when reaching AttackResetTime
@@ -633,7 +634,7 @@ void Character::EndGame()
 {
     Vector2 OffsetWorldPos{Vector2Add(WorldPos,Offset)};
     State = Emotion::HAPPY;
-    WalkingSounds();
+    WalkingAudio();
 
     if (OffsetWorldPos.x < 352.f) {
         SpriteIndex = static_cast<int>(FoxState::WALK);
@@ -675,6 +676,7 @@ void Character::TakeDamage()
     if (DamageTime <= HurtUpdateTime) {
         SpriteIndex = static_cast<int>(FoxState::HURT);
         Hurting = true;
+        DamageAudio();
     }
 
     // How often health should decrease when colliding into enemy
@@ -718,7 +720,7 @@ void Character::CheckDungeonExit(Enemy& FinalBoss)
 }
 
 // ------------------------- Audio ---------------------------
-void Character::WalkingSounds()
+void Character::WalkingAudio()
 {
     WalkingAudioTime += GetFrameTime();
 
@@ -732,6 +734,15 @@ void Character::WalkingSounds()
     }
 }
 
+void Character::AttackAudio()
+{
+    PlaySound(Audio.FoxAttack);
+}
+
+void Character::DamageAudio()
+{
+    PlaySound(Audio.ImpactMedium);
+}
 
 // -------------------------------------------------------- //
 // Debug Function
