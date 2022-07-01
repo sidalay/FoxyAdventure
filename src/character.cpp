@@ -210,7 +210,7 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, const Vect
                         
                         // manage pushable props
                         if (Prop.IsMoveable()) {
-                            if (Prop.GetType() == PropType::BOULDER || Prop.GetType() == PropType::STUMP) {
+                            if (Prop.GetType() == PropType::BOULDER) {
                                 Colliding = true;   
                                 if(!Prop.IsOutOfBounds()) {
                                     if (Prop.CheckMovement(World, WorldPos, Direction, Speed, Props)) {
@@ -720,6 +720,16 @@ void Character::CheckDungeonExit(Enemy& FinalBoss)
 }
 
 // ------------------------- Audio ---------------------------
+void Character::AttackAudio()
+{
+    PlaySound(Audio.FoxAttack);
+}
+
+void Character::DamageAudio()
+{
+    PlaySound(Audio.ImpactMedium);
+}
+
 void Character::WalkingAudio()
 {
     WalkingAudioTime += GetFrameTime();
@@ -732,16 +742,6 @@ void Character::WalkingAudio()
         PlaySoundMulti(Audio.Walking);
         WalkingAudioTime = 0.f;
     }
-}
-
-void Character::AttackAudio()
-{
-    PlaySound(Audio.FoxAttack);
-}
-
-void Character::DamageAudio()
-{
-    PlaySound(Audio.ImpactMedium);
 }
 
 // -------------------------------------------------------- //

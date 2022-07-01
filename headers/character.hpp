@@ -58,9 +58,9 @@ public:
     void EndGame();
 
     // Audio
-    void WalkingAudio();
     void AttackAudio();
     void DamageAudio();
+    void WalkingAudio();
 
     constexpr bool IsAlive() const {return Alive;}
     constexpr bool IsAttacking() const {return Attacking;}

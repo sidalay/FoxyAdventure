@@ -5,10 +5,11 @@ Prop::Prop(const Texture2D& Texture,
            const Vector2 Pos, 
            const PropType Type, 
            const GameTexture& GameTextures, 
+           const GameAudio& Audio,
            const float Scale, 
            const bool Moveable, 
            const bool Interactable)
-    : Object{Texture}, Type{Type}, GameTextures{GameTextures}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, 
+    : Object{Texture}, Type{Type}, GameTextures{GameTextures}, Audio{Audio}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, 
       Moveable{Moveable}
 {
     if (Type == PropType::BOULDER ||
@@ -42,10 +43,11 @@ Prop::Prop(const Sprite& Object,
            const Vector2 Pos, 
            const PropType Type, 
            const GameTexture& GameTextures, 
+           const GameAudio& Audio,
            const std::string& ItemName, 
            const bool Spawned, 
            const bool Interactable)
-    : Object{Object}, Type{Type}, GameTextures{GameTextures}, WorldPos{Pos}, Interactable{Interactable}, Spawned{Spawned}, ItemName{ItemName} 
+    : Object{Object}, Type{Type}, GameTextures{GameTextures}, Audio{Audio}, WorldPos{Pos}, Interactable{Interactable}, Spawned{Spawned}, ItemName{ItemName} 
 {
     Collidable = true;
 }
@@ -55,6 +57,7 @@ Prop::Prop(const Sprite& Object,
            const Vector2 Pos, 
            const PropType Type, 
            const GameTexture& GameTextures, 
+           const GameAudio& Audio,
            const Texture2D& Item, 
            const float Scale, 
            const bool Moveable, 
@@ -64,7 +67,7 @@ Prop::Prop(const Sprite& Object,
            const bool Spawn,
            const std::string& ItemName, 
            const float ItemScale)
-    : Object{Object}, Type{Type}, GameTextures{GameTextures}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}, 
+    : Object{Object}, Type{Type}, GameTextures{GameTextures}, Audio{Audio}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, Moveable{Moveable}, 
       Spawned{Spawn}, TriggerAct{TriggerAct}, TriggerNPC{TriggerNPC}, Item{Item}, ItemName{ItemName}, ItemScale{ItemScale} 
 {
     if (Type == PropType::GRASS ||
@@ -259,7 +262,6 @@ void Prop::AltarTick(const float DeltaTime)
 
 void Prop::OpenChest(const float DeltaTime)
 {
-    // controls 'press enter' delay to close dialogue
     ReceiveItem = true;
     if (ItemName == "Cryptex") {
         CryptexReceived = true;
@@ -267,10 +269,12 @@ void Prop::OpenChest(const float DeltaTime)
     else {
         ++PiecesReceived;
     }
+    // controls 'press enter' delay to close dialogue
     RunningTime += DeltaTime;
     if (RunningTime >= Object.UpdateTime * 6.f) {
         Opening = false;
         RunningTime = 0.f;
+        TreasureAudio();
     }
 }
 
@@ -1611,6 +1615,12 @@ void Prop::DrawSpeech()
             Talking = false;
             break;
     }
+}
+
+// ------------------------- Audio ---------------------------
+void Prop::TreasureAudio()
+{
+    PlaySound(Audio.TreasureOpen);
 }
 
 // ---------------------------------------------------------------------

@@ -51,6 +51,7 @@ public:
          const Vector2 Pos, 
          const PropType Type, 
          const GameTexture& GameTextures, 
+         const GameAudio& Audio,
          const float Scale = 4.f, 
          const bool Moveable = false, 
          const bool Interactable = false);
@@ -60,6 +61,7 @@ public:
          const Vector2 Pos, 
          const PropType Type, 
          const GameTexture& GameTextures, 
+         const GameAudio& Audio,
          const std::string& ItemName = "None", 
          const bool Spawned = false, 
          const bool Interactable = false);      
@@ -68,7 +70,8 @@ public:
     Prop(const Sprite& Object, 
          const Vector2 Pos, 
          const PropType Type, 
-         const GameTexture& GameTextures, 
+         const GameTexture& GameTextures,
+         const GameAudio& Audio, 
          const Texture2D& Item, 
          const float Scale = 4.f, 
          const bool Moveable = false, 
@@ -92,6 +95,9 @@ public:
     void UpdateNpcInactive();
     void UpdateNpcActive();
     void CheckFinalChest();
+
+    // Audio
+    void TreasureAudio();
 
     constexpr bool HasCollision() const {return Collidable;}
     constexpr bool IsInteractable() const {return Interactable;}
@@ -122,6 +128,7 @@ private:
     Sprite Object{};
     const PropType Type{};
     const GameTexture& GameTextures;
+    const GameAudio& Audio;
     Vector2 WorldPos{};
     Vector2 PrevWorldPos{};
     float Scale {4.f};

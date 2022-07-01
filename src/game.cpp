@@ -16,10 +16,10 @@ namespace Game
             Game::Objects Objects{
                 Game::InitializeHud(Textures), 
                 Game::InitializeFox(Window, Info, Textures, Audio),
-                {Game::InitializePropsUnder(Textures), Game::InitializePropsOver(Textures)},
+                {Game::InitializePropsUnder(Textures, Audio), Game::InitializePropsOver(Textures, Audio)},
                 {Game::InitializeEnemies(Info.Map, Window, Textures, RandomEngine, Audio)},
                 {Game::InitializeCrows(Info.Map, Window, Textures, RandomEngine, Audio)},
-                {Game::InitializeTrees(Textures)},
+                {Game::InitializeTrees(Textures, Audio)},
                 Game::InitializePauseFox(Textures),
                 Game::InitializeButtons(Textures)
             };
@@ -828,7 +828,7 @@ namespace Game
         };
     }
 
-    std::vector<std::vector<Prop>> InitializePropsUnder(const GameTexture& Textures)
+    std::vector<std::vector<Prop>> InitializePropsUnder(const GameTexture& Textures, const GameAudio& Audio)
     {
         std::vector<std::vector<Prop>> Props{};
 
@@ -838,118 +838,111 @@ namespace Game
         */
         std::vector<Prop> Placeholder
         {
-            Prop{Textures.Placeholder, Vector2{0.f,0.f}, PropType::PLACEHOLDER, Textures, 4.f, false, true}
+            Prop{Textures.Placeholder, Vector2{0.f,0.f}, PropType::PLACEHOLDER, Textures, Audio, 4.f, false, true}
         };
         Props.emplace_back(Placeholder);
 
         std::vector<Prop> DungeonEntrance
         {
-            Prop{Textures.DungeonEntrance, Vector2{3520.f,60.f}, PropType::DUNGEONLEFT, Textures, 4.f},
-            Prop{Textures.DungeonEntrance, Vector2{3520.f,60.f}, PropType::DUNGEONRIGHT, Textures, 4.f},
-            Prop{Textures.DungeonEntrance, Vector2{3520.f,60.f}, PropType::DUNGEON, Textures, 4.f, false, true},
+            Prop{Textures.DungeonEntrance, Vector2{3520.f,60.f}, PropType::DUNGEONLEFT, Textures, Audio, 4.f},
+            Prop{Textures.DungeonEntrance, Vector2{3520.f,60.f}, PropType::DUNGEONRIGHT, Textures, Audio, 4.f},
+            Prop{Textures.DungeonEntrance, Vector2{3520.f,60.f}, PropType::DUNGEON, Textures, Audio, 4.f, false, true},
         };
         Props.emplace_back(DungeonEntrance);
 
         std::vector<Prop> Boulder
         {
-            Prop{Textures.Boulder, Vector2{640.f,458.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{550.f,357.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{632.f,244.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{852.f,550.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{733.f,655.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{1748.f,556.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{655.f,1542.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{153.f,2145.f}, PropType::BOULDER, Textures},
-            // Prop{Textures.Boulder, Vector2{528.f,2233.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{930.f,2050.f}, PropType::BOULDER, Textures},
-            // Prop{Textures.Boulder, Vector2{934.f,2444.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{1138.f,2041.f}, PropType::BOULDER, Textures},
-            // Prop{Textures.Boulder, Vector2{1144.f,2235.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{1053.f,1737.f}, PropType::BOULDER, Textures},
-            // Prop{Textures.Boulder, Vector2{1236.f,1858.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{1430.f,2035.f}, PropType::BOULDER, Textures},
-            // Prop{Textures.Boulder, Vector2{1534.f,2444.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{1639.f,2444.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{1655.f,2342.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{1735.f,2439.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{2234.f,1054.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{2136.f,1144.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{2055.f,1144.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{1150.f,1343.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{1544.f,945.f}, PropType::BOULDER, Textures},
-            // Prop{Textures.Boulder, Vector2{1638.f,945.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{1732.f,446.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{2636.f,650.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{2757.f,347.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{2935.f,244.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{3056.f,543.f}, PropType::BOULDER, Textures},
+            Prop{Textures.Boulder, Vector2{640.f,458.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{550.f,357.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{632.f,244.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{852.f,550.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{733.f,655.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{1748.f,556.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{655.f,1542.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{153.f,2145.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{930.f,2050.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{1138.f,2041.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{1053.f,1737.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{1430.f,2035.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{1639.f,2444.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{1655.f,2342.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{1735.f,2439.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{2234.f,1054.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{2136.f,1144.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{2055.f,1144.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{1150.f,1343.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{1544.f,945.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{1732.f,446.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{2636.f,650.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{2757.f,347.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{2935.f,244.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{3056.f,543.f}, PropType::BOULDER, Textures, Audio},
         };
         Props.emplace_back(Boulder);
 
         std::vector<Prop> Bushes
         {
-            Prop{Textures.Bush, Vector2{383.f,1024.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{501.f,936.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{597.f,821.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{890.f,834.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1147.f,713.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1193.f,829.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1805.f,2534.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{2659.f,718.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{655.f,2439.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{803.f,2122.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{2090.f,1218.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{906.f,1934.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{906.f,2333.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1398.f,1934.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1584.f,641.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1405.f,2122.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{667.f,1625.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1286.f,1433.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{2757.f,416.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1823.f,2120.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1823.f,2185.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{2619.f,822.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{2661.f,923.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{2661.f,1026.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{2661.f,1122.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{889.f,2222.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1063.f,1811.f}, PropType::BUSH, Textures},
-            // Prop{Textures.Bush, Vector2{3397.f,1800.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3460.f,2100.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3460.f,2000.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3397.f,1700.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3397.f,1600.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3428.f,1500.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3397.f,1423.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3397.f,1313.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3397.f,1217.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3397.f,1117.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3397.f,1011.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3397.f,900.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3397.f,800.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3397.f,700.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3397.f,600.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{2785.f,1827.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{2758.f,1934.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{2938.f,2022.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3155.f,2033.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3159.f,1422.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{2657.f,1522.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{2603.f,1634.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3767.f,2022.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3246.f,2234.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1770.f,734.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1594.f,334.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1465.f,222.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{3152.f,1222.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{2155.f,966.f}, PropType::BUSH, Textures, 3.f}, 
-            Prop{Textures.Bush, Vector2{2274.f,966.f}, PropType::BUSH, Textures, 3.f}, 
-            Prop{Textures.Bush, Vector2{2395.f,966.f}, PropType::BUSH, Textures, 3.f}, 
-            Prop{Textures.Bush, Vector2{2534.f,3525.f}, PropType::BUSH, Textures, 3.f}, 
-            Prop{Textures.Bush, Vector2{2749.f,3906.f}, PropType::BUSH, Textures, 3.f}, 
-            Prop{Textures.Bush, Vector2{2749.f,4006.f}, PropType::BUSH, Textures, 3.f}, 
-            Prop{Textures.Bush, Vector2{2550.f,3715.f}, PropType::BUSH, Textures}, 
+            Prop{Textures.Bush, Vector2{383.f,1024.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{501.f,936.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{597.f,821.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{890.f,834.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1147.f,713.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1193.f,829.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1805.f,2534.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{2659.f,718.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{655.f,2439.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{803.f,2122.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{2090.f,1218.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{906.f,1934.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{906.f,2333.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1398.f,1934.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1584.f,641.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1405.f,2122.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{667.f,1625.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1286.f,1433.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{2757.f,416.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1823.f,2120.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1823.f,2185.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{2619.f,822.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{2661.f,923.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{2661.f,1026.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{2661.f,1122.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{889.f,2222.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1063.f,1811.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3460.f,2100.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3460.f,2000.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3397.f,1700.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3397.f,1600.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3428.f,1500.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3397.f,1423.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3397.f,1313.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3397.f,1217.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3397.f,1117.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3397.f,1011.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3397.f,900.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3397.f,800.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3397.f,700.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3397.f,600.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{2785.f,1827.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{2758.f,1934.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{2938.f,2022.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3155.f,2033.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3159.f,1422.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{2657.f,1522.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{2603.f,1634.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3767.f,2022.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3246.f,2234.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1770.f,734.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1594.f,334.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1465.f,222.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3152.f,1222.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{2155.f,966.f}, PropType::BUSH, Textures, Audio, 3.f}, 
+            Prop{Textures.Bush, Vector2{2274.f,966.f}, PropType::BUSH, Textures, Audio, 3.f}, 
+            Prop{Textures.Bush, Vector2{2395.f,966.f}, PropType::BUSH, Textures, Audio, 3.f}, 
+            Prop{Textures.Bush, Vector2{2534.f,3525.f}, PropType::BUSH, Textures, Audio, 3.f}, 
+            Prop{Textures.Bush, Vector2{2749.f,3906.f}, PropType::BUSH, Textures, Audio, 3.f}, 
+            Prop{Textures.Bush, Vector2{2749.f,4006.f}, PropType::BUSH, Textures, Audio, 3.f}, 
+            Prop{Textures.Bush, Vector2{2550.f,3715.f}, PropType::BUSH, Textures, Audio}, 
         };
         Props.emplace_back(Bushes);
 
@@ -957,659 +950,659 @@ namespace Game
         {   
             // ---------------------------------------------- Left Map Grass -----------------------------------------------
             // ---------------------------------------------------- -4 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,940.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,980.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,940.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,980.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,1004.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,1044.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,1004.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,1044.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,1068.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,1064.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,1064.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,940.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,980.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,940.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,980.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,1004.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,1044.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,1004.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,1044.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,1068.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,1064.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,1064.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- -3 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,812.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,852.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,812.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,852.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,876.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,916.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,876.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,916.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,812.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,852.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,812.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,852.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,876.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,916.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,876.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,916.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- -2 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,684.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,724.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,684.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,724.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,748.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,788.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,748.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,788.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,684.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,724.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,684.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,724.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,748.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{145.f,788.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,748.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,788.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- -1 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,492.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,532.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,492.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,532.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,492.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,532.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,492.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,532.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
 
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,556.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,596.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,556.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,596.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,620.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,660.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,620.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,660.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,684.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,724.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,556.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,596.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,556.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,596.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,620.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,660.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,620.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{209.f,660.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,684.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,724.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
 
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,748.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,788.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,812.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,852.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,876.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,916.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,940.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,980.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,1004.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,1044.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,748.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,788.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,812.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,852.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,876.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,916.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,940.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,980.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,1004.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{273.f,1044.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------- --------------- -----------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,488.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,512.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,424.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,448.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,808.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,832.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,488.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,512.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,424.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,448.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,808.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,832.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
 
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,404.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,428.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,468.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,492.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,620.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,660.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,684.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,724.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,748.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,788.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,812.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,852.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,404.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,428.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,468.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,492.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,620.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,660.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,684.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,724.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,748.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,788.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,812.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{337.f,852.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
 
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,492.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,532.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,492.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,532.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,492.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,532.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,492.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,532.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,556.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,596.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,556.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,596.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,620.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,660.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,620.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,660.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,684.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,724.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,684.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,724.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,748.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,748.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,724.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,788.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,788.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,812.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{529.f,724.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,556.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,596.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,556.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,596.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,620.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,660.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,620.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,660.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,684.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,724.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,684.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,724.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,748.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,748.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,724.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,788.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{465.f,788.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{401.f,812.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{529.f,724.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
 
             // --------------------------------------------- Far Left Column -----------------------------------------------
             // ---------------------------------------------------- -4 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1806.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1846.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1806.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1846.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1870.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1910.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1870.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1910.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- -3 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1678.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1718.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1678.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1718.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1742.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1782.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1742.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1782.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- -2 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1614.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1816.f,1654.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1614.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1880.f,1654.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- -1 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1358.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1398.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1358.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1398.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ----------------------------------------------------- 0 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1462.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1462.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1486.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1486.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1442.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1462.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1442.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1462.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1486.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1526.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1486.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1526.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ----------------------------------------------------- 1 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1550.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1590.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1550.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1590.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1550.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1590.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1550.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1590.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1614.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1654.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1614.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1654.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ----------------------------------------------------- 2 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1678.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1718.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1678.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1718.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1742.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1782.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1742.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1782.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ------------------------------------------------------ 3 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1806.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1846.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1806.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1846.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1870.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1910.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1870.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1910.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ------------------------------------------------------ 3 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1806.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1846.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1806.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1846.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1870.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1910.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1870.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1910.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ----------------------------------------------------- 4 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1974.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1974.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1934.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1974.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1934.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1974.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,1998.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1944.f,2038.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,1998.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2008.f,2038.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ------------------------------------------------ Left Column ------------------------------------------------
             // ---------------------------------------------------- -1 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1294.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1334.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            // Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1294.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1334.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1358.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1398.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1358.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1398.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1294.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1334.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            // Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1294.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1334.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1358.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1398.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1358.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1398.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- 0 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1422.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1462.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1422.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1462.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1486.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1486.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1422.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1462.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1422.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1462.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1486.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1526.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1486.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1526.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- 1 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1550.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1590.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1550.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1590.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1550.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1590.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1550.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1590.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1614.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1654.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1614.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1654.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 2 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1678.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1718.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1678.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1718.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1742.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1782.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1742.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1782.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 3 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1806.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1846.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1806.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1846.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1870.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1910.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1870.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1910.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 4 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1974.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1974.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1934.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1974.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1934.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1974.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,1998.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2072.f,2038.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,1998.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2136.f,2038.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------- Far Right Column ----------------------------------------------
             // --------------------------------------------------- -6 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1974.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1974.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1934.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1974.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1934.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1974.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1998.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,2038.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1998.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- -5 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1806.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1846.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1806.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1846.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1870.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1910.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1870.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1910.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- -4 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1678.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1718.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1678.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1718.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1742.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1782.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1742.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1782.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- -3 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1614.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1654.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1614.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1654.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- -2 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1486.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2456.f,1526.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1486.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2520.f,1526.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- -1 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1334.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1294.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1334.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1358.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1398.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1358.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1398.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1334.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1294.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1334.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1358.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1398.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1358.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1398.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 0 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1422.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1462.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1422.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1462.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1486.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1486.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1422.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1462.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1422.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1462.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1486.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1526.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1486.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1526.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 1 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1550.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1590.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1550.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1590.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1550.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1590.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1550.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1590.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1614.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1654.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1614.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1654.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 2 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1678.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1718.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1678.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1718.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1742.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1782.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1742.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1782.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 3 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1806.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1846.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1806.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1846.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1870.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1910.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1870.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1910.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 4 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1974.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1974.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1934.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1974.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1934.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1974.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,1998.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2328.f,2038.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,1998.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2392.f,2038.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ------------------------------------------------ Right Column -----------------------------------------------
             // --------------------------------------------------- -1 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1334.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1334.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1358.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1398.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1358.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1398.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1334.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1334.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1358.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1398.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1358.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1398.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 0 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1422.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1462.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1422.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1462.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1486.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1486.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1526.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1422.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1462.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1422.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1462.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1486.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1526.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1486.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1526.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 1 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1550.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1590.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1550.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1590.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1614.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1654.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1550.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1590.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1550.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1590.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1614.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1654.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1614.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1654.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 2 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1678.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1718.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1742.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1782.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1678.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1718.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1678.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1718.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1742.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1782.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1742.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1782.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 3 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1806.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1846.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1870.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1910.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1806.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1846.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1806.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1846.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1870.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1910.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1870.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1910.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 4 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1974.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1934.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1974.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1998.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,2038.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1934.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1974.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1934.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1974.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,1998.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2200.f,2038.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,1998.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2264.f,2038.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
             // -----------------------------------------Dungeon Entrance Grass-----------------------------------------------
             // --------------------------------------------------------------------------------------------------------------
             // ------------------------------------------------ Left Column -------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,170.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,210.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,170.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,210.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,234.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,274.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,234.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,274.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,170.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,210.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,170.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,210.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,234.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,274.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,234.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,274.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,338.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,338.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,362.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,402.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,362.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,402.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,298.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,338.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,298.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,338.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,362.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,402.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,362.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,402.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,446.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,446.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,490.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,530.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,490.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,530.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,426.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,446.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,426.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,446.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,490.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,530.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,490.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,530.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,594.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,594.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,618.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,658.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,618.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,658.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,554.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,594.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,554.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,594.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,618.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,658.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,618.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,658.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,722.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,722.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,746.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,786.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,746.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,786.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,682.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,722.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,682.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,722.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,746.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,786.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,746.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,786.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,850.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,850.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,874.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,914.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,874.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,914.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,810.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,850.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,810.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,850.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,874.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,914.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,874.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,914.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,978.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,978.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1002.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1042.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1002.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1042.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,938.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,978.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,938.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,978.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1002.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1042.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1002.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1042.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1066.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1106.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1066.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1106.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1130.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1170.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1130.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1170.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1066.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1106.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1066.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1106.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1130.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1170.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1130.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1170.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1194.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1234.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1194.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1234.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1258.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1258.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1194.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1234.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1194.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1234.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1258.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1298.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1258.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1298.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1322.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1362.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1322.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1362.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1386.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1386.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1322.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1362.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1322.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1362.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1386.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1426.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1386.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1426.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1450.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1490.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1450.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1490.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1514.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1514.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1450.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1490.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1450.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1490.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1514.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1554.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1514.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1554.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1578.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1618.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1578.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1618.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1642.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1642.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1578.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1618.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1578.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1618.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1642.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1682.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1642.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1682.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1706.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1746.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1706.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1746.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1770.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1770.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1706.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1746.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1706.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1746.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1770.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1810.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1770.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1810.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1834.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1874.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1834.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1874.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1898.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1898.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1834.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1874.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1834.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1874.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1898.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1938.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1898.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1938.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1962.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,2002.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1962.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,2002.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,2026.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,2046.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,2026.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,2046.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,1962.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,2002.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,1962.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,2002.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,2026.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3500.f,2046.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,2026.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3564.f,2046.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ------------------------------------------------ Right Column -------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,170.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,210.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,170.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,210.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,234.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,274.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,234.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,274.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,170.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,210.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,170.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,210.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,234.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,274.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,234.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,274.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,338.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,338.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,362.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,402.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,362.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,402.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,298.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,338.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,298.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,338.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,362.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,402.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,362.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,402.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,446.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,446.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,490.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,530.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,490.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,530.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,426.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,446.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,426.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,446.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,490.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,530.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,490.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,530.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,594.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,594.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,618.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,658.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,618.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,658.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,554.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,594.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,554.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,594.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,618.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,658.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,618.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,658.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,722.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,722.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,746.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,786.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,746.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,786.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,682.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,722.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,682.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,722.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,746.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,786.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,746.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,786.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,850.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,850.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,874.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,914.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,874.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,914.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,810.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,850.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,810.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,850.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,874.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,914.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,874.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,914.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,978.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,978.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1002.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1042.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1002.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1042.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,938.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,978.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,938.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,978.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1002.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1042.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1002.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1042.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1066.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1106.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1066.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1106.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1130.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1170.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1130.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1170.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1066.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1106.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1066.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1106.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1130.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1170.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1130.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1170.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1194.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1234.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1194.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1234.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1258.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1258.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1298.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1194.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1234.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1194.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1234.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1258.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1298.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1258.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1298.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1322.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1362.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1322.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1362.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1386.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1386.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1426.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1322.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1362.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1322.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1362.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1386.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1426.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1386.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1426.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1450.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1490.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1450.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1490.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1514.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1514.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1554.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1450.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1490.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1450.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1490.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1514.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1554.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1514.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1554.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1578.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1618.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1578.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1618.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1642.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1642.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1682.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1578.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1618.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1578.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1618.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1642.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1682.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1642.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1682.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1706.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1746.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1706.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1746.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1770.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1770.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1810.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1706.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1746.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1706.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1746.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1770.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1810.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1770.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1810.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1834.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1874.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1834.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1874.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1898.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1898.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1938.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1834.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1874.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1834.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1874.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1898.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1938.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1898.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1938.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1962.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,2002.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1962.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,2002.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,2026.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,2046.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,2026.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,2046.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,1962.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,2002.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,1962.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,2002.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,2026.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3628.f,2046.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,2026.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3692.f,2046.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
         };
         Props.emplace_back(Grass);
 
@@ -1617,311 +1610,311 @@ namespace Game
         {
             // ---------------------------------------- Left Side Hill -----------------------------------
             // Left Side Walls
-            Prop{Textures.GrassWallLeft, Vector2{768.f, 2688.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{768.f, 2752.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{768.f, 2816.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{768.f, 2880.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{768.f, 2944.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{768.f, 3008.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{768.f, 3072.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{768.f, 3136.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{768.f, 3200.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{768.f, 3264.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{768.f, 3328.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{768.f, 3392.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{768.f, 3456.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{768.f, 3520.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallBotLeft, Vector2{768.f, 3584.f}, PropType::BOTTOMWALL, Textures},
+            Prop{Textures.GrassWallLeft, Vector2{768.f, 2688.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{768.f, 2752.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{768.f, 2816.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{768.f, 2880.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{768.f, 2944.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{768.f, 3008.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{768.f, 3072.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{768.f, 3136.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{768.f, 3200.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{768.f, 3264.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{768.f, 3328.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{768.f, 3392.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{768.f, 3456.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{768.f, 3520.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallBotLeft, Vector2{768.f, 3584.f}, PropType::BOTTOMWALL, Textures, Audio},
             // Bottom Walls
-            Prop{Textures.GrassWallBottom, Vector2{896.f, 3584.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{960.f, 3584.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{832.f, 3584.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{1024.f, 3584.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{1216.f, 3584.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBotRight, Vector2{1280.f, 3584.f}, PropType::BOTTOMWALL, Textures},
+            Prop{Textures.GrassWallBottom, Vector2{896.f, 3584.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{960.f, 3584.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{832.f, 3584.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{1024.f, 3584.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{1216.f, 3584.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBotRight, Vector2{1280.f, 3584.f}, PropType::BOTTOMWALL, Textures, Audio},
             // Bottom Right Walls
-            Prop{Textures.GrassWallRight, Vector2{1280.f, 3520.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{1280.f, 3456.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{1280.f, 3392.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{1280.f, 3328.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallInnerRight, Vector2{1280.f, 3264.f}, PropType::RIGHTSIDEWALL, Textures},
+            Prop{Textures.GrassWallRight, Vector2{1280.f, 3520.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{1280.f, 3456.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{1280.f, 3392.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{1280.f, 3328.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallInnerRight, Vector2{1280.f, 3264.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
             // Bottom Walls
-            Prop{Textures.GrassWallBottom, Vector2{1344.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{1408.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{1472.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{1536.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{1600.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{1664.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{1728.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{1792.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{1856.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBotRight, Vector2{1920.f, 3264.f}, PropType::BOTTOMWALL, Textures},     
+            Prop{Textures.GrassWallBottom, Vector2{1344.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{1408.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{1472.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{1536.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{1600.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{1664.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{1728.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{1792.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{1856.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBotRight, Vector2{1920.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},     
             // Right Side Walls
-            Prop{Textures.GrassWallRight, Vector2{1920.f, 3200.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{1920.f, 3136.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{1920.f, 3072.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{1920.f, 3008.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{1920.f, 2944.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{1920.f, 2880.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{1920.f, 2816.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{1920.f, 2752.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{1920.f, 2688.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallTopRight, Vector2{1920.f, 2624.f}, PropType::TOPWALL, Textures},
+            Prop{Textures.GrassWallRight, Vector2{1920.f, 3200.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{1920.f, 3136.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{1920.f, 3072.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{1920.f, 3008.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{1920.f, 2944.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{1920.f, 2880.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{1920.f, 2816.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{1920.f, 2752.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{1920.f, 2688.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallTopRight, Vector2{1920.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
             // Top Walls
-            Prop{Textures.GrassWallTop, Vector2{1856.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{1792.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{1728.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{1664.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{1600.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{1536.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{1472.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{1408.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{1344.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{1280.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{1216.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{1152.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{1088.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{1024.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{960.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{896.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{832.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTopLeft, Vector2{768.f, 2624.f}, PropType::TOPWALL, Textures},
+            Prop{Textures.GrassWallTop, Vector2{1856.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{1792.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{1728.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{1664.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{1600.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{1536.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{1472.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{1408.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{1344.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{1280.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{1216.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{1152.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{1088.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{1024.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{960.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{896.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{832.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTopLeft, Vector2{768.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
             // Fences
-            Prop{Textures.FenceDown, Vector2{832.f, 3662.f}, PropType::FENCE, Textures},
-            Prop{Textures.FenceDown, Vector2{896.f, 3662.f}, PropType::FENCE, Textures},
-            Prop{Textures.FenceDown, Vector2{960.f, 3662.f}, PropType::FENCE, Textures},
-            Prop{Textures.FenceDown, Vector2{1024.f, 3662.f}, PropType::FENCE, Textures},
-            Prop{Textures.FenceDown, Vector2{1216.f, 3662.f}, PropType::FENCE, Textures},
+            Prop{Textures.FenceDown, Vector2{832.f, 3662.f}, PropType::FENCE, Textures, Audio},
+            Prop{Textures.FenceDown, Vector2{896.f, 3662.f}, PropType::FENCE, Textures, Audio},
+            Prop{Textures.FenceDown, Vector2{960.f, 3662.f}, PropType::FENCE, Textures, Audio},
+            Prop{Textures.FenceDown, Vector2{1024.f, 3662.f}, PropType::FENCE, Textures, Audio},
+            Prop{Textures.FenceDown, Vector2{1216.f, 3662.f}, PropType::FENCE, Textures, Audio},
             // ---------------------------------------- Garden Fences -----------------------------------
             // Left Side
-            Prop{Textures.FenceLeft, Vector2{1688.f, 3070.f}, PropType::FENCE, Textures},
-            Prop{Textures.FenceLeft, Vector2{1688.f, 3198.f}, PropType::FENCE, Textures},
+            Prop{Textures.FenceLeft, Vector2{1688.f, 3070.f}, PropType::FENCE, Textures, Audio},
+            Prop{Textures.FenceLeft, Vector2{1688.f, 3198.f}, PropType::FENCE, Textures, Audio},
             // Right Side
-            Prop{Textures.FenceRight, Vector2{1925.f, 3070.f}, PropType::FENCE, Textures},
-            Prop{Textures.FenceRight, Vector2{1925.f, 3128.f}, PropType::FENCE, Textures},
-            Prop{Textures.FenceRight, Vector2{1925.f, 3198.f}, PropType::FENCE, Textures},
+            Prop{Textures.FenceRight, Vector2{1925.f, 3070.f}, PropType::FENCE, Textures, Audio},
+            Prop{Textures.FenceRight, Vector2{1925.f, 3128.f}, PropType::FENCE, Textures, Audio},
+            Prop{Textures.FenceRight, Vector2{1925.f, 3198.f}, PropType::FENCE, Textures, Audio},
             // Top Side
-            Prop{Textures.FenceUp, Vector2{1728.f, 3070.f}, PropType::FENCE, Textures},
-            Prop{Textures.FenceUp, Vector2{1856.f, 3070.f}, PropType::FENCE, Textures},
+            Prop{Textures.FenceUp, Vector2{1728.f, 3070.f}, PropType::FENCE, Textures, Audio},
+            Prop{Textures.FenceUp, Vector2{1856.f, 3070.f}, PropType::FENCE, Textures, Audio},
             // Bottom Side
-            Prop{Textures.FenceDown, Vector2{1728.f, 3215.f}, PropType::FENCE, Textures},
-            Prop{Textures.FenceDown, Vector2{1792.f, 3215.f}, PropType::FENCE, Textures},
-            Prop{Textures.FenceDown, Vector2{1856.f, 3215.f}, PropType::FENCE, Textures},
+            Prop{Textures.FenceDown, Vector2{1728.f, 3215.f}, PropType::FENCE, Textures, Audio},
+            Prop{Textures.FenceDown, Vector2{1792.f, 3215.f}, PropType::FENCE, Textures, Audio},
+            Prop{Textures.FenceDown, Vector2{1856.f, 3215.f}, PropType::FENCE, Textures, Audio},
             // ---------------------------------------- Left Side Inner Hill -----------------------------------
             // Holes
-            Prop{Textures.Hole, Vector2{960.f, 3008.f}, PropType::HOLE, Textures},
-            Prop{Textures.Hole, Vector2{1088.f, 3008.f}, PropType::HOLE, Textures},
+            Prop{Textures.Hole, Vector2{960.f, 3008.f}, PropType::HOLE, Textures, Audio},
+            Prop{Textures.Hole, Vector2{1088.f, 3008.f}, PropType::HOLE, Textures, Audio},
             // Left Side Walls
-            Prop{Textures.WallLeft, Vector2{896.f, 2816.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.WallLeft, Vector2{896.f, 2880.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.WallLeft, Vector2{896.f, 2944.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.WallLeft, Vector2{896.f, 3008.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.WallLeft, Vector2{896.f, 3072.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.WallLeft, Vector2{896.f, 3136.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.WallLeft, Vector2{896.f, 3200.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.WallBotLeft, Vector2{896.f, 3264.f}, PropType::BOTTOMWALL, Textures},
+            Prop{Textures.WallLeft, Vector2{896.f, 2816.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallLeft, Vector2{896.f, 2880.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallLeft, Vector2{896.f, 2944.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallLeft, Vector2{896.f, 3008.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallLeft, Vector2{896.f, 3072.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallLeft, Vector2{896.f, 3136.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallLeft, Vector2{896.f, 3200.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallBotLeft, Vector2{896.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
             // Bottom Walls
-            Prop{Textures.WallBottom, Vector2{960.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.WallBottom, Vector2{1024.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.WallBotRight, Vector2{1152.f, 3264.f}, PropType::BOTTOMWALL, Textures},
+            Prop{Textures.WallBottom, Vector2{960.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.WallBottom, Vector2{1024.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.WallBotRight, Vector2{1152.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
             // Right Side Walls
-            Prop{Textures.WallRight, Vector2{1152.f, 3200.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.WallRight, Vector2{1152.f, 3136.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.WallRight, Vector2{1152.f, 3072.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.WallRight, Vector2{1152.f, 3008.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.WallRight, Vector2{1152.f, 2944.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.WallRight, Vector2{1152.f, 2880.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.WallRight, Vector2{1152.f, 2816.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.WallTopRight, Vector2{1152.f, 2752.f}, PropType::TOPWALL, Textures},
+            Prop{Textures.WallRight, Vector2{1152.f, 3200.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallRight, Vector2{1152.f, 3136.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallRight, Vector2{1152.f, 3072.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallRight, Vector2{1152.f, 3008.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallRight, Vector2{1152.f, 2944.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallRight, Vector2{1152.f, 2880.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallRight, Vector2{1152.f, 2816.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallTopRight, Vector2{1152.f, 2752.f}, PropType::TOPWALL, Textures, Audio},
             // Top Walls
-            Prop{Textures.GrassWallTop, Vector2{1088.f, 2752.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{1024.f, 2752.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{960.f, 2752.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.WallTopLeft, Vector2{896.f, 2752.f}, PropType::TOPWALL, Textures},
+            Prop{Textures.GrassWallTop, Vector2{1088.f, 2752.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{1024.f, 2752.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{960.f, 2752.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.WallTopLeft, Vector2{896.f, 2752.f}, PropType::TOPWALL, Textures, Audio},
             // ---------------------------------------- Right Side Hill -----------------------------------
             // Left Side Walls
-            Prop{Textures.GrassWallLeft, Vector2{2688.f, 2560.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2688.f, 2624.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2688.f, 2688.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2688.f, 2752.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2688.f, 2816.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2688.f, 2880.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2688.f, 2944.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2688.f, 3008.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2688.f, 3072.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2688.f, 3136.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2688.f, 3200.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2688.f, 3264.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2688.f, 3328.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2688.f, 3392.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallBotLeft, Vector2{2688.f, 3456.f}, PropType::BOTTOMWALL, Textures},
+            Prop{Textures.GrassWallLeft, Vector2{2688.f, 2560.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2688.f, 2624.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2688.f, 2688.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2688.f, 2752.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2688.f, 2816.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2688.f, 2880.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2688.f, 2944.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2688.f, 3008.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2688.f, 3072.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2688.f, 3136.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2688.f, 3200.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2688.f, 3264.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2688.f, 3328.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2688.f, 3392.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallBotLeft, Vector2{2688.f, 3456.f}, PropType::BOTTOMWALL, Textures, Audio},
             // Bottom Walls
-            Prop{Textures.GrassWallBottom, Vector2{2752.f, 3456.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{2816.f, 3456.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{2880.f, 3456.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3264.f, 3456.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3328.f, 3456.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3392.f, 3456.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3456.f, 3456.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3520.f, 3456.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3584.f, 3456.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3648.f, 3456.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3712.f, 3456.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3776.f, 3456.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBotRight, Vector2{3840.f, 3456.f}, PropType::BOTTOMWALL, Textures},
+            Prop{Textures.GrassWallBottom, Vector2{2752.f, 3456.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{2816.f, 3456.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{2880.f, 3456.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3264.f, 3456.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3328.f, 3456.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3392.f, 3456.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3456.f, 3456.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3520.f, 3456.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3584.f, 3456.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3648.f, 3456.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3712.f, 3456.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3776.f, 3456.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBotRight, Vector2{3840.f, 3456.f}, PropType::BOTTOMWALL, Textures, Audio},
             // Right Side Walls
-            Prop{Textures.GrassWallRight, Vector2{3840.f, 3392.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3840.f, 3328.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3840.f, 3264.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3840.f, 3200.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3840.f, 3136.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3840.f, 3072.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3840.f, 3008.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3840.f, 2944.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3840.f, 2880.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3840.f, 2816.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3840.f, 2752.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3840.f, 2688.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3840.f, 2624.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3840.f, 2560.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallTopRight, Vector2{3840.f, 2496.f}, PropType::TOPWALL, Textures},
+            Prop{Textures.GrassWallRight, Vector2{3840.f, 3392.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3840.f, 3328.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3840.f, 3264.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3840.f, 3200.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3840.f, 3136.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3840.f, 3072.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3840.f, 3008.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3840.f, 2944.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3840.f, 2880.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3840.f, 2816.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3840.f, 2752.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3840.f, 2688.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3840.f, 2624.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3840.f, 2560.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallTopRight, Vector2{3840.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
             // Top Side Walls
-            Prop{Textures.GrassWallTop, Vector2{3776.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3712.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3648.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3584.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3520.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3456.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3392.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3328.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3264.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3200.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3136.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3072.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3008.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{2944.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{2880.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{2816.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{2752.f, 2496.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTopLeft, Vector2{2688.f, 2496.f}, PropType::TOPWALL, Textures},
+            Prop{Textures.GrassWallTop, Vector2{3776.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3712.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3648.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3584.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3520.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3456.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3392.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3328.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3264.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3200.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3136.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3072.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3008.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{2944.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{2880.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{2816.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{2752.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTopLeft, Vector2{2688.f, 2496.f}, PropType::TOPWALL, Textures, Audio},
             // ---------------------------------------- Right Side Second Hill -----------------------------------
             // Left Side Walls
-            Prop{Textures.GrassWallLeft, Vector2{2752.f, 2624.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2752.f, 2688.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2752.f, 2752.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2752.f, 2816.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2752.f, 2880.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2752.f, 2944.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2752.f, 3008.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2752.f, 3072.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2752.f, 3136.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallLeft, Vector2{2752.f, 3200.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.GrassWallBotLeft, Vector2{2752.f, 3264.f}, PropType::BOTTOMWALL, Textures},
+            Prop{Textures.GrassWallLeft, Vector2{2752.f, 2624.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2752.f, 2688.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2752.f, 2752.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2752.f, 2816.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2752.f, 2880.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2752.f, 2944.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2752.f, 3008.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2752.f, 3072.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2752.f, 3136.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallLeft, Vector2{2752.f, 3200.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallBotLeft, Vector2{2752.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
             // Bottom Walls
-            Prop{Textures.GrassWallBottom, Vector2{2816.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{2880.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{2944.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3136.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3200.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3264.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3328.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3392.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3456.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3520.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3584.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBottom, Vector2{3648.f, 3264.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.GrassWallBotRight, Vector2{3712.f, 3264.f}, PropType::BOTTOMWALL, Textures},
+            Prop{Textures.GrassWallBottom, Vector2{2816.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{2880.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{2944.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3136.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3200.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3264.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3328.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3392.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3456.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3520.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3584.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBottom, Vector2{3648.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.GrassWallBotRight, Vector2{3712.f, 3264.f}, PropType::BOTTOMWALL, Textures, Audio},
             // Right Side Walls
-            Prop{Textures.GrassWallRight, Vector2{3712.f, 3200.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3712.f, 3136.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3712.f, 3072.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3712.f, 3008.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3712.f, 2944.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3712.f, 2880.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3712.f, 2816.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3712.f, 2752.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3712.f, 2688.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallRight, Vector2{3712.f, 2624.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.GrassWallTopRight, Vector2{3712.f, 2560.f}, PropType::TOPWALL, Textures},
+            Prop{Textures.GrassWallRight, Vector2{3712.f, 3200.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3712.f, 3136.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3712.f, 3072.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3712.f, 3008.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3712.f, 2944.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3712.f, 2880.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3712.f, 2816.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3712.f, 2752.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3712.f, 2688.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallRight, Vector2{3712.f, 2624.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.GrassWallTopRight, Vector2{3712.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
             // Top Walls
-            Prop{Textures.GrassWallTop, Vector2{3648.f, 2560.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3584.f, 2560.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3520.f, 2560.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3456.f, 2560.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3392.f, 2560.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3328.f, 2560.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3264.f, 2560.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3200.f, 2560.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3136.f, 2560.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3072.f, 2560.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3008.f, 2560.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{2944.f, 2560.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{2880.f, 2560.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{2816.f, 2560.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTopLeft, Vector2{2752.f, 2560.f}, PropType::TOPWALL, Textures},
+            Prop{Textures.GrassWallTop, Vector2{3648.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3584.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3520.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3456.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3392.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3328.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3264.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3200.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3136.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3072.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3008.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{2944.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{2880.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{2816.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTopLeft, Vector2{2752.f, 2560.f}, PropType::TOPWALL, Textures, Audio},
             // ---------------------------------------- Right Side Third Hill -----------------------------------
             // Left Side Walls
-            Prop{Textures.WallLeft, Vector2{2944.f, 2688.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.WallLeft, Vector2{2944.f, 2752.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.WallLeft, Vector2{2944.f, 2816.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.WallLeft, Vector2{2944.f, 2880.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.WallLeft, Vector2{2944.f, 2944.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.WallLeft, Vector2{2944.f, 3008.f}, PropType::LEFTSIDEWALL, Textures},
-            Prop{Textures.WallBotLeft, Vector2{2944.f, 3072.f}, PropType::BOTTOMWALL, Textures},
+            Prop{Textures.WallLeft, Vector2{2944.f, 2688.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallLeft, Vector2{2944.f, 2752.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallLeft, Vector2{2944.f, 2816.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallLeft, Vector2{2944.f, 2880.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallLeft, Vector2{2944.f, 2944.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallLeft, Vector2{2944.f, 3008.f}, PropType::LEFTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallBotLeft, Vector2{2944.f, 3072.f}, PropType::BOTTOMWALL, Textures, Audio},
             // Bottom Walls
-            Prop{Textures.WallBottom, Vector2{3008.f, 3072.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.WallBottom, Vector2{3136.f, 3072.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.WallBottom, Vector2{3200.f, 3072.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.WallBottom, Vector2{3264.f, 3072.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.WallBottom, Vector2{3328.f, 3072.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.WallBottom, Vector2{3456.f, 3072.f}, PropType::BOTTOMWALL, Textures},
-            Prop{Textures.WallBotRight, Vector2{3520.f, 3072.f}, PropType::BOTTOMWALL, Textures},
+            Prop{Textures.WallBottom, Vector2{3008.f, 3072.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.WallBottom, Vector2{3136.f, 3072.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.WallBottom, Vector2{3200.f, 3072.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.WallBottom, Vector2{3264.f, 3072.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.WallBottom, Vector2{3328.f, 3072.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.WallBottom, Vector2{3456.f, 3072.f}, PropType::BOTTOMWALL, Textures, Audio},
+            Prop{Textures.WallBotRight, Vector2{3520.f, 3072.f}, PropType::BOTTOMWALL, Textures, Audio},
             // Right Side Walls
-            Prop{Textures.WallRight, Vector2{3520.f, 3008.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.WallRight, Vector2{3520.f, 2944.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.WallRight, Vector2{3520.f, 2880.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.WallRight, Vector2{3520.f, 2816.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.WallRight, Vector2{3520.f, 2752.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.WallRight, Vector2{3520.f, 2688.f}, PropType::RIGHTSIDEWALL, Textures},
-            Prop{Textures.WallTopRight, Vector2{3520.f, 2624.f}, PropType::TOPWALL, Textures},
+            Prop{Textures.WallRight, Vector2{3520.f, 3008.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallRight, Vector2{3520.f, 2944.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallRight, Vector2{3520.f, 2880.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallRight, Vector2{3520.f, 2816.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallRight, Vector2{3520.f, 2752.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallRight, Vector2{3520.f, 2688.f}, PropType::RIGHTSIDEWALL, Textures, Audio},
+            Prop{Textures.WallTopRight, Vector2{3520.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
             // Bottom Walls
-            Prop{Textures.GrassWallTop, Vector2{3456.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3392.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3328.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3264.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3200.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3136.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3072.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.GrassWallTop, Vector2{3008.f, 2624.f}, PropType::TOPWALL, Textures},
-            Prop{Textures.WallTopLeft, Vector2{2944.f, 2624.f}, PropType::TOPWALL, Textures},
+            Prop{Textures.GrassWallTop, Vector2{3456.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3392.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3328.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3264.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3200.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3136.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3072.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.GrassWallTop, Vector2{3008.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
+            Prop{Textures.WallTopLeft, Vector2{2944.f, 2624.f}, PropType::TOPWALL, Textures, Audio},
             // Door
-            Prop{Textures.DoorRed, Vector2{1612.f,2815.f}, PropType::DOOR, Textures, 4.f, false, true}, 
-            Prop{Textures.DoorBlue, Vector2{3120.f,2685.f}, PropType::DOOR, Textures, 4.f, false, true}
+            Prop{Textures.DoorRed, Vector2{1612.f,2815.f}, PropType::DOOR, Textures, Audio, 4.f, false, true}, 
+            Prop{Textures.DoorBlue, Vector2{3120.f,2685.f}, PropType::DOOR, Textures, Audio, 4.f, false, true}
         };
         Props.emplace_back(Walls);
 
         std::vector<Prop> Stumps
         {
-            Prop{Textures.TreeStump, Vector2{3274.f,3625.f}, PropType::STUMP, Textures, 5.f, false},
-            Prop{Textures.TreeStump, Vector2{3352.f,3552.f}, PropType::STUMP, Textures, 4.f, false},
-            Prop{Textures.TreeStump, Vector2{3293.f,3745.f}, PropType::STUMP, Textures, 3.5f, false},
-            Prop{Textures.TreeStump, Vector2{3375.f,3667.f}, PropType::STUMP, Textures, 3.f, false},
-            Prop{Textures.TreeStump, Vector2{3473.f,3649.f}, PropType::STUMP, Textures, 3.f, false},
-            Prop{Textures.TreeStump, Vector2{3420.f,3736.f}, PropType::STUMP, Textures, 6.f, false},
-            Prop{Textures.TreeStump, Vector2{3607.f,3795.f}, PropType::STUMP, Textures, 4.f, false},
-            Prop{Textures.TreeStump, Vector2{3706.f,3748.f}, PropType::STUMP, Textures, 3.5f, false},
-            Prop{Textures.TreeStump, Vector2{3857.f,3634.f}, PropType::STUMP, Textures, 4.f, false},
-            Prop{Textures.TreeStump, Vector2{3630.f,3527.f}, PropType::STUMP, Textures, 6.f, false},
-            Prop{Textures.TreeStump, Vector2{3636.f,3698.f}, PropType::STUMP, Textures, 3.5f, false},
-            Prop{Textures.TreeStump, Vector2{3655.f,3877.f}, PropType::STUMP, Textures, 3.5f, false},
-            Prop{Textures.AxeStump, Vector2{3439.f,3531.f}, PropType::STUMP, Textures, 4.f, false},
+            Prop{Textures.TreeStump, Vector2{3274.f,3625.f}, PropType::STUMP, Textures, Audio, 5.f, false},
+            Prop{Textures.TreeStump, Vector2{3352.f,3552.f}, PropType::STUMP, Textures, Audio, 4.f, false},
+            Prop{Textures.TreeStump, Vector2{3293.f,3745.f}, PropType::STUMP, Textures, Audio, 3.5f, false},
+            Prop{Textures.TreeStump, Vector2{3375.f,3667.f}, PropType::STUMP, Textures, Audio, 3.f, false},
+            Prop{Textures.TreeStump, Vector2{3473.f,3649.f}, PropType::STUMP, Textures, Audio, 3.f, false},
+            Prop{Textures.TreeStump, Vector2{3420.f,3736.f}, PropType::STUMP, Textures, Audio, 6.f, false},
+            Prop{Textures.TreeStump, Vector2{3607.f,3795.f}, PropType::STUMP, Textures, Audio, 4.f, false},
+            Prop{Textures.TreeStump, Vector2{3706.f,3748.f}, PropType::STUMP, Textures, Audio, 3.5f, false},
+            Prop{Textures.TreeStump, Vector2{3857.f,3634.f}, PropType::STUMP, Textures, Audio, 4.f, false},
+            Prop{Textures.TreeStump, Vector2{3630.f,3527.f}, PropType::STUMP, Textures, Audio, 6.f, false},
+            Prop{Textures.TreeStump, Vector2{3636.f,3698.f}, PropType::STUMP, Textures, Audio, 3.5f, false},
+            Prop{Textures.TreeStump, Vector2{3655.f,3877.f}, PropType::STUMP, Textures, Audio, 3.5f, false},
+            Prop{Textures.AxeStump, Vector2{3439.f,3531.f}, PropType::STUMP, Textures, Audio, 4.f, false},
         };
         Props.emplace_back(Stumps);
 
         std::vector<Prop> Moveable
         {
-            Prop{Textures.Boulder, Vector2{3525.f,3640.f}, PropType::STUMP, Textures, 5.f, true},
-            Prop{Textures.Boulder, Vector2{1025.f,3050.f}, PropType::BOULDER, Textures, 4.f, true},
+            Prop{Textures.Boulder, Vector2{3525.f,3640.f}, PropType::STUMP, Textures, Audio, 5.f, true},
+            Prop{Textures.Boulder, Vector2{1025.f,3050.f}, PropType::BOULDER, Textures, Audio, 4.f, true},
         };
         Props.emplace_back(Moveable);
 
@@ -1929,53 +1922,53 @@ namespace Game
         return Props;
     }
 
-    std::vector<std::vector<Prop>> InitializePropsOver(const GameTexture& Textures)
+    std::vector<std::vector<Prop>> InitializePropsOver(const GameTexture& Textures, const GameAudio& Audio)
     {
         std::vector<std::vector<Prop>> Props{};
 
         std::vector<Prop> Bushes
         {
-            Prop{Textures.Bush, Vector2{1889.f,2965.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1889.f,2865.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1889.f,2765.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1889.f,2665.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1789.f,2665.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1689.f,2665.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1589.f,2665.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1489.f,2665.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1389.f,2665.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1289.f,2665.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1189.f,2665.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{1089.f,2665.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{989.f,2665.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{889.f,2665.f}, PropType::BUSH, Textures},
-            Prop{Textures.Bush, Vector2{789.f,2665.f}, PropType::BUSH, Textures},
+            Prop{Textures.Bush, Vector2{1889.f,2965.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1889.f,2865.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1889.f,2765.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1889.f,2665.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1789.f,2665.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1689.f,2665.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1589.f,2665.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1489.f,2665.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1389.f,2665.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1289.f,2665.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1189.f,2665.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{1089.f,2665.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{989.f,2665.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{889.f,2665.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{789.f,2665.f}, PropType::BUSH, Textures, Audio},
         };
         Props.emplace_back(Bushes);
 
         std::vector<Prop> Houses
         {
-            Prop{Textures.HouseRed, Vector2{1472.f,2688.f}, PropType::rHOUSELEFT, Textures},   
-            Prop{Textures.HouseRed, Vector2{1472.f,2688.f}, PropType::rHOUSERIGHT, Textures},
-            Prop{Textures.HouseBlue, Vector2{3073.f,2495.f}, PropType::bHOUSELEFT, Textures},   
-            Prop{Textures.HouseBlue, Vector2{3073.f,2495.f}, PropType::bHOUSERIGHT, Textures},
+            Prop{Textures.HouseRed, Vector2{1472.f,2688.f}, PropType::rHOUSELEFT, Textures, Audio},   
+            Prop{Textures.HouseRed, Vector2{1472.f,2688.f}, PropType::rHOUSERIGHT, Textures, Audio},
+            Prop{Textures.HouseBlue, Vector2{3073.f,2495.f}, PropType::bHOUSELEFT, Textures, Audio},   
+            Prop{Textures.HouseBlue, Vector2{3073.f,2495.f}, PropType::bHOUSERIGHT, Textures, Audio},
 
         };
         Props.emplace_back(Houses);
 
         std::vector<Prop> Boulder
         {
-            Prop{Textures.Boulder, Vector2{960.f,2950.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{1090.f,2950.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{940.f,3050.f}, PropType::BOULDER, Textures},
-            Prop{Textures.Boulder, Vector2{1110.f,3050.f}, PropType::BOULDER, Textures},
+            Prop{Textures.Boulder, Vector2{960.f,2950.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{1090.f,2950.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{940.f,3050.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{1110.f,3050.f}, PropType::BOULDER, Textures, Audio},
         };
         Props.emplace_back(Boulder);
 
         std::vector<Prop> Moveable
         {
-            Prop{Textures.Boulder, Vector2{3525.f,3640.f}, PropType::STUMP, Textures, 5.f, true},
-            Prop{Textures.Boulder, Vector2{1025.f,3050.f}, PropType::BOULDER, Textures, 4.f, true},
+            Prop{Textures.Boulder, Vector2{3525.f,3640.f}, PropType::STUMP, Textures, Audio, 5.f, true},
+            Prop{Textures.Boulder, Vector2{1025.f,3050.f}, PropType::BOULDER, Textures, Audio, 4.f, true},
         };
         Props.emplace_back(Moveable);
 
@@ -1983,1520 +1976,1520 @@ namespace Game
         {
             // ---------------------------------------------- Left Map Grass -----------------------------------------------
             // ---------------------------------------------------- -4 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,960.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,1000.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,960.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,1000.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,1024.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,1024.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,960.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,1000.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,960.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,1000.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,1024.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,1024.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- -3 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,832.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,872.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,832.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,872.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,896.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,936.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,896.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,936.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,832.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,872.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,832.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,872.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,896.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,936.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,896.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,936.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- -2 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,704.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,744.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,704.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,744.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,768.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,808.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,768.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,808.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,704.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,744.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,704.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,744.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,768.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{110.f,808.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,768.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{174.f,808.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- -1 ------------------------------------------------------
-            // Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,360.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,384.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,424.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            // Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,360.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,384.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,424.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
 
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,448.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,512.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,552.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,448.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,512.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,552.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
 
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,576.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,616.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,576.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,616.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,640.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,680.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,640.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,680.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,576.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,616.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,576.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,616.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,640.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,680.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,640.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,680.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
 
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,704.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,744.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,704.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,744.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,768.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,808.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,768.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,808.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,704.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,744.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,704.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,744.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,768.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,808.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,768.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,808.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,832.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,872.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,832.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,872.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,896.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,936.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,832.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,872.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,832.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{302.f,872.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,896.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,936.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,960.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,1000.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,1024.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,960.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,1000.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{238.f,1024.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------- --------------- -----------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,384.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,384.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
 
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,616.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,640.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,680.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,704.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,744.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,768.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,616.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,640.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,680.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,704.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,744.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{366.f,768.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
 
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,488.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,528.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,552.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,592.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,616.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,640.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,680.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,704.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            // Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{494.f,704.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,488.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,528.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,552.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,592.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,616.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,640.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,680.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{430.f,704.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            // Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{494.f,704.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
 
             // --------------------------------------------- Far Left Column -----------------------------------------------
             // --------------------------------------------------- -4 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1826.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1866.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1826.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1866.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1890.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1890.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- -3 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1698.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1738.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1698.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1738.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1762.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1802.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1762.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1802.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- -2 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1634.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1781.f,1674.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1634.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1845.f,1674.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- -1 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1378.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1418.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1378.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1418.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 0 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1482.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1482.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1506.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1442.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1482.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1442.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1482.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1546.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1506.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1546.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 1 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1570.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1610.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1570.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1610.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1570.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1610.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1570.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1610.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1634.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1674.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1634.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1674.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 2 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1698.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1738.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1698.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1738.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1762.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1802.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1762.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1802.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 3 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1826.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1866.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1826.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1866.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1890.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1909.f,1930.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1890.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{1973.f,1930.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ------------------------------------------------ Left Column ------------------------------------------------
             // ---------------------------------------------------- -1 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1314.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1354.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1314.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1354.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1378.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1378.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1314.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1354.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1314.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1354.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1378.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1418.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1378.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1418.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- 0 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1482.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1482.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1506.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1506.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1442.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1482.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1442.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1482.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1506.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1546.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1506.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1546.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 1 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1570.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1610.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1570.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1610.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1570.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1610.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1570.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1610.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1634.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1674.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1634.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1674.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 2 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1698.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1738.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1698.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1738.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1762.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1802.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1762.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1802.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 3 -------------------------------------------------------        
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1826.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1866.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1826.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1866.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1890.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1930.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1890.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1930.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 4 ------------------------------------------------------- 
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1954.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1994.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1954.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1994.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,2058.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1954.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,1994.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1954.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,1994.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,2018.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2037.f,2058.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2101.f,2018.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------- Far Right Column ----------------------------------------------
             // --------------------------------------------------- -6 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1954.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1994.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1954.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1994.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,2058.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1954.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1994.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1954.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1994.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,2018.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,2058.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,2018.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- -5 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1826.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1866.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1890.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1930.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1890.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1930.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- -4 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1698.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1738.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1698.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1738.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1762.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1802.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- -3 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1634.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1674.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2485.f,1674.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- -2 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2421.f,1418.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- -1 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1314.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1354.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1314.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1354.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1378.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1378.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1314.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1354.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1314.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1354.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1378.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1418.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1378.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1418.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ---------------------------------------------------- 0 ------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1482.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1482.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1506.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1506.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1442.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1482.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1442.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1482.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1506.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1546.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1506.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1546.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 1 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1570.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1610.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1570.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1610.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1570.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1610.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1570.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1610.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1634.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1674.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1634.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1674.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 2 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1698.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1738.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1698.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1738.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1762.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1802.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1762.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1802.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 3 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1826.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1866.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1826.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1866.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1890.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1930.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1890.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1930.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 4 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1954.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1994.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1954.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1994.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1954.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2293.f,1994.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1954.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,1994.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2357.f,2018.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ------------------------------------------------ Right Column -----------------------------------------------
             // --------------------------------------------------- -1 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1314.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1354.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1314.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1354.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1378.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1378.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1418.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1314.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1354.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1314.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1354.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1378.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1418.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1378.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1418.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 0 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1482.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1442.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1482.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1506.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1506.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1546.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1442.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1482.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1442.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1482.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1506.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1546.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1506.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1546.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 1 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1570.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1610.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1570.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1610.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1634.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1674.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1570.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1610.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1570.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1610.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1634.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1674.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1634.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1674.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 2 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1698.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1738.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1762.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1802.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1698.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1738.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1698.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1738.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1762.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1802.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1762.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1802.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 3 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1826.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1866.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1890.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1930.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1826.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1866.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1826.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1866.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1890.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1930.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1890.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1930.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------- 4 -------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1954.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1994.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1954.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1994.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,2058.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,2018.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1954.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,1994.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1954.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,1994.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,2018.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2165.f,2058.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{2229.f,2018.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
             // -----------------------------------------Dungeon Entrance Grass-----------------------------------------------
             // --------------------------------------------------------------------------------------------------------------
             // ------------------------------------------------ Left Column -------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,150.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,190.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,214.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,254.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,150.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,190.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,214.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,254.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,278.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,318.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,342.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,382.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,278.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,318.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,342.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,382.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,406.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,446.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,470.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,510.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,406.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,446.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,470.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,510.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,534.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,574.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,598.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,638.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,534.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,574.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,598.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,638.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,662.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,702.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,726.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,766.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,662.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,702.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,726.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,766.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,790.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,830.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,854.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,894.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,790.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,830.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,854.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,894.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,918.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,958.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,982.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1022.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,918.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,958.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,982.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1022.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1046.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1086.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1110.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1150.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1046.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1086.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1110.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1150.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1174.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1214.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1238.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1278.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1174.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1214.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1238.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1278.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1302.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1342.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1366.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1406.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1302.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1342.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1366.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1406.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1430.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1470.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1494.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1534.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1430.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1470.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1494.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1534.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1558.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1598.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1622.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1662.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1558.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1598.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1622.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1662.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1686.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1726.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1750.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1790.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1686.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1726.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1750.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1790.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1814.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1854.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1878.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1918.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1814.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1854.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1878.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3529.f,1918.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // ------------------------------------------------ Right Column -------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,150.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,190.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,150.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,190.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,214.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,254.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,214.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,254.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,150.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,190.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,150.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,190.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,214.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,254.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,214.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,254.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,278.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,318.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,278.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,318.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,342.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,382.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,342.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,382.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,278.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,318.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,278.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,318.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,342.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,382.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,342.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,382.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,406.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,446.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,406.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,446.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,470.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,510.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,470.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,510.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,406.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,446.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,406.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,446.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,470.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,510.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,470.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,510.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,534.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,574.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,534.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,574.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,598.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,638.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,598.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,638.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,534.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,574.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,534.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,574.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,598.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,638.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,598.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,638.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,662.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,702.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,662.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,702.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,726.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,766.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,726.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,766.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,662.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,702.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,662.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,702.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,726.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,766.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,726.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,766.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,790.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,830.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,790.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,830.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,854.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,894.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,854.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,894.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,790.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,830.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,790.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,830.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,854.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,894.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,854.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,894.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,918.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,958.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,918.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,958.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,982.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1022.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,982.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1022.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,918.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,958.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,918.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,958.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,982.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1022.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,982.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1022.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1046.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1086.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1046.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1086.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1110.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1150.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1110.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1150.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1046.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1086.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1046.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1086.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1110.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1150.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1110.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1150.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1174.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1214.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1174.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1214.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1238.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1278.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1238.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1278.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1174.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1214.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1174.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1214.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1238.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1278.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1238.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1278.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1302.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1342.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1302.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1342.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1366.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1406.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1366.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1406.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1302.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1342.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1302.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1342.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1366.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1406.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1366.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1406.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1430.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1470.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1430.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1470.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1494.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1534.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1494.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1534.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1430.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1470.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1430.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1470.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1494.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1534.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1494.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1534.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1558.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1598.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1558.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1598.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1622.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1662.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1622.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1662.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1558.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1598.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1558.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1598.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1622.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1662.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1622.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1662.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1686.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1726.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1686.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1726.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1750.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1790.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1750.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1790.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1686.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1726.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1686.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1726.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1750.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1790.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1750.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1790.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
             // --------------------------------------------------------------------------------------------------------------
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1814.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1854.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1814.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1854.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1878.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1918.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1878.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
-            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1918.f}, PropType::GRASS, Textures, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1814.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1854.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1814.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1854.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1878.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3593.f,1918.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1878.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
+            Prop{Sprite{Textures.GrassAnimation, 4, 1, 1.f/3.f}, Vector2{3657.f,1918.f}, PropType::GRASS, Textures, Audio, Textures.Placeholder,  4.f, true},
         };
         Props.emplace_back(Grass);
 
         std::vector<Prop> Stumps
         {
-            Prop{Textures.RockStump, Vector2{440.f,1883.f}, PropType::STUMP, Textures, 5.f, false, true},
+            Prop{Textures.RockStump, Vector2{440.f,1883.f}, PropType::STUMP, Textures, Audio, 5.f, false, true},
         };
         Props.emplace_back(Stumps);
 
         std::vector<Prop> Treasure
         {
-            Prop{Sprite{Textures.TreasureChestBig, 4, 1, 1.f/4.f}, Vector2{2270.f,2375.f}, PropType::BIGTREASURE, Textures, Textures.Bracelet, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Silver Bracelet", 4.f},
-            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{3462.f,2760.f}, PropType::TREASURE, Textures, Textures.Cryptex, 4.f, false, true, Progress::ACT_V, PropType::NPC_DIANA, true, "Cryptex"},
-            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{130.f,210.f}, PropType::TREASURE, Textures, Textures.AltarTopLeft, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, true, "Top Left Altar Piece"},
-            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{1025.f,2765.f}, PropType::TREASURE, Textures, Textures.AltarBotLeft, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, true, "Bottom Left Altar Piece"},
-            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2110.f,2429.f}, PropType::TREASURE, Textures, Textures.AltarBot, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Bottom Altar Piece"},
-            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2433.f,2429.f}, PropType::TREASURE, Textures, Textures.AltarTopRight, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Bottom Right Altar Piece"},
-            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2110.f,2175.f}, PropType::TREASURE, Textures, Textures.AltarTopRight, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Top Right Altar Piece"},
-            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2433.f,2175.f}, PropType::TREASURE, Textures, Textures.AltarTop, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Top Altar Piece"},
+            Prop{Sprite{Textures.TreasureChestBig, 4, 1, 1.f/4.f}, Vector2{2270.f,2375.f}, PropType::BIGTREASURE, Textures, Audio, Textures.Bracelet, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Silver Bracelet", 4.f},
+            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{3462.f,2760.f}, PropType::TREASURE, Textures, Audio, Textures.Cryptex, 4.f, false, true, Progress::ACT_V, PropType::NPC_DIANA, true, "Cryptex"},
+            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{130.f,210.f}, PropType::TREASURE, Textures, Audio, Textures.AltarTopLeft, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, true, "Top Left Altar Piece"},
+            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{1025.f,2765.f}, PropType::TREASURE, Textures, Audio, Textures.AltarBotLeft, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, true, "Bottom Left Altar Piece"},
+            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2110.f,2429.f}, PropType::TREASURE, Textures, Audio, Textures.AltarBot, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Bottom Altar Piece"},
+            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2433.f,2429.f}, PropType::TREASURE, Textures, Audio, Textures.AltarTopRight, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Bottom Right Altar Piece"},
+            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2110.f,2175.f}, PropType::TREASURE, Textures, Audio, Textures.AltarTopRight, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Top Right Altar Piece"},
+            Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{2433.f,2175.f}, PropType::TREASURE, Textures, Audio, Textures.AltarTop, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Top Altar Piece"},
 };
         Props.emplace_back(Treasure);
 
         std::vector<Prop> NPCS
         {
-            Prop{Sprite{Textures.Didi, 4, 1, 1.f/8.f}, Vector2{2480.f, 3640.f}, PropType::NPC_DIANA, Textures, Textures.Placeholder, 3.f, false, true},
-            Prop{Sprite{Textures.Jade, 4, 1, 1.f/8.f}, Vector2{1030.f, 3120.f}, PropType::NPC_JADE, Textures, Textures.Placeholder, 3.f, false, true},
-            Prop{Sprite{Textures.Son, 4, 1, 1.f/8.f}, Vector2{1240.f, 2036.f}, PropType::NPC_SON, Textures, Textures.Placeholder, 3.f, false, true},
-            Prop{Sprite{Textures.Rumby, 4, 1, 1.f/8.f}, Vector2{106.f, 3684.f}, PropType::NPC_RUMBY, Textures, Textures.Placeholder, 3.f, false, true},
+            Prop{Sprite{Textures.Didi, 4, 1, 1.f/8.f}, Vector2{2480.f, 3640.f}, PropType::NPC_DIANA, Textures, Audio, Textures.Placeholder, 3.f, false, true},
+            Prop{Sprite{Textures.Jade, 4, 1, 1.f/8.f}, Vector2{1030.f, 3120.f}, PropType::NPC_JADE, Textures, Audio, Textures.Placeholder, 3.f, false, true},
+            Prop{Sprite{Textures.Son, 4, 1, 1.f/8.f}, Vector2{1240.f, 2036.f}, PropType::NPC_SON, Textures, Audio, Textures.Placeholder, 3.f, false, true},
+            Prop{Sprite{Textures.Rumby, 4, 1, 1.f/8.f}, Vector2{106.f, 3684.f}, PropType::NPC_RUMBY, Textures, Audio, Textures.Placeholder, 3.f, false, true},
         };
         Props.emplace_back(NPCS);
 
         std::vector<Prop> AnimatedAltarPieces
         {
-            Prop{Sprite{Textures.AltarTopLeftAnimated, 14, 1, 1/14.f}, Vector2{700.f,1025.f}, PropType::ANIMATEDALTAR, Textures, "Top Left Altar Piece", true, true},
-            Prop{Sprite{Textures.AltarTopAnimated, 14, 1, 1/14.f}, Vector2{764.f,1025.f}, PropType::ANIMATEDALTAR, Textures, "Top Altar Piece", true, true},
-            Prop{Sprite{Textures.AltarTopRightAnimated, 14, 1, 1/14.f}, Vector2{828.f,1025.f}, PropType::ANIMATEDALTAR, Textures, "Top Right Altar Piece", true, true},
-            Prop{Sprite{Textures.AltarBotLeftAnimated, 14, 1, 1/14.f}, Vector2{700.f,1089.f}, PropType::ANIMATEDALTAR, Textures, "Bottom Left Altar Piece", true, true},
-            Prop{Sprite{Textures.AltarBotAnimated, 14, 1, 1/14.f}, Vector2{764.f,1089.f}, PropType::ANIMATEDALTAR, Textures, "Bottom Altar Piece", true, true},
-            Prop{Sprite{Textures.AltarBotRightAnimated, 14, 1, 1/14.f}, Vector2{828.f,1089.f}, PropType::ANIMATEDALTAR, Textures, "Bottom Right Altar Piece", true, true},
+            Prop{Sprite{Textures.AltarTopLeftAnimated, 14, 1, 1/14.f}, Vector2{700.f,1025.f}, PropType::ANIMATEDALTAR, Textures, Audio, "Top Left Altar Piece", true, true},
+            Prop{Sprite{Textures.AltarTopAnimated, 14, 1, 1/14.f}, Vector2{764.f,1025.f}, PropType::ANIMATEDALTAR, Textures, Audio, "Top Altar Piece", true, true},
+            Prop{Sprite{Textures.AltarTopRightAnimated, 14, 1, 1/14.f}, Vector2{828.f,1025.f}, PropType::ANIMATEDALTAR, Textures, Audio, "Top Right Altar Piece", true, true},
+            Prop{Sprite{Textures.AltarBotLeftAnimated, 14, 1, 1/14.f}, Vector2{700.f,1089.f}, PropType::ANIMATEDALTAR, Textures, Audio, "Bottom Left Altar Piece", true, true},
+            Prop{Sprite{Textures.AltarBotAnimated, 14, 1, 1/14.f}, Vector2{764.f,1089.f}, PropType::ANIMATEDALTAR, Textures, Audio, "Bottom Altar Piece", true, true},
+            Prop{Sprite{Textures.AltarBotRightAnimated, 14, 1, 1/14.f}, Vector2{828.f,1089.f}, PropType::ANIMATEDALTAR, Textures, Audio, "Bottom Right Altar Piece", true, true},
         };
         Props.emplace_back(AnimatedAltarPieces);
         
         return Props;
     }
 
-    std::vector<Prop> InitializeTrees(const GameTexture& Textures)
+    std::vector<Prop> InitializeTrees(const GameTexture& Textures, const GameAudio& Audio)
     {
         return std::vector<Prop> {
             // row1
-            Prop{Textures.TreeGreen, Vector2{20.f,67.f}, PropType::TREE, Textures},        // 1
-            Prop{Textures.TreeGreen, Vector2{120.f,67.f}, PropType::TREE, Textures},       // 2
-            Prop{Textures.TreeGreen, Vector2{220.f,67.f}, PropType::TREE, Textures},       // 3
-            Prop{Textures.TreeGreen, Vector2{320.f,67.f}, PropType::TREE, Textures},       // 4
-            Prop{Textures.TreeGreen, Vector2{420.f,67.f}, PropType::TREE, Textures},       // 5
-            Prop{Textures.TreeGreen, Vector2{520.f,67.f}, PropType::TREE, Textures},       // 6
-            Prop{Textures.TreeGreen, Vector2{620.f,67.f}, PropType::TREE, Textures},       // 7
-            Prop{Textures.TreeGreen, Vector2{720.f,67.f}, PropType::TREE, Textures},       // 8
-            Prop{Textures.TreeGreen, Vector2{820.f,67.f}, PropType::TREE, Textures},       // 9
-            Prop{Textures.TreeGreen, Vector2{920.f,67.f}, PropType::TREE, Textures},       // 10
-            Prop{Textures.TreeGreen, Vector2{1020.f,67.f}, PropType::TREE, Textures},      // 11
-            Prop{Textures.TreeGreen, Vector2{1120.f,67.f}, PropType::TREE, Textures},      // 12
-            Prop{Textures.TreeGreen, Vector2{1220.f,67.f}, PropType::TREE, Textures},      // 13
-            Prop{Textures.TreeGreen, Vector2{1320.f,67.f}, PropType::TREE, Textures},      // 14
-            Prop{Textures.TreeGreen, Vector2{1420.f,67.f}, PropType::TREE, Textures},      // 15
-            Prop{Textures.TreeGreen, Vector2{1520.f,67.f}, PropType::TREE, Textures},      // 16
-            Prop{Textures.TreeGreen, Vector2{1620.f,67.f}, PropType::TREE, Textures},      // 17
-            Prop{Textures.TreeGreen, Vector2{1720.f,67.f}, PropType::TREE, Textures},      // 18
-            Prop{Textures.TreeGreen, Vector2{1820.f,67.f}, PropType::TREE, Textures},      // 19
-            Prop{Textures.TreeGreen, Vector2{1920.f,67.f}, PropType::TREE, Textures},      // 20
-            Prop{Textures.TreeGreen, Vector2{2020.f,67.f}, PropType::TREE, Textures},      // 21
-            Prop{Textures.TreeGreen, Vector2{2120.f,67.f}, PropType::TREE, Textures},      // 22
-            Prop{Textures.TreeGreen, Vector2{2220.f,67.f}, PropType::TREE, Textures},      // 23
-            Prop{Textures.TreeGreen, Vector2{2320.f,67.f}, PropType::TREE, Textures},      // 24
-            Prop{Textures.TreeGreen, Vector2{2420.f,67.f}, PropType::TREE, Textures},      // 25
-            Prop{Textures.TreeGreen, Vector2{2520.f,67.f}, PropType::TREE, Textures},      // 26
-            Prop{Textures.TreeGreen, Vector2{2620.f,67.f}, PropType::TREE, Textures},      // 27
-            Prop{Textures.TreeGreen, Vector2{2720.f,67.f}, PropType::TREE, Textures},      // 28
-            Prop{Textures.TreeGreen, Vector2{2820.f,67.f}, PropType::TREE, Textures},      // 29
-            Prop{Textures.TreeGreen, Vector2{2920.f,67.f}, PropType::TREE, Textures},      // 30
-            Prop{Textures.TreeGreen, Vector2{3020.f,67.f}, PropType::TREE, Textures},      // 31
-            Prop{Textures.TreeGreen, Vector2{3120.f,67.f}, PropType::TREE, Textures},      // 32
-            Prop{Textures.TreeGreen, Vector2{3220.f,67.f}, PropType::TREE, Textures},      // 33
-            Prop{Textures.TreeGreen, Vector2{3320.f,67.f}, PropType::TREE, Textures},      // 34
-            Prop{Textures.TreeGreen, Vector2{3420.f,67.f}, PropType::TREE, Textures},      // 35
-            Prop{Textures.TreeGreen, Vector2{3700.f,67.f}, PropType::TREE, Textures},      // 36
-            Prop{Textures.TreeGreen, Vector2{3800.f,67.f}, PropType::TREE, Textures},      // 37
-            Prop{Textures.TreeGreen, Vector2{3900.f,67.f}, PropType::TREE, Textures},      // 38
-            Prop{Textures.TreeGreen, Vector2{4000.f,67.f}, PropType::TREE, Textures},      // 39
+            Prop{Textures.TreeGreen, Vector2{20.f,67.f}, PropType::TREE, Textures, Audio},        // 1
+            Prop{Textures.TreeGreen, Vector2{120.f,67.f}, PropType::TREE, Textures, Audio},       // 2
+            Prop{Textures.TreeGreen, Vector2{220.f,67.f}, PropType::TREE, Textures, Audio},       // 3
+            Prop{Textures.TreeGreen, Vector2{320.f,67.f}, PropType::TREE, Textures, Audio},       // 4
+            Prop{Textures.TreeGreen, Vector2{420.f,67.f}, PropType::TREE, Textures, Audio},       // 5
+            Prop{Textures.TreeGreen, Vector2{520.f,67.f}, PropType::TREE, Textures, Audio},       // 6
+            Prop{Textures.TreeGreen, Vector2{620.f,67.f}, PropType::TREE, Textures, Audio},       // 7
+            Prop{Textures.TreeGreen, Vector2{720.f,67.f}, PropType::TREE, Textures, Audio},       // 8
+            Prop{Textures.TreeGreen, Vector2{820.f,67.f}, PropType::TREE, Textures, Audio},       // 9
+            Prop{Textures.TreeGreen, Vector2{920.f,67.f}, PropType::TREE, Textures, Audio},       // 10
+            Prop{Textures.TreeGreen, Vector2{1020.f,67.f}, PropType::TREE, Textures, Audio},      // 11
+            Prop{Textures.TreeGreen, Vector2{1120.f,67.f}, PropType::TREE, Textures, Audio},      // 12
+            Prop{Textures.TreeGreen, Vector2{1220.f,67.f}, PropType::TREE, Textures, Audio},      // 13
+            Prop{Textures.TreeGreen, Vector2{1320.f,67.f}, PropType::TREE, Textures, Audio},      // 14
+            Prop{Textures.TreeGreen, Vector2{1420.f,67.f}, PropType::TREE, Textures, Audio},      // 15
+            Prop{Textures.TreeGreen, Vector2{1520.f,67.f}, PropType::TREE, Textures, Audio},      // 16
+            Prop{Textures.TreeGreen, Vector2{1620.f,67.f}, PropType::TREE, Textures, Audio},      // 17
+            Prop{Textures.TreeGreen, Vector2{1720.f,67.f}, PropType::TREE, Textures, Audio},      // 18
+            Prop{Textures.TreeGreen, Vector2{1820.f,67.f}, PropType::TREE, Textures, Audio},      // 19
+            Prop{Textures.TreeGreen, Vector2{1920.f,67.f}, PropType::TREE, Textures, Audio},      // 20
+            Prop{Textures.TreeGreen, Vector2{2020.f,67.f}, PropType::TREE, Textures, Audio},      // 21
+            Prop{Textures.TreeGreen, Vector2{2120.f,67.f}, PropType::TREE, Textures, Audio},      // 22
+            Prop{Textures.TreeGreen, Vector2{2220.f,67.f}, PropType::TREE, Textures, Audio},      // 23
+            Prop{Textures.TreeGreen, Vector2{2320.f,67.f}, PropType::TREE, Textures, Audio},      // 24
+            Prop{Textures.TreeGreen, Vector2{2420.f,67.f}, PropType::TREE, Textures, Audio},      // 25
+            Prop{Textures.TreeGreen, Vector2{2520.f,67.f}, PropType::TREE, Textures, Audio},      // 26
+            Prop{Textures.TreeGreen, Vector2{2620.f,67.f}, PropType::TREE, Textures, Audio},      // 27
+            Prop{Textures.TreeGreen, Vector2{2720.f,67.f}, PropType::TREE, Textures, Audio},      // 28
+            Prop{Textures.TreeGreen, Vector2{2820.f,67.f}, PropType::TREE, Textures, Audio},      // 29
+            Prop{Textures.TreeGreen, Vector2{2920.f,67.f}, PropType::TREE, Textures, Audio},      // 30
+            Prop{Textures.TreeGreen, Vector2{3020.f,67.f}, PropType::TREE, Textures, Audio},      // 31
+            Prop{Textures.TreeGreen, Vector2{3120.f,67.f}, PropType::TREE, Textures, Audio},      // 32
+            Prop{Textures.TreeGreen, Vector2{3220.f,67.f}, PropType::TREE, Textures, Audio},      // 33
+            Prop{Textures.TreeGreen, Vector2{3320.f,67.f}, PropType::TREE, Textures, Audio},      // 34
+            Prop{Textures.TreeGreen, Vector2{3420.f,67.f}, PropType::TREE, Textures, Audio},      // 35
+            Prop{Textures.TreeGreen, Vector2{3700.f,67.f}, PropType::TREE, Textures, Audio},      // 36
+            Prop{Textures.TreeGreen, Vector2{3800.f,67.f}, PropType::TREE, Textures, Audio},      // 37
+            Prop{Textures.TreeGreen, Vector2{3900.f,67.f}, PropType::TREE, Textures, Audio},      // 38
+            Prop{Textures.TreeGreen, Vector2{4000.f,67.f}, PropType::TREE, Textures, Audio},      // 39
             // row2
-            Prop{Textures.TreeGreen, Vector2{0.f,167.f}, PropType::TREE, Textures},        // 1
-            Prop{Textures.TreeGreen, Vector2{200.f,167.f}, PropType::TREE, Textures},      // 3
-            Prop{Textures.TreeGreen, Vector2{300.f,167.f}, PropType::TREE, Textures},      // 4
-            Prop{Textures.TreeGreen, Vector2{400.f,167.f}, PropType::TREE, Textures},      // 5
-            Prop{Textures.TreeGreen, Vector2{500.f,167.f}, PropType::TREE, Textures},      // 6
-            Prop{Textures.TreeGreen, Vector2{700.f,167.f}, PropType::TREE, Textures},      // 8
-            Prop{Textures.TreeGreen, Vector2{800.f,167.f}, PropType::TREE, Textures},      // 9
-            Prop{Textures.TreeGreen, Vector2{900.f,167.f}, PropType::TREE, Textures},      // 10
-            // Prop{Textures.TreeGreen, Vector2{1000.f,167.f}, PropType::TREE, Textures},     // 11
-            Prop{Textures.TreeGreen, Vector2{1400.f,167.f}, PropType::TREE, Textures},     // 15
-            Prop{Textures.TreeGreen, Vector2{1500.f,167.f}, PropType::TREE, Textures},     // 16
-            Prop{Textures.TreeGreen, Vector2{1600.f,167.f}, PropType::TREE, Textures},     // 17
-            Prop{Textures.TreeGreen, Vector2{1900.f,167.f}, PropType::TREE, Textures},     // 20
-            Prop{Textures.TreeGreen, Vector2{2000.f,167.f}, PropType::TREE, Textures},     // 21
-            Prop{Textures.TreeGreen, Vector2{2100.f,167.f}, PropType::TREE, Textures},     // 22
-            Prop{Textures.TreeGreen, Vector2{2200.f,167.f}, PropType::TREE, Textures},     // 23
-            Prop{Textures.TreeGreen, Vector2{2500.f,167.f}, PropType::TREE, Textures},     // 26
-            Prop{Textures.TreeGreen, Vector2{2600.f,167.f}, PropType::TREE, Textures},     // 27
-            Prop{Textures.TreeGreen, Vector2{2700.f,167.f}, PropType::TREE, Textures},     // 28
-            Prop{Textures.TreeGreen, Vector2{2800.f,167.f}, PropType::TREE, Textures},     // 29
-            Prop{Textures.TreeGreen, Vector2{3000.f,167.f}, PropType::TREE, Textures},     // 31
-            Prop{Textures.TreeGreen, Vector2{3100.f,167.f}, PropType::TREE, Textures},     // 32
-            Prop{Textures.TreeGreen, Vector2{3200.f,167.f}, PropType::TREE, Textures},     // 33
-            Prop{Textures.TreeGreen, Vector2{3300.f,167.f}, PropType::TREE, Textures},     // 34
-            Prop{Textures.TreeGreen, Vector2{3400.f,167.f}, PropType::TREE, Textures},     // 35
-            Prop{Textures.TreeGreen, Vector2{3720.f,167.f}, PropType::TREE, Textures},     // 36
-            Prop{Textures.TreeGreen, Vector2{3920.f,167.f}, PropType::TREE, Textures},     // 38
+            Prop{Textures.TreeGreen, Vector2{0.f,167.f}, PropType::TREE, Textures, Audio},        // 1
+            Prop{Textures.TreeGreen, Vector2{200.f,167.f}, PropType::TREE, Textures, Audio},      // 3
+            Prop{Textures.TreeGreen, Vector2{300.f,167.f}, PropType::TREE, Textures, Audio},      // 4
+            Prop{Textures.TreeGreen, Vector2{400.f,167.f}, PropType::TREE, Textures, Audio},      // 5
+            Prop{Textures.TreeGreen, Vector2{500.f,167.f}, PropType::TREE, Textures, Audio},      // 6
+            Prop{Textures.TreeGreen, Vector2{700.f,167.f}, PropType::TREE, Textures, Audio},      // 8
+            Prop{Textures.TreeGreen, Vector2{800.f,167.f}, PropType::TREE, Textures, Audio},      // 9
+            Prop{Textures.TreeGreen, Vector2{900.f,167.f}, PropType::TREE, Textures, Audio},      // 10
+            // Prop{Textures.TreeGreen, Vector2{1000.f,167.f}, PropType::TREE, Textures, Audio},     // 11
+            Prop{Textures.TreeGreen, Vector2{1400.f,167.f}, PropType::TREE, Textures, Audio},     // 15
+            Prop{Textures.TreeGreen, Vector2{1500.f,167.f}, PropType::TREE, Textures, Audio},     // 16
+            Prop{Textures.TreeGreen, Vector2{1600.f,167.f}, PropType::TREE, Textures, Audio},     // 17
+            Prop{Textures.TreeGreen, Vector2{1900.f,167.f}, PropType::TREE, Textures, Audio},     // 20
+            Prop{Textures.TreeGreen, Vector2{2000.f,167.f}, PropType::TREE, Textures, Audio},     // 21
+            Prop{Textures.TreeGreen, Vector2{2100.f,167.f}, PropType::TREE, Textures, Audio},     // 22
+            Prop{Textures.TreeGreen, Vector2{2200.f,167.f}, PropType::TREE, Textures, Audio},     // 23
+            Prop{Textures.TreeGreen, Vector2{2500.f,167.f}, PropType::TREE, Textures, Audio},     // 26
+            Prop{Textures.TreeGreen, Vector2{2600.f,167.f}, PropType::TREE, Textures, Audio},     // 27
+            Prop{Textures.TreeGreen, Vector2{2700.f,167.f}, PropType::TREE, Textures, Audio},     // 28
+            Prop{Textures.TreeGreen, Vector2{2800.f,167.f}, PropType::TREE, Textures, Audio},     // 29
+            Prop{Textures.TreeGreen, Vector2{3000.f,167.f}, PropType::TREE, Textures, Audio},     // 31
+            Prop{Textures.TreeGreen, Vector2{3100.f,167.f}, PropType::TREE, Textures, Audio},     // 32
+            Prop{Textures.TreeGreen, Vector2{3200.f,167.f}, PropType::TREE, Textures, Audio},     // 33
+            Prop{Textures.TreeGreen, Vector2{3300.f,167.f}, PropType::TREE, Textures, Audio},     // 34
+            Prop{Textures.TreeGreen, Vector2{3400.f,167.f}, PropType::TREE, Textures, Audio},     // 35
+            Prop{Textures.TreeGreen, Vector2{3720.f,167.f}, PropType::TREE, Textures, Audio},     // 36
+            Prop{Textures.TreeGreen, Vector2{3920.f,167.f}, PropType::TREE, Textures, Audio},     // 38
             // row3
-            Prop{Textures.TreeGreen, Vector2{20.f,267.f}, PropType::TREE, Textures},       // 1 
-            Prop{Textures.TreeGreen, Vector2{120.f,267.f}, PropType::TREE, Textures},      // 2 
-            // Prop{Textures.TreeGreen, Vector2{220.f,267.f}, PropType::TREE, Textures},      // 3 
-            Prop{Textures.TreeGreen, Vector2{320.f,267.f}, PropType::TREE, Textures},      // 4 
-            Prop{Textures.TreeGreen, Vector2{420.f,267.f}, PropType::TREE, Textures},      // 5 
-            Prop{Textures.TreeGreen, Vector2{620.f,267.f}, PropType::TREE, Textures},      // 7 
-            Prop{Textures.TreeGreen, Vector2{720.f,267.f}, PropType::TREE, Textures},      // 8 
-            Prop{Textures.TreeGreen, Vector2{820.f,267.f}, PropType::TREE, Textures},      // 9 
-            // Prop{Textures.TreeGreen, Vector2{920.f,267.f}, PropType::TREE, Textures},      // 10
-            Prop{Textures.TreeGreen, Vector2{1520.f,267.f}, PropType::TREE, Textures},     // 16
-            Prop{Textures.TreeGreen, Vector2{1620.f,267.f}, PropType::TREE, Textures},     // 17
-            Prop{Textures.TreeGreen, Vector2{1720.f,267.f}, PropType::TREE, Textures},     // 18
-            Prop{Textures.TreeGreen, Vector2{1820.f,267.f}, PropType::TREE, Textures},     // 19
-            Prop{Textures.TreeGreen, Vector2{1920.f,267.f}, PropType::TREE, Textures},     // 20
-            Prop{Textures.TreeGreen, Vector2{2020.f,267.f}, PropType::TREE, Textures},     // 21
-            Prop{Textures.TreeGreen, Vector2{2220.f,267.f}, PropType::TREE, Textures},     // 23
-            Prop{Textures.TreeGreen, Vector2{2320.f,267.f}, PropType::TREE, Textures},     // 24
-            Prop{Textures.TreeGreen, Vector2{2420.f,267.f}, PropType::TREE, Textures},     // 25
-            Prop{Textures.TreeGreen, Vector2{2520.f,267.f}, PropType::TREE, Textures},     // 26
-            Prop{Textures.TreeGreen, Vector2{2620.f,267.f}, PropType::TREE, Textures},     // 27
-            Prop{Textures.TreeGreen, Vector2{2820.f,267.f}, PropType::TREE, Textures},     // 29
-            Prop{Textures.TreeGreen, Vector2{2920.f,267.f}, PropType::TREE, Textures},     // 30
-            Prop{Textures.TreeGreen, Vector2{3020.f,267.f}, PropType::TREE, Textures},     // 31
-            Prop{Textures.TreeGreen, Vector2{3120.f,267.f}, PropType::TREE, Textures},     // 32
-            Prop{Textures.TreeGreen, Vector2{3320.f,267.f}, PropType::TREE, Textures},     // 34
-            Prop{Textures.TreeGreen, Vector2{3700.f,267.f}, PropType::TREE, Textures},     // 36
-            Prop{Textures.TreeGreen, Vector2{3800.f,267.f}, PropType::TREE, Textures},     // 37
-            Prop{Textures.TreeGreen, Vector2{3900.f,267.f}, PropType::TREE, Textures},     // 38
-            Prop{Textures.TreeGreen, Vector2{4000.f,267.f}, PropType::TREE, Textures},     // 39
+            Prop{Textures.TreeGreen, Vector2{20.f,267.f}, PropType::TREE, Textures, Audio},       // 1 
+            Prop{Textures.TreeGreen, Vector2{120.f,267.f}, PropType::TREE, Textures, Audio},      // 2 
+            // Prop{Textures.TreeGreen, Vector2{220.f,267.f}, PropType::TREE, Textures, Audio},      // 3 
+            Prop{Textures.TreeGreen, Vector2{320.f,267.f}, PropType::TREE, Textures, Audio},      // 4 
+            Prop{Textures.TreeGreen, Vector2{420.f,267.f}, PropType::TREE, Textures, Audio},      // 5 
+            Prop{Textures.TreeGreen, Vector2{620.f,267.f}, PropType::TREE, Textures, Audio},      // 7 
+            Prop{Textures.TreeGreen, Vector2{720.f,267.f}, PropType::TREE, Textures, Audio},      // 8 
+            Prop{Textures.TreeGreen, Vector2{820.f,267.f}, PropType::TREE, Textures, Audio},      // 9 
+            // Prop{Textures.TreeGreen, Vector2{920.f,267.f}, PropType::TREE, Textures, Audio},      // 10
+            Prop{Textures.TreeGreen, Vector2{1520.f,267.f}, PropType::TREE, Textures, Audio},     // 16
+            Prop{Textures.TreeGreen, Vector2{1620.f,267.f}, PropType::TREE, Textures, Audio},     // 17
+            Prop{Textures.TreeGreen, Vector2{1720.f,267.f}, PropType::TREE, Textures, Audio},     // 18
+            Prop{Textures.TreeGreen, Vector2{1820.f,267.f}, PropType::TREE, Textures, Audio},     // 19
+            Prop{Textures.TreeGreen, Vector2{1920.f,267.f}, PropType::TREE, Textures, Audio},     // 20
+            Prop{Textures.TreeGreen, Vector2{2020.f,267.f}, PropType::TREE, Textures, Audio},     // 21
+            Prop{Textures.TreeGreen, Vector2{2220.f,267.f}, PropType::TREE, Textures, Audio},     // 23
+            Prop{Textures.TreeGreen, Vector2{2320.f,267.f}, PropType::TREE, Textures, Audio},     // 24
+            Prop{Textures.TreeGreen, Vector2{2420.f,267.f}, PropType::TREE, Textures, Audio},     // 25
+            Prop{Textures.TreeGreen, Vector2{2520.f,267.f}, PropType::TREE, Textures, Audio},     // 26
+            Prop{Textures.TreeGreen, Vector2{2620.f,267.f}, PropType::TREE, Textures, Audio},     // 27
+            Prop{Textures.TreeGreen, Vector2{2820.f,267.f}, PropType::TREE, Textures, Audio},     // 29
+            Prop{Textures.TreeGreen, Vector2{2920.f,267.f}, PropType::TREE, Textures, Audio},     // 30
+            Prop{Textures.TreeGreen, Vector2{3020.f,267.f}, PropType::TREE, Textures, Audio},     // 31
+            Prop{Textures.TreeGreen, Vector2{3120.f,267.f}, PropType::TREE, Textures, Audio},     // 32
+            Prop{Textures.TreeGreen, Vector2{3320.f,267.f}, PropType::TREE, Textures, Audio},     // 34
+            Prop{Textures.TreeGreen, Vector2{3700.f,267.f}, PropType::TREE, Textures, Audio},     // 36
+            Prop{Textures.TreeGreen, Vector2{3800.f,267.f}, PropType::TREE, Textures, Audio},     // 37
+            Prop{Textures.TreeGreen, Vector2{3900.f,267.f}, PropType::TREE, Textures, Audio},     // 38
+            Prop{Textures.TreeGreen, Vector2{4000.f,267.f}, PropType::TREE, Textures, Audio},     // 39
             // row4
-            Prop{Textures.TreeGreen, Vector2{0.f,367.f}, PropType::TREE, Textures},        // 1 
-            Prop{Textures.TreeGreen, Vector2{100.f,367.f}, PropType::TREE, Textures},      // 2 
-            Prop{Textures.TreeGreen, Vector2{200.f,367.f}, PropType::TREE, Textures},      // 3 
-            Prop{Textures.TreeGreen, Vector2{400.f,367.f}, PropType::TREE, Textures},      // 5 
-            Prop{Textures.TreeGreen, Vector2{500.f,367.f}, PropType::TREE, Textures},      // 6 
-            Prop{Textures.TreeGreen, Vector2{700.f,367.f}, PropType::TREE, Textures},      // 8 
-            Prop{Textures.TreeGreen, Vector2{800.f,367.f}, PropType::TREE, Textures},      // 9 
-            // Prop{Textures.TreeGreen, Vector2{900.f,367.f}, PropType::TREE, Textures},      // 10
-            Prop{Textures.TreeGreen, Vector2{1500.f,367.f}, PropType::TREE, Textures},     // 16
-            Prop{Textures.TreeGreen, Vector2{1600.f,367.f}, PropType::TREE, Textures},     // 17
-            Prop{Textures.TreeGreen, Vector2{1800.f,367.f}, PropType::TREE, Textures},     // 19
-            Prop{Textures.TreeGreen, Vector2{1900.f,367.f}, PropType::TREE, Textures},     // 20
-            Prop{Textures.TreeGreen, Vector2{2400.f,367.f}, PropType::TREE, Textures},     // 25
-            Prop{Textures.TreeGreen, Vector2{2500.f,367.f}, PropType::TREE, Textures},     // 26
-            Prop{Textures.TreeGreen, Vector2{2600.f,367.f}, PropType::TREE, Textures},     // 27
-            Prop{Textures.TreeGreen, Vector2{2700.f,367.f}, PropType::TREE, Textures},     // 28
-            Prop{Textures.TreeGreen, Vector2{2800.f,367.f}, PropType::TREE, Textures},     // 29
-            Prop{Textures.TreeGreen, Vector2{2900.f,367.f}, PropType::TREE, Textures},     // 30
-            Prop{Textures.TreeGreen, Vector2{3000.f,367.f}, PropType::TREE, Textures},     // 31
-            Prop{Textures.TreeGreen, Vector2{3100.f,367.f}, PropType::TREE, Textures},     // 32
-            Prop{Textures.TreeGreen, Vector2{3200.f,367.f}, PropType::TREE, Textures},     // 33
-            Prop{Textures.TreeGreen, Vector2{3300.f,367.f}, PropType::TREE, Textures},     // 34
-            Prop{Textures.TreeGreen, Vector2{3400.f,367.f}, PropType::TREE, Textures},     // 35
-            Prop{Textures.TreeGreen, Vector2{3720.f,367.f}, PropType::TREE, Textures},     // 36
-            Prop{Textures.TreeGreen, Vector2{3820.f,367.f}, PropType::TREE, Textures},     // 37
-            Prop{Textures.TreeGreen, Vector2{3920.f,367.f}, PropType::TREE, Textures},     // 38
+            Prop{Textures.TreeGreen, Vector2{0.f,367.f}, PropType::TREE, Textures, Audio},        // 1 
+            Prop{Textures.TreeGreen, Vector2{100.f,367.f}, PropType::TREE, Textures, Audio},      // 2 
+            Prop{Textures.TreeGreen, Vector2{200.f,367.f}, PropType::TREE, Textures, Audio},      // 3 
+            Prop{Textures.TreeGreen, Vector2{400.f,367.f}, PropType::TREE, Textures, Audio},      // 5 
+            Prop{Textures.TreeGreen, Vector2{500.f,367.f}, PropType::TREE, Textures, Audio},      // 6 
+            Prop{Textures.TreeGreen, Vector2{700.f,367.f}, PropType::TREE, Textures, Audio},      // 8 
+            Prop{Textures.TreeGreen, Vector2{800.f,367.f}, PropType::TREE, Textures, Audio},      // 9 
+            // Prop{Textures.TreeGreen, Vector2{900.f,367.f}, PropType::TREE, Textures, Audio},      // 10
+            Prop{Textures.TreeGreen, Vector2{1500.f,367.f}, PropType::TREE, Textures, Audio},     // 16
+            Prop{Textures.TreeGreen, Vector2{1600.f,367.f}, PropType::TREE, Textures, Audio},     // 17
+            Prop{Textures.TreeGreen, Vector2{1800.f,367.f}, PropType::TREE, Textures, Audio},     // 19
+            Prop{Textures.TreeGreen, Vector2{1900.f,367.f}, PropType::TREE, Textures, Audio},     // 20
+            Prop{Textures.TreeGreen, Vector2{2400.f,367.f}, PropType::TREE, Textures, Audio},     // 25
+            Prop{Textures.TreeGreen, Vector2{2500.f,367.f}, PropType::TREE, Textures, Audio},     // 26
+            Prop{Textures.TreeGreen, Vector2{2600.f,367.f}, PropType::TREE, Textures, Audio},     // 27
+            Prop{Textures.TreeGreen, Vector2{2700.f,367.f}, PropType::TREE, Textures, Audio},     // 28
+            Prop{Textures.TreeGreen, Vector2{2800.f,367.f}, PropType::TREE, Textures, Audio},     // 29
+            Prop{Textures.TreeGreen, Vector2{2900.f,367.f}, PropType::TREE, Textures, Audio},     // 30
+            Prop{Textures.TreeGreen, Vector2{3000.f,367.f}, PropType::TREE, Textures, Audio},     // 31
+            Prop{Textures.TreeGreen, Vector2{3100.f,367.f}, PropType::TREE, Textures, Audio},     // 32
+            Prop{Textures.TreeGreen, Vector2{3200.f,367.f}, PropType::TREE, Textures, Audio},     // 33
+            Prop{Textures.TreeGreen, Vector2{3300.f,367.f}, PropType::TREE, Textures, Audio},     // 34
+            Prop{Textures.TreeGreen, Vector2{3400.f,367.f}, PropType::TREE, Textures, Audio},     // 35
+            Prop{Textures.TreeGreen, Vector2{3720.f,367.f}, PropType::TREE, Textures, Audio},     // 36
+            Prop{Textures.TreeGreen, Vector2{3820.f,367.f}, PropType::TREE, Textures, Audio},     // 37
+            Prop{Textures.TreeGreen, Vector2{3920.f,367.f}, PropType::TREE, Textures, Audio},     // 38
             //row5
-            Prop{Textures.TreeGreen, Vector2{20.f,467.f}, PropType::TREE, Textures},       // 1 
-            Prop{Textures.TreeGreen, Vector2{120.f,467.f}, PropType::TREE, Textures},      // 2 
-            Prop{Textures.TreeGreen, Vector2{320.f,467.f}, PropType::TREE, Textures},      // 4 
-            Prop{Textures.TreeGreen, Vector2{520.f,467.f}, PropType::TREE, Textures},      // 6 
-            Prop{Textures.TreeGreen, Vector2{620.f,467.f}, PropType::TREE, Textures},      // 7 
-            Prop{Textures.TreeGreen, Vector2{720.f,467.f}, PropType::TREE, Textures},      // 8 
-            Prop{Textures.TreeGreen, Vector2{920.f,467.f}, PropType::TREE, Textures},      // 10
-            // Prop{Textures.TreeGreen, Vector2{1020.f,467.f}, PropType::TREE, Textures},     // 11
-            Prop{Textures.TreeGreen, Vector2{1420.f,467.f}, PropType::TREE, Textures},     // 15
-            Prop{Textures.TreeGreen, Vector2{1520.f,467.f}, PropType::TREE, Textures},     // 16
-            Prop{Textures.TreeGreen, Vector2{1620.f,467.f}, PropType::TREE, Textures},     // 17
-            Prop{Textures.TreeGreen, Vector2{1820.f,467.f}, PropType::TREE, Textures},     // 19
-            Prop{Textures.TreeGreen, Vector2{2520.f,467.f}, PropType::TREE, Textures},     // 26
-            Prop{Textures.TreeGreen, Vector2{2620.f,467.f}, PropType::TREE, Textures},     // 27
-            Prop{Textures.TreeGreen, Vector2{2720.f,467.f}, PropType::TREE, Textures},     // 28
-            Prop{Textures.TreeGreen, Vector2{2820.f,467.f}, PropType::TREE, Textures},     // 29
-            Prop{Textures.TreeGreen, Vector2{2920.f,467.f}, PropType::TREE, Textures},     // 30
-            Prop{Textures.TreeGreen, Vector2{3120.f,467.f}, PropType::TREE, Textures},     // 32
-            Prop{Textures.TreeGreen, Vector2{3220.f,467.f}, PropType::TREE, Textures},     // 33
-            Prop{Textures.TreeGreen, Vector2{3320.f,467.f}, PropType::TREE, Textures},     // 34
-            Prop{Textures.TreeGreen, Vector2{3420.f,467.f}, PropType::TREE, Textures},     // 35
-            Prop{Textures.TreeGreen, Vector2{3700.f,467.f}, PropType::TREE, Textures},     // 36
-            Prop{Textures.TreeGreen, Vector2{3800.f,467.f}, PropType::TREE, Textures},     // 37
-            Prop{Textures.TreeGreen, Vector2{3900.f,467.f}, PropType::TREE, Textures},     // 38
-            Prop{Textures.TreeGreen, Vector2{4000.f,467.f}, PropType::TREE, Textures},     // 39
+            Prop{Textures.TreeGreen, Vector2{20.f,467.f}, PropType::TREE, Textures, Audio},       // 1 
+            Prop{Textures.TreeGreen, Vector2{120.f,467.f}, PropType::TREE, Textures, Audio},      // 2 
+            Prop{Textures.TreeGreen, Vector2{320.f,467.f}, PropType::TREE, Textures, Audio},      // 4 
+            Prop{Textures.TreeGreen, Vector2{520.f,467.f}, PropType::TREE, Textures, Audio},      // 6 
+            Prop{Textures.TreeGreen, Vector2{620.f,467.f}, PropType::TREE, Textures, Audio},      // 7 
+            Prop{Textures.TreeGreen, Vector2{720.f,467.f}, PropType::TREE, Textures, Audio},      // 8 
+            Prop{Textures.TreeGreen, Vector2{920.f,467.f}, PropType::TREE, Textures, Audio},      // 10
+            // Prop{Textures.TreeGreen, Vector2{1020.f,467.f}, PropType::TREE, Textures, Audio},     // 11
+            Prop{Textures.TreeGreen, Vector2{1420.f,467.f}, PropType::TREE, Textures, Audio},     // 15
+            Prop{Textures.TreeGreen, Vector2{1520.f,467.f}, PropType::TREE, Textures, Audio},     // 16
+            Prop{Textures.TreeGreen, Vector2{1620.f,467.f}, PropType::TREE, Textures, Audio},     // 17
+            Prop{Textures.TreeGreen, Vector2{1820.f,467.f}, PropType::TREE, Textures, Audio},     // 19
+            Prop{Textures.TreeGreen, Vector2{2520.f,467.f}, PropType::TREE, Textures, Audio},     // 26
+            Prop{Textures.TreeGreen, Vector2{2620.f,467.f}, PropType::TREE, Textures, Audio},     // 27
+            Prop{Textures.TreeGreen, Vector2{2720.f,467.f}, PropType::TREE, Textures, Audio},     // 28
+            Prop{Textures.TreeGreen, Vector2{2820.f,467.f}, PropType::TREE, Textures, Audio},     // 29
+            Prop{Textures.TreeGreen, Vector2{2920.f,467.f}, PropType::TREE, Textures, Audio},     // 30
+            Prop{Textures.TreeGreen, Vector2{3120.f,467.f}, PropType::TREE, Textures, Audio},     // 32
+            Prop{Textures.TreeGreen, Vector2{3220.f,467.f}, PropType::TREE, Textures, Audio},     // 33
+            Prop{Textures.TreeGreen, Vector2{3320.f,467.f}, PropType::TREE, Textures, Audio},     // 34
+            Prop{Textures.TreeGreen, Vector2{3420.f,467.f}, PropType::TREE, Textures, Audio},     // 35
+            Prop{Textures.TreeGreen, Vector2{3700.f,467.f}, PropType::TREE, Textures, Audio},     // 36
+            Prop{Textures.TreeGreen, Vector2{3800.f,467.f}, PropType::TREE, Textures, Audio},     // 37
+            Prop{Textures.TreeGreen, Vector2{3900.f,467.f}, PropType::TREE, Textures, Audio},     // 38
+            Prop{Textures.TreeGreen, Vector2{4000.f,467.f}, PropType::TREE, Textures, Audio},     // 39
             // row6
-            Prop{Textures.TreeGreen, Vector2{0.f,567.f}, PropType::TREE, Textures},        // 1 
-            Prop{Textures.TreeGreen, Vector2{100.f,567.f}, PropType::TREE, Textures},      // 2 
-            // Prop{Textures.TreeGreen, Vector2{200.f,567.f}, PropType::TREE, Textures},      // 3 
-            // Prop{Textures.TreeGreen, Vector2{300.f,567.f}, PropType::TREE, Textures},      // 4 
-            // Prop{Textures.TreeGreen, Vector2{400.f,567.f}, PropType::TREE, Textures},      // 5 
-            Prop{Textures.TreeGreen, Vector2{500.f,567.f}, PropType::TREE, Textures},      // 6 
-            Prop{Textures.TreeGreen, Vector2{600.f,567.f}, PropType::TREE, Textures},      // 7 
-            Prop{Textures.TreeGreen, Vector2{800.f,567.f}, PropType::TREE, Textures},      // 9 
-            Prop{Textures.TreeGreen, Vector2{900.f,567.f}, PropType::TREE, Textures},      // 10
-            Prop{Textures.TreeGreen, Vector2{1000.f,567.f}, PropType::TREE, Textures},     // 11
-            Prop{Textures.TreeGreen, Vector2{1100.f,567.f}, PropType::TREE, Textures},     // 12
-            Prop{Textures.TreeGreen, Vector2{1200.f,567.f}, PropType::TREE, Textures},     // 13
-            Prop{Textures.TreeGreen, Vector2{1400.f,567.f}, PropType::TREE, Textures},     // 15
-            Prop{Textures.TreeGreen, Vector2{1500.f,567.f}, PropType::TREE, Textures},     // 16
-            Prop{Textures.TreeGreen, Vector2{1600.f,567.f}, PropType::TREE, Textures},     // 17
-            Prop{Textures.TreeGreen, Vector2{1700.f,567.f}, PropType::TREE, Textures},     // 18
-            Prop{Textures.TreeGreen, Vector2{2500.f,567.f}, PropType::TREE, Textures},     // 26
-            Prop{Textures.TreeGreen, Vector2{2700.f,567.f}, PropType::TREE, Textures},     // 28
-            // Prop{Textures.TreeGreen, Vector2{2800.f,567.f}, PropType::TREE, Textures},     // 29
-            // Prop{Textures.TreeGreen, Vector2{2900.f,567.f}, PropType::TREE, Textures},     // 30
-            // Prop{Textures.TreeGreen, Vector2{3000.f,567.f}, PropType::TREE, Textures},     // 31
-            Prop{Textures.TreeGreen, Vector2{3100.f,567.f}, PropType::TREE, Textures},     // 32
-            Prop{Textures.TreeGreen, Vector2{3200.f,567.f}, PropType::TREE, Textures},     // 33
-            Prop{Textures.TreeGreen, Vector2{3300.f,567.f}, PropType::TREE, Textures},     // 34
-            Prop{Textures.TreeGreen, Vector2{3400.f,567.f}, PropType::TREE, Textures},     // 35
-            Prop{Textures.TreeGreen, Vector2{3720.f,567.f}, PropType::TREE, Textures},     // 36
-            Prop{Textures.TreeGreen, Vector2{3820.f,567.f}, PropType::TREE, Textures},     // 37
-            Prop{Textures.TreeGreen, Vector2{3920.f,567.f}, PropType::TREE, Textures},     // 38
+            Prop{Textures.TreeGreen, Vector2{0.f,567.f}, PropType::TREE, Textures, Audio},        // 1 
+            Prop{Textures.TreeGreen, Vector2{100.f,567.f}, PropType::TREE, Textures, Audio},      // 2 
+            // Prop{Textures.TreeGreen, Vector2{200.f,567.f}, PropType::TREE, Textures, Audio},      // 3 
+            // Prop{Textures.TreeGreen, Vector2{300.f,567.f}, PropType::TREE, Textures, Audio},      // 4 
+            // Prop{Textures.TreeGreen, Vector2{400.f,567.f}, PropType::TREE, Textures, Audio},      // 5 
+            Prop{Textures.TreeGreen, Vector2{500.f,567.f}, PropType::TREE, Textures, Audio},      // 6 
+            Prop{Textures.TreeGreen, Vector2{600.f,567.f}, PropType::TREE, Textures, Audio},      // 7 
+            Prop{Textures.TreeGreen, Vector2{800.f,567.f}, PropType::TREE, Textures, Audio},      // 9 
+            Prop{Textures.TreeGreen, Vector2{900.f,567.f}, PropType::TREE, Textures, Audio},      // 10
+            Prop{Textures.TreeGreen, Vector2{1000.f,567.f}, PropType::TREE, Textures, Audio},     // 11
+            Prop{Textures.TreeGreen, Vector2{1100.f,567.f}, PropType::TREE, Textures, Audio},     // 12
+            Prop{Textures.TreeGreen, Vector2{1200.f,567.f}, PropType::TREE, Textures, Audio},     // 13
+            Prop{Textures.TreeGreen, Vector2{1400.f,567.f}, PropType::TREE, Textures, Audio},     // 15
+            Prop{Textures.TreeGreen, Vector2{1500.f,567.f}, PropType::TREE, Textures, Audio},     // 16
+            Prop{Textures.TreeGreen, Vector2{1600.f,567.f}, PropType::TREE, Textures, Audio},     // 17
+            Prop{Textures.TreeGreen, Vector2{1700.f,567.f}, PropType::TREE, Textures, Audio},     // 18
+            Prop{Textures.TreeGreen, Vector2{2500.f,567.f}, PropType::TREE, Textures, Audio},     // 26
+            Prop{Textures.TreeGreen, Vector2{2700.f,567.f}, PropType::TREE, Textures, Audio},     // 28
+            // Prop{Textures.TreeGreen, Vector2{2800.f,567.f}, PropType::TREE, Textures, Audio},     // 29
+            // Prop{Textures.TreeGreen, Vector2{2900.f,567.f}, PropType::TREE, Textures, Audio},     // 30
+            // Prop{Textures.TreeGreen, Vector2{3000.f,567.f}, PropType::TREE, Textures, Audio},     // 31
+            Prop{Textures.TreeGreen, Vector2{3100.f,567.f}, PropType::TREE, Textures, Audio},     // 32
+            Prop{Textures.TreeGreen, Vector2{3200.f,567.f}, PropType::TREE, Textures, Audio},     // 33
+            Prop{Textures.TreeGreen, Vector2{3300.f,567.f}, PropType::TREE, Textures, Audio},     // 34
+            Prop{Textures.TreeGreen, Vector2{3400.f,567.f}, PropType::TREE, Textures, Audio},     // 35
+            Prop{Textures.TreeGreen, Vector2{3720.f,567.f}, PropType::TREE, Textures, Audio},     // 36
+            Prop{Textures.TreeGreen, Vector2{3820.f,567.f}, PropType::TREE, Textures, Audio},     // 37
+            Prop{Textures.TreeGreen, Vector2{3920.f,567.f}, PropType::TREE, Textures, Audio},     // 38
             // row7
-            Prop{Textures.TreeGreen, Vector2{20.f,667.f}, PropType::TREE, Textures},       // 1 
-            // Prop{Textures.TreeGreen, Vector2{120.f,667.f}, PropType::TREE, Textures},      // 2 
-            // Prop{Textures.TreeGreen, Vector2{220.f,667.f}, PropType::TREE, Textures},      // 3 
-            // Prop{Textures.TreeGreen, Vector2{320.f,667.f}, PropType::TREE, Textures},      // 4 
-            // Prop{Textures.TreeGreen, Vector2{420.f,667.f}, PropType::TREE, Textures},      // 5 
-            Prop{Textures.TreeGreen, Vector2{520.f,667.f}, PropType::TREE, Textures},      // 6 
-            Prop{Textures.TreeGreen, Vector2{620.f,667.f}, PropType::TREE, Textures},      // 6 
-            Prop{Textures.TreeGreen, Vector2{720.f,667.f}, PropType::TREE, Textures},      // 8 
-            Prop{Textures.TreeGreen, Vector2{820.f,667.f}, PropType::TREE, Textures},      // 9 
-            Prop{Textures.TreeGreen, Vector2{920.f,667.f}, PropType::TREE, Textures},      // 10
-            Prop{Textures.TreeGreen, Vector2{1020.f,667.f}, PropType::TREE, Textures},     // 11
-            Prop{Textures.TreeGreen, Vector2{1120.f,667.f}, PropType::TREE, Textures},     // 12
-            Prop{Textures.TreeGreen, Vector2{1220.f,667.f}, PropType::TREE, Textures},     // 13
-            // Prop{Textures.TreeGreen, Vector2{1320.f,667.f}, PropType::TREE, Textures},     // 14
-            // Prop{Textures.TreeGreen, Vector2{1420.f,667.f}, PropType::TREE, Textures},     // 15
-            // Prop{Textures.TreeGreen, Vector2{1520.f,667.f}, PropType::TREE, Textures},     // 16
-            Prop{Textures.TreeGreen, Vector2{1720.f,667.f}, PropType::TREE, Textures},     // 18
-            Prop{Textures.TreeGreen, Vector2{1820.f,667.f}, PropType::TREE, Textures},     // 19
-            // Prop{Textures.TreeGreen, Vector2{2420.f,667.f}, PropType::TREE, Textures},     // 25
-            Prop{Textures.TreeGreen, Vector2{2520.f,667.f}, PropType::TREE, Textures},     // 26
-            Prop{Textures.TreeGreen, Vector2{2620.f,667.f}, PropType::TREE, Textures},     // 27
-            // Prop{Textures.TreeGreen, Vector2{2720.f,667.f}, PropType::TREE, Textures},     // 28    
-            // Prop{Textures.TreeGreen, Vector2{3120.f,667.f}, PropType::TREE, Textures},     // 32    
-            Prop{Textures.TreeGreen, Vector2{3220.f,667.f}, PropType::TREE, Textures},     // 33
-            Prop{Textures.TreeGreen, Vector2{3320.f,667.f}, PropType::TREE, Textures},     // 34
-            Prop{Textures.TreeGreen, Vector2{3420.f,667.f}, PropType::TREE, Textures},     // 35
-            Prop{Textures.TreeGreen, Vector2{3700.f,667.f}, PropType::TREE, Textures},     // 36    
-            Prop{Textures.TreeGreen, Vector2{3800.f,667.f}, PropType::TREE, Textures},     // 37
-            Prop{Textures.TreeGreen, Vector2{3900.f,667.f}, PropType::TREE, Textures},     // 38
-            Prop{Textures.TreeGreen, Vector2{4000.f,667.f}, PropType::TREE, Textures},     // 39
+            Prop{Textures.TreeGreen, Vector2{20.f,667.f}, PropType::TREE, Textures, Audio},       // 1 
+            // Prop{Textures.TreeGreen, Vector2{120.f,667.f}, PropType::TREE, Textures, Audio},      // 2 
+            // Prop{Textures.TreeGreen, Vector2{220.f,667.f}, PropType::TREE, Textures, Audio},      // 3 
+            // Prop{Textures.TreeGreen, Vector2{320.f,667.f}, PropType::TREE, Textures, Audio},      // 4 
+            // Prop{Textures.TreeGreen, Vector2{420.f,667.f}, PropType::TREE, Textures, Audio},      // 5 
+            Prop{Textures.TreeGreen, Vector2{520.f,667.f}, PropType::TREE, Textures, Audio},      // 6 
+            Prop{Textures.TreeGreen, Vector2{620.f,667.f}, PropType::TREE, Textures, Audio},      // 6 
+            Prop{Textures.TreeGreen, Vector2{720.f,667.f}, PropType::TREE, Textures, Audio},      // 8 
+            Prop{Textures.TreeGreen, Vector2{820.f,667.f}, PropType::TREE, Textures, Audio},      // 9 
+            Prop{Textures.TreeGreen, Vector2{920.f,667.f}, PropType::TREE, Textures, Audio},      // 10
+            Prop{Textures.TreeGreen, Vector2{1020.f,667.f}, PropType::TREE, Textures, Audio},     // 11
+            Prop{Textures.TreeGreen, Vector2{1120.f,667.f}, PropType::TREE, Textures, Audio},     // 12
+            Prop{Textures.TreeGreen, Vector2{1220.f,667.f}, PropType::TREE, Textures, Audio},     // 13
+            // Prop{Textures.TreeGreen, Vector2{1320.f,667.f}, PropType::TREE, Textures, Audio},     // 14
+            // Prop{Textures.TreeGreen, Vector2{1420.f,667.f}, PropType::TREE, Textures, Audio},     // 15
+            // Prop{Textures.TreeGreen, Vector2{1520.f,667.f}, PropType::TREE, Textures, Audio},     // 16
+            Prop{Textures.TreeGreen, Vector2{1720.f,667.f}, PropType::TREE, Textures, Audio},     // 18
+            Prop{Textures.TreeGreen, Vector2{1820.f,667.f}, PropType::TREE, Textures, Audio},     // 19
+            // Prop{Textures.TreeGreen, Vector2{2420.f,667.f}, PropType::TREE, Textures, Audio},     // 25
+            Prop{Textures.TreeGreen, Vector2{2520.f,667.f}, PropType::TREE, Textures, Audio},     // 26
+            Prop{Textures.TreeGreen, Vector2{2620.f,667.f}, PropType::TREE, Textures, Audio},     // 27
+            // Prop{Textures.TreeGreen, Vector2{2720.f,667.f}, PropType::TREE, Textures, Audio},     // 28    
+            // Prop{Textures.TreeGreen, Vector2{3120.f,667.f}, PropType::TREE, Textures, Audio},     // 32    
+            Prop{Textures.TreeGreen, Vector2{3220.f,667.f}, PropType::TREE, Textures, Audio},     // 33
+            Prop{Textures.TreeGreen, Vector2{3320.f,667.f}, PropType::TREE, Textures, Audio},     // 34
+            Prop{Textures.TreeGreen, Vector2{3420.f,667.f}, PropType::TREE, Textures, Audio},     // 35
+            Prop{Textures.TreeGreen, Vector2{3700.f,667.f}, PropType::TREE, Textures, Audio},     // 36    
+            Prop{Textures.TreeGreen, Vector2{3800.f,667.f}, PropType::TREE, Textures, Audio},     // 37
+            Prop{Textures.TreeGreen, Vector2{3900.f,667.f}, PropType::TREE, Textures, Audio},     // 38
+            Prop{Textures.TreeGreen, Vector2{4000.f,667.f}, PropType::TREE, Textures, Audio},     // 39
             // row8
-            Prop{Textures.TreeGreen, Vector2{0.f,767.f}, PropType::TREE, Textures},        // 1 
-            // Prop{Textures.TreeGreen, Vector2{100.f,767.f}, PropType::TREE, Textures},      // 2 
-            // Prop{Textures.TreeGreen, Vector2{200.f,767.f}, PropType::TREE, Textures},      // 3 
-            // Prop{Textures.TreeGreen, Vector2{300.f,767.f}, PropType::TREE, Textures},      // 4 
-            Prop{Textures.TreeGreen, Vector2{400.f,767.f}, PropType::TREE, Textures},      // 5 
-            Prop{Textures.TreeGreen, Vector2{500.f,767.f}, PropType::TREE, Textures},      // 6 
-            Prop{Textures.TreeGreen, Vector2{600.f,767.f}, PropType::TREE, Textures},      // 7 
-            Prop{Textures.TreeGreen, Vector2{800.f,767.f}, PropType::TREE, Textures},      // 9 
-            Prop{Textures.TreeGreen, Vector2{900.f,767.f}, PropType::TREE, Textures},      // 10
-            Prop{Textures.TreeGreen, Vector2{1000.f,767.f}, PropType::TREE, Textures},     // 11
-            Prop{Textures.TreeGreen, Vector2{1100.f,767.f}, PropType::TREE, Textures},     // 12
-            Prop{Textures.TreeGreen, Vector2{1200.f,767.f}, PropType::TREE, Textures},     // 13
-            Prop{Textures.TreeGreen, Vector2{1300.f,767.f}, PropType::TREE, Textures},     // 14
-            Prop{Textures.TreeGreen, Vector2{1400.f,767.f}, PropType::TREE, Textures},     // 15
-            Prop{Textures.TreeGreen, Vector2{1500.f,767.f}, PropType::TREE, Textures},     // 16
-            Prop{Textures.TreeGreen, Vector2{1600.f,767.f}, PropType::TREE, Textures},     // 17
-            // Prop{Textures.TreeGreen, Vector2{1700.f,767.f}, PropType::TREE, Textures},     // 18
-            // Prop{Textures.TreeGreen, Vector2{1900.f,767.f}, PropType::TREE, Textures},     // 20
-            // Prop{Textures.TreeGreen, Vector2{2400.f,767.f}, PropType::TREE, Textures},     // 25
-            // Prop{Textures.TreeGreen, Vector2{2500.f,767.f}, PropType::TREE, Textures},     // 26
-            Prop{Textures.TreeGreen, Vector2{2600.f,767.f}, PropType::TREE, Textures},     // 27
-            Prop{Textures.TreeGreen, Vector2{3200.f,767.f}, PropType::TREE, Textures},     // 33
-            Prop{Textures.TreeGreen, Vector2{3300.f,767.f}, PropType::TREE, Textures},     // 34    
-            Prop{Textures.TreeGreen, Vector2{3400.f,767.f}, PropType::TREE, Textures},     // 35
-            Prop{Textures.TreeGreen, Vector2{3720.f,767.f}, PropType::TREE, Textures},     // 36    
-            Prop{Textures.TreeGreen, Vector2{3820.f,767.f}, PropType::TREE, Textures},     // 37    
-            Prop{Textures.TreeGreen, Vector2{3920.f,767.f}, PropType::TREE, Textures},     // 38
+            Prop{Textures.TreeGreen, Vector2{0.f,767.f}, PropType::TREE, Textures, Audio},        // 1 
+            // Prop{Textures.TreeGreen, Vector2{100.f,767.f}, PropType::TREE, Textures, Audio},      // 2 
+            // Prop{Textures.TreeGreen, Vector2{200.f,767.f}, PropType::TREE, Textures, Audio},      // 3 
+            // Prop{Textures.TreeGreen, Vector2{300.f,767.f}, PropType::TREE, Textures, Audio},      // 4 
+            Prop{Textures.TreeGreen, Vector2{400.f,767.f}, PropType::TREE, Textures, Audio},      // 5 
+            Prop{Textures.TreeGreen, Vector2{500.f,767.f}, PropType::TREE, Textures, Audio},      // 6 
+            Prop{Textures.TreeGreen, Vector2{600.f,767.f}, PropType::TREE, Textures, Audio},      // 7 
+            Prop{Textures.TreeGreen, Vector2{800.f,767.f}, PropType::TREE, Textures, Audio},      // 9 
+            Prop{Textures.TreeGreen, Vector2{900.f,767.f}, PropType::TREE, Textures, Audio},      // 10
+            Prop{Textures.TreeGreen, Vector2{1000.f,767.f}, PropType::TREE, Textures, Audio},     // 11
+            Prop{Textures.TreeGreen, Vector2{1100.f,767.f}, PropType::TREE, Textures, Audio},     // 12
+            Prop{Textures.TreeGreen, Vector2{1200.f,767.f}, PropType::TREE, Textures, Audio},     // 13
+            Prop{Textures.TreeGreen, Vector2{1300.f,767.f}, PropType::TREE, Textures, Audio},     // 14
+            Prop{Textures.TreeGreen, Vector2{1400.f,767.f}, PropType::TREE, Textures, Audio},     // 15
+            Prop{Textures.TreeGreen, Vector2{1500.f,767.f}, PropType::TREE, Textures, Audio},     // 16
+            Prop{Textures.TreeGreen, Vector2{1600.f,767.f}, PropType::TREE, Textures, Audio},     // 17
+            // Prop{Textures.TreeGreen, Vector2{1700.f,767.f}, PropType::TREE, Textures, Audio},     // 18
+            // Prop{Textures.TreeGreen, Vector2{1900.f,767.f}, PropType::TREE, Textures, Audio},     // 20
+            // Prop{Textures.TreeGreen, Vector2{2400.f,767.f}, PropType::TREE, Textures, Audio},     // 25
+            // Prop{Textures.TreeGreen, Vector2{2500.f,767.f}, PropType::TREE, Textures, Audio},     // 26
+            Prop{Textures.TreeGreen, Vector2{2600.f,767.f}, PropType::TREE, Textures, Audio},     // 27
+            Prop{Textures.TreeGreen, Vector2{3200.f,767.f}, PropType::TREE, Textures, Audio},     // 33
+            Prop{Textures.TreeGreen, Vector2{3300.f,767.f}, PropType::TREE, Textures, Audio},     // 34    
+            Prop{Textures.TreeGreen, Vector2{3400.f,767.f}, PropType::TREE, Textures, Audio},     // 35
+            Prop{Textures.TreeGreen, Vector2{3720.f,767.f}, PropType::TREE, Textures, Audio},     // 36    
+            Prop{Textures.TreeGreen, Vector2{3820.f,767.f}, PropType::TREE, Textures, Audio},     // 37    
+            Prop{Textures.TreeGreen, Vector2{3920.f,767.f}, PropType::TREE, Textures, Audio},     // 38
             // row9
-            Prop{Textures.TreeGreen, Vector2{20.f,867.f}, PropType::TREE, Textures},       // 1 
-            // Prop{Textures.TreeGreen, Vector2{120.f,867.f}, PropType::TREE, Textures},      // 2 
-            // Prop{Textures.TreeGreen, Vector2{220.f,867.f}, PropType::TREE, Textures},      // 3 
-            Prop{Textures.TreeGreen, Vector2{320.f,867.f}, PropType::TREE, Textures},      // 4 
-            Prop{Textures.TreeGreen, Vector2{420.f,867.f}, PropType::TREE, Textures},      // 5 
-            Prop{Textures.TreeGreen, Vector2{520.f,867.f}, PropType::TREE, Textures},      // 6 
-            // Prop{Textures.TreeGreen, Vector2{1020.f,867.f}, PropType::TREE, Textures},     // 11
-            Prop{Textures.TreeGreen, Vector2{1120.f,867.f}, PropType::TREE, Textures},     // 12
-            Prop{Textures.TreeGreen, Vector2{1220.f,867.f}, PropType::TREE, Textures},     // 13
-            Prop{Textures.TreeGreen, Vector2{1320.f,867.f}, PropType::TREE, Textures},     // 14
-            Prop{Textures.TreeGreen, Vector2{1420.f,867.f}, PropType::TREE, Textures},     // 15
-            // Prop{Textures.TreeGreen, Vector2{1520.f,867.f}, PropType::TREE, Textures},     // 16
-            Prop{Textures.TreeGreen, Vector2{1620.f,867.f}, PropType::TREE, Textures},     // 17
-            Prop{Textures.TreeGreen, Vector2{1720.f,867.f}, PropType::TREE, Textures},     // 18
-            Prop{Textures.TreeGreen, Vector2{1820.f,867.f}, PropType::TREE, Textures},     // 19
-            // Prop{Textures.TreeGreen, Vector2{1920.f,867.f}, PropType::TREE, Textures},     // 20
-            // Prop{Textures.TreeGreen, Vector2{2020.f,867.f}, PropType::TREE, Textures},     // 21
-            Prop{Textures.TreeGreen, Vector2{2060.f,867.f}, PropType::TREE, Textures},     // 22
-            Prop{Textures.TreeGreen, Vector2{2180.f,867.f}, PropType::TREE, Textures},     // 23
-            Prop{Textures.TreeGreen, Vector2{2300.f,867.f}, PropType::TREE, Textures},     // 24
-            Prop{Textures.TreeGreen, Vector2{2420.f,867.f}, PropType::TREE, Textures},     // 25
-            // Prop{Textures.TreeGreen, Vector2{2520.f,867.f}, PropType::TREE, Textures},     // 26
-            Prop{Textures.TreeGreen, Vector2{2620.f,867.f}, PropType::TREE, Textures},     // 27
-            Prop{Textures.TreeGreen, Vector2{3220.f,867.f}, PropType::TREE, Textures},     // 33
-            Prop{Textures.TreeGreen, Vector2{3320.f,867.f}, PropType::TREE, Textures},     // 34
-            Prop{Textures.TreeGreen, Vector2{3420.f,867.f}, PropType::TREE, Textures},     // 35
-            Prop{Textures.TreeGreen, Vector2{3700.f,867.f}, PropType::TREE, Textures},     // 36
-            Prop{Textures.TreeGreen, Vector2{3800.f,867.f}, PropType::TREE, Textures},     // 37
-            Prop{Textures.TreeGreen, Vector2{3900.f,867.f}, PropType::TREE, Textures},     // 38
-            Prop{Textures.TreeGreen, Vector2{4000.f,867.f}, PropType::TREE, Textures},     // 39
+            Prop{Textures.TreeGreen, Vector2{20.f,867.f}, PropType::TREE, Textures, Audio},       // 1 
+            // Prop{Textures.TreeGreen, Vector2{120.f,867.f}, PropType::TREE, Textures, Audio},      // 2 
+            // Prop{Textures.TreeGreen, Vector2{220.f,867.f}, PropType::TREE, Textures, Audio},      // 3 
+            Prop{Textures.TreeGreen, Vector2{320.f,867.f}, PropType::TREE, Textures, Audio},      // 4 
+            Prop{Textures.TreeGreen, Vector2{420.f,867.f}, PropType::TREE, Textures, Audio},      // 5 
+            Prop{Textures.TreeGreen, Vector2{520.f,867.f}, PropType::TREE, Textures, Audio},      // 6 
+            // Prop{Textures.TreeGreen, Vector2{1020.f,867.f}, PropType::TREE, Textures, Audio},     // 11
+            Prop{Textures.TreeGreen, Vector2{1120.f,867.f}, PropType::TREE, Textures, Audio},     // 12
+            Prop{Textures.TreeGreen, Vector2{1220.f,867.f}, PropType::TREE, Textures, Audio},     // 13
+            Prop{Textures.TreeGreen, Vector2{1320.f,867.f}, PropType::TREE, Textures, Audio},     // 14
+            Prop{Textures.TreeGreen, Vector2{1420.f,867.f}, PropType::TREE, Textures, Audio},     // 15
+            // Prop{Textures.TreeGreen, Vector2{1520.f,867.f}, PropType::TREE, Textures, Audio},     // 16
+            Prop{Textures.TreeGreen, Vector2{1620.f,867.f}, PropType::TREE, Textures, Audio},     // 17
+            Prop{Textures.TreeGreen, Vector2{1720.f,867.f}, PropType::TREE, Textures, Audio},     // 18
+            Prop{Textures.TreeGreen, Vector2{1820.f,867.f}, PropType::TREE, Textures, Audio},     // 19
+            // Prop{Textures.TreeGreen, Vector2{1920.f,867.f}, PropType::TREE, Textures, Audio},     // 20
+            // Prop{Textures.TreeGreen, Vector2{2020.f,867.f}, PropType::TREE, Textures, Audio},     // 21
+            Prop{Textures.TreeGreen, Vector2{2060.f,867.f}, PropType::TREE, Textures, Audio},     // 22
+            Prop{Textures.TreeGreen, Vector2{2180.f,867.f}, PropType::TREE, Textures, Audio},     // 23
+            Prop{Textures.TreeGreen, Vector2{2300.f,867.f}, PropType::TREE, Textures, Audio},     // 24
+            Prop{Textures.TreeGreen, Vector2{2420.f,867.f}, PropType::TREE, Textures, Audio},     // 25
+            // Prop{Textures.TreeGreen, Vector2{2520.f,867.f}, PropType::TREE, Textures, Audio},     // 26
+            Prop{Textures.TreeGreen, Vector2{2620.f,867.f}, PropType::TREE, Textures, Audio},     // 27
+            Prop{Textures.TreeGreen, Vector2{3220.f,867.f}, PropType::TREE, Textures, Audio},     // 33
+            Prop{Textures.TreeGreen, Vector2{3320.f,867.f}, PropType::TREE, Textures, Audio},     // 34
+            Prop{Textures.TreeGreen, Vector2{3420.f,867.f}, PropType::TREE, Textures, Audio},     // 35
+            Prop{Textures.TreeGreen, Vector2{3700.f,867.f}, PropType::TREE, Textures, Audio},     // 36
+            Prop{Textures.TreeGreen, Vector2{3800.f,867.f}, PropType::TREE, Textures, Audio},     // 37
+            Prop{Textures.TreeGreen, Vector2{3900.f,867.f}, PropType::TREE, Textures, Audio},     // 38
+            Prop{Textures.TreeGreen, Vector2{4000.f,867.f}, PropType::TREE, Textures, Audio},     // 39
             // row10
-            Prop{Textures.TreeGreen, Vector2{0.f,967.f}, PropType::TREE, Textures},        // 1 
-            // Prop{Textures.TreeGreen, Vector2{100.f,967.f}, PropType::TREE, Textures},      // 2 
-            // Prop{Textures.TreeGreen, Vector2{200.f,967.f}, PropType::TREE, Textures},      // 3 
-            Prop{Textures.TreeGreen, Vector2{300.f,967.f}, PropType::TREE, Textures},      // 4 
-            Prop{Textures.TreeGreen, Vector2{400.f,967.f}, PropType::TREE, Textures},      // 5 
-            Prop{Textures.TreeGreen, Vector2{1100.f,967.f}, PropType::TREE, Textures},     // 12
-            Prop{Textures.TreeGreen, Vector2{1200.f,967.f}, PropType::TREE, Textures},     // 13
-            Prop{Textures.TreeGreen, Vector2{1300.f,967.f}, PropType::TREE, Textures},     // 14
-            // Prop{Textures.TreeGreen, Vector2{1400.f,967.f}, PropType::TREE, Textures},     // 15
-            Prop{Textures.TreeGreen, Vector2{1500.f,967.f}, PropType::TREE, Textures},     // 16
-            Prop{Textures.TreeGreen, Vector2{1600.f,967.f}, PropType::TREE, Textures},     // 17
-            // Prop{Textures.TreeGreen, Vector2{1700.f,967.f}, PropType::TREE, Textures},     // 18
-            // Prop{Textures.TreeGreen, Vector2{1800.f,967.f}, PropType::TREE, Textures},     // 19
-            Prop{Textures.TreeGreen, Vector2{1900.f,967.f}, PropType::TREE, Textures},     // 20
-            Prop{Textures.TreeGreen, Vector2{2000.f,967.f}, PropType::TREE, Textures},     // 21
-            Prop{Textures.TreeGreen, Vector2{2100.f,967.f}, PropType::TREE, Textures},     // 22
-            // Prop{Textures.TreeGreen, Vector2{2200.f,967.f}, PropType::TREE, Textures},     // 23
-            Prop{Textures.TreeGreen, Vector2{2300.f,967.f}, PropType::TREE, Textures},     // 24
-            // Prop{Textures.TreeGreen, Vector2{2400.f,967.f}, PropType::TREE, Textures},     // 25
-            Prop{Textures.TreeGreen, Vector2{2500.f,967.f}, PropType::TREE, Textures},     // 26
-            Prop{Textures.TreeGreen, Vector2{2600.f,967.f}, PropType::TREE, Textures},     // 27
-            Prop{Textures.TreeGreen, Vector2{3200.f,967.f}, PropType::TREE, Textures},     // 33
-            Prop{Textures.TreeGreen, Vector2{3300.f,967.f}, PropType::TREE, Textures},     // 34
-            Prop{Textures.TreeGreen, Vector2{3400.f,967.f}, PropType::TREE, Textures},     // 35
-            Prop{Textures.TreeGreen, Vector2{3720.f,967.f}, PropType::TREE, Textures},     // 36
-            Prop{Textures.TreeGreen, Vector2{3820.f,967.f}, PropType::TREE, Textures},     // 37
-            Prop{Textures.TreeGreen, Vector2{3920.f,967.f}, PropType::TREE, Textures},     // 38
+            Prop{Textures.TreeGreen, Vector2{0.f,967.f}, PropType::TREE, Textures, Audio},        // 1 
+            // Prop{Textures.TreeGreen, Vector2{100.f,967.f}, PropType::TREE, Textures, Audio},      // 2 
+            // Prop{Textures.TreeGreen, Vector2{200.f,967.f}, PropType::TREE, Textures, Audio},      // 3 
+            Prop{Textures.TreeGreen, Vector2{300.f,967.f}, PropType::TREE, Textures, Audio},      // 4 
+            Prop{Textures.TreeGreen, Vector2{400.f,967.f}, PropType::TREE, Textures, Audio},      // 5 
+            Prop{Textures.TreeGreen, Vector2{1100.f,967.f}, PropType::TREE, Textures, Audio},     // 12
+            Prop{Textures.TreeGreen, Vector2{1200.f,967.f}, PropType::TREE, Textures, Audio},     // 13
+            Prop{Textures.TreeGreen, Vector2{1300.f,967.f}, PropType::TREE, Textures, Audio},     // 14
+            // Prop{Textures.TreeGreen, Vector2{1400.f,967.f}, PropType::TREE, Textures, Audio},     // 15
+            Prop{Textures.TreeGreen, Vector2{1500.f,967.f}, PropType::TREE, Textures, Audio},     // 16
+            Prop{Textures.TreeGreen, Vector2{1600.f,967.f}, PropType::TREE, Textures, Audio},     // 17
+            // Prop{Textures.TreeGreen, Vector2{1700.f,967.f}, PropType::TREE, Textures, Audio},     // 18
+            // Prop{Textures.TreeGreen, Vector2{1800.f,967.f}, PropType::TREE, Textures, Audio},     // 19
+            Prop{Textures.TreeGreen, Vector2{1900.f,967.f}, PropType::TREE, Textures, Audio},     // 20
+            Prop{Textures.TreeGreen, Vector2{2000.f,967.f}, PropType::TREE, Textures, Audio},     // 21
+            Prop{Textures.TreeGreen, Vector2{2100.f,967.f}, PropType::TREE, Textures, Audio},     // 22
+            // Prop{Textures.TreeGreen, Vector2{2200.f,967.f}, PropType::TREE, Textures, Audio},     // 23
+            Prop{Textures.TreeGreen, Vector2{2300.f,967.f}, PropType::TREE, Textures, Audio},     // 24
+            // Prop{Textures.TreeGreen, Vector2{2400.f,967.f}, PropType::TREE, Textures, Audio},     // 25
+            Prop{Textures.TreeGreen, Vector2{2500.f,967.f}, PropType::TREE, Textures, Audio},     // 26
+            Prop{Textures.TreeGreen, Vector2{2600.f,967.f}, PropType::TREE, Textures, Audio},     // 27
+            Prop{Textures.TreeGreen, Vector2{3200.f,967.f}, PropType::TREE, Textures, Audio},     // 33
+            Prop{Textures.TreeGreen, Vector2{3300.f,967.f}, PropType::TREE, Textures, Audio},     // 34
+            Prop{Textures.TreeGreen, Vector2{3400.f,967.f}, PropType::TREE, Textures, Audio},     // 35
+            Prop{Textures.TreeGreen, Vector2{3720.f,967.f}, PropType::TREE, Textures, Audio},     // 36
+            Prop{Textures.TreeGreen, Vector2{3820.f,967.f}, PropType::TREE, Textures, Audio},     // 37
+            Prop{Textures.TreeGreen, Vector2{3920.f,967.f}, PropType::TREE, Textures, Audio},     // 38
             // row11
-            Prop{Textures.TreeGreen, Vector2{20.f,1067.f}, PropType::TREE, Textures},      // 1 
-            Prop{Textures.TreeGreen, Vector2{120.f,1067.f}, PropType::TREE, Textures},     // 2     
-            // Prop{Textures.TreeGreen, Vector2{220.f,1067.f}, PropType::TREE, Textures},     // 3     
-            // Prop{Textures.TreeGreen, Vector2{320.f,1067.f}, PropType::TREE, Textures},     // 4 
-            // Prop{Textures.TreeGreen, Vector2{420.f,1067.f}, PropType::TREE, Textures},     // 5 
-            // Prop{Textures.TreeGreen, Vector2{1420.f,1067.f}, PropType::TREE, Textures},    // 15    
-            // Prop{Textures.TreeGreen, Vector2{1520.f,1067.f}, PropType::TREE, Textures},    // 16    
-            // Prop{Textures.TreeGreen, Vector2{1620.f,1067.f}, PropType::TREE, Textures},    // 17    
-            // Prop{Textures.TreeGreen, Vector2{1720.f,1067.f}, PropType::TREE, Textures},    // 18    
-            Prop{Textures.TreeGreen, Vector2{1820.f,1067.f}, PropType::TREE, Textures},    // 19    
-            Prop{Textures.TreeGreen, Vector2{1920.f,1067.f}, PropType::TREE, Textures},    // 20    
-            // Prop{Textures.TreeGreen, Vector2{2020.f,1067.f}, PropType::TREE, Textures},    // 21    
-            // Prop{Textures.TreeGreen, Vector2{2120.f,1067.f}, PropType::TREE, Textures},    // 22    
-            Prop{Textures.TreeGreen, Vector2{2220.f,1067.f}, PropType::TREE, Textures},    // 23    
-            Prop{Textures.TreeGreen, Vector2{2320.f,1067.f}, PropType::TREE, Textures},    // 24    
-            // Prop{Textures.TreeGreen, Vector2{2420.f,1067.f}, PropType::TREE, Textures},    // 25    
-            // Prop{Textures.TreeGreen, Vector2{2520.f,1067.f}, PropType::TREE, Textures},    // 26    
-            Prop{Textures.TreeGreen, Vector2{2620.f,1067.f}, PropType::TREE, Textures},    // 27    
-            Prop{Textures.TreeGreen, Vector2{2720.f,1067.f}, PropType::TREE, Textures},    // 28    
-            Prop{Textures.TreeGreen, Vector2{3120.f,1067.f}, PropType::TREE, Textures},    // 32    
-            Prop{Textures.TreeGreen, Vector2{3220.f,1067.f}, PropType::TREE, Textures},    // 33    
-            Prop{Textures.TreeGreen, Vector2{3320.f,1067.f}, PropType::TREE, Textures},    // 34    
-            Prop{Textures.TreeGreen, Vector2{3420.f,1067.f}, PropType::TREE, Textures},    // 35    
-            Prop{Textures.TreeGreen, Vector2{3700.f,1067.f}, PropType::TREE, Textures},    // 36    
-            Prop{Textures.TreeGreen, Vector2{3800.f,1067.f}, PropType::TREE, Textures},    // 37    
-            Prop{Textures.TreeGreen, Vector2{3900.f,1067.f}, PropType::TREE, Textures},    // 38    
-            Prop{Textures.TreeGreen, Vector2{4000.f,1067.f}, PropType::TREE, Textures},    // 39
+            Prop{Textures.TreeGreen, Vector2{20.f,1067.f}, PropType::TREE, Textures, Audio},      // 1 
+            Prop{Textures.TreeGreen, Vector2{120.f,1067.f}, PropType::TREE, Textures, Audio},     // 2     
+            // Prop{Textures.TreeGreen, Vector2{220.f,1067.f}, PropType::TREE, Textures, Audio},     // 3     
+            // Prop{Textures.TreeGreen, Vector2{320.f,1067.f}, PropType::TREE, Textures, Audio},     // 4 
+            // Prop{Textures.TreeGreen, Vector2{420.f,1067.f}, PropType::TREE, Textures, Audio},     // 5 
+            // Prop{Textures.TreeGreen, Vector2{1420.f,1067.f}, PropType::TREE, Textures, Audio},    // 15    
+            // Prop{Textures.TreeGreen, Vector2{1520.f,1067.f}, PropType::TREE, Textures, Audio},    // 16    
+            // Prop{Textures.TreeGreen, Vector2{1620.f,1067.f}, PropType::TREE, Textures, Audio},    // 17    
+            // Prop{Textures.TreeGreen, Vector2{1720.f,1067.f}, PropType::TREE, Textures, Audio},    // 18    
+            Prop{Textures.TreeGreen, Vector2{1820.f,1067.f}, PropType::TREE, Textures, Audio},    // 19    
+            Prop{Textures.TreeGreen, Vector2{1920.f,1067.f}, PropType::TREE, Textures, Audio},    // 20    
+            // Prop{Textures.TreeGreen, Vector2{2020.f,1067.f}, PropType::TREE, Textures, Audio},    // 21    
+            // Prop{Textures.TreeGreen, Vector2{2120.f,1067.f}, PropType::TREE, Textures, Audio},    // 22    
+            Prop{Textures.TreeGreen, Vector2{2220.f,1067.f}, PropType::TREE, Textures, Audio},    // 23    
+            Prop{Textures.TreeGreen, Vector2{2320.f,1067.f}, PropType::TREE, Textures, Audio},    // 24    
+            // Prop{Textures.TreeGreen, Vector2{2420.f,1067.f}, PropType::TREE, Textures, Audio},    // 25    
+            // Prop{Textures.TreeGreen, Vector2{2520.f,1067.f}, PropType::TREE, Textures, Audio},    // 26    
+            Prop{Textures.TreeGreen, Vector2{2620.f,1067.f}, PropType::TREE, Textures, Audio},    // 27    
+            Prop{Textures.TreeGreen, Vector2{2720.f,1067.f}, PropType::TREE, Textures, Audio},    // 28    
+            Prop{Textures.TreeGreen, Vector2{3120.f,1067.f}, PropType::TREE, Textures, Audio},    // 32    
+            Prop{Textures.TreeGreen, Vector2{3220.f,1067.f}, PropType::TREE, Textures, Audio},    // 33    
+            Prop{Textures.TreeGreen, Vector2{3320.f,1067.f}, PropType::TREE, Textures, Audio},    // 34    
+            Prop{Textures.TreeGreen, Vector2{3420.f,1067.f}, PropType::TREE, Textures, Audio},    // 35    
+            Prop{Textures.TreeGreen, Vector2{3700.f,1067.f}, PropType::TREE, Textures, Audio},    // 36    
+            Prop{Textures.TreeGreen, Vector2{3800.f,1067.f}, PropType::TREE, Textures, Audio},    // 37    
+            Prop{Textures.TreeGreen, Vector2{3900.f,1067.f}, PropType::TREE, Textures, Audio},    // 38    
+            Prop{Textures.TreeGreen, Vector2{4000.f,1067.f}, PropType::TREE, Textures, Audio},    // 39
             // row12
-            Prop{Textures.TreeGreen, Vector2{0.f,1167.f}, PropType::TREE, Textures},       // 1 
-            Prop{Textures.TreeGreen, Vector2{100.f,1167.f}, PropType::TREE, Textures},     // 2 
-            Prop{Textures.TreeGreen, Vector2{200.f,1167.f}, PropType::TREE, Textures},     // 3 
-            Prop{Textures.TreeGreen, Vector2{300.f,1167.f}, PropType::TREE, Textures},     // 4 
-            Prop{Textures.TreeGreen, Vector2{400.f,1167.f}, PropType::TREE, Textures},     // 5 
-            Prop{Textures.TreeGreen, Vector2{1100.f,1167.f}, PropType::TREE, Textures},    // 12    
-            Prop{Textures.TreeGreen, Vector2{1200.f,1167.f}, PropType::TREE, Textures},    // 13    
-            // Prop{Textures.TreeGreen, Vector2{1300.f,1167.f}, PropType::TREE, Textures},    // 14    
-            // Prop{Textures.TreeGreen, Vector2{1400.f,1167.f}, PropType::TREE, Textures},    // 15    
-            Prop{Textures.TreeGreen, Vector2{1500.f,1167.f}, PropType::TREE, Textures},    // 16    
-            Prop{Textures.TreeGreen, Vector2{1600.f,1167.f}, PropType::TREE, Textures},    // 17    
-            Prop{Textures.TreeGreen, Vector2{1700.f,1167.f}, PropType::TREE, Textures},    // 18    
-            Prop{Textures.TreeGreen, Vector2{1800.f,1167.f}, PropType::TREE, Textures},    // 19    
-            Prop{Textures.TreeGreen, Vector2{1900.f,1167.f}, PropType::TREE, Textures},    // 20    
-            Prop{Textures.TreeGreen, Vector2{2000.f,1167.f}, PropType::TREE, Textures},    // 21    
-            Prop{Textures.TreeGreen, Vector2{2100.f,1167.f}, PropType::TREE, Textures},    // 22    
-            Prop{Textures.TreeGreen, Vector2{2200.f,1167.f}, PropType::TREE, Textures},    // 23    
-            Prop{Textures.TreeGreen, Vector2{2300.f,1167.f}, PropType::TREE, Textures},    // 24    
-            Prop{Textures.TreeGreen, Vector2{2400.f,1167.f}, PropType::TREE, Textures},    // 25    
-            Prop{Textures.TreeGreen, Vector2{2500.f,1167.f}, PropType::TREE, Textures},    // 26    
-            // Prop{Textures.TreeGreen, Vector2{2800.f,1167.f}, PropType::TREE, Textures},    // 29    
-            Prop{Textures.TreeGreen, Vector2{2900.f,1167.f}, PropType::TREE, Textures},    // 30    
-            Prop{Textures.TreeGreen, Vector2{3000.f,1167.f}, PropType::TREE, Textures},    // 31    
-            Prop{Textures.TreeGreen, Vector2{3100.f,1167.f}, PropType::TREE, Textures},    // 32    
-            Prop{Textures.TreeGreen, Vector2{3300.f,1167.f}, PropType::TREE, Textures},    // 34    
-            Prop{Textures.TreeGreen, Vector2{3400.f,1167.f}, PropType::TREE, Textures},    // 35    
-            Prop{Textures.TreeGreen, Vector2{3720.f,1167.f}, PropType::TREE, Textures},    // 36    
-            Prop{Textures.TreeGreen, Vector2{3820.f,1167.f}, PropType::TREE, Textures},    // 37    
-            Prop{Textures.TreeGreen, Vector2{3920.f,1167.f}, PropType::TREE, Textures},    // 38    
+            Prop{Textures.TreeGreen, Vector2{0.f,1167.f}, PropType::TREE, Textures, Audio},       // 1 
+            Prop{Textures.TreeGreen, Vector2{100.f,1167.f}, PropType::TREE, Textures, Audio},     // 2 
+            Prop{Textures.TreeGreen, Vector2{200.f,1167.f}, PropType::TREE, Textures, Audio},     // 3 
+            Prop{Textures.TreeGreen, Vector2{300.f,1167.f}, PropType::TREE, Textures, Audio},     // 4 
+            Prop{Textures.TreeGreen, Vector2{400.f,1167.f}, PropType::TREE, Textures, Audio},     // 5 
+            Prop{Textures.TreeGreen, Vector2{1100.f,1167.f}, PropType::TREE, Textures, Audio},    // 12    
+            Prop{Textures.TreeGreen, Vector2{1200.f,1167.f}, PropType::TREE, Textures, Audio},    // 13    
+            // Prop{Textures.TreeGreen, Vector2{1300.f,1167.f}, PropType::TREE, Textures, Audio},    // 14    
+            // Prop{Textures.TreeGreen, Vector2{1400.f,1167.f}, PropType::TREE, Textures, Audio},    // 15    
+            Prop{Textures.TreeGreen, Vector2{1500.f,1167.f}, PropType::TREE, Textures, Audio},    // 16    
+            Prop{Textures.TreeGreen, Vector2{1600.f,1167.f}, PropType::TREE, Textures, Audio},    // 17    
+            Prop{Textures.TreeGreen, Vector2{1700.f,1167.f}, PropType::TREE, Textures, Audio},    // 18    
+            Prop{Textures.TreeGreen, Vector2{1800.f,1167.f}, PropType::TREE, Textures, Audio},    // 19    
+            Prop{Textures.TreeGreen, Vector2{1900.f,1167.f}, PropType::TREE, Textures, Audio},    // 20    
+            Prop{Textures.TreeGreen, Vector2{2000.f,1167.f}, PropType::TREE, Textures, Audio},    // 21    
+            Prop{Textures.TreeGreen, Vector2{2100.f,1167.f}, PropType::TREE, Textures, Audio},    // 22    
+            Prop{Textures.TreeGreen, Vector2{2200.f,1167.f}, PropType::TREE, Textures, Audio},    // 23    
+            Prop{Textures.TreeGreen, Vector2{2300.f,1167.f}, PropType::TREE, Textures, Audio},    // 24    
+            Prop{Textures.TreeGreen, Vector2{2400.f,1167.f}, PropType::TREE, Textures, Audio},    // 25    
+            Prop{Textures.TreeGreen, Vector2{2500.f,1167.f}, PropType::TREE, Textures, Audio},    // 26    
+            // Prop{Textures.TreeGreen, Vector2{2800.f,1167.f}, PropType::TREE, Textures, Audio},    // 29    
+            Prop{Textures.TreeGreen, Vector2{2900.f,1167.f}, PropType::TREE, Textures, Audio},    // 30    
+            Prop{Textures.TreeGreen, Vector2{3000.f,1167.f}, PropType::TREE, Textures, Audio},    // 31    
+            Prop{Textures.TreeGreen, Vector2{3100.f,1167.f}, PropType::TREE, Textures, Audio},    // 32    
+            Prop{Textures.TreeGreen, Vector2{3300.f,1167.f}, PropType::TREE, Textures, Audio},    // 34    
+            Prop{Textures.TreeGreen, Vector2{3400.f,1167.f}, PropType::TREE, Textures, Audio},    // 35    
+            Prop{Textures.TreeGreen, Vector2{3720.f,1167.f}, PropType::TREE, Textures, Audio},    // 36    
+            Prop{Textures.TreeGreen, Vector2{3820.f,1167.f}, PropType::TREE, Textures, Audio},    // 37    
+            Prop{Textures.TreeGreen, Vector2{3920.f,1167.f}, PropType::TREE, Textures, Audio},    // 38    
             // row13
-            Prop{Textures.TreeGreen, Vector2{20.f,1267.f}, PropType::TREE, Textures},     // 2 
-            Prop{Textures.TreeGreen, Vector2{120.f,1267.f}, PropType::TREE, Textures},     // 2 
-            Prop{Textures.TreeGreen, Vector2{220.f,1267.f}, PropType::TREE, Textures},     // 3 
-            Prop{Textures.TreeGreen, Vector2{320.f,1267.f}, PropType::TREE, Textures},     // 4 
-            Prop{Textures.TreeGreen, Vector2{420.f,1267.f}, PropType::TREE, Textures},     // 5 
-            Prop{Textures.TreeGreen, Vector2{520.f,1267.f}, PropType::TREE, Textures},     // 6 
-            Prop{Textures.TreeGreen, Vector2{1020.f,1267.f}, PropType::TREE, Textures},    // 11
-            // Prop{Textures.TreeGreen, Vector2{1120.f,1267.f}, PropType::TREE, Textures},    // 12
-            Prop{Textures.TreeGreen, Vector2{1220.f,1267.f}, PropType::TREE, Textures},    // 13
-            Prop{Textures.TreeGreen, Vector2{1320.f,1267.f}, PropType::TREE, Textures},    // 14
-            // Prop{Textures.TreeGreen, Vector2{1420.f,1267.f}, PropType::TREE, Textures},    // 15
-            // Prop{Textures.TreeGreen, Vector2{1520.f,1267.f}, PropType::TREE, Textures},    // 16
-            // Prop{Textures.TreeGreen, Vector2{1620.f,1267.f}, PropType::TREE, Textures},    // 17
-            // Prop{Textures.TreeGreen, Vector2{1720.f,1267.f}, PropType::TREE, Textures},    // 18
-            Prop{Textures.TreeGreen, Vector2{1820.f,1267.f}, PropType::TREE, Textures},    // 19
-            Prop{Textures.TreeGreen, Vector2{1920.f,1267.f}, PropType::TREE, Textures},    // 20
-            Prop{Textures.TreeGreen, Vector2{2420.f,1267.f}, PropType::TREE, Textures},    // 25
-            // Prop{Textures.TreeGreen, Vector2{2520.f,1267.f}, PropType::TREE, Textures},    // 26
-            // Prop{Textures.TreeGreen, Vector2{2620.f,1267.f}, PropType::TREE, Textures},    // 27
-            Prop{Textures.TreeGreen, Vector2{2720.f,1267.f}, PropType::TREE, Textures},    // 28
-            Prop{Textures.TreeFall, Vector2{2820.f,1267.f}, PropType::TREE, Textures},    // 29
-            Prop{Textures.TreeGreen, Vector2{2920.f,1267.f}, PropType::TREE, Textures},    // 30
-            Prop{Textures.TreeFall, Vector2{3020.f,1267.f}, PropType::TREE, Textures},    // 31
-            Prop{Textures.TreeGreen, Vector2{3120.f,1267.f}, PropType::TREE, Textures},    // 32
-            Prop{Textures.TreeGreen, Vector2{3220.f,1267.f}, PropType::TREE, Textures},    // 33
-            Prop{Textures.TreeGreen, Vector2{3320.f,1267.f}, PropType::TREE, Textures},    // 34
-            Prop{Textures.TreeGreen, Vector2{3420.f,1267.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3700.f,1267.f}, PropType::TREE, Textures},    // 36
-            Prop{Textures.TreeGreen, Vector2{3800.f,1267.f}, PropType::TREE, Textures},    // 37
-            Prop{Textures.TreeGreen, Vector2{3900.f,1267.f}, PropType::TREE, Textures},    // 38
-            Prop{Textures.TreeGreen, Vector2{4000.f,1267.f}, PropType::TREE, Textures},    // 39
+            Prop{Textures.TreeGreen, Vector2{20.f,1267.f}, PropType::TREE, Textures, Audio},     // 2 
+            Prop{Textures.TreeGreen, Vector2{120.f,1267.f}, PropType::TREE, Textures, Audio},     // 2 
+            Prop{Textures.TreeGreen, Vector2{220.f,1267.f}, PropType::TREE, Textures, Audio},     // 3 
+            Prop{Textures.TreeGreen, Vector2{320.f,1267.f}, PropType::TREE, Textures, Audio},     // 4 
+            Prop{Textures.TreeGreen, Vector2{420.f,1267.f}, PropType::TREE, Textures, Audio},     // 5 
+            Prop{Textures.TreeGreen, Vector2{520.f,1267.f}, PropType::TREE, Textures, Audio},     // 6 
+            Prop{Textures.TreeGreen, Vector2{1020.f,1267.f}, PropType::TREE, Textures, Audio},    // 11
+            // Prop{Textures.TreeGreen, Vector2{1120.f,1267.f}, PropType::TREE, Textures, Audio},    // 12
+            Prop{Textures.TreeGreen, Vector2{1220.f,1267.f}, PropType::TREE, Textures, Audio},    // 13
+            Prop{Textures.TreeGreen, Vector2{1320.f,1267.f}, PropType::TREE, Textures, Audio},    // 14
+            // Prop{Textures.TreeGreen, Vector2{1420.f,1267.f}, PropType::TREE, Textures, Audio},    // 15
+            // Prop{Textures.TreeGreen, Vector2{1520.f,1267.f}, PropType::TREE, Textures, Audio},    // 16
+            // Prop{Textures.TreeGreen, Vector2{1620.f,1267.f}, PropType::TREE, Textures, Audio},    // 17
+            // Prop{Textures.TreeGreen, Vector2{1720.f,1267.f}, PropType::TREE, Textures, Audio},    // 18
+            Prop{Textures.TreeGreen, Vector2{1820.f,1267.f}, PropType::TREE, Textures, Audio},    // 19
+            Prop{Textures.TreeGreen, Vector2{1920.f,1267.f}, PropType::TREE, Textures, Audio},    // 20
+            Prop{Textures.TreeGreen, Vector2{2420.f,1267.f}, PropType::TREE, Textures, Audio},    // 25
+            // Prop{Textures.TreeGreen, Vector2{2520.f,1267.f}, PropType::TREE, Textures, Audio},    // 26
+            // Prop{Textures.TreeGreen, Vector2{2620.f,1267.f}, PropType::TREE, Textures, Audio},    // 27
+            Prop{Textures.TreeGreen, Vector2{2720.f,1267.f}, PropType::TREE, Textures, Audio},    // 28
+            Prop{Textures.TreeFall, Vector2{2820.f,1267.f}, PropType::TREE, Textures, Audio},    // 29
+            Prop{Textures.TreeGreen, Vector2{2920.f,1267.f}, PropType::TREE, Textures, Audio},    // 30
+            Prop{Textures.TreeFall, Vector2{3020.f,1267.f}, PropType::TREE, Textures, Audio},    // 31
+            Prop{Textures.TreeGreen, Vector2{3120.f,1267.f}, PropType::TREE, Textures, Audio},    // 32
+            Prop{Textures.TreeGreen, Vector2{3220.f,1267.f}, PropType::TREE, Textures, Audio},    // 33
+            Prop{Textures.TreeGreen, Vector2{3320.f,1267.f}, PropType::TREE, Textures, Audio},    // 34
+            Prop{Textures.TreeGreen, Vector2{3420.f,1267.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3700.f,1267.f}, PropType::TREE, Textures, Audio},    // 36
+            Prop{Textures.TreeGreen, Vector2{3800.f,1267.f}, PropType::TREE, Textures, Audio},    // 37
+            Prop{Textures.TreeGreen, Vector2{3900.f,1267.f}, PropType::TREE, Textures, Audio},    // 38
+            Prop{Textures.TreeGreen, Vector2{4000.f,1267.f}, PropType::TREE, Textures, Audio},    // 39
             // row14
-            Prop{Textures.TreeGreen, Vector2{0.f,1367.f}, PropType::TREE, Textures},       // 1 
-            Prop{Textures.TreeGreen, Vector2{100.f,1367.f}, PropType::TREE, Textures},     // 2     
-            Prop{Textures.TreeGreen, Vector2{200.f,1367.f}, PropType::TREE, Textures},     // 3     
-            Prop{Textures.TreeGreen, Vector2{300.f,1367.f}, PropType::TREE, Textures},     // 4     
-            Prop{Textures.TreeGreen, Vector2{400.f,1367.f}, PropType::TREE, Textures},     // 5     
-            // Prop{Textures.TreeGreen, Vector2{500.f,1367.f}, PropType::TREE, Textures},     // 6     
-            Prop{Textures.TreeGreen, Vector2{700.f,1367.f}, PropType::TREE, Textures},     // 8     
-            Prop{Textures.TreeGreen, Vector2{800.f,1367.f}, PropType::TREE, Textures},     // 9     
-            // Prop{Textures.TreeGreen, Vector2{900.f,1367.f}, PropType::TREE, Textures},     // 10    
-            Prop{Textures.TreeGreen, Vector2{1000.f,1367.f}, PropType::TREE, Textures},    // 11    
-            Prop{Textures.TreeGreen, Vector2{1100.f,1367.f}, PropType::TREE, Textures},    // 12    
-            Prop{Textures.TreeGreen, Vector2{1200.f,1367.f}, PropType::TREE, Textures},    // 13    
-            Prop{Textures.TreeGreen, Vector2{1300.f,1367.f}, PropType::TREE, Textures},    // 14    
-            Prop{Textures.TreeGreen, Vector2{1400.f,1367.f}, PropType::TREE, Textures},    // 15    
-            Prop{Textures.TreeGreen, Vector2{1500.f,1367.f}, PropType::TREE, Textures},    // 16    
-            Prop{Textures.TreeGreen, Vector2{1600.f,1367.f}, PropType::TREE, Textures},    // 17    
-            // Prop{Textures.TreeGreen, Vector2{1700.f,1367.f}, PropType::TREE, Textures},    // 18    
-            // Prop{Textures.TreeGreen, Vector2{1800.f,1367.f}, PropType::TREE, Textures},    // 19    
-            // Prop{Textures.TreeGreen, Vector2{2500.f,1367.f}, PropType::TREE, Textures},    // 26    
-            Prop{Textures.TreeGreen, Vector2{2600.f,1367.f}, PropType::TREE, Textures},    // 27    
-            Prop{Textures.TreeFall, Vector2{2700.f,1367.f}, PropType::TREE, Textures},    // 28    
-            Prop{Textures.TreeGreen, Vector2{2800.f,1367.f}, PropType::TREE, Textures},    // 29    
-            Prop{Textures.TreeGreen, Vector2{2900.f,1367.f}, PropType::TREE, Textures},    // 30    
-            Prop{Textures.TreeGreen, Vector2{3100.f,1367.f}, PropType::TREE, Textures},    // 32    
-            Prop{Textures.TreeGreen, Vector2{3200.f,1367.f}, PropType::TREE, Textures},    // 33    
-            Prop{Textures.TreeGreen, Vector2{3300.f,1367.f}, PropType::TREE, Textures},    // 34    
-            Prop{Textures.TreeGreen, Vector2{3400.f,1367.f}, PropType::TREE, Textures},    // 35    
-            Prop{Textures.TreeGreen, Vector2{3720.f,1367.f}, PropType::TREE, Textures},    // 36    
-            Prop{Textures.TreeGreen, Vector2{3820.f,1367.f}, PropType::TREE, Textures},    // 37    
-            Prop{Textures.TreeGreen, Vector2{3920.f,1367.f}, PropType::TREE, Textures},    // 38    
+            Prop{Textures.TreeGreen, Vector2{0.f,1367.f}, PropType::TREE, Textures, Audio},       // 1 
+            Prop{Textures.TreeGreen, Vector2{100.f,1367.f}, PropType::TREE, Textures, Audio},     // 2     
+            Prop{Textures.TreeGreen, Vector2{200.f,1367.f}, PropType::TREE, Textures, Audio},     // 3     
+            Prop{Textures.TreeGreen, Vector2{300.f,1367.f}, PropType::TREE, Textures, Audio},     // 4     
+            Prop{Textures.TreeGreen, Vector2{400.f,1367.f}, PropType::TREE, Textures, Audio},     // 5     
+            // Prop{Textures.TreeGreen, Vector2{500.f,1367.f}, PropType::TREE, Textures, Audio},     // 6     
+            Prop{Textures.TreeGreen, Vector2{700.f,1367.f}, PropType::TREE, Textures, Audio},     // 8     
+            Prop{Textures.TreeGreen, Vector2{800.f,1367.f}, PropType::TREE, Textures, Audio},     // 9     
+            // Prop{Textures.TreeGreen, Vector2{900.f,1367.f}, PropType::TREE, Textures, Audio},     // 10    
+            Prop{Textures.TreeGreen, Vector2{1000.f,1367.f}, PropType::TREE, Textures, Audio},    // 11    
+            Prop{Textures.TreeGreen, Vector2{1100.f,1367.f}, PropType::TREE, Textures, Audio},    // 12    
+            Prop{Textures.TreeGreen, Vector2{1200.f,1367.f}, PropType::TREE, Textures, Audio},    // 13    
+            Prop{Textures.TreeGreen, Vector2{1300.f,1367.f}, PropType::TREE, Textures, Audio},    // 14    
+            Prop{Textures.TreeGreen, Vector2{1400.f,1367.f}, PropType::TREE, Textures, Audio},    // 15    
+            Prop{Textures.TreeGreen, Vector2{1500.f,1367.f}, PropType::TREE, Textures, Audio},    // 16    
+            Prop{Textures.TreeGreen, Vector2{1600.f,1367.f}, PropType::TREE, Textures, Audio},    // 17    
+            // Prop{Textures.TreeGreen, Vector2{1700.f,1367.f}, PropType::TREE, Textures, Audio},    // 18    
+            // Prop{Textures.TreeGreen, Vector2{1800.f,1367.f}, PropType::TREE, Textures, Audio},    // 19    
+            // Prop{Textures.TreeGreen, Vector2{2500.f,1367.f}, PropType::TREE, Textures, Audio},    // 26    
+            Prop{Textures.TreeGreen, Vector2{2600.f,1367.f}, PropType::TREE, Textures, Audio},    // 27    
+            Prop{Textures.TreeFall, Vector2{2700.f,1367.f}, PropType::TREE, Textures, Audio},    // 28    
+            Prop{Textures.TreeGreen, Vector2{2800.f,1367.f}, PropType::TREE, Textures, Audio},    // 29    
+            Prop{Textures.TreeGreen, Vector2{2900.f,1367.f}, PropType::TREE, Textures, Audio},    // 30    
+            Prop{Textures.TreeGreen, Vector2{3100.f,1367.f}, PropType::TREE, Textures, Audio},    // 32    
+            Prop{Textures.TreeGreen, Vector2{3200.f,1367.f}, PropType::TREE, Textures, Audio},    // 33    
+            Prop{Textures.TreeGreen, Vector2{3300.f,1367.f}, PropType::TREE, Textures, Audio},    // 34    
+            Prop{Textures.TreeGreen, Vector2{3400.f,1367.f}, PropType::TREE, Textures, Audio},    // 35    
+            Prop{Textures.TreeGreen, Vector2{3720.f,1367.f}, PropType::TREE, Textures, Audio},    // 36    
+            Prop{Textures.TreeGreen, Vector2{3820.f,1367.f}, PropType::TREE, Textures, Audio},    // 37    
+            Prop{Textures.TreeGreen, Vector2{3920.f,1367.f}, PropType::TREE, Textures, Audio},    // 38    
             // row15
-            Prop{Textures.TreeGreen, Vector2{20.f,1467.f}, PropType::TREE, Textures},      // 1 
-            Prop{Textures.TreeGreen, Vector2{120.f,1467.f}, PropType::TREE, Textures},     // 2 
-            Prop{Textures.TreeGreen, Vector2{220.f,1467.f}, PropType::TREE, Textures},     // 3 
-            Prop{Textures.TreeGreen, Vector2{320.f,1467.f}, PropType::TREE, Textures},     // 4 
-            Prop{Textures.TreeGreen, Vector2{520.f,1467.f}, PropType::TREE, Textures},     // 6 
-            Prop{Textures.TreeGreen, Vector2{720.f,1467.f}, PropType::TREE, Textures},     // 8 
-            Prop{Textures.TreeGreen, Vector2{820.f,1467.f}, PropType::TREE, Textures},     // 9 
-            // Prop{Textures.TreeGreen, Vector2{920.f,1467.f}, PropType::TREE, Textures},     // 10
-            // Prop{Textures.TreeGreen, Vector2{1220.f,1467.f}, PropType::TREE, Textures},    // 13
-            // Prop{Textures.TreeGreen, Vector2{1320.f,1467.f}, PropType::TREE, Textures},    // 14
-            Prop{Textures.TreeGreen, Vector2{1420.f,1467.f}, PropType::TREE, Textures},    // 15
-            Prop{Textures.TreeGreen, Vector2{1520.f,1467.f}, PropType::TREE, Textures},    // 16
-            // Prop{Textures.TreeGreen, Vector2{1620.f,1467.f}, PropType::TREE, Textures},    // 17
-            Prop{Textures.TreeGreen, Vector2{1720.f,1467.f}, PropType::TREE, Textures},    // 18
-            Prop{Textures.TreeGreen, Vector2{1820.f,1467.f}, PropType::TREE, Textures},    // 19
-            Prop{Textures.TreeGreen, Vector2{2420.f,1467.f}, PropType::TREE, Textures},    // 25
-            Prop{Textures.TreeGreen, Vector2{2520.f,1467.f}, PropType::TREE, Textures},    // 26
-            Prop{Textures.TreeGreen, Vector2{2620.f,1467.f}, PropType::TREE, Textures},    // 27
-            // Prop{Textures.TreeGreen, Vector2{2720.f,1467.f}, PropType::TREE, Textures},    // 28
-            Prop{Textures.TreeStump, Vector2{2835.f,1546.f}, PropType::STUMP, Textures},    // 29
-            // Prop{Textures.TreeGreen, Vector2{2820.f,1467.f}, PropType::TREE, Textures},    // 29
-            Prop{Textures.TreeFall, Vector2{2920.f,1467.f}, PropType::TREE, Textures},    // 30
-            Prop{Textures.TreeStump, Vector2{3135.f,1546.f}, PropType::STUMP, Textures},    // 31
-            // Prop{Textures.TreeGreen, Vector2{3120.f,1467.f}, PropType::TREE, Textures},    // 32
-            Prop{Textures.TreeGreen, Vector2{3220.f,1467.f}, PropType::TREE, Textures},    // 33
-            // Prop{Textures.TreeGreen, Vector2{3320.f,1467.f}, PropType::TREE, Textures},    // 34
-            Prop{Textures.TreeGreen, Vector2{3420.f,1467.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3700.f,1467.f}, PropType::TREE, Textures},    // 36
-            Prop{Textures.TreeGreen, Vector2{3800.f,1467.f}, PropType::TREE, Textures},    // 37
-            Prop{Textures.TreeGreen, Vector2{3900.f,1467.f}, PropType::TREE, Textures},    // 38
+            Prop{Textures.TreeGreen, Vector2{20.f,1467.f}, PropType::TREE, Textures, Audio},      // 1 
+            Prop{Textures.TreeGreen, Vector2{120.f,1467.f}, PropType::TREE, Textures, Audio},     // 2 
+            Prop{Textures.TreeGreen, Vector2{220.f,1467.f}, PropType::TREE, Textures, Audio},     // 3 
+            Prop{Textures.TreeGreen, Vector2{320.f,1467.f}, PropType::TREE, Textures, Audio},     // 4 
+            Prop{Textures.TreeGreen, Vector2{520.f,1467.f}, PropType::TREE, Textures, Audio},     // 6 
+            Prop{Textures.TreeGreen, Vector2{720.f,1467.f}, PropType::TREE, Textures, Audio},     // 8 
+            Prop{Textures.TreeGreen, Vector2{820.f,1467.f}, PropType::TREE, Textures, Audio},     // 9 
+            // Prop{Textures.TreeGreen, Vector2{920.f,1467.f}, PropType::TREE, Textures, Audio},     // 10
+            // Prop{Textures.TreeGreen, Vector2{1220.f,1467.f}, PropType::TREE, Textures, Audio},    // 13
+            // Prop{Textures.TreeGreen, Vector2{1320.f,1467.f}, PropType::TREE, Textures, Audio},    // 14
+            Prop{Textures.TreeGreen, Vector2{1420.f,1467.f}, PropType::TREE, Textures, Audio},    // 15
+            Prop{Textures.TreeGreen, Vector2{1520.f,1467.f}, PropType::TREE, Textures, Audio},    // 16
+            // Prop{Textures.TreeGreen, Vector2{1620.f,1467.f}, PropType::TREE, Textures, Audio},    // 17
+            Prop{Textures.TreeGreen, Vector2{1720.f,1467.f}, PropType::TREE, Textures, Audio},    // 18
+            Prop{Textures.TreeGreen, Vector2{1820.f,1467.f}, PropType::TREE, Textures, Audio},    // 19
+            Prop{Textures.TreeGreen, Vector2{2420.f,1467.f}, PropType::TREE, Textures, Audio},    // 25
+            Prop{Textures.TreeGreen, Vector2{2520.f,1467.f}, PropType::TREE, Textures, Audio},    // 26
+            Prop{Textures.TreeGreen, Vector2{2620.f,1467.f}, PropType::TREE, Textures, Audio},    // 27
+            // Prop{Textures.TreeGreen, Vector2{2720.f,1467.f}, PropType::TREE, Textures, Audio},    // 28
+            Prop{Textures.TreeStump, Vector2{2835.f,1546.f}, PropType::STUMP, Textures, Audio},    // 29
+            // Prop{Textures.TreeGreen, Vector2{2820.f,1467.f}, PropType::TREE, Textures, Audio},    // 29
+            Prop{Textures.TreeFall, Vector2{2920.f,1467.f}, PropType::TREE, Textures, Audio},    // 30
+            Prop{Textures.TreeStump, Vector2{3135.f,1546.f}, PropType::STUMP, Textures, Audio},    // 31
+            // Prop{Textures.TreeGreen, Vector2{3120.f,1467.f}, PropType::TREE, Textures, Audio},    // 32
+            Prop{Textures.TreeGreen, Vector2{3220.f,1467.f}, PropType::TREE, Textures, Audio},    // 33
+            // Prop{Textures.TreeGreen, Vector2{3320.f,1467.f}, PropType::TREE, Textures, Audio},    // 34
+            Prop{Textures.TreeGreen, Vector2{3420.f,1467.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3700.f,1467.f}, PropType::TREE, Textures, Audio},    // 36
+            Prop{Textures.TreeGreen, Vector2{3800.f,1467.f}, PropType::TREE, Textures, Audio},    // 37
+            Prop{Textures.TreeGreen, Vector2{3900.f,1467.f}, PropType::TREE, Textures, Audio},    // 38
             // row16
-            Prop{Textures.TreeGreen, Vector2{0.f,1567.f}, PropType::TREE, Textures},       // 1 
-            Prop{Textures.TreeGreen, Vector2{100.f,1567.f}, PropType::TREE, Textures},     // 2 
-            Prop{Textures.TreeGreen, Vector2{200.f,1567.f}, PropType::TREE, Textures},     // 3 
-            Prop{Textures.TreeGreen, Vector2{400.f,1567.f}, PropType::TREE, Textures},     // 5 
-            Prop{Textures.TreeGreen, Vector2{500.f,1567.f}, PropType::TREE, Textures},     // 6 
-            Prop{Textures.TreeGreen, Vector2{600.f,1567.f}, PropType::TREE, Textures},     // 7 
-            Prop{Textures.TreeGreen, Vector2{700.f,1567.f}, PropType::TREE, Textures},     // 8 
-            Prop{Textures.TreeGreen, Vector2{800.f,1567.f}, PropType::TREE, Textures},     // 9 
-            Prop{Textures.TreeGreen, Vector2{900.f,1567.f}, PropType::TREE, Textures},     // 10
-            Prop{Textures.TreeGreen, Vector2{1000.f,1567.f}, PropType::TREE, Textures},    // 11    
-            Prop{Textures.TreeGreen, Vector2{1100.f,1567.f}, PropType::TREE, Textures},    // 12
-            Prop{Textures.TreeGreen, Vector2{1200.f,1567.f}, PropType::TREE, Textures},    // 13
-            Prop{Textures.TreeGreen, Vector2{1300.f,1567.f}, PropType::TREE, Textures},    // 14
-            // Prop{Textures.TreeGreen, Vector2{1400.f,1567.f}, PropType::TREE, Textures},    // 15
-            Prop{Textures.TreeGreen, Vector2{1500.f,1567.f}, PropType::TREE, Textures},    // 16
-            Prop{Textures.TreeGreen, Vector2{1600.f,1567.f}, PropType::TREE, Textures},    // 17
-            Prop{Textures.TreeGreen, Vector2{2500.f,1567.f}, PropType::TREE, Textures},    // 26
-            Prop{Textures.TreeGreen, Vector2{2600.f,1567.f}, PropType::TREE, Textures},    // 27
-            Prop{Textures.TreeGreen, Vector2{2700.f,1567.f}, PropType::TREE, Textures},    // 28
-            Prop{Textures.TreeGreen, Vector2{2800.f,1567.f}, PropType::TREE, Textures},    // 29
-            Prop{Textures.TreeStump, Vector2{2950.f,1658.f}, PropType::STUMP, Textures},    // 30
-            Prop{Textures.TreeStump, Vector2{3050.f,1658.f}, PropType::STUMP, Textures},    // 31
-            // Prop{Textures.TreeGreen, Vector2{3100.f,1567.f}, PropType::TREE, Textures},    // 32
-            Prop{Textures.TreeFall, Vector2{3200.f,1567.f}, PropType::TREE, Textures},    // 33
-            Prop{Textures.TreeGreen, Vector2{3300.f,1567.f}, PropType::TREE, Textures},    // 34
-            Prop{Textures.TreeGreen, Vector2{3400.f,1567.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3720.f,1567.f}, PropType::TREE, Textures},    // 36 
-            Prop{Textures.TreeGreen, Vector2{3820.f,1567.f}, PropType::TREE, Textures},    // 37
-            Prop{Textures.TreeGreen, Vector2{3920.f,1567.f}, PropType::TREE, Textures},    // 38
+            Prop{Textures.TreeGreen, Vector2{0.f,1567.f}, PropType::TREE, Textures, Audio},       // 1 
+            Prop{Textures.TreeGreen, Vector2{100.f,1567.f}, PropType::TREE, Textures, Audio},     // 2 
+            Prop{Textures.TreeGreen, Vector2{200.f,1567.f}, PropType::TREE, Textures, Audio},     // 3 
+            Prop{Textures.TreeGreen, Vector2{400.f,1567.f}, PropType::TREE, Textures, Audio},     // 5 
+            Prop{Textures.TreeGreen, Vector2{500.f,1567.f}, PropType::TREE, Textures, Audio},     // 6 
+            Prop{Textures.TreeGreen, Vector2{600.f,1567.f}, PropType::TREE, Textures, Audio},     // 7 
+            Prop{Textures.TreeGreen, Vector2{700.f,1567.f}, PropType::TREE, Textures, Audio},     // 8 
+            Prop{Textures.TreeGreen, Vector2{800.f,1567.f}, PropType::TREE, Textures, Audio},     // 9 
+            Prop{Textures.TreeGreen, Vector2{900.f,1567.f}, PropType::TREE, Textures, Audio},     // 10
+            Prop{Textures.TreeGreen, Vector2{1000.f,1567.f}, PropType::TREE, Textures, Audio},    // 11    
+            Prop{Textures.TreeGreen, Vector2{1100.f,1567.f}, PropType::TREE, Textures, Audio},    // 12
+            Prop{Textures.TreeGreen, Vector2{1200.f,1567.f}, PropType::TREE, Textures, Audio},    // 13
+            Prop{Textures.TreeGreen, Vector2{1300.f,1567.f}, PropType::TREE, Textures, Audio},    // 14
+            // Prop{Textures.TreeGreen, Vector2{1400.f,1567.f}, PropType::TREE, Textures, Audio},    // 15
+            Prop{Textures.TreeGreen, Vector2{1500.f,1567.f}, PropType::TREE, Textures, Audio},    // 16
+            Prop{Textures.TreeGreen, Vector2{1600.f,1567.f}, PropType::TREE, Textures, Audio},    // 17
+            Prop{Textures.TreeGreen, Vector2{2500.f,1567.f}, PropType::TREE, Textures, Audio},    // 26
+            Prop{Textures.TreeGreen, Vector2{2600.f,1567.f}, PropType::TREE, Textures, Audio},    // 27
+            Prop{Textures.TreeGreen, Vector2{2700.f,1567.f}, PropType::TREE, Textures, Audio},    // 28
+            Prop{Textures.TreeGreen, Vector2{2800.f,1567.f}, PropType::TREE, Textures, Audio},    // 29
+            Prop{Textures.TreeStump, Vector2{2950.f,1658.f}, PropType::STUMP, Textures, Audio},    // 30
+            Prop{Textures.TreeStump, Vector2{3050.f,1658.f}, PropType::STUMP, Textures, Audio},    // 31
+            // Prop{Textures.TreeGreen, Vector2{3100.f,1567.f}, PropType::TREE, Textures, Audio},    // 32
+            Prop{Textures.TreeFall, Vector2{3200.f,1567.f}, PropType::TREE, Textures, Audio},    // 33
+            Prop{Textures.TreeGreen, Vector2{3300.f,1567.f}, PropType::TREE, Textures, Audio},    // 34
+            Prop{Textures.TreeGreen, Vector2{3400.f,1567.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3720.f,1567.f}, PropType::TREE, Textures, Audio},    // 36 
+            Prop{Textures.TreeGreen, Vector2{3820.f,1567.f}, PropType::TREE, Textures, Audio},    // 37
+            Prop{Textures.TreeGreen, Vector2{3920.f,1567.f}, PropType::TREE, Textures, Audio},    // 38
             // row17
-            Prop{Textures.TreeGreen, Vector2{20.f,1667.f}, PropType::TREE, Textures},      // 1 
-            Prop{Textures.TreeGreen, Vector2{120.f,1667.f}, PropType::TREE, Textures},     // 2 
-            // Prop{Textures.TreeGreen, Vector2{220.f,1667.f}, PropType::TREE, Textures},     // 3 
-            // Prop{Textures.TreeGreen, Vector2{520.f,1667.f}, PropType::TREE, Textures},     // 6 
-            // Prop{Textures.TreeGreen, Vector2{620.f,1667.f}, PropType::TREE, Textures},     // 7 
-            Prop{Textures.TreeGreen, Vector2{720.f,1667.f}, PropType::TREE, Textures},     // 8 
-            Prop{Textures.TreeGreen, Vector2{820.f,1667.f}, PropType::TREE, Textures},     // 9 
-            Prop{Textures.TreeGreen, Vector2{920.f,1667.f}, PropType::TREE, Textures},     // 10
-            Prop{Textures.TreeGreen, Vector2{1120.f,1667.f}, PropType::TREE, Textures},    // 12
-            Prop{Textures.TreeGreen, Vector2{1220.f,1667.f}, PropType::TREE, Textures},    // 13
-            Prop{Textures.TreeGreen, Vector2{1320.f,1667.f}, PropType::TREE, Textures},    // 14
-            Prop{Textures.TreeGreen, Vector2{2920.f,1667.f}, PropType::TREE, Textures},    // 30
-            Prop{Textures.TreeStump, Vector2{2635.f,1737.f}, PropType::STUMP, Textures},    // 32
-            Prop{Textures.TreeStump, Vector2{2735.f,1737.f}, PropType::STUMP, Textures},    // 32
-            Prop{Textures.TreeStump, Vector2{2835.f,1737.f}, PropType::STUMP, Textures},    // 31
-            Prop{Textures.TreeStump, Vector2{3050.f,1737.f}, PropType::STUMP, Textures},    // 31
-            Prop{Textures.TreeStump, Vector2{3220.f,1737.f}, PropType::STUMP, Textures},    // 32
-            // Prop{Textures.TreeGreen, Vector2{3220.f,1667.f}, PropType::TREE, Textures},    // 33
-            Prop{Textures.TreeGreen, Vector2{3320.f,1667.f}, PropType::TREE, Textures},    // 34
-            Prop{Textures.TreeFall, Vector2{3420.f,1667.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3700.f,1667.f}, PropType::TREE, Textures},    // 36
-            Prop{Textures.TreeGreen, Vector2{3800.f,1667.f}, PropType::TREE, Textures},    // 37
-            Prop{Textures.TreeGreen, Vector2{3900.f,1667.f}, PropType::TREE, Textures},    // 38
-            Prop{Textures.TreeGreen, Vector2{4000.f,1667.f}, PropType::TREE, Textures},    // 39
+            Prop{Textures.TreeGreen, Vector2{20.f,1667.f}, PropType::TREE, Textures, Audio},      // 1 
+            Prop{Textures.TreeGreen, Vector2{120.f,1667.f}, PropType::TREE, Textures, Audio},     // 2 
+            // Prop{Textures.TreeGreen, Vector2{220.f,1667.f}, PropType::TREE, Textures, Audio},     // 3 
+            // Prop{Textures.TreeGreen, Vector2{520.f,1667.f}, PropType::TREE, Textures, Audio},     // 6 
+            // Prop{Textures.TreeGreen, Vector2{620.f,1667.f}, PropType::TREE, Textures, Audio},     // 7 
+            Prop{Textures.TreeGreen, Vector2{720.f,1667.f}, PropType::TREE, Textures, Audio},     // 8 
+            Prop{Textures.TreeGreen, Vector2{820.f,1667.f}, PropType::TREE, Textures, Audio},     // 9 
+            Prop{Textures.TreeGreen, Vector2{920.f,1667.f}, PropType::TREE, Textures, Audio},     // 10
+            Prop{Textures.TreeGreen, Vector2{1120.f,1667.f}, PropType::TREE, Textures, Audio},    // 12
+            Prop{Textures.TreeGreen, Vector2{1220.f,1667.f}, PropType::TREE, Textures, Audio},    // 13
+            Prop{Textures.TreeGreen, Vector2{1320.f,1667.f}, PropType::TREE, Textures, Audio},    // 14
+            Prop{Textures.TreeGreen, Vector2{2920.f,1667.f}, PropType::TREE, Textures, Audio},    // 30
+            Prop{Textures.TreeStump, Vector2{2635.f,1737.f}, PropType::STUMP, Textures, Audio},    // 32
+            Prop{Textures.TreeStump, Vector2{2735.f,1737.f}, PropType::STUMP, Textures, Audio},    // 32
+            Prop{Textures.TreeStump, Vector2{2835.f,1737.f}, PropType::STUMP, Textures, Audio},    // 31
+            Prop{Textures.TreeStump, Vector2{3050.f,1737.f}, PropType::STUMP, Textures, Audio},    // 31
+            Prop{Textures.TreeStump, Vector2{3220.f,1737.f}, PropType::STUMP, Textures, Audio},    // 32
+            // Prop{Textures.TreeGreen, Vector2{3220.f,1667.f}, PropType::TREE, Textures, Audio},    // 33
+            Prop{Textures.TreeGreen, Vector2{3320.f,1667.f}, PropType::TREE, Textures, Audio},    // 34
+            Prop{Textures.TreeFall, Vector2{3420.f,1667.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3700.f,1667.f}, PropType::TREE, Textures, Audio},    // 36
+            Prop{Textures.TreeGreen, Vector2{3800.f,1667.f}, PropType::TREE, Textures, Audio},    // 37
+            Prop{Textures.TreeGreen, Vector2{3900.f,1667.f}, PropType::TREE, Textures, Audio},    // 38
+            Prop{Textures.TreeGreen, Vector2{4000.f,1667.f}, PropType::TREE, Textures, Audio},    // 39
             // row18
-            Prop{Textures.TreeGreen, Vector2{0.f,1767.f}, PropType::TREE, Textures},       // 1 
-            Prop{Textures.TreeGreen, Vector2{100.f,1767.f}, PropType::TREE, Textures},     // 2 
-            // Prop{Textures.TreeGreen, Vector2{200.f,1767.f}, PropType::TREE, Textures},     // 3 
-            // Prop{Textures.TreeGreen, Vector2{300.f,1767.f}, PropType::TREE, Textures},     // 4 
-            // Prop{Textures.TreeGreen, Vector2{400.f,1767.f}, PropType::TREE, Textures},     // 5 
-            // Prop{Textures.TreeGreen, Vector2{500.f,1767.f}, PropType::TREE, Textures},     // 6 
-            // Prop{Textures.TreeGreen, Vector2{600.f,1767.f}, PropType::TREE, Textures},     // 7 
-            // Prop{Textures.TreeGreen, Vector2{700.f,1767.f}, PropType::TREE, Textures},     // 8 
-            Prop{Textures.TreeGreen, Vector2{800.f,1767.f}, PropType::TREE, Textures},     // 9 
-            Prop{Textures.TreeGreen, Vector2{900.f,1767.f}, PropType::TREE, Textures},     // 10
-            Prop{Textures.TreeGreen, Vector2{1000.f,1767.f}, PropType::TREE, Textures},    // 11
-            Prop{Textures.TreeGreen, Vector2{1100.f,1767.f}, PropType::TREE, Textures},    // 12
-            // Prop{Textures.TreeGreen, Vector2{1200.f,1767.f}, PropType::TREE, Textures},    // 13
-            Prop{Textures.TreeGreen, Vector2{1300.f,1767.f}, PropType::TREE, Textures},    // 14
-            Prop{Textures.TreeGreen, Vector2{1400.f,1767.f}, PropType::TREE, Textures},    // 15
-            Prop{Textures.TreeGreen, Vector2{2500.f,1767.f}, PropType::TREE, Textures},    // 26
-            Prop{Textures.TreeGreen, Vector2{2600.f,1767.f}, PropType::TREE, Textures},    // 27
-            Prop{Textures.TreeGreen, Vector2{2700.f,1767.f}, PropType::TREE, Textures},    // 28
-            Prop{Textures.TreeGreen, Vector2{2800.f,1767.f}, PropType::TREE, Textures},    // 29
-            // Prop{Textures.TreeGreen, Vector2{2900.f,1767.f}, PropType::TREE, Textures},    // 30
-            Prop{Textures.TreeFall, Vector2{3000.f,1767.f}, PropType::TREE, Textures},    // 31
-            // Prop{Textures.TreeGreen, Vector2{3100.f,1767.f}, PropType::TREE, Textures},    // 32
-            // Prop{Textures.TreeGreen, Vector2{3200.f,1767.f}, PropType::TREE, Textures},    // 33
-            // Prop{Textures.TreeGreen, Vector2{3300.f,1767.f}, PropType::TREE, Textures},    // 34
-            // Prop{Textures.TreeGreen, Vector2{3400.f,1767.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3720.f,1767.f}, PropType::TREE, Textures},    // 36
-            Prop{Textures.TreeGreen, Vector2{3820.f,1767.f}, PropType::TREE, Textures},    // 37
-            Prop{Textures.TreeGreen, Vector2{3920.f,1767.f}, PropType::TREE, Textures},    // 38
+            Prop{Textures.TreeGreen, Vector2{0.f,1767.f}, PropType::TREE, Textures, Audio},       // 1 
+            Prop{Textures.TreeGreen, Vector2{100.f,1767.f}, PropType::TREE, Textures, Audio},     // 2 
+            // Prop{Textures.TreeGreen, Vector2{200.f,1767.f}, PropType::TREE, Textures, Audio},     // 3 
+            // Prop{Textures.TreeGreen, Vector2{300.f,1767.f}, PropType::TREE, Textures, Audio},     // 4 
+            // Prop{Textures.TreeGreen, Vector2{400.f,1767.f}, PropType::TREE, Textures, Audio},     // 5 
+            // Prop{Textures.TreeGreen, Vector2{500.f,1767.f}, PropType::TREE, Textures, Audio},     // 6 
+            // Prop{Textures.TreeGreen, Vector2{600.f,1767.f}, PropType::TREE, Textures, Audio},     // 7 
+            // Prop{Textures.TreeGreen, Vector2{700.f,1767.f}, PropType::TREE, Textures, Audio},     // 8 
+            Prop{Textures.TreeGreen, Vector2{800.f,1767.f}, PropType::TREE, Textures, Audio},     // 9 
+            Prop{Textures.TreeGreen, Vector2{900.f,1767.f}, PropType::TREE, Textures, Audio},     // 10
+            Prop{Textures.TreeGreen, Vector2{1000.f,1767.f}, PropType::TREE, Textures, Audio},    // 11
+            Prop{Textures.TreeGreen, Vector2{1100.f,1767.f}, PropType::TREE, Textures, Audio},    // 12
+            // Prop{Textures.TreeGreen, Vector2{1200.f,1767.f}, PropType::TREE, Textures, Audio},    // 13
+            Prop{Textures.TreeGreen, Vector2{1300.f,1767.f}, PropType::TREE, Textures, Audio},    // 14
+            Prop{Textures.TreeGreen, Vector2{1400.f,1767.f}, PropType::TREE, Textures, Audio},    // 15
+            Prop{Textures.TreeGreen, Vector2{2500.f,1767.f}, PropType::TREE, Textures, Audio},    // 26
+            Prop{Textures.TreeGreen, Vector2{2600.f,1767.f}, PropType::TREE, Textures, Audio},    // 27
+            Prop{Textures.TreeGreen, Vector2{2700.f,1767.f}, PropType::TREE, Textures, Audio},    // 28
+            Prop{Textures.TreeGreen, Vector2{2800.f,1767.f}, PropType::TREE, Textures, Audio},    // 29
+            // Prop{Textures.TreeGreen, Vector2{2900.f,1767.f}, PropType::TREE, Textures, Audio},    // 30
+            Prop{Textures.TreeFall, Vector2{3000.f,1767.f}, PropType::TREE, Textures, Audio},    // 31
+            // Prop{Textures.TreeGreen, Vector2{3100.f,1767.f}, PropType::TREE, Textures, Audio},    // 32
+            // Prop{Textures.TreeGreen, Vector2{3200.f,1767.f}, PropType::TREE, Textures, Audio},    // 33
+            // Prop{Textures.TreeGreen, Vector2{3300.f,1767.f}, PropType::TREE, Textures, Audio},    // 34
+            // Prop{Textures.TreeGreen, Vector2{3400.f,1767.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3720.f,1767.f}, PropType::TREE, Textures, Audio},    // 36
+            Prop{Textures.TreeGreen, Vector2{3820.f,1767.f}, PropType::TREE, Textures, Audio},    // 37
+            Prop{Textures.TreeGreen, Vector2{3920.f,1767.f}, PropType::TREE, Textures, Audio},    // 38
             // row19
-            Prop{Textures.TreeGreen, Vector2{20.f,1867.f}, PropType::TREE, Textures},      // 1     
-            // Prop{Textures.TreeGreen, Vector2{220.f,1867.f}, PropType::TREE, Textures},     // 3     
-            // Prop{Textures.TreeGreen, Vector2{320.f,1867.f}, PropType::TREE, Textures},     // 4 
-            // Prop{Textures.TreeGreen, Vector2{420.f,1867.f}, PropType::TREE, Textures},     // 5 
-            // Prop{Textures.TreeGreen, Vector2{520.f,1867.f}, PropType::TREE, Textures},     // 6 
-            // Prop{Textures.TreeGreen, Vector2{620.f,1867.f}, PropType::TREE, Textures},     // 7 
-            Prop{Textures.TreeGreen, Vector2{820.f,1867.f}, PropType::TREE, Textures},     // 9 
-            Prop{Textures.TreeGreen, Vector2{920.f,1867.f}, PropType::TREE, Textures},     // 10
-            Prop{Textures.TreeGreen, Vector2{1020.f,1867.f}, PropType::TREE, Textures},    // 11
-            Prop{Textures.TreeGreen, Vector2{1120.f,1867.f}, PropType::TREE, Textures},    // 12
-            Prop{Textures.TreeGreen, Vector2{1220.f,1867.f}, PropType::TREE, Textures},    // 13
-            Prop{Textures.TreeGreen, Vector2{1320.f,1867.f}, PropType::TREE, Textures},    // 14
-            Prop{Textures.TreeGreen, Vector2{1420.f,1867.f}, PropType::TREE, Textures},    // 15
-            Prop{Textures.TreeGreen, Vector2{1520.f,1867.f}, PropType::TREE, Textures},    // 16
-            Prop{Textures.TreeGreen, Vector2{1620.f,1867.f}, PropType::TREE, Textures},    // 17
-            Prop{Textures.TreeGreen, Vector2{2720.f,1867.f}, PropType::TREE, Textures},    // 28
-            Prop{Textures.TreeGreen, Vector2{2820.f,1867.f}, PropType::TREE, Textures},    // 29
-            Prop{Textures.TreeStump, Vector2{2954.f,1956.f}, PropType::STUMP, Textures},    // 29
-            // Prop{Textures.TreeGreen, Vector2{2920.f,1867.f}, PropType::TREE, Textures},    // 30
-            // Prop{Textures.TreeGreen, Vector2{3020.f,1867.f}, PropType::TREE, Textures},    // 31
-            Prop{Textures.TreeGreen, Vector2{3120.f,1867.f}, PropType::TREE, Textures},    // 32
-            Prop{Textures.TreeGreen, Vector2{3220.f,1867.f}, PropType::TREE, Textures},    // 33
-            Prop{Textures.TreeGreen, Vector2{3320.f,1867.f}, PropType::TREE, Textures},    // 34
-            Prop{Textures.TreeFall, Vector2{3420.f,1867.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3700.f,1867.f}, PropType::TREE, Textures},    // 36
-            Prop{Textures.TreeGreen, Vector2{3800.f,1867.f}, PropType::TREE, Textures},    // 37
-            Prop{Textures.TreeGreen, Vector2{3900.f,1867.f}, PropType::TREE, Textures},    // 38
-            Prop{Textures.TreeGreen, Vector2{4000.f,1867.f}, PropType::TREE, Textures},    // 39
+            Prop{Textures.TreeGreen, Vector2{20.f,1867.f}, PropType::TREE, Textures, Audio},      // 1     
+            // Prop{Textures.TreeGreen, Vector2{220.f,1867.f}, PropType::TREE, Textures, Audio},     // 3     
+            // Prop{Textures.TreeGreen, Vector2{320.f,1867.f}, PropType::TREE, Textures, Audio},     // 4 
+            // Prop{Textures.TreeGreen, Vector2{420.f,1867.f}, PropType::TREE, Textures, Audio},     // 5 
+            // Prop{Textures.TreeGreen, Vector2{520.f,1867.f}, PropType::TREE, Textures, Audio},     // 6 
+            // Prop{Textures.TreeGreen, Vector2{620.f,1867.f}, PropType::TREE, Textures, Audio},     // 7 
+            Prop{Textures.TreeGreen, Vector2{820.f,1867.f}, PropType::TREE, Textures, Audio},     // 9 
+            Prop{Textures.TreeGreen, Vector2{920.f,1867.f}, PropType::TREE, Textures, Audio},     // 10
+            Prop{Textures.TreeGreen, Vector2{1020.f,1867.f}, PropType::TREE, Textures, Audio},    // 11
+            Prop{Textures.TreeGreen, Vector2{1120.f,1867.f}, PropType::TREE, Textures, Audio},    // 12
+            Prop{Textures.TreeGreen, Vector2{1220.f,1867.f}, PropType::TREE, Textures, Audio},    // 13
+            Prop{Textures.TreeGreen, Vector2{1320.f,1867.f}, PropType::TREE, Textures, Audio},    // 14
+            Prop{Textures.TreeGreen, Vector2{1420.f,1867.f}, PropType::TREE, Textures, Audio},    // 15
+            Prop{Textures.TreeGreen, Vector2{1520.f,1867.f}, PropType::TREE, Textures, Audio},    // 16
+            Prop{Textures.TreeGreen, Vector2{1620.f,1867.f}, PropType::TREE, Textures, Audio},    // 17
+            Prop{Textures.TreeGreen, Vector2{2720.f,1867.f}, PropType::TREE, Textures, Audio},    // 28
+            Prop{Textures.TreeGreen, Vector2{2820.f,1867.f}, PropType::TREE, Textures, Audio},    // 29
+            Prop{Textures.TreeStump, Vector2{2954.f,1956.f}, PropType::STUMP, Textures, Audio},    // 29
+            // Prop{Textures.TreeGreen, Vector2{2920.f,1867.f}, PropType::TREE, Textures, Audio},    // 30
+            // Prop{Textures.TreeGreen, Vector2{3020.f,1867.f}, PropType::TREE, Textures, Audio},    // 31
+            Prop{Textures.TreeGreen, Vector2{3120.f,1867.f}, PropType::TREE, Textures, Audio},    // 32
+            Prop{Textures.TreeGreen, Vector2{3220.f,1867.f}, PropType::TREE, Textures, Audio},    // 33
+            Prop{Textures.TreeGreen, Vector2{3320.f,1867.f}, PropType::TREE, Textures, Audio},    // 34
+            Prop{Textures.TreeFall, Vector2{3420.f,1867.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3700.f,1867.f}, PropType::TREE, Textures, Audio},    // 36
+            Prop{Textures.TreeGreen, Vector2{3800.f,1867.f}, PropType::TREE, Textures, Audio},    // 37
+            Prop{Textures.TreeGreen, Vector2{3900.f,1867.f}, PropType::TREE, Textures, Audio},    // 38
+            Prop{Textures.TreeGreen, Vector2{4000.f,1867.f}, PropType::TREE, Textures, Audio},    // 39
             // row20
-            Prop{Textures.TreeGreen, Vector2{0.f,1967.f}, PropType::TREE, Textures},       // 1     
-            Prop{Textures.TreeGreen, Vector2{100.f,1967.f}, PropType::TREE, Textures},     // 2 
-            // Prop{Textures.TreeGreen, Vector2{200.f,1967.f}, PropType::TREE, Textures},     // 3 
-            // Prop{Textures.TreeGreen, Vector2{400.f,1967.f}, PropType::TREE, Textures},     // 5 
-            // Prop{Textures.TreeGreen, Vector2{500.f,1967.f}, PropType::TREE, Textures},     // 6 
-            // Prop{Textures.TreeGreen, Vector2{600.f,1967.f}, PropType::TREE, Textures},     // 7 
-            Prop{Textures.TreeGreen, Vector2{700.f,1967.f}, PropType::TREE, Textures},     // 8 
-            Prop{Textures.TreeGreen, Vector2{800.f,1967.f}, PropType::TREE, Textures},     // 9 
-            Prop{Textures.TreeGreen, Vector2{1000.f,1967.f}, PropType::TREE, Textures},    // 11
-            Prop{Textures.TreeGreen, Vector2{1100.f,1967.f}, PropType::TREE, Textures},    // 12
-            Prop{Textures.TreeGreen, Vector2{1300.f,1967.f}, PropType::TREE, Textures},    // 14
-            // Prop{Textures.TreeGreen, Vector2{1400.f,1967.f}, PropType::TREE, Textures},    // 15
-            Prop{Textures.TreeGreen, Vector2{1500.f,1967.f}, PropType::TREE, Textures},    // 16
-            Prop{Textures.TreeGreen, Vector2{1600.f,1967.f}, PropType::TREE, Textures},    // 17
-            Prop{Textures.TreeGreen, Vector2{1800.f,1967.f}, PropType::TREE, Textures},    // 19
-            Prop{Textures.TreeGreen, Vector2{1900.f,1967.f}, PropType::TREE, Textures},    // 20
-            Prop{Textures.TreeGreen, Vector2{2600.f,1967.f}, PropType::TREE, Textures},    // 27
-            Prop{Textures.TreeGreen, Vector2{2700.f,1967.f}, PropType::TREE, Textures},    // 28
-            Prop{Textures.TreeGreen, Vector2{2900.f,1967.f}, PropType::TREE, Textures},    // 30
-            Prop{Textures.TreeStump, Vector2{3035.f,2053.f}, PropType::STUMP, Textures},    // 30
-            // Prop{Textures.TreeGreen, Vector2{3000.f,1967.f}, PropType::TREE, Textures},    // 31
-            Prop{Textures.TreeGreen, Vector2{3100.f,1967.f}, PropType::TREE, Textures},    // 32
-            Prop{Textures.TreeGreen, Vector2{3200.f,1967.f}, PropType::TREE, Textures},    // 33
-            Prop{Textures.TreeGreen, Vector2{3400.f,1967.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3500.f,1967.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3600.f,1967.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3720.f,1967.f}, PropType::TREE, Textures},    // 36
-            Prop{Textures.TreeGreen, Vector2{3820.f,1967.f}, PropType::TREE, Textures},    // 37
-            Prop{Textures.TreeGreen, Vector2{3920.f,1967.f}, PropType::TREE, Textures},    // 38
+            Prop{Textures.TreeGreen, Vector2{0.f,1967.f}, PropType::TREE, Textures, Audio},       // 1     
+            Prop{Textures.TreeGreen, Vector2{100.f,1967.f}, PropType::TREE, Textures, Audio},     // 2 
+            // Prop{Textures.TreeGreen, Vector2{200.f,1967.f}, PropType::TREE, Textures, Audio},     // 3 
+            // Prop{Textures.TreeGreen, Vector2{400.f,1967.f}, PropType::TREE, Textures, Audio},     // 5 
+            // Prop{Textures.TreeGreen, Vector2{500.f,1967.f}, PropType::TREE, Textures, Audio},     // 6 
+            // Prop{Textures.TreeGreen, Vector2{600.f,1967.f}, PropType::TREE, Textures, Audio},     // 7 
+            Prop{Textures.TreeGreen, Vector2{700.f,1967.f}, PropType::TREE, Textures, Audio},     // 8 
+            Prop{Textures.TreeGreen, Vector2{800.f,1967.f}, PropType::TREE, Textures, Audio},     // 9 
+            Prop{Textures.TreeGreen, Vector2{1000.f,1967.f}, PropType::TREE, Textures, Audio},    // 11
+            Prop{Textures.TreeGreen, Vector2{1100.f,1967.f}, PropType::TREE, Textures, Audio},    // 12
+            Prop{Textures.TreeGreen, Vector2{1300.f,1967.f}, PropType::TREE, Textures, Audio},    // 14
+            // Prop{Textures.TreeGreen, Vector2{1400.f,1967.f}, PropType::TREE, Textures, Audio},    // 15
+            Prop{Textures.TreeGreen, Vector2{1500.f,1967.f}, PropType::TREE, Textures, Audio},    // 16
+            Prop{Textures.TreeGreen, Vector2{1600.f,1967.f}, PropType::TREE, Textures, Audio},    // 17
+            Prop{Textures.TreeGreen, Vector2{1800.f,1967.f}, PropType::TREE, Textures, Audio},    // 19
+            Prop{Textures.TreeGreen, Vector2{1900.f,1967.f}, PropType::TREE, Textures, Audio},    // 20
+            Prop{Textures.TreeGreen, Vector2{2600.f,1967.f}, PropType::TREE, Textures, Audio},    // 27
+            Prop{Textures.TreeGreen, Vector2{2700.f,1967.f}, PropType::TREE, Textures, Audio},    // 28
+            Prop{Textures.TreeGreen, Vector2{2900.f,1967.f}, PropType::TREE, Textures, Audio},    // 30
+            Prop{Textures.TreeStump, Vector2{3035.f,2053.f}, PropType::STUMP, Textures, Audio},    // 30
+            // Prop{Textures.TreeGreen, Vector2{3000.f,1967.f}, PropType::TREE, Textures, Audio},    // 31
+            Prop{Textures.TreeGreen, Vector2{3100.f,1967.f}, PropType::TREE, Textures, Audio},    // 32
+            Prop{Textures.TreeGreen, Vector2{3200.f,1967.f}, PropType::TREE, Textures, Audio},    // 33
+            Prop{Textures.TreeGreen, Vector2{3400.f,1967.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3500.f,1967.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3600.f,1967.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3720.f,1967.f}, PropType::TREE, Textures, Audio},    // 36
+            Prop{Textures.TreeGreen, Vector2{3820.f,1967.f}, PropType::TREE, Textures, Audio},    // 37
+            Prop{Textures.TreeGreen, Vector2{3920.f,1967.f}, PropType::TREE, Textures, Audio},    // 38
             // row21
-            Prop{Textures.TreeGreen, Vector2{20.f,2067.f}, PropType::TREE, Textures},      // 1 
-            Prop{Textures.TreeGreen, Vector2{220.f,2067.f}, PropType::TREE, Textures},     // 3 
-            Prop{Textures.TreeGreen, Vector2{320.f,2067.f}, PropType::TREE, Textures},     // 4 
-            Prop{Textures.TreeGreen, Vector2{420.f,2067.f}, PropType::TREE, Textures},     // 5 
-            Prop{Textures.TreeGreen, Vector2{520.f,2067.f}, PropType::TREE, Textures},     // 6 
-            Prop{Textures.TreeGreen, Vector2{620.f,2067.f}, PropType::TREE, Textures},     // 7 
-            Prop{Textures.TreeGreen, Vector2{720.f,2067.f}, PropType::TREE, Textures},     // 8 
-            Prop{Textures.TreeGreen, Vector2{820.f,2067.f}, PropType::TREE, Textures},     // 9 
-            Prop{Textures.TreeGreen, Vector2{920.f,2067.f}, PropType::TREE, Textures},     // 10
-            Prop{Textures.TreeGreen, Vector2{1020.f,2067.f}, PropType::TREE, Textures},    // 11
-            Prop{Textures.TreeGreen, Vector2{1120.f,2067.f}, PropType::TREE, Textures},    // 12
-            Prop{Textures.TreeGreen, Vector2{1320.f,2067.f}, PropType::TREE, Textures},    // 14
-            Prop{Textures.TreeGreen, Vector2{1420.f,2067.f}, PropType::TREE, Textures},    // 15
-            Prop{Textures.TreeGreen, Vector2{1820.f,2067.f}, PropType::TREE, Textures},    // 19
-            Prop{Textures.TreeGreen, Vector2{2720.f,2067.f}, PropType::TREE, Textures},    // 28
-            Prop{Textures.TreeGreen, Vector2{2820.f,2067.f}, PropType::TREE, Textures},    // 29
-            Prop{Textures.TreeGreen, Vector2{2920.f,2067.f}, PropType::TREE, Textures},    // 30
-            Prop{Textures.TreeGreen, Vector2{3220.f,2067.f}, PropType::TREE, Textures},    // 33
-            Prop{Textures.TreeGreen, Vector2{3320.f,2067.f}, PropType::TREE, Textures},    // 34
-            Prop{Textures.TreeGreen, Vector2{3420.f,2067.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3520.f,2067.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3620.f,2067.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3700.f,2067.f}, PropType::TREE, Textures},    // 36
-            Prop{Textures.TreeGreen, Vector2{3800.f,2067.f}, PropType::TREE, Textures},    // 37
-            Prop{Textures.TreeGreen, Vector2{3900.f,2067.f}, PropType::TREE, Textures},    // 38
-            Prop{Textures.TreeGreen, Vector2{4000.f,2067.f}, PropType::TREE, Textures},    // 39
+            Prop{Textures.TreeGreen, Vector2{20.f,2067.f}, PropType::TREE, Textures, Audio},      // 1 
+            Prop{Textures.TreeGreen, Vector2{220.f,2067.f}, PropType::TREE, Textures, Audio},     // 3 
+            Prop{Textures.TreeGreen, Vector2{320.f,2067.f}, PropType::TREE, Textures, Audio},     // 4 
+            Prop{Textures.TreeGreen, Vector2{420.f,2067.f}, PropType::TREE, Textures, Audio},     // 5 
+            Prop{Textures.TreeGreen, Vector2{520.f,2067.f}, PropType::TREE, Textures, Audio},     // 6 
+            Prop{Textures.TreeGreen, Vector2{620.f,2067.f}, PropType::TREE, Textures, Audio},     // 7 
+            Prop{Textures.TreeGreen, Vector2{720.f,2067.f}, PropType::TREE, Textures, Audio},     // 8 
+            Prop{Textures.TreeGreen, Vector2{820.f,2067.f}, PropType::TREE, Textures, Audio},     // 9 
+            Prop{Textures.TreeGreen, Vector2{920.f,2067.f}, PropType::TREE, Textures, Audio},     // 10
+            Prop{Textures.TreeGreen, Vector2{1020.f,2067.f}, PropType::TREE, Textures, Audio},    // 11
+            Prop{Textures.TreeGreen, Vector2{1120.f,2067.f}, PropType::TREE, Textures, Audio},    // 12
+            Prop{Textures.TreeGreen, Vector2{1320.f,2067.f}, PropType::TREE, Textures, Audio},    // 14
+            Prop{Textures.TreeGreen, Vector2{1420.f,2067.f}, PropType::TREE, Textures, Audio},    // 15
+            Prop{Textures.TreeGreen, Vector2{1820.f,2067.f}, PropType::TREE, Textures, Audio},    // 19
+            Prop{Textures.TreeGreen, Vector2{2720.f,2067.f}, PropType::TREE, Textures, Audio},    // 28
+            Prop{Textures.TreeGreen, Vector2{2820.f,2067.f}, PropType::TREE, Textures, Audio},    // 29
+            Prop{Textures.TreeGreen, Vector2{2920.f,2067.f}, PropType::TREE, Textures, Audio},    // 30
+            Prop{Textures.TreeGreen, Vector2{3220.f,2067.f}, PropType::TREE, Textures, Audio},    // 33
+            Prop{Textures.TreeGreen, Vector2{3320.f,2067.f}, PropType::TREE, Textures, Audio},    // 34
+            Prop{Textures.TreeGreen, Vector2{3420.f,2067.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3520.f,2067.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3620.f,2067.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3700.f,2067.f}, PropType::TREE, Textures, Audio},    // 36
+            Prop{Textures.TreeGreen, Vector2{3800.f,2067.f}, PropType::TREE, Textures, Audio},    // 37
+            Prop{Textures.TreeGreen, Vector2{3900.f,2067.f}, PropType::TREE, Textures, Audio},    // 38
+            Prop{Textures.TreeGreen, Vector2{4000.f,2067.f}, PropType::TREE, Textures, Audio},    // 39
             // row22
-            Prop{Textures.TreeGreen, Vector2{0.f,2167.f}, PropType::TREE, Textures},       // 1 
-            Prop{Textures.TreeGreen, Vector2{100.f,2167.f}, PropType::TREE, Textures},     // 2 
-            Prop{Textures.TreeGreen, Vector2{200.f,2167.f}, PropType::TREE, Textures},     // 3 
-            Prop{Textures.TreeGreen, Vector2{300.f,2167.f}, PropType::TREE, Textures},     // 4 
-            Prop{Textures.TreeGreen, Vector2{400.f,2167.f}, PropType::TREE, Textures},     // 5 
-            Prop{Textures.TreeGreen, Vector2{600.f,2167.f}, PropType::TREE, Textures},     // 7 
-            Prop{Textures.TreeGreen, Vector2{700.f,2167.f}, PropType::TREE, Textures},     // 8 
-            Prop{Textures.TreeGreen, Vector2{800.f,2167.f}, PropType::TREE, Textures},     // 9 
-            Prop{Textures.TreeGreen, Vector2{900.f,2167.f}, PropType::TREE, Textures},     // 10
-            Prop{Textures.TreeGreen, Vector2{1000.f,2167.f}, PropType::TREE, Textures},    // 11
-            // Prop{Textures.TreeGreen, Vector2{1300.f,2167.f}, PropType::TREE, Textures},    // 14
-            // Prop{Textures.TreeGreen, Vector2{1400.f,2167.f}, PropType::TREE, Textures},    // 15
-            // Prop{Textures.TreeGreen, Vector2{1500.f,2167.f}, PropType::TREE, Textures},    // 16
-            Prop{Textures.TreeGreen, Vector2{1600.f,2167.f}, PropType::TREE, Textures},    // 17
-            Prop{Textures.TreeGreen, Vector2{1700.f,2167.f}, PropType::TREE, Textures},    // 18
-            Prop{Textures.TreeGreen, Vector2{1800.f,2167.f}, PropType::TREE, Textures},    // 19
-            Prop{Textures.TreeGreen, Vector2{1900.f,2167.f}, PropType::TREE, Textures},    // 20
-            Prop{Textures.TreeGreen, Vector2{2600.f,2167.f}, PropType::TREE, Textures},    // 27
-            Prop{Textures.TreeGreen, Vector2{2700.f,2167.f}, PropType::TREE, Textures},    // 28
-            Prop{Textures.TreeGreen, Vector2{2800.f,2167.f}, PropType::TREE, Textures},    // 29
-            Prop{Textures.TreeGreen, Vector2{2900.f,2167.f}, PropType::TREE, Textures},    // 30
-            Prop{Textures.TreeGreen, Vector2{3000.f,2167.f}, PropType::TREE, Textures},    // 31
-            Prop{Textures.TreeGreen, Vector2{3100.f,2167.f}, PropType::TREE, Textures},    // 32
-            Prop{Textures.TreeGreen, Vector2{3200.f,2167.f}, PropType::TREE, Textures},    // 33
-            Prop{Textures.TreeGreen, Vector2{3300.f,2167.f}, PropType::TREE, Textures},    // 34
-            Prop{Textures.TreeGreen, Vector2{3400.f,2167.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3500.f,2167.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3600.f,2167.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3720.f,2167.f}, PropType::TREE, Textures},    // 36
-            Prop{Textures.TreeGreen, Vector2{3820.f,2167.f}, PropType::TREE, Textures},    // 37    
-            Prop{Textures.TreeGreen, Vector2{3920.f,2167.f}, PropType::TREE, Textures},    // 38
+            Prop{Textures.TreeGreen, Vector2{0.f,2167.f}, PropType::TREE, Textures, Audio},       // 1 
+            Prop{Textures.TreeGreen, Vector2{100.f,2167.f}, PropType::TREE, Textures, Audio},     // 2 
+            Prop{Textures.TreeGreen, Vector2{200.f,2167.f}, PropType::TREE, Textures, Audio},     // 3 
+            Prop{Textures.TreeGreen, Vector2{300.f,2167.f}, PropType::TREE, Textures, Audio},     // 4 
+            Prop{Textures.TreeGreen, Vector2{400.f,2167.f}, PropType::TREE, Textures, Audio},     // 5 
+            Prop{Textures.TreeGreen, Vector2{600.f,2167.f}, PropType::TREE, Textures, Audio},     // 7 
+            Prop{Textures.TreeGreen, Vector2{700.f,2167.f}, PropType::TREE, Textures, Audio},     // 8 
+            Prop{Textures.TreeGreen, Vector2{800.f,2167.f}, PropType::TREE, Textures, Audio},     // 9 
+            Prop{Textures.TreeGreen, Vector2{900.f,2167.f}, PropType::TREE, Textures, Audio},     // 10
+            Prop{Textures.TreeGreen, Vector2{1000.f,2167.f}, PropType::TREE, Textures, Audio},    // 11
+            // Prop{Textures.TreeGreen, Vector2{1300.f,2167.f}, PropType::TREE, Textures, Audio},    // 14
+            // Prop{Textures.TreeGreen, Vector2{1400.f,2167.f}, PropType::TREE, Textures, Audio},    // 15
+            // Prop{Textures.TreeGreen, Vector2{1500.f,2167.f}, PropType::TREE, Textures, Audio},    // 16
+            Prop{Textures.TreeGreen, Vector2{1600.f,2167.f}, PropType::TREE, Textures, Audio},    // 17
+            Prop{Textures.TreeGreen, Vector2{1700.f,2167.f}, PropType::TREE, Textures, Audio},    // 18
+            Prop{Textures.TreeGreen, Vector2{1800.f,2167.f}, PropType::TREE, Textures, Audio},    // 19
+            Prop{Textures.TreeGreen, Vector2{1900.f,2167.f}, PropType::TREE, Textures, Audio},    // 20
+            Prop{Textures.TreeGreen, Vector2{2600.f,2167.f}, PropType::TREE, Textures, Audio},    // 27
+            Prop{Textures.TreeGreen, Vector2{2700.f,2167.f}, PropType::TREE, Textures, Audio},    // 28
+            Prop{Textures.TreeGreen, Vector2{2800.f,2167.f}, PropType::TREE, Textures, Audio},    // 29
+            Prop{Textures.TreeGreen, Vector2{2900.f,2167.f}, PropType::TREE, Textures, Audio},    // 30
+            Prop{Textures.TreeGreen, Vector2{3000.f,2167.f}, PropType::TREE, Textures, Audio},    // 31
+            Prop{Textures.TreeGreen, Vector2{3100.f,2167.f}, PropType::TREE, Textures, Audio},    // 32
+            Prop{Textures.TreeGreen, Vector2{3200.f,2167.f}, PropType::TREE, Textures, Audio},    // 33
+            Prop{Textures.TreeGreen, Vector2{3300.f,2167.f}, PropType::TREE, Textures, Audio},    // 34
+            Prop{Textures.TreeGreen, Vector2{3400.f,2167.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3500.f,2167.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3600.f,2167.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3720.f,2167.f}, PropType::TREE, Textures, Audio},    // 36
+            Prop{Textures.TreeGreen, Vector2{3820.f,2167.f}, PropType::TREE, Textures, Audio},    // 37    
+            Prop{Textures.TreeGreen, Vector2{3920.f,2167.f}, PropType::TREE, Textures, Audio},    // 38
             // row21
-            Prop{Textures.TreeGreen, Vector2{20.f,2267.f}, PropType::TREE, Textures},      // 1
-            Prop{Textures.TreeGreen, Vector2{120.f,2267.f}, PropType::TREE, Textures},     // 2
-            Prop{Textures.TreeGreen, Vector2{220.f,2267.f}, PropType::TREE, Textures},     // 3   
-            Prop{Textures.TreeGreen, Vector2{320.f,2267.f}, PropType::TREE, Textures},     // 4
-            Prop{Textures.TreeGreen, Vector2{420.f,2267.f}, PropType::TREE, Textures},     // 5    
-            Prop{Textures.TreeGreen, Vector2{520.f,2267.f}, PropType::TREE, Textures},     // 6
-            Prop{Textures.TreeGreen, Vector2{620.f,2267.f}, PropType::TREE, Textures},     // 7
-            Prop{Textures.TreeGreen, Vector2{720.f,2267.f}, PropType::TREE, Textures},     // 8
-            Prop{Textures.TreeGreen, Vector2{820.f,2267.f}, PropType::TREE, Textures},     // 9
-            Prop{Textures.TreeGreen, Vector2{920.f,2267.f}, PropType::TREE, Textures},     // 10
-            Prop{Textures.TreeGreen, Vector2{1020.f,2267.f}, PropType::TREE, Textures},    // 11
-            Prop{Textures.TreeGreen, Vector2{1120.f,2267.f}, PropType::TREE, Textures},    // 12
-            Prop{Textures.TreeGreen, Vector2{1220.f,2267.f}, PropType::TREE, Textures},    // 13
-            Prop{Textures.TreeGreen, Vector2{1320.f,2267.f}, PropType::TREE, Textures},    // 14
-            Prop{Textures.TreeGreen, Vector2{1420.f,2267.f}, PropType::TREE, Textures},    // 15
-            Prop{Textures.TreeGreen, Vector2{1520.f,2267.f}, PropType::TREE, Textures},    // 16
-            // Prop{Textures.TreeGreen, Vector2{1620.f,2267.f}, PropType::TREE, Textures},    // 17
-            Prop{Textures.TreeGreen, Vector2{1720.f,2267.f}, PropType::TREE, Textures},    // 18
-            Prop{Textures.TreeGreen, Vector2{1820.f,2267.f}, PropType::TREE, Textures},    // 19
-            Prop{Textures.TreeGreen, Vector2{2620.f,2267.f}, PropType::TREE, Textures},    // 27
-            Prop{Textures.TreeGreen, Vector2{2720.f,2267.f}, PropType::TREE, Textures},    // 28
-            Prop{Textures.TreeGreen, Vector2{2820.f,2267.f}, PropType::TREE, Textures},    // 29
-            Prop{Textures.TreeGreen, Vector2{2920.f,2267.f}, PropType::TREE, Textures},    // 30
-            Prop{Textures.TreeGreen, Vector2{3020.f,2267.f}, PropType::TREE, Textures},    // 31
-            Prop{Textures.TreeGreen, Vector2{3120.f,2267.f}, PropType::TREE, Textures},    // 32
-            Prop{Textures.TreeGreen, Vector2{3220.f,2267.f}, PropType::TREE, Textures},    // 33
-            Prop{Textures.TreeGreen, Vector2{3320.f,2267.f}, PropType::TREE, Textures},    // 34
-            Prop{Textures.TreeGreen, Vector2{3420.f,2267.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3520.f,2267.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3620.f,2267.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3700.f,2267.f}, PropType::TREE, Textures},    // 36
-            Prop{Textures.TreeGreen, Vector2{3800.f,2267.f}, PropType::TREE, Textures},    // 37
-            Prop{Textures.TreeGreen, Vector2{3900.f,2267.f}, PropType::TREE, Textures},    // 38
-            Prop{Textures.TreeGreen, Vector2{4000.f,2267.f}, PropType::TREE, Textures},    // 39
+            Prop{Textures.TreeGreen, Vector2{20.f,2267.f}, PropType::TREE, Textures, Audio},      // 1
+            Prop{Textures.TreeGreen, Vector2{120.f,2267.f}, PropType::TREE, Textures, Audio},     // 2
+            Prop{Textures.TreeGreen, Vector2{220.f,2267.f}, PropType::TREE, Textures, Audio},     // 3   
+            Prop{Textures.TreeGreen, Vector2{320.f,2267.f}, PropType::TREE, Textures, Audio},     // 4
+            Prop{Textures.TreeGreen, Vector2{420.f,2267.f}, PropType::TREE, Textures, Audio},     // 5    
+            Prop{Textures.TreeGreen, Vector2{520.f,2267.f}, PropType::TREE, Textures, Audio},     // 6
+            Prop{Textures.TreeGreen, Vector2{620.f,2267.f}, PropType::TREE, Textures, Audio},     // 7
+            Prop{Textures.TreeGreen, Vector2{720.f,2267.f}, PropType::TREE, Textures, Audio},     // 8
+            Prop{Textures.TreeGreen, Vector2{820.f,2267.f}, PropType::TREE, Textures, Audio},     // 9
+            Prop{Textures.TreeGreen, Vector2{920.f,2267.f}, PropType::TREE, Textures, Audio},     // 10
+            Prop{Textures.TreeGreen, Vector2{1020.f,2267.f}, PropType::TREE, Textures, Audio},    // 11
+            Prop{Textures.TreeGreen, Vector2{1120.f,2267.f}, PropType::TREE, Textures, Audio},    // 12
+            Prop{Textures.TreeGreen, Vector2{1220.f,2267.f}, PropType::TREE, Textures, Audio},    // 13
+            Prop{Textures.TreeGreen, Vector2{1320.f,2267.f}, PropType::TREE, Textures, Audio},    // 14
+            Prop{Textures.TreeGreen, Vector2{1420.f,2267.f}, PropType::TREE, Textures, Audio},    // 15
+            Prop{Textures.TreeGreen, Vector2{1520.f,2267.f}, PropType::TREE, Textures, Audio},    // 16
+            // Prop{Textures.TreeGreen, Vector2{1620.f,2267.f}, PropType::TREE, Textures, Audio},    // 17
+            Prop{Textures.TreeGreen, Vector2{1720.f,2267.f}, PropType::TREE, Textures, Audio},    // 18
+            Prop{Textures.TreeGreen, Vector2{1820.f,2267.f}, PropType::TREE, Textures, Audio},    // 19
+            Prop{Textures.TreeGreen, Vector2{2620.f,2267.f}, PropType::TREE, Textures, Audio},    // 27
+            Prop{Textures.TreeGreen, Vector2{2720.f,2267.f}, PropType::TREE, Textures, Audio},    // 28
+            Prop{Textures.TreeGreen, Vector2{2820.f,2267.f}, PropType::TREE, Textures, Audio},    // 29
+            Prop{Textures.TreeGreen, Vector2{2920.f,2267.f}, PropType::TREE, Textures, Audio},    // 30
+            Prop{Textures.TreeGreen, Vector2{3020.f,2267.f}, PropType::TREE, Textures, Audio},    // 31
+            Prop{Textures.TreeGreen, Vector2{3120.f,2267.f}, PropType::TREE, Textures, Audio},    // 32
+            Prop{Textures.TreeGreen, Vector2{3220.f,2267.f}, PropType::TREE, Textures, Audio},    // 33
+            Prop{Textures.TreeGreen, Vector2{3320.f,2267.f}, PropType::TREE, Textures, Audio},    // 34
+            Prop{Textures.TreeGreen, Vector2{3420.f,2267.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3520.f,2267.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3620.f,2267.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3700.f,2267.f}, PropType::TREE, Textures, Audio},    // 36
+            Prop{Textures.TreeGreen, Vector2{3800.f,2267.f}, PropType::TREE, Textures, Audio},    // 37
+            Prop{Textures.TreeGreen, Vector2{3900.f,2267.f}, PropType::TREE, Textures, Audio},    // 38
+            Prop{Textures.TreeGreen, Vector2{4000.f,2267.f}, PropType::TREE, Textures, Audio},    // 39
             // row22
-            Prop{Textures.TreeGreen, Vector2{50.f,2367.f}, PropType::TREE, Textures},      // 1 
-            Prop{Textures.TreeClear, Vector2{550.f,2303.f}, PropType::TREE, Textures},     // 6 Invisible Wall
-            Prop{Textures.TreeGreen, Vector2{550.f,2367.f}, PropType::TREE, Textures},     // 6 
-            Prop{Textures.TreeGreen, Vector2{700.f,2367.f}, PropType::TREE, Textures},     // 8 
-            Prop{Textures.TreeGreen, Vector2{800.f,2367.f}, PropType::TREE, Textures},     // 9 
-            // Prop{Textures.TreeGreen, Vector2{900.f,2367.f}, PropType::TREE, Textures},     // 10
-            Prop{Textures.TreeGreen, Vector2{1000.f,2367.f}, PropType::TREE, Textures},    // 11
-            Prop{Textures.TreeGreen, Vector2{1100.f,2367.f}, PropType::TREE, Textures},    // 12
-            Prop{Textures.TreeGreen, Vector2{1200.f,2367.f}, PropType::TREE, Textures},    // 13
-            Prop{Textures.TreeGreen, Vector2{1300.f,2367.f}, PropType::TREE, Textures},    // 14
-            Prop{Textures.TreeGreen, Vector2{1400.f,2367.f}, PropType::TREE, Textures},    // 15
-            // Prop{Textures.TreeGreen, Vector2{1500.f,2367.f}, PropType::TREE, Textures},    // 16
-            Prop{Textures.TreeGreen, Vector2{1600.f,2367.f}, PropType::TREE, Textures},    // 17
-            // Prop{Textures.TreeGreen, Vector2{1700.f,2367.f}, PropType::TREE, Textures},    // 18
-            Prop{Textures.TreeGreen, Vector2{1800.f,2367.f}, PropType::TREE, Textures},    // 19
-            Prop{Textures.TreeGreen, Vector2{2600.f,2340.f}, PropType::TREE, Textures},    // 27
-            Prop{Textures.TreeGreen, Vector2{2700.f,2340.f}, PropType::TREE, Textures},    // 28
-            Prop{Textures.TreeGreen, Vector2{2800.f,2340.f}, PropType::TREE, Textures},    // 29
-            Prop{Textures.TreeGreen, Vector2{2900.f,2340.f}, PropType::TREE, Textures},    // 30
-            Prop{Textures.TreeGreen, Vector2{3000.f,2340.f}, PropType::TREE, Textures},    // 31
-            Prop{Textures.TreeGreen, Vector2{3100.f,2340.f}, PropType::TREE, Textures},    // 32
-            Prop{Textures.TreeGreen, Vector2{3200.f,2340.f}, PropType::TREE, Textures},    // 33
-            Prop{Textures.TreeGreen, Vector2{3300.f,2340.f}, PropType::TREE, Textures},    // 34
-            Prop{Textures.TreeGreen, Vector2{3400.f,2340.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3500.f,2340.f}, PropType::TREE, Textures},    // 36
-            Prop{Textures.TreeGreen, Vector2{3600.f,2340.f}, PropType::TREE, Textures},    // 37
-            Prop{Textures.TreeGreen, Vector2{3720.f,2340.f}, PropType::TREE, Textures},    // 38
-            Prop{Textures.TreeGreen, Vector2{3820.f,2340.f}, PropType::TREE, Textures},    // 39
-            Prop{Textures.TreeGreen, Vector2{3920.f,2340.f}, PropType::TREE, Textures},    // 40
+            Prop{Textures.TreeGreen, Vector2{50.f,2367.f}, PropType::TREE, Textures, Audio},      // 1 
+            Prop{Textures.TreeClear, Vector2{550.f,2303.f}, PropType::TREE, Textures, Audio},     // 6 Invisible Wall
+            Prop{Textures.TreeGreen, Vector2{550.f,2367.f}, PropType::TREE, Textures, Audio},     // 6 
+            Prop{Textures.TreeGreen, Vector2{700.f,2367.f}, PropType::TREE, Textures, Audio},     // 8 
+            Prop{Textures.TreeGreen, Vector2{800.f,2367.f}, PropType::TREE, Textures, Audio},     // 9 
+            // Prop{Textures.TreeGreen, Vector2{900.f,2367.f}, PropType::TREE, Textures, Audio},     // 10
+            Prop{Textures.TreeGreen, Vector2{1000.f,2367.f}, PropType::TREE, Textures, Audio},    // 11
+            Prop{Textures.TreeGreen, Vector2{1100.f,2367.f}, PropType::TREE, Textures, Audio},    // 12
+            Prop{Textures.TreeGreen, Vector2{1200.f,2367.f}, PropType::TREE, Textures, Audio},    // 13
+            Prop{Textures.TreeGreen, Vector2{1300.f,2367.f}, PropType::TREE, Textures, Audio},    // 14
+            Prop{Textures.TreeGreen, Vector2{1400.f,2367.f}, PropType::TREE, Textures, Audio},    // 15
+            // Prop{Textures.TreeGreen, Vector2{1500.f,2367.f}, PropType::TREE, Textures, Audio},    // 16
+            Prop{Textures.TreeGreen, Vector2{1600.f,2367.f}, PropType::TREE, Textures, Audio},    // 17
+            // Prop{Textures.TreeGreen, Vector2{1700.f,2367.f}, PropType::TREE, Textures, Audio},    // 18
+            Prop{Textures.TreeGreen, Vector2{1800.f,2367.f}, PropType::TREE, Textures, Audio},    // 19
+            Prop{Textures.TreeGreen, Vector2{2600.f,2340.f}, PropType::TREE, Textures, Audio},    // 27
+            Prop{Textures.TreeGreen, Vector2{2700.f,2340.f}, PropType::TREE, Textures, Audio},    // 28
+            Prop{Textures.TreeGreen, Vector2{2800.f,2340.f}, PropType::TREE, Textures, Audio},    // 29
+            Prop{Textures.TreeGreen, Vector2{2900.f,2340.f}, PropType::TREE, Textures, Audio},    // 30
+            Prop{Textures.TreeGreen, Vector2{3000.f,2340.f}, PropType::TREE, Textures, Audio},    // 31
+            Prop{Textures.TreeGreen, Vector2{3100.f,2340.f}, PropType::TREE, Textures, Audio},    // 32
+            Prop{Textures.TreeGreen, Vector2{3200.f,2340.f}, PropType::TREE, Textures, Audio},    // 33
+            Prop{Textures.TreeGreen, Vector2{3300.f,2340.f}, PropType::TREE, Textures, Audio},    // 34
+            Prop{Textures.TreeGreen, Vector2{3400.f,2340.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3500.f,2340.f}, PropType::TREE, Textures, Audio},    // 36
+            Prop{Textures.TreeGreen, Vector2{3600.f,2340.f}, PropType::TREE, Textures, Audio},    // 37
+            Prop{Textures.TreeGreen, Vector2{3720.f,2340.f}, PropType::TREE, Textures, Audio},    // 38
+            Prop{Textures.TreeGreen, Vector2{3820.f,2340.f}, PropType::TREE, Textures, Audio},    // 39
+            Prop{Textures.TreeGreen, Vector2{3920.f,2340.f}, PropType::TREE, Textures, Audio},    // 40
             // row23
-            Prop{Textures.TreeGreen, Vector2{20.f,2467.f}, PropType::TREE, Textures},      // 1 
-            Prop{Textures.TreeClear, Vector2{620.f,2403.f}, PropType::TREE, Textures},     // 7 Invisible Wall
-            Prop{Textures.TreeGreen, Vector2{620.f,2467.f}, PropType::TREE, Textures},     // 7 
-            Prop{Textures.TreeGreen, Vector2{720.f,2467.f}, PropType::TREE, Textures},     // 8 
-            Prop{Textures.TreeGreen, Vector2{820.f,2467.f}, PropType::TREE, Textures},     // 9 
-            Prop{Textures.TreeGreen, Vector2{920.f,2467.f}, PropType::TREE, Textures},     // 10
-            Prop{Textures.TreeGreen, Vector2{1020.f,2467.f}, PropType::TREE, Textures},    // 11    
-            Prop{Textures.TreeGreen, Vector2{1120.f,2467.f}, PropType::TREE, Textures},    // 12    
-            Prop{Textures.TreeGreen, Vector2{1220.f,2467.f}, PropType::TREE, Textures},    // 13
-            Prop{Textures.TreeGreen, Vector2{1320.f,2467.f}, PropType::TREE, Textures},    // 14
-            Prop{Textures.TreeGreen, Vector2{1420.f,2467.f}, PropType::TREE, Textures},    // 15
-            Prop{Textures.TreeGreen, Vector2{1520.f,2467.f}, PropType::TREE, Textures},    // 16
-            Prop{Textures.TreeGreen, Vector2{1620.f,2467.f}, PropType::TREE, Textures},    // 17
-            Prop{Textures.TreeGreen, Vector2{1720.f,2467.f}, PropType::TREE, Textures},    // 18
-            Prop{Textures.TreeGreen, Vector2{1820.f,2467.f}, PropType::TREE, Textures},    // 19
-            Prop{Textures.TreeGreen, Vector2{1920.f,2467.f}, PropType::TREE, Textures},    // 20
+            Prop{Textures.TreeGreen, Vector2{20.f,2467.f}, PropType::TREE, Textures, Audio},      // 1 
+            Prop{Textures.TreeClear, Vector2{620.f,2403.f}, PropType::TREE, Textures, Audio},     // 7 Invisible Wall
+            Prop{Textures.TreeGreen, Vector2{620.f,2467.f}, PropType::TREE, Textures, Audio},     // 7 
+            Prop{Textures.TreeGreen, Vector2{720.f,2467.f}, PropType::TREE, Textures, Audio},     // 8 
+            Prop{Textures.TreeGreen, Vector2{820.f,2467.f}, PropType::TREE, Textures, Audio},     // 9 
+            Prop{Textures.TreeGreen, Vector2{920.f,2467.f}, PropType::TREE, Textures, Audio},     // 10
+            Prop{Textures.TreeGreen, Vector2{1020.f,2467.f}, PropType::TREE, Textures, Audio},    // 11    
+            Prop{Textures.TreeGreen, Vector2{1120.f,2467.f}, PropType::TREE, Textures, Audio},    // 12    
+            Prop{Textures.TreeGreen, Vector2{1220.f,2467.f}, PropType::TREE, Textures, Audio},    // 13
+            Prop{Textures.TreeGreen, Vector2{1320.f,2467.f}, PropType::TREE, Textures, Audio},    // 14
+            Prop{Textures.TreeGreen, Vector2{1420.f,2467.f}, PropType::TREE, Textures, Audio},    // 15
+            Prop{Textures.TreeGreen, Vector2{1520.f,2467.f}, PropType::TREE, Textures, Audio},    // 16
+            Prop{Textures.TreeGreen, Vector2{1620.f,2467.f}, PropType::TREE, Textures, Audio},    // 17
+            Prop{Textures.TreeGreen, Vector2{1720.f,2467.f}, PropType::TREE, Textures, Audio},    // 18
+            Prop{Textures.TreeGreen, Vector2{1820.f,2467.f}, PropType::TREE, Textures, Audio},    // 19
+            Prop{Textures.TreeGreen, Vector2{1920.f,2467.f}, PropType::TREE, Textures, Audio},    // 20
             // row24
-            Prop{Textures.TreeGreen, Vector2{50.f,2567.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{650.f,2567.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{1980.f,2567.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2490.f,2567.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2590.f,2567.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2800.f,2567.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{3920.f,2567.f}, PropType::TREE, Textures},
+            Prop{Textures.TreeGreen, Vector2{50.f,2567.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{650.f,2567.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{1980.f,2567.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2490.f,2567.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2590.f,2567.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2800.f,2567.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{3920.f,2567.f}, PropType::TREE, Textures, Audio},
             // row25
-            Prop{Textures.TreeGreen, Vector2{20.f,2667.f}, PropType::TREE, Textures}, 
-            Prop{Textures.TreeGreen, Vector2{620.f,2667.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2420.f,2667.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2520.f,2667.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2820.f,2667.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{4000.f,2667.f}, PropType::TREE, Textures},
+            Prop{Textures.TreeGreen, Vector2{20.f,2667.f}, PropType::TREE, Textures, Audio}, 
+            Prop{Textures.TreeGreen, Vector2{620.f,2667.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2420.f,2667.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2520.f,2667.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2820.f,2667.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{4000.f,2667.f}, PropType::TREE, Textures, Audio},
             // row26
-            Prop{Textures.TreeGreen, Vector2{50.f,2767.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{100.f,2767.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{550.f,2767.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{650.f,2767.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{1980.f,2767.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2490.f,2767.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2590.f,2767.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2800.f,2767.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{3920.f,2767.f}, PropType::TREE, Textures},
+            Prop{Textures.TreeGreen, Vector2{50.f,2767.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{100.f,2767.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{550.f,2767.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{650.f,2767.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{1980.f,2767.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2490.f,2767.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2590.f,2767.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2800.f,2767.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{3920.f,2767.f}, PropType::TREE, Textures, Audio},
             // row27
-            Prop{Textures.TreeGreen, Vector2{20.f,2867.f}, PropType::TREE, Textures}, 
-            Prop{Textures.TreeGreen, Vector2{120.f,2867.f}, PropType::TREE, Textures}, 
-            Prop{Textures.TreeGreen, Vector2{520.f,2867.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{620.f,2867.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2420.f,2867.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2520.f,2867.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2820.f,2867.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{4000.f,2867.f}, PropType::TREE, Textures},
+            Prop{Textures.TreeGreen, Vector2{20.f,2867.f}, PropType::TREE, Textures, Audio}, 
+            Prop{Textures.TreeGreen, Vector2{120.f,2867.f}, PropType::TREE, Textures, Audio}, 
+            Prop{Textures.TreeGreen, Vector2{520.f,2867.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{620.f,2867.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2420.f,2867.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2520.f,2867.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2820.f,2867.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{4000.f,2867.f}, PropType::TREE, Textures, Audio},
             // row28
-            Prop{Textures.TreeGreen, Vector2{50.f,2967.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{150.f,2967.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{450.f,2967.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{550.f,2967.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{650.f,2967.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{1980.f,2967.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2490.f,2967.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2590.f,2967.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{3920.f,2967.f}, PropType::TREE, Textures},
+            Prop{Textures.TreeGreen, Vector2{50.f,2967.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{150.f,2967.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{450.f,2967.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{550.f,2967.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{650.f,2967.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{1980.f,2967.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2490.f,2967.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2590.f,2967.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{3920.f,2967.f}, PropType::TREE, Textures, Audio},
             // row29
-            Prop{Textures.TreeGreen, Vector2{20.f,3067.f}, PropType::TREE, Textures}, 
-            Prop{Textures.TreeGreen, Vector2{120.f,3067.f}, PropType::TREE, Textures}, 
-            Prop{Textures.TreeGreen, Vector2{220.f,3067.f}, PropType::TREE, Textures}, 
-            Prop{Textures.TreeGreen, Vector2{420.f,3067.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{520.f,3067.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{620.f,3067.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2420.f,3067.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2520.f,3067.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{4000.f,3067.f}, PropType::TREE, Textures},
+            Prop{Textures.TreeGreen, Vector2{20.f,3067.f}, PropType::TREE, Textures, Audio}, 
+            Prop{Textures.TreeGreen, Vector2{120.f,3067.f}, PropType::TREE, Textures, Audio}, 
+            Prop{Textures.TreeGreen, Vector2{220.f,3067.f}, PropType::TREE, Textures, Audio}, 
+            Prop{Textures.TreeGreen, Vector2{420.f,3067.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{520.f,3067.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{620.f,3067.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2420.f,3067.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2520.f,3067.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{4000.f,3067.f}, PropType::TREE, Textures, Audio},
             // row30
-            Prop{Textures.TreeGreen, Vector2{50.f,3167.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{150.f,3167.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{250.f,3167.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{450.f,3167.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{550.f,3167.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{650.f,3167.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{1980.f,3167.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2490.f,3167.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2590.f,3167.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{3920.f,3167.f}, PropType::TREE, Textures},
+            Prop{Textures.TreeGreen, Vector2{50.f,3167.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{150.f,3167.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{250.f,3167.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{450.f,3167.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{550.f,3167.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{650.f,3167.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{1980.f,3167.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2490.f,3167.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2590.f,3167.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{3920.f,3167.f}, PropType::TREE, Textures, Audio},
             // row31
-            Prop{Textures.TreeGreen, Vector2{20.f,3267.f}, PropType::TREE, Textures}, 
-            Prop{Textures.TreeGreen, Vector2{120.f,3267.f}, PropType::TREE, Textures}, 
-            Prop{Textures.TreeGreen, Vector2{220.f,3267.f}, PropType::TREE, Textures}, 
-            Prop{Textures.TreeGreen, Vector2{530.f,3267.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{620.f,3267.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2420.f,3267.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2520.f,3267.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{4000.f,3267.f}, PropType::TREE, Textures},
+            Prop{Textures.TreeGreen, Vector2{20.f,3267.f}, PropType::TREE, Textures, Audio}, 
+            Prop{Textures.TreeGreen, Vector2{120.f,3267.f}, PropType::TREE, Textures, Audio}, 
+            Prop{Textures.TreeGreen, Vector2{220.f,3267.f}, PropType::TREE, Textures, Audio}, 
+            Prop{Textures.TreeGreen, Vector2{530.f,3267.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{620.f,3267.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2420.f,3267.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2520.f,3267.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{4000.f,3267.f}, PropType::TREE, Textures, Audio},
             // row32
-            Prop{Textures.TreeGreen, Vector2{50.f,3367.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{150.f,3367.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{250.f,3367.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{350.f,3367.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{650.f,3367.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2490.f,3367.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2590.f,3367.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{3920.f,3367.f}, PropType::TREE, Textures},
+            Prop{Textures.TreeGreen, Vector2{50.f,3367.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{150.f,3367.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{250.f,3367.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{350.f,3367.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{650.f,3367.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2490.f,3367.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2590.f,3367.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{3920.f,3367.f}, PropType::TREE, Textures, Audio},
             // row33
-            Prop{Textures.TreeGreen, Vector2{20.f,3467.f}, PropType::TREE, Textures},      
-            Prop{Textures.TreeGreen, Vector2{120.f,3467.f}, PropType::TREE, Textures},         
-            Prop{Textures.TreeGreen, Vector2{220.f,3467.f}, PropType::TREE, Textures},         
-            Prop{Textures.TreeGreen, Vector2{320.f,3467.f}, PropType::TREE, Textures},     
-            Prop{Textures.TreeGreen, Vector2{420.f,3467.f}, PropType::TREE, Textures},     
-            Prop{Textures.TreeGreen, Vector2{620.f,3467.f}, PropType::TREE, Textures},     
-            Prop{Textures.TreeGreen, Vector2{2420.f,3467.f}, PropType::TREE, Textures},     
-            Prop{Textures.TreeGreen, Vector2{2520.f,3467.f}, PropType::TREE, Textures},     
-            Prop{Textures.TreeGreen, Vector2{2620.f,3467.f}, PropType::TREE, Textures},     
-            Prop{Textures.TreeGreen, Vector2{2720.f,3467.f}, PropType::TREE, Textures},     
-            Prop{Textures.TreeGreen, Vector2{4000.f,3467.f}, PropType::TREE, Textures},    
+            Prop{Textures.TreeGreen, Vector2{20.f,3467.f}, PropType::TREE, Textures, Audio},      
+            Prop{Textures.TreeGreen, Vector2{120.f,3467.f}, PropType::TREE, Textures, Audio},         
+            Prop{Textures.TreeGreen, Vector2{220.f,3467.f}, PropType::TREE, Textures, Audio},         
+            Prop{Textures.TreeGreen, Vector2{320.f,3467.f}, PropType::TREE, Textures, Audio},     
+            Prop{Textures.TreeGreen, Vector2{420.f,3467.f}, PropType::TREE, Textures, Audio},     
+            Prop{Textures.TreeGreen, Vector2{620.f,3467.f}, PropType::TREE, Textures, Audio},     
+            Prop{Textures.TreeGreen, Vector2{2420.f,3467.f}, PropType::TREE, Textures, Audio},     
+            Prop{Textures.TreeGreen, Vector2{2520.f,3467.f}, PropType::TREE, Textures, Audio},     
+            Prop{Textures.TreeGreen, Vector2{2620.f,3467.f}, PropType::TREE, Textures, Audio},     
+            Prop{Textures.TreeGreen, Vector2{2720.f,3467.f}, PropType::TREE, Textures, Audio},     
+            Prop{Textures.TreeGreen, Vector2{4000.f,3467.f}, PropType::TREE, Textures, Audio},    
             // row34
-            Prop{Textures.TreeGreen, Vector2{0.f,3567.f}, PropType::TREE, Textures},       // 1 
-            Prop{Textures.TreeGreen, Vector2{150.f,3567.f}, PropType::TREE, Textures},     // 2 
-            Prop{Textures.TreeGreen, Vector2{250.f,3567.f}, PropType::TREE, Textures},     // 3 
-            Prop{Textures.TreeGreen, Vector2{350.f,3567.f}, PropType::TREE, Textures},     // 4 
-            Prop{Textures.TreeGreen, Vector2{665.f,3530.f}, PropType::TREE, Textures},     // 6 
-            Prop{Textures.TreeGreen, Vector2{3920.f,3567.f}, PropType::TREE, Textures},    // 21
-            Prop{Textures.TreeGreen, Vector2{2320.f,3667.f}, PropType::TREE, Textures},    // 21
-            Prop{Textures.TreeGreen, Vector2{2520.f,3667.f}, PropType::TREE, Textures},    // 21
-            Prop{Textures.TreeGreen, Vector2{2620.f,3667.f}, PropType::TREE, Textures},    // 21
+            Prop{Textures.TreeGreen, Vector2{0.f,3567.f}, PropType::TREE, Textures, Audio},       // 1 
+            Prop{Textures.TreeGreen, Vector2{150.f,3567.f}, PropType::TREE, Textures, Audio},     // 2 
+            Prop{Textures.TreeGreen, Vector2{250.f,3567.f}, PropType::TREE, Textures, Audio},     // 3 
+            Prop{Textures.TreeGreen, Vector2{350.f,3567.f}, PropType::TREE, Textures, Audio},     // 4 
+            Prop{Textures.TreeGreen, Vector2{665.f,3530.f}, PropType::TREE, Textures, Audio},     // 6 
+            Prop{Textures.TreeGreen, Vector2{3920.f,3567.f}, PropType::TREE, Textures, Audio},    // 21
+            Prop{Textures.TreeGreen, Vector2{2320.f,3667.f}, PropType::TREE, Textures, Audio},    // 21
+            Prop{Textures.TreeGreen, Vector2{2520.f,3667.f}, PropType::TREE, Textures, Audio},    // 21
+            Prop{Textures.TreeGreen, Vector2{2620.f,3667.f}, PropType::TREE, Textures, Audio},    // 21
             // row35
-            // Prop{Textures.TreeGreen, Vector2{100.f,3740.f}, PropType::TREE, Textures}, 
-            Prop{Textures.TreeGreen, Vector2{200.f,3740.f}, PropType::TREE, Textures}, 
-            Prop{Textures.TreeGreen, Vector2{300.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{500.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{800.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{900.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{1600.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{1700.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{1800.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{1900.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2000.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2200.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2300.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2400.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2600.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2700.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{2900.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{3000.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{3100.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{3300.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{3800.f,3740.f}, PropType::TREE, Textures},
-            Prop{Textures.TreeGreen, Vector2{3900.f,3740.f}, PropType::TREE, Textures},
+            // Prop{Textures.TreeGreen, Vector2{100.f,3740.f}, PropType::TREE, Textures, Audio}, 
+            Prop{Textures.TreeGreen, Vector2{200.f,3740.f}, PropType::TREE, Textures, Audio}, 
+            Prop{Textures.TreeGreen, Vector2{300.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{500.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{800.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{900.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{1600.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{1700.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{1800.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{1900.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2000.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2200.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2300.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2400.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2600.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2700.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{2900.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{3000.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{3100.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{3300.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{3800.f,3740.f}, PropType::TREE, Textures, Audio},
+            Prop{Textures.TreeGreen, Vector2{3900.f,3740.f}, PropType::TREE, Textures, Audio},
             // row36
-            Prop{Textures.TreeGreen, Vector2{20.f,3840.f}, PropType::TREE, Textures},      // 1 
-            Prop{Textures.TreeGreen, Vector2{120.f,3840.f}, PropType::TREE, Textures},     // 2 
-            Prop{Textures.TreeGreen, Vector2{220.f,3840.f}, PropType::TREE, Textures},     // 3 
-            Prop{Textures.TreeGreen, Vector2{420.f,3840.f}, PropType::TREE, Textures},     // 5 
-            Prop{Textures.TreeGreen, Vector2{520.f,3840.f}, PropType::TREE, Textures},     // 6 
-            Prop{Textures.TreeGreen, Vector2{720.f,3840.f}, PropType::TREE, Textures},     // 8 
-            Prop{Textures.TreeGreen, Vector2{820.f,3840.f}, PropType::TREE, Textures},     // 9 
-            Prop{Textures.TreeGreen, Vector2{1020.f,3840.f}, PropType::TREE, Textures},    // 11
-            Prop{Textures.TreeGreen, Vector2{1120.f,3840.f}, PropType::TREE, Textures},    // 12
-            Prop{Textures.TreeGreen, Vector2{1220.f,3840.f}, PropType::TREE, Textures},    // 13
-            Prop{Textures.TreeGreen, Vector2{1420.f,3840.f}, PropType::TREE, Textures},    // 15
-            Prop{Textures.TreeGreen, Vector2{1520.f,3840.f}, PropType::TREE, Textures},    // 16
-            Prop{Textures.TreeGreen, Vector2{1620.f,3840.f}, PropType::TREE, Textures},    // 17
-            Prop{Textures.TreeGreen, Vector2{1720.f,3840.f}, PropType::TREE, Textures},    // 18
-            Prop{Textures.TreeGreen, Vector2{1920.f,3840.f}, PropType::TREE, Textures},    // 20
-            Prop{Textures.TreeGreen, Vector2{2020.f,3840.f}, PropType::TREE, Textures},    // 21
-            Prop{Textures.TreeGreen, Vector2{2120.f,3840.f}, PropType::TREE, Textures},    // 22
-            Prop{Textures.TreeGreen, Vector2{2320.f,3840.f}, PropType::TREE, Textures},    // 24
-            Prop{Textures.TreeGreen, Vector2{2420.f,3840.f}, PropType::TREE, Textures},    // 25
-            Prop{Textures.TreeGreen, Vector2{2520.f,3840.f}, PropType::TREE, Textures},    // 26
-            Prop{Textures.TreeGreen, Vector2{2720.f,3840.f}, PropType::TREE, Textures},    // 28
-            Prop{Textures.TreeGreen, Vector2{2820.f,3840.f}, PropType::TREE, Textures},    // 29
-            Prop{Textures.TreeGreen, Vector2{2920.f,3840.f}, PropType::TREE, Textures},    // 30
-            Prop{Textures.TreeGreen, Vector2{3020.f,3840.f}, PropType::TREE, Textures},    // 31
-            Prop{Textures.TreeGreen, Vector2{3120.f,3840.f}, PropType::TREE, Textures},    // 32
-            Prop{Textures.TreeGreen, Vector2{3420.f,3840.f}, PropType::TREE, Textures},    // 35
-            Prop{Textures.TreeGreen, Vector2{3520.f,3840.f}, PropType::TREE, Textures},    // 36
-            Prop{Textures.TreeGreen, Vector2{3720.f,3840.f}, PropType::TREE, Textures},    // 38
-            Prop{Textures.TreeGreen, Vector2{3820.f,3840.f}, PropType::TREE, Textures},    // 39
-            Prop{Textures.TreeGreen, Vector2{3920.f,3840.f}, PropType::TREE, Textures},    // 40
+            Prop{Textures.TreeGreen, Vector2{20.f,3840.f}, PropType::TREE, Textures, Audio},      // 1 
+            Prop{Textures.TreeGreen, Vector2{120.f,3840.f}, PropType::TREE, Textures, Audio},     // 2 
+            Prop{Textures.TreeGreen, Vector2{220.f,3840.f}, PropType::TREE, Textures, Audio},     // 3 
+            Prop{Textures.TreeGreen, Vector2{420.f,3840.f}, PropType::TREE, Textures, Audio},     // 5 
+            Prop{Textures.TreeGreen, Vector2{520.f,3840.f}, PropType::TREE, Textures, Audio},     // 6 
+            Prop{Textures.TreeGreen, Vector2{720.f,3840.f}, PropType::TREE, Textures, Audio},     // 8 
+            Prop{Textures.TreeGreen, Vector2{820.f,3840.f}, PropType::TREE, Textures, Audio},     // 9 
+            Prop{Textures.TreeGreen, Vector2{1020.f,3840.f}, PropType::TREE, Textures, Audio},    // 11
+            Prop{Textures.TreeGreen, Vector2{1120.f,3840.f}, PropType::TREE, Textures, Audio},    // 12
+            Prop{Textures.TreeGreen, Vector2{1220.f,3840.f}, PropType::TREE, Textures, Audio},    // 13
+            Prop{Textures.TreeGreen, Vector2{1420.f,3840.f}, PropType::TREE, Textures, Audio},    // 15
+            Prop{Textures.TreeGreen, Vector2{1520.f,3840.f}, PropType::TREE, Textures, Audio},    // 16
+            Prop{Textures.TreeGreen, Vector2{1620.f,3840.f}, PropType::TREE, Textures, Audio},    // 17
+            Prop{Textures.TreeGreen, Vector2{1720.f,3840.f}, PropType::TREE, Textures, Audio},    // 18
+            Prop{Textures.TreeGreen, Vector2{1920.f,3840.f}, PropType::TREE, Textures, Audio},    // 20
+            Prop{Textures.TreeGreen, Vector2{2020.f,3840.f}, PropType::TREE, Textures, Audio},    // 21
+            Prop{Textures.TreeGreen, Vector2{2120.f,3840.f}, PropType::TREE, Textures, Audio},    // 22
+            Prop{Textures.TreeGreen, Vector2{2320.f,3840.f}, PropType::TREE, Textures, Audio},    // 24
+            Prop{Textures.TreeGreen, Vector2{2420.f,3840.f}, PropType::TREE, Textures, Audio},    // 25
+            Prop{Textures.TreeGreen, Vector2{2520.f,3840.f}, PropType::TREE, Textures, Audio},    // 26
+            Prop{Textures.TreeGreen, Vector2{2720.f,3840.f}, PropType::TREE, Textures, Audio},    // 28
+            Prop{Textures.TreeGreen, Vector2{2820.f,3840.f}, PropType::TREE, Textures, Audio},    // 29
+            Prop{Textures.TreeGreen, Vector2{2920.f,3840.f}, PropType::TREE, Textures, Audio},    // 30
+            Prop{Textures.TreeGreen, Vector2{3020.f,3840.f}, PropType::TREE, Textures, Audio},    // 31
+            Prop{Textures.TreeGreen, Vector2{3120.f,3840.f}, PropType::TREE, Textures, Audio},    // 32
+            Prop{Textures.TreeGreen, Vector2{3420.f,3840.f}, PropType::TREE, Textures, Audio},    // 35
+            Prop{Textures.TreeGreen, Vector2{3520.f,3840.f}, PropType::TREE, Textures, Audio},    // 36
+            Prop{Textures.TreeGreen, Vector2{3720.f,3840.f}, PropType::TREE, Textures, Audio},    // 38
+            Prop{Textures.TreeGreen, Vector2{3820.f,3840.f}, PropType::TREE, Textures, Audio},    // 39
+            Prop{Textures.TreeGreen, Vector2{3920.f,3840.f}, PropType::TREE, Textures, Audio},    // 40
             // row37
-            Prop{Textures.TreeGreen, Vector2{0.f,3940.f}, PropType::TREE, Textures},       // 1 
-            Prop{Textures.TreeGreen, Vector2{100.f,3940.f}, PropType::TREE, Textures},     // 2 
-            Prop{Textures.TreeGreen, Vector2{200.f,3940.f}, PropType::TREE, Textures},     // 3 
-            Prop{Textures.TreeGreen, Vector2{300.f,3940.f}, PropType::TREE, Textures},     // 4  
-            Prop{Textures.TreeGreen, Vector2{400.f,3940.f}, PropType::TREE, Textures},     // 5 
-            Prop{Textures.TreeGreen, Vector2{500.f,3940.f}, PropType::TREE, Textures},     // 6 
-            Prop{Textures.TreeGreen, Vector2{600.f,3940.f}, PropType::TREE, Textures},     // 7 
-            Prop{Textures.TreeGreen, Vector2{700.f,3940.f}, PropType::TREE, Textures},     // 8 
-            Prop{Textures.TreeGreen, Vector2{800.f,3940.f}, PropType::TREE, Textures},     // 9 
-            Prop{Textures.TreeGreen, Vector2{900.f,3940.f}, PropType::TREE, Textures},     // 10
-            Prop{Textures.TreeGreen, Vector2{1000.f,3940.f}, PropType::TREE, Textures},    // 11  
-            Prop{Textures.TreeGreen, Vector2{1100.f,3940.f}, PropType::TREE, Textures},    // 12
-            Prop{Textures.TreeGreen, Vector2{1200.f,3940.f}, PropType::TREE, Textures},    // 13
-            Prop{Textures.TreeGreen, Vector2{1300.f,3940.f}, PropType::TREE, Textures},    // 14
-            Prop{Textures.TreeGreen, Vector2{1400.f,3940.f}, PropType::TREE, Textures},    // 15
-            Prop{Textures.TreeGreen, Vector2{1500.f,3940.f}, PropType::TREE, Textures},    // 16
-            Prop{Textures.TreeGreen, Vector2{1600.f,3940.f}, PropType::TREE, Textures},    // 17
-            Prop{Textures.TreeGreen, Vector2{1700.f,3940.f}, PropType::TREE, Textures},    // 18
-            Prop{Textures.TreeGreen, Vector2{1800.f,3940.f}, PropType::TREE, Textures},    // 19
-            Prop{Textures.TreeGreen, Vector2{1900.f,3940.f}, PropType::TREE, Textures},    // 20
-            Prop{Textures.TreeGreen, Vector2{2000.f,3940.f}, PropType::TREE, Textures},    // 21
-            Prop{Textures.TreeGreen, Vector2{2100.f,3940.f}, PropType::TREE, Textures},    // 22
-            Prop{Textures.TreeGreen, Vector2{2200.f,3940.f}, PropType::TREE, Textures},    // 23
-            Prop{Textures.TreeGreen, Vector2{2300.f,3940.f}, PropType::TREE, Textures},    // 24
-            Prop{Textures.TreeGreen, Vector2{2400.f,3940.f}, PropType::TREE, Textures},    // 25
-            Prop{Textures.TreeGreen, Vector2{2500.f,3940.f}, PropType::TREE, Textures},    // 26
-            Prop{Textures.TreeGreen, Vector2{2600.f,3940.f}, PropType::TREE, Textures},    // 27 
-            Prop{Textures.TreeGreen, Vector2{2700.f,3940.f}, PropType::TREE, Textures},    // 28
-            Prop{Textures.TreeGreen, Vector2{2800.f,3940.f}, PropType::TREE, Textures},    // 29
-            Prop{Textures.TreeGreen, Vector2{2900.f,3940.f}, PropType::TREE, Textures},    // 30
-            Prop{Textures.TreeGreen, Vector2{3000.f,3940.f}, PropType::TREE, Textures},    // 31
-            Prop{Textures.TreeGreen, Vector2{3100.f,3940.f}, PropType::TREE, Textures},    // 32
-            Prop{Textures.TreeGreen, Vector2{3200.f,3940.f}, PropType::TREE, Textures},    // 33
-            Prop{Textures.TreeGreen, Vector2{3300.f,3940.f}, PropType::TREE, Textures},    // 34
-            Prop{Textures.TreeGreen, Vector2{3400.f,3940.f}, PropType::TREE, Textures},    // 35 
-            Prop{Textures.TreeGreen, Vector2{3500.f,3940.f}, PropType::TREE, Textures},    // 36 
-            Prop{Textures.TreeGreen, Vector2{3600.f,3940.f}, PropType::TREE, Textures},    // 37
-            Prop{Textures.TreeGreen, Vector2{3700.f,3940.f}, PropType::TREE, Textures},    // 38
-            Prop{Textures.TreeGreen, Vector2{3800.f,3940.f}, PropType::TREE, Textures},    // 39
-            Prop{Textures.TreeGreen, Vector2{3900.f,3940.f}, PropType::TREE, Textures},    // 40 
-            Prop{Textures.TreeGreen, Vector2{4000.f,3940.f}, PropType::TREE, Textures},    // 41
+            Prop{Textures.TreeGreen, Vector2{0.f,3940.f}, PropType::TREE, Textures, Audio},       // 1 
+            Prop{Textures.TreeGreen, Vector2{100.f,3940.f}, PropType::TREE, Textures, Audio},     // 2 
+            Prop{Textures.TreeGreen, Vector2{200.f,3940.f}, PropType::TREE, Textures, Audio},     // 3 
+            Prop{Textures.TreeGreen, Vector2{300.f,3940.f}, PropType::TREE, Textures, Audio},     // 4  
+            Prop{Textures.TreeGreen, Vector2{400.f,3940.f}, PropType::TREE, Textures, Audio},     // 5 
+            Prop{Textures.TreeGreen, Vector2{500.f,3940.f}, PropType::TREE, Textures, Audio},     // 6 
+            Prop{Textures.TreeGreen, Vector2{600.f,3940.f}, PropType::TREE, Textures, Audio},     // 7 
+            Prop{Textures.TreeGreen, Vector2{700.f,3940.f}, PropType::TREE, Textures, Audio},     // 8 
+            Prop{Textures.TreeGreen, Vector2{800.f,3940.f}, PropType::TREE, Textures, Audio},     // 9 
+            Prop{Textures.TreeGreen, Vector2{900.f,3940.f}, PropType::TREE, Textures, Audio},     // 10
+            Prop{Textures.TreeGreen, Vector2{1000.f,3940.f}, PropType::TREE, Textures, Audio},    // 11  
+            Prop{Textures.TreeGreen, Vector2{1100.f,3940.f}, PropType::TREE, Textures, Audio},    // 12
+            Prop{Textures.TreeGreen, Vector2{1200.f,3940.f}, PropType::TREE, Textures, Audio},    // 13
+            Prop{Textures.TreeGreen, Vector2{1300.f,3940.f}, PropType::TREE, Textures, Audio},    // 14
+            Prop{Textures.TreeGreen, Vector2{1400.f,3940.f}, PropType::TREE, Textures, Audio},    // 15
+            Prop{Textures.TreeGreen, Vector2{1500.f,3940.f}, PropType::TREE, Textures, Audio},    // 16
+            Prop{Textures.TreeGreen, Vector2{1600.f,3940.f}, PropType::TREE, Textures, Audio},    // 17
+            Prop{Textures.TreeGreen, Vector2{1700.f,3940.f}, PropType::TREE, Textures, Audio},    // 18
+            Prop{Textures.TreeGreen, Vector2{1800.f,3940.f}, PropType::TREE, Textures, Audio},    // 19
+            Prop{Textures.TreeGreen, Vector2{1900.f,3940.f}, PropType::TREE, Textures, Audio},    // 20
+            Prop{Textures.TreeGreen, Vector2{2000.f,3940.f}, PropType::TREE, Textures, Audio},    // 21
+            Prop{Textures.TreeGreen, Vector2{2100.f,3940.f}, PropType::TREE, Textures, Audio},    // 22
+            Prop{Textures.TreeGreen, Vector2{2200.f,3940.f}, PropType::TREE, Textures, Audio},    // 23
+            Prop{Textures.TreeGreen, Vector2{2300.f,3940.f}, PropType::TREE, Textures, Audio},    // 24
+            Prop{Textures.TreeGreen, Vector2{2400.f,3940.f}, PropType::TREE, Textures, Audio},    // 25
+            Prop{Textures.TreeGreen, Vector2{2500.f,3940.f}, PropType::TREE, Textures, Audio},    // 26
+            Prop{Textures.TreeGreen, Vector2{2600.f,3940.f}, PropType::TREE, Textures, Audio},    // 27 
+            Prop{Textures.TreeGreen, Vector2{2700.f,3940.f}, PropType::TREE, Textures, Audio},    // 28
+            Prop{Textures.TreeGreen, Vector2{2800.f,3940.f}, PropType::TREE, Textures, Audio},    // 29
+            Prop{Textures.TreeGreen, Vector2{2900.f,3940.f}, PropType::TREE, Textures, Audio},    // 30
+            Prop{Textures.TreeGreen, Vector2{3000.f,3940.f}, PropType::TREE, Textures, Audio},    // 31
+            Prop{Textures.TreeGreen, Vector2{3100.f,3940.f}, PropType::TREE, Textures, Audio},    // 32
+            Prop{Textures.TreeGreen, Vector2{3200.f,3940.f}, PropType::TREE, Textures, Audio},    // 33
+            Prop{Textures.TreeGreen, Vector2{3300.f,3940.f}, PropType::TREE, Textures, Audio},    // 34
+            Prop{Textures.TreeGreen, Vector2{3400.f,3940.f}, PropType::TREE, Textures, Audio},    // 35 
+            Prop{Textures.TreeGreen, Vector2{3500.f,3940.f}, PropType::TREE, Textures, Audio},    // 36 
+            Prop{Textures.TreeGreen, Vector2{3600.f,3940.f}, PropType::TREE, Textures, Audio},    // 37
+            Prop{Textures.TreeGreen, Vector2{3700.f,3940.f}, PropType::TREE, Textures, Audio},    // 38
+            Prop{Textures.TreeGreen, Vector2{3800.f,3940.f}, PropType::TREE, Textures, Audio},    // 39
+            Prop{Textures.TreeGreen, Vector2{3900.f,3940.f}, PropType::TREE, Textures, Audio},    // 40 
+            Prop{Textures.TreeGreen, Vector2{4000.f,3940.f}, PropType::TREE, Textures, Audio},    // 41
             // large tree
-            Prop{Textures.TreeGreen, Vector2{2185.f,2050.f}, PropType::TREE, Textures, 8.f}
+            Prop{Textures.TreeGreen, Vector2{2185.f,2050.f}, PropType::TREE, Textures, Audio, 8.f}
         };
     }
 

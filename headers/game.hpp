@@ -78,9 +78,9 @@ namespace Game
     Character InitializeFox(const Window& Window, Game::Info& Info, const GameTexture& Textures, const GameAudio& Audio);
     std::array<Sprite,5> InitializePauseFox(const GameTexture& Textures);
     std::array<const Texture2D,9> InitializeButtons(const GameTexture& Textures);
-    std::vector<std::vector<Prop>> InitializePropsUnder(const GameTexture& Textures);
-    std::vector<std::vector<Prop>> InitializePropsOver(const GameTexture& Textures);
-    std::vector<Prop> InitializeTrees(const GameTexture& Textures);
+    std::vector<std::vector<Prop>> InitializePropsUnder(const GameTexture& Textures, const GameAudio& Audio);
+    std::vector<std::vector<Prop>> InitializePropsOver(const GameTexture& Textures, const GameAudio& Audio);
+    std::vector<Prop> InitializeTrees(const GameTexture& Textures, const GameAudio& Audio);
     std::vector<Enemy> InitializeEnemies(Background& MapBG, const Window& Window, const GameTexture& Textures, Randomizer& RandomEngine, const GameAudio& Audio);
     std::vector<Enemy> InitializeCrows(Background& MapaBG, const Window& Window, const GameTexture& Textures, Randomizer& RandomEngine, const GameAudio& Audio);
 
