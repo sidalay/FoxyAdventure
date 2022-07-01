@@ -988,6 +988,10 @@ namespace Game
             Prop{Textures.Bush, Vector2{2754.f,527.f}, PropType::BUSH, Textures, Audio}, 
             Prop{Textures.Bush, Vector2{2789.f,2243.f}, PropType::BUSH, Textures, Audio}, 
             Prop{Textures.Bush, Vector2{2950.f,2144.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{441.f,310.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{3212.f,209.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{3366.f,423.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{3371.f,322.f}, PropType::BUSH, Textures, Audio}, 
             Prop{Textures.Bush, Vector2{2671.f,2500.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
             Prop{Textures.Bush, Vector2{2740.f,2572.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
             Prop{Textures.Bush, Vector2{2941.f,2629.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
@@ -2660,7 +2664,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{700.f,167.f}, PropType::TREE, Textures, Audio},      // 8
             Prop{Textures.TreeGreen, Vector2{800.f,167.f}, PropType::TREE, Textures, Audio},      // 9
             Prop{Textures.TreeGreen, Vector2{900.f,167.f}, PropType::TREE, Textures, Audio},      // 10
-            // Prop{Textures.TreeGreen, Vector2{1000.f,167.f}, PropType::TREE, Textures, Audio},     // 11
             Prop{Textures.TreeGreen, Vector2{1400.f,167.f}, PropType::TREE, Textures, Audio},     // 15
             Prop{Textures.TreeGreen, Vector2{1500.f,167.f}, PropType::TREE, Textures, Audio},     // 16
             Prop{Textures.TreeGreen, Vector2{1600.f,167.f}, PropType::TREE, Textures, Audio},     // 17
@@ -2682,13 +2685,11 @@ namespace Game
             // row3
             Prop{Textures.TreeGreen, Vector2{20.f,267.f}, PropType::TREE, Textures, Audio},       // 1 
             Prop{Textures.TreeGreen, Vector2{120.f,267.f}, PropType::TREE, Textures, Audio},      // 2 
-            // Prop{Textures.TreeGreen, Vector2{220.f,267.f}, PropType::TREE, Textures, Audio},      // 3 
             Prop{Textures.TreeGreen, Vector2{320.f,267.f}, PropType::TREE, Textures, Audio},      // 4 
             Prop{Textures.TreeGreen, Vector2{420.f,267.f}, PropType::TREE, Textures, Audio},      // 5 
             Prop{Textures.TreeGreen, Vector2{620.f,267.f}, PropType::TREE, Textures, Audio},      // 7 
             Prop{Textures.TreeGreen, Vector2{720.f,267.f}, PropType::TREE, Textures, Audio},      // 8 
             Prop{Textures.TreeGreen, Vector2{820.f,267.f}, PropType::TREE, Textures, Audio},      // 9 
-            // Prop{Textures.TreeGreen, Vector2{920.f,267.f}, PropType::TREE, Textures, Audio},      // 10
             Prop{Textures.TreeGreen, Vector2{1520.f,267.f}, PropType::TREE, Textures, Audio},     // 16
             Prop{Textures.TreeGreen, Vector2{1620.f,267.f}, PropType::TREE, Textures, Audio},     // 17
             Prop{Textures.TreeGreen, Vector2{1720.f,267.f}, PropType::TREE, Textures, Audio},     // 18
@@ -2717,7 +2718,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{500.f,367.f}, PropType::TREE, Textures, Audio},      // 6 
             Prop{Textures.TreeGreen, Vector2{700.f,367.f}, PropType::TREE, Textures, Audio},      // 8 
             Prop{Textures.TreeGreen, Vector2{800.f,367.f}, PropType::TREE, Textures, Audio},      // 9 
-            // Prop{Textures.TreeGreen, Vector2{900.f,367.f}, PropType::TREE, Textures, Audio},      // 10
             Prop{Textures.TreeGreen, Vector2{1500.f,367.f}, PropType::TREE, Textures, Audio},     // 16
             Prop{Textures.TreeGreen, Vector2{1600.f,367.f}, PropType::TREE, Textures, Audio},     // 17
             Prop{Textures.TreeGreen, Vector2{1800.f,367.f}, PropType::TREE, Textures, Audio},     // 19
@@ -2744,7 +2744,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{620.f,467.f}, PropType::TREE, Textures, Audio},      // 7 
             Prop{Textures.TreeGreen, Vector2{720.f,467.f}, PropType::TREE, Textures, Audio},      // 8 
             Prop{Textures.TreeGreen, Vector2{920.f,467.f}, PropType::TREE, Textures, Audio},      // 10
-            // Prop{Textures.TreeGreen, Vector2{1020.f,467.f}, PropType::TREE, Textures, Audio},     // 11
             Prop{Textures.TreeGreen, Vector2{1420.f,467.f}, PropType::TREE, Textures, Audio},     // 15
             Prop{Textures.TreeGreen, Vector2{1520.f,467.f}, PropType::TREE, Textures, Audio},     // 16
             Prop{Textures.TreeGreen, Vector2{1620.f,467.f}, PropType::TREE, Textures, Audio},     // 17
@@ -2765,9 +2764,6 @@ namespace Game
             // row6
             Prop{Textures.TreeGreen, Vector2{0.f,567.f}, PropType::TREE, Textures, Audio},        // 1 
             Prop{Textures.TreeGreen, Vector2{100.f,567.f}, PropType::TREE, Textures, Audio},      // 2 
-            // Prop{Textures.TreeGreen, Vector2{200.f,567.f}, PropType::TREE, Textures, Audio},      // 3 
-            // Prop{Textures.TreeGreen, Vector2{300.f,567.f}, PropType::TREE, Textures, Audio},      // 4 
-            // Prop{Textures.TreeGreen, Vector2{400.f,567.f}, PropType::TREE, Textures, Audio},      // 5 
             Prop{Textures.TreeGreen, Vector2{500.f,567.f}, PropType::TREE, Textures, Audio},      // 6 
             Prop{Textures.TreeGreen, Vector2{600.f,567.f}, PropType::TREE, Textures, Audio},      // 7 
             Prop{Textures.TreeGreen, Vector2{800.f,567.f}, PropType::TREE, Textures, Audio},      // 9 
@@ -2781,9 +2777,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{1700.f,567.f}, PropType::TREE, Textures, Audio},     // 18
             Prop{Textures.TreeGreen, Vector2{2500.f,567.f}, PropType::TREE, Textures, Audio},     // 26
             Prop{Textures.TreeGreen, Vector2{2700.f,567.f}, PropType::TREE, Textures, Audio},     // 28
-            // Prop{Textures.TreeGreen, Vector2{2800.f,567.f}, PropType::TREE, Textures, Audio},     // 29
-            // Prop{Textures.TreeGreen, Vector2{2900.f,567.f}, PropType::TREE, Textures, Audio},     // 30
-            // Prop{Textures.TreeGreen, Vector2{3000.f,567.f}, PropType::TREE, Textures, Audio},     // 31
             Prop{Textures.TreeGreen, Vector2{3100.f,567.f}, PropType::TREE, Textures, Audio},     // 32
             Prop{Textures.TreeGreen, Vector2{3200.f,567.f}, PropType::TREE, Textures, Audio},     // 33
             Prop{Textures.TreeGreen, Vector2{3300.f,567.f}, PropType::TREE, Textures, Audio},     // 34
@@ -2793,10 +2786,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3920.f,567.f}, PropType::TREE, Textures, Audio},     // 38
             // row7
             Prop{Textures.TreeGreen, Vector2{20.f,667.f}, PropType::TREE, Textures, Audio},       // 1 
-            // Prop{Textures.TreeGreen, Vector2{120.f,667.f}, PropType::TREE, Textures, Audio},      // 2 
-            // Prop{Textures.TreeGreen, Vector2{220.f,667.f}, PropType::TREE, Textures, Audio},      // 3 
-            // Prop{Textures.TreeGreen, Vector2{320.f,667.f}, PropType::TREE, Textures, Audio},      // 4 
-            // Prop{Textures.TreeGreen, Vector2{420.f,667.f}, PropType::TREE, Textures, Audio},      // 5 
             Prop{Textures.TreeGreen, Vector2{520.f,667.f}, PropType::TREE, Textures, Audio},      // 6 
             Prop{Textures.TreeGreen, Vector2{620.f,667.f}, PropType::TREE, Textures, Audio},      // 6 
             Prop{Textures.TreeGreen, Vector2{720.f,667.f}, PropType::TREE, Textures, Audio},      // 8 
@@ -2805,16 +2794,10 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{1020.f,667.f}, PropType::TREE, Textures, Audio},     // 11
             Prop{Textures.TreeGreen, Vector2{1120.f,667.f}, PropType::TREE, Textures, Audio},     // 12
             Prop{Textures.TreeGreen, Vector2{1220.f,667.f}, PropType::TREE, Textures, Audio},     // 13
-            // Prop{Textures.TreeGreen, Vector2{1320.f,667.f}, PropType::TREE, Textures, Audio},     // 14
-            // Prop{Textures.TreeGreen, Vector2{1420.f,667.f}, PropType::TREE, Textures, Audio},     // 15
-            // Prop{Textures.TreeGreen, Vector2{1520.f,667.f}, PropType::TREE, Textures, Audio},     // 16
             Prop{Textures.TreeGreen, Vector2{1720.f,667.f}, PropType::TREE, Textures, Audio},     // 18
             Prop{Textures.TreeGreen, Vector2{1820.f,667.f}, PropType::TREE, Textures, Audio},     // 19
-            // Prop{Textures.TreeGreen, Vector2{2420.f,667.f}, PropType::TREE, Textures, Audio},     // 25
             Prop{Textures.TreeGreen, Vector2{2520.f,667.f}, PropType::TREE, Textures, Audio},     // 26
             Prop{Textures.TreeGreen, Vector2{2620.f,667.f}, PropType::TREE, Textures, Audio},     // 27
-            // Prop{Textures.TreeGreen, Vector2{2720.f,667.f}, PropType::TREE, Textures, Audio},     // 28    
-            // Prop{Textures.TreeGreen, Vector2{3120.f,667.f}, PropType::TREE, Textures, Audio},     // 32    
             Prop{Textures.TreeGreen, Vector2{3220.f,667.f}, PropType::TREE, Textures, Audio},     // 33
             Prop{Textures.TreeGreen, Vector2{3320.f,667.f}, PropType::TREE, Textures, Audio},     // 34
             Prop{Textures.TreeGreen, Vector2{3420.f,667.f}, PropType::TREE, Textures, Audio},     // 35
@@ -2824,9 +2807,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{4000.f,667.f}, PropType::TREE, Textures, Audio},     // 39
             // row8
             Prop{Textures.TreeGreen, Vector2{0.f,767.f}, PropType::TREE, Textures, Audio},        // 1 
-            // Prop{Textures.TreeGreen, Vector2{100.f,767.f}, PropType::TREE, Textures, Audio},      // 2 
-            // Prop{Textures.TreeGreen, Vector2{200.f,767.f}, PropType::TREE, Textures, Audio},      // 3 
-            // Prop{Textures.TreeGreen, Vector2{300.f,767.f}, PropType::TREE, Textures, Audio},      // 4 
             Prop{Textures.TreeGreen, Vector2{400.f,767.f}, PropType::TREE, Textures, Audio},      // 5 
             Prop{Textures.TreeGreen, Vector2{500.f,767.f}, PropType::TREE, Textures, Audio},      // 6 
             Prop{Textures.TreeGreen, Vector2{600.f,767.f}, PropType::TREE, Textures, Audio},      // 7 
@@ -2839,10 +2819,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{1400.f,767.f}, PropType::TREE, Textures, Audio},     // 15
             Prop{Textures.TreeGreen, Vector2{1500.f,767.f}, PropType::TREE, Textures, Audio},     // 16
             Prop{Textures.TreeGreen, Vector2{1600.f,767.f}, PropType::TREE, Textures, Audio},     // 17
-            // Prop{Textures.TreeGreen, Vector2{1700.f,767.f}, PropType::TREE, Textures, Audio},     // 18
-            // Prop{Textures.TreeGreen, Vector2{1900.f,767.f}, PropType::TREE, Textures, Audio},     // 20
-            // Prop{Textures.TreeGreen, Vector2{2400.f,767.f}, PropType::TREE, Textures, Audio},     // 25
-            // Prop{Textures.TreeGreen, Vector2{2500.f,767.f}, PropType::TREE, Textures, Audio},     // 26
             Prop{Textures.TreeGreen, Vector2{2600.f,767.f}, PropType::TREE, Textures, Audio},     // 27
             Prop{Textures.TreeGreen, Vector2{3200.f,767.f}, PropType::TREE, Textures, Audio},     // 33
             Prop{Textures.TreeGreen, Vector2{3300.f,767.f}, PropType::TREE, Textures, Audio},     // 34    
@@ -2852,27 +2828,20 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{3920.f,767.f}, PropType::TREE, Textures, Audio},     // 38
             // row9
             Prop{Textures.TreeGreen, Vector2{20.f,867.f}, PropType::TREE, Textures, Audio},       // 1 
-            // Prop{Textures.TreeGreen, Vector2{120.f,867.f}, PropType::TREE, Textures, Audio},      // 2 
-            // Prop{Textures.TreeGreen, Vector2{220.f,867.f}, PropType::TREE, Textures, Audio},      // 3 
             Prop{Textures.TreeGreen, Vector2{320.f,867.f}, PropType::TREE, Textures, Audio},      // 4 
             Prop{Textures.TreeGreen, Vector2{420.f,867.f}, PropType::TREE, Textures, Audio},      // 5 
             Prop{Textures.TreeGreen, Vector2{520.f,867.f}, PropType::TREE, Textures, Audio},      // 6 
-            // Prop{Textures.TreeGreen, Vector2{1020.f,867.f}, PropType::TREE, Textures, Audio},     // 11
             Prop{Textures.TreeGreen, Vector2{1120.f,867.f}, PropType::TREE, Textures, Audio},     // 12
             Prop{Textures.TreeGreen, Vector2{1220.f,867.f}, PropType::TREE, Textures, Audio},     // 13
             Prop{Textures.TreeGreen, Vector2{1320.f,867.f}, PropType::TREE, Textures, Audio},     // 14
             Prop{Textures.TreeGreen, Vector2{1420.f,867.f}, PropType::TREE, Textures, Audio},     // 15
-            // Prop{Textures.TreeGreen, Vector2{1520.f,867.f}, PropType::TREE, Textures, Audio},     // 16
             Prop{Textures.TreeGreen, Vector2{1620.f,867.f}, PropType::TREE, Textures, Audio},     // 17
             Prop{Textures.TreeGreen, Vector2{1720.f,867.f}, PropType::TREE, Textures, Audio},     // 18
             Prop{Textures.TreeGreen, Vector2{1820.f,867.f}, PropType::TREE, Textures, Audio},     // 19
-            // Prop{Textures.TreeGreen, Vector2{1920.f,867.f}, PropType::TREE, Textures, Audio},     // 20
-            // Prop{Textures.TreeGreen, Vector2{2020.f,867.f}, PropType::TREE, Textures, Audio},     // 21
             Prop{Textures.TreeGreen, Vector2{2060.f,867.f}, PropType::TREE, Textures, Audio},     // 22
             Prop{Textures.TreeGreen, Vector2{2180.f,867.f}, PropType::TREE, Textures, Audio},     // 23
             Prop{Textures.TreeGreen, Vector2{2300.f,867.f}, PropType::TREE, Textures, Audio},     // 24
             Prop{Textures.TreeGreen, Vector2{2420.f,867.f}, PropType::TREE, Textures, Audio},     // 25
-            // Prop{Textures.TreeGreen, Vector2{2520.f,867.f}, PropType::TREE, Textures, Audio},     // 26
             Prop{Textures.TreeGreen, Vector2{2620.f,867.f}, PropType::TREE, Textures, Audio},     // 27
             Prop{Textures.TreeGreen, Vector2{3220.f,867.f}, PropType::TREE, Textures, Audio},     // 33
             Prop{Textures.TreeGreen, Vector2{3320.f,867.f}, PropType::TREE, Textures, Audio},     // 34
@@ -2883,24 +2852,17 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{4000.f,867.f}, PropType::TREE, Textures, Audio},     // 39
             // row10
             Prop{Textures.TreeGreen, Vector2{0.f,967.f}, PropType::TREE, Textures, Audio},        // 1 
-            // Prop{Textures.TreeGreen, Vector2{100.f,967.f}, PropType::TREE, Textures, Audio},      // 2 
-            // Prop{Textures.TreeGreen, Vector2{200.f,967.f}, PropType::TREE, Textures, Audio},      // 3 
             Prop{Textures.TreeGreen, Vector2{300.f,967.f}, PropType::TREE, Textures, Audio},      // 4 
             Prop{Textures.TreeGreen, Vector2{400.f,967.f}, PropType::TREE, Textures, Audio},      // 5 
             Prop{Textures.TreeGreen, Vector2{1100.f,967.f}, PropType::TREE, Textures, Audio},     // 12
             Prop{Textures.TreeGreen, Vector2{1200.f,967.f}, PropType::TREE, Textures, Audio},     // 13
             Prop{Textures.TreeGreen, Vector2{1300.f,967.f}, PropType::TREE, Textures, Audio},     // 14
-            // Prop{Textures.TreeGreen, Vector2{1400.f,967.f}, PropType::TREE, Textures, Audio},     // 15
             Prop{Textures.TreeGreen, Vector2{1500.f,967.f}, PropType::TREE, Textures, Audio},     // 16
             Prop{Textures.TreeGreen, Vector2{1600.f,967.f}, PropType::TREE, Textures, Audio},     // 17
-            // Prop{Textures.TreeGreen, Vector2{1700.f,967.f}, PropType::TREE, Textures, Audio},     // 18
-            // Prop{Textures.TreeGreen, Vector2{1800.f,967.f}, PropType::TREE, Textures, Audio},     // 19
             Prop{Textures.TreeGreen, Vector2{1900.f,967.f}, PropType::TREE, Textures, Audio},     // 20
             Prop{Textures.TreeGreen, Vector2{2000.f,967.f}, PropType::TREE, Textures, Audio},     // 21
             Prop{Textures.TreeGreen, Vector2{2100.f,967.f}, PropType::TREE, Textures, Audio},     // 22
-            // Prop{Textures.TreeGreen, Vector2{2200.f,967.f}, PropType::TREE, Textures, Audio},     // 23
             Prop{Textures.TreeGreen, Vector2{2300.f,967.f}, PropType::TREE, Textures, Audio},     // 24
-            // Prop{Textures.TreeGreen, Vector2{2400.f,967.f}, PropType::TREE, Textures, Audio},     // 25
             Prop{Textures.TreeGreen, Vector2{2500.f,967.f}, PropType::TREE, Textures, Audio},     // 26
             Prop{Textures.TreeGreen, Vector2{2600.f,967.f}, PropType::TREE, Textures, Audio},     // 27
             Prop{Textures.TreeGreen, Vector2{3200.f,967.f}, PropType::TREE, Textures, Audio},     // 33
@@ -2912,21 +2874,10 @@ namespace Game
             // row11
             Prop{Textures.TreeGreen, Vector2{20.f,1067.f}, PropType::TREE, Textures, Audio},      // 1 
             Prop{Textures.TreeGreen, Vector2{120.f,1067.f}, PropType::TREE, Textures, Audio},     // 2     
-            // Prop{Textures.TreeGreen, Vector2{220.f,1067.f}, PropType::TREE, Textures, Audio},     // 3     
-            // Prop{Textures.TreeGreen, Vector2{320.f,1067.f}, PropType::TREE, Textures, Audio},     // 4 
-            // Prop{Textures.TreeGreen, Vector2{420.f,1067.f}, PropType::TREE, Textures, Audio},     // 5 
-            // Prop{Textures.TreeGreen, Vector2{1420.f,1067.f}, PropType::TREE, Textures, Audio},    // 15    
-            // Prop{Textures.TreeGreen, Vector2{1520.f,1067.f}, PropType::TREE, Textures, Audio},    // 16    
-            // Prop{Textures.TreeGreen, Vector2{1620.f,1067.f}, PropType::TREE, Textures, Audio},    // 17    
-            // Prop{Textures.TreeGreen, Vector2{1720.f,1067.f}, PropType::TREE, Textures, Audio},    // 18    
             Prop{Textures.TreeGreen, Vector2{1820.f,1067.f}, PropType::TREE, Textures, Audio},    // 19    
             Prop{Textures.TreeGreen, Vector2{1920.f,1067.f}, PropType::TREE, Textures, Audio},    // 20    
-            // Prop{Textures.TreeGreen, Vector2{2020.f,1067.f}, PropType::TREE, Textures, Audio},    // 21    
-            // Prop{Textures.TreeGreen, Vector2{2120.f,1067.f}, PropType::TREE, Textures, Audio},    // 22    
             Prop{Textures.TreeGreen, Vector2{2220.f,1067.f}, PropType::TREE, Textures, Audio},    // 23    
             Prop{Textures.TreeGreen, Vector2{2320.f,1067.f}, PropType::TREE, Textures, Audio},    // 24    
-            // Prop{Textures.TreeGreen, Vector2{2420.f,1067.f}, PropType::TREE, Textures, Audio},    // 25    
-            // Prop{Textures.TreeGreen, Vector2{2520.f,1067.f}, PropType::TREE, Textures, Audio},    // 26    
             Prop{Textures.TreeGreen, Vector2{2620.f,1067.f}, PropType::TREE, Textures, Audio},    // 27    
             Prop{Textures.TreeGreen, Vector2{2720.f,1067.f}, PropType::TREE, Textures, Audio},    // 28    
             Prop{Textures.TreeGreen, Vector2{3120.f,1067.f}, PropType::TREE, Textures, Audio},    // 32    
@@ -2945,8 +2896,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{400.f,1167.f}, PropType::TREE, Textures, Audio},     // 5 
             Prop{Textures.TreeGreen, Vector2{1100.f,1167.f}, PropType::TREE, Textures, Audio},    // 12    
             Prop{Textures.TreeGreen, Vector2{1200.f,1167.f}, PropType::TREE, Textures, Audio},    // 13    
-            // Prop{Textures.TreeGreen, Vector2{1300.f,1167.f}, PropType::TREE, Textures, Audio},    // 14    
-            // Prop{Textures.TreeGreen, Vector2{1400.f,1167.f}, PropType::TREE, Textures, Audio},    // 15    
             Prop{Textures.TreeGreen, Vector2{1500.f,1167.f}, PropType::TREE, Textures, Audio},    // 16    
             Prop{Textures.TreeGreen, Vector2{1600.f,1167.f}, PropType::TREE, Textures, Audio},    // 17    
             Prop{Textures.TreeGreen, Vector2{1700.f,1167.f}, PropType::TREE, Textures, Audio},    // 18    
@@ -2958,7 +2907,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{2300.f,1167.f}, PropType::TREE, Textures, Audio},    // 24    
             Prop{Textures.TreeGreen, Vector2{2400.f,1167.f}, PropType::TREE, Textures, Audio},    // 25    
             Prop{Textures.TreeGreen, Vector2{2500.f,1167.f}, PropType::TREE, Textures, Audio},    // 26    
-            // Prop{Textures.TreeGreen, Vector2{2800.f,1167.f}, PropType::TREE, Textures, Audio},    // 29    
             Prop{Textures.TreeGreen, Vector2{2900.f,1167.f}, PropType::TREE, Textures, Audio},    // 30    
             Prop{Textures.TreeGreen, Vector2{3000.f,1167.f}, PropType::TREE, Textures, Audio},    // 31    
             Prop{Textures.TreeGreen, Vector2{3100.f,1167.f}, PropType::TREE, Textures, Audio},    // 32    
@@ -2975,18 +2923,11 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{420.f,1267.f}, PropType::TREE, Textures, Audio},     // 5 
             Prop{Textures.TreeGreen, Vector2{520.f,1267.f}, PropType::TREE, Textures, Audio},     // 6 
             Prop{Textures.TreeGreen, Vector2{1020.f,1267.f}, PropType::TREE, Textures, Audio},    // 11
-            // Prop{Textures.TreeGreen, Vector2{1120.f,1267.f}, PropType::TREE, Textures, Audio},    // 12
             Prop{Textures.TreeGreen, Vector2{1220.f,1267.f}, PropType::TREE, Textures, Audio},    // 13
             Prop{Textures.TreeGreen, Vector2{1320.f,1267.f}, PropType::TREE, Textures, Audio},    // 14
-            // Prop{Textures.TreeGreen, Vector2{1420.f,1267.f}, PropType::TREE, Textures, Audio},    // 15
-            // Prop{Textures.TreeGreen, Vector2{1520.f,1267.f}, PropType::TREE, Textures, Audio},    // 16
-            // Prop{Textures.TreeGreen, Vector2{1620.f,1267.f}, PropType::TREE, Textures, Audio},    // 17
-            // Prop{Textures.TreeGreen, Vector2{1720.f,1267.f}, PropType::TREE, Textures, Audio},    // 18
             Prop{Textures.TreeGreen, Vector2{1820.f,1267.f}, PropType::TREE, Textures, Audio},    // 19
             Prop{Textures.TreeGreen, Vector2{1920.f,1267.f}, PropType::TREE, Textures, Audio},    // 20
             Prop{Textures.TreeGreen, Vector2{2420.f,1267.f}, PropType::TREE, Textures, Audio},    // 25
-            // Prop{Textures.TreeGreen, Vector2{2520.f,1267.f}, PropType::TREE, Textures, Audio},    // 26
-            // Prop{Textures.TreeGreen, Vector2{2620.f,1267.f}, PropType::TREE, Textures, Audio},    // 27
             Prop{Textures.TreeGreen, Vector2{2720.f,1267.f}, PropType::TREE, Textures, Audio},    // 28
             Prop{Textures.TreeFall, Vector2{2820.f,1267.f}, PropType::TREE, Textures, Audio},    // 29
             Prop{Textures.TreeGreen, Vector2{2920.f,1267.f}, PropType::TREE, Textures, Audio},    // 30
@@ -3005,10 +2946,8 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{200.f,1367.f}, PropType::TREE, Textures, Audio},     // 3     
             Prop{Textures.TreeGreen, Vector2{300.f,1367.f}, PropType::TREE, Textures, Audio},     // 4     
             Prop{Textures.TreeGreen, Vector2{400.f,1367.f}, PropType::TREE, Textures, Audio},     // 5     
-            // Prop{Textures.TreeGreen, Vector2{500.f,1367.f}, PropType::TREE, Textures, Audio},     // 6     
             Prop{Textures.TreeGreen, Vector2{700.f,1367.f}, PropType::TREE, Textures, Audio},     // 8     
             Prop{Textures.TreeGreen, Vector2{800.f,1367.f}, PropType::TREE, Textures, Audio},     // 9     
-            // Prop{Textures.TreeGreen, Vector2{900.f,1367.f}, PropType::TREE, Textures, Audio},     // 10    
             Prop{Textures.TreeGreen, Vector2{1000.f,1367.f}, PropType::TREE, Textures, Audio},    // 11    
             Prop{Textures.TreeGreen, Vector2{1100.f,1367.f}, PropType::TREE, Textures, Audio},    // 12    
             Prop{Textures.TreeGreen, Vector2{1200.f,1367.f}, PropType::TREE, Textures, Audio},    // 13    
@@ -3016,9 +2955,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{1400.f,1367.f}, PropType::TREE, Textures, Audio},    // 15    
             Prop{Textures.TreeGreen, Vector2{1500.f,1367.f}, PropType::TREE, Textures, Audio},    // 16    
             Prop{Textures.TreeGreen, Vector2{1600.f,1367.f}, PropType::TREE, Textures, Audio},    // 17    
-            // Prop{Textures.TreeGreen, Vector2{1700.f,1367.f}, PropType::TREE, Textures, Audio},    // 18    
-            // Prop{Textures.TreeGreen, Vector2{1800.f,1367.f}, PropType::TREE, Textures, Audio},    // 19    
-            // Prop{Textures.TreeGreen, Vector2{2500.f,1367.f}, PropType::TREE, Textures, Audio},    // 26    
             Prop{Textures.TreeGreen, Vector2{2600.f,1367.f}, PropType::TREE, Textures, Audio},    // 27    
             Prop{Textures.TreeFall, Vector2{2700.f,1367.f}, PropType::TREE, Textures, Audio},    // 28    
             Prop{Textures.TreeGreen, Vector2{2800.f,1367.f}, PropType::TREE, Textures, Audio},    // 29    
@@ -3038,25 +2974,17 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{520.f,1467.f}, PropType::TREE, Textures, Audio},     // 6 
             Prop{Textures.TreeGreen, Vector2{720.f,1467.f}, PropType::TREE, Textures, Audio},     // 8 
             Prop{Textures.TreeGreen, Vector2{820.f,1467.f}, PropType::TREE, Textures, Audio},     // 9 
-            // Prop{Textures.TreeGreen, Vector2{920.f,1467.f}, PropType::TREE, Textures, Audio},     // 10
-            // Prop{Textures.TreeGreen, Vector2{1220.f,1467.f}, PropType::TREE, Textures, Audio},    // 13
-            // Prop{Textures.TreeGreen, Vector2{1320.f,1467.f}, PropType::TREE, Textures, Audio},    // 14
             Prop{Textures.TreeGreen, Vector2{1420.f,1467.f}, PropType::TREE, Textures, Audio},    // 15
             Prop{Textures.TreeGreen, Vector2{1520.f,1467.f}, PropType::TREE, Textures, Audio},    // 16
-            // Prop{Textures.TreeGreen, Vector2{1620.f,1467.f}, PropType::TREE, Textures, Audio},    // 17
             Prop{Textures.TreeGreen, Vector2{1720.f,1467.f}, PropType::TREE, Textures, Audio},    // 18
             Prop{Textures.TreeGreen, Vector2{1820.f,1467.f}, PropType::TREE, Textures, Audio},    // 19
             Prop{Textures.TreeGreen, Vector2{2420.f,1467.f}, PropType::TREE, Textures, Audio},    // 25
             Prop{Textures.TreeGreen, Vector2{2520.f,1467.f}, PropType::TREE, Textures, Audio},    // 26
             Prop{Textures.TreeGreen, Vector2{2620.f,1467.f}, PropType::TREE, Textures, Audio},    // 27
-            // Prop{Textures.TreeGreen, Vector2{2720.f,1467.f}, PropType::TREE, Textures, Audio},    // 28
             Prop{Textures.TreeStump, Vector2{2835.f,1546.f}, PropType::STUMP, Textures, Audio},    // 29
-            // Prop{Textures.TreeGreen, Vector2{2820.f,1467.f}, PropType::TREE, Textures, Audio},    // 29
             Prop{Textures.TreeFall, Vector2{2920.f,1467.f}, PropType::TREE, Textures, Audio},    // 30
             Prop{Textures.TreeStump, Vector2{3135.f,1546.f}, PropType::STUMP, Textures, Audio},    // 31
-            // Prop{Textures.TreeGreen, Vector2{3120.f,1467.f}, PropType::TREE, Textures, Audio},    // 32
             Prop{Textures.TreeGreen, Vector2{3220.f,1467.f}, PropType::TREE, Textures, Audio},    // 33
-            // Prop{Textures.TreeGreen, Vector2{3320.f,1467.f}, PropType::TREE, Textures, Audio},    // 34
             Prop{Textures.TreeGreen, Vector2{3420.f,1467.f}, PropType::TREE, Textures, Audio},    // 35
             Prop{Textures.TreeGreen, Vector2{3700.f,1467.f}, PropType::TREE, Textures, Audio},    // 36
             Prop{Textures.TreeGreen, Vector2{3800.f,1467.f}, PropType::TREE, Textures, Audio},    // 37
@@ -3075,7 +3003,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{1100.f,1567.f}, PropType::TREE, Textures, Audio},    // 12
             Prop{Textures.TreeGreen, Vector2{1200.f,1567.f}, PropType::TREE, Textures, Audio},    // 13
             Prop{Textures.TreeGreen, Vector2{1300.f,1567.f}, PropType::TREE, Textures, Audio},    // 14
-            // Prop{Textures.TreeGreen, Vector2{1400.f,1567.f}, PropType::TREE, Textures, Audio},    // 15
             Prop{Textures.TreeGreen, Vector2{1500.f,1567.f}, PropType::TREE, Textures, Audio},    // 16
             Prop{Textures.TreeGreen, Vector2{1600.f,1567.f}, PropType::TREE, Textures, Audio},    // 17
             Prop{Textures.TreeGreen, Vector2{2500.f,1567.f}, PropType::TREE, Textures, Audio},    // 26
@@ -3084,7 +3011,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{2800.f,1567.f}, PropType::TREE, Textures, Audio},    // 29
             Prop{Textures.TreeStump, Vector2{2950.f,1658.f}, PropType::STUMP, Textures, Audio},    // 30
             Prop{Textures.TreeStump, Vector2{3050.f,1658.f}, PropType::STUMP, Textures, Audio},    // 31
-            // Prop{Textures.TreeGreen, Vector2{3100.f,1567.f}, PropType::TREE, Textures, Audio},    // 32
             Prop{Textures.TreeFall, Vector2{3200.f,1567.f}, PropType::TREE, Textures, Audio},    // 33
             Prop{Textures.TreeGreen, Vector2{3300.f,1567.f}, PropType::TREE, Textures, Audio},    // 34
             Prop{Textures.TreeGreen, Vector2{3400.f,1567.f}, PropType::TREE, Textures, Audio},    // 35
@@ -3094,9 +3020,6 @@ namespace Game
             // row17
             Prop{Textures.TreeGreen, Vector2{20.f,1667.f}, PropType::TREE, Textures, Audio},      // 1 
             Prop{Textures.TreeGreen, Vector2{120.f,1667.f}, PropType::TREE, Textures, Audio},     // 2 
-            // Prop{Textures.TreeGreen, Vector2{220.f,1667.f}, PropType::TREE, Textures, Audio},     // 3 
-            // Prop{Textures.TreeGreen, Vector2{520.f,1667.f}, PropType::TREE, Textures, Audio},     // 6 
-            // Prop{Textures.TreeGreen, Vector2{620.f,1667.f}, PropType::TREE, Textures, Audio},     // 7 
             Prop{Textures.TreeGreen, Vector2{720.f,1667.f}, PropType::TREE, Textures, Audio},     // 8 
             Prop{Textures.TreeGreen, Vector2{820.f,1667.f}, PropType::TREE, Textures, Audio},     // 9 
             Prop{Textures.TreeGreen, Vector2{920.f,1667.f}, PropType::TREE, Textures, Audio},     // 10
@@ -3109,7 +3032,6 @@ namespace Game
             Prop{Textures.TreeStump, Vector2{2835.f,1737.f}, PropType::STUMP, Textures, Audio},    // 31
             Prop{Textures.TreeStump, Vector2{3050.f,1737.f}, PropType::STUMP, Textures, Audio},    // 31
             Prop{Textures.TreeStump, Vector2{3220.f,1737.f}, PropType::STUMP, Textures, Audio},    // 32
-            // Prop{Textures.TreeGreen, Vector2{3220.f,1667.f}, PropType::TREE, Textures, Audio},    // 33
             Prop{Textures.TreeGreen, Vector2{3320.f,1667.f}, PropType::TREE, Textures, Audio},    // 34
             Prop{Textures.TreeFall, Vector2{3420.f,1667.f}, PropType::TREE, Textures, Audio},    // 35
             Prop{Textures.TreeGreen, Vector2{3700.f,1667.f}, PropType::TREE, Textures, Audio},    // 36
@@ -3119,39 +3041,22 @@ namespace Game
             // row18
             Prop{Textures.TreeGreen, Vector2{0.f,1767.f}, PropType::TREE, Textures, Audio},       // 1 
             Prop{Textures.TreeGreen, Vector2{100.f,1767.f}, PropType::TREE, Textures, Audio},     // 2 
-            // Prop{Textures.TreeGreen, Vector2{200.f,1767.f}, PropType::TREE, Textures, Audio},     // 3 
-            // Prop{Textures.TreeGreen, Vector2{300.f,1767.f}, PropType::TREE, Textures, Audio},     // 4 
-            // Prop{Textures.TreeGreen, Vector2{400.f,1767.f}, PropType::TREE, Textures, Audio},     // 5 
-            // Prop{Textures.TreeGreen, Vector2{500.f,1767.f}, PropType::TREE, Textures, Audio},     // 6 
-            // Prop{Textures.TreeGreen, Vector2{600.f,1767.f}, PropType::TREE, Textures, Audio},     // 7 
-            // Prop{Textures.TreeGreen, Vector2{700.f,1767.f}, PropType::TREE, Textures, Audio},     // 8 
             Prop{Textures.TreeGreen, Vector2{800.f,1767.f}, PropType::TREE, Textures, Audio},     // 9 
             Prop{Textures.TreeGreen, Vector2{900.f,1767.f}, PropType::TREE, Textures, Audio},     // 10
             Prop{Textures.TreeGreen, Vector2{1000.f,1767.f}, PropType::TREE, Textures, Audio},    // 11
             Prop{Textures.TreeGreen, Vector2{1100.f,1767.f}, PropType::TREE, Textures, Audio},    // 12
-            // Prop{Textures.TreeGreen, Vector2{1200.f,1767.f}, PropType::TREE, Textures, Audio},    // 13
             Prop{Textures.TreeGreen, Vector2{1300.f,1767.f}, PropType::TREE, Textures, Audio},    // 14
             Prop{Textures.TreeGreen, Vector2{1400.f,1767.f}, PropType::TREE, Textures, Audio},    // 15
             Prop{Textures.TreeGreen, Vector2{2500.f,1767.f}, PropType::TREE, Textures, Audio},    // 26
             Prop{Textures.TreeGreen, Vector2{2600.f,1767.f}, PropType::TREE, Textures, Audio},    // 27
             Prop{Textures.TreeGreen, Vector2{2700.f,1767.f}, PropType::TREE, Textures, Audio},    // 28
             Prop{Textures.TreeGreen, Vector2{2800.f,1767.f}, PropType::TREE, Textures, Audio},    // 29
-            // Prop{Textures.TreeGreen, Vector2{2900.f,1767.f}, PropType::TREE, Textures, Audio},    // 30
             Prop{Textures.TreeFall, Vector2{3000.f,1767.f}, PropType::TREE, Textures, Audio},    // 31
-            // Prop{Textures.TreeGreen, Vector2{3100.f,1767.f}, PropType::TREE, Textures, Audio},    // 32
-            // Prop{Textures.TreeGreen, Vector2{3200.f,1767.f}, PropType::TREE, Textures, Audio},    // 33
-            // Prop{Textures.TreeGreen, Vector2{3300.f,1767.f}, PropType::TREE, Textures, Audio},    // 34
-            // Prop{Textures.TreeGreen, Vector2{3400.f,1767.f}, PropType::TREE, Textures, Audio},    // 35
             Prop{Textures.TreeGreen, Vector2{3720.f,1767.f}, PropType::TREE, Textures, Audio},    // 36
             Prop{Textures.TreeGreen, Vector2{3820.f,1767.f}, PropType::TREE, Textures, Audio},    // 37
             Prop{Textures.TreeGreen, Vector2{3920.f,1767.f}, PropType::TREE, Textures, Audio},    // 38
             // row19
             Prop{Textures.TreeGreen, Vector2{20.f,1867.f}, PropType::TREE, Textures, Audio},      // 1     
-            // Prop{Textures.TreeGreen, Vector2{220.f,1867.f}, PropType::TREE, Textures, Audio},     // 3     
-            // Prop{Textures.TreeGreen, Vector2{320.f,1867.f}, PropType::TREE, Textures, Audio},     // 4 
-            // Prop{Textures.TreeGreen, Vector2{420.f,1867.f}, PropType::TREE, Textures, Audio},     // 5 
-            // Prop{Textures.TreeGreen, Vector2{520.f,1867.f}, PropType::TREE, Textures, Audio},     // 6 
-            // Prop{Textures.TreeGreen, Vector2{620.f,1867.f}, PropType::TREE, Textures, Audio},     // 7 
             Prop{Textures.TreeGreen, Vector2{820.f,1867.f}, PropType::TREE, Textures, Audio},     // 9 
             Prop{Textures.TreeGreen, Vector2{920.f,1867.f}, PropType::TREE, Textures, Audio},     // 10
             Prop{Textures.TreeGreen, Vector2{1020.f,1867.f}, PropType::TREE, Textures, Audio},    // 11
@@ -3164,8 +3069,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{2720.f,1867.f}, PropType::TREE, Textures, Audio},    // 28
             Prop{Textures.TreeGreen, Vector2{2820.f,1867.f}, PropType::TREE, Textures, Audio},    // 29
             Prop{Textures.TreeStump, Vector2{2954.f,1956.f}, PropType::STUMP, Textures, Audio},    // 29
-            // Prop{Textures.TreeGreen, Vector2{2920.f,1867.f}, PropType::TREE, Textures, Audio},    // 30
-            // Prop{Textures.TreeGreen, Vector2{3020.f,1867.f}, PropType::TREE, Textures, Audio},    // 31
             Prop{Textures.TreeGreen, Vector2{3120.f,1867.f}, PropType::TREE, Textures, Audio},    // 32
             Prop{Textures.TreeGreen, Vector2{3220.f,1867.f}, PropType::TREE, Textures, Audio},    // 33
             Prop{Textures.TreeGreen, Vector2{3320.f,1867.f}, PropType::TREE, Textures, Audio},    // 34
@@ -3177,16 +3080,11 @@ namespace Game
             // row20
             Prop{Textures.TreeGreen, Vector2{0.f,1967.f}, PropType::TREE, Textures, Audio},       // 1     
             Prop{Textures.TreeGreen, Vector2{100.f,1967.f}, PropType::TREE, Textures, Audio},     // 2 
-            // Prop{Textures.TreeGreen, Vector2{200.f,1967.f}, PropType::TREE, Textures, Audio},     // 3 
-            // Prop{Textures.TreeGreen, Vector2{400.f,1967.f}, PropType::TREE, Textures, Audio},     // 5 
-            // Prop{Textures.TreeGreen, Vector2{500.f,1967.f}, PropType::TREE, Textures, Audio},     // 6 
-            // Prop{Textures.TreeGreen, Vector2{600.f,1967.f}, PropType::TREE, Textures, Audio},     // 7 
             Prop{Textures.TreeGreen, Vector2{700.f,1967.f}, PropType::TREE, Textures, Audio},     // 8 
             Prop{Textures.TreeGreen, Vector2{800.f,1967.f}, PropType::TREE, Textures, Audio},     // 9 
             Prop{Textures.TreeGreen, Vector2{1000.f,1967.f}, PropType::TREE, Textures, Audio},    // 11
             Prop{Textures.TreeGreen, Vector2{1100.f,1967.f}, PropType::TREE, Textures, Audio},    // 12
             Prop{Textures.TreeGreen, Vector2{1300.f,1967.f}, PropType::TREE, Textures, Audio},    // 14
-            // Prop{Textures.TreeGreen, Vector2{1400.f,1967.f}, PropType::TREE, Textures, Audio},    // 15
             Prop{Textures.TreeGreen, Vector2{1500.f,1967.f}, PropType::TREE, Textures, Audio},    // 16
             Prop{Textures.TreeGreen, Vector2{1600.f,1967.f}, PropType::TREE, Textures, Audio},    // 17
             Prop{Textures.TreeGreen, Vector2{1800.f,1967.f}, PropType::TREE, Textures, Audio},    // 19
@@ -3195,7 +3093,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{2700.f,1967.f}, PropType::TREE, Textures, Audio},    // 28
             Prop{Textures.TreeGreen, Vector2{2900.f,1967.f}, PropType::TREE, Textures, Audio},    // 30
             Prop{Textures.TreeStump, Vector2{3035.f,2053.f}, PropType::STUMP, Textures, Audio},    // 30
-            // Prop{Textures.TreeGreen, Vector2{3000.f,1967.f}, PropType::TREE, Textures, Audio},    // 31
             Prop{Textures.TreeGreen, Vector2{3100.f,1967.f}, PropType::TREE, Textures, Audio},    // 32
             Prop{Textures.TreeGreen, Vector2{3200.f,1967.f}, PropType::TREE, Textures, Audio},    // 33
             Prop{Textures.TreeGreen, Vector2{3400.f,1967.f}, PropType::TREE, Textures, Audio},    // 35
@@ -3242,9 +3139,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{800.f,2167.f}, PropType::TREE, Textures, Audio},     // 9 
             Prop{Textures.TreeGreen, Vector2{900.f,2167.f}, PropType::TREE, Textures, Audio},     // 10
             Prop{Textures.TreeGreen, Vector2{1000.f,2167.f}, PropType::TREE, Textures, Audio},    // 11
-            // Prop{Textures.TreeGreen, Vector2{1300.f,2167.f}, PropType::TREE, Textures, Audio},    // 14
-            // Prop{Textures.TreeGreen, Vector2{1400.f,2167.f}, PropType::TREE, Textures, Audio},    // 15
-            // Prop{Textures.TreeGreen, Vector2{1500.f,2167.f}, PropType::TREE, Textures, Audio},    // 16
             Prop{Textures.TreeGreen, Vector2{1600.f,2167.f}, PropType::TREE, Textures, Audio},    // 17
             Prop{Textures.TreeGreen, Vector2{1700.f,2167.f}, PropType::TREE, Textures, Audio},    // 18
             Prop{Textures.TreeGreen, Vector2{1800.f,2167.f}, PropType::TREE, Textures, Audio},    // 19
@@ -3280,7 +3174,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{1320.f,2267.f}, PropType::TREE, Textures, Audio},    // 14
             Prop{Textures.TreeGreen, Vector2{1420.f,2267.f}, PropType::TREE, Textures, Audio},    // 15
             Prop{Textures.TreeGreen, Vector2{1520.f,2267.f}, PropType::TREE, Textures, Audio},    // 16
-            // Prop{Textures.TreeGreen, Vector2{1620.f,2267.f}, PropType::TREE, Textures, Audio},    // 17
             Prop{Textures.TreeGreen, Vector2{1720.f,2267.f}, PropType::TREE, Textures, Audio},    // 18
             Prop{Textures.TreeGreen, Vector2{1820.f,2267.f}, PropType::TREE, Textures, Audio},    // 19
             Prop{Textures.TreeGreen, Vector2{2620.f,2267.f}, PropType::TREE, Textures, Audio},    // 27
@@ -3304,15 +3197,12 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{550.f,2367.f}, PropType::TREE, Textures, Audio},     // 6 
             Prop{Textures.TreeGreen, Vector2{700.f,2367.f}, PropType::TREE, Textures, Audio},     // 8 
             Prop{Textures.TreeGreen, Vector2{800.f,2367.f}, PropType::TREE, Textures, Audio},     // 9 
-            // Prop{Textures.TreeGreen, Vector2{900.f,2367.f}, PropType::TREE, Textures, Audio},     // 10
             Prop{Textures.TreeGreen, Vector2{1000.f,2367.f}, PropType::TREE, Textures, Audio},    // 11
             Prop{Textures.TreeGreen, Vector2{1100.f,2367.f}, PropType::TREE, Textures, Audio},    // 12
             Prop{Textures.TreeGreen, Vector2{1200.f,2367.f}, PropType::TREE, Textures, Audio},    // 13
             Prop{Textures.TreeGreen, Vector2{1300.f,2367.f}, PropType::TREE, Textures, Audio},    // 14
             Prop{Textures.TreeGreen, Vector2{1400.f,2367.f}, PropType::TREE, Textures, Audio},    // 15
-            // Prop{Textures.TreeGreen, Vector2{1500.f,2367.f}, PropType::TREE, Textures, Audio},    // 16
             Prop{Textures.TreeGreen, Vector2{1600.f,2367.f}, PropType::TREE, Textures, Audio},    // 17
-            // Prop{Textures.TreeGreen, Vector2{1700.f,2367.f}, PropType::TREE, Textures, Audio},    // 18
             Prop{Textures.TreeGreen, Vector2{1800.f,2367.f}, PropType::TREE, Textures, Audio},    // 19
             Prop{Textures.TreeGreen, Vector2{2600.f,2340.f}, PropType::TREE, Textures, Audio},    // 27
             Prop{Textures.TreeGreen, Vector2{2700.f,2340.f}, PropType::TREE, Textures, Audio},    // 28
@@ -3451,7 +3341,6 @@ namespace Game
             Prop{Textures.TreeGreen, Vector2{2520.f,3667.f}, PropType::TREE, Textures, Audio},    // 21
             Prop{Textures.TreeGreen, Vector2{2620.f,3667.f}, PropType::TREE, Textures, Audio},    // 21
             // row35
-            // Prop{Textures.TreeGreen, Vector2{100.f,3740.f}, PropType::TREE, Textures, Audio}, 
             Prop{Textures.TreeGreen, Vector2{200.f,3740.f}, PropType::TREE, Textures, Audio}, 
             Prop{Textures.TreeGreen, Vector2{300.f,3740.f}, PropType::TREE, Textures, Audio},
             Prop{Textures.TreeGreen, Vector2{500.f,3740.f}, PropType::TREE, Textures, Audio},
@@ -3686,7 +3575,7 @@ namespace Game
             Sprite{Textures.MushroomRedHurt, 4, 4},
             Sprite{Textures.MushroomRedDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{144.f, 1929.f}, Window, MapBG, Textures, Audio, RandomEngine, 2, 2.f
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{158.f, 1925.f}, Window, MapBG, Textures, Audio, RandomEngine, 2, 2.f
         };
         Enemies.emplace_back(RedMushroomThree);
 
@@ -3698,7 +3587,7 @@ namespace Game
             Sprite{Textures.MushroomRedHurt, 4, 4},
             Sprite{Textures.MushroomRedDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1935.f, 2120.f}, Window, MapBG, Textures, Audio, RandomEngine, 2, 2.f
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1945.f, 2115.f}, Window, MapBG, Textures, Audio, RandomEngine, 2, 2.f
         };
         Enemies.emplace_back(RedMushroomFour);
 
@@ -3890,7 +3779,7 @@ namespace Game
             Sprite{Textures.MushroomGreenHurt, 4, 4},
             Sprite{Textures.MushroomGreenDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1360.f, 3894.f}, Window, MapBG, Textures, Audio, RandomEngine, 2, 2.f
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{1354.f, 3855.f}, Window, MapBG, Textures, Audio, RandomEngine, 2, 2.f
         };
         Enemies.emplace_back(GreenMushroomFive);
 
