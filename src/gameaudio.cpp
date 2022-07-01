@@ -9,7 +9,6 @@ GameAudio::~GameAudio()
     UnloadSound(ImpactHeavy);
     UnloadSound(ImpactMedium);
     UnloadSound(MapChange);
-    UnloadSound(MiniMapOpen);
     UnloadSound(MonsterAttack);
     UnloadSound(MonsterDeath);
     UnloadSound(MonsterRangedAttack);
@@ -17,6 +16,7 @@ GameAudio::~GameAudio()
     UnloadSound(NpcTalk);
     UnloadSound(Pushing);
     UnloadSound(Select);
+    UnloadSound(Sleep);
     UnloadSound(Transition);
     UnloadSound(TreasureOpen);
     UnloadSound(Walking);

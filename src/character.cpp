@@ -737,14 +737,13 @@ void Character::DamageAudio()
 void Character::WalkingAudio()
 {
     SetSoundVolume(Audio.Walking, 0.20f);
-
     WalkingAudioTime += GetFrameTime();
 
     if (Walking && WalkingAudioTime >= 1.f/3.f) {
         PlaySoundMulti(Audio.Walking);
         WalkingAudioTime = 0.f;
     }
-    else if (Running && WalkingAudioTime >= 1.f/3.5f) {
+    else if (Walking && IsKeyDown(KEY_LEFT_SHIFT) && WalkingAudioTime >= 1.f/3.5f) {
         PlaySoundMulti(Audio.Walking);
         WalkingAudioTime = 0.f;
     }
@@ -753,7 +752,12 @@ void Character::WalkingAudio()
 void Character::PushingAudio()
 {
     SetSoundVolume(Audio.Pushing, 0.7f);
-    PlaySound(Audio.Pushing);
+    PushingAudioTime += GetFrameTime();
+
+    if (Colliding && PushingAudioTime >= 1.f) {
+        PlaySoundMulti(Audio.Pushing);
+        PushingAudioTime = 0.f;
+    }
 }
 
 // -------------------------------------------------------- //

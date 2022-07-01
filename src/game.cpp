@@ -162,6 +162,7 @@ namespace Game
 
         if (IsKeyPressed(KEY_L)) {
             Objects.Fox.SetSleep();
+            PlaySound(Audio.Sleep);
         }
 
         if (!Objects.Fox.IsAlive()) {
