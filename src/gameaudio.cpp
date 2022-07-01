@@ -13,6 +13,7 @@ GameAudio::~GameAudio()
     UnloadSound(Transition);
     UnloadSound(TreasureOpen);
     UnloadSound(Walking);
-    UnloadMusicStream(ForestTheme);
     UnloadMusicStream(DungeonTheme);
+    UnloadMusicStream(ForestTheme);
+    UnloadMusicStream(PauseMenuTheme);
 }

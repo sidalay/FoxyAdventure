@@ -28,6 +28,8 @@ namespace Game
         bool ForestThemePaused{false};
         bool DungeonThemeStarted{false};
         bool DungeonThemePaused{false};
+        bool PauseThemeStarted{false};
+        bool PauseThemePaused{false};
         Game::State State{Game::State::TRANSITION};
         Game::State PrevState{Game::State::FOREST};
         Game::State NextState{Game::State::MAINMENU};
@@ -62,7 +64,7 @@ namespace Game
     void ForestDraw(Game::Info& Info, Game::Objects& Objects);
     void DungeonUpdate(Game::Info& Info, Game::Objects& Objects, const GameAudio& Audio);
     void DungeonDraw(Game::Info& Info, Game::Objects& Objects);
-    void PauseUpdate(Game::Info& Info, Game::Objects& Objects);
+    void PauseUpdate(Game::Info& Info, Game::Objects& Objects, const GameAudio& Audio);
     void PauseDraw(const Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures);
     void ExitUpdate(Game::Info& Info);
     void ExitDraw(const Game::Info& Info);

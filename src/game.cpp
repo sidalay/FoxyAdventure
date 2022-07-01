@@ -25,6 +25,8 @@ namespace Game
             };
 
             Audio.ForestTheme.looping = true;
+            Audio.DungeonTheme.looping = true;
+            Audio.PauseMenuTheme.looping = true;
 
             // Start Game Loop
             while (!Info.ExitGame) 
@@ -91,7 +93,7 @@ namespace Game
 
             ClearBackground(BLACK);
 
-            Game::PauseUpdate(Info, Objects);
+            Game::PauseUpdate(Info, Objects, Audio);
             Game::PauseDraw(Info, Objects, Textures);
         }
         else if (Info.State == Game::State::EXIT) {
@@ -547,8 +549,18 @@ namespace Game
         }
     }
 
-    void PauseUpdate(Game::Info& Info, Game::Objects& Objects)
+    void PauseUpdate(Game::Info& Info, Game::Objects& Objects, const GameAudio& Audio)
     {
+        if (!Info.PauseThemeStarted) {
+            Info.PauseThemeStarted = true;
+            SetMusicVolume(Audio.PauseMenuTheme, 0.15f);
+            PlayMusicStream(Audio.PauseMenuTheme);
+        }
+        if (Info.PauseThemePaused) {
+            Info.PauseThemePaused = false;
+            ResumeMusicStream(Audio.PauseMenuTheme);
+        }
+        UpdateMusicStream(Audio.PauseMenuTheme);
 
         if (IsKeyDown(KEY_L)) {
             Info.PauseFoxIndex = 3;
@@ -575,12 +587,14 @@ namespace Game
         if (IsKeyPressed(KEY_P)) {
             Info.NextState = Info.PrevState;
             Info.State = Game::State::TRANSITION;
-            
-            // Add audio functionality here later
+            PauseMusicStream(Audio.DungeonTheme);
+            Info.DungeonThemePaused = true;
         }
-        else if (IsKeyPressed(KEY_F5) || IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
+        else if (IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
             Info.NextState = Game::State::EXIT;
             Info.State = Game::State::TRANSITION;
+            PauseMusicStream(Audio.DungeonTheme);
+            Info.DungeonThemePaused = true;
         }
     }
 
