@@ -868,37 +868,6 @@ void Enemy::CheckSpawnChest(std::vector<std::vector<Prop>>& Props)
     }
 }
 
-// ------------------------- Audio ---------------------------
-void Enemy::WalkingAudio()
-{
-
-}
-
-void Enemy::AttackAudio()
-{
-    if (Ranged) {
-        PlaySound(Audio.MonsterRangedAttack);
-    }
-    else {
-        PlaySound(Audio.MonsterAttack);
-    }
-}
-
-void Enemy::DamageAudio()
-{
-    PlaySound(Audio.ImpactHeavy);
-}
-
-void Enemy::DeathAudio()
-{
-    if (Type == EnemyType::NORMAL) {
-        PlaySound(Audio.MonsterDeath);
-    }
-    else if (Type == EnemyType::BOSS || Type == EnemyType::FINALBOSS) {
-        PlaySound(Audio.BossDeath);
-    }
-}
-
 Rectangle Enemy::GetCollisionRec()
 {
     float CurrentSpriteWidth{static_cast<float>((Sprites.at(CurrentSpriteIndex).Texture.width/Sprites.at(CurrentSpriteIndex).MaxFramesX) * Scale)};
@@ -1035,5 +1004,36 @@ bool Enemy::WithinScreen(const Vector2 HeroWorldPos)
     }
     else {
         return false;
+    }
+}
+
+// ------------------------- Audio ---------------------------
+void Enemy::WalkingAudio()
+{
+
+}
+
+void Enemy::AttackAudio()
+{
+    if (Ranged) {
+        PlaySound(Audio.MonsterRangedAttack);
+    }
+    else {
+        PlaySound(Audio.MonsterAttack);
+    }
+}
+
+void Enemy::DamageAudio()
+{
+    PlaySound(Audio.ImpactHeavy);
+}
+
+void Enemy::DeathAudio()
+{
+    if (Type == EnemyType::NORMAL) {
+        PlaySound(Audio.MonsterDeath);
+    }
+    else if (Type == EnemyType::BOSS || Type == EnemyType::FINALBOSS) {
+        PlaySound(Audio.BossDeath);
     }
 }

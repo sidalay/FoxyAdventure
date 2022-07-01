@@ -1171,6 +1171,8 @@ void Prop::DrawPropText()
         if (IsKeyReleased(KEY_ENTER)) {
             Reading = false;
             Opened = true;
+            PageOpen = false;
+            TextAudio();
         }
     }
 }
@@ -1234,6 +1236,8 @@ void Prop::DrawSpeech()
                     Opened = true;
                     Talking = false;
                 }
+                PageOpen = false;
+                TextAudio();
             }
             break;
         }
@@ -1293,6 +1297,8 @@ void Prop::DrawSpeech()
                     Opened = true;
                     Talking = false;
                 }
+                PageOpen = false;
+                TextAudio();
             }
             break;
         }
@@ -1352,6 +1358,8 @@ void Prop::DrawSpeech()
                     Opened = true;
                     Talking = false;
                 }
+                PageOpen = false;
+                TextAudio();
             }
             break;
         }
@@ -1406,6 +1414,8 @@ void Prop::DrawSpeech()
             if (IsKeyPressed(KEY_ENTER)) {
                 Opened = true;
                 Talking = false;
+                PageOpen = false;
+                TextAudio();
             }
             break;
         }
@@ -1460,6 +1470,8 @@ void Prop::DrawSpeech()
             if (IsKeyPressed(KEY_ENTER)) {
                 Opened = true;
                 Talking = false;
+                PageOpen = false;
+                TextAudio();
             }
             break;
         }
@@ -1499,6 +1511,8 @@ void Prop::DrawSpeech()
                     Opened = true;
                     Talking = false;
                 }
+                PageOpen = false;
+                TextAudio();
             }
             break;
         }
@@ -1533,6 +1547,8 @@ void Prop::DrawSpeech()
             if (IsKeyPressed(KEY_ENTER)) {
                 Opened = true;
                 Talking = false;
+                PageOpen = false;
+                TextAudio();
             }
             break;
         }
@@ -1592,6 +1608,8 @@ void Prop::DrawSpeech()
                     Opened = true;
                     Talking = false;
                 }
+                PageOpen = false;
+                TextAudio();
             }
             break;
         }
@@ -1616,6 +1634,8 @@ void Prop::DrawSpeech()
             if (IsKeyPressed(KEY_ENTER)) {
                 Opened = true;
                 Talking = false;
+                PageOpen = false;
+                TextAudio();
             }
             break;
         }
@@ -1641,13 +1661,10 @@ void Prop::AltarAudio()
 
 void Prop::TextAudio()
 {
-    PlaySound(Audio.NpcTalk);
-}
-
-void Prop::PushingAudio()
-{
-    SetSoundVolume(Audio.Pushing, 0.7f);
-    PlaySound(Audio.Pushing);
+    if (!PageOpen) {
+        PlaySoundMulti(Audio.NpcTalk);
+        PageOpen = true;
+    }
 }
 
 // ---------------------------------------------------------------------

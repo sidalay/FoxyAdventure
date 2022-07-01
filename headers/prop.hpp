@@ -100,7 +100,6 @@ public:
     void TreasureAudio();
     void AltarAudio();
     void TextAudio();
-    void PushingAudio();
 
     constexpr bool HasCollision() const {return Collidable;}
     constexpr bool IsInteractable() const {return Interactable;}
@@ -146,6 +145,7 @@ private:
     bool Visible{false};
     bool Spawned{true};
     bool Reading{false};
+    bool PageOpen{false};
     bool ReadyToProgress{false};
 
     // NPC variables
