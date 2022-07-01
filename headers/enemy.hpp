@@ -152,6 +152,8 @@ private:
     float StopTime{};
     float ActionTime{};
     float ActionIdleTime{};
+    float AttackAudioTime{};
+    float WalkingAudioTime{};
     float MoveXRange{};
     float MoveYRange{};
     float AIX{0.6f};

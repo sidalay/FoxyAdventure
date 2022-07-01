@@ -605,6 +605,8 @@ void Enemy::CheckAlive(float DeltaTime)
         float EndTime{1.35f};
         IsAttacked = false;
         Dying = true;
+        Walking = false;
+        Chasing = false;
 
         // Allow time for death animation to finish before setting alive=false which turns off SpriteTick()
         StopTime += DeltaTime;
@@ -782,7 +784,7 @@ void Enemy::CheckMovementAI()
     }
     if (Movement.y <= -MoveYRange || Movement.y >= MoveYRange) {
         AIY = -AIY;
-    }    
+    }  
 }
 
 void Enemy::InitializeAI()
@@ -1010,21 +1012,39 @@ bool Enemy::WithinScreen(const Vector2 HeroWorldPos)
 // ------------------------- Audio ---------------------------
 void Enemy::WalkingAudio()
 {
+    SetSoundVolume(Audio.Walking, 0.10f);
+    WalkingAudioTime += GetFrameTime();
 
+    if (Walking && WalkingAudioTime >= 1.f/3.f) {
+        PlaySoundMulti(Audio.Walking);
+        WalkingAudioTime = 0.f;
+    }
+    else if (Chasing && WalkingAudioTime >= 1.f/3.5f) {
+        PlaySoundMulti(Audio.Walking);
+        WalkingAudioTime = 0.f;
+    }
 }
 
 void Enemy::AttackAudio()
 {
-    if (Ranged) {
-        PlaySound(Audio.MonsterRangedAttack);
-    }
-    else {
-        PlaySound(Audio.MonsterAttack);
+    AttackAudioTime += GetFrameTime();
+
+    if (AttackAudioTime >= 0.6f) {
+        if (Ranged) {
+            SetSoundVolume(Audio.MonsterRangedAttack, 0.7f);
+            PlaySoundMulti(Audio.MonsterRangedAttack);
+        }
+        else {
+            SetSoundVolume(Audio.MonsterAttack, 0.7f);
+            PlaySoundMulti(Audio.MonsterAttack);
+        }
+        AttackAudioTime = 0.f;
     }
 }
 
 void Enemy::DamageAudio()
 {
+    SetSoundVolume(Audio.ImpactHeavy, 0.7f);
     PlaySound(Audio.ImpactHeavy);
 }
 

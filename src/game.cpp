@@ -749,9 +749,11 @@ namespace Game
         if ((Info.PrevState == Game::State::FOREST && Info.NextState == Game::State::DUNGEON) ||
             (Info.PrevState == Game::State::DUNGEON && Info.NextState == Game::State::FOREST))
         {
+            SetSoundVolume(Audio.MapChange, 0.5f);
             PlaySound(Audio.MapChange);   
         }
         else {
+            SetSoundVolume(Audio.Transition, 0.5f);
             PlaySound(Audio.Transition);
         }
 
