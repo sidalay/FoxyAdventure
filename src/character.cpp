@@ -548,10 +548,10 @@ Rectangle Character::GetCollisionRec()
 
     return Rectangle 
     {
-        ScreenPos.x + CurrentSpriteWidth/2.f,
-        ScreenPos.y + CurrentSpriteHeight/2.f,
-        ((CurrentSpriteWidth) - (CurrentSpriteWidth)/1.5f) * Scale,
-        ((CurrentSpriteHeight) - (CurrentSpriteHeight)/1.5f)  * Scale
+        ScreenPos.x + CurrentSpriteWidth/1.55f,
+        ScreenPos.y + CurrentSpriteHeight/1.55f,
+        ((CurrentSpriteWidth) - (CurrentSpriteWidth)/1.2f) * Scale,
+        ((CurrentSpriteHeight) - (CurrentSpriteHeight)/1.2f)  * Scale
     };
 }
 

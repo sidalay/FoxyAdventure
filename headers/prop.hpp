@@ -54,7 +54,8 @@ public:
          const GameAudio& Audio,
          const float Scale = 4.f, 
          const bool Moveable = false, 
-         const bool Interactable = false);
+         const bool Interactable = false,
+         const bool Invisible = false);
 
     // Constructor for animated altar pieces
     Prop(const Sprite& Object, 
@@ -143,6 +144,7 @@ private:
     bool OutOfBounds{false};
     bool Talking{false};
     bool Visible{false};
+    bool Invisible{false};
     bool Spawned{true};
     bool Reading{false};
     bool PageOpen{false};

@@ -8,9 +8,10 @@ Prop::Prop(const Texture2D& Texture,
            const GameAudio& Audio,
            const float Scale, 
            const bool Moveable, 
-           const bool Interactable)
+           const bool Interactable,
+           const bool Invisible)
     : Object{Texture}, Type{Type}, GameTextures{GameTextures}, Audio{Audio}, WorldPos{Pos}, Scale{Scale}, Interactable{Interactable}, 
-      Moveable{Moveable}
+      Moveable{Moveable}, Invisible{Invisible}
 {
     if (Type == PropType::BOULDER ||
         Type == PropType::BUSH ||
@@ -169,7 +170,7 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
 
     CheckVisibility(CharacterWorldPos);
 
-    if (Visible) {
+    if (Visible && !Invisible) {
         if (Type == PropType::BIGTREASURE) {
             if (FinalChestSpawned) {
                 DrawTexturePro(Object.Texture, Object.GetSourceRec(), Object.GetPosRec(ScreenPos, Scale), Vector2{}, 0.f, WHITE);
@@ -695,7 +696,7 @@ Rectangle Prop::GetCollisionRec(const Vector2 CharacterWorldPos)
             {
                 ScreenPos.x + ((Object.Texture.width*.23f) * Scale),
                 ScreenPos.y + ((Object.Texture.height*.75f) * Scale),
-                (Object.Texture.width - Object.Texture.width*.47f) * Scale,
+                (Object.Texture.width - Object.Texture.width*.35f) * Scale,
                 (Object.Texture.height - Object.Texture.height*.75f) * Scale
             };
         }
@@ -1150,8 +1151,8 @@ void Prop::DrawPropText()
         }
         else {
             DrawText("All pieces have been collected!", 490, 600, 20, WHITE);
-            DrawText("You hear sounds coming from", 490, 625, 20, WHITE);
-            DrawText("the middle of the forest...", 490, 650, 20, WHITE);
+            DrawText("You hear the elder tree in the middle", 490, 625, 20, WHITE);
+            DrawText("of the forest shake...", 490, 650, 20, WHITE);
             DrawText("", 510, 675, 20, WHITE);
             DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
         }

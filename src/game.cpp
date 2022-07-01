@@ -44,7 +44,7 @@ namespace Game
         SetTraceLogLevel(LOG_WARNING);
         InitWindow(Window.x, Window.y, Title.c_str());
         InitAudioDevice();
-        SetMasterVolume(0.20f);
+        SetMasterVolume(0.60f);
         SetTargetFPS(144);
         SetExitKey(0);
         HideCursor();
@@ -122,7 +122,7 @@ namespace Game
     {
         if (!Info.ForestThemeStarted) {
             Info.ForestThemeStarted = true;
-            SetMusicVolume(Audio.ForestTheme, 0.15f);
+            SetMusicVolume(Audio.ForestTheme, 0.25f);
             PlayMusicStream(Audio.ForestTheme);
         }
         if (Info.ForestThemePaused) {
@@ -391,7 +391,7 @@ namespace Game
     {
         if (!Info.DungeonThemeStarted) {
             Info.DungeonThemeStarted = true;
-            SetMusicVolume(Audio.DungeonTheme, 0.15f);
+            SetMusicVolume(Audio.DungeonTheme, 0.25f);
             PlayMusicStream(Audio.DungeonTheme);
         }
         if (Info.DungeonThemePaused) {
@@ -554,7 +554,7 @@ namespace Game
     {
         if (!Info.PauseThemeStarted) {
             Info.PauseThemeStarted = true;
-            SetMusicVolume(Audio.PauseMenuTheme, 0.15f);
+            SetMusicVolume(Audio.PauseMenuTheme, 0.25f);
             PlayMusicStream(Audio.PauseMenuTheme);
         }
         if (Info.PauseThemePaused) {
@@ -947,7 +947,7 @@ namespace Game
             Prop{Textures.Bush, Vector2{2785.f,1827.f}, PropType::BUSH, Textures, Audio},
             Prop{Textures.Bush, Vector2{2758.f,1934.f}, PropType::BUSH, Textures, Audio},
             Prop{Textures.Bush, Vector2{2938.f,2022.f}, PropType::BUSH, Textures, Audio},
-            Prop{Textures.Bush, Vector2{3155.f,2033.f}, PropType::BUSH, Textures, Audio},
+            Prop{Textures.Bush, Vector2{3125.f,2033.f}, PropType::BUSH, Textures, Audio},
             Prop{Textures.Bush, Vector2{3159.f,1422.f}, PropType::BUSH, Textures, Audio},
             Prop{Textures.Bush, Vector2{2657.f,1522.f}, PropType::BUSH, Textures, Audio},
             Prop{Textures.Bush, Vector2{2603.f,1634.f}, PropType::BUSH, Textures, Audio},
@@ -960,10 +960,46 @@ namespace Game
             Prop{Textures.Bush, Vector2{2155.f,966.f}, PropType::BUSH, Textures, Audio, 3.f}, 
             Prop{Textures.Bush, Vector2{2274.f,966.f}, PropType::BUSH, Textures, Audio, 3.f}, 
             Prop{Textures.Bush, Vector2{2395.f,966.f}, PropType::BUSH, Textures, Audio, 3.f}, 
-            Prop{Textures.Bush, Vector2{2534.f,3525.f}, PropType::BUSH, Textures, Audio, 3.f}, 
+            Prop{Textures.Bush, Vector2{2534.f,3525.f}, PropType::BUSH, Textures, Audio, 4.f}, 
             Prop{Textures.Bush, Vector2{2749.f,3906.f}, PropType::BUSH, Textures, Audio, 3.f}, 
             Prop{Textures.Bush, Vector2{2749.f,4006.f}, PropType::BUSH, Textures, Audio, 3.f}, 
             Prop{Textures.Bush, Vector2{2550.f,3715.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{3662.f,3956.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{2655.f,3808.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{1110.f,2116.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{1839.f,2410.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{1837.f,2309.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{1861.f,2243.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{2646.f,1811.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{2974.f,1716.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{2664.f,2308.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{2686.f,2409.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{3725.f,3811.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{884.f,208.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{795.f,338.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{491.f,434.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{577.f,643.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{567.f,544.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{1593.f,538.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{1599.f,438.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{2728.f,618.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{3394.f,531.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{2894.f,325.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{2754.f,527.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{2789.f,2243.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{2950.f,2144.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{2671.f,2500.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
+            Prop{Textures.Bush, Vector2{2740.f,2572.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
+            Prop{Textures.Bush, Vector2{2941.f,2629.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
+            Prop{Textures.Bush, Vector2{3544.f,2629.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
+            Prop{Textures.Bush, Vector2{3383.f,3505.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
+            Prop{Textures.Bush, Vector2{3345.f,3789.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
+            Prop{Textures.Bush, Vector2{3929.f,2941.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
+            Prop{Textures.Bush, Vector2{3875.f,2501.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
+            Prop{Textures.Bush, Vector2{3746.f,2567.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
+            Prop{Textures.Bush, Vector2{885.f,2764.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
+            Prop{Textures.Bush, Vector2{1181.f,2764.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
+            Prop{Textures.Bush, Vector2{3747.f,4000.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, false}, 
         };
         Props.emplace_back(Bushes);
 
@@ -1916,6 +1952,7 @@ namespace Game
 
         std::vector<Prop> Stumps
         {
+            Prop{Textures.TreeStump, Vector2{3056.f,1955.f}, PropType::STUMP, Textures, Audio, 4.f, false},
             Prop{Textures.TreeStump, Vector2{3274.f,3625.f}, PropType::STUMP, Textures, Audio, 5.f, false},
             Prop{Textures.TreeStump, Vector2{3352.f,3552.f}, PropType::STUMP, Textures, Audio, 4.f, false},
             Prop{Textures.TreeStump, Vector2{3293.f,3745.f}, PropType::STUMP, Textures, Audio, 3.5f, false},
@@ -1935,7 +1972,7 @@ namespace Game
         std::vector<Prop> Moveable
         {
             Prop{Textures.Boulder, Vector2{3525.f,3640.f}, PropType::BOULDER, Textures, Audio, 5.f, true},
-            Prop{Textures.Boulder, Vector2{1025.f,3050.f}, PropType::BOULDER, Textures, Audio, 4.f, true},
+            Prop{Textures.Boulder, Vector2{1025.f,2990.f}, PropType::BOULDER, Textures, Audio, 4.f, true},
         };
         Props.emplace_back(Moveable);
 
@@ -1979,17 +2016,17 @@ namespace Game
 
         std::vector<Prop> Boulder
         {
-            Prop{Textures.Boulder, Vector2{960.f,2950.f}, PropType::BOULDER, Textures, Audio},
-            Prop{Textures.Boulder, Vector2{1090.f,2950.f}, PropType::BOULDER, Textures, Audio},
-            Prop{Textures.Boulder, Vector2{940.f,3050.f}, PropType::BOULDER, Textures, Audio},
-            Prop{Textures.Boulder, Vector2{1110.f,3050.f}, PropType::BOULDER, Textures, Audio},
+            Prop{Textures.Boulder, Vector2{945.f,2925.f}, PropType::BOULDER, Textures, Audio, 5.f},
+            Prop{Textures.Boulder, Vector2{1090.f,2925.f}, PropType::BOULDER, Textures, Audio, 5.f},
+            Prop{Textures.Boulder, Vector2{925.f,3060.f}, PropType::BOULDER, Textures, Audio, 5.f},
+            Prop{Textures.Boulder, Vector2{1110.f,3060.f}, PropType::BOULDER, Textures, Audio, 5.f},
         };
         Props.emplace_back(Boulder);
 
         std::vector<Prop> Moveable
         {
             Prop{Textures.Boulder, Vector2{3525.f,3640.f}, PropType::BOULDER, Textures, Audio, 5.f, true},
-            Prop{Textures.Boulder, Vector2{1025.f,3050.f}, PropType::BOULDER, Textures, Audio, 4.f, true},
+            Prop{Textures.Boulder, Vector2{1025.f,2990.f}, PropType::BOULDER, Textures, Audio, 4.f, true},
         };
         Props.emplace_back(Moveable);
 
@@ -2551,7 +2588,7 @@ namespace Game
         std::vector<Prop> NPCS
         {
             Prop{Sprite{Textures.Didi, 4, 1, 1.f/8.f}, Vector2{2480.f, 3640.f}, PropType::NPC_DIANA, Textures, Audio, Textures.Placeholder, 3.f, false, true},
-            Prop{Sprite{Textures.Jade, 4, 1, 1.f/8.f}, Vector2{1030.f, 3120.f}, PropType::NPC_JADE, Textures, Audio, Textures.Placeholder, 3.f, false, true},
+            Prop{Sprite{Textures.Jade, 4, 1, 1.f/8.f}, Vector2{1034.f, 3060.f}, PropType::NPC_JADE, Textures, Audio, Textures.Placeholder, 3.f, false, true},
             Prop{Sprite{Textures.Son, 4, 1, 1.f/8.f}, Vector2{1240.f, 2036.f}, PropType::NPC_SON, Textures, Audio, Textures.Placeholder, 3.f, false, true},
             Prop{Sprite{Textures.Rumby, 4, 1, 1.f/8.f}, Vector2{106.f, 3684.f}, PropType::NPC_RUMBY, Textures, Audio, Textures.Placeholder, 3.f, false, true},
         };
@@ -3709,7 +3746,7 @@ namespace Game
             Sprite{Textures.MushroomBrownHurt, 4, 4},
             Sprite{Textures.MushroomBrownDeath, 11, 4},
             Sprite{Textures.Placeholder, 0, 0},
-            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{740.f, 840.f}, Window, MapBG, Textures, Audio, RandomEngine, 2, 2.f
+            EnemyType::MUSHROOM, EnemyType::NORMAL, Vector2{727.f, 886.f}, Window, MapBG, Textures, Audio, RandomEngine, 2, 2.f
         };
         Enemies.emplace_back(BrownMushroomOne);
 
