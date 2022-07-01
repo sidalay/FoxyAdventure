@@ -161,6 +161,7 @@ void Prop::Tick(const float DeltaTime)
         }
     }
     UpdateNpcInactive();
+    UpdateNewInfo();
     CheckFinalChest();
 }
 
@@ -187,6 +188,10 @@ void Prop::Draw(const Vector2 CharacterWorldPos)
                     DrawTextureEx(Object.Texture, WorldPos, 0.f, Scale, WHITE);
                 }
             }
+        }
+
+        if  (NewInfo && (Type == PropType::NPC_DIANA || Type == PropType::NPC_JADE || Type == PropType::NPC_SON || Type == PropType::NPC_RUMBY)) {
+            DrawTextureEx(GameTextures.Interact, Vector2{Object.GetPosRec(ScreenPos, Scale).x + static_cast<float>(Object.Texture.width)/1.8f, Object.GetPosRec(ScreenPos, Scale).y - static_cast<float>(Object.Texture.height)/2.f}, 0.f, 2.f, WHITE);
         }
     }
     
@@ -310,6 +315,7 @@ void Prop::TreasureTick(const float DeltaTime)
     if (Type == PropType::BIGTREASURE) {
         BraceletReceived = true;
         FinalAct = true;
+        MuteNewInfo = false;
     }
 
     if (TriggerAct != Progress::ACT_O) {
@@ -364,7 +370,7 @@ void Prop::InsertAltarPiece()
 void Prop::TalkToNpc()
 {
     Talking = true;
-
+    NewInfo = false;
     UpdateNpcActive();
 }
 
@@ -381,7 +387,7 @@ void Prop::UpdateNpcInactive()
                     WorldPos.y = 3653.f;
                 }
 
-                if (PiecesAdded >= 1 && PiecesAdded <= 5 && ReadyToProgress) {
+                if (PiecesAdded >= 1 && PiecesAdded <= 5 && ReadyToProgress && !CryptexReceived) {
                     WorldPos.x = 3163.f;
                     WorldPos.y = 2853.f;
                     ReadyToProgress = false;
@@ -403,11 +409,15 @@ void Prop::UpdateNpcInactive()
                     Act = Progress::ACT_VIII;
                     WorldPos.x = 1060.f;
                     WorldPos.y = 3409.f;
+                    MuteNewInfo = false;
                 }
-                else if (Act == Progress::ACT_III && ReadyToProgress) {
+                else if (Act == Progress::ACT_I && SonSaved) {
                     WorldPos.x = 1549.f;
                     WorldPos.y = 2945.f;
                     ReadyToProgress = false;
+                }
+                else if (PiecesReceived >= 1) {
+                    Act = Progress::ACT_IV;
                 }
                 break;
             }
@@ -420,6 +430,7 @@ void Prop::UpdateNpcInactive()
                 }
                 else if (PiecesAdded >= 1 && PiecesAdded <= 4) {
                     Act = Progress::ACT_V;
+                    ReadyToProgress = false;
                 }
                 else if (PiecesAdded > 4) {
                     Act = Progress::ACT_VI;
@@ -470,6 +481,7 @@ void Prop::UpdateNpcActive()
                 {
                     QuestlineProgress.at(PropType::NPC_JADE).first = Progress::ACT_II;
                     QuestlineProgress.at(PropType::NPC_JADE).second = PropType::NPC_SON;
+                    ReadyToProgress = true;
                     break;
                 }
                 case PropType::NPC_SON:
@@ -508,6 +520,7 @@ void Prop::UpdateNpcActive()
                 {
                     QuestlineProgress.at(PropType::NPC_SON).first = Progress::ACT_II;
                     QuestlineProgress.at(PropType::NPC_SON).second = PropType::NPC_JADE;
+                    SonSaved = true;
                     ReadyToProgress = true;
                     break;
                 }
@@ -541,6 +554,7 @@ void Prop::UpdateNpcActive()
                     if (PiecesReceived >= 1) {
                         Act = Progress::ACT_IV;
                     }
+                    ReadyToProgress = true;
                     break;
                 }
                 case PropType::NPC_RUMBY:
@@ -561,6 +575,11 @@ void Prop::UpdateNpcActive()
                 case PropType::NPC_DIANA:
                 {
                     ReadyToProgress = true;
+                    break;
+                }
+                case PropType::NPC_SON:
+                {
+                    ReadyToProgress = false;
                     break;
                 }
                 case PropType::NPC_RUMBY:
@@ -637,6 +656,104 @@ void Prop::UpdateNpcActive()
             }
             break;    
         }    
+        default:
+            break;
+    }
+}
+
+void Prop::UpdateNewInfo()
+{
+    switch (Type)
+    {
+        case PropType::NPC_DIANA:
+        {
+            if (Act == Progress::ACT_VIII && !MuteNewInfo) {
+                NewInfo = true;
+                MuteNewInfo = true;
+            }
+
+            if (PiecesReceived >= 1 && Act == Progress::ACT_I) {
+                NewInfo = true;
+            }
+
+            if (PiecesAdded >= 1 && PiecesAdded <= 5 && Act == Progress::ACT_IV && !ReadyToProgress) {
+                NewInfo = true;
+            }
+
+            if (CryptexReceived && !MuteNewInfo) {
+                NewInfo = true;
+                MuteNewInfo = true;
+            }
+
+            if (PiecesAdded == 6 && (Act == Progress::ACT_IV || Act == Progress::ACT_V)) {
+                NewInfo = true;
+            }
+
+            if (PiecesAdded == 6 && !FinalChestKey) {
+                NewInfo = true;
+            }
+
+            break;
+        }
+        case PropType::NPC_JADE:
+        {
+            if (Act == Progress::ACT_VIII && !MuteNewInfo) {
+                NewInfo = true;
+                MuteNewInfo = true;
+            }
+
+            if (Act == Progress::ACT_IV && !MuteNewInfo) {
+                NewInfo = true;
+                MuteNewInfo = true;
+            }
+            
+            if (Act == Progress::ACT_II && !ReadyToProgress) {
+                NewInfo = true;
+            }
+
+            if (PiecesReceived >= 1 && (Act == Progress::ACT_II || Act == Progress::ACT_III)) {
+                NewInfo = true;
+            }
+
+            break;
+        }
+        case PropType::NPC_SON:
+        {
+            if (Act == Progress::ACT_VIII && !MuteNewInfo) {
+                NewInfo = true;
+                MuteNewInfo = true;
+            }
+
+            if (Act == Progress::ACT_VI && !ReadyToProgress) {
+                NewInfo = true;
+                ReadyToProgress = true;
+                MuteNewInfo = false;
+            }
+
+            if (Act == Progress::ACT_V && !MuteNewInfo) {
+                NewInfo = true;
+                MuteNewInfo = true;
+            }  
+
+            if (Act == Progress::ACT_III && !ReadyToProgress) {
+                NewInfo = true;
+                ReadyToProgress = true;
+            }
+
+            if (PiecesReceived >= 1 && PiecesReceived <= 4 && ReadyToProgress) {
+                NewInfo = true;
+                ReadyToProgress = false;
+            }
+            break;
+        }
+        case PropType::NPC_RUMBY:
+        {
+            if (Act == Progress::ACT_VIII && !MuteNewInfo) {
+                NewInfo = true;
+                MuteNewInfo = true;
+            }
+            break;
+        }
         default:
             break;
     }
@@ -1151,8 +1268,8 @@ void Prop::DrawPropText()
         }
         else {
             DrawText("All pieces have been collected!", 490, 600, 20, WHITE);
-            DrawText("You hear the elder tree in the middle", 490, 625, 20, WHITE);
-            DrawText("of the forest shake...", 490, 650, 20, WHITE);
+            DrawText("You hear the elder tree in the", 490, 625, 20, WHITE);
+            DrawText("middle of the forest shake...", 490, 650, 20, WHITE);
             DrawText("", 510, 675, 20, WHITE);
             DrawText("                                               (ENTER to Continue)", 390, 675, 16, WHITE);
         }
@@ -1272,7 +1389,7 @@ void Prop::DrawSpeech()
                     DrawText("She said that I keep wandering off???", 390, 575, 20, WHITE);
                     DrawText("SHES the one who left ME here!!", 390, 600, 20, WHITE);
                     DrawText("Could you please lead me back home...?", 390, 625, 20, WHITE);
-                    DrawText("I'll follow along behind you!", 390, 650, 20, WHITE);
+                    DrawText("I'll catch up with you!", 390, 650, 20, WHITE);
                     DrawText("                                                         (ENTER to Continue)", 390, 675, 16, WHITE);
                     break;
                 }

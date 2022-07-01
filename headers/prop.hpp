@@ -96,6 +96,7 @@ public:
     void UpdateNpcInactive();
     void UpdateNpcActive();
     void CheckFinalChest();
+    void UpdateNewInfo();
 
     // Audio
     void TreasureAudio();
@@ -148,12 +149,14 @@ private:
     bool Spawned{true};
     bool Reading{false};
     bool PageOpen{false};
-    bool ReadyToProgress{false};
 
     // NPC variables
     Progress Act{Progress::ACT_I};
     Progress TriggerAct{};
     PropType TriggerNPC{};
+    bool NewInfo{true};
+    bool MuteNewInfo{false};
+    bool ReadyToProgress{false};
 
     static inline std::unordered_map<PropType, std::pair<Progress, PropType>> QuestlineProgress
     {
@@ -175,6 +178,7 @@ private:
     float RunningTime{};
     static inline int PiecesReceived{0};
     static inline int PiecesAdded{0};
+    static inline bool SonSaved{false};
     static inline bool FinalAct{false};
     static inline bool BraceletReceived{false};
     static inline bool CryptexReceived{false};

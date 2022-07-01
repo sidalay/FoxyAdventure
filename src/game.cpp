@@ -992,6 +992,7 @@ namespace Game
             Prop{Textures.Bush, Vector2{3212.f,209.f}, PropType::BUSH, Textures, Audio}, 
             Prop{Textures.Bush, Vector2{3366.f,423.f}, PropType::BUSH, Textures, Audio}, 
             Prop{Textures.Bush, Vector2{3371.f,322.f}, PropType::BUSH, Textures, Audio}, 
+            Prop{Textures.Bush, Vector2{2538.f,3688.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
             Prop{Textures.Bush, Vector2{2671.f,2500.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
             Prop{Textures.Bush, Vector2{2740.f,2572.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
             Prop{Textures.Bush, Vector2{2941.f,2629.f}, PropType::BUSH, Textures, Audio, 3.f, false, false, true}, 
