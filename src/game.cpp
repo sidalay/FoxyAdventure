@@ -86,7 +86,7 @@ namespace Game
 
             ClearBackground(BLACK);
 
-            Game::MainMenuUpdate(Info);
+            Game::MainMenuUpdate(Info, Audio);
             Game::MainMenuDraw(Info);
         }
         else if (Info.State == Game::State::PAUSED) {
@@ -100,14 +100,14 @@ namespace Game
 
             ClearBackground(BLACK);
 
-            Game::ExitUpdate(Info);
+            Game::ExitUpdate(Info, Audio);
             Game::ExitDraw(Info);
         }
         else if (Info.State == Game::State::GAMEOVER) {
 
             ClearBackground(BLACK);
 
-            Game::GameOverUpdate(Info);
+            Game::GameOverUpdate(Info, Audio);
             Game::GameOverDraw(Info);
         }
         else if (Info.State == Game::State::TRANSITION) {
@@ -636,22 +636,28 @@ namespace Game
         }
     }
 
-    void ExitUpdate(Game::Info& Info)
+    void ExitUpdate(Game::Info& Info, const GameAudio& Audio)
     {
+        SetSoundVolume(Audio.MoveCursor, 0.5f);
+        SetSoundVolume(Audio.Select, 0.5f);
+
         if (IsKeyPressed(KEY_A) || IsKeyPressed(KEY_D) || IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_RIGHT)) {
             Info.ExitIsYes = !Info.ExitIsYes;
+            PlaySound(Audio.MoveCursor);
         }
 
         if (Info.ExitIsYes) {
             if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
                 Info.NextState = Game::State::MAINMENU;
                 Info.State = Game::State::TRANSITION;
+                PlaySound(Audio.Select);
             }
         }
         else {
             if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
                 Info.NextState = Info.PrevState;
                 Info.State = Game::State::TRANSITION;
+                PlaySound(Audio.Select);
             }
         }
 
@@ -675,21 +681,27 @@ namespace Game
         }
     }
 
-    void MainMenuUpdate(Game::Info& Info)
+    void MainMenuUpdate(Game::Info& Info, const GameAudio& Audio)
     {
+        SetSoundVolume(Audio.MoveCursor, 0.5f);
+        SetSoundVolume(Audio.Select, 0.5f);
+
         if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_S) || IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_DOWN)) {
             Info.MainMenuStart = !Info.MainMenuStart;
+            PlaySound(Audio.MoveCursor);
         }
 
         if (!Info.MainMenuStart) {
             if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
                 Info.ExitGame = true;
+                PlaySound(Audio.Select);
             }
         }
         else {
             if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
                 Info.NextState = Info.PrevState;
                 Info.State = Game::State::TRANSITION;
+                PlaySound(Audio.Select);
             }
         }
     }
@@ -708,22 +720,28 @@ namespace Game
         }
     }
 
-    void GameOverUpdate(Game::Info& Info)
+    void GameOverUpdate(Game::Info& Info, const GameAudio& Audio)
     {
+        SetSoundVolume(Audio.MoveCursor, 0.5f);
+        SetSoundVolume(Audio.Select, 0.5f);
+
         if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_S) || IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_DOWN)) {
             Info.GameOverStart = !Info.GameOverStart;
+            PlaySound(Audio.MoveCursor);
         }
 
         if (!Info.GameOverStart) {
             if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
                 Info.NextState = Info.PrevState;
-                Info.State = Game::State::TRANSITION;    
+                Info.State = Game::State::TRANSITION;
+                PlaySound(Audio.Select);
             }
         }
         else {
             if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
                 Info.NextState = Game::State::MAINMENU;
                 Info.State = Game::State::TRANSITION;
+                PlaySound(Audio.Select);
             }
         }
     }
@@ -753,7 +771,7 @@ namespace Game
             PlaySound(Audio.MapChange);   
         }
         else {
-            SetSoundVolume(Audio.Transition, 0.5f);
+            SetSoundVolume(Audio.Transition, 0.1f);
             PlaySound(Audio.Transition);
         }
 

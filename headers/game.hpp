@@ -66,11 +66,11 @@ namespace Game
     void DungeonDraw(Game::Info& Info, Game::Objects& Objects);
     void PauseUpdate(Game::Info& Info, Game::Objects& Objects, const GameAudio& Audio);
     void PauseDraw(const Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures);
-    void ExitUpdate(Game::Info& Info);
+    void ExitUpdate(Game::Info& Info, const GameAudio& Audio);
     void ExitDraw(const Game::Info& Info);
-    void MainMenuUpdate(Game::Info& Info);
+    void MainMenuUpdate(Game::Info& Info, const GameAudio& Audio);
     void MainMenuDraw(const Game::Info& Info);
-    void GameOverUpdate(Game::Info& Info);
+    void GameOverUpdate(Game::Info& Info, const GameAudio& Audio);
     void GameOverDraw(const Game::Info& Info);
     void Transition(Game::Info& Info, const GameAudio& Audio);
 
