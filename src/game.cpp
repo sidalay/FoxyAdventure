@@ -1913,7 +1913,7 @@ namespace Game
 
         std::vector<Prop> Moveable
         {
-            Prop{Textures.Boulder, Vector2{3525.f,3640.f}, PropType::STUMP, Textures, Audio, 5.f, true},
+            Prop{Textures.Boulder, Vector2{3525.f,3640.f}, PropType::BOULDER, Textures, Audio, 5.f, true},
             Prop{Textures.Boulder, Vector2{1025.f,3050.f}, PropType::BOULDER, Textures, Audio, 4.f, true},
         };
         Props.emplace_back(Moveable);
@@ -1967,7 +1967,7 @@ namespace Game
 
         std::vector<Prop> Moveable
         {
-            Prop{Textures.Boulder, Vector2{3525.f,3640.f}, PropType::STUMP, Textures, Audio, 5.f, true},
+            Prop{Textures.Boulder, Vector2{3525.f,3640.f}, PropType::BOULDER, Textures, Audio, 5.f, true},
             Prop{Textures.Boulder, Vector2{1025.f,3050.f}, PropType::BOULDER, Textures, Audio, 4.f, true},
         };
         Props.emplace_back(Moveable);

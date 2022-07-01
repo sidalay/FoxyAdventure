@@ -121,7 +121,7 @@ void Prop::Tick(const float DeltaTime)
         if (Type == PropType::ANIMATEDALTAR) {
             AltarTick(DeltaTime);
         }
-
+        
         if (Active) {
             switch (Type)
             {
@@ -1642,6 +1642,12 @@ void Prop::AltarAudio()
 void Prop::TextAudio()
 {
     PlaySound(Audio.NpcTalk);
+}
+
+void Prop::PushingAudio()
+{
+    SetSoundVolume(Audio.Pushing, 0.7f);
+    PlaySound(Audio.Pushing);
 }
 
 // ---------------------------------------------------------------------

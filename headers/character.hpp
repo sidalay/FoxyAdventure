@@ -61,6 +61,7 @@ public:
     void AttackAudio();
     void DamageAudio();
     void WalkingAudio();
+    void PushingAudio();
 
     constexpr bool IsAlive() const {return Alive;}
     constexpr bool IsAttacking() const {return Attacking;}

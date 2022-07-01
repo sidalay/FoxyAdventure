@@ -200,7 +200,8 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, const Vect
         // Loop through all Props for collision
         for (auto& PropType:Props) {
             for (auto& Prop:PropType) {
-                if (Prop.HasCollision()) {    
+                if (Prop.HasCollision()) {   
+                     
                     if (Prop.IsFinalAct()) {
                         FinalAct = true;
                     }
@@ -211,7 +212,8 @@ void Character::CheckCollision(std::vector<std::vector<Prop>>& Props, const Vect
                         // manage pushable props
                         if (Prop.IsMoveable()) {
                             if (Prop.GetType() == PropType::BOULDER) {
-                                Colliding = true;   
+                                Colliding = true; 
+                                PushingAudio();
                                 if(!Prop.IsOutOfBounds()) {
                                     if (Prop.CheckMovement(World, WorldPos, Direction, Speed, Props)) {
                                         UndoMovement();
@@ -722,11 +724,13 @@ void Character::CheckDungeonExit(Enemy& FinalBoss)
 // ------------------------- Audio ---------------------------
 void Character::AttackAudio()
 {
+    SetSoundVolume(Audio.FoxAttack, 0.4f);
     PlaySound(Audio.FoxAttack);
 }
 
 void Character::DamageAudio()
 {
+    SetSoundVolume(Audio.FoxAttack, 0.4f);
     PlaySound(Audio.ImpactMedium);
 }
 
@@ -744,6 +748,12 @@ void Character::WalkingAudio()
         PlaySoundMulti(Audio.Walking);
         WalkingAudioTime = 0.f;
     }
+}
+
+void Character::PushingAudio()
+{
+    SetSoundVolume(Audio.Pushing, 0.7f);
+    PlaySound(Audio.Pushing);
 }
 
 // -------------------------------------------------------- //
