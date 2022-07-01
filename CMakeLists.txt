@@ -48,4 +48,4 @@ if (APPLE)
 endif()
 
 # set up assets
-file(COPY sprites audio DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY audio sprites DESTINATION ${CMAKE_BINARY_DIR})

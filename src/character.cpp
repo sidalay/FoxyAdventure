@@ -732,6 +732,8 @@ void Character::DamageAudio()
 
 void Character::WalkingAudio()
 {
+    SetSoundVolume(Audio.Walking, 0.20f);
+
     WalkingAudioTime += GetFrameTime();
 
     if (Walking && WalkingAudioTime >= 1.f/3.f) {

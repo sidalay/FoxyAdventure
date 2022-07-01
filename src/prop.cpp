@@ -322,6 +322,8 @@ void Prop::CheckVisibility(const Vector2 CharacterWorldPos)
 
 void Prop::InsertAltarPiece()
 {
+    AltarAudio();
+
     if (PiecesAdded == 0) {
         InsertPiece = true;
     }
@@ -1620,7 +1622,14 @@ void Prop::DrawSpeech()
 // ------------------------- Audio ---------------------------
 void Prop::TreasureAudio()
 {
+    SetSoundVolume(Audio.TreasureOpen, 0.4f);
     PlaySound(Audio.TreasureOpen);
+}
+
+void Prop::AltarAudio()
+{
+    SetSoundVolume(Audio.AltarInsert, 0.4f);
+    PlaySound(Audio.AltarInsert);
 }
 
 // ---------------------------------------------------------------------
