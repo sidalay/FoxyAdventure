@@ -53,7 +53,7 @@ namespace Game
     void Run();
     void Initialize(const Window& Window, const std::string& Title);
     void CheckScreenSizing(Window& Window);
-    void Tick(Window& Window, Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures);
+    void Tick(Window& Window, Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures, const GameAudio& Audio);
     void ForestUpdate(Game::Info& Info, Game::Objects& Objects);
     void ForestDraw(Game::Info& Info, Game::Objects& Objects);
     void DungeonUpdate(Game::Info& Info, Game::Objects& Objects);
@@ -69,7 +69,7 @@ namespace Game
     void Transition(Game::Info& Info);
 
     HUD InitializeHud(const GameTexture& Textures);
-    Character InitializeFox(const Window& Window, Game::Info& Info, const GameTexture& Textures);
+    Character InitializeFox(const Window& Window, Game::Info& Info, const GameTexture& Textures, const GameAudio& Audio);
     std::array<Sprite,5> InitializePauseFox(const GameTexture& Textures);
     std::array<const Texture2D,9> InitializeButtons(const GameTexture& Textures);
     std::vector<std::vector<Prop>> InitializePropsUnder(const GameTexture& Textures);

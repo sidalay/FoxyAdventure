@@ -10,9 +10,11 @@ Character::Character(const Sprite& Idle,
                      const Sprite& Sleep, 
                      const Sprite& ItemGrab,
                      const GameTexture& GameTextures, 
+                     const GameAudio& Audio,
                      const Window& Screen, 
                      Background& World)
     : GameTextures{GameTextures},
+      Audio{Audio},
       Screen{Screen},
       World{World}
 {
@@ -123,6 +125,7 @@ void Character::CheckMovement(Props& Props, std::vector<Enemy>& Enemies, std::ve
 {
     PrevWorldPos = WorldPos;
     Vector2 Direction{};
+    WalkingSounds();
 
     // Check for movement input
     if (!Locked) {
@@ -630,6 +633,7 @@ void Character::EndGame()
 {
     Vector2 OffsetWorldPos{Vector2Add(WorldPos,Offset)};
     State = Emotion::HAPPY;
+    WalkingSounds();
 
     if (OffsetWorldPos.x < 352.f) {
         SpriteIndex = static_cast<int>(FoxState::WALK);
@@ -647,11 +651,13 @@ void Character::EndGame()
         Sprites.at(SpriteIndex).FrameY = 3;
         SpriteIndex = static_cast<int>(FoxState::WALK);
         WorldPos.y -= 0.5f;
+        Walking = true;
     }
     else if (OffsetWorldPos.y <= 2480.f) {
         Sprites.at(SpriteIndex).FrameY = 0;
         SpriteIndex = static_cast<int>(FoxState::SLEEP);
         FinishEndGame = true;
+        Walking = false;
     }
 }
 
@@ -710,8 +716,24 @@ void Character::CheckDungeonExit(Enemy& FinalBoss)
         CanExitDungeon = true;
     }
 }
-// -------------------------------------------------------- //
 
+// ------------------------- Audio ---------------------------
+void Character::WalkingSounds()
+{
+    WalkingAudioTime += GetFrameTime();
+
+    if (Walking && WalkingAudioTime >= 1.f/3.f) {
+        PlaySoundMulti(Audio.Walking);
+        WalkingAudioTime = 0.f;
+    }
+    else if (Running && WalkingAudioTime >= 1.f/3.5f) {
+        PlaySoundMulti(Audio.Walking);
+        WalkingAudioTime = 0.f;
+    }
+}
+
+
+// -------------------------------------------------------- //
 // Debug Function
 void Character::AddHealth(float HP)
 {

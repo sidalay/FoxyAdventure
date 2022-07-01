@@ -25,7 +25,8 @@ public:
               const Sprite& Push, 
               const Sprite& Sleep, 
               const Sprite& ItemGrab,
-              const GameTexture& GameTextures, 
+              const GameTexture& GameTextures,
+              const GameAudio& Audio, 
               const Window& Screen, 
               Background& World);
     
@@ -56,6 +57,9 @@ public:
     void CheckEndGame();
     void EndGame();
 
+    // Audio
+    void WalkingSounds();
+
     constexpr bool IsAlive() const {return Alive;}
     constexpr bool IsAttacking() const {return Attacking;}
     constexpr bool IsEndGameFinished() const {return FinishEndGame;}
@@ -78,6 +82,7 @@ public:
     
 private:
     const GameTexture& GameTextures;
+    const GameAudio& Audio;
     const Window& Screen;
     Background& World;
     Vector2 Offset{615.f,335.f};         // Player offset vs Enemy/Prop WorldPos
@@ -100,6 +105,7 @@ private:
     float DamageTime{};
     float AttackTime{};
     float HealTime{};
+    float WalkingAudioTime{};
     float DamageTaken{0.5f};
     float AmountToHeal{};
     bool Alive{true};

@@ -12,6 +12,7 @@ struct GameAudio
     GameAudio& operator=(const GameAudio&) = delete;
     GameAudio& operator=(GameAudio&&) = default;
     
+    const Sound Walking{LoadSound("../audio/Footsteps.wav")};
 };
 
 

@@ -10,11 +10,12 @@ namespace Game
         if (IsWindowReady()) {
             // Initialization ---------------------------
             GameTexture Textures;
+            GameAudio Audio;
             Randomizer RandomEngine{};
             Game::Info Info{Background{Textures}, 0, 0.f, 0.f, 0.f};
             Game::Objects Objects{
                 Game::InitializeHud(Textures), 
-                Game::InitializeFox(Window, Info, Textures),
+                Game::InitializeFox(Window, Info, Textures, Audio),
                 {Game::InitializePropsUnder(Textures), Game::InitializePropsOver(Textures)},
                 {Game::InitializeEnemies(Info.Map, Window, Textures, RandomEngine)},
                 {Game::InitializeCrows(Info.Map, Window, Textures, RandomEngine)},
@@ -26,10 +27,11 @@ namespace Game
             // Start Game Loop
             while (!Info.ExitGame) 
             {
-                Game::Tick(Window, Info, Objects, Textures);
+                Game::Tick(Window, Info, Objects, Textures, Audio);
             }
         }
 
+        CloseAudioDevice();
         CloseWindow();
     }
 
@@ -37,6 +39,8 @@ namespace Game
     {
         SetTraceLogLevel(LOG_WARNING);
         InitWindow(Window.x, Window.y, Title.c_str());
+        InitAudioDevice();
+        SetMasterVolume(50.f);
         SetTargetFPS(144);
         SetExitKey(0);
         HideCursor();
@@ -54,7 +58,7 @@ namespace Game
         }
     }
 
-    void Tick(Window& Window, Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures)
+    void Tick(Window& Window, Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures, const GameAudio& Audio)
     {
         Game::CheckScreenSizing(Window);
 
@@ -715,7 +719,7 @@ namespace Game
         return HUD(Textures);
     }
 
-    Character InitializeFox(const Window& Window, Game::Info& Info, const GameTexture& Textures)
+    Character InitializeFox(const Window& Window, Game::Info& Info, const GameTexture& Textures, const GameAudio& Audio)
     {
         return Character {
             Sprite{Textures.FoxIdle, 4, 4}, 
@@ -728,6 +732,7 @@ namespace Game
             Sprite{Textures.FoxSleeping, 4, 1}, 
             Sprite{Textures.FoxItemGot, 1, 4},
             Textures,
+            Audio,
             Window, Info.Map
         };
     }

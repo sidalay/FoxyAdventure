@@ -6,6 +6,7 @@
 #include <tuple>
 #include <unordered_map>
 #include "sprite.hpp"
+#include "gameaudio.hpp"
 #include "background.hpp"
 
 enum class PropType
