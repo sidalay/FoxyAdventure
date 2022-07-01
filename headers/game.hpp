@@ -24,6 +24,10 @@ namespace Game
         bool ExitGame{false};
         bool ExitIsYes{false};
         bool TeleportOn{false};
+        bool ForestThemeStarted{false};
+        bool ForestThemePaused{false};
+        bool DungeonThemeStarted{false};
+        bool DungeonThemePaused{false};
         Game::State State{Game::State::TRANSITION};
         Game::State PrevState{Game::State::FOREST};
         Game::State NextState{Game::State::MAINMENU};
@@ -54,9 +58,9 @@ namespace Game
     void Initialize(const Window& Window, const std::string& Title);
     void CheckScreenSizing(Window& Window);
     void Tick(Window& Window, Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures, const GameAudio& Audio);
-    void ForestUpdate(Game::Info& Info, Game::Objects& Objects);
+    void ForestUpdate(Game::Info& Info, Game::Objects& Objects, const GameAudio& Audio);
     void ForestDraw(Game::Info& Info, Game::Objects& Objects);
-    void DungeonUpdate(Game::Info& Info, Game::Objects& Objects);
+    void DungeonUpdate(Game::Info& Info, Game::Objects& Objects, const GameAudio& Audio);
     void DungeonDraw(Game::Info& Info, Game::Objects& Objects);
     void PauseUpdate(Game::Info& Info, Game::Objects& Objects);
     void PauseDraw(const Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures);

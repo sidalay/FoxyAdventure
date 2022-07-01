@@ -13,6 +13,8 @@ struct GameAudio
     GameAudio& operator=(GameAudio&&) = default;
     
     const Sound Walking{LoadSound("../audio/Footsteps.wav")};
+    Music ForestTheme{LoadMusicStream("../audio/SecretOfTheForest.mp3")};
+    Music DungeonTheme{LoadMusicStream("../audio/ZealPalace.mp3")};
 };
 
 

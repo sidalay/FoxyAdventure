@@ -24,6 +24,8 @@ namespace Game
                 Game::InitializeButtons(Textures)
             };
 
+            Audio.ForestTheme.looping = true;
+
             // Start Game Loop
             while (!Info.ExitGame) 
             {
@@ -40,7 +42,7 @@ namespace Game
         SetTraceLogLevel(LOG_WARNING);
         InitWindow(Window.x, Window.y, Title.c_str());
         InitAudioDevice();
-        SetMasterVolume(50.f);
+        SetMasterVolume(0.10f);
         SetTargetFPS(144);
         SetExitKey(0);
         HideCursor();
@@ -68,14 +70,14 @@ namespace Game
 
             ClearBackground(BLACK);
 
-            Game::ForestUpdate(Info, Objects);
+            Game::ForestUpdate(Info, Objects, Audio);
             Game::ForestDraw(Info, Objects);
         }
         else if (Info.State == Game::State::DUNGEON) {
             
             ClearBackground(BLACK);
 
-            Game::DungeonUpdate(Info, Objects);
+            Game::DungeonUpdate(Info, Objects, Audio);
             Game::DungeonDraw(Info, Objects);
         }
         else if (Info.State == Game::State::MAINMENU) {
@@ -114,8 +116,19 @@ namespace Game
         EndDrawing();
     }
 
-    void ForestUpdate(Game::Info& Info, Game::Objects& Objects)
+    void ForestUpdate(Game::Info& Info, Game::Objects& Objects, const GameAudio& Audio)
     {
+        if (!Info.ForestThemeStarted) {
+            Info.ForestThemeStarted = true;
+            // SetMusicVolume(Audio.ForestTheme, 0.5f);
+            PlayMusicStream(Audio.ForestTheme);
+        }
+        if (Info.ForestThemePaused) {
+            Info.ForestThemePaused = false;
+            ResumeMusicStream(Audio.ForestTheme);
+        }
+        UpdateMusicStream(Audio.ForestTheme);
+
         float DeltaTime{GetFrameTime()};
 
         Info.Map.Tick(Objects.Fox.GetWorldPos());
@@ -152,23 +165,31 @@ namespace Game
         if (!Objects.Fox.IsAlive()) {
             Info.NextState = Game::State::GAMEOVER;
             Info.State = Game::State::TRANSITION;
+            PauseMusicStream(Audio.ForestTheme);
+            Info.ForestThemePaused = true;
         }
 
         if (Objects.Fox.GetWorldPos().x >= (3580.f - 615.f) && Objects.Fox.GetWorldPos().x <= (3650.f - 615.f) && Objects.Fox.GetWorldPos().y <= (135.f - 335.f)) {
             Info.Map.SetArea(Area::DUNGEON);
             Info.NextState = Game::State::DUNGEON;
             Info.State = Game::State::TRANSITION;
+            PauseMusicStream(Audio.ForestTheme);
+            Info.ForestThemePaused = true;
         }
 
         if (IsKeyPressed(KEY_P)) {
             Info.PrevState = Game::State::FOREST;
             Info.NextState = Game::State::PAUSED;
             Info.State = Game::State::TRANSITION;
+            PauseMusicStream(Audio.ForestTheme);
+            Info.ForestThemePaused = true;
         }
         else if (IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
             Info.PrevState = Game::State::FOREST;
             Info.NextState = Game::State::EXIT;
             Info.State = Game::State::TRANSITION;
+            PauseMusicStream(Audio.ForestTheme);
+            Info.ForestThemePaused = true;
         }
 
         if (Objects.Fox.IsEndGameFinished()) {
@@ -176,6 +197,8 @@ namespace Game
             if (Info.EndGameTime >= 3.f) {
                 Info.NextState = Game::State::GAMEOVER;
                 Info.State = Game::State::TRANSITION;
+                PauseMusicStream(Audio.ForestTheme);
+                Info.ForestThemePaused = true;
             }
         }
 
@@ -361,8 +384,19 @@ namespace Game
         }
     }
 
-    void DungeonUpdate(Game::Info& Info, Game::Objects& Objects)
+    void DungeonUpdate(Game::Info& Info, Game::Objects& Objects, const GameAudio& Audio)
     {
+        if (!Info.DungeonThemeStarted) {
+            Info.DungeonThemeStarted = true;
+            // SetMusicVolume(Audio.DungeonTheme, 0.5f);
+            PlayMusicStream(Audio.DungeonTheme);
+        }
+        if (Info.DungeonThemePaused) {
+            Info.DungeonThemePaused = false;
+            ResumeMusicStream(Audio.DungeonTheme);
+        }
+        UpdateMusicStream(Audio.DungeonTheme);
+
         float DeltaTime{GetFrameTime()};
 
         Info.Map.Tick(Objects.Fox.GetWorldPos());
@@ -381,6 +415,8 @@ namespace Game
         if (!Objects.Fox.IsAlive()) {
             Info.NextState = Game::State::GAMEOVER;
             Info.State = Game::State::TRANSITION;
+            PauseMusicStream(Audio.DungeonTheme);
+            Info.DungeonThemePaused = true;
         }
 
         if (Objects.Fox.GetWorldPos().x >= (450.f - 615.f) && 
@@ -391,17 +427,23 @@ namespace Game
             Info.Map.SetArea(Area::FOREST);
             Info.NextState = Game::State::FOREST;
             Info.State = Game::State::TRANSITION;
+            PauseMusicStream(Audio.DungeonTheme);
+            Info.DungeonThemePaused = true;
         }
 
         if (IsKeyPressed(KEY_P)) {
             Info.PrevState = Game::State::DUNGEON;
             Info.NextState = Game::State::PAUSED;
             Info.State = Game::State::TRANSITION;
+            PauseMusicStream(Audio.DungeonTheme);
+            Info.DungeonThemePaused = true;
         }
         else if (IsKeyPressed(KEY_PERIOD) || IsKeyPressed(KEY_ESCAPE)) {
             Info.PrevState = Game::State::DUNGEON;
             Info.NextState = Game::State::EXIT;
             Info.State = Game::State::TRANSITION;
+            PauseMusicStream(Audio.DungeonTheme);
+            Info.DungeonThemePaused = true;
         }
 
         // Dev Tools--------------------------------------
@@ -2458,7 +2500,7 @@ namespace Game
 
         std::vector<Prop> Treasure
         {
-            Prop{Sprite{Textures.TreasureChestBig, 4, 1, 1.f/4.f}, Vector2{2270.f,2375.f}, PropType::BIGTREASURE, Textures, Textures.Bracelet, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, true, "Silver Bracelet", 4.f},
+            Prop{Sprite{Textures.TreasureChestBig, 4, 1, 1.f/4.f}, Vector2{2270.f,2375.f}, PropType::BIGTREASURE, Textures, Textures.Bracelet, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, false, "Silver Bracelet", 4.f},
             Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{3462.f,2760.f}, PropType::TREASURE, Textures, Textures.Cryptex, 4.f, false, true, Progress::ACT_V, PropType::NPC_DIANA, true, "Cryptex"},
             Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{130.f,210.f}, PropType::TREASURE, Textures, Textures.AltarTopLeft, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, true, "Top Left Altar Piece"},
             Prop{Sprite{Textures.TreasureChest, 4, 1, 1.f/4.f}, Vector2{1025.f,2765.f}, PropType::TREASURE, Textures, Textures.AltarBotLeft, 4.f, false, true, Progress::ACT_O, PropType::NPC_O, true, "Bottom Left Altar Piece"},
