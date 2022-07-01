@@ -41,6 +41,7 @@ public:
           const Window& Screen,
           Background& World,
           const GameTexture& GameTextures,
+          const GameAudio& Audio,
           Randomizer& RandomEngine,
           const int Health = 3,
           const float Scale = 3.2f,
@@ -57,6 +58,7 @@ public:
           const Window& Screen,
           Background& World,
           const GameTexture& GameTextures,
+          const GameAudio& Audio,
           Randomizer& RandomEngine,
           const float Scale = 3.2f);
 
@@ -81,6 +83,12 @@ public:
     void DrawHP();
     void CheckBossSummon(const Vector2 HeroWorldPos);
     void CheckSpawnChest(std::vector<std::vector<Prop>>& Props);
+
+    // Audio
+    void WalkingAudio();
+    void AttackAudio();
+    void DamageAudio();
+    void DeathAudio();
 
     constexpr void Damaged(const bool Attacked) {IsAttacked = Attacked;}
     constexpr bool IsBlocked() const {return Blocked;}
@@ -120,6 +128,7 @@ private:
     const Window& Screen;
     Background& World;
     const GameTexture& GameTextures;
+    const GameAudio& Audio;
     Randomizer& RandomEngine;
     EnemyType BossSpawner{};    // Spawn Boss after this EnemyType is all killed
     

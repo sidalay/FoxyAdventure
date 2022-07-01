@@ -8,6 +8,7 @@ GameAudio::~GameAudio()
     UnloadSound(ImpactMedium);
     UnloadSound(MonsterAttack);
     UnloadSound(MonsterDeath);
+    UnloadSound(MonsterRangedAttack);
     UnloadSound(MapChange);
     UnloadSound(Transition);
     UnloadSound(TreasureOpen);

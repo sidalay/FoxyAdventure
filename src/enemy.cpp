@@ -25,6 +25,7 @@ Enemy::Enemy(const Sprite& Idle,
              const Window& Screen,
              Background& World,
              const GameTexture& GameTextures,
+             const GameAudio& Audio,
              Randomizer& RandomEngine,
              const int Health,
              const float Scale, 
@@ -35,6 +36,7 @@ Enemy::Enemy(const Sprite& Idle,
       Screen{Screen},
       World{World},
       GameTextures{GameTextures},
+      Audio{Audio},
       RandomEngine{RandomEngine},
       BossSpawner{BossSpawner},
       Health{Health},
@@ -91,6 +93,7 @@ Enemy::Enemy(const Sprite& NpcIdle,
              const Window& Screen,
              Background& World,
              const GameTexture& GameTextures,
+             const GameAudio& Audio,
              Randomizer& RandomEngine,
              const float Scale)
     : Race{Race},
@@ -99,6 +102,7 @@ Enemy::Enemy(const Sprite& NpcIdle,
       Screen{Screen},
       World{World},
       GameTextures{GameTextures},
+      Audio{Audio},
       RandomEngine{RandomEngine},
       Scale{Scale}
 {
@@ -574,6 +578,7 @@ void Enemy::TakeDamage()
         if (DamageTime <= HurtUpdateTime) {
             CurrentSpriteIndex = static_cast<int>(Monster::HURT);
             Hurting = true;
+            DamageAudio();
             Trajectory = 1.f;
         }
 
@@ -594,6 +599,7 @@ void Enemy::TakeDamage()
 void Enemy::CheckAlive(float DeltaTime) 
 {
     if (Health <= 0) {
+        DeathAudio();
         CurrentSpriteIndex = static_cast<int>(Monster::DEATH);
         // Amount of time needed for death animation to complete beginning to end
         float EndTime{1.35f};
@@ -757,6 +763,7 @@ void Enemy::EnemyAggro(const Vector2 HeroScreenPos)
             }
         }
         else if (Aggro <= MinRange) {
+            AttackAudio();
             Attacking = true;
             Trajectory += 1.3f;
         }
@@ -858,6 +865,37 @@ void Enemy::CheckSpawnChest(std::vector<std::vector<Prop>>& Props)
                 }
             }
         }
+    }
+}
+
+// ------------------------- Audio ---------------------------
+void Enemy::WalkingAudio()
+{
+
+}
+
+void Enemy::AttackAudio()
+{
+    if (Ranged) {
+        PlaySound(Audio.MonsterRangedAttack);
+    }
+    else {
+        PlaySound(Audio.MonsterAttack);
+    }
+}
+
+void Enemy::DamageAudio()
+{
+    PlaySound(Audio.ImpactHeavy);
+}
+
+void Enemy::DeathAudio()
+{
+    if (Type == EnemyType::NORMAL) {
+        PlaySound(Audio.MonsterDeath);
+    }
+    else if (Type == EnemyType::BOSS || Type == EnemyType::FINALBOSS) {
+        PlaySound(Audio.BossDeath);
     }
 }
 

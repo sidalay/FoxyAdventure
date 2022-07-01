@@ -18,6 +18,7 @@ struct GameAudio
     const Sound ImpactMedium{LoadSound("../audio/ImpactMedium.wav")};
     const Sound MonsterAttack{LoadSound("../audio/MonsterAttack.wav")};
     const Sound MonsterDeath{LoadSound("../audio/MonsterDeath.wav")};
+    const Sound MonsterRangedAttack{LoadSound("../audio/MonsterRangedAttack.wav")};
     const Sound MapChange{LoadSound("../audio/MapChange.wav")};
     const Sound Transition{LoadSound("../audio/Transition.wav")};
     const Sound TreasureOpen{LoadSound("../audio/Treasure.wav")};
