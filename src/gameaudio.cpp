@@ -2,14 +2,21 @@
 
 GameAudio::~GameAudio()
 {
+    UnloadSound(AltarInsert);
     UnloadSound(BossDeath);
     UnloadSound(FoxAttack);
+    UnloadSound(FoxAttackTwo);
     UnloadSound(ImpactHeavy);
     UnloadSound(ImpactMedium);
+    UnloadSound(MapChange);
+    UnloadSound(MiniMapOpen);
     UnloadSound(MonsterAttack);
     UnloadSound(MonsterDeath);
     UnloadSound(MonsterRangedAttack);
-    UnloadSound(MapChange);
+    UnloadSound(MoveCursor);
+    UnloadSound(NpcTalk);
+    UnloadSound(Pushing);
+    UnloadSound(Select);
     UnloadSound(Transition);
     UnloadSound(TreasureOpen);
     UnloadSound(Walking);
