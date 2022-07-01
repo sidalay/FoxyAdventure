@@ -12,7 +12,7 @@ namespace Game
             GameTexture Textures;
             GameAudio Audio;
             Randomizer RandomEngine{};
-            Game::Info Info{Background{Textures}, 0, 0.f, 0.f, 0.f};
+            Game::Info Info{Background{Textures, Audio}, 0, 0.f, 0.f, 0.f};
             Game::Objects Objects{
                 Game::InitializeHud(Textures), 
                 Game::InitializeFox(Window, Info, Textures, Audio),
@@ -770,10 +770,10 @@ namespace Game
             SetSoundVolume(Audio.MapChange, 0.5f);
             PlaySound(Audio.MapChange);   
         }
-        else {
-            SetSoundVolume(Audio.Transition, 0.1f);
-            PlaySound(Audio.Transition);
-        }
+        // else {
+        //     SetSoundVolume(Audio.Transition, 0.1f);
+        //     PlaySound(Audio.Transition);
+        // }
 
         if (Info.State != Game::State::TRANSITION) {
             if (Info.TransitionInTime < MaxTransitionTime) {

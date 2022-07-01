@@ -2,6 +2,7 @@
 #define BACKGROUND_HPP
 
 #include "gametextures.hpp"
+#include "gameaudio.hpp"
 #include <raymath.h>
 
 enum class Direction
@@ -17,7 +18,7 @@ enum class Area
 class Background
 {
 public:
-    explicit Background(const GameTexture& GameTextures);
+    explicit Background(const GameTexture& GameTextures, const GameAudio& Audio);
     ~Background() = default;
     constexpr Background(const Background&) = delete;
     constexpr Background(Background&&) = default;
@@ -38,6 +39,7 @@ public:
     
 private:
     const GameTexture& GameTextures;
+    const GameAudio& Audio;
     Vector2 MapPos{0.f, 0.f};
     float Scale{4.f};
     Area Map{Area::FOREST};

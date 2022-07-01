@@ -150,7 +150,6 @@ void Enemy::Tick(float DeltaTime, Props& Props, const Vector2 HeroWorldPos, cons
             CheckBossSummon(HeroWorldPos);
         }
     }
-
     CheckSpawnChest(Props.Over);
 }
 
@@ -309,7 +308,6 @@ void Enemy::CheckMovement(Props& Props, const Vector2 HeroWorldPos, const Vector
     if (Race != EnemyType::MUSHROOM) {
         EnemyAI();
     }
-
 
     if (Type != EnemyType::NPC) {
         EnemyAggro(HeroScreenPos);
@@ -605,8 +603,6 @@ void Enemy::CheckAlive(float DeltaTime)
         float EndTime{1.35f};
         IsAttacked = false;
         Dying = true;
-        Walking = false;
-        Chasing = false;
 
         // Allow time for death animation to finish before setting alive=false which turns off SpriteTick()
         StopTime += DeltaTime;

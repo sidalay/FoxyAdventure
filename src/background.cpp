@@ -1,7 +1,7 @@
 #include "background.hpp"
 
-Background::Background(const GameTexture& GameTextures)
-    : GameTextures{GameTextures}
+Background::Background(const GameTexture& GameTextures, const GameAudio& Audio)
+    : GameTextures{GameTextures}, Audio{Audio}
 {
 
 }
@@ -12,6 +12,8 @@ void Background::Tick(const Vector2 WorldPos)
 
     if (IsKeyPressed(KEY_M)) {
         MiniMapOpen = !MiniMapOpen;
+        SetSoundVolume(Audio.Transition, 0.2f);
+        PlaySound(Audio.Transition);
     }
 }
 
