@@ -228,7 +228,7 @@ void Enemy::CheckDirection()
         }
     }
     else {
-        if (!Chasing && (Race != EnemyType::MUSHROOM)) {
+        if (!Chasing) {
             if (AIY < 0.f) {
                 Face = Direction::UP;
             }
@@ -948,6 +948,13 @@ Rectangle Enemy::GetAttackRec()
         switch (Face)
         {
             case Direction::UP:
+                return Rectangle
+                {
+                    ScreenPos.x,
+                    ScreenPos.y - (CurrentSpriteHeight * 0.4f),
+                    CurrentSpriteWidth,
+                    CurrentSpriteHeight
+                }; 
             case Direction::DOWN:
                 return Rectangle
                 {
@@ -957,10 +964,17 @@ Rectangle Enemy::GetAttackRec()
                     CurrentSpriteHeight
                 }; 
             case Direction::LEFT: 
-            case Direction::RIGHT:
                 return Rectangle
                 {
                     ScreenPos.x - (CurrentSpriteWidth * 0.4f),
+                    ScreenPos.y,
+                    CurrentSpriteWidth,
+                    CurrentSpriteHeight
+                }; 
+            case Direction::RIGHT:
+                return Rectangle
+                {
+                    ScreenPos.x + (CurrentSpriteWidth * 0.4f),
                     ScreenPos.y,
                     CurrentSpriteWidth,
                     CurrentSpriteHeight
