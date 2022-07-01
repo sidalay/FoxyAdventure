@@ -165,12 +165,12 @@ namespace Game
             PlaySound(Audio.Sleep);
         }
 
-        if (!Objects.Fox.IsAlive()) {
-            Info.NextState = Game::State::GAMEOVER;
-            Info.State = Game::State::TRANSITION;
-            PauseMusicStream(Audio.ForestTheme);
-            Info.ForestThemePaused = true;
-        }
+        // if (!Objects.Fox.IsAlive()) {
+        //     Info.NextState = Game::State::GAMEOVER;
+        //     Info.State = Game::State::TRANSITION;
+        //     PauseMusicStream(Audio.ForestTheme);
+        //     Info.ForestThemePaused = true;
+        // }
 
         if (Objects.Fox.GetWorldPos().x >= (3580.f - 615.f) && Objects.Fox.GetWorldPos().x <= (3650.f - 615.f) && Objects.Fox.GetWorldPos().y <= (135.f - 335.f)) {
             Info.Map.SetArea(Area::DUNGEON);
@@ -415,12 +415,12 @@ namespace Game
             Objects.Fox.SetSleep();
         }
 
-        if (!Objects.Fox.IsAlive()) {
-            Info.NextState = Game::State::GAMEOVER;
-            Info.State = Game::State::TRANSITION;
-            PauseMusicStream(Audio.DungeonTheme);
-            Info.DungeonThemePaused = true;
-        }
+        // if (!Objects.Fox.IsAlive()) {
+        //     Info.NextState = Game::State::GAMEOVER;
+        //     Info.State = Game::State::TRANSITION;
+        //     PauseMusicStream(Audio.DungeonTheme);
+        //     Info.DungeonThemePaused = true;
+        // }
 
         if (Objects.Fox.GetWorldPos().x >= (450.f - 615.f) && 
             Objects.Fox.GetWorldPos().x <= (570.f - 615.f) && 
