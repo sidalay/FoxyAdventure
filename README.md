@@ -20,6 +20,7 @@ A video showcasing Foxy Adventure's gameplay and features can be seen here: http
   - Minimap with current position marker!
   - Start/Quit/Pause Menu
   - Hidden path / Mini Dungeon
+  - Minimalistic health HUD with dynamic portraits
 
 ---
 
