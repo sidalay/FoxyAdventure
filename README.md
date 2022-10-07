@@ -1,5 +1,4 @@
 # FoxyAdventure
-2D Top-down Adventure RPG made with C++ &amp; Raylib
 
 This was my first attempt at a fully completed RPG that became a passion project of mine over the span of a year. 
 I started the project with less than 1 years worth of c++ experience and finished the project with 1.5 years of c++ experience.
