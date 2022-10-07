@@ -4,6 +4,7 @@ This was my first attempt at a fully completed RPG that became a passion project
 I started the project with less than 1 years worth of c++ experience and finished the project with 1.5 years of c++ experience.
 
 A video showcasing Foxy Adventure's gameplay and features can be seen here: https://vimeo.com/manage/videos/726397549
+
 (Note: Music in the video is currently placeholder music)
 
 ## Notable Features
