@@ -44,7 +44,7 @@ namespace Game
         SetTraceLogLevel(LOG_WARNING);
         InitWindow(Window.x, Window.y, Title.c_str());
         InitAudioDevice();
-        SetMasterVolume(0.60f);
+        SetMasterVolume(0.5f);
         SetTargetFPS(144);
         SetExitKey(0);
         HideCursor();
@@ -203,6 +203,15 @@ namespace Game
                 PauseMusicStream(Audio.ForestTheme);
                 Info.ForestThemePaused = true;
             }
+        }
+
+        if (IsKeyPressed(KEY_MINUS) && Info.MasterAudio > 0.f) {
+          Info.MasterAudio -= 0.1f;
+          SetMasterVolume(Info.MasterAudio);
+        }
+        else if (IsKeyPressed(KEY_EQUAL) && Info.MasterAudio < 1.f) {
+          Info.MasterAudio += 0.1f;
+          SetMasterVolume(Info.MasterAudio);
         }
 
         // Dev Tools--------------------------------------
@@ -449,6 +458,15 @@ namespace Game
             Info.DungeonThemePaused = true;
         }
 
+        if (IsKeyPressed(KEY_MINUS) && Info.MasterAudio > 0.f) {
+          Info.MasterAudio -= 0.1f;
+          SetMasterVolume(Info.MasterAudio);
+        }
+        else if (IsKeyPressed(KEY_EQUAL) && Info.MasterAudio < 1.f) {
+          Info.MasterAudio += 0.1f;
+          SetMasterVolume(Info.MasterAudio);
+        }
+
         // Dev Tools--------------------------------------
         if (IsKeyPressed(KEY_GRAVE)) {
             Info.DevToolsOn = !Info.DevToolsOn;
@@ -597,6 +615,15 @@ namespace Game
             PauseMusicStream(Audio.DungeonTheme);
             Info.DungeonThemePaused = true;
         }
+
+        if (IsKeyPressed(KEY_MINUS) && Info.MasterAudio > 0.f) {
+          Info.MasterAudio -= 0.1f;
+          SetMasterVolume(Info.MasterAudio);
+        }
+        else if (IsKeyPressed(KEY_EQUAL) && Info.MasterAudio < 1.f) {
+          Info.MasterAudio += 0.1f;
+          SetMasterVolume(Info.MasterAudio);
+        }
     }
 
     void PauseDraw(const Game::Info& Info, Game::Objects& Objects, const GameTexture& Textures)
@@ -665,6 +692,15 @@ namespace Game
             Info.NextState = Info.PrevState;
             Info.State = Game::State::TRANSITION;
         }
+
+        if (IsKeyPressed(KEY_MINUS) && Info.MasterAudio > 0.f) {
+          Info.MasterAudio -= 0.1f;
+          SetMasterVolume(Info.MasterAudio);
+        }
+        else if (IsKeyPressed(KEY_EQUAL) && Info.MasterAudio < 1.f) {
+          Info.MasterAudio += 0.1f;
+          SetMasterVolume(Info.MasterAudio);
+        }
     }
 
     void ExitDraw(const Game::Info& Info)
@@ -703,6 +739,15 @@ namespace Game
                 Info.State = Game::State::TRANSITION;
                 PlaySound(Audio.Select);
             }
+        }
+
+        if (IsKeyPressed(KEY_MINUS) && Info.MasterAudio > 0.f) {
+          Info.MasterAudio -= 0.1f;
+          SetMasterVolume(Info.MasterAudio);
+        }
+        else if (IsKeyPressed(KEY_EQUAL) && Info.MasterAudio < 1.f) {
+          Info.MasterAudio += 0.1f;
+          SetMasterVolume(Info.MasterAudio);
         }
     }
 
@@ -743,6 +788,15 @@ namespace Game
                 Info.State = Game::State::TRANSITION;
                 PlaySound(Audio.Select);
             }
+        }
+
+        if (IsKeyPressed(KEY_MINUS) && Info.MasterAudio > 0.f) {
+          Info.MasterAudio -= 0.1f;
+          SetMasterVolume(Info.MasterAudio);
+        }
+        else if (IsKeyPressed(KEY_EQUAL) && Info.MasterAudio < 1.f) {
+          Info.MasterAudio += 0.1f;
+          SetMasterVolume(Info.MasterAudio);
         }
     }
 
