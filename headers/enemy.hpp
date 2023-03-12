@@ -1,6 +1,8 @@
 #ifndef ENEMY_HPP
 #define ENEMY_HPP
 
+#include <array>
+
 #include "prop.hpp"
 #include "window.hpp"
 #include "randomizer.hpp"
